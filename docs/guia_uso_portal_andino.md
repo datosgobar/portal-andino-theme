@@ -208,13 +208,13 @@ Al igual que con los Temas, cada vez que generes un nuevo dataset, el formulario
 
 ![alt text](assets/portal-andino-asig-tags.png "crear-etiquetas")
 
-//Imagen tipo portada. Ver con quien lo implemente tamaños y formatos//
 ***
 ### Personalizar el portal
 
 Hacer que tu portal represente tu organización es muy fácil. Por favor, **andá a la Página principal > Configuración**. Llegarás a la sección que te permite cambiar cómo luce la portada de tu catálogo de datos y cada sección en particular.
 
-//Imagen de la home con config remarcado + imagen del form//
+![alt text](assets/portal-andino-sec-config.png "sec-config")
+
 ***
 ### Otros contenidos útiles
 
