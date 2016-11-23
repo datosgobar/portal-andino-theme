@@ -120,6 +120,8 @@ Son las categorías en las que se pueden clasificar todos los datasets de tu por
 
 **Andá a Página principal > Crear tema**. 
 
+![alt text](assets/portal-andino-sec-temas-03.png "sec-temas-03")
+
 ##### ¿Cómo los asigno?
 
 **Cada vez que generes un nuevo dataset**, el formulario te pedirá que asignes temas. Recordá siempre reutilizar los que ya hayas creado y no repetirlos.  
