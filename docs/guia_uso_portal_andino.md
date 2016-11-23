@@ -31,8 +31,6 @@ Esta guía te ayudará a:
 
 <p align="center">¡Arranquemos!</p>
 
-***
-
 ## Entrar y salir de tu portal
 
 Para poder entrar y salir de tu portal, **es necesario que tu administrador haya creado un usuario y contraseña**. Con esa información, cada vez que quieras entrar al portal, **podrás hacerlo desde http://*tu-url.com*/ingresar**.
@@ -47,12 +45,9 @@ Para poder entrar y salir de tu portal, **es necesario que tu administrador haya
 
 Por el momento, tanto la creación del usuario y la contraseña, como la recuperación de esta última sólo podrá hacerla quien se haya encargado de instalarte Andino. 
 
-***
-
 ## Elementos de tu portal
 
 ### Organizaciones 
-
 
 Son los organismos que abren o mantienen cada dataset. **Es muy importante que crees las organizaciones antes de que generes un dataset** que esté asociado a ella. 
 
