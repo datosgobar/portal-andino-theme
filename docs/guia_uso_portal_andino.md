@@ -53,7 +53,7 @@ Son los organismos que abren o mantienen cada dataset. **Es muy importante que c
 
 ##### ¿Dónde lo veo en el portal?
 
-* Como elemento descriptivo, en cada dataset. 
+* Como uno de los filtros de la vista de Datasets. 
 
 * Como número agregado, en la Página principal de tu portal, en caso de que hayas elegido la vista que muestra el número de Organizaciones con datos.
 
@@ -117,6 +117,10 @@ Son las categorías en las que se pueden clasificar todos los datasets de tu por
 * Asegurate de que cada tema específico sea un aparte más pequeña dentro de los Temas globales. 
 
 ##### ¿Cómo los creo?
+
+**Andá a Página principal > Crear tema**. 
+
+##### ¿Cómo los asigno?
 
 **Cada vez que generes un nuevo dataset**, el formulario te pedirá que asignes temas. Recordá siempre reutilizar los que ya hayas creado y no repetirlos.  
 
@@ -212,11 +216,11 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 ***
 ### Otros contenidos útiles
 
-* Glosario.
-* Kit de Datos abiertos.
-* Guía para el uso y la publicación de metadatos.
-* Guía para la identificación y uso de entidades interoperables.
-* Guía para la publicación de datos en formatos abiertos.
+* [Guía para el uso y la publicación de metadatos] (https://github.com/datosgobar/paquete-apertura-datos/raw/master/docs/Gu%C3%ADa%20para%20la%20publicaci%C3%B3n%20de%20datos%20en%20formatos%20abiertos%20(v0.1).pdf).
+
+* [Guía para la identificación y uso de entidades interoperables](https://github.com/datosgobar/paquete-apertura-datos/raw/master/docs/Guia%20para%20la%20identificaci%C3%B3n%20y%20uso%20de%20entidades%20interoperables%20(v0.1).pdf).
+
+* [Guía para la publicación de datos en formatos abiertos](https://github.com/datosgobar/paquete-apertura-datos/raw/master/docs/Gu%C3%ADa%20para%20el%20uso%20y%20la%20publicaci%C3%B3n%20de%20metadatos%20(v0.1).pdf).
 
 
 
