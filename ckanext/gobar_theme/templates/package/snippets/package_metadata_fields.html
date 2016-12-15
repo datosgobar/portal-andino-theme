@@ -1,7 +1,7 @@
 {% import 'macros/form.html' as form %}
 
 {% block package_metadata_fields %}
-    {% set frequencies = h.update_frequencies().items() %}
+    {% set frequencies = h.update_frequencies() %}
     {% set selected_freq = h.get_pkg_extra(data, 'updateFrequency') %}
     <div class="control-group hidden-extra-select">
         <label for="update-freq" class="control-label">* Frecuencia de actualización</label>
