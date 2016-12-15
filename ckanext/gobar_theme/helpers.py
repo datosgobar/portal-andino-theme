@@ -2,7 +2,8 @@
 import ckan.logic as logic
 import ckan.lib.helpers as ckan_helpers
 from urlparse import urlparse
-from ckan.common import request, c, g
+from ckan.common import request, c, g, _
+import ckan.lib.formatters as formatters
 import json
 from urlparse import urljoin
 from config_controller import GobArConfigController
@@ -162,25 +163,25 @@ def json_loads(json_string):
 
 def update_frequencies():
     return {
-        "R/P10Y": "Cada diez años",
-        "R/P4Y": "Cada cuatro años",
-        "R/P3Y": "Cada tres años",
-        "R/P2Y": "Cada dos años",
-        "R/P1Y": "Anualmente",
-        "R/P6M": "Cada medio año",
-        "R/P4M": "Cuatrimestralmente",
-        "R/P3M": "Trimestralmente",
-        "R/P2M": "Bimestralmente",
-        "R/P1M": "Mensualmente",
-        "R/P0.5M": "Cada 15 días",
-        "R/P0.33M": "Tres veces por mes",
-        "R/P1W": "Semanalmente",
-        "R/P3.5D": "Cada media semana",
-        "R/P0.5W": "Dos veces a la semana",
-        "R/P0.33W": "Tres veces a la semana",
-        "R/P1D": "Diariamente",
-        "R/PT1H": "Cada hora",
         "R/PT1S": "Continuamente actualizado",
+        "R/PT1H": "Cada hora",
+        "R/P1D": "Diariamente",
+        "R/P0.33W": "Tres veces a la semana",
+        "R/P0.5W": "Dos veces a la semana",
+        "R/P3.5D": "Cada media semana",
+        "R/P1W": "Semanalmente",
+        "R/P0.33M": "Tres veces por mes",
+        "R/P0.5M": "Cada 15 días",
+        "R/P1M": "Mensualmente",
+        "R/P2M": "Bimestralmente",
+        "R/P3M": "Trimestralmente",
+        "R/P4M": "Cuatrimestralmente",
+        "R/P6M": "Cada medio año",
+        "R/P1Y": "Anualmente",
+        "R/P2Y": "Cada dos años",
+        "R/P3Y": "Cada tres años",
+        "R/P4Y": "Cada cuatro años",
+        "R/P10Y": "Cada diez años",
         'eventual': 'Eventual'
     }
 
@@ -201,3 +202,18 @@ def field_types():
         "binary": "Valor binario en base64 (binary)",
         "any": "Otro (any)"
     }
+
+
+def render_ar_datetime(datetime_):
+    datetime_ = ckan_helpers._datestamp_to_datetime(datetime_)
+    if not datetime_:
+        return ''
+    details = {
+        'min': datetime_.minute,
+        'hour': datetime_.hour,
+        'day': datetime_.day,
+        'year': datetime_.year,
+        'month': formatters._MONTH_FUNCTIONS[datetime_.month - 1]().lower(),
+        'timezone': datetime_.tzinfo.zone,
+    }
+    return _('{day} de {month} de {year}').format(**details)

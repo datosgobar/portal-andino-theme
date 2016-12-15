@@ -95,14 +95,14 @@
                 {% endif %}
 
                 <div class="resource-additional-info col-xs-12 col-md-4 {{ '' if has_more_resources else 'col-md-offset-8' }}">
-                    <h2>Información Adicional</h2>
+                    <h2>Información adicional</h2>
 
                     <div class="resource-additional col-xs-12">
                         <div class="col-xs-6 key">
                             Fecha de creación
                         </div>
                         <div class="col-xs-6 value">
-                            {{ h.render_datetime(res.created) or _('unknown') }}
+                            {{ h.render_ar_datetime(res.created) or _('unknown') }}
                         </div>
                     </div>
                     <div class="resource-additional col-xs-12">
@@ -119,7 +119,7 @@
                             Último cambio
                         </div>
                         <div class="col-xs-6 value">
-                            {{ h.render_datetime(res.last_modified) or h.render_datetime(res.revision_timestamp) or h.render_datetime(res.created) or _('unknown') }}
+                            {{ h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
                         </div>
                     </div>
                 </div>
