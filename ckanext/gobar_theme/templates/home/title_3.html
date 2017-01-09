@@ -24,7 +24,7 @@
                           action="{% url_for controller='package', action='search' %}">
                         <input type="text" class="search" name="q" value="" autocomplete="off"
                                placeholder="¿Qué dataset buscás?"/>
-                        <button type="submit">
+                        <button type="submit" maxlength="200" >
                             <img src="/img/search.svg" class="search-icon">
                         </button>
                     </form>
