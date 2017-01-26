@@ -96,10 +96,10 @@
       }
 
       &.inactive {
-        color: $grey-200;
+        color: $grey-200 !important;
         .group-text {
           svg path {
-            fill: $grey-200;
+            fill: $grey-200 !important;
           }
         }
       }
@@ -108,7 +108,7 @@
         background: $blue-300;
         color: white;
         svg {
-          path {
+          path, circle, polygon {
             fill: white !important;
           }
         }

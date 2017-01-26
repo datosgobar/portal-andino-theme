@@ -6866,13 +6866,13 @@ div#background-container {
         padding-left: 45px;
         text-align: left; }
       .featured-groups .group-container .group.inactive {
-        color: #cccccc; }
+        color: #cccccc !important; }
         .featured-groups .group-container .group.inactive .group-text svg path {
-          fill: #cccccc; }
+          fill: #cccccc !important; }
       .featured-groups .group-container .group.active:hover {
         background: #0695d6;
         color: white; }
-        .featured-groups .group-container .group.active:hover svg path {
+        .featured-groups .group-container .group.active:hover svg path, .featured-groups .group-container .group.active:hover svg circle, .featured-groups .group-container .group.active:hover svg polygon {
           fill: white !important; }
       .featured-groups .group-container .group.hide-icons {
         text-transform: uppercase;
