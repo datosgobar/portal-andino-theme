@@ -152,6 +152,8 @@ class GobArRouter:
             m.connect('/configurar/metadata/google_fb', action='edit_metadata_google_fb')
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
+            m.connect('/configurar/alta_de_usuarios', action="create_users")
+            m.connect('/configurar/gestion_de_permisos', action="manage_roles")
 
         self.redirect(
             ('/configurar', '/configurar/titulo'),

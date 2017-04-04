@@ -181,6 +181,12 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_11_metadata_twitter.html')
 
+    def create_users(self):
+        return base.render('config/config_12_create_users.html')
+
+    def manage_roles(self):
+        return base.render('config/config_13_manage_roles.html')
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':
