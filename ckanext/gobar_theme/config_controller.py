@@ -182,6 +182,8 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_11_metadata_twitter.html')
 
     def create_users(self):
+        # path_to_virtualenv/src/ckan/ckan/lib/cli.py
+        # class UserCmd
         return base.render('config/config_12_create_users.html')
 
     def manage_roles(self):

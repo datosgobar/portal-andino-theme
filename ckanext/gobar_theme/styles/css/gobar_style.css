@@ -9034,6 +9034,8 @@ ul.activity {
       font-size: 16px; }
       #template-config-container #template-config p:after, #template-config-container #template-config label:after {
         content: none; }
+    #template-config-container #template-config p.error {
+      color: #ef4d3d; }
     #template-config-container #template-config .radio-container {
       margin-bottom: 30px; }
       #template-config-container #template-config .radio-container .radio-box {
@@ -9065,7 +9067,8 @@ ul.activity {
           padding: 20px; }
           #template-config-container #template-config .radio-container label.img-radio .radio-description h2 {
             color: #767676; }
-    #template-config-container #template-config input[type="text"] {
+    #template-config-container #template-config input[type="text"],
+    #template-config-container #template-config input[type="password"] {
       width: 100%;
       margin-bottom: 30px;
       padding: 10px;

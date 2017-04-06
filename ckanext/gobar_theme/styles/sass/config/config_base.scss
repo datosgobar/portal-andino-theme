@@ -48,6 +48,9 @@
         content: none;
       }
     }
+    p.error {
+        color: $red-300;
+    }
     .radio-container {
       margin-bottom: 30px;
 
@@ -88,7 +91,8 @@
         }
       }
     }
-    input[type="text"] {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       margin-bottom: 30px;
       padding: 10px;
