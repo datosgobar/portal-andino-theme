@@ -184,7 +184,31 @@ class GobArConfigController(base.BaseController):
     def create_users(self):
         # path_to_virtualenv/src/ckan/ckan/lib/cli.py
         # class UserCmd
-        return base.render('config/config_12_create_users.html')
+        self._authorize()
+        extra_vars = {}
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            data_dict = {
+                'name': params['username'],
+                'email': params['email'],
+                'password': params['password'],
+                'sysadmin': True
+            }
+            extra_vars['user'] = data_dict
+            site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+            context = {
+                'model': model,
+                'session': model.Session,
+                'ignore_auth': True,
+                'user': site_user['name'],
+            }
+            try:
+                logic.get_action('user_create')(context, data_dict)
+                user_created = True
+            except logic.ValidationError, e:
+                user_created = False
+            extra_vars['user_created'] = user_created
+        return base.render('config/config_12_create_users.html', extra_vars=extra_vars)
 
     def manage_roles(self):
         return base.render('config/config_13_manage_roles.html')

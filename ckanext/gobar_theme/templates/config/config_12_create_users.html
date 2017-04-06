@@ -4,6 +4,8 @@
     <h1 class="small-margin">Alta de usuario</h1>
 
     {% if user_created %}
+        El usuario se creó con éxito
+    {% else %}
         <form method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
             <h2>Nombre de usuario</h2>
             {% if user and user.username_error %}
@@ -21,19 +23,12 @@
             {% if user and user.password_error %}
                 <p class="error">{{ user.password_error }}</p>
             {% endif %}
-            <input name="email" type="password" title="Contraseña" placeholder="Contraseña" value="{{ user.password if user else '' }}">
-
-            <h2>Rol de usuario</h2>
-            <select name="role">
-                <option {{ "selected" if user and user.role == "user" else '' }} value="user">Usuario</option>
-                <option {{ "selected" if user and user.role == "admin" else '' }} value="admin">Administrador</option>
-            </select>
+            <input name="password" type="password" title="Contraseña" placeholder="Contraseña" value="{{ user.password if user else '' }}">
 
             <div class="submit-container">
                 <button class="submit-button" type="submit" name="save">GUARDAR</button>
             </div>
         </form>
-    {% else %}
-        
+
     {% endif %}
 {% endblock %}
