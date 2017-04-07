@@ -1,0 +1,12 @@
+{% extends "config/config_base.html" %}
+
+{% block config %}
+{%  for user in users %}
+    <div>
+        <p>Usuario: {{ user.name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>¿Es admin? {{ "Si" if user.sysadmin else "No"}}</p>
+        <p>Estado: {{ user.state }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

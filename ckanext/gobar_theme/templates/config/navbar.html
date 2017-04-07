@@ -62,9 +62,9 @@
            class="section-link {{ 'active' if c.action == 'create_users' else '' }}">
             Alta de usuarios
         </a>
-        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='manage_roles') }}"
-           class="section-link {{ 'active' if c.action == 'manage_roles' else '' }}">
-            Gestión de permisos
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='list_users') }}"
+           class="section-link {{ 'active' if c.action == 'list_users' else '' }}">
+            Listado de usuarios
         </a>
     </div>
 

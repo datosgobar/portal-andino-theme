@@ -210,8 +210,10 @@ class GobArConfigController(base.BaseController):
             extra_vars['user_created'] = user_created
         return base.render('config/config_12_create_users.html', extra_vars=extra_vars)
 
-    def manage_roles(self):
-        return base.render('config/config_13_manage_roles.html')
+    def list_users(self):
+        self._authorize()
+        extra_vars = {'users': model.Session.query(model.User)}
+        return base.render('config/config_13_list_users.html', extra_vars=extra_vars)
 
     def edit_greetings(self):
         self._authorize()

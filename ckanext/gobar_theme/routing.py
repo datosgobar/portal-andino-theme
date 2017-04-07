@@ -153,7 +153,7 @@ class GobArRouter:
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
             m.connect('/configurar/alta_de_usuarios', action="create_users")
-            m.connect('/configurar/gestion_de_permisos', action="manage_roles")
+            m.connect('/configurar/listar_usuarios', action="list_users")
 
         self.redirect(
             ('/configurar', '/configurar/titulo'),
