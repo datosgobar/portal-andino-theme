@@ -228,6 +228,13 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 
 * <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_abiertos.html" target="_blank">Guía para la publicación de datos en formatos abiertos</a>
 
+### Consultas sobre Andino
+
+**Andino es un portal abierto en constante desarrollo** para ser usado por toda la comunidad de datos. Por eso, cuando incorporamos una nueva mejora, **cuidamos mucho su compatibilidad con la versión anterior**.
+
+Como la comunidad de datos es grande, **por ahora no podemos dar soporte técnico frente a modificaciones particulares del código**. Sin embargo, **podés contactarnos para despejar dudas**. 
+
+Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún bug o tengas feedback. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar.  
 
 
 
