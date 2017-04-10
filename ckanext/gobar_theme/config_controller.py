@@ -192,7 +192,7 @@ class GobArConfigController(base.BaseController):
                 'name': params['username'],
                 'email': params['email'],
                 'password': params['password'],
-                'sysadmin': True
+                'sysadmin': 'admin' in params
             }
             extra_vars['user'] = data_dict
             site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
