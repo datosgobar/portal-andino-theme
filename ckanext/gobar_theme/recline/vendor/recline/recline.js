@@ -2281,10 +2281,17 @@ my.Map = Backbone.View.extend({
   _setupMap: function(){
     var self = this;
     this.map = new L.Map(this.$map.get(0));
+    
+    // Gooooooodbye OSM!!
+    // var mapUrl = "//otile{s}-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png";
+    // var osmAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="//developer.mapquest.com/content/osm/mq_logo.png">';
+    // var bg = new L.TileLayer(mapUrl, {maxZoom: 18, attribution: osmAttribution ,subdomains: '1234'});
 
-    var mapUrl = "//otile{s}-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png";
-    var osmAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="//developer.mapquest.com/content/osm/mq_logo.png">';
-    var bg = new L.TileLayer(mapUrl, {maxZoom: 18, attribution: osmAttribution ,subdomains: '1234'});
+    // Hello IGN:
+    var mapUrl = "//wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{y}.png"
+    var ignAttribution = '<a href="http://www.ign.gob.ar/" target="blank">Instituto Geografico Nacional</a>'
+    var bg = new L.TileLayer(mapUrl, {maxZoom: 18, tms:true, attribution: ignAttribution, subdomains: 'abcd'});
+
     this.map.addLayer(bg);
 
     this.markers = new L.MarkerClusterGroup(this._clusterOptions);
@@ -2294,8 +2301,9 @@ my.Map = Backbone.View.extend({
         this.geoJsonLayerOptions.pointToLayer,
         this);
     this.features = new L.GeoJSON(null, this.geoJsonLayerOptions);
-
-    this.map.setView([0, 0], 2);
+    // Centramos el mapa dento del territorio nacional Argentino.
+    // this.map.setView([0, 0], 2);
+    this.map.setView([-33.424246, -64.419246], 2);
 
     this.mapReady = true;
   },
