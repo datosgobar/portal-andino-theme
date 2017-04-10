@@ -215,18 +215,6 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 
 ![alt text](assets/portal-andino-sec-config.png "sec-config")
 
-***
-### Otros contenidos útiles
-
-
-
-* <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_metadatos.html" target="_blank">Guía para el uso y la publicación de metadatos</a>
-
-
-* <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_interoperables.html" target="_blank">Guía para la identificación y uso de entidades interoperables</a>
-
-
-* <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_abiertos.html" target="_blank">Guía para la publicación de datos en formatos abiertos</a>
 
 ***
 ### Consultas sobre Andino
@@ -237,8 +225,14 @@ Como la comunidad de datos es grande, **por ahora no podemos dar soporte técnic
 
 Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún _bug_ o _tengas feedback_. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar.  
 
+***
+### Otros contenidos útiles
 
+* <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_metadatos.html" target="_blank">Guía para el uso y la publicación de metadatos</a>
 
+* <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_interoperables.html" target="_blank">Guía para la identificación y uso de entidades interoperables</a>
+
+* <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_abiertos.html" target="_blank">Guía para la publicación de datos en formatos abiertos</a>
 
 
 
