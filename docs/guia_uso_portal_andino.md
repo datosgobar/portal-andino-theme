@@ -235,7 +235,7 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 
 Como la comunidad de datos es grande, **por ahora no podemos dar soporte técnico frente a modificaciones particulares del código**. Sin embargo, **podés contactarnos para despejar dudas**. 
 
-Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún bug o tengas feedback. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar.  
+Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún _bug_ o _tengas feedback_. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar.  
 
 
 
