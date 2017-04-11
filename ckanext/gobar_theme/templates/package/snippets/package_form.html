@@ -23,7 +23,7 @@
     {% snippet 'package/snippets/package_metadata_fields.html', data=data, errors=errors %}
 
     <div class="form-actions">
-        {% block delete_button_dataset %}
+        {% block delete_button %}
             {% if h.check_access('package_delete', {'id': data.id}) and not data.state == 'deleted' %}
                 <button type="button" class="btn btn-red" id="confirm-delete">
                     BORRAR DATASET
