@@ -9150,6 +9150,19 @@ ul.activity {
         padding: 12px; }
         #template-config-container #template-config .submit-container .submit-button:hover {
           background-color: #17b2f8; }
+    #template-config-container #template-config .user-list {
+      padding: 20px 0; }
+      #template-config-container #template-config .user-list .list-header,
+      #template-config-container #template-config .user-list .list-user {
+        padding: 0; }
+        #template-config-container #template-config .user-list .list-header .user-attr,
+        #template-config-container #template-config .user-list .list-user .user-attr {
+          padding: 5px 10px 5px 10px; }
+      #template-config-container #template-config .user-list a {
+        color: inherit; }
+        #template-config-container #template-config .user-list a .list-user:hover {
+          background: #f5f5f5;
+          color: #0695d6; }
 
 #template-config #navbar {
   background: #f5f5f5;

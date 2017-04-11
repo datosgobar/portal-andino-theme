@@ -27,7 +27,7 @@
             {% if user and user.password_error %}
                 <p class="error">{{ user.password_error }}</p>
             {% endif %}
-            <input name="password" type="password" title="Contraseña" placeholder="Contraseña" value="{{ user.password if user else '' }}">
+            <input name="password" type="password" title="Contraseña" placeholder="Contraseña" value="{{ user.password if user else '' }}"  autocomplete="new-password">
 
             <label class="with-bottom-margin checkbox-label">
             <input type="checkbox" name="admin" {{ 'checked="checked"' if user and user.sysadmin else '' }}>
