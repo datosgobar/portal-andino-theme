@@ -97,7 +97,7 @@ Como la sección Organizaciones con datos es opcional, podés elegir que se vea 
 
 Son las categorías en las que se pueden clasificar todos los datasets de tu portal. Hay dos taxonomías de temas:
 
-*  **Temas globales**, que ya vienen con AbreAr, y que necesitás elegir para cada dataset. Estos temas no se ven en tu portal, pero es necesario que lo elijas para que el portal nacional datos.gob.ar pueda republicar el dataset según esta clasificación. Por ejemplo: “Economía y finanzas”. 
+*  **Temas globales**, que ya vienen con Andino, y que necesitás elegir para cada dataset. Estos temas no se ven en tu portal, pero es necesario que lo elijas para que el portal nacional datos.gob.ar pueda republicar el dataset según esta clasificación. Por ejemplo: “Economía y finanzas”. 
 
 * **Temas específicos**, que son opcionales, pero que te recomendamos con énfasis que agregues a todos tus conjuntos de datos porque son los temas que van a ver tus usuarios. Por ejemplo, si el tema global era “Economía y finanzas”, un tema específico podría ser “Compras”. 
 
@@ -215,22 +215,24 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 
 ![alt text](assets/portal-andino-sec-config.png "sec-config")
 
+
+***
+### Consultas sobre Andino
+
+**Andino es un portal abierto en constante desarrollo** para ser usado por toda la comunidad de datos. Por eso, cuando incorporamos una nueva mejora, **cuidamos mucho su compatibilidad con la versión anterior**.
+
+Como la comunidad de datos es grande, **por ahora no podemos dar soporte técnico frente a modificaciones particulares del código**. Sin embargo, **podés contactarnos para despejar dudas**. 
+
+Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún _bug_ o _tengas feedback_. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar.  
+
 ***
 ### Otros contenidos útiles
 
-
-
 * <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_metadatos.html" target="_blank">Guía para el uso y la publicación de metadatos</a>
-
 
 * <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_interoperables.html" target="_blank">Guía para la identificación y uso de entidades interoperables</a>
 
-
 * <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_abiertos.html" target="_blank">Guía para la publicación de datos en formatos abiertos</a>
-
-
-
-
 
 
 
