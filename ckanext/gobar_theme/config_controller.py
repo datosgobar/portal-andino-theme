@@ -215,6 +215,14 @@ class GobArConfigController(base.BaseController):
         extra_vars = {'users': model.Session.query(model.User)}
         return base.render('config/config_13_list_users.html', extra_vars=extra_vars)
 
+    def edit_user(self):
+        self._authorize()
+        params = parse_params(request.GET)
+        username = params['username']
+        user = model.User.get(username)
+        extra_vars = {'user': user}
+        return base.render('config/config_14_edit_user.html', extra_vars=extra_vars)
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':

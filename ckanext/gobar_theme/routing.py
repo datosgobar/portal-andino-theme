@@ -154,6 +154,7 @@ class GobArRouter:
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
             m.connect('/configurar/alta_de_usuarios', action="create_users")
             m.connect('/configurar/listar_usuarios', action="list_users")
+            m.connect('/configurar/editar_usuario', action="edit_user")
 
         self.redirect(
             ('/configurar', '/configurar/titulo'),

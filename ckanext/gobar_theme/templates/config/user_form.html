@@ -1,0 +1,28 @@
+<form method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
+    <h2>Nombre de usuario</h2>
+    {% if user and user.username_error %}
+        <p class="error">{{ user.username_error }}</p>
+    {% endif %}
+    <input name="username" type="text" title="Nombre de usuario" placeholder="Nombre de usuario" value="{{ user.name if user else '' }}">
+
+    <h2>Correo electrónico</h2>
+    {% if user and user.email_error %}
+        <p class="error">{{ user.email_error }}</p>
+    {% endif %}
+    <input name="email" type="text" title="Correo electrónico" placeholder="Correo electrónico" value="{{ user.email if user else '' }}">
+
+    <h2>Contraseña</h2>
+    {% if user and user.password_error %}
+        <p class="error">{{ user.password_error }}</p>
+    {% endif %}
+    <input name="password" type="password" title="Contraseña" placeholder="Contraseña" value="{{ user.password if user else '' }}"  autocomplete="new-password">
+
+    <label class="with-bottom-margin checkbox-label">
+    <input type="checkbox" name="admin" {{ 'checked="checked"' if user and user.sysadmin else '' }}>
+        Usuario administrador del sitio
+    </label>
+
+    <div class="submit-container">
+        <button class="submit-button" type="submit" name="save">GUARDAR</button>
+    </div>
+</form>

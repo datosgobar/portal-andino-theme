@@ -10,7 +10,7 @@
         </div>
 
         {%  for user in users %}
-            <a href="/configurar/editar-usuario/user.name">
+            <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_user', username=user.name) }}">
                 <div class="col-xs-12 list-user">
                     <div class="col-xs-3 user-attr">{{ user.name }}</div>
                     <div class="col-xs-3 user-attr">{{ user.email }}</div>

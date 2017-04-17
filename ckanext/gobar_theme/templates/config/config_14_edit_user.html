@@ -1,0 +1,6 @@
+{% extends "config/config_base.html" %}
+
+{% block config %}
+    <h1 class="small-margin">Editar usuario</h1>
+    {% snippet "config/user_form.html", user=user %}
+{% endblock %}
