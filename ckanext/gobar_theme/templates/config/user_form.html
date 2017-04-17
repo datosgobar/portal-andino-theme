@@ -1,19 +1,19 @@
 <form method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
     <h2>Nombre de usuario</h2>
-    {% if user and user.username_error %}
-        <p class="error">{{ user.username_error }}</p>
+    {% if user and errors and errors.name %}
+        <p class="error">{{ errors.name[0] }}</p>
     {% endif %}
-    <input name="username" type="text" title="Nombre de usuario" placeholder="Nombre de usuario" value="{{ user.name if user else '' }}">
+    <input name="name" type="text" title="Nombre de usuario" placeholder="Nombre de usuario" value="{{ user.name if user else '' }}">
 
     <h2>Correo electrónico</h2>
-    {% if user and user.email_error %}
-        <p class="error">{{ user.email_error }}</p>
+    {% if user and errors and errors.email %}
+        <p class="error">{{ errors.email[0] }}</p>
     {% endif %}
     <input name="email" type="text" title="Correo electrónico" placeholder="Correo electrónico" value="{{ user.email if user else '' }}">
 
     <h2>Contraseña</h2>
-    {% if user and user.password_error %}
-        <p class="error">{{ user.password_error }}</p>
+    {% if user and errors and errors.password %}
+        <p class="error">{{ errors.password[0] }}</p>
     {% endif %}
     <input name="password" type="password" title="Contraseña" placeholder="Contraseña" value="{{ user.password if user else '' }}"  autocomplete="new-password">
 

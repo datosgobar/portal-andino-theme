@@ -2,5 +2,14 @@
 
 {% block config %}
     <h1 class="small-margin">Editar usuario</h1>
-    {% snippet "config/user_form.html", user=user %}
+
+    {% if user_updated %}
+        <p>El usuario se actualizó con éxito</p>
+        <p>Nombre de usuario: {{ user.name }}</p>
+        <p>Correo electrónico: {{ user.email }}</p>
+        <p>Contraseña {{ '*' * user.password|length }}</p>
+        <p>El usuario es administrador del sitio: {{ 'si' if user.sysadmin else 'no' }}</p>
+    {% else %}
+        {% snippet "config/user_form.html", user=user, errors=errors %}
+    {% endif %}
 {% endblock %}

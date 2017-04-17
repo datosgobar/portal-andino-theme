@@ -189,7 +189,7 @@ class GobArConfigController(base.BaseController):
         if request.method == 'POST':
             params = parse_params(request.POST)
             data_dict = {
-                'name': params['username'],
+                'name': params['name'],
                 'email': params['email'],
                 'password': params['password'],
                 'sysadmin': 'admin' in params
@@ -207,6 +207,7 @@ class GobArConfigController(base.BaseController):
                 user_created = True
             except logic.ValidationError, e:
                 user_created = False
+                extra_vars['errors'] = e.error_dict
             extra_vars['user_created'] = user_created
         return base.render('config/config_12_create_users.html', extra_vars=extra_vars)
 
@@ -217,10 +218,34 @@ class GobArConfigController(base.BaseController):
 
     def edit_user(self):
         self._authorize()
-        params = parse_params(request.GET)
-        username = params['username']
+        get_params = parse_params(request.GET)
+        username = get_params['username']
         user = model.User.get(username)
         extra_vars = {'user': user}
+        if request.method == 'POST':
+            post_params = parse_params(request.POST)
+            data_dict = {
+                'id': user.id,
+                'name': post_params['name'],
+                'email': post_params['email'],
+                'password': post_params['password'],
+                'sysadmin': 'admin' in post_params
+            }
+            extra_vars['user'] = data_dict
+            site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+            context = {
+                'model': model,
+                'session': model.Session,
+                'ignore_auth': True,
+                'user': site_user['name'],
+            }
+            try:
+                logic.get_action('user_update')(context, data_dict)
+                user_updated = True
+            except logic.ValidationError, e:
+                user_updated = False
+                extra_vars['errors'] = e.error_dict
+            extra_vars['user_updated'] = user_updated
         return base.render('config/config_14_edit_user.html', extra_vars=extra_vars)
 
     def edit_greetings(self):

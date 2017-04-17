@@ -10,6 +10,6 @@
         <p>Contraseña {{ '*' * user.password|length }}</p>
         <p>El usuario es administrador del sitio: {{ 'si' if user.sysadmin else 'no' }}</p>
     {% else %}
-        {% snippet "config/user_form.html", user=user %}
+        {% snippet "config/user_form.html", user=user, errors=errors %}
     {% endif %}
 {% endblock %}
