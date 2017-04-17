@@ -1,6 +1,5 @@
 $(function () {
-    var $form;
-
+    var submit_count = 0;
     function formIsValid() {
         $('.missing-field').remove();
         var isValid = true;
@@ -33,12 +32,15 @@ $(function () {
         return isValid;
     };
 
+    $(document).on('click', '.btn-mini', function () {
+        if (submit_count > 0){
+            return formIsValid();
+        }
+    });
+
     $('form#organization-edit-form').submit(function () {
+        submit_count++;
         return formIsValid();
     });
-});
 
-$('.btn.btn-mini').click(function () {
-        console.log("BOTOOOON")
-        return formIsValid();
 });
