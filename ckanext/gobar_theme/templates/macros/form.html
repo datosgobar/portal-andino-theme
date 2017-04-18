@@ -19,7 +19,6 @@ Examples:
 
 #}
 {% macro input(name, id='', label='', value='', placeholder='', type='text', error="", classes=[], attrs={}, is_required=false, after_desc=false) %}
-    <div>{{error}}</div>
     {% do classes.append('error') if error %}
     {%- set extra_html = caller() if caller -%}
 
