@@ -11,7 +11,7 @@
                             VOLVER
                         </a>
                     </div>
-                    <h1>Crear dataset y agregar recursos</h1>
+                    <h1>Agregar recursos</h1>
                     {% set logged_in = true if c.userobj else false %}
                     {% snippet resource_form_snippet, data=data, errors=errors, error_summary=error_summary, include_metadata=false, pkg_name=pkg_name, stage=stage, allow_upload=g.ofs_impl and logged_in, dataset_type=dataset_type %}
                 </div>
