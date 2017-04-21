@@ -60,7 +60,14 @@
             {% block previous_button %}
             {% endblock %}
             {% block again_button %}
-                <button class="btn btn-blue" name="save" value="again" type="submit">SEGUIR Y AGREGAR RECURSOS</button>
+                <button class="btn btn-blue" name="save" value="again" type="submit">
+                    SEGUIR Y AGREGAR RECURSOS
+                </button>
+            {% endblock %}
+            {% block save_draft %}
+                <button class="btn btn-transparent" name="save" value="save-draft" type="submit">
+                    SUBIR Y DEJAR EN BORRADOR
+                </button>
             {% endblock %}
             {% block save_button %}
                 <button class="btn btn-green" name="save" value="go-metadata" type="submit">
