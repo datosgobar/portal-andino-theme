@@ -216,15 +216,7 @@ class GobArConfigController(base.BaseController):
                     gobar_config = json.load(json_data)
                 except Exception:
                     gobar_config = {}
-                try:
-                    g.GOBAR_CONFIG = json.dumps(gobar_config)
-                except TypeError as err:
-                    # Aparentemente un problema de startup complica el uso de app_globals, que
-                    # al siguiente request puede ser R/W de manera exitosa.
-                    # Esto tiene que pasar solo una vez.
-                    # TODO datosgobar/portal-andino-theme#45 - Mejorar el logging. Ver
-                    # http://modwsgi.readthedocs.io/en/develop/user-guides/debugging-techniques.html#apache-error-log-files
-                    print >> sys.stderr, "No fue posible escribir la config en app_globals: %s" % err
+                g.GOBAR_CONFIG = json.dumps(gobar_config)
 
         return gobar_config
 
