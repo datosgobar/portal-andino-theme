@@ -5,7 +5,7 @@ import ckan.logic as logic
 import ckan.model as model
 import urlparse
 import json
-import os
+import os, sys
 
 parse_params = logic.parse_params
 abort = base.abort
@@ -224,7 +224,7 @@ class GobArConfigController(base.BaseController):
                     # Esto tiene que pasar solo una vez.
                     # TODO datosgobar/portal-andino-theme#45 - Mejorar el logging. Ver
                     # http://modwsgi.readthedocs.io/en/develop/user-guides/debugging-techniques.html#apache-error-log-files
-                    print >> "No fue posible escribir la config en app_globals: %s" % err
+                    print >> sys.stderr, "No fue posible escribir la config en app_globals: %s" % err
 
         return gobar_config
 
