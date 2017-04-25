@@ -2,18 +2,24 @@
 
 {% block subtitle %} - Crear dataset{% endblock %}
 
+{% set stage = form_vars.stage %}
+
 {% block content %}
     <div id="new-package-container" class="container-fluid">
         <div class="restricted-max-width">
             <div id="new-package" class="col-xs-12 col-md-10 col-md-offset-1">
                 <div class="col-xs-12 col-md-10 col-md-offset-1">
                     <div class="back-btn">
-                        <a href="{{ h.url('home') }}">
+                        <a href="{{ request.headers.Referer }}">
                             <i class="icon-chevron-left"></i>
                             VOLVER
                         </a>
                     </div>
-                    <h1>Crear dataset y agregar recursos</h1>
+                    {% if 'active' in stage and 'complete' in stage %}
+                        <h1>Editar dataset</h1>
+                    {% else %}
+                        <h1>Crear dataset y agregar recursos</h1>
+                    {% endif %}
                     {{- h.snippet(form_snippet, c=c, **form_vars) -}}
                 </div>
             </div>
