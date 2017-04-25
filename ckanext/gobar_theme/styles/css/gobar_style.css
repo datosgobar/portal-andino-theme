@@ -6125,6 +6125,38 @@ div.svg-tooltip {
   margin-right: -5px; }
 
 /*# sourceMappingURL=bootstrap-datepicker3.min.css.map */
+.pagination {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 64px;
+  margin-top: 60px;
+  text-transform: uppercase; }
+
+.pagination li a {
+  background-color: #fff;
+  border: 0;
+  border-radius: 4px;
+  color: #0695d6;
+  float: left;
+  line-height: 1.42857;
+  margin: 0 2px;
+  padding: 10px 17px;
+  position: relative;
+  text-decoration: none; }
+
+.pagination li a:hover, .pagination li a:focus {
+  background-color: #999999;
+  border-color: transparent;
+  color: #0695d6; }
+
+.pagination ul li a {
+  border-color: #fff; }
+
+.pagination ul .active a, .pagination ul .active a:hover, .pagination ul .active a:focus {
+  background-color: #767676;
+  border-color: #fff;
+  color: #fff; }
+
 @media (min-width: 768px) {
   body {
     padding-top: 72px; } }
