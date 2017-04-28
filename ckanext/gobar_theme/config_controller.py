@@ -5,7 +5,7 @@ import ckan.logic as logic
 import ckan.model as model
 import urlparse
 import json
-import os
+import os, sys
 
 parse_params = logic.parse_params
 abort = base.abort
@@ -209,19 +209,21 @@ class GobArConfigController(base.BaseController):
     @classmethod
     def _read_config(cls):
         try:
-            gobar_config = json.loads(os.environ['GOBAR_CONFIG'])
+            gobar_config = json.loads(g.GOBAR_CONFIG)
         except Exception:
             with open(cls.CONFIG_PATH) as json_data:
                 try:
                     gobar_config = json.load(json_data)
                 except Exception:
                     gobar_config = {}
+                g.GOBAR_CONFIG = json.dumps(gobar_config)
+
         return gobar_config
 
     @classmethod
     def _set_config(cls, config_dict):
         json_string = json.dumps(config_dict, sort_keys=True, indent=2)
-        os.environ['GOBAR_CONFIG'] = json_string
+        g.GOBAR_CONFIG = json_string
         with open(cls.CONFIG_PATH, 'w') as json_data:
             json_data.write(json_string)
 
