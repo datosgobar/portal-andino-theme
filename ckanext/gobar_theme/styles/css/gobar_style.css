@@ -6125,6 +6125,25 @@ div.svg-tooltip {
   margin-right: -5px; }
 
 /*# sourceMappingURL=bootstrap-datepicker3.min.css.map */
+.pagination {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 60px 0; }
+  .pagination ul {
+    box-shadow: none; }
+    .pagination ul li a {
+      background-color: #fff;
+      border: none;
+      border-radius: 2px !important;
+      color: #0695d6;
+      margin: 0 2px;
+      padding: 6px 11px; }
+      .pagination ul li a:hover, .pagination ul li a:focus {
+        background-color: #e5e5e5; }
+    .pagination ul li.active a, .pagination ul li.active a:hover, .pagination ul li.active a:focus {
+      background-color: #767676;
+      color: #fff; }
+
 @media (min-width: 768px) {
   body {
     padding-top: 72px; } }
@@ -9194,5 +9213,27 @@ ul.activity {
         color: inherit; }
         #template-config #navbar .links-section.guide-link a:hover i, #template-config #navbar .links-section.guide-link a:hover .blue {
           color: #17b2f8; }
+
+#edit-group-container #edit-group form .control-group #field-image-upload,
+#new-package-container #new-package form .control-group #field-image-upload,
+#edit-package-container #edit-package form .control-group #field-image-upload {
+  left: -99999px; }
+#edit-group-container #edit-group form .control-group .file-upload-label,
+#new-package-container #new-package form .control-group .file-upload-label,
+#edit-package-container #edit-package form .control-group .file-upload-label {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px; }
+#edit-group-container #edit-group form .control-group .url-btn, #edit-group-container #edit-group form .control-group .upload-btn,
+#new-package-container #new-package form .control-group .url-btn,
+#new-package-container #new-package form .control-group .upload-btn,
+#edit-package-container #edit-package form .control-group .url-btn,
+#edit-package-container #edit-package form .control-group .upload-btn {
+  margin-left: 0;
+  text-transform: uppercase; }
+#edit-group-container #edit-group form .control-group .upload-btn,
+#new-package-container #new-package form .control-group .upload-btn,
+#edit-package-container #edit-package form .control-group .upload-btn {
+  margin: 0; }
 
 /*# sourceMappingURL=gobar_style.css.map */
