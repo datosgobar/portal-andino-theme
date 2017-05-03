@@ -4,8 +4,8 @@ import ckan.lib.activity_streams as activity_streams
 import ckan.lib.base as base
 import re
 import sys
-
 from webhelpers.html import literal
+
 
 def package_activity_list_html(context, data_dict):
     activity_stream = logic.action.get.package_activity_list(context, data_dict)
@@ -18,6 +18,7 @@ def package_activity_list_html(context, data_dict):
     }
     return activity_list_to_html(
         context, activity_stream, extra_vars)
+
 
 def activity_list_to_html(context, activity_stream, extra_vars):
     activity_list = [] # These are the activity stream messages.
@@ -64,6 +65,7 @@ def activity_list_to_html(context, activity_stream, extra_vars):
             if match == 'extra':
                 if 'updateFrequency' in snippet:
                     data[str(match)] = 'Frecuencia de actualización'
+                    activity_msg = u'{actor} actualizó {extra} del conjunto de datos {dataset}'
                 else:
                     include_msg = False
             else:
