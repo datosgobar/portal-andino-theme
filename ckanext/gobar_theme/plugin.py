@@ -42,6 +42,5 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'json_loads': gobar_helpers.json_loads,
             'update_frequencies': gobar_helpers.update_frequencies,
             'field_types': gobar_helpers.field_types,
-            'render_ar_datetime': gobar_helpers.render_ar_datetime,
-            'documentation_url': gobar_helpers.documentation_url
+            'render_ar_datetime': gobar_helpers.render_ar_datetime
         }
