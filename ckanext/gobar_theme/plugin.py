@@ -3,12 +3,17 @@ import ckan.plugins.toolkit as toolkit
 from ckan.plugins import implements, IRoutes
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.routing as gobar_routes
+import ckanext.gobar_theme.actions as gobar_actions
 
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IConfigurer)
     implements(IRoutes, inherit=True)
     implements(plugins.ITemplateHelpers)
+    implements(plugins.IActions)
+
+    def get_actions(self):
+        return {'package_activity_list_html': gobar_actions.package_activity_list_html}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
@@ -16,7 +21,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         toolkit.add_resource('styles/css', 'gobar_css')
         toolkit.add_resource('js', 'gobar_js')
         toolkit.add_resource('recline', 'gobar_data_preview')
-        gobar_helpers.get_theme_config()
 
     def before_map(self, routing_map):
         gobar_router = gobar_routes.GobArRouter(routing_map)
