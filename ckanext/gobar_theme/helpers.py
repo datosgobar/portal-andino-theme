@@ -223,13 +223,3 @@ def render_ar_datetime(datetime_):
         'timezone': datetime_.tzinfo.zone,
     }
     return _('{day} de {month} de {year}').format(**details)
-
-def documentation_url(extras):
-    import unicodedata
-    for extra in extras:
-        if unicodedata.normalize('NFD', extra['key']).encode('ascii', 'ignore') == 'Documentacion':
-            match = extra['value']
-            break
-    else:
-        match = None
-    return match
