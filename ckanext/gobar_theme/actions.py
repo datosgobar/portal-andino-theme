@@ -1,9 +1,11 @@
 # coding=utf-8
+import ckan
 import ckan.logic as logic
 import ckan.lib.activity_streams as activity_streams
 import ckan.lib.base as base
 import re
 import sys
+import pkg_resources
 from webhelpers.html import literal
 
 
@@ -85,4 +87,32 @@ def activity_list_to_html(context, activity_stream, extra_vars):
     extra_vars['activities'] = activity_list
     return literal(base.render('activity_streams/activity_stream_items.html',
                                extra_vars=extra_vars))
+
+def status_show(context, data_dict):
+    return {
+        # 'site_title': config.get('ckan.site_title'),
+        # 'site_description': config.get('ckan.site_description'),
+        # 'site_url': config.get('ckan.site_url'),
+        # 'ckan_version': ckan.__version__,
+        # 'error_emails_to': config.get('email_to'),
+        # 'locale_default': config.get('ckan.locale_default'),
+        # 'extensions': config.get('ckan.plugins').split(),
+        'gobar_artifacts': _gobar_artifacts()
+}
+
+def _gobar_artifacts():
+    artifacts = []
+    plugins = ['ckanext-harvest', 'ckanext-gobar-theme', 'ckanext-hierarchy']
+    for plugin in plugins:
+        version = _get_version(plugin)
+        artifact = {plugin: version}
+        artifacts.append(artifact)
+    return artifacts
+
+def _get_version(plugin):
+    try:
+        version = pkg_resources.require(plugin)[0].version
+    except:
+        version = None
+    return version
 
