@@ -88,19 +88,7 @@ def activity_list_to_html(context, activity_stream, extra_vars):
     return literal(base.render('activity_streams/activity_stream_items.html',
                                extra_vars=extra_vars))
 
-def status_show(context, data_dict):
-    return {
-        # 'site_title': config.get('ckan.site_title'),
-        # 'site_description': config.get('ckan.site_description'),
-        # 'site_url': config.get('ckan.site_url'),
-        # 'ckan_version': ckan.__version__,
-        # 'error_emails_to': config.get('email_to'),
-        # 'locale_default': config.get('ckan.locale_default'),
-        # 'extensions': config.get('ckan.plugins').split(),
-        'gobar_artifacts': _gobar_artifacts()
-}
-
-def _gobar_artifacts():
+def gobar_status_show(context, data_dict):
     artifacts = []
     plugins = ['ckanext-harvest', 'ckanext-gobar-theme', 'ckanext-hierarchy']
     for plugin in plugins:

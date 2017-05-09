@@ -14,7 +14,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def get_actions(self):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
-                'status_show': gobar_actions.status_show}
+                'gobar_status_show': gobar_actions.gobar_status_show}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
