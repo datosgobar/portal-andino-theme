@@ -6,6 +6,7 @@ import ckan.lib.base as base
 import re
 import sys
 import pkg_resources
+import os
 from webhelpers.html import literal
 from codecs import open
 from os import path
@@ -108,7 +109,8 @@ def _get_plugin_version(plugin):
     return version
 
 def _get_portal_base_version():
-    portal_dir = path.abspath('/portal/')
+    os.chdir('/')
+    portal_dir = path.abspath(path.join(os.getcwd(), 'portal/'))
     try:
         with open(path.join(portal_dir, 'version')) as file:
             version = file.read()
@@ -116,6 +118,3 @@ def _get_portal_base_version():
     except:
         version = None
     return {'portal-base': version}
-
-
-
