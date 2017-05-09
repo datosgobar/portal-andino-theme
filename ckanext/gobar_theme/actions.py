@@ -7,7 +7,8 @@ import re
 import sys
 import pkg_resources
 from webhelpers.html import literal
-
+from codecs import open
+from os import path
 
 def package_activity_list_html(context, data_dict):
     activity_stream = logic.action.get.package_activity_list(context, data_dict)
@@ -92,15 +93,29 @@ def gobar_status_show(context, data_dict):
     artifacts = []
     plugins = ['ckanext-harvest', 'ckanext-gobar-theme', 'ckanext-hierarchy']
     for plugin in plugins:
-        version = _get_version(plugin)
+        version = _get_plugin_version(plugin)
         artifact = {plugin: version}
         artifacts.append(artifact)
+    portal_base_version = _get_portal_base_version()
+    artifacts.append(portal_base_version)
     return artifacts
 
-def _get_version(plugin):
+def _get_plugin_version(plugin):
     try:
         version = pkg_resources.require(plugin)[0].version
     except:
         version = None
     return version
+
+def _get_portal_base_version():
+    portal_dir = path.abspath('/portal/')
+    try:
+        with open(path.join(portal_dir, 'version')) as file:
+            version = file.read()
+            version = re.sub('[^\d\.]', '', version)
+    except:
+        version = None
+    return {'portal-base': version}
+
+
 
