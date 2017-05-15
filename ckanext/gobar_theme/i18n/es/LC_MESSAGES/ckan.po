@@ -17,6 +17,9 @@ msgstr "Archivo demasiado grande"
 msgid "Could not connect to DataPusher."
 msgstr "No se pudo conectar al DataPusher."
 
+msgid "cannot connect to datapusher"
+msgstr "No se pudo conectar al DataPusher."
+
 msgid "Process completed but unable to post to result_url"
-msgstr ""
+msgstr "Proceso completo pero no se puede devolver una url."
 
