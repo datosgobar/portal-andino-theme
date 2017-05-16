@@ -1,5 +1,7 @@
 $(function () {
     var $form;
+    var maxTitleCharacters = 100;
+    var maxDescCharacters = 150;
 
     function addGroupValues() {
         var checkboxList = $('.package-group-checkbox:checked');
@@ -101,6 +103,10 @@ $(function () {
         $form.append(hiddenSave);
     }
 
+    function lengthErrorTemplate(amountOfCharacters){
+        return '<div class="missing-field">Este campo no debe superar los ' + amountOfCharacters +' caracteres</div>';
+    }
+
     function formIsValid() {
         $('.missing-field').remove();
         var isValid = true;
@@ -110,12 +116,22 @@ $(function () {
         if (!title.val().length > 0) {
             isValid = false;
             title.after(errorTemplate)
+        } else {
+            if (title.val().length > maxTitleCharacters){
+                isValid = false;
+                title.after(lengthErrorTemplate(maxTitleCharacters))
+            }
         }
 
         var description = $('#field-notes');
         if (!description.val().length > 0) {
             isValid = false;
             description.after(errorTemplate)
+        } else {
+            if (description.val().length > maxDescCharacters){
+                isValid = false;
+                description.after(lengthErrorTemplate(maxDescCharacters))
+            }
         }
 
         if (!$('.package-global-group-checkbox:checked').length > 0) {
