@@ -191,7 +191,8 @@ class GobArConfigController(base.BaseController):
 
     @staticmethod
     def _url_with_protocol(url):
-        if not urlparse.urlparse(url).scheme:
+        url = url.strip()
+        if len(url) > 0 and not urlparse.urlparse(url).scheme:
             url = "http://" + url
         return url
 
