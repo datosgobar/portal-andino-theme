@@ -1,7 +1,7 @@
 $(function () {
     var $form;
     var maxTitleCharacters = 100;
-    var maxDescCharacters = 150;
+    var maxDescCharacters = 500;
 
     function addGroupValues() {
         var checkboxList = $('.package-group-checkbox:checked');
