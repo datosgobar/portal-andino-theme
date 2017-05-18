@@ -416,7 +416,7 @@ class GobArPackageController(PackageController):
                 if 'tag_string' in data_dict:
                     data_dict['tags'] = self._tag_string_to_list(data_dict['tag_string'])
 
-                self._validate_data(data_dict)
+                self._validate_dataset(data_dict)
 
                 if data_dict.get('pkg_name'):
                     is_an_update = True
@@ -491,6 +491,8 @@ class GobArPackageController(PackageController):
             del data['save']
             resource_id = data['id']
             del data['id']
+
+            self._validate_resource(data)
 
             context = {'model': model, 'session': model.Session,
                        'user': c.user, 'auth_user_obj': c.userobj}
@@ -671,7 +673,7 @@ class GobArPackageController(PackageController):
             data_dict = clean_dict(dict_fns.unflatten(
                 tuplize_dict(parse_params(request.POST))))
 
-            self._validate_data(data_dict)
+            self._validate_dataset(data_dict)
 
             if '_ckan_phase' in data_dict:
                 # we allow partial updates to not destroy existing resources
@@ -707,10 +709,18 @@ class GobArPackageController(PackageController):
 
         return self.edit(name_or_id, data_dict, errors, error_summary)
 
-    def _validate_data(self, data_dict):
-        max_title_characters = 100
+    def _validate_length(self, data, attribute, max_length):
+        if len(data[attribute]) > max_length:
+            raise ValidationError("%s must not have more than %s characters." % (attribute, max_length))
+
+    def _validate_resource(self, data_dict):
+        max_name_characters = 100
         max_desc_characters = 500
-        if len(data_dict['title']) > max_title_characters:
-            raise ValidationError("Title must not have more than %s characters." % max_title_characters)
-        if len(data_dict['notes']) > max_desc_characters:
-            raise ValidationError("Description must not have more than %s characters." % max_desc_characters)
+        self._validate_length(data_dict, 'name', max_name_characters)
+        self._validate_length(data_dict, 'description', max_desc_characters)
+
+    def _validate_dataset(self, data_dict):
+        max_title_characters = 150
+        max_desc_characters = 200
+        self._validate_length(data_dict, 'title', max_title_characters)
+        self._validate_length(data_dict, 'notes', max_desc_characters)
