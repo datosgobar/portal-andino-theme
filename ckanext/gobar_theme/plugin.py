@@ -13,7 +13,8 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IActions)
 
     def get_actions(self):
-        return {'package_activity_list_html': gobar_actions.package_activity_list_html}
+        return {'package_activity_list_html': gobar_actions.package_activity_list_html,
+                'group_delete': gobar_actions.gobar_group_delete}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')

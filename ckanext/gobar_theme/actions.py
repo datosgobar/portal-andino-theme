@@ -86,3 +86,7 @@ def activity_list_to_html(context, activity_stream, extra_vars):
     return literal(base.render('activity_streams/activity_stream_items.html',
                                extra_vars=extra_vars))
 
+
+def gobar_group_delete(context, data_dict):
+    logic.action.delete._group_or_org_delete(context, data_dict)
+    return logic.action.delete.group_purge(context, data_dict)
