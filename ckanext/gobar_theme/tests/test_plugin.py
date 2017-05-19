@@ -18,7 +18,8 @@ class TestDelete:
         helpers.reset_db()
 
     def test_delete_group_purges_group(self):
-        group = factories.Group()
+        sysadmin = factories.Sysadmin()
+        group = factories.Group(user=sysadmin)
 
         helpers.call_action('group_delete', id=group['name'])
 
