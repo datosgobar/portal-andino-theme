@@ -90,17 +90,17 @@ def activity_list_to_html(context, activity_stream, extra_vars):
                                extra_vars=extra_vars))
 
 
-def gobar_group_delete(context, data_dict):
+def group_delete_and_purge(context, data_dict):
     logic.action.delete._group_or_org_delete(context, data_dict)
     return logic.action.delete.group_purge(context, data_dict)
 
 
-def gobar_dataset_delete(context, data_dict):
+def dataset_delete_and_purge(context, data_dict):
     logic.action.delete.package_delete(context, data_dict)
     return logic.action.delete.dataset_purge(context, data_dict)
 
 
-def gobar_organization_delete(context, data_dict):
+def organization_delete_and_purge(context, data_dict):
     logic.action.delete._group_or_org_delete(context, data_dict, is_org=True)
     return logic.action.delete.group_purge(context, data_dict)
 

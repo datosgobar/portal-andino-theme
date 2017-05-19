@@ -14,9 +14,9 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def get_actions(self):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
-                'group_delete': gobar_actions.gobar_group_delete,
-                'package_delete': gobar_actions.gobar_dataset_delete,
-                'organization_delete': gobar_actions.gobar_organization_delete}
+                'group_delete': gobar_actions.group_delete_and_purge,
+                'package_delete': gobar_actions.gobar_dataset_delete_and_purge,
+                'organization_delete': gobar_actions.gobar_organization_delete_and_purge}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
