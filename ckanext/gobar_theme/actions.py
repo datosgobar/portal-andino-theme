@@ -97,8 +97,8 @@ def gobar_status_show(context, data_dict):
         version = _get_plugin_version(plugin)
         artifact = {plugin: version}
         artifacts.append(artifact)
-    portal_base_version = _get_portal_base_version()
-    artifacts.append(portal_base_version)
+    portal_andino_version = _get_portal_andino_version()
+    artifacts.append(portal_andino_version)
     return artifacts
 
 def _get_plugin_version(plugin):
@@ -108,7 +108,7 @@ def _get_plugin_version(plugin):
         version = None
     return version
 
-def _get_portal_base_version():
+def _get_portal_andino_version():
     os.chdir('/')
     portal_dir = path.abspath(path.join(os.getcwd(), 'portal/'))
     try:
@@ -117,4 +117,4 @@ def _get_portal_base_version():
             version = re.sub('[^\d\.]', '', version)
     except:
         version = None
-    return {'portal-base': version}
+    return {'portal-andino': version}
