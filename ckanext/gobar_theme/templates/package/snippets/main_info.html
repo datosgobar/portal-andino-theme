@@ -25,7 +25,7 @@
 
     <div id="pkg-resources">
         {% for resource in pkg.resources %}
-            {% if resource.format == "" %}
+            {% if resource.format == "" or resource.format|lower not in h.accepted_mime_types() %}
                 {% set format = "otro" %}
             {% else %}
                 {% set format = resource.format %}
