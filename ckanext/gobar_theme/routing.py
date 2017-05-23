@@ -26,6 +26,7 @@ class GobArRouter:
         self.remove_dashboard()
         self.remove_tags()
         self.remove_revision()
+        #self.remove_admin()
         self.connect_api()
         self.connect_template_config()
 
@@ -135,9 +136,18 @@ class GobArRouter:
             ('/revision/{id}', '/revision')
         )
 
+    def remove_admin(self):
+        self.redirect(
+            ('/ckan-admin', '/'),
+            ('/ckan-admin/config', '/'),
+            ('/ckan-admin/trash', '/'),
+            ('/ckan-admin/{action}', '/')
+        )
+
     def connect_api(self):
         with SubMapper(self.route_map, controller=self.api_controller, path_prefix='/api{ver:/3|}', ver='/3') as m:
             m.connect('/action/{logic_function}', action='action', conditions=dict(method=['GET', 'POST']))
+            m.connect('/util/status', action='status')
 
     def connect_template_config(self):
         with SubMapper(self.route_map, controller=self.config_controller) as m:
