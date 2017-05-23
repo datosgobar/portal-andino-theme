@@ -22,6 +22,9 @@ $(function () {
             description.after(lengthErrorTemplate(maxDescCharacters))
         }
 
+        if (!isValid) {
+            window.scrollTo(0, 0);
+        }
         return isValid;
     }
 
