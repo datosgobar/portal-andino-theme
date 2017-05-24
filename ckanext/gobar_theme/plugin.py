@@ -13,7 +13,8 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IActions)
 
     def get_actions(self):
-        return {'package_activity_list_html': gobar_actions.package_activity_list_html}
+        return {'package_activity_list_html': gobar_actions.package_activity_list_html,
+                'gobar_status_show': gobar_actions.gobar_status_show}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
@@ -42,5 +43,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'json_loads': gobar_helpers.json_loads,
             'update_frequencies': gobar_helpers.update_frequencies,
             'field_types': gobar_helpers.field_types,
-            'render_ar_datetime': gobar_helpers.render_ar_datetime
+            'render_ar_datetime': gobar_helpers.render_ar_datetime,
+            'accepted_mime_types': gobar_helpers.accepted_mime_types
         }
