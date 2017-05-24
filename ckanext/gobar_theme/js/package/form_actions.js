@@ -225,7 +225,6 @@ $(function () {
         var urlPreview = $('.slug-preview');
         if (urlPreview.length > 0) {
             clearInterval(interval);
-            urlPreview.before('<div class="after-desc">Por favor, no superes los 100 caracteres.</div>');
         }
     }, 100);
 });
