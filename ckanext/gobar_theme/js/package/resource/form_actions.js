@@ -5,7 +5,7 @@ $(function () {
         var errorTemplate = '<div class="missing-field">Completá este dato</div>';
 
         var title = $('#field-name');
-        if (title.val().length < 0){
+        if (title.val().length == 0){
             isValid = false;
             title.after(errorTemplate)
         }
