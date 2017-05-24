@@ -7,6 +7,9 @@
 {% set show_save_button = false %}
 {% set show_save_draft_button = false %}
 
+{% set max_length_title = 150 %}
+{% set max_length_description = 200 %}
+
 <form id="resource-edit" class="dataset-form dataset-resource-form form-horizontal" method="post" action="{{ action }}"
       data-module="basic-form resource-form" enctype="multipart/form-data">
     {% block stages %}
@@ -24,11 +27,13 @@
 
     {% block basic_fields %}
         {% block basic_fields_name %}
-            {{ form.input_custom('name', id='field-name', label='Título del recurso', placeholder='Ej: Solicitudes de Acceso a la Información Pública de 2015.', value=data.name, error=errors.name, classes=['control-full'], after_desc='Por favor, no superes los 150 caracteres.') }}
+            {% set after_desc_title = ["Por favor, no superes los ", max_length_title, " caracteres."] %}
+            {{ form.input_custom('name', id='field-name', label='Título del recurso', placeholder='Ej: Solicitudes de Acceso a la Información Pública de 2015.', value=data.name, error=errors.name, classes=['control-full'], after_desc=after_desc_title|join, max_length=max_length_title) }}
         {% endblock %}
 
         {% block basic_fields_description %}
-            {{ form.markdown_custom('description', id='field-description', label='Descripción del recurso', placeholder='Ej: Detalle de los pedidos de información hechos al Estado en 2015.', value=data.description, error=errors.description, after_desc='Por favor, no superes los 200 caracteres.') }}
+            {% set after_desc_description = ["Por favor, no superes los ", max_length_description, " caracteres."] %}
+            {{ form.markdown_custom('description', id='field-description', label='Descripción del recurso', placeholder='Ej: Detalle de los pedidos de información hechos al Estado en 2015.', value=data.description, error=errors.description, after_desc=after_desc_description|join, max_length=max_length_description) }}
         {% endblock %}
 
         {% block basic_fields_url %}
