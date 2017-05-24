@@ -211,4 +211,18 @@ $(function () {
             clearInterval(interval);
         }
     }, 100);
+
+     $(document).ready(function(){
+        var validTitleLength = $('div[data-valid-title-length]').data('valid-title-length')
+        var validDescLength = $('div[data-valid-desc-length]').data('valid-desc-length')
+
+
+        if (validTitleLength != "True"){
+            $('div#field-title.after-desc').addClass('missing-field')
+        }
+
+        if (validTitleLength != "True"){
+            $('div#field-notes.after-desc').addClass('missing-field')
+        }
+    });
 });

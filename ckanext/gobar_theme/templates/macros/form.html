@@ -66,7 +66,7 @@ Example:
             <input id="{{ id or name }}" type="{{ type }}" name="{{ name }}" value="{{ value | empty_and_escape }}" maxlength="{{ max_length }}"
                    placeholder="{{ placeholder }}"/>
             {% if after_desc %}
-                <div class="after-desc">
+                <div class="after-desc" id="{{ id or name }}">
                     {{ after_desc }}
                 </div>
             {% endif %}
@@ -174,7 +174,7 @@ Examples:
         <textarea id="{{ id or name }}" name="{{ name }}" cols="20" rows="5"
                   placeholder="{{ placeholder }}" maxlength="{{ max_length }}" {{ attributes(attrs) }}>{{ value | empty_and_escape }}</textarea>
         {% if after_desc %}
-            <div class="after-desc">
+            <div class="after-desc" id="{{ id or name }}">
                 {{ after_desc }}
             </div>
         {% endif %}
