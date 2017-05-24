@@ -27,13 +27,23 @@
 
     {% block basic_fields %}
         {% block basic_fields_name %}
-            {% set after_desc_title = ["Por favor, no superes los ", max_length_title, " caracteres."] %}
-            {{ form.input_custom('name', id='field-name', label='Título del recurso', placeholder='Ej: Solicitudes de Acceso a la Información Pública de 2015.', value=data.name, error=errors.name, classes=['control-full'], after_desc=after_desc_title|join, max_length=max_length_title) }}
+            {% set valid_title = h.valid_length(data.name, max_length_title) %}
+            {% if valid_title %}
+                {% set after_desc_title = ["Por favor, no superes los ", max_length_title, " caracteres."] %}
+            {% else %}
+                {% set after_desc_title = ["Por favor, para que el título del recurso sea más claro, <b>no superes los ", max_length_title, " caracteres.</b>"] %}
+            {% endif %}
+            {{ form.input_custom('name', id='field-name', label='Título del recurso', placeholder='Ej: Solicitudes de Acceso a la Información Pública de 2015.', value=data.name, error=errors.name, classes=['control-full'], attrs={'data-valid-title-length': valid_title}, after_desc=after_desc_title|join|safe) }}
         {% endblock %}
 
         {% block basic_fields_description %}
-            {% set after_desc_description = ["Por favor, no superes los ", max_length_description, " caracteres."] %}
-            {{ form.markdown_custom('description', id='field-description', label='Descripción del recurso', placeholder='Ej: Detalle de los pedidos de información hechos al Estado en 2015.', value=data.description, error=errors.description, after_desc=after_desc_description|join, max_length=max_length_description) }}
+            {% set valid_desc = h.valid_length(data.description, max_length_description) %}
+            {% if valid_desc %}
+                {% set after_desc_description = ["Por favor, no superes los ", max_length_description, " caracteres."] %}
+            {% else %}
+                {% set after_desc_description = ["Por favor, para que la descripción sea más clara, <b>no superes los ", max_length_description, " caracteres.</b>"] %}
+            {% endif %}
+            {{ form.markdown_custom('description', id='field-description', label='Descripción del recurso', placeholder='Ej: Detalle de los pedidos de información hechos al Estado en 2015.', value=data.description, error=errors.description, after_desc=after_desc_description|join|safe) }}
         {% endblock %}
 
         {% block basic_fields_url %}
