@@ -714,13 +714,13 @@ class GobArPackageController(PackageController):
             raise ValidationError("%s must not have more than %s characters." % (attribute, max_length))
 
     def _validate_resource(self, data_dict):
-        max_name_characters = 100
-        max_desc_characters = 500
+        max_name_characters = 150
+        max_desc_characters = 200
         self._validate_length(data_dict, 'name', max_name_characters)
         self._validate_length(data_dict, 'description', max_desc_characters)
 
     def _validate_dataset(self, data_dict):
-        max_title_characters = 150
-        max_desc_characters = 200
+        max_title_characters = 100
+        max_desc_characters = 500
         self._validate_length(data_dict, 'title', max_title_characters)
         self._validate_length(data_dict, 'notes', max_desc_characters)
