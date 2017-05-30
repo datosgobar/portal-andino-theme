@@ -223,3 +223,22 @@ def render_ar_datetime(datetime_):
         'timezone': datetime_.tzinfo.zone,
     }
     return _('{day} de {month} de {year}').format(**details)
+
+
+def accepted_mime_types():
+    return [
+        'html',
+        'json',
+        'xml',
+        'text',
+        'csv',
+        'xls',
+        'api',
+        'pdf',
+        'zip',
+        'rdf',
+        'nquad',
+        'ntriples',
+        'turtle',
+        'shp'
+    ]

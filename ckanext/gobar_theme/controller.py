@@ -79,6 +79,16 @@ class GobArApiController(ApiController):
             default_response = self._remove_extra_id_field(default_response)
         return default_response
 
+    def status(self):
+        context = {'model': model, 'session': model.Session}
+        data_dict = {}
+
+        status = logic.get_action('status_show')(context, data_dict)
+        gobar_status = logic.get_action('gobar_status_show')(context, data_dict)
+        status['gobar_artifacts'] = gobar_status
+
+        return self._finish_ok(status)
+
 
 class GobArUserController(UserController):
 
