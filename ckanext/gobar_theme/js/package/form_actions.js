@@ -1,3 +1,19 @@
+function validLength(length, maxLength) {
+    return maxLength >= length;
+}
+
+function validTitle(){
+    var titleLength = $('input[data-valid-title-length]').val().length;
+    var validTitleLength = $('input[data-valid-title-length]').data('valid-title-length');
+    return validLength(titleLength, validTitleLength);
+}
+
+function validDesc(){
+    var descLength = $('textarea[data-valid-desc-length]').val().length
+    var validDescLength = $('textarea[data-valid-desc-length]').data('valid-desc-length')
+    return validLength(descLength, validDescLength);
+}
+
 $(function () {
     var $form;
 
@@ -135,10 +151,13 @@ $(function () {
             updateFreq.after(errorTemplate);
         }
 
-        if (!isValid) {
+        isFormValid = isValid && validTitle() && validDesc()
+
+        if (!isFormValid) {
             window.scrollTo(0, 0);
+            location.reload();
         }
-        return isValid;
+        return isFormValid;
     }
 
     $('form#dataset-edit').submit(function (e) {
@@ -205,6 +224,24 @@ $(function () {
         }
     }
 
+    $(document).ajaxComplete(function(){
+        $('.slug-preview').each(function() {
+            $(this).insertAfter($('div#field-title'));
+        });
+    });
+
+    $(document).ready(function(){
+        if (!validTitle()){
+            $('input#field-title').parent('div').children('div#field-title').addClass('missing-field');
+        }
+
+        if (!validDesc()){
+            $('div#field-notes.after-desc').addClass('missing-field');
+        }
+     });
+
+
+
     var interval = setInterval(function() {
         var urlPreview = $('.slug-preview');
         if (urlPreview.length > 0) {
@@ -212,17 +249,4 @@ $(function () {
         }
     }, 100);
 
-     $(document).ready(function(){
-        var validTitleLength = $('div[data-valid-title-length]').data('valid-title-length')
-        var validDescLength = $('div[data-valid-desc-length]').data('valid-desc-length')
-
-
-        if (validTitleLength != "True"){
-            $('div#field-title.after-desc').addClass('missing-field')
-        }
-
-        if (validTitleLength != "True"){
-            $('div#field-notes.after-desc').addClass('missing-field')
-        }
-    });
 });

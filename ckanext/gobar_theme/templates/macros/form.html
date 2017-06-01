@@ -32,7 +32,7 @@ Examples:
         <input id="{{ id or name }}" type="{{ type }}" name="{{ name }}" value="{{ value | empty_and_escape }}" maxlength="{{ max_length }}"
                placeholder="{{ placeholder }}" {{ attributes(attrs) }} />
         {% if after_desc %}
-            <div class="after-desc">
+            <div class="after-desc" id="{{ id or name }}">
                 {{ after_desc }}
             </div>
         {% endif %}
@@ -64,7 +64,7 @@ Example:
     {% call input_block(id or name, label or name, error, classes, extra_html=extra_html, is_required=is_required) %}
         <div {{ attributes(attrs) }}>
             <input id="{{ id or name }}" type="{{ type }}" name="{{ name }}" value="{{ value | empty_and_escape }}" maxlength="{{ max_length }}"
-                   placeholder="{{ placeholder }}"/>
+                   placeholder="{{ placeholder }}" {{ attributes(attrs) }}/>
             {% if after_desc %}
                 <div class="after-desc" id="{{ id or name }}">
                     {{ after_desc }}
