@@ -1,3 +1,19 @@
+function validLength(length, maxLength) {
+    return maxLength >= length;
+}
+
+function validTitle(){
+    var titleLength = $('input[data-valid-title-length]').val().length;
+    var validTitleLength = $('div[data-valid-title-length]').data('valid-title-length')
+    return validLength(titleLength, validTitleLength);
+}
+
+function validDesc(){
+    var descLength = $('textarea[data-valid-desc-length]').val().length
+    var validDescLength = $('textarea[data-valid-desc-length]').data('valid-desc-length')
+    return validLength(descLength, validDescLength);
+}
+
 $(function () {
     function formIsValid() {
         $('.missing-field').remove();
@@ -10,10 +26,13 @@ $(function () {
             title.after(errorTemplate)
         }
 
-        if (!isValid) {
+        isFormValid = isValid && validTitle() && validDesc();
+
+        if (!isFormValid) {
             window.scrollTo(0, 0);
+            location.reload();
         }
-        return isValid;
+        return isFormValid;
     }
 
     $('form#resource-edit').submit(function () {
@@ -24,12 +43,11 @@ $(function () {
         var validTitleLength = $('div[data-valid-title-length]').data('valid-title-length')
         var validDescLength = $('textarea[data-valid-desc-length]').data('valid-desc-length')
 
-
-        if (validTitleLength != "True"){
+        if (!validTitle()){
             $('div#field-name.after-desc').addClass('missing-field')
         }
 
-        if (validDescLength != "True"){
+        if (!validDesc()){
             $('div#field-description.after-desc').addClass('missing-field')
         }
     });

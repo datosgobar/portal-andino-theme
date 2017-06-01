@@ -1,5 +1,5 @@
 function validLength(length, maxLength) {
-    return maxLength > length;
+    return maxLength >= length;
 }
 
 function validTitle(){
@@ -233,9 +233,6 @@ $(function () {
     $(document).ready(function(){
         if (!validTitle()){
             $('input#field-title').parent('div').children('div#field-title').addClass('missing-field');
-            $('.slug-preview').each(function() {
-                $(this).insertAfter($('div#field-title'));
-            });
         }
 
         if (!validDesc()){
