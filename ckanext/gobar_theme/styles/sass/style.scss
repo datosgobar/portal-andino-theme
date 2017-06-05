@@ -66,6 +66,7 @@ div.svg-tooltip {
 @import 'utils/media_queries';
 @import 'utils/bootstrap-datepicker3';
 
+@import 'pagination';
 @import 'header';
 @import 'footer';
 @import 'background';
@@ -90,3 +91,4 @@ div.svg-tooltip {
 @import 'activity_streams/activity_streams_items';
 @import 'config/config_base';
 @import 'config/navbar';
+@import 'forms/file_upload';

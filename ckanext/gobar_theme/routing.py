@@ -26,6 +26,7 @@ class GobArRouter:
         self.remove_dashboard()
         self.remove_tags()
         self.remove_revision()
+        #self.remove_admin()
         self.connect_api()
         self.connect_template_config()
 
@@ -42,6 +43,7 @@ class GobArRouter:
         with SubMapper(self.route_map, controller=self.package_controller) as m:
             m.connect('search', '/dataset', action='search', highlight_actions='index search')
             m.connect('add dataset', '/dataset/new', action='new')
+            m.connect('new resource', '/dataset/new_resource/{id}', action='new_resource')
         self.route_map.connect('/dataset/{id}/archivo/{resource_id}', action='resource_read', controller='package')
         self.redirect(
             ('/dataset/history/{id:.*?}', '/dataset/{id}'),
@@ -97,7 +99,6 @@ class GobArRouter:
 
     def connect_users(self):
         self.route_map.connect('login', '/ingresar', action='login', controller='user')
-        self.route_map.connect('/user/logged_in', action='logged_in', controller='user')
         self.route_map.connect('/logout', action='logout', controller='user')
         self.route_map.connect('user_datasets', '/user/{id:.*}', action='read',
                                controller='ckanext.gobar_theme.controller:GobArUserController')
@@ -135,9 +136,18 @@ class GobArRouter:
             ('/revision/{id}', '/revision')
         )
 
+    def remove_admin(self):
+        self.redirect(
+            ('/ckan-admin', '/'),
+            ('/ckan-admin/config', '/'),
+            ('/ckan-admin/trash', '/'),
+            ('/ckan-admin/{action}', '/')
+        )
+
     def connect_api(self):
         with SubMapper(self.route_map, controller=self.api_controller, path_prefix='/api{ver:/3|}', ver='/3') as m:
             m.connect('/action/{logic_function}', action='action', conditions=dict(method=['GET', 'POST']))
+            m.connect('/util/status', action='status')
 
     def connect_template_config(self):
         with SubMapper(self.route_map, controller=self.config_controller) as m:
