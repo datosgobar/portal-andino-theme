@@ -47,19 +47,19 @@
                         </div>
 
                         <div class="navbar-link">
-                            <a href="">
+                            <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
                                 CONFIGURACIÓN
                             </a>
                         </div>
 
                         <div class="navbar-link">
-                            <a href="">
+                            <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md" target="_blank">
                                 AYUDA
                             </a>
                         </div>
 
                         <div class="navbar-link">
-                            <a href="">
+                            <a href="{{ h.url_for(controller='user', action='logout') }}">
                                 SALIR
                             </a>
                         </div>
@@ -89,15 +89,15 @@
                                     <li>MI CUENTA</li>
                                 </a>
 
-                                <a href="">
+                                <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
                                     <li>CONFIGURACIÓN</li>
                                 </a>
 
-                                <a href="">
+                                <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md" target="_blank">
                                     <li>AYUDA</li>
                                 </a>
 
-                                <a href="">
+                                <a href="{{ h.url_for(controller='user', action='logout') }}">
                                     <li>SALIR</li>
                                 </a>
                             </ul>
