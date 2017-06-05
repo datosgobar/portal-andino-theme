@@ -11,6 +11,7 @@ class GobArRouter:
         self.api_controller = 'ckanext.gobar_theme.controller:GobArApiController'
         self.package_controller = 'ckanext.gobar_theme.package_controller:GobArPackageController'
         self.config_controller = 'ckanext.gobar_theme.config_controller:GobArConfigController'
+        self.user_controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
 
     def redirect(self, *routes):
         for url_from, url_to in routes:
@@ -29,6 +30,7 @@ class GobArRouter:
         #self.remove_admin()
         self.connect_api()
         self.connect_template_config()
+        self.connect_user_routes()
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')
@@ -163,11 +165,15 @@ class GobArRouter:
             m.connect('/configurar/metadata/google_fb', action='edit_metadata_google_fb')
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
-            m.connect('/configurar/alta_de_usuarios', action="create_users")
-            m.connect('/configurar/listar_usuarios', action="list_users")
-            m.connect('/configurar/editar_usuario', action="edit_user")
 
         self.redirect(
             ('/configurar', '/configurar/titulo'),
             ('/configurar', '/configurar/metadata')
         )
+
+    def connect_user_routes(self):
+        with SubMapper(self.route_map, controller=self.user_controller) as m:
+            m.connect('/configurar/mi_cuenta', action="my_account")
+            m.connect('/configurar/alta_de_usuarios', action="create_users")
+            m.connect('/configurar/listar_usuarios', action="list_users")
+            m.connect('/configurar/editar_usuario', action="edit_user")

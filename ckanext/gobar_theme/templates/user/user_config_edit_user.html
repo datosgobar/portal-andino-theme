@@ -1,15 +1,15 @@
-{% extends "config/config_base.html" %}
+{% extends "user/user_config_base.html" %}
 
 {% block config %}
-    <h1 class="small-margin">Alta de usuario</h1>
+    <h1 class="small-margin">Editar usuario</h1>
 
-    {% if user_created %}
-        <p>El usuario se creó con éxito</p>
+    {% if user_updated %}
+        <p>El usuario se actualizó con éxito</p>
         <p>Nombre de usuario: {{ user.name }}</p>
         <p>Correo electrónico: {{ user.email }}</p>
         <p>Contraseña {{ '*' * user.password|length }}</p>
         <p>El usuario es administrador del sitio: {{ 'si' if user.sysadmin else 'no' }}</p>
     {% else %}
-        {% snippet "config/user_form.html", user=user, errors=errors %}
+        {% snippet "user/user_form.html", user=user, errors=errors %}
     {% endif %}
 {% endblock %}

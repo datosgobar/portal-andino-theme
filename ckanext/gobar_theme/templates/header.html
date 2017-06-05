@@ -41,7 +41,7 @@
                     </div>
                     <div class="dropdown-navbar hidden">
                         <div class="navbar-link">
-                            <a href="">
+                            <a href="{{ h.url_for(controller='ckanext.gobar_theme.user_controller:GobArUserController', action='my_account') }}">
                                 MI CUENTA
                             </a>
                         </div>
@@ -85,7 +85,7 @@
                             <span class="username">{{ c.userobj.name }}</span> {% snippet "svg/user-logo.svg" %}
 
                             <ul>
-                                <a href="">
+                                <a href="{{ h.url_for(controller='ckanext.gobar_theme.user_controller:GobArUserController', action='my_account') }}">
                                     <li>MI CUENTA</li>
                                 </a>
 

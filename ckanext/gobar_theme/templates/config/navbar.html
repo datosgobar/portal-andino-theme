@@ -56,18 +56,6 @@
         </a>
     </div>
 
-    <h2>Usuarios</h2>
-    <div class="links-section">
-        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='create_users') }}"
-           class="section-link {{ 'active' if c.action == 'create_users' else '' }}">
-            Alta de usuarios
-        </a>
-        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='list_users') }}"
-           class="section-link {{ 'active' if c.action == 'list_users' else '' }}">
-            Listado de usuarios
-        </a>
-    </div>
-
     <div class="links-section guide-link">
         <a class="inline"
            href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md"
