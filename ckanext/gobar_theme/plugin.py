@@ -16,6 +16,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
                 'group_delete': gobar_actions.group_delete_and_purge,
                 'package_delete': gobar_actions.dataset_delete_and_purge,
+                'resource_delete': gobar_actions.resource_delete_and_purge,
                 'organization_delete': gobar_actions.organization_delete_and_purge}
 
     def update_config(self, config_):
