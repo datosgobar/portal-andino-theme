@@ -492,6 +492,10 @@ class GobArPackageController(PackageController):
             context = {'model': model, 'session': model.Session,
                        'user': c.user, 'auth_user_obj': c.userobj}
 
+            if save_action == 'go-dataset':
+                # go to first stage of add dataset
+                h.redirect_to(controller='package', action='edit', id=id)
+
             # see if we have any data that we are trying to save
             data_provided = False
             for key, value in data.iteritems():
@@ -502,9 +506,8 @@ class GobArPackageController(PackageController):
 
             if not data_provided and save_action != "go-dataset-complete":
                 if save_action == 'go-dataset':
-                    # go to final stage of adddataset
+                    # go to first stage of add dataset
                     h.redirect_to(controller='package', action='edit', id=id)
-                # see if we have added any resources
                 try:
                     data_dict = get_action('package_show')(context, {'id': id})
                 except NotAuthorized:
@@ -556,9 +559,6 @@ class GobArPackageController(PackageController):
                     dict(context, allow_state_change=True),
                     dict(data_dict, state='active'))
                 h.redirect_to(controller='package', action='read', id=id)
-            elif save_action == 'go-dataset':
-                # go to first stage of add dataset
-                h.redirect_to(controller='package', action='edit', id=id)
             elif save_action == 'go-dataset-complete':
                 # go to first stage of add dataset
                 h.redirect_to(controller='package', action='read', id=id)
