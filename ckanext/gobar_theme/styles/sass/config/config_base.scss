@@ -184,25 +184,5 @@
         }
       }
     }
-
-    .user-list {
-      padding: 20px 0;
-      .list-header,
-      .list-user {
-        padding: 0;
-        .user-attr {
-          padding: 5px 10px 5px 10px;
-        }
-      }
-      a {
-        color: inherit;
-        .list-user {
-          &:hover {
-            background: $grey-100;
-            color: $blue-300;
-          }
-        }
-      }
-    }
   }
 }

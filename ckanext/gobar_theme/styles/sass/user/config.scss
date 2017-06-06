@@ -1,0 +1,49 @@
+#template-config-container #template-config{
+  #user-config-my-account {
+    margin-bottom: 50px;
+
+    input[name="username"] {
+      width: 200px;
+      max-width: 80%;
+    }
+
+    input[name="email"],
+    input[name="password"] {
+      width: 400px;
+      max-width: 80%;
+    }
+
+    .disabled-input {
+      svg {
+        height: 42px;
+        width: 24px;
+        cursor: pointer;
+        path {
+          fill: $grey-300;
+        }
+        &:hover path {
+          fill: $blue-300;
+        }
+      }
+    }
+  }
+  .user-list {
+    padding: 20px 0;
+    .list-header,
+    .list-user {
+      padding: 0;
+      .user-attr {
+        padding: 5px 10px 5px 10px;
+      }
+    }
+    a {
+      color: inherit;
+      .list-user {
+        &:hover {
+          background: $grey-100;
+          color: $blue-300;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{% extends "user/user_config_base.html" %}
+
+{% block config %}
+    <div id="user-config-my-account">
+
+        <h1>Datos personales</h1>
+
+        <h2>Usuario</h2>
+        <input name="username" type="text" title="Usuario" value="{{ c.userobj.name }}" disabled="disabled">
+
+        <h2>Nombre y apelido</h2>
+        <input name="full-name" type="text" title="Nombre y apellido" value="{{ c.userobj.fullname }}" disabled="disabled">
+
+        <h2>E-mail</h2>
+        <div class="disabled-input">
+            <input name="email" type="text" title="E-mail" value="{{ c.userobj.email }}" disabled="disabled">
+            {% snippet "svg/edit.svg" %}
+        </div>
+
+        <h2>Contraseña</h2>
+        <div class="disabled-input">
+            <input name="password" type="password" title="Contraseña" value="******" disabled="disabled">
+            {% snippet "svg/edit.svg" %}
+        </div>
+
+    </div>
+{% endblock %}
