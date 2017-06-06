@@ -104,9 +104,8 @@ class GobArRouter:
             m.connect('user_datasets', '/user/{id:.*}', action='read')
             m.connect('login', '/ingresar', action='login')
             m.connect('/configurar/mi_cuenta', action="my_account")
-            m.connect('/configurar/alta_de_usuarios', action="create_users")
-            m.connect('/configurar/listar_usuarios', action="list_users")
-            m.connect('/configurar/editar_usuario', action="edit_user")
+            m.connect('/configurar/crear_usuarios', action="create_users")
+            m.connect('/configurar/historial', action="user_history")
 
         self.redirect(
             ('/user/login', '/'),

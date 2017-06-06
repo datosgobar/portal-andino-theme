@@ -43,12 +43,14 @@ class GobArUserController(UserController):
             return h.redirect_to('home')
 
     def my_account(self):
-        return ''
+        self._authorize()
+        return base.render('user/user_config_my_account.html')
 
     def create_users(self):
+        # todo: modificar
         # path_to_virtualenv/src/ckan/ckan/lib/cli.py
         # class UserCmd
-        self._authorize()
+        self._authorize(sysadmin_required=True)
         extra_vars = {}
         if request.method == 'POST':
             params = parse_params(request.POST)
@@ -75,12 +77,18 @@ class GobArUserController(UserController):
             extra_vars['user_created'] = user_created
         return base.render('user/user_config_create_users.html', extra_vars=extra_vars)
 
+    def user_history(self):
+        # todo
+        return ''
+
     def list_users(self):
+        # todo: sacar
         self._authorize()
         extra_vars = {'users': model.Session.query(model.User)}
         return base.render('user/user_config_list_users.html', extra_vars=extra_vars)
 
     def edit_user(self):
+        # todo: sacar
         self._authorize()
         get_params = parse_params(request.GET)
         username = get_params['username']
@@ -113,12 +121,20 @@ class GobArUserController(UserController):
         return base.render('user/user_config_edit_user.html', extra_vars=extra_vars)
 
     @staticmethod
-    def _authorize():
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user or c.author, 'auth_user_obj': c.userobj,
-                   'save': 'save' in request.params}
-        try:
-            check_access('package_create', context)
-            return True
-        except NotAuthorized:
-            base.abort(401, _('Unauthorized to change config'))
+    def _authorize(sysadmin_required=False):
+        if sysadmin_required:
+            context = {'model': model, 'user': c.user, 'auth_user_obj': c.userobj}
+            try:
+                logic.check_access('sysadmin', context, {})
+                return True
+            except logic.NotAuthorized:
+                return h.redirect_to('home')
+        else:
+            context = {'model': model, 'session': model.Session,
+                       'user': c.user or c.author, 'auth_user_obj': c.userobj,
+                       'save': 'save' in request.params}
+            try:
+                check_access('package_create', context)
+                return True
+            except NotAuthorized:
+                base.abort(401, _('Unauthorized to change config'))
