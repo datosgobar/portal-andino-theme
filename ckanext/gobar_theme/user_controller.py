@@ -2,13 +2,45 @@ import ckan.lib.base as base
 from ckan.common import request, c, _
 import ckan.logic as logic
 import ckan.model as model
+from ckan.controllers.user import UserController
+import ckan.lib.helpers as h
+import ckan.plugins as p
 
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
 
 
-class GobArUserController(base.BaseController):
+class GobArUserController(UserController):
+
+    def read(self, id=None):
+        if id and id == c.user:
+            return super(GobArUserController, self).read(id)
+        return h.redirect_to('home')
+
+    def login(self, error=None):
+        # Do any plugin login stuff
+        for item in p.PluginImplementations(p.IAuthenticator):
+            item.login()
+
+        if 'error' in request.params:
+            h.flash_error(request.params['error'])
+
+        if not c.user:
+            came_from = request.params.get('came_from')
+            if not came_from:
+                came_from = h.url_for(controller='user', action='logged_in',
+                                      __ckan_no_root=True)
+            c.login_handler = h.url_for(
+                self._get_repoze_handler('login_handler_path'),
+                came_from=came_from)
+            if error:
+                vars = {'error_summary': {'': error}}
+            else:
+                vars = {}
+            return base.render('user/login.html', extra_vars=vars)
+        else:
+            return h.redirect_to('home')
 
     def my_account(self):
         return ''

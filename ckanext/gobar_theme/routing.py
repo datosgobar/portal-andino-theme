@@ -30,7 +30,6 @@ class GobArRouter:
         #self.remove_admin()
         self.connect_api()
         self.connect_template_config()
-        self.connect_user_routes()
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')
@@ -100,10 +99,15 @@ class GobArRouter:
         )
 
     def connect_users(self):
-        self.route_map.connect('login', '/ingresar', action='login', controller='ckanext.gobar_theme.controller:GobArUserController')
         self.route_map.connect('/logout', action='logout', controller='user')
-        self.route_map.connect('user_datasets', '/user/{id:.*}', action='read',
-                               controller='ckanext.gobar_theme.controller:GobArUserController')
+        with SubMapper(self.route_map, controller=self.user_controller) as m:
+            m.connect('user_datasets', '/user/{id:.*}', action='read')
+            m.connect('login', '/ingresar', action='login')
+            m.connect('/configurar/mi_cuenta', action="my_account")
+            m.connect('/configurar/alta_de_usuarios', action="create_users")
+            m.connect('/configurar/listar_usuarios', action="list_users")
+            m.connect('/configurar/editar_usuario', action="edit_user")
+
         self.redirect(
             ('/user/login', '/'),
             ('/user/generate_key/{id}', '/'),
@@ -170,10 +174,3 @@ class GobArRouter:
             ('/configurar', '/configurar/titulo'),
             ('/configurar', '/configurar/metadata')
         )
-
-    def connect_user_routes(self):
-        with SubMapper(self.route_map, controller=self.user_controller) as m:
-            m.connect('/configurar/mi_cuenta', action="my_account")
-            m.connect('/configurar/alta_de_usuarios', action="create_users")
-            m.connect('/configurar/listar_usuarios', action="list_users")
-            m.connect('/configurar/editar_usuario', action="edit_user")
