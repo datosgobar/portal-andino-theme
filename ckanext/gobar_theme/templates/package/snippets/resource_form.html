@@ -10,7 +10,7 @@
 {% set max_length_title = 150 %}
 {% set max_length_description = 200 %}
 
-<form id="resource-edit" class="dataset-form dataset-resource-form form-horizontal" method="post" action="{{ action }}"
+<form novalidate="novalidate" id="resource-edit" class="dataset-form dataset-resource-form form-horizontal" method="post" action="{{ action }}"
       data-module="basic-form resource-form" enctype="multipart/form-data">
     {% block stages %}
         {# An empty stages variable will not show the stages #}
