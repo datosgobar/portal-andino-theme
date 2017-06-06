@@ -9,19 +9,59 @@
         <input name="username" type="text" title="Usuario" value="{{ c.userobj.name }}" disabled="disabled">
 
         <h2>Nombre y apelido</h2>
-        <input name="full-name" type="text" title="Nombre y apellido" value="{{ c.userobj.fullname }}" disabled="disabled">
+        <input name="full-name" type="text" title="Nombre y apellido" value="{{ c.userobj.fullname or '' }}" disabled="disabled">
 
-        <h2>E-mail</h2>
-        <div class="disabled-input">
-            <input name="email" type="text" title="E-mail" value="{{ c.userobj.email }}" disabled="disabled">
-            {% snippet "svg/edit.svg" %}
+        <div class="disabled-input" data-replace-id="email-edit">
+            <h2>E-mail</h2>
+            <div>
+                <input name="email" type="text" title="E-mail" value="{{ c.userobj.email }}" disabled="disabled">
+                {% snippet "svg/edit.svg" %}
+            </div>
         </div>
 
-        <h2>Contraseña</h2>
-        <div class="disabled-input">
-            <input name="password" type="password" title="Contraseña" value="******" disabled="disabled">
-            {% snippet "svg/edit.svg" %}
+        <div id="email-edit" class="hidden edit-section">
+            <h2>Nuevo e-mail</h2>
+            <div>
+                <input name="email" type="text" title="Nuevo e-mail" value="{{ c.userobj.email }}" data-default-value="{{ c.userobj.email }}">
+            </div>
+            <h2>Repetir e-mail</h2>
+            <div>
+                <input name="email-confirmation" type="text" title="Repetir e-mail">
+                <button class="btn btn-blue" id="save-email">
+                    GUARDAR
+                </button>
+                <button class="btn btn-transparent" id="cancel-email">
+                    CANCELAR
+                </button>
+            </div>
+        </div>
+
+        <div class="disabled-input" data-replace-id="password-edit">
+            <h2>Contraseña</h2>
+            <div>
+                <input name="password" type="password" title="Contraseña" value="******" disabled="disabled">
+                {% snippet "svg/edit.svg" %}
+            </div>
+        </div>
+
+        <div id="password-edit" class="hidden edit-section">
+            <h2>Nueva contraseña</h2>
+            <input name="password" type="password" title="Nueva contraseña" data-default-value="">
+
+            <h2>Repetir contraseña</h2>
+            <div>
+                <input name="password" type="password" title="Repetir contraseña">
+                <button class="btn btn-blue" id="save-password">
+                    GUARDAR
+                </button>
+                <button class="btn btn-transparent" id="cancel-password">
+                    CANCELAR
+                </button>
+            </div>
         </div>
 
     </div>
+
+    {% resource 'gobar_js/user_config/my_account.js' %}
+
 {% endblock %}

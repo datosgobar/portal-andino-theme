@@ -8,6 +8,7 @@
     }
 
     input[name="email"],
+    input[name="email-confirmation"],
     input[name="password"] {
       width: 400px;
       max-width: 80%;
@@ -25,6 +26,10 @@
           fill: $blue-300;
         }
       }
+    }
+
+    button {
+      margin-bottom: 30px;
     }
   }
   .user-list {

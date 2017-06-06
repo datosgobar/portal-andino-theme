@@ -7319,6 +7319,7 @@ div#background-container {
     width: 200px;
     max-width: 80%; }
   #template-config-container #template-config #user-config-my-account input[name="email"],
+  #template-config-container #template-config #user-config-my-account input[name="email-confirmation"],
   #template-config-container #template-config #user-config-my-account input[name="password"] {
     width: 400px;
     max-width: 80%; }
@@ -7330,6 +7331,8 @@ div#background-container {
       fill: #999999; }
     #template-config-container #template-config #user-config-my-account .disabled-input svg:hover path {
       fill: #0695d6; }
+  #template-config-container #template-config #user-config-my-account button {
+    margin-bottom: 30px; }
 #template-config-container #template-config .user-list {
   padding: 20px 0; }
   #template-config-container #template-config .user-list .list-header,
