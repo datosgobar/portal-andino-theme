@@ -17,7 +17,8 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
                 'group_delete': gobar_actions.group_delete_and_purge,
                 'package_delete': gobar_actions.dataset_delete_and_purge,
                 'resource_delete': gobar_actions.resource_delete_and_purge,
-                'organization_delete': gobar_actions.organization_delete_and_purge}
+                'organization_delete': gobar_actions.organization_delete_and_purge,
+                'gobar_status_show': gobar_actions.gobar_status_show}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
@@ -46,5 +47,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'json_loads': gobar_helpers.json_loads,
             'update_frequencies': gobar_helpers.update_frequencies,
             'field_types': gobar_helpers.field_types,
-            'render_ar_datetime': gobar_helpers.render_ar_datetime
+            'render_ar_datetime': gobar_helpers.render_ar_datetime,
+            'accepted_mime_types': gobar_helpers.accepted_mime_types
         }

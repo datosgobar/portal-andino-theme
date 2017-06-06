@@ -6,7 +6,11 @@ import ckan.lib.base as base
 import ckanext
 import re
 import sys
+import pkg_resources
+import os
 from webhelpers.html import literal
+from codecs import open
+from os import path
 
 _get_action = ckan.logic.get_action
 
@@ -90,6 +94,7 @@ def activity_list_to_html(context, activity_stream, extra_vars):
     return literal(base.render('activity_streams/activity_stream_items.html',
                                extra_vars=extra_vars))
 
+
 def _resource_purge(context, data_dict):
     model = context['model']
     id = ckan.logic.get_or_bust(data_dict, 'id')
@@ -123,3 +128,34 @@ def organization_delete_and_purge(context, data_dict):
     logic.action.delete._group_or_org_delete(context, data_dict, is_org=True)
     return logic.action.delete.group_purge(context, data_dict)
 
+
+def gobar_status_show(context, data_dict):
+    artifacts = []
+    plugins = ['ckanext-harvest', 'ckanext-gobar-theme', 'ckanext-hierarchy']
+    for plugin in plugins:
+        version = _get_plugin_version(plugin)
+        artifact = {plugin: version}
+        artifacts.append(artifact)
+    portal_andino_version = _get_portal_andino_version()
+    artifacts.append(portal_andino_version)
+    return artifacts
+
+
+def _get_plugin_version(plugin):
+    try:
+        version = pkg_resources.require(plugin)[0].version
+    except:
+        version = None
+    return version
+
+
+def _get_portal_andino_version():
+    os.chdir('/')
+    portal_dir = path.abspath(path.join(os.getcwd(), 'portal/'))
+    try:
+        with open(path.join(portal_dir, 'version')) as file:
+            version = file.read()
+            version = re.sub('[^\d\.]', '', version)
+    except:
+        version = None
+    return {'portal-andino': version}
