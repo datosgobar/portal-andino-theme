@@ -11,7 +11,7 @@
                     <p class="description">
                         {% set description = h.get_theme_config('title.site-description') %}
                         {{ description if description else '' }}
-                        {% if h.check_access('package_create') %}
+                        {% if c.userobj and c.userobj.sysadmin %}
                             <a class="edit-description-link" href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
                                 {% snippet "svg/edit.svg" %}
                             </a>

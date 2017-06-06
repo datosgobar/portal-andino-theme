@@ -46,7 +46,7 @@
                                     {{ organization.display_name }}
                                 {%- endif -%}
 
-                                {%- if h.check_access('organization_update', {'id': organization.name}) -%}
+                                {%- if c.userobj and c.userobj.sysadmin -%}
                                     <a href="{{ h.url_for(controller='organization', action='edit', id=organization.name) }}">
                                         <span class="edit-organization">
                                             {% snippet "svg/edit.svg" %}

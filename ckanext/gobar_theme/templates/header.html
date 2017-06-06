@@ -8,7 +8,7 @@
                         {% set image = h.get_theme_config('header.image') %}
                         <img src="{{ image if image else '/img/logo_ministerio.svg' }}" class="logo-ministerio">
                     </a>
-                    {% if h.check_access('package_create') and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
+                    {% if c.userobj and c.userobj.sysadmin and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
                         <a class="edit-description-link"
                            href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_header') }}">
                             {% snippet "svg/edit.svg" %}
