@@ -46,11 +46,13 @@
                             </a>
                         </div>
 
-                        <div class="navbar-link">
-                            <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
-                                CONFIGURACIÓN
-                            </a>
-                        </div>
+                        {%- if c.userobj.sysadmin -%}
+                            <div class="navbar-link">
+                                <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
+                                    CONFIGURACIÓN
+                                </a>
+                            </div>
+                        {%- endif -%}
 
                         <div class="navbar-link">
                             <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md" target="_blank">
@@ -84,14 +86,16 @@
                         <span class="header-link dropdown">
                             <span class="username">{{ c.userobj.name }}</span> {% snippet "svg/user-logo.svg" %}
 
-                            <ul>
+                            <ul {{ 'style=bottom:-120px' if not c.userobj.sysadmin else '' }}>
                                 <a href="{{ h.url_for(controller='ckanext.gobar_theme.user_controller:GobArUserController', action='my_account') }}">
                                     <li>MI CUENTA</li>
                                 </a>
 
-                                <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
-                                    <li>CONFIGURACIÓN</li>
-                                </a>
+                                {%- if c.userobj.sysadmin -%}
+                                    <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
+                                        <li>CONFIGURACIÓN</li>
+                                    </a>
+                                {%- endif -%}
 
                                 <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md" target="_blank">
                                     <li>AYUDA</li>

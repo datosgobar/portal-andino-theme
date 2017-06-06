@@ -1,5 +1,5 @@
 import ckan.lib.base as base
-from ckan.common import request, g, c, _
+from ckan.common import request, g, c
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
@@ -198,14 +198,12 @@ class GobArConfigController(base.BaseController):
 
     @staticmethod
     def _authorize():
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user or c.author, 'auth_user_obj': c.userobj,
-                   'save': 'save' in request.params}
+        context = {'model': model, 'user': c.user, 'auth_user_obj': c.userobj}
         try:
-            check_access('package_create', context)
+            logic.check_access('sysadmin', context, {})
             return True
-        except NotAuthorized:
-            abort(401, _('Unauthorized to change config'))
+        except logic.NotAuthorized:
+            return h.redirect_to('home')
 
     @classmethod
     def _read_config(cls):
