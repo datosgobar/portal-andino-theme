@@ -153,10 +153,15 @@ $(function () {
 
         isFormValid = isValid && validTitle() && validDesc()
 
-        if (!isFormValid) {
+        if (!isValid) {
+            window.scrollTo(0, 0);
+        }
+
+        if (!(validTitle() && validDesc())) {
             window.scrollTo(0, 0);
             location.reload();
-        }
+        };
+
         return isFormValid;
     }
 
