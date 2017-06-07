@@ -44,6 +44,7 @@ class GobArRouter:
             m.connect('search', '/dataset', action='search', highlight_actions='index search')
             m.connect('add dataset', '/dataset/new', action='new')
             m.connect('new resource', '/dataset/new_resource/{id}', action='new_resource')
+            m.connect('resource view embed', '/dataset/resource_view_embed/{resource_id}', action='resource_view_embed')
         self.route_map.connect('/dataset/{id}/archivo/{resource_id}', action='resource_read', controller='package')
         self.redirect(
             ('/dataset/history/{id:.*?}', '/dataset/{id}'),
