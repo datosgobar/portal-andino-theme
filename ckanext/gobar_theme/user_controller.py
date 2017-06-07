@@ -1,5 +1,5 @@
 import ckan.lib.base as base
-from ckan.common import request, c, _
+from ckan.common import request, c, _, response
 import ckan.logic as logic
 import ckan.model as model
 from ckan.controllers.user import UserController
@@ -13,6 +13,7 @@ NotAuthorized = logic.NotAuthorized
 
 
 class GobArUserController(UserController):
+    json_content_type = 'application/json;charset=utf-8'
 
     def read(self, id=None):
         if id and id == c.user:
@@ -56,6 +57,7 @@ class GobArUserController(UserController):
                 'email': email
             }
             user_updated = self._edit_user(user_data)
+            response.headers['Content-Type'] = self.json_content_type
             return h.json.dumps({'success': user_updated}, for_json=True)
         else:
             return h.redirect_to('/configurar/mi_cuenta')
@@ -70,6 +72,7 @@ class GobArUserController(UserController):
                 'password': password
             }
             user_updated = self._edit_user(user_data)
+            response.headers['Content-Type'] = self.json_content_type
             return h.json.dumps({'success': user_updated}, for_json=True)
         else:
             return h.redirect_to('/configurar/mi_cuenta')

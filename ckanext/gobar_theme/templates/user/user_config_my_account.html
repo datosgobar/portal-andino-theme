@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div id="email-edit" class="hidden edit-section">
+        <div id="email-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_email" data-attr="email">
             <h2>Nuevo e-mail</h2>
             <div>
                 <input name="email" type="text" title="Nuevo e-mail" value="{{ c.userobj.email }}" data-default-value="{{ c.userobj.email }}">
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div id="password-edit" class="hidden edit-section">
+        <div id="password-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_contraseña" data-attr="password">
             <h2>Nueva contraseña</h2>
             <input name="password" type="password" title="Nueva contraseña" data-default-value="">
 
