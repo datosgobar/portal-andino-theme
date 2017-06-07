@@ -7,7 +7,7 @@
       <div class="restricted-max-width">
         <div id="login" class="col-xs-12 col-md-10 col-md-offset-1">
             <div id="login-vertical-wrapper">
-                {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary %}
+                {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary, login_error=login_error %}
             </div>
         </div>
       </div>

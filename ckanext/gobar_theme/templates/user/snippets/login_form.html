@@ -12,6 +12,13 @@
 
   {{ form.checkbox('remember', label='Recordarme', id='field-remember', checked=true, value="63072000") }}
 
+  {% if login_error %}
+    <p>
+      No encontramos ningun usuario con esa combinación de usuario y contraseña
+    </p>
+  {% endif %}
+
+
   <div class="form-actions">
     {% block login_button %}
         <button type="submit">INGRESAR</button>

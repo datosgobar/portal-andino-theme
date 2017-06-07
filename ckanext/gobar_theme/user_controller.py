@@ -5,6 +5,7 @@ import ckan.model as model
 from ckan.controllers.user import UserController
 import ckan.lib.helpers as h
 import ckan.plugins as p
+from webob.exc import HTTPNotFound
 
 parse_params = logic.parse_params
 check_access = logic.check_access
@@ -16,15 +17,17 @@ class GobArUserController(UserController):
     def read(self, id=None):
         if id and id == c.user:
             return super(GobArUserController, self).read(id)
+        if id == 'logged_in':
+            try:
+                return super(GobArUserController, self).read(id)
+            except HTTPNotFound:
+                return h.redirect_to(controller='ckanext.gobar_theme.user_controller:GobArUserController', action='login', login_error=True)
         return h.redirect_to('home')
 
     def login(self, error=None):
         # Do any plugin login stuff
         for item in p.PluginImplementations(p.IAuthenticator):
             item.login()
-
-        if 'error' in request.params:
-            h.flash_error(request.params['error'])
 
         if not c.user:
             came_from = request.params.get('came_from')
@@ -34,10 +37,7 @@ class GobArUserController(UserController):
             c.login_handler = h.url_for(
                 self._get_repoze_handler('login_handler_path'),
                 came_from=came_from)
-            if error:
-                vars = {'error_summary': {'': error}}
-            else:
-                vars = {}
+            vars = {'login_error': parse_params(request.GET).get('login_error')}
             return base.render('user/login.html', extra_vars=vars)
         else:
             return h.redirect_to('home')
