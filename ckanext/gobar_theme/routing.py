@@ -1,3 +1,4 @@
+# coding=utf-8
 from routes.mapper import SubMapper
 
 
@@ -104,6 +105,8 @@ class GobArRouter:
             m.connect('user_datasets', '/user/{id:.*}', action='read')
             m.connect('login', '/ingresar', action='login')
             m.connect('/configurar/mi_cuenta', action="my_account")
+            m.connect('/configurar/mi_cuenta/cambiar_email', action="my_account_edit_email")
+            m.connect('/configurar/mi_cuenta/cambiar_contraseña', action="my_account_edit_password")
             m.connect('/configurar/crear_usuarios', action="create_users")
             m.connect('/configurar/historial', action="user_history")
 

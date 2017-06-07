@@ -46,6 +46,34 @@ class GobArUserController(UserController):
         self._authorize()
         return base.render('user/user_config_my_account.html')
 
+    def my_account_edit_email(self):
+        self._authorize()
+        if request.method == 'POST':
+            post_params = parse_params(request.POST)
+            email = post_params['email']
+            user_data = {
+                'id': c.userobj.id,
+                'email': email
+            }
+            user_updated = self._edit_user(user_data)
+            return h.json.dumps({'success': user_updated}, for_json=True)
+        else:
+            return h.redirect_to('/configurar/mi_cuenta')
+
+    def my_account_edit_password(self):
+        self._authorize()
+        if request.method == 'POST':
+            post_params = parse_params(request.POST)
+            password = post_params['password']
+            user_data = {
+                'id': c.userobj.id,
+                'password': password
+            }
+            user_updated = self._edit_user(user_data)
+            return h.json.dumps({'success': user_updated}, for_json=True)
+        else:
+            return h.redirect_to('/configurar/mi_cuenta')
+
     def create_users(self):
         # todo: modificar
         # path_to_virtualenv/src/ckan/ckan/lib/cli.py
@@ -87,38 +115,16 @@ class GobArUserController(UserController):
         extra_vars = {'users': model.Session.query(model.User)}
         return base.render('user/user_config_list_users.html', extra_vars=extra_vars)
 
-    def edit_user(self):
-        # todo: sacar
-        self._authorize()
-        get_params = parse_params(request.GET)
-        username = get_params['username']
-        user = model.User.get(username)
-        extra_vars = {'user': user}
-        if request.method == 'POST':
-            post_params = parse_params(request.POST)
-            data_dict = {
-                'id': user.id,
-                'name': post_params['name'],
-                'email': post_params['email'],
-                'password': post_params['password'],
-                'sysadmin': 'admin' in post_params
-            }
-            extra_vars['user'] = data_dict
-            site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-            context = {
-                'model': model,
-                'session': model.Session,
-                'ignore_auth': True,
-                'user': site_user['name'],
-            }
-            try:
-                logic.get_action('user_update')(context, data_dict)
-                user_updated = True
-            except logic.ValidationError, e:
-                user_updated = False
-                extra_vars['errors'] = e.error_dict
-            extra_vars['user_updated'] = user_updated
-        return base.render('user/user_config_edit_user.html', extra_vars=extra_vars)
+    @staticmethod
+    def _edit_user(data_dict):
+        site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        context = {'model': model, 'session': model.Session, 'ignore_auth': True, 'user': site_user['name']}
+        try:
+            logic.get_action('user_update')(context, data_dict)
+            user_updated = True
+        except logic.ValidationError, e:
+            user_updated = False
+        return user_updated
 
     @staticmethod
     def _authorize(sysadmin_required=False):
