@@ -118,7 +118,6 @@ $(function () {
     }
 
     function formIsValid() {
-        $('.missing-field').remove();
         var isValid = true;
         var errorTemplate = '<div class="missing-field">Completá este dato</div>';
 
@@ -153,14 +152,9 @@ $(function () {
 
         isFormValid = isValid && validTitle() && validDesc()
 
-        if (!isValid) {
+        if (!isFormValid) {
             window.scrollTo(0, 0);
         }
-
-        if (!(validTitle() && validDesc())) {
-            window.scrollTo(0, 0);
-            location.reload();
-        };
 
         return isFormValid;
     }
