@@ -1,15 +1,52 @@
 {% extends "user/user_config_base.html" %}
 
 {% block config %}
-    <h1 class="small-margin">Alta de usuario</h1>
+    <div id="user-config-create-users">
+        <h1>Crear usuarios</h1>
+        <h2 class="blue">Administrador</h2>
+        <p class="with-bottom-margin">
+            Podrá crear usuarios, editar la configuración general de del portal; crear, actualizar
+            y borrar todos los conjuntos de datos; y gestionar temas y organizaciones.
+        </p>
 
-    {% if user_created %}
-        <p>El usuario se creó con éxito</p>
-        <p>Nombre de usuario: {{ user.name }}</p>
-        <p>Correo electrónico: {{ user.email }}</p>
-        <p>Contraseña {{ '*' * user.password|length }}</p>
-        <p>El usuario es administrador del sitio: {{ 'si' if user.sysadmin else 'no' }}</p>
-    {% else %}
-        {% snippet "user/user_form.html", user=user, errors=errors %}
-    {% endif %}
+        <div class="create-section admin">
+            <h2>Usuario</h2>
+            <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="10">
+            <p>Máximo 10 caracteres.</p>
+
+            <h2>Nombre y apellido</h2>
+            <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez">
+
+            <h2>E-mail</h2>
+            <div>
+                <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
+                <button class="btn btn-blue">
+                    LISTO, CREAR
+                </button>
+            </div>
+        </div>
+
+        <div class="create-section user">
+            <h2 class="blue">Colaborador</h2>
+            <p class="with-bottom-margin">
+                Podrá crear, actualizar y borrar conjuntos de datos sólo de la organización que elijas.
+            </p>
+
+            <h2>Usuario</h2>
+            <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="10">
+            <p>Máximo 10 caracteres.</p>
+
+            <h2>Nombre y apellido</h2>
+            <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez">
+
+            <h2>E-mail</h2>
+            <div>
+                <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
+                <button class="btn btn-blue">
+                    LISTO, CREAR
+                </button>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

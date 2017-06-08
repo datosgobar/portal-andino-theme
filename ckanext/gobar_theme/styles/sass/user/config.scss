@@ -30,6 +30,7 @@
 
     button {
       margin-bottom: 30px;
+      height: 42px;
     }
   }
 
@@ -56,6 +57,7 @@
     */
 
   #user-config-history {
+    margin-bottom: 50px;
     ul.activity {
       li.item {
         display: block;
@@ -70,6 +72,27 @@
           pointer-events: none;
         }
       }
+    }
+  }
+
+  #user-config-create-users {
+    margin-bottom: 50px;
+    input[name="username"] {
+      width: 200px;
+      max-width: 80%;
+    }
+    input[name="email"],
+    input[name="email-confirmation"],
+    input[name="password"] {
+      width: 400px;
+      max-width: 80%;
+    }
+    button {
+      margin-bottom: 30px;
+      height: 42px;
+    }
+    input.small-margin {
+      margin-bottom: 10px;
     }
   }
 }

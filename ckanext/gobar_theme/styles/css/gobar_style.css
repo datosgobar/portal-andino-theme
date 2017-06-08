@@ -7354,16 +7354,34 @@ div#background-container {
       #template-config-container #template-config #user-config-my-account .disabled-input svg:hover path {
         fill: #0695d6; }
     #template-config-container #template-config #user-config-my-account button {
-      margin-bottom: 30px; }
-  #template-config-container #template-config #user-config-history ul.activity li.item {
-    display: block; }
-    #template-config-container #template-config #user-config-history ul.activity li.item i {
-      position: static;
-      display: inline-block; }
-    #template-config-container #template-config #user-config-history ul.activity li.item img {
-      display: none; }
-    #template-config-container #template-config #user-config-history ul.activity li.item .actor a {
-      pointer-events: none; }
+      margin-bottom: 30px;
+      height: 42px; }
+  #template-config-container #template-config #user-config-history {
+    margin-bottom: 50px; }
+    #template-config-container #template-config #user-config-history ul.activity li.item {
+      display: block; }
+      #template-config-container #template-config #user-config-history ul.activity li.item i {
+        position: static;
+        display: inline-block; }
+      #template-config-container #template-config #user-config-history ul.activity li.item img {
+        display: none; }
+      #template-config-container #template-config #user-config-history ul.activity li.item .actor a {
+        pointer-events: none; }
+  #template-config-container #template-config #user-config-create-users {
+    margin-bottom: 50px; }
+    #template-config-container #template-config #user-config-create-users input[name="username"] {
+      width: 200px;
+      max-width: 80%; }
+    #template-config-container #template-config #user-config-create-users input[name="email"],
+    #template-config-container #template-config #user-config-create-users input[name="email-confirmation"],
+    #template-config-container #template-config #user-config-create-users input[name="password"] {
+      width: 400px;
+      max-width: 80%; }
+    #template-config-container #template-config #user-config-create-users button {
+      margin-bottom: 30px;
+      height: 42px; }
+    #template-config-container #template-config #user-config-create-users input.small-margin {
+      margin-bottom: 10px; }
 
 .organization-container {
   display: table-row;
