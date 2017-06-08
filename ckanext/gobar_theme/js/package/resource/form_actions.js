@@ -30,8 +30,4 @@ $(function () {
         clickCount++;
     });
 
-    $('button#publish-button').on('click', function(){
-        clickCount++;
-    });
-
 });

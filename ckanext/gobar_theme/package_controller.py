@@ -500,7 +500,7 @@ class GobArPackageController(PackageController):
             data_provided = False
             for key, value in data.iteritems():
                 if ((value or isinstance(value, cgi.FieldStorage))
-                    and key != 'resource_type'):
+                    and key not in ['resource_type', 'license_id', 'attributesDescription']):
                     data_provided = True
                     break
 
