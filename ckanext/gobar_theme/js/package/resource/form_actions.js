@@ -49,11 +49,11 @@ $(function () {
         var validDescLength = $('textarea[data-valid-desc-length]').data('valid-desc-length')
 
         if (!validTitle()){
-            $('div#field-name.after-desc').addClass('missing-field')
+            $('div#field-name.after-desc').addClass('long-field')
         }
 
         if (!validDesc()){
-            $('div#field-description.after-desc').addClass('missing-field')
+            $('div#field-description.after-desc').addClass('long-field')
         }
     });
 });
