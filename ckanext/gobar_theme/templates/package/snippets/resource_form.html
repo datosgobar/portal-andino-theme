@@ -63,7 +63,7 @@
             {% block previous_button %}
             {% endblock %}
             {% block again_button %}
-                <button class="btn btn-blue" name="save" value="again" type="submit">
+                <button id="again-button" class="btn btn-blue" name="save" value="again" type="submit">
                     SEGUIR Y AGREGAR RECURSOS
                 </button>
             {% endblock %}
@@ -81,14 +81,14 @@
 
             {% if show_save_draft_button %}
                 {% block save_draft %}
-                    <button class="btn btn-transparent" name="save" value="save-draft" type="submit">
+                    <button id="draft-button" class="btn btn-transparent" name="save" value="save-draft" type="submit">
                         SUBIR Y DEJAR EN BORRADOR
                     </button>
                 {% endblock %}
             {% endif %}
             {% if show_save_button %}
                 {% block save_button %}
-                    <button class="btn btn-green" name="save" value="go-metadata" type="submit">
+                    <button id="publish-button" class="btn btn-green" name="save" value="go-metadata" type="submit">
                     {% block save_button_text %}PUBLICAR{% endblock %}
                     </button>
                 {% endblock %}
