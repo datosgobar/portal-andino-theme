@@ -6,6 +6,8 @@ from ckan.controllers.user import UserController
 import ckan.lib.helpers as h
 import ckan.plugins as p
 from webob.exc import HTTPNotFound
+import ckan.lib.dictization.model_dictize as model_dictize
+import ckan.lib.activity_streams as activity_streams
 
 parse_params = logic.parse_params
 check_access = logic.check_access
@@ -109,17 +111,34 @@ class GobArUserController(UserController):
         return base.render('user/user_config_create_users.html', extra_vars=extra_vars)
 
     def user_history(self):
-        # todo
-        return ''
-
-    def list_users(self):
-        # todo: sacar
         self._authorize()
-        extra_vars = {'users': model.Session.query(model.User)}
-        return base.render('user/user_config_list_users.html', extra_vars=extra_vars)
+        if c.userobj.sysadmin:
+            users = model.Session.query(model.User)
+            activity_queries = []
+            for user in users:
+                activity_queries += self._get_activity(user)
+        else:
+            activity_queries = self._get_activity(c.userobj)
+
+        sql_activities = model.activity._activities_union_all(*activity_queries)
+
+        offset, limit = 0, 100
+        raw_activities = model.activity._activities_at_offset(sql_activities, limit, offset)
+        context = {'model': model, 'session': model.Session, 'user': c.user or c.author, 'auth_user_obj': c.userobj, 'for_view': True}
+        activities = model_dictize.activity_list_dictize(raw_activities, context)
+        extra_vars = {
+            'controller': 'user',
+            'action': 'activity',
+            'offset': offset,
+            'user_history': True
+        }
+        activities = activity_streams.activity_list_to_html(context, activities, extra_vars)
+        return base.render('user/user_config_history.html', extra_vars={'activities': activities})
 
     @staticmethod
     def _edit_user(data_dict):
+        if 'email' not in data_dict:
+            data_dict['email'] = model.User.get(data_dict['id']).email
         site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'ignore_auth': True, 'user': site_user['name']}
         try:
@@ -128,6 +147,14 @@ class GobArUserController(UserController):
         except logic.ValidationError, e:
             user_updated = False
         return user_updated
+
+    @staticmethod
+    def _get_activity(user):
+        user = model.User.get(user.id)
+        return [
+            model.activity._activities_from_user_query(user.id),
+            model.activity._activities_about_user_query(user.id)
+        ]
 
     @staticmethod
     def _authorize(sysadmin_required=False):

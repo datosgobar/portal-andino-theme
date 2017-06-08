@@ -32,6 +32,8 @@
       margin-bottom: 30px;
     }
   }
+
+  /*
   .user-list {
     padding: 20px 0;
     .list-header,
@@ -47,6 +49,25 @@
         &:hover {
           background: $grey-100;
           color: $blue-300;
+        }
+      }
+    }
+  }
+    */
+
+  #user-config-history {
+    ul.activity {
+      li.item {
+        display: block;
+        i {
+          position: static;
+          display: inline-block;
+        }
+        img {
+          display: none;
+        }
+        .actor a {
+          pointer-events: none;
         }
       }
     }
