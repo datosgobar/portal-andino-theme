@@ -20,7 +20,7 @@
             <h2>E-mail</h2>
             <div>
                 <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
-                <button class="btn btn-blue">
+                <button class="btn btn-blue save-new-user">
                     LISTO, CREAR
                 </button>
             </div>
@@ -42,7 +42,7 @@
             <h2>E-mail</h2>
             <div>
                 <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
-                <button class="btn btn-blue">
+                <button class="btn btn-blue save-new-user">
                     LISTO, CREAR
                 </button>
             </div>
@@ -51,7 +51,7 @@
         <hr>
 
         <div class="user-list admin-users">
-            <h2 class="blue">Administradores</h2>
+            <h2 class="blue user-list-title">Administradores</h2>
             <div class="users">
                 {% for admin_user in admin_users %}
                     <div class="user">
@@ -68,13 +68,14 @@
                                 {{ admin_user.email or '' }}
                             </p>
                         </div>
+                        {% snippet "user/snippets/edit_form.html", user=admin_user %}
                     </div>
                 {% endfor %}
             </div>
         </div>
 
         <div class="user-list normal-users">
-            <h2 class="blue">Colaboradores</h2>
+            <h2 class="blue user-list-title">Colaboradores</h2>
             <div class="users">
                 {% for normal_user in normal_users %}
                     <div class="user">
@@ -91,6 +92,7 @@
                                 {{ normal_user.email or '' }}
                             </p>
                         </div>
+                        {% snippet "user/snippets/edit_form.html", user=normal_user %}
                     </div>
                 {% endfor %}
             </div>
@@ -98,4 +100,5 @@
 
     </div>
 
+    {% resource 'gobar_js/user_config/create_users.js' %}
 {% endblock %}

@@ -73,7 +73,7 @@
       width: 400px;
       max-width: 80%;
     }
-    button {
+    button.save-new-user {
       margin-bottom: 30px;
       height: 42px;
     }
@@ -85,7 +85,7 @@
       position: relative;
       padding-left: 170px;
       margin-bottom: 50px;
-      h2 {
+      h2.user-list-title {
         position: absolute;
         top: 0;
         left: 0;
@@ -127,6 +127,22 @@
           color: $grey-300;
           font-size: 14px;
           margin-bottom: 0;
+        }
+      }
+      .modal {
+        width: 500px;
+        left: 50%;
+        margin-left: -250px!important;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        h1 {
+          margin-top: 0;
+          text-align: left;
+        }
+        .modal-content {
+          border: none;
+        }
+        .modal-body {
+          max-height: none;
         }
       }
     }

@@ -7371,7 +7371,7 @@ div#background-container {
   #template-config-container #template-config #user-config-create-users input[name="password"] {
     width: 400px;
     max-width: 80%; }
-  #template-config-container #template-config #user-config-create-users button {
+  #template-config-container #template-config #user-config-create-users button.save-new-user {
     margin-bottom: 30px;
     height: 42px; }
   #template-config-container #template-config #user-config-create-users input.small-margin {
@@ -7380,7 +7380,7 @@ div#background-container {
     position: relative;
     padding-left: 170px;
     margin-bottom: 50px; }
-    #template-config-container #template-config #user-config-create-users .user-list h2 {
+    #template-config-container #template-config #user-config-create-users .user-list h2.user-list-title {
       position: absolute;
       top: 0;
       left: 0; }
@@ -7415,6 +7415,18 @@ div#background-container {
         color: #999999;
         font-size: 14px;
         margin-bottom: 0; }
+    #template-config-container #template-config #user-config-create-users .user-list .modal {
+      width: 500px;
+      left: 50%;
+      margin-left: -250px !important;
+      border: 1px solid rgba(0, 0, 0, 0.2); }
+      #template-config-container #template-config #user-config-create-users .user-list .modal h1 {
+        margin-top: 0;
+        text-align: left; }
+      #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content {
+        border: none; }
+      #template-config-container #template-config #user-config-create-users .user-list .modal .modal-body {
+        max-height: none; }
 
 .organization-container {
   display: table-row;

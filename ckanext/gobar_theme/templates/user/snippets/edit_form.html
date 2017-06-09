@@ -1,0 +1,38 @@
+<div class="modal edit-user-modal" tabindex="-1" role="dialog" data-username="{{ user.name }}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h1 class="blue">Modificar</h1>
+
+                <h2>Usuario</h2>
+                <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="10" value="{{ user.name }}" disabled="disabled">
+
+                <h2>Nombre y apellido</h2>
+                <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez" value="{{ user.fullname or '' }}" disabled="disabled">
+
+                <h2>E-mail</h2>
+                <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com" value="{{ user.email or '' }}" disabled="disabled">
+
+                <hr>
+
+                <h2>Permiso</h2>
+                <select>
+                    <option {{ 'selected=selected' if user.sysadmin  }}>Administrador</option>
+                    <option {{ 'selected=selected' if not user.sysadmin  }}>Colaborador</option>
+                </select>
+
+                <div class="modal-actions">
+                    <button type="button" class="dismiss-greetings btn btn-blue">
+                        GUARDAR
+                    </button>
+                    <button type="button" class="dismiss-greetings btn" data-dismiss="modal">
+                        CANCELAR
+                    </button>
+                    <button type="button" class="dismiss-greetings btn btn-transparent" data-dismiss="modal">
+                        BORRAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
