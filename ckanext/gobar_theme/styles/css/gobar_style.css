@@ -7347,9 +7347,15 @@ div#background-container {
       pointer-events: none; }
 #template-config-container #template-config #user-config-create-users {
   margin-bottom: 50px; }
+  #template-config-container #template-config #user-config-create-users .role-description {
+    font-style: italic; }
   #template-config-container #template-config #user-config-create-users input[name="username"] {
     width: 200px;
-    max-width: 80%; }
+    max-width: 80%;
+    margin-bottom: 10px; }
+  #template-config-container #template-config #user-config-create-users .username-restriction {
+    margin-bottom: 30px;
+    font-style: italic; }
   #template-config-container #template-config #user-config-create-users input[name="email"],
   #template-config-container #template-config #user-config-create-users input[name="email-confirmation"],
   #template-config-container #template-config #user-config-create-users input[name="password"] {
@@ -7396,6 +7402,7 @@ div#background-container {
             fill: #999999; }
       #template-config-container #template-config #user-config-create-users .user-list .user .fullname,
       #template-config-container #template-config #user-config-create-users .user-list .user .email {
+        color: #999999;
         font-size: 14px;
         margin-bottom: 0; }
 
