@@ -6176,6 +6176,16 @@ div.svg-tooltip {
       @media (min-width: 768px) {
         #header #header-spacing .header-links {
           display: block; } }
+      #header #header-spacing .header-links .user-divisor {
+        border-left: solid 2px #0695d6;
+        padding: 14px 0.3em 14px 0;
+        display: inline-block;
+        height: 80%;
+        position: absolute;
+        top: 10%;
+        left: 0; }
+      #header #header-spacing .header-links .header-link:hover + .header-link .user-divisor {
+        border-color: transparent; }
       #header #header-spacing .header-links .header-link {
         color: #0695d6;
         margin: 0;

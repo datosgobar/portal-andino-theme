@@ -70,20 +70,20 @@
             </div>
 
             <div class="col-xs-12 col-sm-7 no-padding header-links">
-                {% if c.action != 'login' %}
+                {%- if c.action != 'login' -%}
                     <a class="header-link" href="{{ h.url_for(controller='package', action='search') }}">DATASETS</a>
 
-                    {% if h.get_theme_config('organization.show-organizations') %}
+                    {%- if h.get_theme_config('organization.show-organizations') -%}
                         <a class="header-link" href="{{ h.url_for(controller='organization', action='index') }}">ORGANIZACIONES CON
                             DATOS</a>
-                    {% endif %}
+                    {%- endif -%}
 
                     {% if h.get_theme_config('about.show-about') %}
                         <a class="header-link" href="{{ h.url('gobar_about') }}">ACERCA</a>
-                    {% endif %}
+                    {%- endif -%}
 
-                    {% if c.userobj %}
-                        <span class="header-link dropdown">
+                    {%- if c.userobj -%}
+                        <span class="header-link dropdown"><span class="user-divisor"></span>
                             <span class="username">{{ c.userobj.name }}</span> {% snippet "svg/user-logo.svg" %}
 
                             <ul {{ 'style=bottom:-120px' if not c.userobj.sysadmin else '' }}>
@@ -106,8 +106,8 @@
                                 </a>
                             </ul>
                         </span>
-                    {% endif %}
-                {% endif %}
+                    {%- endif -%}
+                {%- endif -%}
             </div>
         </div>
     </div>
