@@ -242,3 +242,8 @@ def accepted_mime_types():
         'turtle',
         'shp'
     ]
+
+
+def package_resources(pkg_id):
+    package = logic.get_action('package_show')({}, {'id': pkg_id})
+    return package['resources']
