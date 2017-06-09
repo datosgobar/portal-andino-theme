@@ -7313,75 +7313,91 @@ div#background-container {
       font-weight: 400;
       margin: 0 0 30px 0; }
 
-#template-config-container #template-config {
-  /*
-  .user-list {
-    padding: 20px 0;
-    .list-header,
-    .list-user {
-      padding: 0;
-      .user-attr {
-        padding: 5px 10px 5px 10px;
-      }
-    }
-    a {
-      color: inherit;
-      .list-user {
-        &:hover {
-          background: $grey-100;
-          color: $blue-300;
-        }
-      }
-    }
-  }
-    */ }
-  #template-config-container #template-config #user-config-my-account {
+#template-config-container #template-config #user-config-my-account {
+  margin-bottom: 50px; }
+  #template-config-container #template-config #user-config-my-account input[name="username"] {
+    width: 200px;
+    max-width: 80%; }
+  #template-config-container #template-config #user-config-my-account input[name="email"],
+  #template-config-container #template-config #user-config-my-account input[name="email-confirmation"],
+  #template-config-container #template-config #user-config-my-account input[name="password"] {
+    width: 400px;
+    max-width: 80%; }
+  #template-config-container #template-config #user-config-my-account .disabled-input svg {
+    height: 42px;
+    width: 24px;
+    cursor: pointer; }
+    #template-config-container #template-config #user-config-my-account .disabled-input svg path {
+      fill: #999999; }
+    #template-config-container #template-config #user-config-my-account .disabled-input svg:hover path {
+      fill: #0695d6; }
+  #template-config-container #template-config #user-config-my-account button {
+    margin-bottom: 30px;
+    height: 42px; }
+#template-config-container #template-config #user-config-history {
+  margin-bottom: 50px; }
+  #template-config-container #template-config #user-config-history ul.activity li.item {
+    display: block; }
+    #template-config-container #template-config #user-config-history ul.activity li.item i {
+      position: static;
+      display: inline-block; }
+    #template-config-container #template-config #user-config-history ul.activity li.item img {
+      display: none; }
+    #template-config-container #template-config #user-config-history ul.activity li.item .actor a {
+      pointer-events: none; }
+#template-config-container #template-config #user-config-create-users {
+  margin-bottom: 50px; }
+  #template-config-container #template-config #user-config-create-users input[name="username"] {
+    width: 200px;
+    max-width: 80%; }
+  #template-config-container #template-config #user-config-create-users input[name="email"],
+  #template-config-container #template-config #user-config-create-users input[name="email-confirmation"],
+  #template-config-container #template-config #user-config-create-users input[name="password"] {
+    width: 400px;
+    max-width: 80%; }
+  #template-config-container #template-config #user-config-create-users button {
+    margin-bottom: 30px;
+    height: 42px; }
+  #template-config-container #template-config #user-config-create-users input.small-margin {
+    margin-bottom: 10px; }
+  #template-config-container #template-config #user-config-create-users .user-list {
+    position: relative;
+    padding-left: 170px;
     margin-bottom: 50px; }
-    #template-config-container #template-config #user-config-my-account input[name="username"] {
-      width: 200px;
-      max-width: 80%; }
-    #template-config-container #template-config #user-config-my-account input[name="email"],
-    #template-config-container #template-config #user-config-my-account input[name="email-confirmation"],
-    #template-config-container #template-config #user-config-my-account input[name="password"] {
-      width: 400px;
-      max-width: 80%; }
-    #template-config-container #template-config #user-config-my-account .disabled-input svg {
-      height: 42px;
-      width: 24px;
-      cursor: pointer; }
-      #template-config-container #template-config #user-config-my-account .disabled-input svg path {
-        fill: #999999; }
-      #template-config-container #template-config #user-config-my-account .disabled-input svg:hover path {
-        fill: #0695d6; }
-    #template-config-container #template-config #user-config-my-account button {
-      margin-bottom: 30px;
-      height: 42px; }
-  #template-config-container #template-config #user-config-history {
-    margin-bottom: 50px; }
-    #template-config-container #template-config #user-config-history ul.activity li.item {
-      display: block; }
-      #template-config-container #template-config #user-config-history ul.activity li.item i {
-        position: static;
-        display: inline-block; }
-      #template-config-container #template-config #user-config-history ul.activity li.item img {
-        display: none; }
-      #template-config-container #template-config #user-config-history ul.activity li.item .actor a {
-        pointer-events: none; }
-  #template-config-container #template-config #user-config-create-users {
-    margin-bottom: 50px; }
-    #template-config-container #template-config #user-config-create-users input[name="username"] {
-      width: 200px;
-      max-width: 80%; }
-    #template-config-container #template-config #user-config-create-users input[name="email"],
-    #template-config-container #template-config #user-config-create-users input[name="email-confirmation"],
-    #template-config-container #template-config #user-config-create-users input[name="password"] {
-      width: 400px;
-      max-width: 80%; }
-    #template-config-container #template-config #user-config-create-users button {
-      margin-bottom: 30px;
-      height: 42px; }
-    #template-config-container #template-config #user-config-create-users input.small-margin {
-      margin-bottom: 10px; }
+    #template-config-container #template-config #user-config-create-users .user-list h2 {
+      position: absolute;
+      top: 0;
+      left: 0; }
+    #template-config-container #template-config #user-config-create-users .user-list .user {
+      margin-bottom: 20px; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .user-editable {
+        padding-left: 40px;
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        min-height: 45px; }
+        #template-config-container #template-config #user-config-create-users .user-list .user .user-editable:hover .edit-svg path {
+          fill: #0695d6; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .user-logo {
+        position: absolute;
+        top: 6px;
+        left: 2px;
+        width: 30px;
+        height: 30px; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .username {
+        font-size: 18px;
+        margin-bottom: 0; }
+        #template-config-container #template-config #user-config-create-users .user-list .user .username .edit-svg {
+          width: 20px;
+          height: 20px;
+          vertical-align: sub;
+          cursor: pointer; }
+          #template-config-container #template-config #user-config-create-users .user-list .user .username .edit-svg path {
+            fill: #999999; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .fullname,
+      #template-config-container #template-config #user-config-create-users .user-list .user .email {
+        font-size: 14px;
+        margin-bottom: 0; }
 
 .organization-container {
   display: table-row;

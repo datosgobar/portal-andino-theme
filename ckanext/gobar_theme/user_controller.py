@@ -108,6 +108,9 @@ class GobArUserController(UserController):
                 user_created = False
                 extra_vars['errors'] = e.error_dict
             extra_vars['user_created'] = user_created
+        all_users = model.Session.query(model.User)
+        extra_vars['admin_users'] = list(filter(lambda u: u.sysadmin, all_users))
+        extra_vars['normal_users'] = list(filter(lambda u: not u.sysadmin, all_users))
         return base.render('user/user_config_create_users.html', extra_vars=extra_vars)
 
     def user_history(self):

@@ -47,6 +47,55 @@
                 </button>
             </div>
         </div>
+
+        <hr>
+
+        <div class="user-list admin-users">
+            <h2 class="blue">Administradores</h2>
+            <div class="users">
+                {% for admin_user in admin_users %}
+                    <div class="user">
+                        <div class="user-editable">
+                            {% snippet "svg/user-logo.svg" %}
+                            <p class="username">
+                                {{ admin_user.name }}
+                                {% snippet "svg/edit.svg" %}
+                            </p>
+                            <p class="fullname">
+                                {{ admin_user.fullname or '' }}
+                            </p>
+                            <p class="email">
+                                {{ admin_user.email or '' }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="user-list normal-users">
+            <h2 class="blue">Colaboradores</h2>
+            <div class="users">
+                {% for normal_user in normal_users %}
+                    <div class="user">
+                        <div class="user-editable">
+                            {% snippet "svg/user-logo.svg" %}
+                            <p class="username">
+                                {{ normal_user.name }}
+                                {% snippet "svg/edit.svg" %}
+                            </p>
+                            <p class="fullname">
+                                {{ normal_user.fullname or '' }}
+                            </p>
+                            <p class="email">
+                                {{ normal_user.email or '' }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
