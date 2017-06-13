@@ -14,7 +14,6 @@ from ckan.lib.search import SearchError
 import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.lib.base as base
 import cgi
-import ckanext.googleanalytics.plugin as google_analytics
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound
@@ -599,6 +598,3 @@ class GobArPackageController(PackageController):
             vars['stage'] = ['complete', 'active']
             template = 'package/new_resource.html'
         return render(template, extra_vars=vars)
-
-    def resource_view_embed(self, resource_id):
-        google_analytics._post_analytics(c.user, 'CKAN Resource Embed', 'Resource ', resource_id, resource_id)
