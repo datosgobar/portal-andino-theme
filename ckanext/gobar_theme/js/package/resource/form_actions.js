@@ -28,13 +28,8 @@ $(function () {
 
         isFormValid = isValid && validTitle() && validDesc();
 
-        if (!isValid) {
+        if (!isFormValid) {
             window.scrollTo(0, 0);
-        }
-
-        if (!(validTitle() && validDesc())) {
-            window.scrollTo(0, 0);
-            location.reload();
         }
         
         return isFormValid;
@@ -49,11 +44,11 @@ $(function () {
         var validDescLength = $('textarea[data-valid-desc-length]').data('valid-desc-length')
 
         if (!validTitle()){
-            $('div#field-name.after-desc').addClass('missing-field')
+            $('div#field-name.after-desc').addClass('long-field')
         }
 
         if (!validDesc()){
-            $('div#field-description.after-desc').addClass('missing-field')
+            $('div#field-description.after-desc').addClass('long-field')
         }
     });
 });

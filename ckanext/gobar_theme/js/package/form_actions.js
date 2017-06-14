@@ -153,14 +153,9 @@ $(function () {
 
         isFormValid = isValid && validTitle() && validDesc()
 
-        if (!isValid) {
+        if (!isFormValid) {
             window.scrollTo(0, 0);
         }
-
-        if (!(validTitle() && validDesc())) {
-            window.scrollTo(0, 0);
-            location.reload();
-        };
 
         return isFormValid;
     }
@@ -237,11 +232,11 @@ $(function () {
 
     $(document).ready(function(){
         if (!validTitle()){
-            $('input#field-title').parent('div').children('div#field-title').addClass('missing-field');
+            $('input#field-title').parent('div').children('div#field-title').addClass('long-field');
         }
 
         if (!validDesc()){
-            $('div#field-notes.after-desc').addClass('missing-field');
+            $('div#field-notes.after-desc').addClass('long-field');
         }
      });
 
