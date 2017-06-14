@@ -14,6 +14,14 @@ function validDesc(){
     return validLength(descLength, validDescLength);
 }
 
+function validateTitle() {
+    $('div#field-name.after-desc').toggleClass('long-field', !validTitle())
+}
+
+function validateDesc() {
+    $('div#field-description.after-desc').toggleClass('long-field', !validDesc())
+}
+
 $(function () {
     function formIsValid() {
         $('.missing-field').remove();
@@ -40,15 +48,10 @@ $(function () {
     });
 
     $(document).ready(function(){
-        var validTitleLength = $('div[data-valid-title-length]').data('valid-title-length')
-        var validDescLength = $('textarea[data-valid-desc-length]').data('valid-desc-length')
+        validateTitle()
+        $('input[data-valid-title-length]').on('change input keyup', validateTitle)
 
-        if (!validTitle()){
-            $('div#field-name.after-desc').addClass('long-field')
-        }
-
-        if (!validDesc()){
-            $('div#field-description.after-desc').addClass('long-field')
-        }
+        validateDesc()
+        $('textarea[data-valid-desc-length]').on('change input keyup', validateDesc)
     });
 });
