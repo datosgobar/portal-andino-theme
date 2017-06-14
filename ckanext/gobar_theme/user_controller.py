@@ -108,7 +108,7 @@ class GobArUserController(UserController):
                 user_created = False
                 extra_vars['errors'] = e.error_dict
             extra_vars['user_created'] = user_created
-        all_users = model.Session.query(model.User)
+        all_users = model.Session.query(model.User).filter_by(state='active')
         extra_vars['admin_users'] = list(filter(lambda u: u.sysadmin, all_users))
         extra_vars['normal_users'] = list(filter(lambda u: not u.sysadmin, all_users))
         return base.render('user/user_config_create_users.html', extra_vars=extra_vars)
@@ -137,6 +137,20 @@ class GobArUserController(UserController):
         }
         activities = activity_streams.activity_list_to_html(context, activities, extra_vars)
         return base.render('user/user_config_history.html', extra_vars={'activities': activities})
+
+    def delete_user(self):
+        user_deleted = False
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            try:
+                user = model.User.by_name(params['id'])
+                user.delete()
+                model.repo.commit_and_remove()
+                user_deleted = True
+            except NotAuthorized:
+                user_deleted = False
+        response.headers['Content-Type'] = self.json_content_type
+        return h.json.dumps({'success': user_deleted}, for_json=True)
 
     @staticmethod
     def _edit_user(data_dict):
