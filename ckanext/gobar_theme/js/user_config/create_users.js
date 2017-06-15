@@ -59,15 +59,44 @@ $(function () {
                 showNegativeFeedback(divSelect, 'Completá este dato.')
             }
         }
+        return true
     };
 
     $('.save-new-user').on('click', function (e) {
         var createSection = $(e.currentTarget).parents('.create-section')
         var isValid = validateSection(createSection);
+        var usernameInput = createSection.find('input[name="username"]');
+        var fullnameInput = createSection.find('input[name="fullname"]');
+        var emailInput = createSection.find('input[name="email"]');
         if (isValid) {
             var data = {
-
+                username: usernameInput.val().trim(),
+                fullname: fullnameInput.val().trim(),
+                email: emailInput.val().trim(),
             }
+            if (createSection.hasClass('user')) {
+                var organizationSelect = createSection.find('select.organization-select');
+                data['organizations'] = organizationSelect.multipleSelect('getSelects');
+            } else {
+                data['admin'] = true
+            }
+            var url = window.location.href;
+            $.post(url, data, function (response) {
+                console.log(response)
+                if (response.success) {
+                    showPositiveFeedback(usernameInput)
+                    showPositiveFeedback(fullnameInput)
+                    if (createSection.hasClass('admin')) {
+                        showPositiveFeedback(emailInput, '¡Perfecto! Creaste un nuevo usuario.')
+                    } else {
+                        showPositiveFeedback(emailInput)
+                        showPositiveFeedback(organizationSelect, '¡Perfecto! Creaste un nuevo usuario.')
+                    }
+
+                } else if (response.error == 'user_already_exists') {
+                    showNegativeFeedback(usernameInput, 'Este usuario ya existe.')
+                }
+            })
         }
     })
 });

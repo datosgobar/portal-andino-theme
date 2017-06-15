@@ -1,15 +1,19 @@
 var showPositiveFeedback = function(input, msg) {
     clearFeedback(input)
-    var errormsg = $('<p class="feedback validation-success"></p>').text(msg)
-    $(input).parent().append(errormsg)
+    if (msg && msg.length > 0) {
+        var errormsg = $('<p class="feedback validation-success"></p>').text(msg)
+        $(input).parent().append(errormsg)
+    }
     var errorimg = $('<img src="/img/input-check.svg" class="feedback-img success">')
     $(input).parent().append(errorimg)
 };
 
 var showNegativeFeedback = function (input, msg) {
     clearFeedback(input)
-    var errormsg = $('<p class="feedback validation-error"></p>').text(msg)
-    $(input).parent().append(errormsg)
+    if (msg && msg.length > 0) {
+        var errormsg = $('<p class="feedback validation-error"></p>').text(msg)
+        $(input).parent().append(errormsg)
+    }
     var errorimg = $('<img src="/img/input-error.svg" class="feedback-img">')
     $(input).parent().append(errorimg)
 };

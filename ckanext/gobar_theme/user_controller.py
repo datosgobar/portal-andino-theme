@@ -8,6 +8,8 @@ import ckan.plugins as p
 from webob.exc import HTTPNotFound
 import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.lib.activity_streams as activity_streams
+import random
+import string
 
 parse_params = logic.parse_params
 check_access = logic.check_access
@@ -80,34 +82,12 @@ class GobArUserController(UserController):
             return h.redirect_to('/configurar/mi_cuenta')
 
     def create_users(self):
-        # todo: modificar
-        # path_to_virtualenv/src/ckan/ckan/lib/cli.py
-        # class UserCmd
         self._authorize(sysadmin_required=True)
         extra_vars = {}
         if request.method == 'POST':
-            params = parse_params(request.POST)
-            data_dict = {
-                'name': params['name'],
-                'email': params['email'],
-                'password': params['password'],
-                'sysadmin': 'admin' in params
-            }
-            extra_vars['user'] = data_dict
-            site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-            context = {
-                'model': model,
-                'session': model.Session,
-                'ignore_auth': True,
-                'user': site_user['name'],
-            }
-            try:
-                logic.get_action('user_create')(context, data_dict)
-                user_created = True
-            except logic.ValidationError, e:
-                user_created = False
-                extra_vars['errors'] = e.error_dict
-            extra_vars['user_created'] = user_created
+            json_response = self._create_user()
+            response.headers['Content-Type'] = self.json_content_type
+            return h.json.dumps(json_response, for_json=True)
         all_users = model.Session.query(model.User).filter_by(state='active')
         extra_vars['admin_users'] = list(filter(lambda u: u.sysadmin, all_users))
         extra_vars['normal_users'] = list(filter(lambda u: not u.sysadmin, all_users))
@@ -172,6 +152,30 @@ class GobArUserController(UserController):
             model.activity._activities_from_user_query(user.id),
             model.activity._activities_about_user_query(user.id)
         ]
+
+    @staticmethod
+    def _create_user():
+        params = parse_params(request.POST)
+        username = params['username']
+        if model.User.by_name(username) is not None:
+            return {'success': False, 'error': 'user_already_exists'}
+        random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+        data_dict = {
+            'name': username,
+            'fullname': params['fullname'],
+            'email': params['email'],
+            'password': random_password,
+            'sysadmin': 'admin' in params
+        }
+        site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        context = {'model': model, 'session': model.Session, 'ignore_auth': True, 'user': site_user['name']}
+        try:
+            logic.get_action('user_create')(context, data_dict)
+            user_created = True
+        except logic.ValidationError, e:
+            user_created = False
+        print(random_password)
+        return {'success': user_created, 'password': random_password}
 
     @staticmethod
     def _authorize(sysadmin_required=False):
