@@ -13,7 +13,7 @@
 
         <div class="disabled-input" data-replace-id="email-edit">
             <h2>E-mail</h2>
-            <div>
+            <div class="can-have-feedback-img">
                 <input name="email" type="text" title="E-mail" value="{{ c.userobj.email }}" disabled="disabled">
                 {% snippet "svg/edit.svg" %}
             </div>
@@ -21,11 +21,11 @@
 
         <div id="email-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_email" data-attr="email">
             <h2>Nuevo e-mail</h2>
-            <div>
+            <div class="can-have-feedback-img">
                 <input name="email" type="text" title="Nuevo e-mail" value="{{ c.userobj.email }}" data-default-value="{{ c.userobj.email }}">
             </div>
             <h2>Repetir e-mail</h2>
-            <div>
+            <div class="can-have-feedback-img">
                 <input name="email-confirmation" type="text" title="Repetir e-mail">
                 <button class="btn btn-blue" id="save-email">
                     GUARDAR
@@ -38,7 +38,7 @@
 
         <div class="disabled-input" data-replace-id="password-edit">
             <h2>Contraseña</h2>
-            <div>
+            <div class="can-have-feedback-img">
                 <input name="password" type="password" title="Contraseña" value="******" disabled="disabled">
                 {% snippet "svg/edit.svg" %}
             </div>
@@ -46,10 +46,12 @@
 
         <div id="password-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_contraseña" data-attr="password">
             <h2>Nueva contraseña</h2>
-            <input name="password" type="password" title="Nueva contraseña" data-default-value="">
+            <div class="can-have-feedback-img">
+                <input name="password" type="password" title="Nueva contraseña" data-default-value="">
+            </div>
 
             <h2>Repetir contraseña</h2>
-            <div>
+            <div class="can-have-feedback-img">
                 <input name="password" type="password" title="Repetir contraseña">
                 <button class="btn btn-blue" id="save-password">
                     GUARDAR

@@ -13,7 +13,7 @@ $(function () {
             $input.val($input.data('default-value') || '');
         }
         editSection.addClass('hidden')
-        $('div[data-replace-id="' + editSection.attr('id') + '"]').removeClass('hidden');
+        return $('div[data-replace-id="' + editSection.attr('id') + '"]').removeClass('hidden');
     };
     $('#cancel-email, #cancel-password').click(function (e) {
         var editSection = $(e.currentTarget).parents('.edit-section');
@@ -25,12 +25,20 @@ $(function () {
         var inputs = editSection.find('input');
         var endpoint = editSection.data('endpoint');
         var data = {};
-        data[editSection.data('attr')] = $(inputs[0]).val()
+        var newData = $(inputs[0]).val();
+        data[editSection.data('attr')] = newData;
         var callback = function (response) {
             console.log(response)
             if(response.success) {
-                console.log(response)
-                window.location.reload()
+                var defaultSection = resetEditSection(editSection);
+                var input = defaultSection.find('input')
+                input.val(newData)
+                var attr = editSection.data('attr');
+                if (attr == 'password') {
+                    showPositiveFeedback(input, '¡Bien! Cambiaste la contraseña.')
+                } else {
+                    showPositiveFeedback(input, '¡Listo! Cambiaste el e-mail.')
+                }
             }
         };
         $.post(endpoint, data, callback);
@@ -41,29 +49,63 @@ $(function () {
         var firstInput = $(inputs[0]);
         var secondInput = $(inputs[1]);
         var valuesAreEqual = firstInput.val() == secondInput.val();
-        if (!valuesAreEqual) {
-            showNegativeFeedback(secondInput, 'Los datos ingresados no coinciden');
+
+        clearFeedback(firstInput);
+        clearFeedback(secondInput);
+
+        if (firstInput.val().length == 0) {
+            showNegativeFeedback(firstInput, 'Completá este dato.');
             return false
         }
+
+        if (secondInput.val().length == 0) {
+            showNegativeFeedback(secondInput, 'Completá este dato.');
+            return false
+        }
+
         var attr = editSection.data('attr');
-        if (attr == 'password') {
-            // TODO: validaciones de contraseña
-        } else {
-            // TODO: validaciones de mail
+
+        if (!valuesAreEqual) {
+            if (attr == 'password') {
+                showNegativeFeedback(secondInput, '¡Oh! Las contraseñas no coinciden. Probá otra vez.');
+            } else {
+                showNegativeFeedback(secondInput, '¡Oh! Los e-mails no coinciden. Probá otra vez.');
+            }
+            return false
+        }
+
+        if (attr == 'password' && secondInput.val().length < 4) {
+            showNegativeFeedback(secondInput, 'Usá por lo menos 4 caracteres.');
+            return false
+        } else if (attr == 'email') {
+            var email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!email_re.test(secondInput.val())) {
+                showNegativeFeedback(secondInput, 'Usá este formato nombre@ejemplo.com.');
+                return false;
+            }
         }
         return true
     };
 
     var showPositiveFeedback = function(input, msg) {
-        // TODO
+        clearFeedback(input)
+        var errormsg = $('<p class="feedback validation-success"></p>').text(msg)
+        $(input).parent().append(errormsg)
+        var errorimg = $('<img src="/img/input-check.svg" class="feedback-img success">')
+        $(input).parent().append(errorimg)
     };
 
     var showNegativeFeedback = function (input, msg) {
-        // TODO
+        clearFeedback(input)
+        var errormsg = $('<p class="feedback validation-error"></p>').text(msg)
+        $(input).parent().append(errormsg)
+        var errorimg = $('<img src="/img/input-error.svg" class="feedback-img">')
+        $(input).parent().append(errorimg)
     };
 
     var clearFeedback = function (input) {
-        // TODO
+        $(input).parent().find('.feedback').remove()
+        $(input).parent().find('.feedback-img').remove()
     };
 
     $('#save-email, #save-password').click(function (e) {
@@ -73,4 +115,6 @@ $(function () {
             sendChanges(editSection)
         }
     });
+
+    $('')
 });

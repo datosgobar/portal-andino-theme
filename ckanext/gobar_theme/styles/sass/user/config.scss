@@ -10,8 +10,31 @@
     input[name="email"],
     input[name="email-confirmation"],
     input[name="password"] {
-      width: 400px;
+      width: 370px;
       max-width: 80%;
+    }
+
+    .validation-success {
+      position: relative;
+      top: -20px;
+      color: $green-300;
+    }
+
+    .validation-error {
+      position: relative;
+      top: -20px;
+      color: $red-300;
+    }
+
+    .can-have-feedback-img {
+      position: relative;
+      .feedback-img {
+        position: absolute;
+        top: 10px;
+        left: 342px;
+        width: 21px;
+        height: 21px;
+      }
     }
 
     .disabled-input {
@@ -70,7 +93,7 @@
     input[name="email"],
     input[name="email-confirmation"],
     input[name="password"] {
-      width: 400px;
+      width: 370px;
       max-width: 80%;
     }
     button.save-new-user {
@@ -81,7 +104,7 @@
       margin-bottom: 10px;
     }
     select.organization-select {
-      width: 400px;
+      width: 370px;
       max-width: 80%;
       height: 42px;
       margin-bottom: 30px;
