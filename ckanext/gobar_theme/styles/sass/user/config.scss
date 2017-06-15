@@ -80,6 +80,35 @@
     input.small-margin {
       margin-bottom: 10px;
     }
+    select.organization-select {
+      width: 400px;
+      max-width: 80%;
+      height: 42px;
+      margin-bottom: 30px;
+    }
+
+    .ms-parent {
+      margin-bottom: 30px;
+      color: $grey-400;
+      .ms-choice {
+        color: $grey-400;
+        height: 42px;
+        border: solid 1px $grey-200;
+        span {
+          top: 7px;
+        }
+      }
+      .ms-drop {
+        color: $grey-400;
+        .ms-search input {
+          margin: 0;
+          padding: 5px;
+          border: solid 1px $grey-200;
+          border-radius: 4px;
+        }
+      }  
+    }
+    
 
     .user-list {
       position: relative;

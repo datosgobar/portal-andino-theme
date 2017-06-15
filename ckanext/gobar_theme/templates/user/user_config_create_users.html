@@ -40,8 +40,14 @@
             <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez">
 
             <h2>E-mail</h2>
+            <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
+
+
+            <h2>Organización</h2>
             <div>
-                <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
+                {% import 'user/snippets/organization_selector.html' as organization_selector %}
+                {% set organizations_tree = h.organization_tree() %}
+                {{ organization_selector.organization_selector(organizations_tree) }}
                 <button class="btn btn-blue save-new-user">
                     LISTO, CREAR
                 </button>
@@ -101,4 +107,5 @@
     </div>
 
     {% resource 'gobar_js/user_config/create_users.js' %}
+    {% resource 'gobar_js/user_config/multiple-select.js' %}
 {% endblock %}

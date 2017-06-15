@@ -10,4 +10,10 @@ $(function () {
             }
         })
     });
+
+    $('.organization-select').multipleSelect({
+        placeholder: "Elegí una o mas organizaciones.",
+        filter: true,
+        selectAll: false
+    });
 });

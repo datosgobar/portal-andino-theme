@@ -1,0 +1,10 @@
+{% macro organization_selector(organization_tree, user=None) %}
+    <select class="organization-select" multiple="multiple">
+        {% for organization in organization_tree recursive %}
+            <option value="{{ organization.name }}">{{ organization.display_name }}</option>
+            {% if organization.children %}
+                {{ loop(organization.children) }}
+            {% endif %}
+        {% endfor %}
+    </select>
+{% endmacro %}
