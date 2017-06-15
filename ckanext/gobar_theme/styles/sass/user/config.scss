@@ -94,7 +94,7 @@
 
   #user-config-create-users {
     margin-bottom: 50px;
-    padding-bottom: 100px;
+    padding-bottom: 90px;
     .role-description {
       font-style: italic;
     }
@@ -149,6 +149,10 @@
       }  
     }
     
+    hr.before-list {
+      margin-top: 30px;
+      margin-bottom: 60px;
+    }
 
     .user-list {
       position: relative;
@@ -203,15 +207,33 @@
         left: 50%;
         margin-left: -250px!important;
         border: 1px solid rgba(0, 0, 0, 0.2);
-        h1 {
-          margin-top: 0;
-          text-align: left;
-        }
         .modal-content {
           border: none;
-        }
-        .modal-body {
-          max-height: none;
+          .modal-body {
+            h1 {
+              margin-top: 0;
+              text-align: left;
+            }
+            max-height: none;
+            .delete-user {
+              color: $grey-300;
+            }
+            input[name="username"], 
+            input[name="fullname"], 
+            input[name="email"], 
+            select.user-role {
+              margin-bottom: 30px;
+              height: 42px;
+            }
+            input[name="email"] {
+              width: 100%;
+              max-width: 100%;
+            }
+            hr {
+              margin-top: 0;
+              margin-bottom: 30px;
+            }
+          }
         }
       }
     }

@@ -10,6 +10,7 @@ import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.lib.activity_streams as activity_streams
 import random
 import string
+import ckan.authz as authz
 
 parse_params = logic.parse_params
 check_access = logic.check_access
@@ -91,6 +92,7 @@ class GobArUserController(UserController):
         all_users = model.Session.query(model.User).filter_by(state='active')
         extra_vars['admin_users'] = list(filter(lambda u: u.sysadmin, all_users))
         extra_vars['normal_users'] = list(filter(lambda u: not u.sysadmin, all_users))
+        extra_vars['organizations_and_users'] = self._roles_by_organization()
         return base.render('user/user_config_create_users.html', extra_vars=extra_vars)
 
     def user_history(self):
@@ -153,8 +155,7 @@ class GobArUserController(UserController):
             model.activity._activities_about_user_query(user.id)
         ]
 
-    @staticmethod
-    def _create_user():
+    def _create_user(self):
         params = parse_params(request.POST)
         username = params['username']
         if model.User.by_name(username) is not None:
@@ -174,8 +175,35 @@ class GobArUserController(UserController):
             user_created = True
         except logic.ValidationError, e:
             user_created = False
-        print(random_password)
+
+        if 'organizations[]' in params:
+            self._set_user_organizations(username, params['organizations[]'])
+        print(random_password)  # TODO: enviar por mail
         return {'success': user_created, 'password': random_password}
+
+    @staticmethod
+    def _set_user_organizations(username, user_organizations):
+        for organization in model.Session.query(model.Group).filter_by(state='active'):
+            data_dict = {
+                'id': organization.id,
+                'username': username,
+                'role': 'editor'
+            }
+            context = {'model': model, 'session': model.Session, 'user': c.user or c.author}
+            if organization.name in user_organizations:
+                logic.get_action('group_member_create')(context, data_dict)
+            else:
+                logic.get_action('group_member_delete')(context, data_dict)
+
+    @staticmethod
+    def _roles_by_organization():
+        all_users = model.Session.query(model.User).filter_by(state='active')
+        organizations_and_users = {}
+        for organization in model.Session.query(model.Group).filter_by(state='active'):
+            organizations_and_users[organization.name] = {}
+            for user in all_users:
+                organizations_and_users[organization.name][user.name] = authz.users_role_for_group_or_org(organization.id, user.id)
+        return organizations_and_users
 
     @staticmethod
     def _authorize(sysadmin_required=False):

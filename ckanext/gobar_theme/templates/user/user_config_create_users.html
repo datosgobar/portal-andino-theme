@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <hr>
+        <hr class="before-list">
 
         <div class="user-list admin-users">
             <h2 class="blue user-list-title">Administradores</h2>
@@ -84,7 +84,7 @@
                                 {{ admin_user.email or '' }}
                             </p>
                         </div>
-                        {% snippet "user/snippets/edit_form.html", user=admin_user %}
+                        {% snippet "user/snippets/edit_form.html", user=admin_user, organizations_tree=organizations_tree, organization_selector=organization_selector, organizations_and_users=organizations_and_users %}
                     </div>
                 {% endfor %}
             </div>
@@ -109,7 +109,7 @@
                                     {{ normal_user.email or '' }}
                                 </p>
                             </div>
-                            {% snippet "user/snippets/edit_form.html", user=normal_user %}
+                            {% snippet "user/snippets/edit_form.html", user=normal_user, organizations_tree=organizations_tree, organization_selector=organization_selector, organizations_and_users=organizations_and_users %}
                         </div>
                     {% endfor %}
                 </div>

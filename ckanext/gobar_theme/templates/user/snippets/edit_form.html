@@ -16,10 +16,15 @@
                 <hr>
 
                 <h2>Permiso</h2>
-                <select>
+                <select class="user-role">
                     <option {{ 'selected=selected' if user.sysadmin  }}>Administrador</option>
                     <option {{ 'selected=selected' if not user.sysadmin  }}>Colaborador</option>
                 </select>
+
+                <div class="{{ 'hidden' if user.sysadmin }}">
+                    <h2>Organización</h2>
+                    {{ organization_selector.organization_selector(organizations_tree, user, organizations_and_users) }}
+                </div>
 
                 <div class="modal-actions">
                     <button type="button" class="save-edit btn btn-blue">
@@ -29,7 +34,7 @@
                         CANCELAR
                     </button>
                     <button type="button" class="delete-user btn btn-transparent">
-                        BORRAR
+                        BORRAR USUARIO
                     </button>
                 </div>
             </div>
