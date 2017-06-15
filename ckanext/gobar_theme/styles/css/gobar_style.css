@@ -7491,6 +7491,29 @@ div#background-container {
       font-weight: 400;
       margin: 0 0 30px 0; }
 
+#template-config-container #template-config .can-have-feedback-img {
+  position: relative; }
+  #template-config-container #template-config .can-have-feedback-img .feedback-img {
+    position: absolute;
+    top: 10px;
+    left: 342px;
+    width: 21px;
+    height: 21px; }
+  #template-config-container #template-config .can-have-feedback-img .validation-success {
+    position: relative;
+    top: -20px;
+    color: #33B561; }
+  #template-config-container #template-config .can-have-feedback-img .validation-error {
+    position: relative;
+    top: -20px;
+    color: #ef4d3d; }
+  #template-config-container #template-config .can-have-feedback-img.username-feedback .feedback-img {
+    left: 172px; }
+  #template-config-container #template-config .can-have-feedback-img.username-feedback .validation-error {
+    top: 0; }
+  #template-config-container #template-config .can-have-feedback-img.fullname-feedback .feedback-img {
+    left: auto;
+    right: 8px; }
 #template-config-container #template-config #user-config-my-account {
   margin-bottom: 50px; }
   #template-config-container #template-config #user-config-my-account input[name="username"] {
@@ -7501,22 +7524,6 @@ div#background-container {
   #template-config-container #template-config #user-config-my-account input[name="password"] {
     width: 370px;
     max-width: 80%; }
-  #template-config-container #template-config #user-config-my-account .validation-success {
-    position: relative;
-    top: -20px;
-    color: #33B561; }
-  #template-config-container #template-config #user-config-my-account .validation-error {
-    position: relative;
-    top: -20px;
-    color: #ef4d3d; }
-  #template-config-container #template-config #user-config-my-account .can-have-feedback-img {
-    position: relative; }
-    #template-config-container #template-config #user-config-my-account .can-have-feedback-img .feedback-img {
-      position: absolute;
-      top: 10px;
-      left: 342px;
-      width: 21px;
-      height: 21px; }
   #template-config-container #template-config #user-config-my-account .disabled-input svg {
     height: 42px;
     width: 24px;
