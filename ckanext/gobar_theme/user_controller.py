@@ -11,7 +11,13 @@ import ckan.lib.activity_streams as activity_streams
 import random
 import string
 import ckan.authz as authz
-
+import smtplib
+try:
+    from socket import sslerror
+except ImportError:
+    sslerror = None
+from email.MIMEText import MIMEText
+from email.MIMEMultipart import MIMEMultipart
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
@@ -178,7 +184,7 @@ class GobArUserController(UserController):
 
         if 'organizations[]' in params:
             self._set_user_organizations(username, params['organizations[]'])
-        print(random_password)  # TODO: enviar por mail
+        self.send_new_user_email(data_dict)
         return {'success': user_created, 'password': random_password}
 
     @staticmethod
@@ -223,3 +229,59 @@ class GobArUserController(UserController):
                 return True
             except NotAuthorized:
                 base.abort(401, _('Unauthorized to change config'))
+
+    def send_new_user_email(self, data_dict):
+        email_sender = EmailSender()
+        email_sender.send_email(
+            msg_body='Te creamos un usuario de andino',
+            msg_subject='Usuario de andino creado',
+            msg_from='test@test.com',
+            msg_to='ignacio.nh@gmail.com'
+        )
+
+
+class EmailSender:
+    def __init__(self, smtp_server='localhost', smtp_username=None, smtp_password=None, smtp_use_tls=False):
+        self.smtp_server = smtp_server
+        self.smtp_username = smtp_username
+        self.smtp_password = smtp_password
+        self.smtp_use_tls = smtp_use_tls
+
+    def send_email(self, **kwargs):
+        msg = self.assemble_email(kwargs['msg_body'], kwargs['msg_subject'], kwargs['msg_from'], kwargs['msg_to'])
+        server = smtplib.SMTP(self.smtp_server)
+        if self.smtp_use_tls:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+        if self.smtp_username and self.smtp_password:
+            server.login(self.smtp_username, self.smtp_password)
+        server.sendmail(kwargs['msg_from'], kwargs['msg_to'], msg.as_string())
+        try:
+            server.quit()
+        except sslerror:
+            # sslerror is raised in tls connections on closing sometimes
+            pass
+
+    @staticmethod
+    def assemble_email(msg_body, msg_subject, from_address, to_addresses):
+        msg = MIMEMultipart()
+        msg.set_type('multipart/alternative')
+        msg.preamble = msg.epilogue = ''
+        text_msg = MIMEText(msg_body)
+        text_msg.set_type('text/plain')
+        text_msg.set_param('charset', 'ASCII')
+        msg.attach(text_msg)
+        html_msg = MIMEText(msg_body)
+        html_msg.set_type('text/html')
+        # @@: Correct character set?
+        html_msg.set_param('charset', 'UTF-8')
+        html_long = MIMEText(msg_body)
+        html_long.set_type('text/html')
+        html_long.set_param('charset', 'UTF-8')
+        msg.attach(html_msg)
+        msg.attach(html_long)
+        msg['Subject'] = msg_subject
+        msg['From'] = from_address
+        msg['To'] = ', '.join(to_addresses)
+        return msg
