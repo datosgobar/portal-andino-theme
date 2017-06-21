@@ -25,19 +25,30 @@ $(function () {
         var inputs = editSection.find('input');
         var endpoint = editSection.data('endpoint');
         var data = {};
-        var newData = $(inputs[0]).val();
-        data[editSection.data('attr')] = newData;
+        var newData = $(inputs[1]).val();
+        var attr = editSection.data('attr');
+        data[attr] = newData;
+        if (attr == 'password') {
+            data['current-' + attr] = $(inputs[0]).val();
+        }
         var callback = function (response) {
-            console.log(response)
+            var attr = editSection.data('attr');
             if(response.success) {
                 var defaultSection = resetEditSection(editSection);
                 var input = defaultSection.find('input')
                 input.val(newData)
-                var attr = editSection.data('attr');
                 if (attr == 'password') {
                     showPositiveFeedback(input, '¡Bien! Cambiaste la contraseña.')
                 } else {
                     showPositiveFeedback(input, '¡Listo! Cambiaste el e-mail.')
+                }
+            } else {
+                if (attr == 'password' && response.error == 'current_password') {
+                    showNegativeFeedback($(inputs[0]), 'Esta no es tu contraseña actual.');
+                } else {
+                    var secondInput = $(inputs[2]);
+                    clearFeedback(secondInput);
+                    showNegativeFeedback(firstInput, 'Ocurrió un error.');
                 }
             }
         };
@@ -46,10 +57,11 @@ $(function () {
 
     var validate = function (editSection) {
         var inputs = editSection.find('input');
-        var firstInput = $(inputs[0]);
-        var secondInput = $(inputs[1]);
+        var firstInput = $(inputs[1]);
+        var secondInput = $(inputs[2]);
         var valuesAreEqual = firstInput.val() == secondInput.val();
 
+        clearFeedback($(inputs[0]));
         clearFeedback(firstInput);
         clearFeedback(secondInput);
 

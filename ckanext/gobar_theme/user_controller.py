@@ -18,6 +18,7 @@ except ImportError:
     sslerror = None
 from email.MIMEText import MIMEText
 from email.MIMEMultipart import MIMEMultipart
+import ckan.lib.authenticator as authenticator
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
@@ -77,14 +78,19 @@ class GobArUserController(UserController):
         self._authorize()
         if request.method == 'POST':
             post_params = parse_params(request.POST)
+            current_password = post_params['current-password']
+            current_password_is_valid = self.validate_password(current_password)
             password = post_params['password']
             user_data = {
                 'id': c.userobj.id,
                 'password': password
             }
-            user_updated = self._edit_user(user_data)
+            user_updated = current_password_is_valid and self._edit_user(user_data)
+            json_response = {'success': user_updated}
+            if not current_password_is_valid:
+                json_response['error'] = 'current_password'
             response.headers['Content-Type'] = self.json_content_type
-            return h.json.dumps({'success': user_updated}, for_json=True)
+            return h.json.dumps(json_response, for_json=True)
         else:
             return h.redirect_to('/configurar/mi_cuenta')
 
@@ -230,7 +236,13 @@ class GobArUserController(UserController):
             except NotAuthorized:
                 base.abort(401, _('Unauthorized to change config'))
 
-    def send_new_user_email(self, data_dict):
+    @staticmethod
+    def validate_password(password):
+        user = model.User.by_name(c.user)
+        return user.validate_password(password)
+
+    @staticmethod
+    def send_new_user_email(data_dict):
         email_sender = EmailSender()
         email_sender.send_email(
             msg_body='Te creamos un usuario de andino',

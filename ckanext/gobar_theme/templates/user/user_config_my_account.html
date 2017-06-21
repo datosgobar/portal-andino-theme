@@ -20,6 +20,7 @@
         </div>
 
         <div id="email-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_email" data-attr="email">
+            <input type="hidden">
             <h2>Nuevo e-mail</h2>
             <div class="can-have-feedback-img">
                 <input name="email" type="text" title="Nuevo e-mail" value="{{ c.userobj.email }}" data-default-value="{{ c.userobj.email }}">
@@ -45,6 +46,11 @@
         </div>
 
         <div id="password-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_contraseña" data-attr="password">
+            <h2>Contraseña actual</h2>
+            <div class="can-have-feedback-img">
+                <input name="password" type="password" title="Contraseña actual" data-default-value="">
+            </div>
+
             <h2>Nueva contraseña</h2>
             <div class="can-have-feedback-img">
                 <input name="password" type="password" title="Nueva contraseña" data-default-value="">
