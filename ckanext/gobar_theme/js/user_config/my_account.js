@@ -31,7 +31,10 @@ $(function () {
         if (attr == 'password') {
             data['current-' + attr] = $(inputs[0]).val();
         }
+        var button = editSection.find('#save-email, #save-password');
+        button.prop('disabled', true);
         var callback = function (response) {
+            button.prop('disabled', false);
             var attr = editSection.data('attr');
             if(response.success) {
                 var defaultSection = resetEditSection(editSection);
@@ -52,7 +55,8 @@ $(function () {
                 }
             }
         };
-        $.post(endpoint, data, callback);
+        var failCallback = function () { button.prop('disabled', false); }
+        $.post(endpoint, data, callback).fail(failCallback);
     };
 
     var validate = function (editSection) {

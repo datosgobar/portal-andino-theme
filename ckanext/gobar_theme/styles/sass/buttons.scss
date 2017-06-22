@@ -1,4 +1,4 @@
-.btn {
+button.btn {
   color: white;
   border: none;
   @include border-radius(4px);
@@ -20,6 +20,10 @@
     background: $blue-300;
     &:hover, &:active, &:focus {
       background: $blue-200;
+      color: white;
+    }
+    &[disabled] {
+      opacity: 1;
       color: white;
     }
   }

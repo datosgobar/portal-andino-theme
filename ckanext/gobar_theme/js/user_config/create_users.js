@@ -9,8 +9,6 @@ $(function () {
     multipleSelectOptions['maxHeight'] = 92;
     $('.modal .organization-select').multipleSelect(multipleSelectOptions);
 
-
-
     $('.modal').each(function (i, el) {
         var $el = $(el);
         var roleSelector = $el.find('select.user-role');
@@ -23,13 +21,18 @@ $(function () {
     });
     $('.user-list .modal .delete-user').on('click', function (e) {
         var username = $(e.currentTarget).parents('.modal').data('username');
+        var button = $(e.currentTarget);
+        button.prop('disabled', true);
+        var failCallback = function () { button.prop('disabled', false); };
         $.post('/configurar/borrar_usuario', {id: username}, function (response) {
             if (response.success) {
                 window.location.reload()
             }
-        })
+            button.prop('disabled', false);
+        }).fail(failCallback);
     });
     $('.modal .save-edit').on('click', function (e) {
+        var button = $(e.currentTarget);
         var $el = $(e.currentTarget).parents('.modal')
         var data = {
             username: $el.find('input[name="username"]').val(),
@@ -40,8 +43,13 @@ $(function () {
             if (response.success) {
                 window.location.reload()
             }
+            button.prop('disabled', false);
         }
-        $.post('/configurar/editar_usuario', data, callback);
+        var failCallback = function () {
+            button.prop('disabled', false);
+        }
+        button.prop('disabled', true);
+        $.post('/configurar/editar_usuario', data, callback).fail(failCallback);
     })
     $('.modal .cancel-edit').on('click', function (e) {
         var $el = $(e.currentTarget).parents('.modal');
@@ -107,6 +115,7 @@ $(function () {
         var usernameInput = createSection.find('input[name="username"]');
         var fullnameInput = createSection.find('input[name="fullname"]');
         var emailInput = createSection.find('input[name="email"]');
+        var button = $(e.currentTarget);
         if (isValid) {
             var data = {
                 username: usernameInput.val().trim(),
@@ -120,8 +129,10 @@ $(function () {
                 data['admin'] = true
             }
             var url = window.location.href;
+            button.prop('disabled', true);
+            var failCallback = function () { button.prop('disabled', false); };
             $.post(url, data, function (response) {
-                console.log(response)
+                button.prop('disabled', false);
                 if (response.success) {
                     showPositiveFeedback(usernameInput)
                     showPositiveFeedback(fullnameInput)
@@ -135,7 +146,7 @@ $(function () {
                 } else if (response.error == 'user_already_exists') {
                     showNegativeFeedback(usernameInput, 'Este usuario ya existe.')
                 }
-            })
+            }).fail(failCallback)
         }
     });
 });
