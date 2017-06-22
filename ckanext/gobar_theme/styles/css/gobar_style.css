@@ -6173,14 +6173,14 @@ div.svg-tooltip {
 
 .ms-choice > div {
   position: absolute;
-  top: 0;
+  top: 6px;
   right: 0;
   width: 20px;
   height: 25px;
-  background: url("multiple-select.png") left top no-repeat; }
+  background: url("/img/multiple-select.png") left top no-repeat; }
 
 .ms-choice > div.open {
-  background: url("multiple-select.png") right top no-repeat; }
+  background: url("/img/multiple-select.png") right top no-repeat; }
 
 .ms-drop {
   width: 100%;
@@ -6235,13 +6235,13 @@ div.svg-tooltip {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  background: #fff url("multiple-select.png") no-repeat 100% -22px;
-  background: url("multiple-select.png") no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
-  background: url("multiple-select.png") no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%); }
+  background: #fff url("/img/multiple-select.png") no-repeat 100% -22px;
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%); }
 
 .ms-search, .ms-search input {
   -webkit-box-sizing: border-box;
@@ -7586,9 +7586,12 @@ div#background-container {
       color: #767676; }
       #template-config-container #template-config #user-config-create-users .ms-parent .ms-drop .ms-search input {
         margin: 0;
-        padding: 5px;
+        padding: 2px;
         border: solid 1px #cccccc;
         border-radius: 4px; }
+      #template-config-container #template-config #user-config-create-users .ms-parent .ms-drop ul li label {
+        overflow: hidden;
+        text-overflow: ellipsis; }
   #template-config-container #template-config #user-config-create-users hr.before-list {
     margin-top: 30px;
     margin-bottom: 60px; }
@@ -7639,6 +7642,7 @@ div#background-container {
       #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content {
         border: none; }
         #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body {
+          padding: 50px;
           max-height: none; }
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body h1 {
             margin-top: 0;

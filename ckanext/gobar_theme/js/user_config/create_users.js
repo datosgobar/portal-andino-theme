@@ -11,11 +11,16 @@ $(function () {
         })
     });
 
-    $('.organization-select').multipleSelect({
+    var multipleSelectOptions = {
         placeholder: "Elegí una o mas organizaciones.",
         filter: true,
-        selectAll: false
-    });
+        selectAll: false,
+        minimumCountSelected: 2
+    }
+    $('.create-section .organization-select').multipleSelect(multipleSelectOptions);
+    multipleSelectOptions['maxHeight'] = 92;
+    $('.modal .organization-select').multipleSelect(multipleSelectOptions);
+
 
     $('input[name="username"]').on('change input keypress', function (e) {
         var $input = $(e.currentTarget);
