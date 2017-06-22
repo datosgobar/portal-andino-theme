@@ -109,6 +109,7 @@ class GobArRouter:
             m.connect('/configurar/mi_cuenta/cambiar_email', action="my_account_edit_email")
             m.connect('/configurar/mi_cuenta/cambiar_contraseña', action="my_account_edit_password")
             m.connect('/configurar/crear_usuarios', action="create_users")
+            m.connect('/configurar/editar_usuario', action="edit_user")
             m.connect('/configurar/borrar_usuario', action="delete_user")
             m.connect('/configurar/historial', action="user_history")
 

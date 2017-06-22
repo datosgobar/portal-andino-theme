@@ -132,7 +132,23 @@ class GobArUserController(UserController):
         activities = activity_streams.activity_list_to_html(context, activities, extra_vars)
         return base.render('user/user_config_history.html', extra_vars={'activities': activities})
 
+    def edit_user(self):
+        self._authorize(sysadmin_required=True)
+        user_edited = False
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            user_data = {
+                'id': params['username'],
+                'sysadmin': params['role'] == 'admin'
+            }
+            if params['role'] != 'admin':
+                self._set_user_organizations(params['username'], params['organizations[]'])
+            user_edited = self._edit_user(user_data)
+        response.headers['Content-Type'] = self.json_content_type
+        return h.json.dumps({'success': user_edited}, for_json=True)
+
     def delete_user(self):
+        self._authorize(sysadmin_required=True)
         user_deleted = False
         if request.method == 'POST':
             params = parse_params(request.POST)

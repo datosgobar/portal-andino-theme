@@ -1,4 +1,23 @@
 $(function () {
+    var multipleSelectOptions = {
+        placeholder: "Elegí una o mas organizaciones.",
+        filter: true,
+        selectAll: false,
+        minimumCountSelected: 2
+    }
+    $('.create-section .organization-select').multipleSelect(multipleSelectOptions);
+    multipleSelectOptions['maxHeight'] = 92;
+    $('.modal .organization-select').multipleSelect(multipleSelectOptions);
+
+
+
+    $('.modal').each(function (i, el) {
+        var $el = $(el);
+        var roleSelector = $el.find('select.user-role');
+        roleSelector.data('role', roleSelector.val());
+        var organizationSelector = $el.find('select.organization-select');
+        organizationSelector.data('organizations', organizationSelector.multipleSelect('getSelects'))
+    });
     $('.user-editable').on('click', function (e) {
         $(e.currentTarget).parents('.user').find('.modal').modal('show');
     });
@@ -10,16 +29,31 @@ $(function () {
             }
         })
     });
-
-    var multipleSelectOptions = {
-        placeholder: "Elegí una o mas organizaciones.",
-        filter: true,
-        selectAll: false,
-        minimumCountSelected: 2
-    }
-    $('.create-section .organization-select').multipleSelect(multipleSelectOptions);
-    multipleSelectOptions['maxHeight'] = 92;
-    $('.modal .organization-select').multipleSelect(multipleSelectOptions);
+    $('.modal .save-edit').on('click', function (e) {
+        var $el = $(e.currentTarget).parents('.modal')
+        var data = {
+            username: $el.find('input[name="username"]').val(),
+            role: $el.find('select.user-role').val(),
+            organizations: $el.find('select.organization-select').multipleSelect('getSelects')
+        }
+        var callback = function (response) {
+            if (response.success) {
+                window.location.reload()
+            }
+        }
+        $.post('/configurar/editar_usuario', data, callback);
+    })
+    $('.modal .cancel-edit').on('click', function (e) {
+        var $el = $(e.currentTarget).parents('.modal');
+        var roleSelector = $el.find('select.user-role');
+        roleSelector.val(roleSelector.data('role')).trigger('change');
+        var organizationSelector = $el.find('select.organization-select');
+        organizationSelector.multipleSelect('setSelects', organizationSelector.data('organizations'));
+    })
+    $('.modal select.user-role').on('change', function (e) {
+        var role = $(e.currentTarget).val()
+        $(e.currentTarget).siblings('.user-edit-organizations').toggleClass('hidden', role == 'admin')
+    });
 
 
     $('input[name="username"]').on('change input keypress', function (e) {
@@ -103,5 +137,5 @@ $(function () {
                 }
             })
         }
-    })
+    });
 });
