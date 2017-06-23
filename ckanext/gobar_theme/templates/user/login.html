@@ -8,8 +8,30 @@
         <div id="login" class="col-xs-12 col-md-10 col-md-offset-1">
             <div id="login-vertical-wrapper">
                 {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary, login_error=login_error %}
+                <p class="password-reset">
+                    <a href="#" id="password-reset-show-modal">Olvidé mi contraseña</a>
+                </p>
             </div>
         </div>
       </div>
     </div>
+
+<div id="recover-password" class="modal edit-user-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <i class="icon-remove dismiss-greetings" data-dismiss="modal"></i>
+                <h1>Recuperemos tu contraseña</h1>
+                <p>¿Cuál es tu usuario?</p>
+                <div class="can-have-feedback-img username-feedback">
+                    <input type="text" id="username">
+                </div>
+                <button type="button" class="btn btn-blue">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% resource 'gobar_js/login.js' %}
+
 {% endblock %}

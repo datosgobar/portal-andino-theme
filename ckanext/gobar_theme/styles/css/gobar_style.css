@@ -7423,6 +7423,9 @@ button.btn {
     #login-container #login #login-vertical-wrapper {
       display: table-cell;
       vertical-align: middle; }
+      #login-container #login #login-vertical-wrapper .password-reset {
+        text-align: center;
+        margin-top: 50px; }
     #login-container #login form {
       width: 100%;
       margin: 0 auto; }

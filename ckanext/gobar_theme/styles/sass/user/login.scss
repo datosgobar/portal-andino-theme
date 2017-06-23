@@ -11,6 +11,11 @@
     #login-vertical-wrapper {
       display: table-cell;
       vertical-align: middle;
+
+      .password-reset {
+        text-align: center;
+        margin-top: 50px;
+      }
     }
 
     form {

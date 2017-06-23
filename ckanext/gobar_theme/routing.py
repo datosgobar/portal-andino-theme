@@ -122,7 +122,6 @@ class GobArRouter:
             ('/user/unfollow/{id}', '/'),
             ('/user/followers/{id:.*}', '/'),
             ('/user/delete/{id}', '/'),
-            ('/user/reset/{id:.*}', '/'),
             ('/user/register', '/'),
             ('/user/reset', '/'),
             ('/user/set_lang/{lang}', '/'),
