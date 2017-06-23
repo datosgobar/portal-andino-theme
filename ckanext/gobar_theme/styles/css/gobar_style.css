@@ -7538,17 +7538,6 @@ button.btn {
   #template-config-container #template-config #user-config-my-account button {
     margin-bottom: 30px;
     height: 42px; }
-#template-config-container #template-config #user-config-history {
-  margin-bottom: 50px; }
-  #template-config-container #template-config #user-config-history ul.activity li.item {
-    display: block; }
-    #template-config-container #template-config #user-config-history ul.activity li.item i {
-      position: static;
-      display: inline-block; }
-    #template-config-container #template-config #user-config-history ul.activity li.item img {
-      display: none; }
-    #template-config-container #template-config #user-config-history ul.activity li.item .actor a {
-      pointer-events: none; }
 #template-config-container #template-config #user-config-create-users {
   margin-bottom: 50px;
   padding-bottom: 90px; }
@@ -7664,6 +7653,41 @@ button.btn {
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body hr {
             margin-top: 0;
             margin-bottom: 30px; }
+
+#user-config-history {
+  margin-bottom: 50px; }
+  #user-config-history ul.activity {
+    position: relative; }
+    #user-config-history ul.activity:after {
+      content: '';
+      display: block;
+      border-left: 1px dashed #999999;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 14px;
+      z-index: -1; }
+    #user-config-history ul.activity li.item {
+      display: block;
+      border-bottom: none; }
+      #user-config-history ul.activity li.item p {
+        padding-left: 40px;
+        position: relative; }
+      #user-config-history ul.activity li.item i.icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #01bdf2; }
+      #user-config-history ul.activity li.item img {
+        display: none; }
+      #user-config-history ul.activity li.item .actor a {
+        pointer-events: none; }
+      #user-config-history ul.activity li.item[class*="deleted"] i.icon, #user-config-history ul.activity li.item[class*="removed"] i.icon, #user-config-history ul.activity li.item[class*="failure"] i.icon {
+        background: #ff4338; }
+      #user-config-history ul.activity li.item[class*="success"] i.icon, #user-config-history ul.activity li.item[class*="added"] i.icon, #user-config-history ul.activity li.item[class*="new"] i.icon {
+        background: #82bc00; }
+      #user-config-history ul.activity li.item .date:first-letter {
+        text-transform: uppercase; }
 
 .organization-container {
   display: table-row;

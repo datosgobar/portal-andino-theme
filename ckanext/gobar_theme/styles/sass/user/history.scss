@@ -1,0 +1,55 @@
+#user-config-history {
+  margin-bottom: 50px;
+  ul.activity {
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      border-left: 1px dashed $grey-300;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 14px;
+      z-index: -1;
+    }
+    li.item {
+      display: block;
+      border-bottom: none;
+      p {
+        padding-left: 40px;
+        position: relative;
+      }
+
+      i.icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: $blue-325;
+      }
+
+      img {
+        display: none;
+      }
+
+      .actor a {
+        pointer-events: none;
+      }
+
+      &[class*="deleted"] i.icon,
+      &[class*="removed"] i.icon,
+      &[class*="failure"] i.icon {
+        background: $red-250;
+      }
+
+      &[class*="success"] i.icon,
+      &[class*="added"] i.icon,
+      &[class*="new"] i.icon, {
+        background: $green-400;
+      }
+
+      .date:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
