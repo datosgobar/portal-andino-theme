@@ -109,28 +109,17 @@ class GobArUserController(UserController):
 
     def user_history(self):
         self._authorize()
-        if c.userobj.sysadmin:
-            users = model.Session.query(model.User)
-            activity_queries = []
-            for user in users:
-                activity_queries += self._get_activity(user)
+        params = parse_params(request.GET)
+        if params.get('page'):
+            page = int(params['page'])
         else:
-            activity_queries = self._get_activity(c.userobj)
-
-        sql_activities = model.activity._activities_union_all(*activity_queries)
-
-        offset, limit = 0, 100
-        raw_activities = model.activity._activities_at_offset(sql_activities, limit, offset)
-        context = {'model': model, 'session': model.Session, 'user': c.user or c.author, 'auth_user_obj': c.userobj, 'for_view': True}
-        activities = model_dictize.activity_list_dictize(raw_activities, context)
-        extra_vars = {
-            'controller': 'user',
-            'action': 'activity',
-            'offset': offset,
-            'user_history': True
-        }
-        activities = activity_streams.activity_list_to_html(context, activities, extra_vars)
-        return base.render('user/user_config_history.html', extra_vars={'activities': activities})
+            page = 1
+        activities, has_more = self._activities(page)
+        if params.get('raw'):
+            response.headers['X-has-more'] = has_more
+            return activities
+        else:
+            return base.render('user/user_config_history.html', extra_vars={'activities': activities, 'has_more': has_more})
 
     def edit_user(self):
         self._authorize(sysadmin_required=True)
@@ -266,6 +255,32 @@ class GobArUserController(UserController):
             msg_from='test@test.com',
             msg_to='ignacio.nh@gmail.com'
         )
+
+    def _activities(self, page):
+        limit = 100
+        offset = (page-1) * limit
+        if c.userobj.sysadmin:
+            users = model.Session.query(model.User)
+            activity_queries = []
+            for user in users:
+                activity_queries += self._get_activity(user)
+        else:
+            activity_queries = self._get_activity(c.userobj)
+
+        sql_activities = model.activity._activities_union_all(*activity_queries)
+        total_count = sql_activities.count()
+        has_more = total_count > offset+limit
+        raw_activities = model.activity._activities_at_offset(sql_activities, limit, offset)
+        context = {'model': model, 'session': model.Session, 'user': c.user or c.author, 'auth_user_obj': c.userobj,
+                   'for_view': True}
+        activities = model_dictize.activity_list_dictize(raw_activities, context)
+        extra_vars = {
+            'controller': 'user',
+            'action': 'activity',
+            'offset': offset,
+            'user_history': True
+        }
+        return activity_streams.activity_list_to_html(context, activities, extra_vars), has_more
 
 
 class EmailSender:

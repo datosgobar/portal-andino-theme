@@ -7657,7 +7657,8 @@ button.btn {
 #user-config-history {
   margin-bottom: 50px; }
   #user-config-history ul.activity {
-    position: relative; }
+    position: relative;
+    margin-bottom: 0; }
     #user-config-history ul.activity:after {
       content: '';
       display: block;
@@ -7688,6 +7689,16 @@ button.btn {
         background: #82bc00; }
       #user-config-history ul.activity li.item .date:first-letter {
         text-transform: uppercase; }
+  #user-config-history .show-more-container {
+    text-align: center; }
+    #user-config-history .show-more-container .show-more {
+      cursor: pointer; }
+      #user-config-history .show-more-container .show-more svg {
+        width: 12px;
+        height: 12px; }
+      #user-config-history .show-more-container .show-more.fetching {
+        pointer-events: none;
+        cursor: waiting; }
 
 .organization-container {
   display: table-row;
