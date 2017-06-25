@@ -105,6 +105,7 @@ class GobArRouter:
         with SubMapper(self.route_map, controller=self.user_controller) as m:
             m.connect('user_datasets', '/user/{id:.*}', action='read')
             m.connect('login', '/ingresar', action='login')
+            m.connect('/olvide_mi_contraseña', action="password_forgot")
             m.connect('/configurar/mi_cuenta', action="my_account")
             m.connect('/configurar/mi_cuenta/cambiar_email', action="my_account_edit_email")
             m.connect('/configurar/mi_cuenta/cambiar_contraseña', action="my_account_edit_password")

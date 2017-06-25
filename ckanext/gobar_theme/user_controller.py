@@ -56,57 +56,50 @@ class GobArUserController(UserController):
         else:
             return h.redirect_to('home')
 
-    def request_reset(self):
-        context = {'model': model, 'session': model.Session, 'user': c.user, 'auth_user_obj': c.userobj}
-        data_dict = {'id': request.params.get('user')}
+    def password_forgot(self):
+        json_response = {'success': False}
+        access_context = {'model': model, 'session': model.Session, 'user': c.user, 'auth_user_obj': c.userobj}
         try:
-            check_access('request_reset', context)
+            check_access('request_reset', access_context)
         except NotAuthorized:
             base.abort(401, _('Unauthorized to request reset password.'))
 
         if request.method == 'POST':
-            id = request.params.get('user')
-
-            context = {'model': model,
-                       'user': c.user}
-
-            data_dict = {'id': id}
+            user_id = parse_params(request.POST).get('user')
+            context = {'model': model, 'user': c.user}
+            data_dict = {'id': user_id}
             user_obj = None
             try:
-                user_dict = logic.get_action('user_show')(context, data_dict)
+                logic.get_action('user_show')(context, data_dict)
                 user_obj = context['user_obj']
             except logic.NotFound:
                 # Try searching the user
                 del data_dict['id']
-                data_dict['q'] = id
+                data_dict['q'] = user_id
 
-                if id and len(id) > 2:
+                if user_id and len(user_id) > 2:
                     user_list = logic.get_action('user_list')(context, data_dict)
                     if len(user_list) == 1:
-                        # This is ugly, but we need the user object for the
-                        # mailer,
-                        # and user_list does not return them
+                        # This is ugly, but we need the user object for the mailer, and user_list does not return them
                         del data_dict['q']
                         data_dict['id'] = user_list[0]['id']
-                        user_dict = logic.get_action('user_show')(context, data_dict)
+                        logic.get_action('user_show')(context, data_dict)
                         user_obj = context['user_obj']
                     elif len(user_list) > 1:
-                        h.flash_error(_('"%s" matched several users') % (id))
+                        json_response['error'] = 'several_users|'
                     else:
-                        h.flash_error(_('No such user: %s') % id)
+                        json_response['error'] = 'not_found'
                 else:
-                    h.flash_error(_('No such user: %s') % id)
+                    json_response['error'] = 'not_found'
 
             if user_obj:
                 try:
                     mailer.send_reset_link(user_obj)
-                    h.flash_success(_('Please check your inbox for '
-                                      'a reset code.'))
-                    h.redirect_to('/')
+                    json_response['success'] = True
                 except mailer.MailerException, e:
-                    h.flash_error(_('Could not send reset link: %s') %
-                                  unicode(e))
-        return base.render('user/request_reset.html')
+                    json_response['error'] = 'unkown'
+        response.headers['Content-Type'] = self.json_content_type
+        return h.json.dumps(json_response, for_json=True)
 
     def my_account(self):
         self._authorize()
@@ -184,7 +177,7 @@ class GobArUserController(UserController):
                 'sysadmin': params['role'] == 'admin'
             }
             if params['role'] != 'admin':
-                self._set_user_organizations(params['username'], params['organizations[]'])
+                self._set_user_organizations(params['username'], params.get('organizations[]', []))
             user_edited = self._edit_user(user_data)
         response.headers['Content-Type'] = self.json_content_type
         return h.json.dumps({'success': user_edited}, for_json=True)
