@@ -7468,6 +7468,37 @@ button.btn {
         #login-container #login form button:hover {
           background-color: #17b2f8; }
 
+#recover-password.modal {
+  width: 600px;
+  left: 50%;
+  margin-left: -300px !important; }
+  #recover-password.modal .modal-content {
+    -o-box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+    #recover-password.modal .modal-content .modal-body {
+      padding: 50px; }
+      #recover-password.modal .modal-content .modal-body .dismiss-recovery {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #999999;
+        font-size: 16px; }
+      #recover-password.modal .modal-content .modal-body h1 {
+        margin-bottom: 30px; }
+      #recover-password.modal .modal-content .modal-body p {
+        text-align: left;
+        margin: 0;
+        font-weight: 500; }
+      #recover-password.modal .modal-content .modal-body #username {
+        width: 100%;
+        height: 42px;
+        margin-bottom: 30px; }
+      #recover-password.modal .modal-content .modal-body #send-recovery {
+        display: block;
+        margin: 0 auto; }
+
 #user-datasets-container {
   padding-right: 0;
   padding-left: 0;
