@@ -22,7 +22,7 @@
             <div class="modal-body">
                 <i class="icon-remove dismiss-recovery" data-dismiss="modal"></i>
                 <h1>Recuperemos tu contraseña</h1>
-                <p>¿Cuál es tu usuario?</p>
+                <p class="username-label">¿Cuál es tu usuario?</p>
                 <div class="can-have-feedback-img username-feedback">
                     <input type="text" id="username">
                 </div>
@@ -32,6 +32,7 @@
     </div>
 </div>
 
+{% resource 'gobar_js/user_config/user_commons.js' %}
 {% resource 'gobar_js/login.js' %}
 
 {% endblock %}

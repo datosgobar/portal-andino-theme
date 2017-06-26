@@ -1,0 +1,40 @@
+#template-config-container #template-config,
+#recover-password.modal {
+  .can-have-feedback-img {
+    position: relative;
+    .feedback-img {
+      position: absolute;
+      top: 10px;
+      left: 342px;
+      width: 21px;
+      height: 21px;
+    }
+    .validation-success {
+      position: relative;
+      top: -20px;
+      color: $green-300;
+    }
+
+    .validation-error {
+      position: relative;
+      top: -20px;
+      color: $red-300;
+    }
+
+    &.username-feedback {
+      .feedback-img {
+        left: 172px;
+      }
+      .validation-error {
+        top: 0;
+      }
+    }
+
+    &.fullname-feedback {
+      .feedback-img {
+        left: auto;
+        right: 8px;
+      }
+    }
+  }
+}
