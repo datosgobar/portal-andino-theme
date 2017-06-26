@@ -32,7 +32,7 @@ El equipo de %s.
 reset_password_html_body = u"""
 ¡Hola, {username}! <br>
 <br>
-Parece que olvidaste tu contraseña. No te preocupes, vamos a cambiarla: <br>
+<strong>Parece que olvidaste tu contraseña.</strong> No te preocupes, vamos a cambiarla: <br>
 <br>
 <a href="{reset_link}" target="_blank">Crear nueva contraseña</a> <br>
 <br>
@@ -70,9 +70,9 @@ new_user_subject = u'{admin_username} te invitó a colaborar en el portal de dat
 new_user_plain_body = u"""
 ¡Hola, {username}!
 
-{admin_username} te invitó a colaborar en {site_title}.
+<strong>{admin_username} te invitó a colaborar en {site_title}.</strong>
 
-Para que confirmar tu registro, necesitamos que cambies tu contraseña. También vas a poder cambiar tu e-mail si lo necesitás. 
+Para que confirmar tu registro, <strong>necesitamos que cambies tu contraseña.</strong> También vas a poder cambiar tu e-mail si lo necesitás. 
 
 {reset_link}
  

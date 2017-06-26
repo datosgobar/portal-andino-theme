@@ -103,9 +103,10 @@
           height: 42px;
           margin: 0;
         }
-        .feedback {
+        p.feedback {
           text-align: left;
           margin: 0;
+          position: static;
         }
         img {
           left: auto;
