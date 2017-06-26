@@ -11,15 +11,7 @@ import ckan.lib.activity_streams as activity_streams
 import random
 import string
 import ckan.authz as authz
-import ckan.lib.mailer as mailer
-import smtplib
-try:
-    from socket import sslerror
-except ImportError:
-    sslerror = None
-from email.MIMEText import MIMEText
-from email.MIMEMultipart import MIMEMultipart
-import ckan.lib.authenticator as authenticator
+import ckanext.gobar_theme.mailer as mailer
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
@@ -86,7 +78,7 @@ class GobArUserController(UserController):
                         logic.get_action('user_show')(context, data_dict)
                         user_obj = context['user_obj']
                     elif len(user_list) > 1:
-                        json_response['error'] = 'several_users|'
+                        json_response['error'] = 'several_users'
                     else:
                         json_response['error'] = 'not_found'
                 else:
@@ -294,7 +286,7 @@ class GobArUserController(UserController):
 
     @staticmethod
     def send_new_user_email(data_dict):
-        email_sender = EmailSender()
+        email_sender = mailer.EmailSender()
         email_sender.send_email(
             msg_body='Te creamos un usuario de andino',
             msg_subject='Usuario de andino creado',
@@ -327,50 +319,3 @@ class GobArUserController(UserController):
             'user_history': True
         }
         return activity_streams.activity_list_to_html(context, activities, extra_vars), has_more
-
-
-class EmailSender:
-    def __init__(self, smtp_server='localhost', smtp_username=None, smtp_password=None, smtp_use_tls=False):
-        self.smtp_server = smtp_server
-        self.smtp_username = smtp_username
-        self.smtp_password = smtp_password
-        self.smtp_use_tls = smtp_use_tls
-
-    def send_email(self, **kwargs):
-        msg = self.assemble_email(kwargs['msg_body'], kwargs['msg_subject'], kwargs['msg_from'], kwargs['msg_to'])
-        server = smtplib.SMTP(self.smtp_server)
-        if self.smtp_use_tls:
-            server.ehlo()
-            server.starttls()
-            server.ehlo()
-        if self.smtp_username and self.smtp_password:
-            server.login(self.smtp_username, self.smtp_password)
-        server.sendmail(kwargs['msg_from'], kwargs['msg_to'], msg.as_string())
-        try:
-            server.quit()
-        except sslerror:
-            # sslerror is raised in tls connections on closing sometimes
-            pass
-
-    @staticmethod
-    def assemble_email(msg_body, msg_subject, from_address, to_addresses):
-        msg = MIMEMultipart()
-        msg.set_type('multipart/alternative')
-        msg.preamble = msg.epilogue = ''
-        text_msg = MIMEText(msg_body)
-        text_msg.set_type('text/plain')
-        text_msg.set_param('charset', 'ASCII')
-        msg.attach(text_msg)
-        html_msg = MIMEText(msg_body)
-        html_msg.set_type('text/html')
-        # @@: Correct character set?
-        html_msg.set_param('charset', 'UTF-8')
-        html_long = MIMEText(msg_body)
-        html_long.set_type('text/html')
-        html_long.set_param('charset', 'UTF-8')
-        msg.attach(html_msg)
-        msg.attach(html_long)
-        msg['Subject'] = msg_subject
-        msg['From'] = from_address
-        msg['To'] = ', '.join(to_addresses)
-        return msg
