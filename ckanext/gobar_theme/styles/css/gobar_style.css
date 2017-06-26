@@ -7489,7 +7489,7 @@ button.btn {
         margin-bottom: 30px; }
       #recover-password.modal .modal-content .modal-body p {
         text-align: left;
-        margin: 0;
+        margin: 0 0 5px 0;
         font-weight: 500; }
       #recover-password.modal .modal-content .modal-body #username {
         width: 100%;
