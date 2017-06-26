@@ -15,22 +15,42 @@ except ImportError:
     sslerror = None
 MailerException = ckan_mailer.MailerException
 
+reset_password_subject = u'Recuperemos tu contraseña de {site_title}'
+
+reset_password_plain_body = u"""
+¡Hola, {username}!
+
+Parece que olvidaste tu contraseña. No te preocupes, vamos a cambiarla:
+
+{reset_link}
+
+¡Suerte!
+El equipo de %s.
+
+"""
+
+reset_password_html_body = u"""
+¡Hola, {username}! <br>
+<br>
+Parece que olvidaste tu contraseña. No te preocupes, vamos a cambiarla: <br>
+<br>
+<a href="{reset_link}" target="_blank">Crear nueva contraseña</a> <br>
+<br>
+¡Suerte! <br>
+El equipo de {site_title}. <br>
+"""
+
 
 def reset_mail_content(user):
     if len(user.fullname) > 0:
-        user_name = user.fullname
+        username = user.fullname
     else:
-        user_name = user.name
+        username = user.name
     reset_link = ckan_mailer.get_reset_link(user)
     site_title = gobar_helpers.get_theme_config('title.site-title', 'Portal Andino')
-    plain_body = u'¡Hola, %s!\n\n' % user_name
-    plain_body += u'Parece que olvidaste tu contraseña. No te preocupes, vamos a cambiarla:\n\n'
-    plain_body += unicode(reset_link) + '\n\n'
-    plain_body += u'¡Suerte!\nEl equipo de %s.\n' % site_title
-
-    html_body = plain_body.replace(reset_link, u'<a href="%s" target="_blank">Crear nueva contraseña</a>' % reset_link)
-    html_body = html_body.replace('\n', '<br>')
-    subject = u'Recuperemos tu contraseña de %s' % site_title
+    plain_body = reset_password_plain_body.format(username=username, reset_link=reset_link, site_title=site_title)
+    html_body = reset_password_html_body.format(username=username, reset_link=reset_link, site_title=site_title)
+    subject = reset_password_subject.format(site_title=site_title)
     return subject, plain_body, html_body
 
 
@@ -41,6 +61,65 @@ def send_reset_link(user):
     subject, plain_body, html_body = reset_mail_content(user)
     recipient_name = user.display_name
     recipient_email = user.email
+    msg = assemble_email(plain_body, html_body, subject, recipient_name, recipient_email)
+    return send_mail(msg, recipient_email)
+
+
+new_user_subject = u'{admin_username} te invitó a colaborar en el portal de datos.'
+
+new_user_plain_body = u"""
+¡Hola, {username}!
+
+{admin_username} te invitó a colaborar en {site_title}.
+
+Para que confirmar tu registro, necesitamos que cambies tu contraseña. También vas a poder cambiar tu e-mail si lo necesitás. 
+
+{reset_link}
+ 
+¡Suerte y a abrir datos!
+ 
+El equipo de {site_title}.
+
+"""
+
+new_user_html_body = u"""
+¡Hola, {username}!<br>
+<br>
+{admin_username} te invitó a colaborar en {site_title}.<br>
+<br>
+Para que confirmar tu registro, necesitamos que cambies tu contraseña. También vas a poder cambiar tu e-mail si lo necesitás.<br> 
+<br>
+<a href="{reset_link}" target="_blank">Confirmar y cambiar contraseña</a><br>
+ <br>
+¡Suerte y a abrir datos!<br>
+ <br>
+El equipo de {site_title}.<br>
+<br>
+"""
+
+
+def new_user_content(admin_user, new_user):
+    if len(new_user.fullname) > 0:
+        username = new_user.fullname
+    else:
+        username = new_user.name
+    if len(admin_user.fullname) > 0:
+        admin_username = admin_user.fullname
+    else:
+        admin_username = admin_user.name
+    reset_link = ckan_mailer.get_reset_link(new_user)
+    site_title = gobar_helpers.get_theme_config('title.site-title', 'Portal Andino')
+    plain_body = new_user_plain_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title)
+    html_body = new_user_html_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title)
+    subject = new_user_subject.format(site_title=site_title)
+    return subject, plain_body, html_body
+
+
+def send_new_user_mail(admin_user, new_user):
+    ckan_mailer.create_reset_key(new_user)
+    subject, plain_body, html_body = new_user_content(admin_user, new_user)
+    recipient_name = new_user.display_name
+    recipient_email = new_user.email
     msg = assemble_email(plain_body, html_body, subject, recipient_name, recipient_email)
     return send_mail(msg, recipient_email)
 

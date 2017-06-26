@@ -286,13 +286,9 @@ class GobArUserController(UserController):
 
     @staticmethod
     def send_new_user_email(data_dict):
-        email_sender = mailer.EmailSender()
-        email_sender.send_email(
-            msg_body='Te creamos un usuario de andino',
-            msg_subject='Usuario de andino creado',
-            msg_from='test@test.com',
-            msg_to='ignacio.nh@gmail.com'
-        )
+        admin_user = c.userobj
+        new_user = data_dict
+        mailer.send_new_user_mail(admin_user, new_user)
 
     def _activities(self, page):
         limit = 100
