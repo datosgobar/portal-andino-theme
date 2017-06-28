@@ -287,7 +287,7 @@ class GobArUserController(UserController):
     @staticmethod
     def send_new_user_email(data_dict):
         admin_user = c.userobj
-        new_user = data_dict
+        new_user = model.User.get(data_dict['name'])
         mailer.send_new_user_mail(admin_user, new_user)
 
     def _activities(self, page):

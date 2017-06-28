@@ -15,6 +15,8 @@ except ImportError:
     sslerror = None
 MailerException = ckan_mailer.MailerException
 
+andino_address = 'no-reply@andino.datos.gob.ar'
+
 reset_password_subject = u'Recuperemos tu contraseña de {site_title}'
 
 reset_password_plain_body = u"""
@@ -111,7 +113,7 @@ def new_user_content(admin_user, new_user):
     site_title = gobar_helpers.get_theme_config('title.site-title', 'Portal Andino')
     plain_body = new_user_plain_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title)
     html_body = new_user_html_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title)
-    subject = new_user_subject.format(site_title=site_title)
+    subject = new_user_subject.format(admin_username=admin_username)
     return subject, plain_body, html_body
 
 
@@ -131,9 +133,8 @@ def assemble_email(msg_plain_body, msg_html_body, msg_subject, recipient_name, r
     msg.attach(text_msg)
     msg.attach(html_msg)
     msg['Subject'] = Header(msg_subject.encode('utf-8'), 'utf-8')
-    mail_from = config.get('smtp.mail_from')
     site_title = gobar_helpers.get_theme_config('title.site-title', 'Portal Andino')
-    msg['From'] = "%s <%s>" % (site_title, mail_from)
+    msg['From'] = "%s <%s>" % (site_title, andino_address)
     recipient = u"%s <%s>" % (recipient_name, recipient_email)
     msg['To'] = Header(recipient, 'utf-8')
     msg['Date'] = Utils.formatdate(time())
@@ -152,7 +153,7 @@ def send_mail(msg, recipient_email):
         if smtp_user:
             assert smtp_password, "If smtp.user is configured then smtp.password must be configured as well."
             smtp_connection.login(smtp_user, smtp_password)
-        smtp_connection.sendmail(config.get('smtp.mail_from'), [recipient_email], msg.as_string())
+        smtp_connection.sendmail(andino_address, [recipient_email], msg.as_string())
     except smtplib.SMTPException, e:
         msg = '%r' % e
         raise MailerException(msg)
