@@ -21,7 +21,6 @@
 {% if valid_desc %}
     {% set after_desc_description = ["Por favor, no superes los ", max_length_description, " caracteres."] %}
 {% else %}
-    <div>{{data.notes|length}}</div>
     {% set after_desc_description = ["Por favor, para que la descripción sea más clara, <b>no superes los ", max_length_description, " caracteres.</b>"] %}
 {% endif %}
 

@@ -5,6 +5,8 @@ import ckan.logic as logic
 import ckan.model as model
 import ckan.lib.base as base
 import json
+import ckan.plugins as p
+from ckanext.googleanalytics.controller import GAApiController
 
 
 class GobArHomeController(HomeController):
@@ -55,7 +57,7 @@ class GobArHomeController(HomeController):
         return base.render('about.html')
 
 
-class GobArApiController(ApiController):
+class GobArApiController(GAApiController, ApiController):
 
     def _remove_extra_id_field(self, json_string):
         json_dict = json.loads(json_string)
