@@ -14,6 +14,7 @@ from ckan.lib.search import SearchError
 import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.lib.base as base
 import cgi
+import ckanext.googleanalytics.plugin as google_analytics
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound
@@ -724,3 +725,6 @@ class GobArPackageController(PackageController):
         max_desc_characters = 500
         self._validate_length(data_dict, 'title', max_title_characters)
         self._validate_length(data_dict, 'notes', max_desc_characters)
+
+    def resource_view_embed(self, resource_id):
+        google_analytics._post_analytics(c.user, 'CKAN Resource Embed', 'Resource ', resource_id, resource_id)
