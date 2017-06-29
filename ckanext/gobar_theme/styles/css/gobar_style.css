@@ -7471,6 +7471,8 @@ button.btn {
       #login-container #login form .controls {
         display: block;
         margin: 0; }
+      #login-container #login form .error {
+        color: #ef4d3d; }
       #login-container #login form .checkbox {
         text-align: right;
         margin: 0; }

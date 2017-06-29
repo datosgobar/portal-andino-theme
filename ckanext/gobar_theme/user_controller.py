@@ -10,7 +10,6 @@ import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.lib.activity_streams as activity_streams
 import random
 import string
-import ckan.authz as authz
 import ckanext.gobar_theme.mailer as mailer
 parse_params = logic.parse_params
 check_access = logic.check_access
@@ -27,7 +26,8 @@ class GobArUserController(UserController):
             try:
                 return super(GobArUserController, self).read(id)
             except HTTPNotFound:
-                return h.redirect_to(controller='ckanext.gobar_theme.user_controller:GobArUserController', action='login', login_error=True)
+                controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
+                return h.redirect_to(controller=controller, action='login', login_error=True)
         return h.redirect_to('home')
 
     def login(self, error=None):
@@ -43,8 +43,8 @@ class GobArUserController(UserController):
             c.login_handler = h.url_for(
                 self._get_repoze_handler('login_handler_path'),
                 came_from=came_from)
-            vars = {'login_error': parse_params(request.GET).get('login_error')}
-            return base.render('user/login.html', extra_vars=vars)
+            extra_vars = {'login_error': parse_params(request.GET).get('login_error')}
+            return base.render('user/login.html', extra_vars=extra_vars)
         else:
             return h.redirect_to('home')
 
@@ -88,7 +88,7 @@ class GobArUserController(UserController):
                 try:
                     mailer.send_reset_link(user_obj)
                     json_response['success'] = True
-                except mailer.MailerException, e:
+                except mailer.MailerException:
                     json_response['error'] = 'unkown'
         response.headers['Content-Type'] = self.json_content_type
         return h.json.dumps(json_response, for_json=True)
@@ -157,7 +157,8 @@ class GobArUserController(UserController):
             response.headers['X-has-more'] = has_more
             return activities
         else:
-            return base.render('user/user_config_history.html', extra_vars={'activities': activities, 'has_more': has_more})
+            extra_vars = {'activities': activities, 'has_more': has_more}
+            return base.render('user/user_config_history.html', extra_vars=extra_vars)
 
     def edit_user(self):
         self._authorize(sysadmin_required=True)
@@ -198,7 +199,7 @@ class GobArUserController(UserController):
         try:
             logic.get_action('user_update')(context, data_dict)
             user_updated = True
-        except logic.ValidationError, e:
+        except logic.ValidationError:
             user_updated = False
         return user_updated
 
@@ -228,7 +229,7 @@ class GobArUserController(UserController):
         try:
             logic.get_action('user_create')(context, data_dict)
             user_created = True
-        except logic.ValidationError, e:
+        except logic.ValidationError:
             user_created = False
 
         if 'organizations[]' in params:
@@ -256,8 +257,16 @@ class GobArUserController(UserController):
         organizations_and_users = {}
         for organization in model.Session.query(model.Group).filter_by(state='active'):
             organizations_and_users[organization.name] = {}
+            users_in_organization = filter(
+                lambda m: m.table_name == 'user' and m.state == 'active' and m.capacity == 'editor',
+                organization.member_all
+            )
+            users_id_in_organization = map(lambda u: u.table_id, users_in_organization)
             for user in all_users:
-                organizations_and_users[organization.name][user.name] = authz.users_role_for_group_or_org(organization.id, user.id)
+                if user.id in users_id_in_organization:
+                    organizations_and_users[organization.name][user.name] = True
+                else:
+                    organizations_and_users[organization.name][user.name] = None
         return organizations_and_users
 
     @staticmethod
