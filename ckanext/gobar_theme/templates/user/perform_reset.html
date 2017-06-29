@@ -3,7 +3,7 @@
 {% block content %}
     {{ super() }}
 
-    <div id="password-reset" class="modal" tabindex="-1" role="dialog">
+    <div id="password-reset" class="modal" tabindex="-1" role="dialog" data-key="{{ c.reset_key }}">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -13,12 +13,12 @@
 
                     <p class="password-label">Nueva contraseña*</p>
                     <div class="can-have-feedback-img password1-feedback">
-                        <input type="text" id="password1">
+                        <input type="password" id="password1">
                     </div>
 
                     <p class="password-label">Repetir contraseña*</p>
                     <div class="can-have-feedback-img password2-feedback">
-                        <input type="text" id="password2">
+                        <input type="password" id="password2">
                     </div>
 
                     <hr>

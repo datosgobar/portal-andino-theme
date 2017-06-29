@@ -7377,7 +7377,19 @@ button.btn {
         #password-reset.modal .modal-content .modal-body p.password-label, #password-reset.modal .modal-content .modal-body p.email-label {
           margin: 0; }
       #password-reset.modal .modal-content .modal-body .can-have-feedback-img {
+        position: relative;
         margin-bottom: 30px; }
+        #password-reset.modal .modal-content .modal-body .can-have-feedback-img p.feedback {
+          color: #ef4d3d;
+          text-align: left;
+          margin: 0;
+          position: static; }
+        #password-reset.modal .modal-content .modal-body .can-have-feedback-img img {
+          position: absolute;
+          right: 8px;
+          top: 10px;
+          width: 21px;
+          height: 21px; }
       #password-reset.modal .modal-content .modal-body input {
         height: 42px;
         width: 100%;

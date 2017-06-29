@@ -102,7 +102,7 @@ class GobArUserController(UserController):
             return h.redirect_to('home')
 
         try:
-            user_dict = logic.get_action('user_show')(context, {'id': user_id})
+            logic.get_action('user_show')(context, {'id': user_id})
             user_obj = context['user_obj']
         except logic.NotFound:
             return base.abort(404)
@@ -110,18 +110,23 @@ class GobArUserController(UserController):
         c.reset_key = request.params.get('key')
         if not ckan_mailer.verify_reset_link(user_obj, c.reset_key):
             # Invalid reset key.
-            return h.redirect_to('home')
+            return base.abort(404)
 
         if request.method == 'POST':
-            context['reset_password'] = True
-            new_password = self._get_form_password()
-            user_dict['password'] = new_password
-            user_dict['reset_key'] = c.reset_key
-            user_dict['state'] = model.State.ACTIVE
-            logic.get_action('user_update')(context, user_dict)
+            user_data = {
+                'id': user_obj.id,
+                'password': request.params.get('password')
+            }
+            if request.params.get('email', None) is not None:
+                user_data['email'] = request.params.get('email')
+            user_updated = self._edit_user(user_data)
             ckan_mailer.create_reset_key(user_obj)
-
-            return h.redirect_to('/')
+            response.headers['Content-Type'] = self.json_content_type
+            json_response = {
+                'success': user_updated,
+                'redirect_url': h.url_for('/ingresar')
+            }
+            return h.json.dumps(json_response, for_json=True)
         return base.render('user/perform_reset.html', extra_vars={'user': user_obj})
 
     def my_account(self):

@@ -70,7 +70,21 @@
         }
       }
       .can-have-feedback-img {
+        position: relative;
         margin-bottom: 30px;
+        p.feedback {
+          color: $red-300;
+          text-align: left;
+          margin: 0;
+          position: static;
+        }
+        img {
+          position: absolute;
+          right: 8px;
+          top: 10px;
+          width: 21px;
+          height: 21px;
+        }
       }
       input {
         height: 42px;
