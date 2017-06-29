@@ -11,6 +11,7 @@ import ckan.lib.activity_streams as activity_streams
 import random
 import string
 import ckanext.gobar_theme.mailer as mailer
+import ckan.lib.mailer as ckan_mailer
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
@@ -92,6 +93,36 @@ class GobArUserController(UserController):
                     json_response['error'] = 'unkown'
         response.headers['Content-Type'] = self.json_content_type
         return h.json.dumps(json_response, for_json=True)
+
+    def password_reset(self, user_id):
+        context = {'model': model, 'session': model.Session, 'user': user_id, 'keep_email': True}
+        try:
+            check_access('user_reset', context)
+        except NotAuthorized:
+            return h.redirect_to('home')
+
+        try:
+            user_dict = logic.get_action('user_show')(context, {'id': user_id})
+            user_obj = context['user_obj']
+        except logic.NotFound:
+            return base.abort(404)
+
+        c.reset_key = request.params.get('key')
+        if not ckan_mailer.verify_reset_link(user_obj, c.reset_key):
+            # Invalid reset key.
+            return h.redirect_to('home')
+
+        if request.method == 'POST':
+            context['reset_password'] = True
+            new_password = self._get_form_password()
+            user_dict['password'] = new_password
+            user_dict['reset_key'] = c.reset_key
+            user_dict['state'] = model.State.ACTIVE
+            logic.get_action('user_update')(context, user_dict)
+            ckan_mailer.create_reset_key(user_obj)
+
+            return h.redirect_to('/')
+        return base.render('user/perform_reset.html', extra_vars={'user': user_obj})
 
     def my_account(self):
         self._authorize()

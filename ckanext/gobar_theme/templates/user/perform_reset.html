@@ -1,0 +1,47 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+    {{ super() }}
+
+    <div id="password-reset" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1>¡Hola, {{ user.fullname or user.name }}!</h1>
+
+                    <h2>Cambiemos tu contraseña:</h2>
+
+                    <p class="password-label">Nueva contraseña*</p>
+                    <div class="can-have-feedback-img password1-feedback">
+                        <input type="text" id="password1">
+                    </div>
+
+                    <p class="password-label">Repetir contraseña*</p>
+                    <div class="can-have-feedback-img password2-feedback">
+                        <input type="text" id="password2">
+                    </div>
+
+                    <hr>
+
+                    <p>Si querés, tambien podés cambiar tu e-mail:</p>
+
+                    <p class="email-label">Nuevo e-mail</p>
+                    <div class="can-have-feedback-img email1-feedback">
+                        <input type="text" id="email1">
+                    </div>
+
+                    <p class="email-label">Repetir e-mail</p>
+                    <div class="can-have-feedback-img email2-feedback">
+                        <input type="text" id="email2">
+                    </div>
+
+                    <button id="save-changes" type="button" class="btn btn-blue">GUARDAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% resource 'gobar_js/user_config/user_commons.js' %}
+    {% resource 'gobar_js/user/password_reset.js' %}
+{% endblock %}

@@ -29,7 +29,7 @@ class GobArRouter:
         self.remove_dashboard()
         self.remove_tags()
         self.remove_revision()
-        #self.remove_admin()
+        # self.remove_admin()
         self.connect_api()
         self.connect_template_config()
         self.connect_google_analytics()
@@ -109,6 +109,7 @@ class GobArRouter:
     def connect_users(self):
         self.route_map.connect('/logout', action='logout', controller='user')
         with SubMapper(self.route_map, controller=self.user_controller) as m:
+            m.connect('/user/reset/{user_id}', action="password_reset")
             m.connect('user_datasets', '/user/{id:.*}', action='read')
             m.connect('login', '/ingresar', action='login')
             m.connect('/olvide_mi_contraseña', action="password_forgot")
