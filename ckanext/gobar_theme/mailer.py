@@ -9,6 +9,7 @@ from time import time
 from email import Utils
 from email.MIMEText import MIMEText
 from email.MIMEMultipart import MIMEMultipart
+from socket import error as socket_error
 try:
     from socket import sslerror
 except ImportError:
@@ -44,7 +45,7 @@ El equipo de {site_title}. <br>
 
 
 def reset_mail_content(user):
-    if len(user.fullname) > 0:
+    if user.fullname and len(user.fullname) > 0:
         username = user.fullname
     else:
         username = user.name
@@ -101,11 +102,11 @@ El equipo de {site_title}.<br>
 
 
 def new_user_content(admin_user, new_user):
-    if len(new_user.fullname) > 0:
+    if new_user.fullname and len(new_user.fullname) > 0:
         username = new_user.fullname
     else:
         username = new_user.name
-    if len(admin_user.fullname) > 0:
+    if admin_user.fullname and len(admin_user.fullname) > 0:
         admin_username = admin_user.fullname
     else:
         admin_username = admin_user.name
@@ -147,15 +148,18 @@ def send_mail(msg, recipient_email):
     smtp_server = config.get('smtp.server', 'localhost')
     smtp_user = config.get('smtp.user')
     smtp_password = config.get('smtp.password')
-    smtp_connection.connect(smtp_server)
+    try:
+        smtp_connection.connect(smtp_server)
+    except socket_error:
+        return False
     try:
         smtp_connection.ehlo()
         if smtp_user:
             assert smtp_password, "If smtp.user is configured then smtp.password must be configured as well."
             smtp_connection.login(smtp_user, smtp_password)
         smtp_connection.sendmail(andino_address, [recipient_email], msg.as_string())
-    except smtplib.SMTPException, e:
-        msg = '%r' % e
-        raise MailerException(msg)
+        return True
+    except smtplib.SMTPException:
+        return False
     finally:
         smtp_connection.quit()

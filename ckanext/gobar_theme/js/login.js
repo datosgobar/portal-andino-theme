@@ -11,8 +11,10 @@ $(function () {
             return
         }
         var callback = function (response) {
-            if (!response.success) {
+            if (!response.success && response.error == 'not_found') {
                 showNegativeFeedback(userInput, '¡Oh! No encontramos este usuario. Probá con otro.')
+            } else if (!response.success) {
+                showNegativeFeedback(userInput, '') // TODO: mensaje de error inesperado
             } else {
                 showPositiveFeedback(userInput, '¡Perfecto! Te enviamos un e-mail para que crear una nueva contraseña.')
             }
