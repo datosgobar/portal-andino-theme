@@ -11,6 +11,7 @@ import os
 from webhelpers.html import literal
 from codecs import open
 from os import path
+import helpers as h
 
 _get_action = ckan.logic.get_action
 
@@ -125,6 +126,9 @@ def dataset_delete_and_purge(context, data_dict):
 
 
 def organization_delete_and_purge(context, data_dict):
+    for suborganization in h.get_suborganizations():
+        logic.action.delete._group_or_org_delete(context, {'id': suborganization}, is_org=True)
+        logic.action.delete.group_purge(context, {'id': suborganization})
     logic.action.delete._group_or_org_delete(context, data_dict, is_org=True)
     return logic.action.delete.group_purge(context, data_dict)
 
