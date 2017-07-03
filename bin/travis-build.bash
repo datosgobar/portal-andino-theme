@@ -30,6 +30,7 @@ cd -
 git clone https://github.com/ckan/ckanext-googleanalytics
 cd ckanext-googleanalytics
 python setup.py develop
+cd -
 
 echo "Installing ckanext-gobar_theme and its requirements..."
 python setup.py develop
