@@ -10,7 +10,7 @@ sudo apt-get install postgresql-$PGVERSION solr-jetty libcommons-fileupload-java
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
 cd ckan
-export latest_ckan_release_branch=`git branch --all | grep remotes/origin/release-v | sort -r | sed 's/remotes\/origin\///g' | head -n 1`
+export latest_ckan_release_branch='release-v2.5.3'
 echo "CKAN branch: $latest_ckan_release_branch"
 git checkout $latest_ckan_release_branch
 python setup.py develop
@@ -25,6 +25,12 @@ sudo -u postgres psql -c 'CREATE DATABASE ckan_test WITH OWNER ckan_default;'
 echo "Initialising the database..."
 cd ckan
 paster db init -c test-core.ini
+cd -
+
+git clone https://github.com/ckan/ckanext-googleanalytics
+cd ckanext-googleanalytics
+pip install -r requirements.txt
+python setup.py develop
 cd -
 
 echo "Installing ckanext-gobar_theme and its requirements..."
