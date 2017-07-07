@@ -27,6 +27,12 @@ cd ckan
 paster db init -c test-core.ini
 cd -
 
+git clone https://github.com/ckan/ckanext-googleanalytics
+cd ckanext-googleanalytics
+pip install -r requirements.txt
+python setup.py develop
+cd -
+
 echo "Installing ckanext-gobar_theme and its requirements..."
 python setup.py develop
 pip install -r dev-requirements.txt
