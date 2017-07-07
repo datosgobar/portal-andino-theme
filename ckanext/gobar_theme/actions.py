@@ -120,8 +120,15 @@ def group_delete_and_purge(context, data_dict):
     return logic.action.delete.group_purge(context, data_dict)
 
 
+def _delete_and_purge_datasets_resources(context, data_dict):
+    resources = logic.action.get.package_show(context, data_dict)['resources']
+    for resource in resources:
+        resource_delete_and_purge(context, {'id': resource['id']})
+
+
 def dataset_delete_and_purge(context, data_dict):
     logic.action.delete.package_delete(context, data_dict)
+    _delete_and_purge_datasets_resources(context, data_dict)
     return logic.action.delete.dataset_purge(context, data_dict)
 
 
