@@ -150,16 +150,16 @@ def send_mail(msg, recipient_email):
     smtp_password = config.get('smtp.password')
     try:
         smtp_connection.connect(smtp_server)
-    except socket_error:
-        return False
+    except socket_error, e:
+        return {'success': False, 'error': e}
     try:
         smtp_connection.ehlo()
         if smtp_user:
             assert smtp_password, "If smtp.user is configured then smtp.password must be configured as well."
             smtp_connection.login(smtp_user, smtp_password)
         smtp_connection.sendmail(andino_address, [recipient_email], msg.as_string())
-        return True
-    except smtplib.SMTPException:
-        return False
+        return {'success': True}
+    except smtplib.SMTPException, e:
+        return {'success': False, 'error': e}
     finally:
         smtp_connection.quit()

@@ -270,11 +270,12 @@ class GobArUserController(UserController):
             print(e.error_dict)
             print(e.error_summary)
 
+        email_sent = False
         if user_created:
             if 'organizations[]' in params:
                 self._set_user_organizations(username, params['organizations[]'])
-            self.send_new_user_email(data_dict)
-        return {'success': user_created, 'password': random_password}
+            email_sent = self.send_new_user_email(data_dict)
+        return {'success': user_created, 'password': random_password, 'email_sent': email_sent}
 
     @staticmethod
     def _set_user_organizations(username, user_organizations):
@@ -336,7 +337,9 @@ class GobArUserController(UserController):
     def send_new_user_email(data_dict):
         admin_user = c.userobj
         new_user = model.User.get(data_dict['name'])
-        mailer.send_new_user_mail(admin_user, new_user)
+        postfix_response = mailer.send_new_user_mail(admin_user, new_user)
+        print(postfix_response)
+        return postfix_response['success']
 
     def _activities(self, page):
         limit = 100
