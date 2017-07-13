@@ -11,10 +11,12 @@
         <h2>Nombre y apelido</h2>
         <input name="full-name" type="text" title="Nombre y apellido" value="{{ c.userobj.fullname or '' }}" disabled="disabled">
 
+        {% set current_email = c.userobj.email or '' %}
+
         <div class="disabled-input" data-replace-id="email-edit">
             <h2>E-mail</h2>
             <div class="can-have-feedback-img">
-                <input name="email" type="text" title="E-mail" value="{{ c.userobj.email }}" disabled="disabled">
+                <input name="email" type="text" title="E-mail" value="{{ current_email }}" disabled="disabled">
                 {% snippet "svg/edit.svg" %}
             </div>
         </div>
@@ -23,7 +25,7 @@
             <input type="hidden">
             <h2>Nuevo e-mail</h2>
             <div class="can-have-feedback-img">
-                <input name="email" type="text" title="Nuevo e-mail" value="{{ c.userobj.email }}" data-default-value="{{ c.userobj.email }}">
+                <input name="email" type="text" title="Nuevo e-mail" value="{{ current_email }}" data-default-value="{{ current_email }}">
             </div>
             <h2>Repetir e-mail</h2>
             <div class="can-have-feedback-img">
