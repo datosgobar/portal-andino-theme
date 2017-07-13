@@ -36,6 +36,16 @@ def organization_tree():
     return organizations
 
 
+def get_suborganizations():
+    organizations = organization_tree()
+    suborganizations = []
+    for organization in organizations:
+        if 'children' in organization:
+            for child in organization['children']:
+                suborganizations.append(child['name'])
+    return suborganizations
+
+
 def get_faceted_groups():
     data_dict_page_results = {
         'all_fields': True,
