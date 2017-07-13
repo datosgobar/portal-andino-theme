@@ -89,8 +89,9 @@ class GobArUserController(UserController):
                 try:
                     mail_sent = mailer.send_reset_link(user_obj)
                     json_response['success'] = mail_sent
-                except mailer.MailerException:
+                except mailer.MailerException, e:
                     json_response['error'] = 'unkown'
+                    print(e)
         response.headers['Content-Type'] = self.json_content_type
         return h.json.dumps(json_response, for_json=True)
 
