@@ -265,12 +265,15 @@ class GobArUserController(UserController):
         try:
             logic.get_action('user_create')(context, data_dict)
             user_created = True
-        except logic.ValidationError:
+        except logic.ValidationError, e:
             user_created = False
+            print(e.error_dict)
+            print(e.error_summary)
 
-        if 'organizations[]' in params:
-            self._set_user_organizations(username, params['organizations[]'])
-        self.send_new_user_email(data_dict)
+        if user_created:
+            if 'organizations[]' in params:
+                self._set_user_organizations(username, params['organizations[]'])
+            self.send_new_user_email(data_dict)
         return {'success': user_created, 'password': random_password}
 
     @staticmethod
