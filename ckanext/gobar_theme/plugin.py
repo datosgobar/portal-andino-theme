@@ -14,6 +14,10 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def get_actions(self):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
+                'group_delete': gobar_actions.group_delete_and_purge,
+                'package_delete': gobar_actions.dataset_delete_and_purge,
+                'resource_delete': gobar_actions.resource_delete_and_purge,
+                'organization_delete': gobar_actions.organization_delete_and_purge,
                 'gobar_status_show': gobar_actions.gobar_status_show}
 
     def update_config(self, config_):
@@ -31,6 +35,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {
             'organization_tree': gobar_helpers.organization_tree,
+            'get_suborganizations': gobar_helpers.get_suborganizations,
             'get_faceted_groups': gobar_helpers.get_faceted_groups,
             'join_groups': gobar_helpers.join_groups,
             'cut_text': gobar_helpers.cut_text,
