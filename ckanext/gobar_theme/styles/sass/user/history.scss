@@ -36,10 +36,15 @@
         pointer-events: none;
       }
 
-      &[class*="deleted"] i.icon,
-      &[class*="removed"] i.icon,
-      &[class*="failure"] i.icon {
-        background: $red-250;
+      &[class*="deleted"],
+      &[class*="removed"],
+      &[class*="failure"] {
+        i.icon {
+          background: $red-250;
+        }
+        a {
+          pointer-events: none;
+        }
       }
 
       &[class*="success"] i.icon,

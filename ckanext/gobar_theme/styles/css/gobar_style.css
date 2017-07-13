@@ -7787,6 +7787,8 @@ button.btn {
         pointer-events: none; }
       #user-config-history ul.activity li.item[class*="deleted"] i.icon, #user-config-history ul.activity li.item[class*="removed"] i.icon, #user-config-history ul.activity li.item[class*="failure"] i.icon {
         background: #ff4338; }
+      #user-config-history ul.activity li.item[class*="deleted"] a, #user-config-history ul.activity li.item[class*="removed"] a, #user-config-history ul.activity li.item[class*="failure"] a {
+        pointer-events: none; }
       #user-config-history ul.activity li.item[class*="success"] i.icon, #user-config-history ul.activity li.item[class*="added"] i.icon, #user-config-history ul.activity li.item[class*="new"] i.icon {
         background: #82bc00; }
       #user-config-history ul.activity li.item .date:first-letter {
