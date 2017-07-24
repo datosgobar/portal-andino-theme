@@ -148,18 +148,21 @@ def send_mail(msg, recipient_email):
     smtp_server = config.get('smtp.server', 'localhost')
     smtp_user = config.get('smtp.user')
     smtp_password = config.get('smtp.password')
+    return_value = {'success': False}
     try:
         smtp_connection.connect(smtp_server)
     except socket_error, e:
-        return {'success': False, 'error': e}
+        return_value['error'] = str(e)
+        return return_value
     try:
         smtp_connection.ehlo()
         if smtp_user:
             assert smtp_password, "If smtp.user is configured then smtp.password must be configured as well."
             smtp_connection.login(smtp_user, smtp_password)
         smtp_connection.sendmail(andino_address, [recipient_email], msg.as_string())
-        return {'success': True}
+        return_value['success'] = True
     except smtplib.SMTPException, e:
-        return {'success': False, 'error': e}
+        return_value['error'] = str(e)
     finally:
         smtp_connection.quit()
+    return return_value

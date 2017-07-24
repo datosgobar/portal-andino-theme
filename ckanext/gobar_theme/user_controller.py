@@ -88,7 +88,9 @@ class GobArUserController(UserController):
             if user_obj:
                 try:
                     mail_sent = mailer.send_reset_link(user_obj)
-                    json_response['success'] = mail_sent
+                    json_response['success'] = mail_sent['success']
+                    if 'error' in mail_sent:
+                        json_response['error'] = mail_sent['error']
                 except mailer.MailerException, e:
                     json_response['error'] = 'unkown'
                     print(e)
@@ -276,7 +278,9 @@ class GobArUserController(UserController):
             if 'organizations[]' in params:
                 self._set_user_organizations(username, params['organizations[]'])
             email_sent = self.send_new_user_email(data_dict)
-        return {'success': user_created, 'password': random_password, 'email_sent': email_sent}
+            if 'error' in email_sent:
+                print(email_sent['error'])
+        return {'success': user_created, 'password': random_password, 'email_sent': email_sent['success']}
 
     @staticmethod
     def _set_user_organizations(username, user_organizations):
