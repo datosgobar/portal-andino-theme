@@ -273,7 +273,7 @@ class GobArUserController(UserController):
             print(e.error_dict)
             print(e.error_summary)
 
-        email_sent = False
+        email_sent = {'success': False}
         if user_created:
             if 'organizations[]' in params:
                 self._set_user_organizations(username, params['organizations[]'])
@@ -343,8 +343,7 @@ class GobArUserController(UserController):
         admin_user = c.userobj
         new_user = model.User.get(data_dict['name'])
         postfix_response = mailer.send_new_user_mail(admin_user, new_user)
-        print(postfix_response)
-        return postfix_response['success']
+        return postfix_response
 
     def _activities(self, page):
         limit = 100
