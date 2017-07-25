@@ -28,7 +28,7 @@ Parece que olvidaste tu contraseña. No te preocupes, vamos a cambiarla:
 {reset_link}
 
 ¡Suerte!
-El equipo de %s.
+El equipo de {site_title}.
 
 """
 
@@ -73,7 +73,7 @@ new_user_subject = u'{admin_username} te invitó a colaborar en el portal de dat
 new_user_plain_body = u"""
 ¡Hola, {username}!
 
-<strong>{admin_username} te invitó a colaborar en {site_title}.</strong>
+{admin_username} te invitó a colaborar en {site_title}.
 
 Para que confirmar tu registro, <strong>necesitamos que cambies tu contraseña.</strong> También vas a poder cambiar tu e-mail si lo necesitás. 
 
