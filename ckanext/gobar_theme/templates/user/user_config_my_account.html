@@ -8,7 +8,7 @@
         <h2>Usuario</h2>
         <input name="username" type="text" title="Usuario" value="{{ c.userobj.name }}" disabled="disabled">
 
-        <h2>Nombre y apelido</h2>
+        <h2>Nombre y apellido</h2>
         <input name="full-name" type="text" title="Nombre y apellido" value="{{ c.userobj.fullname or '' }}" disabled="disabled">
 
         {% set current_email = c.userobj.email or '' %}

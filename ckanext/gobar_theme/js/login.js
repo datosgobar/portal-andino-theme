@@ -14,7 +14,11 @@ $(function () {
             if (!response.success && response.error == 'not_found') {
                 showNegativeFeedback(userInput, '¡Oh! No encontramos este usuario. Probá con otro.')
             } else if (!response.success) {
-                showNegativeFeedback(userInput, '') // TODO: mensaje de error inesperado
+                if (response.error.indexOf('Connection refused') != -1) {
+                    showNegativeFeedback(userInput, 'Hemos tenido un error al intentar enviarte un email. Contactate con tu administrador')
+                } else {
+                    showNegativeFeedback(userInput, '') // TODO: mensaje de error inesperado
+                }
             } else {
                 showPositiveFeedback(userInput, '¡Perfecto! Te enviamos un e-mail para que crear una nueva contraseña.')
             }
