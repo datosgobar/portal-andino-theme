@@ -55,16 +55,16 @@
         color: $blue-300;
         font-size: 20px;
         font-weight: 400;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
       }
       hr {
         border-color: $grey-200;
-        margin: 50px 0;
+        margin: 50px 0 20px 0;
       }
       p {
         text-align: left;
         margin-bottom: 30px;
-        &.password-label, 
+        &.password-label,
         &.email-label {
           margin: 0;
         }

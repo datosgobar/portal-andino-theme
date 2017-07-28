@@ -32,7 +32,7 @@
       font-weight: 400;
       margin: 0 0 10px 0;
       font-size: 20px;
-      color: $grey-300;
+      color: $grey-400;
       &.blue {
         color: $blue-300;
       }
@@ -99,6 +99,9 @@
       height: auto;
       font-size: 16px;
       color: $grey-400;
+      @include placeholder {
+        font-style: italic
+      }
     }
     .checkbox-label {
       font-size: 20px;

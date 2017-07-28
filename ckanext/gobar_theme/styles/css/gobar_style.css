@@ -6348,9 +6348,9 @@ div.svg-tooltip {
         border-left: solid 2px #0695d6;
         padding: 14px 0.3em 14px 0;
         display: inline-block;
-        height: 80%;
+        height: 60%;
         position: absolute;
-        top: 10%;
+        top: 20%;
         left: 0; }
       #header #header-spacing .header-links .header-link:hover + .header-link .user-divisor {
         border-color: transparent; }
@@ -7367,10 +7367,10 @@ button.btn {
         color: #0695d6;
         font-size: 20px;
         font-weight: 400;
-        margin-bottom: 50px; }
+        margin-bottom: 20px; }
       #password-reset.modal .modal-content .modal-body hr {
         border-color: #cccccc;
-        margin: 50px 0; }
+        margin: 50px 0 20px 0; }
       #password-reset.modal .modal-content .modal-body p {
         text-align: left;
         margin-bottom: 30px; }
@@ -7740,9 +7740,12 @@ button.btn {
           max-height: none; }
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body h1 {
             margin-top: 0;
+            margin-bottom: 10px;
             text-align: left; }
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body .delete-user {
             color: #999999; }
+            #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body .delete-user:hover {
+              color: #767676; }
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body input[name="username"],
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body input[name="fullname"],
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body input[name="email"],
@@ -7796,13 +7799,20 @@ button.btn {
   #user-config-history .show-more-container {
     text-align: center; }
     #user-config-history .show-more-container .show-more {
-      cursor: pointer; }
+      cursor: pointer;
+      color: #999999; }
       #user-config-history .show-more-container .show-more svg {
         width: 12px;
         height: 12px; }
+        #user-config-history .show-more-container .show-more svg path {
+          fill: #999999; }
       #user-config-history .show-more-container .show-more.fetching {
         pointer-events: none;
         cursor: waiting; }
+      #user-config-history .show-more-container .show-more:hover {
+        color: #767676; }
+        #user-config-history .show-more-container .show-more:hover svg path {
+          fill: #767676; }
 
 .organization-container {
   display: table-row;
@@ -9648,7 +9658,7 @@ ul.activity {
       font-weight: 400;
       margin: 0 0 10px 0;
       font-size: 20px;
-      color: #999999; }
+      color: #767676; }
       #template-config-container #template-config h2.blue {
         color: #0695d6; }
     #template-config-container #template-config .with-bottom-margin {
@@ -9700,6 +9710,18 @@ ul.activity {
       height: auto;
       font-size: 16px;
       color: #767676; }
+      #template-config-container #template-config input[type="text"]::-webkit-input-placeholder,
+      #template-config-container #template-config input[type="password"]::-webkit-input-placeholder {
+        font-style: italic; }
+      #template-config-container #template-config input[type="text"]::-moz-placeholder,
+      #template-config-container #template-config input[type="password"]::-moz-placeholder {
+        font-style: italic; }
+      #template-config-container #template-config input[type="text"]:-moz-placeholder,
+      #template-config-container #template-config input[type="password"]:-moz-placeholder {
+        font-style: italic; }
+      #template-config-container #template-config input[type="text"]:-ms-input-placeholder,
+      #template-config-container #template-config input[type="password"]:-ms-input-placeholder {
+        font-style: italic; }
     #template-config-container #template-config .checkbox-label {
       font-size: 20px;
       color: #999999; }

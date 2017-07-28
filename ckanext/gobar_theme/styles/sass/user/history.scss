@@ -62,13 +62,23 @@
     text-align: center;
     .show-more {
       cursor: pointer;
+      color: $grey-300;
       svg {
         width: 12px;
         height: 12px;
+        path {
+            fill: $grey-300;
+        }
       }
       &.fetching {
         pointer-events: none;
         cursor: waiting;
+      }
+      &:hover {
+          color: $grey-400;
+          svg path {
+              fill: $grey-400;
+          }
       }
     }
   }
