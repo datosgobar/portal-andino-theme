@@ -7505,7 +7505,7 @@ button.btn {
       vertical-align: middle; }
       #login-container #login #login-vertical-wrapper .password-reset {
         text-align: center;
-        margin-top: 50px; }
+        margin: 50px 0 0 0; }
     #login-container #login form {
       width: 100%;
       margin: 0 auto; }
@@ -7738,6 +7738,13 @@ button.btn {
         #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body {
           padding: 50px;
           max-height: none; }
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body .dismiss-greetings {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #999999;
+            font-size: 16px; }
           #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body h1 {
             margin-top: 0;
             margin-bottom: 10px;
