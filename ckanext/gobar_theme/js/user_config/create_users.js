@@ -104,6 +104,7 @@ $(function () {
             clearFeedback(divSelect)
             if (selectedOrganizations.length == 0) {
                 showNegativeFeedback(divSelect, 'Completá este dato.')
+                return false
             }
         }
         return true

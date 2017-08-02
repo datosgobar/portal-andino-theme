@@ -2,6 +2,7 @@ $(function () {
     var showEditSection = function (e) {
         var replaceId = $(e.currentTarget).parents('.disabled-input').addClass('hidden').data('replace-id');
         $('#' + replaceId).removeClass('hidden');
+        clearFeedback($(e.currentTarget).siblings('input'))
     };
     $('.disabled-input svg').click(showEditSection);
 
@@ -11,6 +12,7 @@ $(function () {
         for (var i=0; i<inputs.length; i++) {
             var $input = $(inputs[i]);
             $input.val($input.data('default-value') || '');
+            clearFeedback($input);
         }
         editSection.addClass('hidden')
         return $('div[data-replace-id="' + editSection.attr('id') + '"]').removeClass('hidden');
@@ -83,8 +85,10 @@ $(function () {
 
         if (!valuesAreEqual) {
             if (attr == 'password') {
+                showNegativeFeedback(firstInput, '');
                 showNegativeFeedback(secondInput, '¡Oh! Las contraseñas no coinciden. Probá otra vez.');
             } else {
+                showNegativeFeedback(firstInput, '');
                 showNegativeFeedback(secondInput, '¡Oh! Los e-mails no coinciden. Probá otra vez.');
             }
             return false

@@ -7658,8 +7658,10 @@ button.btn {
     width: 370px;
     max-width: 80%; }
   #template-config-container #template-config #user-config-create-users button.save-new-user {
+    display: block;
     margin-bottom: 30px;
-    height: 42px; }
+    height: 42px;
+    margin-left: 0; }
   #template-config-container #template-config #user-config-create-users input.small-margin {
     margin-bottom: 10px; }
   #template-config-container #template-config #user-config-create-users select.organization-select {

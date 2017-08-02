@@ -24,11 +24,13 @@
             <h2>E-mail</h2>
             <div class="can-have-feedback-img">
                 <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
-                <button class="btn btn-blue save-new-user">
-                    LISTO, CREAR
-                </button>
             </div>
+            <button class="btn btn-blue save-new-user">
+                LISTO, CREAR
+            </button>
         </div>
+
+        <hr class="before-list">
 
         <div class="create-section user">
             <h2 class="blue">Colaborador</h2>
@@ -58,10 +60,10 @@
                     {% import 'user/snippets/organization_selector.html' as organization_selector %}
                     {% set organizations_tree = h.organization_tree() %}
                     {{ organization_selector.organization_selector(organizations_tree) }}
-                <button class="btn btn-blue save-new-user">
-                    LISTO, CREAR
-                </button>
             </div>
+            <button class="btn btn-blue save-new-user">
+                LISTO, CREAR
+            </button>
         </div>
 
         <hr class="before-list">

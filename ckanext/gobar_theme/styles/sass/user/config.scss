@@ -57,8 +57,10 @@
       max-width: 80%;
     }
     button.save-new-user {
+      display: block;
       margin-bottom: 30px;
       height: 42px;
+      margin-left: 0;
     }
     input.small-margin {
       margin-bottom: 10px;
