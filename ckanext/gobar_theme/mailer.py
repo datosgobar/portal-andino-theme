@@ -75,7 +75,9 @@ new_user_plain_body = u"""
 
 {admin_username} te invitó a colaborar en {site_title}.
 
-Para que confirmar tu registro, <strong>necesitamos que cambies tu contraseña.</strong> También vas a poder cambiar tu e-mail si lo necesitás. 
+Tu usuario es: {login_username}
+
+Para que confirmar tu registro, necesitamos que cambies tu contraseña. También vas a poder cambiar tu e-mail si lo necesitás. 
 
 {reset_link}
  
@@ -90,7 +92,9 @@ new_user_html_body = u"""
 <br>
 {admin_username} te invitó a colaborar en {site_title}.<br>
 <br>
-Para que confirmar tu registro, necesitamos que cambies tu contraseña. También vas a poder cambiar tu e-mail si lo necesitás.<br> 
+Tu usuario es: {login_username}<br>
+<br>
+Para que confirmar tu registro, <strong>necesitamos que cambies tu contraseña.</strong> También vas a poder cambiar tu e-mail si lo necesitás.<br> 
 <br>
 <a href="{reset_link}" target="_blank">Confirmar y cambiar contraseña</a><br>
  <br>
@@ -110,10 +114,11 @@ def new_user_content(admin_user, new_user):
         admin_username = admin_user.fullname
     else:
         admin_username = admin_user.name
+    login_username = new_user.name
     reset_link = ckan_mailer.get_reset_link(new_user)
     site_title = gobar_helpers.get_theme_config('title.site-title', 'Portal Andino')
-    plain_body = new_user_plain_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title)
-    html_body = new_user_html_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title)
+    plain_body = new_user_plain_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title, login_username=login_username)
+    html_body = new_user_html_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title, login_username=login_username)
     subject = new_user_subject.format(admin_username=admin_username)
     return subject, plain_body, html_body
 
