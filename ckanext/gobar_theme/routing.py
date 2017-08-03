@@ -109,6 +109,7 @@ class GobArRouter:
     def connect_users(self):
         self.route_map.connect('/logout', action='logout', controller='user')
         with SubMapper(self.route_map, controller=self.user_controller) as m:
+            m.connect('/borradores', action="drafts")
             m.connect('/user/reset/{user_id}', action="password_reset")
             m.connect('user_datasets', '/user/{id:.*}', action='read')
             m.connect('login', '/ingresar', action='login')

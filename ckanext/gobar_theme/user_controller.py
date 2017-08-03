@@ -5,13 +5,14 @@ import ckan.model as model
 from ckan.controllers.user import UserController
 import ckan.lib.helpers as h
 import ckan.plugins as p
-from webob.exc import HTTPNotFound
+import ckan.lib.search as search
 import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.lib.activity_streams as activity_streams
 import random
 import string
 import ckanext.gobar_theme.mailer as mailer
 import ckan.lib.mailer as ckan_mailer
+import json
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
@@ -21,14 +22,6 @@ class GobArUserController(UserController):
     json_content_type = 'application/json;charset=utf-8'
 
     def read(self, id=None):
-        if id and id == c.user:
-            return super(GobArUserController, self).read(id)
-        if id == 'logged_in':
-            try:
-                return super(GobArUserController, self).read(id)
-            except HTTPNotFound:
-                controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
-                return h.redirect_to(controller=controller, action='login', login_error=True)
         return h.redirect_to('home')
 
     def login(self, error=None):
@@ -314,15 +307,9 @@ class GobArUserController(UserController):
                     organizations_and_users[organization.name][user.name] = None
         return organizations_and_users
 
-    @staticmethod
-    def _authorize(sysadmin_required=False):
-        if sysadmin_required:
-            context = {'model': model, 'user': c.user, 'auth_user_obj': c.userobj}
-            try:
-                logic.check_access('sysadmin', context, {})
-                return True
-            except logic.NotAuthorized:
-                return h.redirect_to('home')
+    def _authorize(self, sysadmin_required=False):
+        if sysadmin_required and not self._current_user_is_sysadmin():
+            return h.redirect_to('home')
         else:
             context = {'model': model, 'session': model.Session,
                        'user': c.user or c.author, 'auth_user_obj': c.userobj,
@@ -332,6 +319,15 @@ class GobArUserController(UserController):
                 return True
             except NotAuthorized:
                 base.abort(401, _('Unauthorized to change config'))
+
+    @staticmethod
+    def _current_user_is_sysadmin():
+        context = {'model': model, 'user': c.user, 'auth_user_obj': c.userobj}
+        try:
+            logic.check_access('sysadmin', context, {})
+            return True
+        except logic.NotAuthorized:
+            return False
 
     @staticmethod
     def validate_password(password):
@@ -370,3 +366,35 @@ class GobArUserController(UserController):
             'user_history': True
         }
         return activity_streams.activity_list_to_html(context, activities, extra_vars), has_more
+
+    def drafts(self):
+        self._authorize()
+        # /ckan/lib/default/src/ckan/ckan/logic/action/get.py #1937
+        query_params = {
+            'sort': 'score desc, metadata_modified desc',
+            'fq': '+state:(draft OR active)',
+            'rows': 1000,
+            'fl': 'id validated_data_dict'
+        }
+        query = search.query_for(model.Package)
+        query.run(query_params)
+        results = []
+        for package in query.results:
+            package, package_dict = package['id'], package.get('validated_data_dict')
+            if package_dict:
+                package_dict = json.loads(package_dict)
+                results.append(package_dict)
+
+        if self._current_user_is_sysadmin():
+            draft_packages = [
+                p for p in results
+                if p['private'] or p['state'] == 'draft'
+            ]
+        else:
+            roles = self._roles_by_organization()
+            draft_packages = [
+                p for p in results
+                if (p['private'] or p['state'] == 'draft') and roles[p['organization']['name']][c.user]
+            ]
+        extra_vars = {'draft_packages': draft_packages}
+        return base.render('package/drafts.html', extra_vars=extra_vars)
