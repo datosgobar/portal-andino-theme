@@ -7,6 +7,7 @@
 
 - [Primeros pasos](#primeros-pasos)
 - [Entrar y salir de tu portal](#entrar-y-salir-de-tu-portal)
+- [Permisos de usuarios](#permisos-de-usuario)
 - [Elementos de tu portal](#elementos-de-tu-portal)
   - [Organizaciones](#organizaciones)
   - [Sección Organizaciones con datos](#secci%C3%B3n-organizaciones-con-datos)
@@ -15,6 +16,8 @@
   - [Recursos](#recursos)
   - [Etiquetas](#etiquetas)
 - [Personalizar el portal](#personalizar-el-portal)
+- [Integrar Andino con Google Analytics](#integrar-andino-con-google-analytics)
+- [Consultas sobre Andino](#consultas-sobre-andino)
 - [Otros contenidos útiles](#otros-contenidos-%C3%BAtiles)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -28,22 +31,29 @@ Esta guía te ayudará a:
 * Conocer los elementos del catálogo e identificar dónde se ven en el portal.
 * Personalizar el portal.
 * Crear datasets, recursos, organizaciones y temas.
+* Asignar permisos de usuarios. 
+* Integrar con Google Analytics.
+
 
 <p align="center">¡Arranquemos!</p>
 
 ## Entrar y salir de tu portal
 
-Para poder entrar y salir de tu portal, **es necesario que tu administrador haya creado un usuario y contraseña**. Con esa información, cada vez que quieras entrar al portal, **podrás hacerlo desde http://*tu-url.com*/ingresar**.
+**Cada vez que quieras entrar al portal, podrás hacerlo desde http://*tu-url.com*/ingresar**.
 
 ![alt text](assets/portal-andino-login.png "login")
 
-**Para salir**, sólo tenés que **hacer clic en el botón en el margen superior derecho**.
+## Permisos de usuario
 
-![alt text](assets/portal-andino-logout.png "logout")
+Desde agosto de 2017, en Andino **hay dos tipos de usuarios: los administradores y los colaboradores**. El primer usuario administrador siempre es creado por el técnico en sistemas que instaló Andino. 
 
-**¿Y si olvidé mi contraseña?**
+**Los administradores de Andino pueden invitar a más personas a colaborar** en la apertura de datos, **eligiendo el tipo que quieren asignar**:
 
-Por el momento, tanto la creación del usuario y la contraseña, como la recuperación de esta última sólo podrá hacerla quien se haya encargado de instalarte Andino. 
+* **Administrador**: podrá crear usuarios, editar la configuración general del portal; crear, actualizar y borrar todos los datasets; y gestionar temas y organizaciones. 
+
+* **Colaborador**: podrá crear, actualizar y borrar datasets sólo de las organizaciones que tenga asignadas (por eso es importante que primero crees en tu Andino las organizaciones en las que necesitás colaboradores). 
+
+**Asigná permisos desde Mi cuenta > Crear usuarios**.
 
 ## Elementos de tu portal
 
@@ -215,6 +225,11 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 
 ![alt text](assets/portal-andino-sec-config.png "sec-config")
 
+***
+
+### Integrar Andino con Google Analytics
+
+Por favor, [escribinos](datos@modernizacion.gob.ar) y contanos con qué casilla de e-mail querés tener permisos para ver las métricas de tu Andino. 
 
 ***
 ### Consultas sobre Andino
@@ -224,7 +239,6 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 Como la comunidad de datos es grande, **por ahora no podemos dar soporte técnico frente a modificaciones particulares del código**. Sin embargo, **podés contactarnos para despejar dudas**. 
 
 Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún _bug_ o _tengas feedback_. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar.  
-
 ***
 ### Otros contenidos útiles
 
