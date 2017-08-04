@@ -37,11 +37,15 @@ Esta guía te ayudará a:
 
 <p align="center">¡Arranquemos!</p>
 
+***
+
 ## Entrar y salir de tu portal
 
 **Cada vez que quieras entrar al portal, podrás hacerlo desde http://*tu-url.com*/ingresar**.
 
 ![alt text](assets/portal-andino-login.png "login")
+
+***
 
 ## Permisos de usuario
 
@@ -54,6 +58,8 @@ Desde agosto de 2017, en Andino **hay dos tipos de usuarios: los administradores
 * **Colaborador**: podrá crear, actualizar y borrar datasets sólo de las organizaciones que tenga asignadas (por eso es importante que primero crees en tu Andino las organizaciones en las que necesitás colaboradores). 
 
 **Asigná permisos desde Mi cuenta > Crear usuarios**.
+
+***
 
 ## Elementos de tu portal
 
@@ -227,20 +233,23 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 
 ***
 
-### Integrar Andino con Google Analytics
+## Integrar Andino con Google Analytics
 
 Por favor, [escribinos](datos@modernizacion.gob.ar) y contanos con qué casilla de e-mail querés tener permisos para ver las métricas de tu Andino. 
 
 ***
-### Consultas sobre Andino
+
+## Consultas sobre Andino
 
 **Andino es un portal abierto en constante desarrollo** para ser usado por toda la comunidad de datos. Por eso, cuando incorporamos una nueva mejora, **cuidamos mucho su compatibilidad con la versión anterior**.
 
 Como la comunidad de datos es grande, **por ahora no podemos dar soporte técnico frente a modificaciones particulares del código**. Sin embargo, **podés contactarnos para despejar dudas**. 
 
-Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún _bug_ o _tengas feedback_. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar.  
+Te invitamos a crear issues o enviarnos sugerencias en caso de que encuentren algún _bug_ o _tengas feedback_. También podés mandarnos tu comentario o consulta a datos@modernizacion.gob.ar
+ 
 ***
-### Otros contenidos útiles
+
+## Otros contenidos útiles
 
 * <a href="http://paquete-apertura-datos.readthedocs.io/es/stable/guia_metadatos.html" target="_blank">Guía para el uso y la publicación de metadatos</a>
 
