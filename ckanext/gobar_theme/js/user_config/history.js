@@ -1,14 +1,14 @@
 $(function () {
     var page = 1;
     $('.show-more').on('click', function (e) {
-        var url = window.location.href;
+        var url = './historial.json';
         var data = {page: page+1, raw: true}
         var button = $(e.currentTarget);
         button.addClass('fetching');
-        var callback = function (response, textStatus, request) {
-            var activities = $(response).find('li.item')
+        var callback = function (response) {
+            var activities = $(response.activities).find('li.item')
             $('#user-config-history ul.activity').append(activities)
-            var has_more = request.getResponseHeader('X-has-more') == 'True';
+            var has_more = response.has_more
             if (!has_more) {
                 button.addClass('hidden');
             } else {

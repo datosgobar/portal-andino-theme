@@ -121,6 +121,7 @@ class GobArRouter:
             m.connect('/configurar/editar_usuario', action="edit_user")
             m.connect('/configurar/borrar_usuario', action="delete_user")
             m.connect('/configurar/historial', action="user_history")
+            m.connect('/configurar/historial.json', action="user_history_json")
 
         self.redirect(
             ('/user/login', '/'),

@@ -179,18 +179,18 @@ class GobArUserController(UserController):
 
     def user_history(self):
         self._authorize()
-        params = parse_params(request.GET)
-        if params.get('page'):
-            page = int(params['page'])
-        else:
-            page = 1
+        page = 1
         activities, has_more = self._activities(page)
-        if params.get('raw'):
-            response.headers['X-has-more'] = has_more
-            return activities
-        else:
-            extra_vars = {'activities': activities, 'has_more': has_more}
-            return base.render('user/user_config_history.html', extra_vars=extra_vars)
+        extra_vars = {'activities': activities, 'has_more': has_more}
+        return base.render('user/user_config_history.html', extra_vars=extra_vars)
+
+    def user_history_json(self):
+        self._authorize()
+        params = parse_params(request.GET)
+        page = int(params.get('page', 1))
+        activities, has_more = self._activities(page)
+        response.headers['Content-Type'] = self.json_content_type
+        return h.json.dumps({'activities': activities, 'has_more': has_more}, for_json=True)
 
     def edit_user(self):
         self._authorize(sysadmin_required=True)
@@ -245,7 +245,7 @@ class GobArUserController(UserController):
 
     def _create_user(self):
         params = parse_params(request.POST)
-        username = params['username']
+        username = params['username'].lower()
         if model.User.by_name(username) is not None:
             return {'success': False, 'error': 'user_already_exists'}
         random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
@@ -387,14 +387,14 @@ class GobArUserController(UserController):
 
         if self._current_user_is_sysadmin():
             draft_packages = [
-                p for p in results
-                if p['private'] or p['state'] == 'draft'
+                package for package in results
+                if package['private'] or package['state'] == 'draft'
             ]
         else:
             roles = self._roles_by_organization()
             draft_packages = [
-                p for p in results
-                if (p['private'] or p['state'] == 'draft') and roles[p['organization']['name']][c.user]
+                package for package in results
+                if (package['private'] or package['state'] == 'draft') and roles[package['organization']['name']][c.user]
             ]
         extra_vars = {'draft_packages': draft_packages}
         return base.render('package/drafts.html', extra_vars=extra_vars)
