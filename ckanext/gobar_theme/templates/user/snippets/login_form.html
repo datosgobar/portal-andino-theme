@@ -10,6 +10,12 @@
 
   {{ form.input('password', label='Contraseña', id='field-password', type="password", value="", error=password_error) }}
 
+  {% if login_error %}
+    <p class="error">
+      No encontramos ningun usuario con esa combinación de usuario y contraseña
+    </p>
+  {% endif %}
+
   {{ form.checkbox('remember', label='Recordarme', id='field-remember', checked=true, value="63072000") }}
 
   <div class="form-actions">
@@ -17,4 +23,8 @@
         <button type="submit">INGRESAR</button>
     {% endblock %}
   </div>
+
+  <p class="password-reset">
+      <a href="#" id="password-reset-show-modal">Olvidé mi contraseña</a>
+  </p>
 </form>

@@ -65,6 +65,7 @@ div.svg-tooltip {
 @import 'utils/mixins';
 @import 'utils/media_queries';
 @import 'utils/bootstrap-datepicker3';
+@import 'utils/multiple-select';
 
 @import 'pagination';
 @import 'header';
@@ -75,8 +76,11 @@ div.svg-tooltip {
 @import 'about';
 @import 'buttons';
 @import 'home/index';
+@import 'user/user_commons';
 @import 'user/login';
 @import 'user/read';
+@import 'user/config';
+@import 'user/history';
 @import 'organization/index';
 @import 'organization/title';
 @import 'organization/new_and_edit';

@@ -1,0 +1,20 @@
+{% extends "user/user_config_base.html" %}
+
+{% block config %}
+    <div id="user-config-history">
+        <h1>Historial</h1>
+        <div class="vertical-dashed-line"></div>
+        {{ activities }}
+        {% if has_more %}
+            <p class="show-more-container">
+                <span class="show-more">
+                    {{ h.snippet('svg/flecha_abajo.svg') }}
+                    Mostrar más
+                    {{ h.snippet('svg/flecha_abajo.svg') }}
+                </span>
+            </p>
+        {% endif %}
+    </div>
+
+    {% resource 'gobar_js/user_config/history.js' %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% macro organization_selector(organization_tree, user=None, organizations_and_users=None) %}
+    <select class="organization-select" multiple="multiple">
+        {% for organization in organization_tree recursive %}
+            {% set selected = False %}
+            {% if user is not none %}
+                {% set selected = organizations_and_users[organization.name][user.name] is not none %}
+            {% endif %}
+            <option value="{{ organization.name }}" {{ 'selected=selected' if selected }}>{{ organization.display_name }}</option>
+            {% if organization.children %}
+                {{ loop(organization.children) }}
+            {% endif %}
+        {% endfor %}
+    </select>
+{% endmacro %}

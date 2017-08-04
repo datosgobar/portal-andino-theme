@@ -1,3 +1,4 @@
+# coding=utf-8
 from routes.mapper import SubMapper
 
 
@@ -11,6 +12,7 @@ class GobArRouter:
         self.api_controller = 'ckanext.gobar_theme.controller:GobArApiController'
         self.package_controller = 'ckanext.gobar_theme.package_controller:GobArPackageController'
         self.config_controller = 'ckanext.gobar_theme.config_controller:GobArConfigController'
+        self.user_controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
         self.google_analytics_controller = 'ckanext.gobar_theme.google_analytics_controller:GobArGAController'
 
     def redirect(self, *routes):
@@ -27,7 +29,7 @@ class GobArRouter:
         self.remove_dashboard()
         self.remove_tags()
         self.remove_revision()
-        #self.remove_admin()
+        # self.remove_admin()
         self.connect_api()
         self.connect_template_config()
         self.connect_google_analytics()
@@ -105,10 +107,22 @@ class GobArRouter:
         )
 
     def connect_users(self):
-        self.route_map.connect('login', '/ingresar', action='login', controller='ckanext.gobar_theme.controller:GobArUserController')
         self.route_map.connect('/logout', action='logout', controller='user')
-        self.route_map.connect('user_datasets', '/user/{id:.*}', action='read',
-                               controller='ckanext.gobar_theme.controller:GobArUserController')
+        with SubMapper(self.route_map, controller=self.user_controller) as m:
+            m.connect('/borradores', action="drafts")
+            m.connect('/user/reset/{user_id}', action="password_reset")
+            m.connect('user_datasets', '/user/{id:.*}', action='read')
+            m.connect('login', '/ingresar', action='login')
+            m.connect('/olvide_mi_contraseña', action="password_forgot")
+            m.connect('/configurar/mi_cuenta', action="my_account")
+            m.connect('/configurar/mi_cuenta/cambiar_email', action="my_account_edit_email")
+            m.connect('/configurar/mi_cuenta/cambiar_contraseña', action="my_account_edit_password")
+            m.connect('/configurar/crear_usuarios', action="create_users")
+            m.connect('/configurar/editar_usuario', action="edit_user")
+            m.connect('/configurar/borrar_usuario', action="delete_user")
+            m.connect('/configurar/historial', action="user_history")
+            m.connect('/configurar/historial.json', action="user_history_json")
+
         self.redirect(
             ('/user/login', '/'),
             ('/user/generate_key/{id}', '/'),
@@ -118,7 +132,6 @@ class GobArRouter:
             ('/user/unfollow/{id}', '/'),
             ('/user/followers/{id:.*}', '/'),
             ('/user/delete/{id}', '/'),
-            ('/user/reset/{id:.*}', '/'),
             ('/user/register', '/'),
             ('/user/reset', '/'),
             ('/user/set_lang/{lang}', '/'),

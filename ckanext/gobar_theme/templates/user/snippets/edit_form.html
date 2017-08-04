@@ -1,0 +1,44 @@
+<div class="modal edit-user-modal" tabindex="-1" role="dialog" data-username="{{ user.name }}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <i class="icon-remove dismiss-greetings" data-dismiss="modal"></i>
+                <h1 class="blue">Modificar</h1>
+
+                <h2>Usuario</h2>
+                <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="10" value="{{ user.name }}" disabled="disabled">
+
+                <h2>Nombre y apellido</h2>
+                <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez" value="{{ user.fullname or '' }}" disabled="disabled">
+
+                <h2>E-mail</h2>
+                <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com" value="{{ user.email or '' }}" disabled="disabled">
+
+                <hr>
+
+                <h2>Permiso</h2>
+                <select class="user-role">
+                    <option value="admin" {{ 'selected=selected' if user.sysadmin  }}>Administrador</option>
+                    <option value="user" {{ 'selected=selected' if not user.sysadmin  }}>Colaborador</option>
+                </select>
+
+                <div class="user-edit-organizations {{ 'hidden' if user.sysadmin }}">
+                    <h2>Organización</h2>
+                    {{ organization_selector.organization_selector(organizations_tree, user, organizations_and_users) }}
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="save-edit btn btn-blue">
+                        GUARDAR
+                    </button>
+                    <button type="button" class="cancel-edit btn" data-dismiss="modal">
+                        CANCELAR
+                    </button>
+                    <button type="button" class="delete-user btn btn-transparent">
+                        BORRAR USUARIO
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

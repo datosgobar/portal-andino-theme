@@ -1,0 +1,100 @@
+#template-config-container #template-config,
+#recover-password.modal {
+  .can-have-feedback-img {
+    position: relative;
+    .feedback-img {
+      position: absolute;
+      top: 10px;
+      left: 342px;
+      width: 21px;
+      height: 21px;
+    }
+    .validation-success {
+      position: relative;
+      top: -20px;
+      color: $green-300;
+    }
+
+    .validation-error {
+      position: relative;
+      top: -20px;
+      color: $red-300;
+    }
+
+    &.username-feedback {
+      .feedback-img {
+        left: 172px;
+      }
+      .validation-error {
+        top: 0;
+      }
+    }
+
+    &.fullname-feedback {
+      .feedback-img {
+        left: auto;
+        right: 8px;
+      }
+    }
+  }
+}
+
+#password-reset.modal {
+  width: 500px;
+  left: 50%;
+  margin-left: -250px!important;
+  .modal-content {
+    @include box-shadow(none);
+    .modal-body {
+      padding: 50px;
+      max-height: 80%;
+      h1 {
+        text-align: left;
+      }
+      h2 {
+        color: $blue-300;
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+      hr {
+        border-color: $grey-200;
+        margin: 50px 0 20px 0;
+      }
+      p {
+        text-align: left;
+        margin-bottom: 30px;
+        &.password-label,
+        &.email-label {
+          margin: 0;
+        }
+      }
+      .can-have-feedback-img {
+        position: relative;
+        margin-bottom: 30px;
+        p.feedback {
+          color: $red-300;
+          text-align: left;
+          margin: 0;
+          position: static;
+        }
+        img {
+          position: absolute;
+          right: 8px;
+          top: 10px;
+          width: 21px;
+          height: 21px;
+        }
+      }
+      input {
+        height: 42px;
+        width: 100%;
+        margin: 0;
+      }
+    }
+    button {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}

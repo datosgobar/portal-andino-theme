@@ -6125,6 +6125,174 @@ div.svg-tooltip {
   margin-right: -5px; }
 
 /*# sourceMappingURL=bootstrap-datepicker3.min.css.map */
+/**
+ * @author zhixin wen <wenzhixin2010@gmail.com>
+ */
+.ms-parent {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle; }
+
+.ms-choice {
+  display: block;
+  width: 100%;
+  height: 26px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #aaa;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 26px;
+  color: #444;
+  text-decoration: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff; }
+
+.ms-choice.disabled {
+  background-color: #f4f4f4;
+  background-image: none;
+  border: 1px solid #ddd;
+  cursor: default; }
+
+.ms-choice > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  padding-left: 8px; }
+
+.ms-choice > span.placeholder {
+  color: #999; }
+
+.ms-choice > div {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 20px;
+  height: 25px;
+  background: url("/img/multiple-select.png") left top no-repeat; }
+
+.ms-choice > div.open {
+  background: url("/img/multiple-select.png") right top no-repeat; }
+
+.ms-drop {
+  width: 100%;
+  overflow: hidden;
+  display: none;
+  margin-top: -1px;
+  padding: 0;
+  position: absolute;
+  z-index: 1000;
+  background: #fff;
+  color: #000;
+  border: 1px solid #aaa;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px; }
+
+.ms-drop.bottom {
+  top: 100%;
+  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15); }
+
+.ms-drop.top {
+  bottom: 100%;
+  -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15); }
+
+.ms-search {
+  display: inline-block;
+  margin: 0;
+  min-height: 26px;
+  padding: 4px;
+  position: relative;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 10000; }
+
+.ms-search input {
+  width: 100%;
+  height: auto !important;
+  min-height: 24px;
+  padding: 0 20px 0 5px;
+  margin: 0;
+  outline: 0;
+  font-family: sans-serif;
+  font-size: 1em;
+  border: 1px solid #aaa;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background: #fff url("/img/multiple-select.png") no-repeat 100% -22px;
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+  background: url("/img/multiple-select.png") no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%); }
+
+.ms-search, .ms-search input {
+  -webkit-box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.ms-drop ul {
+  overflow: auto;
+  margin: 0;
+  padding: 5px 8px; }
+
+.ms-drop ul > li {
+  list-style: none;
+  display: list-item;
+  background-image: none;
+  position: static; }
+
+.ms-drop ul > li .disabled {
+  opacity: .35;
+  filter: Alpha(Opacity=35); }
+
+.ms-drop ul > li.multiple {
+  display: block;
+  float: left; }
+
+.ms-drop ul > li.group {
+  clear: both; }
+
+.ms-drop ul > li.multiple label {
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.ms-drop ul > li label {
+  font-weight: normal;
+  display: block;
+  white-space: nowrap; }
+
+.ms-drop ul > li label.optgroup {
+  font-weight: bold; }
+
+.ms-drop input[type="checkbox"] {
+  vertical-align: middle; }
+
+.ms-drop .ms-no-results {
+  display: none; }
+
 .pagination {
   font-size: 18px;
   font-weight: 500;
@@ -6163,8 +6331,7 @@ div.svg-tooltip {
       top: 0;
       width: 100%; } }
   #header #header-spacing {
-    padding: 0 20px;
-    text-align: center; }
+    padding: 0 20px; }
     #header #header-spacing .logo-header, #header #header-spacing .header-links {
       height: 72px;
       font-size: 18px;
@@ -6172,27 +6339,131 @@ div.svg-tooltip {
       #header #header-spacing .logo-header svg.edit-svg path, #header #header-spacing .header-links svg.edit-svg path {
         fill: #999999; }
     #header #header-spacing .header-links {
-      overflow: hidden; }
-      #header #header-spacing .header-links a {
-        color: #0695d6;
-        padding: 0 0.5em;
-        font-size: 90%;
-        display: inline-block;
-        height: 100%; }
-        @media (min-width: 768px) {
-          #header #header-spacing .header-links a:hover {
-            background: #0695d6;
-            color: white; } }
+      display: none;
+      text-align: right; }
       @media (min-width: 768px) {
         #header #header-spacing .header-links {
-          text-align: right; }
-          #header #header-spacing .header-links a {
+          display: block; } }
+      #header #header-spacing .header-links .user-divisor {
+        border-left: solid 2px #0695d6;
+        padding: 14px 0.3em 14px 0;
+        display: inline-block;
+        height: 60%;
+        position: absolute;
+        top: 20%;
+        left: 0; }
+      #header #header-spacing .header-links .header-link:hover + .header-link .user-divisor {
+        border-color: transparent; }
+      #header #header-spacing .header-links .header-link {
+        color: #0695d6;
+        margin: 0;
+        padding: 0 0.3em;
+        font-size: 85%;
+        line-height: 72px;
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        vertical-align: bottom; }
+        @media (min-width: 768px) {
+          #header #header-spacing .header-links .header-link:hover, #header #header-spacing .header-links .header-link.active {
+            background: #0695d6;
+            color: white; }
+            #header #header-spacing .header-links .header-link:hover .user-logo path, #header #header-spacing .header-links .header-link.active .user-logo path {
+              fill: white !important; } }
+        @media (min-width: 992px) {
+          #header #header-spacing .header-links .header-link {
+            padding: 0 0.5em;
             font-size: 100%; } }
-    @media (min-width: 768px) {
-      #header #header-spacing .logo-header {
-        text-align: left; } }
+      #header #header-spacing .header-links .header-link.dropdown {
+        position: relative; }
+        #header #header-spacing .header-links .header-link.dropdown .caret {
+          margin-bottom: 8px; }
+        #header #header-spacing .header-links .header-link.dropdown .username {
+          text-transform: uppercase; }
+        #header #header-spacing .header-links .header-link.dropdown .user-logo {
+          height: 30px;
+          vertical-align: middle;
+          margin-left: 10px; }
+        #header #header-spacing .header-links .header-link.dropdown ul {
+          margin: 0;
+          display: none;
+          position: absolute;
+          right: 0;
+          width: 250px;
+          background-color: #0695d6;
+          color: white;
+          list-style-type: none;
+          text-align: left;
+          bottom: -160px;
+          -o-box-shadow: 0 5px 14px -4px rgba(0, 0, 0, 0.5);
+          -moz-box-shadow: 0 5px 14px -4px rgba(0, 0, 0, 0.5);
+          -webkit-box-shadow: 0 5px 14px -4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 14px -4px rgba(0, 0, 0, 0.5); }
+          #header #header-spacing .header-links .header-link.dropdown ul a li {
+            height: 40px;
+            line-height: 26px;
+            padding: 7px 14px;
+            color: white; }
+            #header #header-spacing .header-links .header-link.dropdown ul a li:hover {
+              background: #17b2f8; }
+        #header #header-spacing .header-links .header-link.dropdown.active ul {
+          display: block; }
+    #header #header-spacing .logo-header.showing-nav {
+      height: auto; }
+    #header #header-spacing .logo-header .logo-and-xs-icon {
+      position: relative;
+      padding-left: 50px; }
+      @media (min-width: 768px) {
+        #header #header-spacing .logo-header .logo-and-xs-icon {
+          padding-left: 0; } }
+    #header #header-spacing .logo-header .icon-reorder {
+      position: absolute;
+      font-size: 30px;
+      top: 50%;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      margin-top: -20px;
+      border: none;
+      -o-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+      color: #0695d6; }
+      #header #header-spacing .logo-header .icon-reorder:hover, #header #header-spacing .logo-header .icon-reorder.active {
+        color: white;
+        background: #0695d6; }
+      @media (min-width: 768px) {
+        #header #header-spacing .logo-header .icon-reorder {
+          display: none; } }
+    #header #header-spacing .logo-header .xs-navbar {
+      padding-bottom: 10px; }
+      @media (min-width: 768px) {
+        #header #header-spacing .logo-header .xs-navbar {
+          display: none; } }
+      #header #header-spacing .logo-header .xs-navbar .navbar-link {
+        line-height: initial;
+        padding: 10px;
+        color: #0695d6; }
+        #header #header-spacing .logo-header .xs-navbar .navbar-link:hover {
+          background: #0695d6;
+          color: white;
+          cursor: pointer; }
+          #header #header-spacing .logo-header .xs-navbar .navbar-link:hover a {
+            color: white; }
+          #header #header-spacing .logo-header .xs-navbar .navbar-link:hover .user-logo path {
+            fill: white !important; }
+        #header #header-spacing .logo-header .xs-navbar .navbar-link .username {
+          text-transform: uppercase; }
+        #header #header-spacing .logo-header .xs-navbar .navbar-link .user-logo {
+          height: 20px;
+          vertical-align: middle; }
+      #header #header-spacing .logo-header .xs-navbar .dropdown-navbar .navbar-link {
+        padding-left: 15px; }
     #header #header-spacing .logo-header .logo-ministerio {
-      height: 100%;
+      height: 60px;
       max-width: 100%; }
 
 .footer-down {
@@ -6629,7 +6900,7 @@ div#background-container {
     .gobar-static-container .gobar-static p {
       font-size: 16px; }
 
-.btn {
+button.btn {
   color: white;
   border: none;
   -o-border-radius: 4px;
@@ -6640,30 +6911,33 @@ div#background-container {
   font-weight: 400;
   margin-left: 10px;
   background: #999999; }
-  .btn:focus {
+  button.btn:focus {
     color: white; }
-  .btn:hover, .btn:active, .btn:focus {
+  button.btn:hover, button.btn:active, button.btn:focus {
     background: #767676;
     color: white; }
-  .btn.btn-blue {
+  button.btn.btn-blue {
     background: #0695d6; }
-    .btn.btn-blue:hover, .btn.btn-blue:active, .btn.btn-blue:focus {
+    button.btn.btn-blue:hover, button.btn.btn-blue:active, button.btn.btn-blue:focus {
       background: #17b2f8;
       color: white; }
-  .btn.btn-red {
+    button.btn.btn-blue[disabled] {
+      opacity: 1;
+      color: white; }
+  button.btn.btn-red {
     background: #ef4d3d; }
-    .btn.btn-red:hover, .btn.btn-red:active, .btn.btn-red:focus {
+    button.btn.btn-red:hover, button.btn.btn-red:active, button.btn.btn-red:focus {
       background: #ff7366; }
-  .btn.btn-green {
+  button.btn.btn-green {
     background: #33B561; }
-    .btn.btn-green:hover, .btn.btn-green:active, .btn.btn-green:focus {
+    button.btn.btn-green:hover, button.btn.btn-green:active, button.btn.btn-green:focus {
       background: #4ecd7a; }
-  .btn.btn-transparent {
+  button.btn.btn-transparent {
     background: transparent;
     color: #0695d6;
     border: none;
     box-shadow: none; }
-    .btn.btn-transparent:hover {
+    button.btn.btn-transparent:hover {
       color: #17b2f8; }
 
 #title {
@@ -7044,6 +7318,86 @@ div#background-container {
     top: 10px;
     left: 10px; }
 
+#template-config-container #template-config .can-have-feedback-img,
+#recover-password.modal .can-have-feedback-img {
+  position: relative; }
+  #template-config-container #template-config .can-have-feedback-img .feedback-img,
+  #recover-password.modal .can-have-feedback-img .feedback-img {
+    position: absolute;
+    top: 10px;
+    left: 342px;
+    width: 21px;
+    height: 21px; }
+  #template-config-container #template-config .can-have-feedback-img .validation-success,
+  #recover-password.modal .can-have-feedback-img .validation-success {
+    position: relative;
+    top: -20px;
+    color: #33B561; }
+  #template-config-container #template-config .can-have-feedback-img .validation-error,
+  #recover-password.modal .can-have-feedback-img .validation-error {
+    position: relative;
+    top: -20px;
+    color: #ef4d3d; }
+  #template-config-container #template-config .can-have-feedback-img.username-feedback .feedback-img,
+  #recover-password.modal .can-have-feedback-img.username-feedback .feedback-img {
+    left: 172px; }
+  #template-config-container #template-config .can-have-feedback-img.username-feedback .validation-error,
+  #recover-password.modal .can-have-feedback-img.username-feedback .validation-error {
+    top: 0; }
+  #template-config-container #template-config .can-have-feedback-img.fullname-feedback .feedback-img,
+  #recover-password.modal .can-have-feedback-img.fullname-feedback .feedback-img {
+    left: auto;
+    right: 8px; }
+
+#password-reset.modal {
+  width: 500px;
+  left: 50%;
+  margin-left: -250px !important; }
+  #password-reset.modal .modal-content {
+    -o-box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+    #password-reset.modal .modal-content .modal-body {
+      padding: 50px;
+      max-height: 80%; }
+      #password-reset.modal .modal-content .modal-body h1 {
+        text-align: left; }
+      #password-reset.modal .modal-content .modal-body h2 {
+        color: #0695d6;
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 20px; }
+      #password-reset.modal .modal-content .modal-body hr {
+        border-color: #cccccc;
+        margin: 50px 0 20px 0; }
+      #password-reset.modal .modal-content .modal-body p {
+        text-align: left;
+        margin-bottom: 30px; }
+        #password-reset.modal .modal-content .modal-body p.password-label, #password-reset.modal .modal-content .modal-body p.email-label {
+          margin: 0; }
+      #password-reset.modal .modal-content .modal-body .can-have-feedback-img {
+        position: relative;
+        margin-bottom: 30px; }
+        #password-reset.modal .modal-content .modal-body .can-have-feedback-img p.feedback {
+          color: #ef4d3d;
+          text-align: left;
+          margin: 0;
+          position: static; }
+        #password-reset.modal .modal-content .modal-body .can-have-feedback-img img {
+          position: absolute;
+          right: 8px;
+          top: 10px;
+          width: 21px;
+          height: 21px; }
+      #password-reset.modal .modal-content .modal-body input {
+        height: 42px;
+        width: 100%;
+        margin: 0; }
+    #password-reset.modal .modal-content button {
+      display: block;
+      margin: 0 auto; }
+
 #login-container {
   height: 100%;
   padding-right: 0;
@@ -7149,6 +7503,9 @@ div#background-container {
     #login-container #login #login-vertical-wrapper {
       display: table-cell;
       vertical-align: middle; }
+      #login-container #login #login-vertical-wrapper .password-reset {
+        text-align: center;
+        margin: 50px 0 0 0; }
     #login-container #login form {
       width: 100%;
       margin: 0 auto; }
@@ -7163,6 +7520,8 @@ div#background-container {
       #login-container #login form .controls {
         display: block;
         margin: 0; }
+      #login-container #login form .error {
+        color: #ef4d3d; }
       #login-container #login form .checkbox {
         text-align: right;
         margin: 0; }
@@ -7190,6 +7549,46 @@ div#background-container {
         display: inline-block; }
         #login-container #login form button:hover {
           background-color: #17b2f8; }
+
+#recover-password.modal {
+  width: 600px;
+  left: 50%;
+  margin-left: -300px !important; }
+  #recover-password.modal .modal-content {
+    -o-box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+    #recover-password.modal .modal-content .modal-body {
+      padding: 50px; }
+      #recover-password.modal .modal-content .modal-body .dismiss-recovery {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #999999;
+        font-size: 16px; }
+      #recover-password.modal .modal-content .modal-body h1 {
+        margin-bottom: 30px; }
+      #recover-password.modal .modal-content .modal-body p.username-label {
+        text-align: left;
+        margin: 0 0 5px 0;
+        font-weight: 500; }
+      #recover-password.modal .modal-content .modal-body .can-have-feedback-img {
+        margin-bottom: 30px; }
+        #recover-password.modal .modal-content .modal-body .can-have-feedback-img #username {
+          width: 100%;
+          height: 42px;
+          margin: 0; }
+        #recover-password.modal .modal-content .modal-body .can-have-feedback-img p.feedback {
+          text-align: left;
+          margin: 0;
+          position: static; }
+        #recover-password.modal .modal-content .modal-body .can-have-feedback-img img {
+          left: auto;
+          right: 8px; }
+      #recover-password.modal .modal-content .modal-body #send-recovery {
+        display: block;
+        margin: 0 auto; }
 
 #user-datasets-container {
   padding-right: 0;
@@ -7219,6 +7618,210 @@ div#background-container {
       font-size: 40px;
       font-weight: 400;
       margin: 0 0 30px 0; }
+
+#template-config-container #template-config #user-config-my-account {
+  margin-bottom: 50px; }
+  #template-config-container #template-config #user-config-my-account input[name="username"] {
+    width: 200px;
+    max-width: 80%; }
+  #template-config-container #template-config #user-config-my-account input[name="email"],
+  #template-config-container #template-config #user-config-my-account input[name="email-confirmation"],
+  #template-config-container #template-config #user-config-my-account input[name="password"] {
+    width: 370px;
+    max-width: 80%; }
+  #template-config-container #template-config #user-config-my-account .disabled-input svg {
+    height: 42px;
+    width: 24px;
+    cursor: pointer; }
+    #template-config-container #template-config #user-config-my-account .disabled-input svg path {
+      fill: #999999; }
+    #template-config-container #template-config #user-config-my-account .disabled-input svg:hover path {
+      fill: #0695d6; }
+  #template-config-container #template-config #user-config-my-account button {
+    margin-bottom: 30px;
+    height: 42px; }
+#template-config-container #template-config #user-config-create-users {
+  margin-bottom: 50px;
+  padding-bottom: 90px; }
+  #template-config-container #template-config #user-config-create-users .role-description {
+    font-style: italic; }
+  #template-config-container #template-config #user-config-create-users input[name="username"] {
+    width: 200px;
+    max-width: 80%;
+    margin-bottom: 10px; }
+  #template-config-container #template-config #user-config-create-users .username-restriction {
+    margin-bottom: 30px;
+    font-style: italic; }
+  #template-config-container #template-config #user-config-create-users input[name="email"],
+  #template-config-container #template-config #user-config-create-users input[name="email-confirmation"],
+  #template-config-container #template-config #user-config-create-users input[name="password"] {
+    width: 370px;
+    max-width: 80%; }
+  #template-config-container #template-config #user-config-create-users button.save-new-user {
+    display: block;
+    margin-bottom: 30px;
+    height: 42px;
+    margin-left: 0; }
+  #template-config-container #template-config #user-config-create-users input.small-margin {
+    margin-bottom: 10px; }
+  #template-config-container #template-config #user-config-create-users select.organization-select {
+    width: 370px;
+    max-width: 80%;
+    height: 42px;
+    margin-bottom: 30px; }
+  #template-config-container #template-config #user-config-create-users .ms-parent {
+    margin-bottom: 30px;
+    color: #767676; }
+    #template-config-container #template-config #user-config-create-users .ms-parent .ms-choice {
+      color: #767676;
+      height: 42px;
+      border: solid 1px #cccccc; }
+      #template-config-container #template-config #user-config-create-users .ms-parent .ms-choice span {
+        top: 7px; }
+    #template-config-container #template-config #user-config-create-users .ms-parent .ms-drop {
+      color: #767676; }
+      #template-config-container #template-config #user-config-create-users .ms-parent .ms-drop .ms-search input {
+        margin: 0;
+        padding: 2px;
+        border: solid 1px #cccccc;
+        border-radius: 4px; }
+      #template-config-container #template-config #user-config-create-users .ms-parent .ms-drop ul li label {
+        overflow: hidden;
+        text-overflow: ellipsis; }
+  #template-config-container #template-config #user-config-create-users hr.before-list {
+    margin-top: 30px;
+    margin-bottom: 60px; }
+  #template-config-container #template-config #user-config-create-users .user-list {
+    position: relative;
+    padding-left: 170px;
+    margin-bottom: 50px; }
+    #template-config-container #template-config #user-config-create-users .user-list h2.user-list-title {
+      position: absolute;
+      top: 0;
+      left: 0; }
+    #template-config-container #template-config #user-config-create-users .user-list .user {
+      margin-bottom: 20px; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .user-editable {
+        padding-left: 40px;
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        min-height: 45px; }
+        #template-config-container #template-config #user-config-create-users .user-list .user .user-editable:hover .edit-svg path {
+          fill: #0695d6; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .user-logo {
+        position: absolute;
+        top: 6px;
+        left: 2px;
+        width: 30px;
+        height: 30px; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .username {
+        font-size: 18px;
+        margin-bottom: 0; }
+        #template-config-container #template-config #user-config-create-users .user-list .user .username .edit-svg {
+          width: 20px;
+          height: 20px;
+          vertical-align: sub;
+          cursor: pointer; }
+          #template-config-container #template-config #user-config-create-users .user-list .user .username .edit-svg path {
+            fill: #999999; }
+      #template-config-container #template-config #user-config-create-users .user-list .user .fullname,
+      #template-config-container #template-config #user-config-create-users .user-list .user .email {
+        color: #999999;
+        font-size: 14px;
+        margin-bottom: 0; }
+    #template-config-container #template-config #user-config-create-users .user-list .modal {
+      width: 500px;
+      left: 50%;
+      margin-left: -250px !important;
+      border: 1px solid rgba(0, 0, 0, 0.2); }
+      #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content {
+        border: none; }
+        #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body {
+          padding: 50px;
+          max-height: none; }
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body .dismiss-greetings {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #999999;
+            font-size: 16px; }
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: left; }
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body .delete-user {
+            color: #999999; }
+            #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body .delete-user:hover {
+              color: #767676; }
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body input[name="username"],
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body input[name="fullname"],
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body input[name="email"],
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body select.user-role {
+            margin-bottom: 30px;
+            height: 42px; }
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body input[name="email"] {
+            width: 100%;
+            max-width: 100%; }
+          #template-config-container #template-config #user-config-create-users .user-list .modal .modal-content .modal-body hr {
+            margin-top: 0;
+            margin-bottom: 30px; }
+
+#user-config-history {
+  margin-bottom: 50px; }
+  #user-config-history ul.activity {
+    position: relative;
+    margin-bottom: 0; }
+    #user-config-history ul.activity:after {
+      content: '';
+      display: block;
+      border-left: 1px dashed #999999;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 14px;
+      z-index: -1; }
+    #user-config-history ul.activity li.item {
+      display: block;
+      border-bottom: none; }
+      #user-config-history ul.activity li.item p {
+        padding-left: 40px;
+        position: relative; }
+      #user-config-history ul.activity li.item i.icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #01bdf2; }
+      #user-config-history ul.activity li.item img {
+        display: none; }
+      #user-config-history ul.activity li.item .actor a {
+        pointer-events: none; }
+      #user-config-history ul.activity li.item[class*="deleted"] i.icon, #user-config-history ul.activity li.item[class*="removed"] i.icon, #user-config-history ul.activity li.item[class*="failure"] i.icon {
+        background: #ff4338; }
+      #user-config-history ul.activity li.item[class*="deleted"] a, #user-config-history ul.activity li.item[class*="removed"] a, #user-config-history ul.activity li.item[class*="failure"] a {
+        pointer-events: none; }
+      #user-config-history ul.activity li.item[class*="success"] i.icon, #user-config-history ul.activity li.item[class*="added"] i.icon, #user-config-history ul.activity li.item[class*="new"] i.icon {
+        background: #82bc00; }
+      #user-config-history ul.activity li.item .date:first-letter {
+        text-transform: uppercase; }
+  #user-config-history .show-more-container {
+    text-align: center; }
+    #user-config-history .show-more-container .show-more {
+      cursor: pointer;
+      color: #999999; }
+      #user-config-history .show-more-container .show-more svg {
+        width: 12px;
+        height: 12px; }
+        #user-config-history .show-more-container .show-more svg path {
+          fill: #999999; }
+      #user-config-history .show-more-container .show-more.fetching {
+        pointer-events: none;
+        cursor: waiting; }
+      #user-config-history .show-more-container .show-more:hover {
+        color: #767676; }
+        #user-config-history .show-more-container .show-more:hover svg path {
+          fill: #767676; }
 
 .organization-container {
   display: table-row;
@@ -9064,7 +9667,7 @@ ul.activity {
       font-weight: 400;
       margin: 0 0 10px 0;
       font-size: 20px;
-      color: #999999; }
+      color: #767676; }
       #template-config-container #template-config h2.blue {
         color: #0695d6; }
     #template-config-container #template-config .with-bottom-margin {
@@ -9075,6 +9678,8 @@ ul.activity {
       font-size: 16px; }
       #template-config-container #template-config p:after, #template-config-container #template-config label:after {
         content: none; }
+    #template-config-container #template-config p.error {
+      color: #ef4d3d; }
     #template-config-container #template-config .radio-container {
       margin-bottom: 30px; }
       #template-config-container #template-config .radio-container .radio-box {
@@ -9106,13 +9711,26 @@ ul.activity {
           padding: 20px; }
           #template-config-container #template-config .radio-container label.img-radio .radio-description h2 {
             color: #767676; }
-    #template-config-container #template-config input[type="text"] {
+    #template-config-container #template-config input[type="text"],
+    #template-config-container #template-config input[type="password"] {
       width: 100%;
       margin-bottom: 30px;
       padding: 10px;
       height: auto;
       font-size: 16px;
       color: #767676; }
+      #template-config-container #template-config input[type="text"]::-webkit-input-placeholder,
+      #template-config-container #template-config input[type="password"]::-webkit-input-placeholder {
+        font-style: italic; }
+      #template-config-container #template-config input[type="text"]::-moz-placeholder,
+      #template-config-container #template-config input[type="password"]::-moz-placeholder {
+        font-style: italic; }
+      #template-config-container #template-config input[type="text"]:-moz-placeholder,
+      #template-config-container #template-config input[type="password"]:-moz-placeholder {
+        font-style: italic; }
+      #template-config-container #template-config input[type="text"]:-ms-input-placeholder,
+      #template-config-container #template-config input[type="password"]:-ms-input-placeholder {
+        font-style: italic; }
     #template-config-container #template-config .checkbox-label {
       font-size: 20px;
       color: #999999; }

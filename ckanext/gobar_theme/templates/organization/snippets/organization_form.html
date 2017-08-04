@@ -58,14 +58,18 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h1>¿Querés borrar esta organización?</h1>
-                <p>Si lo hacés, todos los datasets y recursos vinculados a ella van a desaparecer.</p>
+                <p>
+                    Si lo hacés, <strong>borrarás también las organizaciones que dependan de ella y todos los conjuntos
+                    de datos vinculados</strong>. Además, <strong>los usuarios asociados a estas organización dejarán
+                    de tener permisos</strong> para crear, actualizar y borrar datos.
+                </p>
                 <div class="modal-actions">
                     <form id="organization-confirm-delete-form"
                           action="{% url_for controller='organization', action='delete', id=data.name %}"
                           method="post">
                         <button class="btn btn-blue" type="submit" name="delete">BORRAR ORGANIZACIÓN</button>
                         <button id="dismiss-greetings" type="button" class="btn btn-blue" data-dismiss="modal">
-                            NO, NO BORRAR
+                            NO BORRAR
                         </button>
                     </form>
                 </div>
