@@ -105,7 +105,10 @@
         }
 
         p.pkg-tag {
+          overflow: hidden;
+          text-overflow: ellipsis;
           a {
+            white-space: normal;
             color: $grey-400;
             &:hover {
               color: $blue-300;
@@ -113,8 +116,15 @@
           }
           margin: 0 0 5px 0;
         }
+        p.show-more-tags,
+        p.show-fewer-tags {
+            cursor: pointer;
+            color: $blue-300;
+            &:hover {
+                color: $blue-400;
+            }
+        }
       }
     }
-
   }
 }

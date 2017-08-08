@@ -38,12 +38,21 @@
                 </div>
                 <div class="col-xs-7 value">
                     {% for tag in pkg.tags %}
-                        <p class="pkg-tag">
+                        <p class="pkg-tag {{ 'hidden not-default-visible' if loop.index > 5 }}">
                             <a href="{{ h.add_url_param(new_params={'tags': tag.name}, alternative_url=dataset_url) }}">
                                 {{ tag.name }}
                             </a>
                         </p>
                     {% endfor %}
+
+                    {% if pkg.tags|length > 5 %}
+                        <p class="toggle-tags show-more-tags">
+                            Mostrar más
+                        </p>
+                        <p class="toggle-tags show-fewer-tags hidden">
+                            Mostrar menos
+                        </p>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
@@ -146,4 +155,5 @@
     </div>
 </div>
 
+{% resource 'gobar_js/package/tags.js' %}
 {% resource 'gobar_js/package/activity.js' %}

@@ -107,6 +107,8 @@
           padding: 5px $side-padding;
           position: relative;
           background: transparent;
+          overflow: hidden;
+          text-overflow: ellipsis;
           @include transition-delay(0s);
           @include transition-property(background);
           @include transition-timing-function(linear);

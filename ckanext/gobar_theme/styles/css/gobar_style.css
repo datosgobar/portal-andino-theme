@@ -8361,6 +8361,8 @@ button.btn {
           padding: 5px 30px;
           position: relative;
           background: transparent;
+          overflow: hidden;
+          text-overflow: ellipsis;
           -webkit-transition-delay: 0s;
           -moz-transition-delay: 0s;
           transition-delay: 0s;
@@ -8711,11 +8713,21 @@ button.btn {
             #pkg-secondary-info #info-container .row .value .group-img-container svg.group-image:hover + .svg-tooltip .tooltip-text {
               opacity: 1; }
         #pkg-secondary-info #info-container .row .value p.pkg-tag {
+          overflow: hidden;
+          text-overflow: ellipsis;
           margin: 0 0 5px 0; }
           #pkg-secondary-info #info-container .row .value p.pkg-tag a {
+            white-space: normal;
             color: #767676; }
             #pkg-secondary-info #info-container .row .value p.pkg-tag a:hover {
               color: #0695d6; }
+        #pkg-secondary-info #info-container .row .value p.show-more-tags,
+        #pkg-secondary-info #info-container .row .value p.show-fewer-tags {
+          cursor: pointer;
+          color: #0695d6; }
+          #pkg-secondary-info #info-container .row .value p.show-more-tags:hover,
+          #pkg-secondary-info #info-container .row .value p.show-fewer-tags:hover {
+            color: #0072bc; }
 
 #pkg-recent-activity {
   background: #fafafa;
@@ -8730,6 +8742,9 @@ button.btn {
     margin: 0; }
     #pkg-recent-activity ul.activity li.item {
       border-bottom: solid 1px #999999; }
+      #pkg-recent-activity ul.activity li.item p {
+        overflow: hidden;
+        text-overflow: ellipsis; }
   #pkg-recent-activity .activity-read-more, #pkg-recent-activity .activity-loading {
     text-align: center;
     background: transparent;
