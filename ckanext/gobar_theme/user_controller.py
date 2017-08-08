@@ -13,6 +13,7 @@ import string
 import ckanext.gobar_theme.mailer as mailer
 import ckan.lib.mailer as ckan_mailer
 import json
+from webob.exc import HTTPNotFound
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
@@ -22,6 +23,12 @@ class GobArUserController(UserController):
     json_content_type = 'application/json;charset=utf-8'
 
     def read(self, id=None):
+        if id == 'logged_in':
+            try:
+                return super(GobArUserController, self).read(id)
+            except HTTPNotFound:
+                controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
+                return h.redirect_to(controller=controller, action='login', login_error=True)
         return h.redirect_to('home')
 
     def login(self, error=None):
