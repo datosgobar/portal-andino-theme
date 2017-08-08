@@ -59,6 +59,8 @@ Desde agosto de 2017, en Andino **hay dos tipos de usuarios: los administradores
 
 **Asigná permisos desde Mi cuenta > Crear usuarios**.
 
+![alt text](assets/portal-andino-user.png "user")
+
 ***
 
 ## Elementos de tu portal
