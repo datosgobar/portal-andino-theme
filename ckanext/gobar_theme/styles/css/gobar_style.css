@@ -6823,6 +6823,46 @@ div#background-container {
           #error #error-text #error-code .circle-container .circle-gutter .circle-background.different {
             opacity: 0.75; }
 
+#expired-key {
+  padding-right: 0;
+  padding-left: 0;
+  height: 100%;
+  background: #f5f5f5; }
+  @media (min-width: 992px) {
+    #expired-key {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  #expired-key #expired-key-content {
+    padding: 30px 50px;
+    color: #767676;
+    font-size: 16px;
+    -o-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    height: 100%; }
+    @media (min-width: 992px) {
+      #expired-key #expired-key-content {
+        -o-box-shadow: 0 -2px 4px 0 rgba(150, 150, 150, 0.5);
+        -moz-box-shadow: 0 -2px 4px 0 rgba(150, 150, 150, 0.5);
+        -webkit-box-shadow: 0 -2px 4px 0 rgba(150, 150, 150, 0.5);
+        box-shadow: 0 -2px 4px 0 rgba(150, 150, 150, 0.5); } }
+    #expired-key #expired-key-content table {
+      width: 100%;
+      height: 100%; }
+    #expired-key #expired-key-content td {
+      text-align: center;
+      vertical-align: middle; }
+    #expired-key #expired-key-content img {
+      width: 200px;
+      margin-bottom: 30px; }
+    #expired-key #expired-key-content .expired-key-title {
+      color: #17b2f8;
+      font-size: 30px; }
+    #expired-key #expired-key-content .expired-key-desc {
+      font-size: 20px;
+      margin: 0; }
+
 .modal-open .modal {
   width: 50%;
   max-height: 80%;

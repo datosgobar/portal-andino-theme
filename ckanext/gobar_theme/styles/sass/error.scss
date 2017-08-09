@@ -47,3 +47,34 @@
     }
   }
 }
+
+#expired-key {
+    @include base-container();
+    height: 100%;
+    background: $grey-100;
+    #expired-key-content {
+        @include base-content();
+        @include box-shadow(none!important);
+        height: 100%;
+        table {
+            width: 100%;
+            height: 100%;
+        }
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        img {
+            width: 200px;
+            margin-bottom: 30px;
+        }
+        .expired-key-title {
+            color: $blue-200;
+            font-size: 30px;
+        }
+        .expired-key-desc {
+            font-size: 20px;
+            margin: 0;
+        }
+    }
+}

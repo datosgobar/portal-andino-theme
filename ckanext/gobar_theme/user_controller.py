@@ -108,12 +108,12 @@ class GobArUserController(UserController):
             logic.get_action('user_show')(context, {'id': user_id})
             user_obj = context['user_obj']
         except logic.NotFound:
-            return base.abort(404)
+            return base.render('user/expired_key.html')
 
         c.reset_key = request.params.get('key')
         if not ckan_mailer.verify_reset_link(user_obj, c.reset_key):
             # Invalid reset key.
-            return base.abort(404)
+            return base.render('user/expired_key.html')
 
         if request.method == 'POST':
             user_data = {
