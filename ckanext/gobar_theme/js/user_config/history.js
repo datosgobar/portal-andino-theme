@@ -19,4 +19,6 @@ $(function () {
         var failCallback = function () { button.removeClass('fetching'); }
         $.get(url, data, callback).fail(failCallback);
     });
+
+    $('.load-more').remove()
 });

@@ -7550,9 +7550,10 @@ button.btn {
       text-align: center;
       margin-bottom: 40px; }
       #login-container #login #forgot-password-positive-feedback span {
+        border-radius: 4px;
         color: #424242;
         display: inline-block;
-        padding: 5px 20px;
+        padding: 10px 20px;
         background: #f5f5f5; }
         #login-container #login #forgot-password-positive-feedback span img {
           width: 20px;
@@ -7857,8 +7858,12 @@ button.btn {
         background: #82bc00; }
       #user-config-history ul.activity li.item .date:first-letter {
         text-transform: uppercase; }
+      #user-config-history ul.activity li.item:nth-last-child(1) {
+        background: white; }
   #user-config-history .show-more-container {
-    text-align: center; }
+    text-align: center;
+    border-top: solid 1px #cccccc;
+    padding-top: 10px; }
     #user-config-history .show-more-container .show-more {
       cursor: pointer;
       color: #999999; }
@@ -8779,7 +8784,7 @@ button.btn {
           color: #0695d6; }
           #pkg-secondary-info #info-container .row .value p.show-more-tags:hover,
           #pkg-secondary-info #info-container .row .value p.show-fewer-tags:hover {
-            color: #0072bc; }
+            color: #17b2f8; }
 
 #pkg-recent-activity {
   background: #fafafa;

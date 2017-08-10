@@ -56,10 +56,16 @@
       .date:first-letter {
         text-transform: uppercase;
       }
+
+      &:nth-last-child(1) {
+          background: white;
+      }
     }
   }
   .show-more-container {
     text-align: center;
+    border-top: solid 1px $grey-200;
+    padding-top: 10px;
     .show-more {
       cursor: pointer;
       color: $grey-300;
