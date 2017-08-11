@@ -7744,6 +7744,12 @@ button.btn {
   #template-config-container #template-config #user-config-create-users hr.before-list {
     margin-top: 30px;
     margin-bottom: 60px; }
+  #template-config-container #template-config #user-config-create-users .orphan-list-title {
+    magin-bottom: 5px; }
+  #template-config-container #template-config #user-config-create-users .orphan-list-description {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-style: italic; }
   #template-config-container #template-config #user-config-create-users .user-list {
     position: relative;
     padding-left: 170px;

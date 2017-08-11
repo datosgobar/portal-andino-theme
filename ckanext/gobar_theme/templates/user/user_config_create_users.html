@@ -118,6 +118,36 @@
             </div>
         {% endif %}
 
+        {% if orphan_users|length > 0 %}
+            <hr>
+            <h2 class="blue user-list-title orphan-list-title">Colaboradores sin organizaciones asociadas</h2>
+            <p class="orphan-list-description">
+                Estos usuarios ya no tienen permisos para crear, actualizar y borrar conjuntos de datos. Podés asociarlos a nuevas organizaciones o borrarlos.
+            </p>
+            <div class="user-list orphan-users">
+                <div class="users">
+                    {% for orphan_user in orphan_users %}
+                        <div class="user">
+                            <div class="user-editable">
+                                {% snippet "svg/user-logo.svg" %}
+                                <p class="username">
+                                    {{ orphan_user.name }}
+                                    {% snippet "svg/edit.svg" %}
+                                </p>
+                                <p class="fullname">
+                                    {{ orphan_user.fullname or '' }}
+                                </p>
+                                <p class="email">
+                                    {{ orphan_user.email or '' }}
+                                </p>
+                            </div>
+                            {% snippet "user/snippets/edit_form.html", user=orphan_user, organizations_tree=organizations_tree, organization_selector=organization_selector, organizations_and_users=organizations_and_users %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
     </div>
 
     {% resource 'gobar_js/user_config/user_commons.js' %}

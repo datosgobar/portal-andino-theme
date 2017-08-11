@@ -180,8 +180,19 @@ class GobArUserController(UserController):
             return h.json.dumps(json_response, for_json=True)
         all_users = model.Session.query(model.User).filter_by(state='active')
         extra_vars['admin_users'] = list(filter(lambda u: u.sysadmin, all_users))
-        extra_vars['normal_users'] = list(filter(lambda u: not u.sysadmin, all_users))
+        extra_vars['normal_users'] = []
+        extra_vars['orphan_users'] = []
+        not_admin_users = list(filter(lambda u: not u.sysadmin, all_users))
         extra_vars['organizations_and_users'] = self._roles_by_organization()
+        for user in not_admin_users:
+            has_any_permit = any([
+                extra_vars['organizations_and_users'][org][user.name]
+                for org in extra_vars['organizations_and_users']
+            ])
+            if has_any_permit:
+                extra_vars['normal_users'].append(user)
+            else:
+                extra_vars['orphan_users'].append(user)
         return base.render('user/user_config_create_users.html', extra_vars=extra_vars)
 
     def user_history(self):
