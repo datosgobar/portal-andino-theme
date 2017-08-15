@@ -6940,7 +6940,7 @@ div#background-container {
     .gobar-static-container .gobar-static p {
       font-size: 16px; }
 
-button.btn {
+.btn {
   color: white;
   border: none;
   -o-border-radius: 4px;
@@ -6951,33 +6951,33 @@ button.btn {
   font-weight: 400;
   margin-left: 10px;
   background: #999999; }
-  button.btn:focus {
+  .btn:focus {
     color: white; }
-  button.btn:hover, button.btn:active, button.btn:focus {
+  .btn:hover, .btn:active, .btn:focus {
     background: #767676;
     color: white; }
-  button.btn.btn-blue {
+  .btn.btn-blue {
     background: #0695d6; }
-    button.btn.btn-blue:hover, button.btn.btn-blue:active, button.btn.btn-blue:focus {
+    .btn.btn-blue:hover, .btn.btn-blue:active, .btn.btn-blue:focus {
       background: #17b2f8;
       color: white; }
-    button.btn.btn-blue[disabled] {
+    .btn.btn-blue[disabled] {
       opacity: 1;
       color: white; }
-  button.btn.btn-red {
+  .btn.btn-red {
     background: #ef4d3d; }
-    button.btn.btn-red:hover, button.btn.btn-red:active, button.btn.btn-red:focus {
+    .btn.btn-red:hover, .btn.btn-red:active, .btn.btn-red:focus {
       background: #ff7366; }
-  button.btn.btn-green {
+  .btn.btn-green {
     background: #33B561; }
-    button.btn.btn-green:hover, button.btn.btn-green:active, button.btn.btn-green:focus {
+    .btn.btn-green:hover, .btn.btn-green:active, .btn.btn-green:focus {
       background: #4ecd7a; }
-  button.btn.btn-transparent {
+  .btn.btn-transparent {
     background: transparent;
     color: #0695d6;
     border: none;
     box-shadow: none; }
-    button.btn.btn-transparent:hover {
+    .btn.btn-transparent:hover {
       color: #17b2f8; }
 
 #title {
