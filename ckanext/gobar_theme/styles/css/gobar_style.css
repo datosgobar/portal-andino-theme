@@ -7044,7 +7044,7 @@ button.btn {
       -webkit-box-shadow: none;
       box-shadow: none;
       margin-bottom: 15px;
-      padding: 15px 2em 15px 15px;
+      padding: 0 2em 0 15px;
       font-size: 20px;
       line-height: 1.2;
       height: 39px; }

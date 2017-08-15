@@ -96,7 +96,7 @@
         @include box-shadow(none);
 
         margin-bottom: 15px;
-        padding: $padding 2em $padding $padding;
+        padding: 0 2em 0 $padding;
         font-size: $font-size;
         line-height: $line-height;
         height: $padding + $font-size * $line-height;
