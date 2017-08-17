@@ -134,8 +134,11 @@ $header-height: 72px;
       }
 
       .logo-and-xs-icon {
+        height: 100%;
         position: relative;
         padding-left: 50px;
+        padding-top: 11px;
+        padding-bottom: 11px;
         @include breakpoint-sm {
           padding-left: 0;
         }
@@ -196,9 +199,15 @@ $header-height: 72px;
           padding-left: 15px;
         }
       }
+      a {
+       display: inline-block;
+       height: 50px;
+       vertical-align: top;
+      }
       .logo-ministerio {
-        height: 60px;
+        height: 50px;
         max-width: 100%;
+        display: block;
       }
     }
   }
