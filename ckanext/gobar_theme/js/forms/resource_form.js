@@ -35,4 +35,5 @@ $(function () {
         addAttributesHidden();
         return true
     });
+    $('#resource-attributes-form').on('change', 'input, select, textarea', addAttributesHidden)
 });
