@@ -6,12 +6,14 @@ $(function () {
         newCol.find('.resource-col-descrition').val('');
         $('.resource-attributes-actions').before(newCol);
         $('#remove-col').removeClass('hidden');
+        addAttributesHidden()
     });
 
     $('#remove-col').on('click', function (e) {
         var cols = $('.resource-attributes-group');
         $(e.currentTarget).toggleClass('hidden', cols.length == 2);
         cols.last().remove()
+        addAttributesHidden()
     });
 
     function addAttributesHidden() {
