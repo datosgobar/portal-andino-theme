@@ -2,7 +2,7 @@ language: python
 sudo: required
 python:
     - "2.7"
-env: PGVERSION=9.5
+env: PGVERSION=9.1
 install:
     - bash bin/travis-build.bash
     - pip install coveralls

@@ -4,9 +4,6 @@ set -e
 echo "This is travis-build.bash..."
 
 echo "Installing the packages that CKAN requires..."
-# Añado el repo de Postgresql v9.5 + key
-sudo su -c "echo deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main >> /etc/apt/sources.list.d/pgdg.list"
-sudo wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 sudo apt-get update -qq
 sudo apt-get install postgresql-$PGVERSION solr-jetty libcommons-fileupload-java
 
