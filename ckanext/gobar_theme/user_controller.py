@@ -14,9 +14,12 @@ import ckanext.gobar_theme.mailer as mailer
 import ckan.lib.mailer as ckan_mailer
 import json
 from webob.exc import HTTPNotFound
+import logging
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
+
+logger = logging.getLogger(__name__)
 
 
 class GobArUserController(UserController):
@@ -25,7 +28,15 @@ class GobArUserController(UserController):
     def read(self, id=None):
         if id == 'logged_in':
             try:
-                return super(GobArUserController, self).read(id)
+                user_id = c.userobj.id
+                user_name = c.userobj.name
+            except:
+                user_id = ''
+                user_name = ''
+            logger.info('User ID:\'{}\', name: \'{}\''.format(user_id, user_name))
+            try:
+                super(GobArUserController, self).read(user_id)
+                return h.redirect_to('home')
             except HTTPNotFound:
                 controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
                 return h.redirect_to(controller=controller, action='login', login_error=True)
