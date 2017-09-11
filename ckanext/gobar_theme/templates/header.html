@@ -1,0 +1,31 @@
+<div id="header" class="container-fluid">
+    <div class="restricted-max-width">
+        <div id="header-spacing" class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <div class="col-xs-12 col-sm-5 no-padding logo-header">
+                <a href="{{ h.url('home') }}">
+                    {% set image = h.get_theme_config('header.image') %}
+                    <img src="{{ image if image else '/img/nepal-data-portal-logo.svg' }}" class="logo-datahub">
+                </a>
+                {% if h.check_access('package_create') and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
+                    <a class="edit-description-link"
+                       href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_header') }}">
+                        {% snippet "svg/edit.svg" %}
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-7 no-padding header-links">
+                {% if c.action != 'login' %}
+                    <a href="{{ h.url_for(controller='package', action='search') }}">DATASETS</a>
+
+                    {% if h.get_theme_config('organization.show-organizations') %}
+                        <a href="{{ h.url_for(controller='organization', action='index') }}">ORGANIZATIONS</a>
+                    {% endif %}
+
+                    {% if h.get_theme_config('about.show-about') %}
+                        <a href="{{ h.url('gobar_about') }}">ABOUT</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

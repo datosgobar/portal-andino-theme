@@ -1,0 +1,35 @@
+{% extends "gobar_page.html" %}
+
+{% block subtitle %} - Legal Framework{% endblock %}
+
+{% block content %}
+
+    <div id="legal-access-container" class="container-fluid gobar-static-container">
+        <div class="restricted-max-width">
+            <div id="legal-access" class="col-xs-12 col-md-10 col-md-offset-1 gobar-static">
+                <div id="pkg-path">
+                    <a href="{{ h.url_for(controller='package', action='search') }}">Datasets</a> / Legal Framework
+                
+                </div>
+
+                <h2>Legal Framework</h2>
+
+                <p>These are the decrees and resolutions that inspire us</p>
+
+                <h3>National Data Opening Plan</h3>
+
+                <p>
+                    The sets deadlines for both the publication of the first datasets of our portal. It also regulates the times for detailing the assets of data of the different organisms of the Nation and its publication schedule.
+                </p>
+
+<!--                 <h3>Régimen de Acceso a la Información Pública</h3>
+
+                <p>
+                    El <a href="http://infoleg.gov.ar/infolegInternet/anexos/90000-94999/90763/norma.htm"
+                          target="_blank">decreto 1172/2003</a> establece el Reglamento General del Acceso a la
+                    Información Pública para el Poder Ejecutivo Nacional.
+                </p> -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,179 @@
+@mixin box-shadow($shadow) {
+  -o-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  -webkit-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin border-radius($radius) {
+  -o-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin base-container() {
+  padding-right: 0;
+  padding-left: 0;
+  @include breakpoint-md {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+@mixin base-content() {
+  padding: 30px 50px;
+  color: $grey-400;
+  font-size: 16px;
+  @include breakpoint-md {
+    @include box-shadow(0 -2px 4px 0 rgba(150, 150, 150, 0.5));
+  }
+}
+
+@mixin font-spacing($font-size, $line-height, $padding) {
+  font-size: $font-size;
+  line-height: $line-height;
+  padding: $padding;
+  height: $font-size * $line-height + 2*$padding;
+}
+
+@mixin base-form($font-size: 16px, $line-height: 1.2, $input-padding: 10px) {
+  h1 {
+    margin: 20px 0;
+    font-weight: 400;
+    font-size: 40px;
+  }
+  form {
+    padding: 50px;
+    @include border-radius(4px);
+    @include box-shadow(0 0 4px 0 rgba(150, 150, 150, 0.5));
+    label {
+      display: block;
+      text-align: left;
+      font-weight: 400;
+      padding: 5px 20px 5px 0;
+      font-size: $font-size;
+      line-height: $line-height;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      @include font-spacing($font-size, $line-height, $input-padding);
+    }
+    .control-custom {
+      .input-prepend {
+        width: 100%;
+        white-space: normal;
+        position: relative;
+        label.add-on {
+          display: inline-block;
+          margin: 0;
+          width: 20%;
+          @include font-spacing($font-size, $line-height, $input-padding);
+        }
+        label.icon-remove {
+          position: absolute;
+          top: 50%;
+          left: initial;
+          right: 0;
+          min-width: 4em;
+          margin: -1em 0 0 0;
+          @include font-spacing($font-size, $line-height, $input-padding);
+          &:before, &:after {
+            content: initial;
+          }
+          span {
+            display: inline-block;
+          }
+        }
+        input[type="text"] {
+          display: inline-block;
+          margin: 0;
+          width: 65%;
+          @include font-spacing($font-size, $line-height, $input-padding);
+        }
+      }
+    }
+    .package-groups {
+      input[type="checkbox"].package-group-checkbox {
+        display: inline-block;
+        width: auto;
+        margin: 0;
+        position: static;
+        vertical-align: baseline;
+      }
+      label.package-group-label {
+        color: $grey-300;
+        margin: 0;
+        padding: 2px 0;
+        &:after {
+          content: none;
+        }
+      }
+
+    }
+    .control-group {
+      position: relative;
+      &.error {
+        .input-prepend {
+          .add-on {
+            @include font-spacing($font-size, $line-height, $input-padding);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin svgFormatColor($format, $color) {
+  &[data-format=#{$format}],
+  &[data-format*=#{$format}] {
+    svg {
+      path {
+        fill: #{$color};
+      }
+    }
+  }
+}
+
+@mixin labelFormatColor($format, $color) {
+  &[data-format=#{$format}],
+  &[data-format*=#{$format}] {
+    background-color: #{$color};
+  }
+}
+
+$colors: (
+                ("html", "#8E24AA"),
+                ("json", "#FB8C00"),
+                ("xml", "#FB8C00"),
+                ("text", "#039BE5"),
+                ("csv", "#F7CD0F"),
+                ("xls", "#4CAF50"),
+                ("api", "#D81B60"),
+                ("pdf", "#E53935"),
+                ("zip", "#4CAF50"),
+                ("rdf", "#00ACC1"),
+                ("nquad", "#00ACC1"),
+                ("ntriples", "#00ACC1"),
+                ("turtle", "#00ACC1"),
+                ("shp", "#039BE5")
+);
+$default-color: $blue-300;
+
+@mixin svgFormatColors() {
+  svg {
+    path {
+      fill: #{$default-color};
+    }
+  }
+  @each $format, $color in $colors {
+    @include svgFormatColor($format, $color);
+  }
+}
+
+@mixin labelsFormatColors() {
+  background-color: #{$default-color};
+  @each $format, $color in $colors {
+    @include labelFormatColor($format, $color);
+  }
+}

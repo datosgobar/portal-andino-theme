@@ -1,0 +1,44 @@
+{% extends "config/config_base.html" %}
+
+{% block config %}
+
+    <h1>Topics format</h1>
+
+    <form method="post" action="" data-module="basic-form">
+        <h2 class="blue with-bottom-margin">How would you like your cover to look like?</h2>
+
+        {% set selected_option = h.get_theme_config('groups.imgs') %}
+        {% set something_selected = selected_option and selected_option|length > 0 %}
+
+        <div class="container-fluid radio-container">
+            <label class="img-radio col-xs-12 col-md-6">
+                <div class="radio-box {{ (selected_option == 'show-icons' and 'selected') or (something_selected and 'not-selected') or '' }}">
+                    <img src="/img/config/temas1.svg" class="logo-datahub">
+                    <div class="radio-description">
+                        <h2>Topics with icons</h2>
+                        Show topics with icons and description
+                    </div>
+                    <input value="show-icons" type="radio" name="group-imgs" {{ 'checked="checked"' if selected_option == 'show-icons' }}>
+                </div>
+            </label>
+
+            <label class="img-radio col-xs-12 col-md-6">
+                <div class="radio-box {{ (selected_option == 'hide-icons' and 'selected') or (something_selected and 'not-selected') or '' }}">
+                    <img src="/img/config/temas2.svg" class="logo-datahub">
+                    <div class="radio-description">
+                        <h2>Themes without icons</h2>
+                        Show topics with description only
+                    </div>
+                    <input value="hide-icons" type="radio" name="group-imgs" {{ 'checked="checked"' if selected_option == 'hide-icons' }}>
+                </div>
+            </label>
+
+        </div>
+
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">SAVE</button>
+        </div>
+    </form>
+
+{% endblock %}

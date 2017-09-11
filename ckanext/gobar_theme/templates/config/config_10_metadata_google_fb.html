@@ -1,0 +1,39 @@
+{% extends "config/config_base.html" %}
+
+{% block config %}
+    <h1 class="small-margin">Metadata</h1>
+
+    <form method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
+        <p>This information allows you to define <strong> the title, description and image displayed in FB and Twitter when you share a link from your portal. </strong> Also, it is very useful because it is also the way in which Google show your site in your results. Please complete it.</p>
+
+        <h1>Google and Facebook</h1>
+
+        <h2>Title of the Portal</h2>
+        <p>I typed a maximum of 67 characters so it would not be cut.</p>
+        {% set title = h.get_theme_config('fb-metadata.title') %}
+        <input name="metadata-title" type="text" title="Title" placeholder="Title" value="{{ title if title else '' }}">
+
+        <h2>Description of the Portal</h2>
+        <p>I wrote a maximum of 155 characters so that it is not cut.</p>
+        {% set description = h.get_theme_config('fb-metadata.description') %}
+        <input name="metadata-description" type="text" title="Description" placeholder="Description" value="{{ description if description else '' }}">
+
+        <h2>Image of the Portal</h2>
+        <p>You can, for example, put a screenshot of the name of your portal.</p>
+        {% set image = h.get_theme_config('fb-metadata.image') %}
+        <div class="file-upload-container {{ 'with-image' if image else '' }}">
+            <i class="icon-remove-sign" aria-hidden="true"></i>
+            <input type="text" disabled placeholder="Upload your file" id="filename" class="filename-input" value="{{ image if image else '' }}">
+            <input type="file" id="image" name="image">
+            <input type="hidden" name="image-logic" id="image-logic" value="">
+            <label for="image">
+                <span class="upload-file-button">CHOOSE</span>
+            </label>
+            <p>*Please, choose format .JPG, .SVG o .PNG</p>
+        </div>
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">SAVE</button>
+        </div>
+    </form>
+{% endblock %}

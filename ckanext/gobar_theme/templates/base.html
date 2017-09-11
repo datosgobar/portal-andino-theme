@@ -1,0 +1,42 @@
+{%- ckan_extends -%}
+
+{%- block styles -%}
+    {{ super() }}
+    {%- resource 'gobar_css/gobar_style.css' -%}
+{%- endblock -%}
+
+{%- block meta -%}
+    {{ super() }}
+    {%- set base_url = h.url('', locale='default', qualified=true) -%}
+    <meta property="og:url" content="{{ h.url('/', locale='default', qualified=true) or ''}}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ h.get_theme_config('fb-metadata.title') or ''}}">
+    <meta property="og:site_name" content="{{ h.get_theme_config('fb-metadata.title') or '' }}">
+    <meta property="og:description" content="{{ h.get_theme_config('fb-metadata.description') or ''}}">
+    {%- set fb_img = h.get_theme_config('fb-metadata.image', default='') %}
+    <meta property="og:image" content="{{ h.url_join(base_url, fb_img) or ''}}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="2400">
+    <meta property="og:image:height" content="1260">
+    <meta property="og:locale" content="es_AR">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site:id" content="@{{ h.get_theme_config('tw-metadata.user') or ''}}"/>
+    {%- set tw_img = h.get_theme_config('tw-metadata.image', default='') %}
+    <meta name="twitter:image:src" content="{{ h.url_join(base_url, tw_img) or ''}}">
+    {% block twitter_title -%}
+        <meta name="twitter:title" content="{{ h.get_theme_config('tw-metadata.title') or ''}}">
+    {%- endblock %}
+    {% block twitter_description-%}
+        <meta name="twitter:description" content="{{ h.get_theme_config('tw-metadata.description') or ''}}">
+    {%- endblock %}
+{%- endblock -%}
+
+{%- block title -%}
+    {% set title = h.get_theme_config('title.site-title') %}
+    {{ title if title else '' }} {%- block subtitle -%}{%- endblock -%}
+{%- endblock -%}
+
+{%- block links -%}
+    <link rel="shortcut icon" href="/favicon.ico"/>
+{%- endblock -%}

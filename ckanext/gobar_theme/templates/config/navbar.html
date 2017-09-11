@@ -1,0 +1,67 @@
+<div id="navbar" class="col-xs-12 col-md-4">
+
+    <h2>Homepage</h2>
+    <div class="links-section">
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}"
+           class="section-link {{ 'active' if c.action == 'edit_title' else '' }}">
+            Title, description and image of the portal
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_home') }}"
+           class="section-link {{ 'active' if c.action == 'edit_home' else '' }}">
+            Homepage Format
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_groups') }}"
+           class="section-link {{ 'active' if c.action == 'edit_groups' else '' }}">
+            Topics format
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_header') }}"
+           class="section-link {{ 'active' if c.action == 'edit_header' else '' }}">
+            Logo in the header
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_social') }}"
+           class="section-link {{ 'active' if c.action == 'edit_social' else '' }}">
+            Social networks and contact
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_footer') }}"
+           class="section-link {{ 'active' if c.action == 'edit_footer' else '' }}">
+            Logo in footer
+        </a>
+    </div>
+
+    <h2>Other sections of the portal</h2>
+    <div class="links-section">
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_datasets') }}"
+           class="section-link {{ 'active' if c.action == 'edit_datasets' else '' }}">
+            Datasets
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_organizations') }}"
+           class="section-link {{ 'active' if c.action == 'edit_organizations' else '' }}">
+            Organization with Data (optional)
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_about') }}"
+           class="section-link {{ 'active' if c.action == 'edit_about' else '' }}">
+            About (optional)
+        </a>
+    </div>
+
+    <h2>Metadata</h2>
+    <div class="links-section">
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_metadata_google_fb') }}"
+           class="section-link {{ 'active' if c.action == 'edit_metadata_google_fb' else '' }}">
+            Google and Facebook
+        </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_metadata_tw') }}"
+           class="section-link {{ 'active' if c.action == 'edit_metadata_tw' else '' }}">
+            Twitter
+        </a>
+    </div>
+
+    <div class="links-section guide-link">
+        <a class="inline"
+           href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md"
+           target="_blank">
+            <i class="icon-question-sign" aria-hidden="true"></i>
+            Doubts? I have the <span class = "blue"> handy guide </ span> on hand..
+        </a>
+    </div>
+</div>

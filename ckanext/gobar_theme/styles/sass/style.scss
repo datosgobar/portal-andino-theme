@@ -1,0 +1,117 @@
+// Para compilar correr (parado en esta carpeta):
+// sass style.scss:../css/gobar_style.css
+// Para compilar y quedar escuchando cambios a los archivos (para desarrollo) correr:
+// sass --watch style.scss:../css/gobar_style.css
+@import 'utils/bootstrap_style';
+@import 'fonts';
+@import 'utils/colors';
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: #fff;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 400;
+  color: $grey-400;
+}
+
+a {
+  color: $blue-300;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: $blue-200;
+}
+
+div.no-padding {
+  padding: 0;
+}
+
+div.svg-tooltip {
+  display: none;
+}
+
+.modal.in {
+  margin-top: 0;
+  top: 20%;
+  bottom: initial;
+  left: 50%;
+}
+
+.restricted-max-width {
+  max-width: 1440px;
+  margin: auto;
+  height: 100%;
+  &:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+.container, .container-fluid,
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5,
+.col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12,
+.col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9,
+.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5,
+.col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12,
+.col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@import 'utils/selective_bourbon';
+@import 'utils/animate';
+@import 'utils/mixins';
+@import 'utils/media_queries';
+@import 'utils/bootstrap-datepicker3';
+
+.blue-gradient {
+  @include linear-gradient(to right, $blue-350, $blue-400);
+  color: white;
+  padding-left: 0;
+  padding-right: 0;
+
+  .background-pattern {
+    background-image: url('/img/tramita.svg');
+    background-size: 300px;
+    background-repeat: repeat repeat;
+  }
+}
+
+strong {
+  font-weight: 600;
+}
+
+@import 'header';
+@import 'footer';
+@import 'background';
+@import 'static/about_pages';
+@import 'error';
+@import 'modals';
+@import 'about';
+@import 'buttons';
+@import 'home/index';
+@import 'user/login';
+@import 'user/read';
+@import 'organization/index';
+@import 'organization/title';
+@import 'organization/new_and_edit';
+@import 'package/search';
+@import 'package/title';
+@import 'package/read';
+@import 'package/resources';
+@import 'package/new_and_edit';
+@import 'package/resource_read';
+@import 'package/snippets/resource_item';
+@import 'group/new_and_edit';
+@import 'activity_streams/activity_streams_items';
+@import 'config/config_base';
+@import 'config/navbar';

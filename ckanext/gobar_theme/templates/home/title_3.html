@@ -1,0 +1,48 @@
+{% set stats = h.get_site_statistics() %}
+
+{% set background = h.get_theme_config('title.background-image') %}
+<div id="title" class="container-fluid" style="{{ 'background-image:url("%s")' % background if background else '' }}">
+    {% snippet "home/title_config.html" %}
+    <div class="background-overlay">
+        <div class="restricted-max-width">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                <div id="title-container" class="col-xs-12 col-md-7 text-left">
+                    {% set title = h.get_theme_config('title.site-title') %}
+                    <h1>{{ title if title else '' }}</h1>
+                    <p class="description">
+                        {% set description = h.get_theme_config('title.site-description') %}
+                        {{ description if description else '' }}
+                        {% if h.check_access('package_create') %}
+                            <a class="edit-description-link" href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
+                                {% snippet "svg/edit.svg" %}
+                            </a>
+                        {% endif %}
+                    </p>
+                </div>
+                <div id="searcher" class="col-xs-8 col-xs-offset-2 col-md-5 col-md-offset-0 no-padding position-bottom">
+                    <form class="module-content search-form" method="get"
+                          action="{% url_for controller='package', action='search' %}">
+                        <input type="text" class="search" name="q" value="" autocomplete="off" placeholder="What datasets are you looking for?" maxlength="200"/>
+                        <button type="submit">
+                            <img src="/img/search.svg" class="search-icon">
+                        </button>
+                    </form>
+                </div>
+                <div id="stats" class="hidden-xs col-sm-12 col-md-4 col-md-offset-1">
+                    <div class="col-sm-4 col-sm-offset-2 col-md-12 col-md-offset-0">
+                        <p class="stat">{{ "%03d" % stats.dataset_count }}</p>
+
+                        <p class="stats-legend datasets">DATASETS</p>
+                    </div>
+                    <div class="col-sm-4 col-md-12">
+                        <p class="stat organizations">{{ "%03d" % h.organizations_with_packages() }}</p>
+                        
+                        <p class="stats-legend">ORGANIZATION<br>WITH DATA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% resource 'gobar_js/background_ie.js' %}

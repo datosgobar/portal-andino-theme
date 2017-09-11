@@ -1,0 +1,130 @@
+{% extends "gobar_page.html" %}
+
+{% block subtitle %} - {{ c.resource.name }}{% endblock %}
+
+{% set pkg = c.pkg_dict or pkg_dict %}
+{% set res = c.resource %}
+
+{% block twitter_title -%}
+    <meta name="twitter:title" content="{{ h.get_theme_config('tw-metadata.title') }} | {{ res.name }}">
+{%- endblock %}
+{% block twitter_description -%}
+    <meta name="twitter:description" content="{{ res.description }}">
+{%- endblock %}
+
+
+{% block content %}
+    <div class="resource-container container-fluid">
+        <div class="restricted-max-width">
+            <div class="resource col-xs-12 col-md-10 col-md-offset-1">
+                <div class="col-xs-12 back-to-pkg">
+                    {% set title = h.get_theme_config('title.site-title') %}
+                    <a href="{{ h.url_for(controller='package', action='search') }}">{{ title if title else '' }}</a> / <a href="{{ h.url_for(controller='package', action='read', id=pkg.name) }}">Dataset</a> / Resource
+
+                    {% set can_edit = h.check_access('package_update', {'id':pkg.id }) %}
+
+                    {% if can_edit %}
+                        {% link_for 'EDIT RESOURCES', controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-blue edit-resource' %}
+                    {% endif %}
+                </div>
+                <div class="col-xs-12 title">
+                    <h1>{{ res.name }}</h1>
+
+                    <p>{{ res.description }}</p>
+                    <a href="{{ res.url }}">
+                        <button>DOWNLOAD</button>
+                    </a>                
+                </div>
+              
+                <div class="data-preview hidden-xs hidden-sm col-md-12">
+                    {% set resource_preview = h.resource_preview(c.resource, c.package) %}
+                    {% snippet "package/snippets/resource_views_list.html",
+                        views=resource_views,
+                        pkg=pkg,
+                        is_edit=false,
+                        view_id=current_resource_view['id'],
+                        resource_preview=resource_preview,
+                        resource=c.resource,
+                        extra_class="nav-tabs-plain" %}
+                    {% set resource_preview = h.resource_preview(c.resource, c.package) %}
+                    {% set views_created = res.has_views or resource_preview %}
+                    {% if views_created %}
+                        {% if resource_preview and not current_resource_view %}
+                            {{ h.resource_preview(c.resource, c.package) }}
+                        {% else %}
+                            {% for resource_view in resource_views %}
+                                {% if resource_view == current_resource_view %}
+                                    {% snippet 'package/snippets/resource_view.html',
+                             resource_view=resource_view,
+                             resource=c.resource,
+                             package=c.package %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% else %}
+                        {% if h.check_access('resource_view_create', {'resource_id': c.resource.id}) %}
+                            <p class="muted">
+                                <i class="icon-info-sign"></i>
+                                {{ _("Not seeing the views you were expecting?") }}
+                                <a href="javascript:void(0);" data-toggle="collapse"
+                                   data-target="#data-view-info">
+                                    {{ _('Click here for more information.') }}</a>
+                            </p>
+                            <div id="data-view-info" class="collapse">
+                                <p>{{ _('Here are some reasons you may not be seeing expected views:') }}</p>
+                                <ul>
+                                    <li>{{ _("No view has been created that is suitable for this resource") }}</li>
+                                    <li>{{ _("The site administrators may not have enabled the relevant view plugins") }}</li>
+                                    <li>{{ _("If a view requires the DataStore, the DataStore plugin may not be enabled, or the data may not have been pushed to the DataStore, or the DataStore hasn't finished processing the data yet") }}</li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                {% set has_more_resources = pkg.resources and pkg.resources|length > 1 %}
+
+                {% if has_more_resources %}
+                    <div class="resource-alternative-packages col-xs-12 col-md-8">
+                        <h2>Other resources from this dataset</h2>
+                        {% for resource in pkg.resources %}
+                            {% if resource.id != res.id %}
+                                {% snippet "package/snippets/dataset_resource_item.html", pkg=pkg, resource=resource %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="resource-additional-info col-xs-12 col-md-4 {{ '' if has_more_resources else 'col-md-offset-8' }}">
+                    <h2>Additional Information</h2>
+
+                    <div class="resource-additional col-xs-12">
+                        <div class="col-xs-6 key">
+                            Creation date
+                        </div>
+                        <div class="col-xs-6 value">
+                            {{ h.render_ar_datetime(res.created) or _('unknown') }}
+                        </div>
+                    </div>
+                    <div class="resource-additional col-xs-12">
+                        <div class="col-xs-6 key">
+                            Format
+                        </div>
+                        <div class="col-xs-6 value">
+                            {% set format = (res.mimetype_inner or res.mimetype or res.format or _('unknown')).lower() %}
+                            <span class="label" data-format="{{ format }}">{{ format }}</span>
+                        </div>
+                    </div>
+                    <div class="resource-additional col-xs-12">
+                        <div class="col-xs-6 key">
+                            Last change
+                        </div>
+                        <div class="col-xs-6 value">
+                            {{ h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

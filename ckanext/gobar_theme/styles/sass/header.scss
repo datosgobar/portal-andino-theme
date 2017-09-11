@@ -1,0 +1,74 @@
+$header-height: 72px;
+
+@include breakpoint-sm {
+  body {
+    padding-top: $header-height
+  }
+}
+
+
+#header {
+  background: white;
+  padding: 0;
+  @include box-shadow(0 0 12px 0 rgba(0, 0, 0, 0.5));
+  position: relative;
+  white-space: nowrap;
+  z-index: 4;
+
+  @include breakpoint-sm {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  #header-spacing {
+    $padding: 20px;
+    padding: 0 $padding;
+    text-align: center;
+
+    .logo-header, .header-links {
+      height: $header-height;
+      $font-size: 18px;
+      font-size: $font-size;
+      line-height: $header-height / $font-size;
+
+      svg.edit-svg path {
+        fill: $grey-300;
+      }
+    }
+
+    .header-links {
+      overflow: hidden;
+      a {
+        color: $blue-300;
+        padding: 0 0.5em;
+        font-size: 90%;
+        display: inline-block;
+        height: 100%;
+        @include breakpoint-sm {
+          &:hover {
+            background: $blue-300;
+            color: white;
+          }
+        }
+      }
+      @include breakpoint-sm {
+        text-align: right;
+        a {
+          font-size: 100%;
+        }
+      }
+    }
+
+    .logo-header {
+      @include breakpoint-sm {
+        text-align: left;
+      }
+      .logo-datahub {
+        height: 100%;
+        width: 300px;
+        max-width: 100%;
+      }
+    }
+  }
+}

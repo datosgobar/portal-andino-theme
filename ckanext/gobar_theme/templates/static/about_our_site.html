@@ -1,0 +1,169 @@
+{% extends "gobar_page.html" %}
+
+{% block subtitle %} - About Portal{% endblock %}
+
+{% block content %}
+
+    <div id="our-site-container" class="container-fluid gobar-static-container">
+
+        <div class="container-fluid blue-gradient counter-section">
+            <div class="container-fluid background-pattern">
+                <div class="restricted-max-width">
+                    <div class="col-xs-12 col-md-6 col-md-offset-1">
+                        <div id="pkg-path">
+                            <a href="{{ h.url_for(controller='package', action='search') }}">Datasets</a> / About Portal
+                        </div>                    
+                        <h2>Nepal Data Hub</h2>
+                        <h1>We make it possible for you to know</h1>
+
+                        <p>
+                            In fulfilling its tasks, <strong> the public administration produces enormous amounts of data. We open them and we bring them to you so that you can use them! </strong> They are yours and you can make gigantic decisions with them.
+                        </p>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4 col-md-offset-0 round-counter-section">
+                        <div class="round-counter-max-width">
+                            <div class="round-counter-container">
+                                <div class="round-counter">
+                                    {% include 'svg/circulito_fondo.svg' %}
+                                    {% include 'svg/circulito.svg' %}
+                                    <div class="counter-table">
+                                        <h3>
+                                            <span class="counter-number">&nbsp;</span>
+                                            FREE DATA
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+                                WITHOUT RESTRICTIONS<br>ACCESS, AUTHOR OR PATENT
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="data-section-background container-fluid">
+            <div class="restricted-max-width">
+                <div class="col-xs-12 col-md-10 col-md-offset-1 data-section">
+                    <div class="col-xs-12">
+                        <h2>A world of data </h2>
+                        <p>
+                            <strong>Without realizing it, you use and produce data. </strong> When you open a calculation in the office or when you read a note about the community of scientists who work in new disease cures, all the time!
+                        </p>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4 svg-container">
+                        <div class="svg-drawing-container" id="usalos-container">
+                            {% include "svg/usalos.svg" %}
+                        </div>
+                        <h3>USE THEM</h3>
+                        <p>
+                            Download and analyze them!
+                        </p>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4 svg-container">
+                        <div class="svg-drawing-container" id="procesalos-container">
+                            {% include "svg/procesalos.svg" %}
+                        </div>
+                        <h3>PROCESSING</h3>
+                        <p>
+                            Combined with other data! Create visualizations, research and new products.
+                        </p>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4 svg-container">
+                        <div class="svg-drawing-container" id="compartilos-container">
+                            {% include "svg/compartilos.svg" %}
+                        </div>
+                        <h3>SHARE</h3>
+                        <p>
+                            Let everyone see what you created!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid restricted-max-width">
+            <div class="col-xs-12 col-md-10 col-md-offset-1 steps-section">
+                <div class="col-xs-12 step">
+                    <div class="col-xs-12 col-sm-8">
+                        <h2>We build with transparency</h2>
+                        <p>
+                            We make every effort to make accountability clear and to create public policies evidence-based tools.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="svg-drawing-container" id="transparencia-container">
+                            {% include "svg/transparencia.svg" %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 step">
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                        <h2>Create community</h2>
+                        <p>
+                            Public, private sector organizations, civil society organizations, researchers... Everyone is welcome to reuse data, add value, generate information, create new and better services, and applications!
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="svg-drawing-container" id="comunidad-container">
+                            {% include "svg/comunidad.svg" %}
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-8">
+                        <h2>Create community</h2>
+                        <p>
+                            Public, private sector organizations, civil society organizations, researchers... Everyone is welcome to reuse data, add value, generate information, create new and better services, and applications!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 step last-step">
+                    <div class="col-xs-12 col-sm-8">
+                        <h2>Learn More!</h2>
+                        <p>
+                            <a href="{{ h.url('gobar_glossary') }}" target="_blank">Check our glossary</a> to familiarize yourself with the world of open data. And take advantage our <a href="/kit_de_datos.pdf" target="_blank"> data kit </a>, to take your first steps by opening data.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="svg-drawing-container" id="kit-container">
+                            {% include "svg/kit.svg" %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 text-center discover">
+                    <a href="{{ h.url_for(controller='package', action='search') }}">
+                            <button>DISCOVER DATASETS</button>
+                        </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 blue-gradient team-section">
+            <div class="container-fluid background-pattern">
+                <div class="restricted-max-width">
+                    <h2>Our Team</h2>
+                    <p>
+                        The <strong> Social Science Baha and Datanepal </ strong> is part of this portal.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{%- block scripts %}
+    {{ super() }}
+    {% resource 'gobar_js/about_our_site.js' %}
+{%- endblock -%}

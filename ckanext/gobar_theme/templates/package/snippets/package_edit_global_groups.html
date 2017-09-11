@@ -1,0 +1,31 @@
+{% set global_groups = [
+  {"id": "AGRI", "label": "Agriculture, fishing, forestry and food"},
+  {"id": "ECON", "label": "Economy and Finance"},
+  {"id": "EDUC", "label": "Education, culture and sports"},
+  {"id": "ENER", "label": "Energy"},
+  {"id": "ENVI", "label": "Environment"},
+  {"id": "GOVE", "label": "Government and public sector"},
+  {"id": "HEAL", "label": "Health"},
+  {"id": "INTR", "label": "International Affairs"},
+  {"id": "JUST", "label": "Justice, judicial system and public safety"},
+  {"id": "REGI", "label": "Regions and cities"},
+  {"id": "SOCI", "label": "Population and society"},
+  {"id": "TECH", "label": "Science and Technology"},
+  {"id": "TRAN", "label": "Transportation"}
+] %}
+
+{% set selected_global_groups = h.json_loads(h.get_pkg_extra(data, 'globalGroups') or '[]') %}
+
+<div class="control-group control-full">
+    <label class="control-label" for="field-groups">* Global Issues</label>
+    <p>These <strong> themes will not be visible on your portal </strong>. By choosing them, <strong> you help the national portal <a href="https://data.soscbaha.org"> Social Science Baha</a> can easily republish the dataset </strong>.</p>
+    <div class="controls package-groups super-groups">
+        {% for group in global_groups %}
+            <label class="package-group-label" for="{{ group.id }}">
+                <input type="checkbox" class="package-global-group-checkbox"
+                       id="{{ group.id }}" {{ 'checked' if group.id in selected_global_groups else '' }}>
+                {{ group.label }}
+            </label>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,93 @@
+{% extends "gobar_page.html" %}
+
+{% block subtitle %} - Glossary{% endblock %}
+
+{% block content %}
+
+    <div id="glossary-container" class="container-fluid gobar-static-container">
+        <div class="restricted-max-width">
+            <div id="glossary" class="col-xs-12 col-md-10 col-md-offset-1 gobar-static">
+                <div id="pkg-path">
+                    <a href="{{ h.url_for(controller='package', action='search') }}">Datasets</a> / Glossary
+                </div>
+
+                <h2>Glossary</h2>
+                <p>
+                    Are you new to the world of open data? Do not worry, we all went sometime. <strong> We'll explain some common words. </strong>
+                </p>
+
+                <h3>Information asset</h3>
+
+                <p>
+                    <strong> It is any resource of information or data with value for the development of the functions of an organization </strong>, which can be understood and treated as a single unit for purposes of management, use, protection and exchange.
+                </p>
+
+                <p>
+                    Although it may designate isolated pieces of information (an image included in a document, a Database), it is often used to identify and Information or data, such as documentary groupings, databases, websites, collections of Metadata. An example? A database.
+                </p>
+
+                <h3>Data Catalog</h3>
+
+                <p> It is the information system that collects and organizes descriptive metadata about the different Data sets opened by an organization, giving a unique access to them. A portal is a catalog.
+                </p>
+
+                <h3>Open Data</h3>
+
+                <p>
+                    <strong> Open data is the data that anyone can access, use and sharing. </strong> They should only be attributed and shared with the same license with which were published. They are, in turn, public data made available in a digital medium, under an open license and using an open standard format.
+                </p>
+
+                <h3>Data</h3>
+
+                <p>
+                    <strong>Data is a decontextualized element that can give rise to the generation of information. </strong> These are symbols that describe facts, conditions, values ​​or situations. A data can be a letter, a number or any symbol representing an amount, a measure, word or description. Data is the true raw material to generate information with added value.
+                </p>
+
+                <h3>Datasets</h3>
+
+                <p>
+                    <strong>Datasets, also called "data sets", are the main piece in all the data catalog. </strong> These group one or more data resources and are the over-which is documented the metadata of the information.
+                </p>
+
+                <h3>Public Data</h3>
+
+                <p>
+                    It is any data generated in the governmental sphere, or that is under his guard, and that it is not restricted by any specific legislation.
+                </p>
+
+                <h3>Information</h3>
+
+                <p>
+                    <strong>It is a data endowed with relevance and usefulness. </strong> To obtain information is some kind of processing or processing is required on the data. Convert data in information is a process that generates value, brings relevance, generates something new that it did not know.
+
+                <h3>Metadata</h3>
+
+                <p>
+                    Certain characteristics or attributes of the data are defined to facilitate their understanding. These characteristics are known as "metadata". For that reason, it is often said that "metadata are data about the data. "Metadata can describe how a data is represented, what are the ranges of acceptable values, their relationship to other data and how these should be labeled. They may also provide other relevant information, such as the administrator responsible, associated laws and regulations, and access management policy.
+                </p>
+
+                <h3>Open Licences</h3>
+
+                <p>
+                    <strong>Open data needs to be open both technically and legally. To do so, we must apply a license.</strong> Data held by the public sector should not be subject to patent restrictions. More importantly, make sure they are in readable formats that allow for greater reuse. For example, Portable Document Format (PDF) documents limit data extraction and processing.
+                </p>
+
+                <h3>Resources</h3>
+
+                <p>
+                    Resources are the smallest piece of information in the catalog and are the real data assets of the portal.
+                </p>
+
+
+            </div>
+        </div>
+        <div class="col-xs-12 bottom-link blue-gradient">
+            <div class="background-pattern">
+                <p>¿Querés aprender más sobre datos abiertos?</p>
+                <a href="/kit_de_datos.pdf" target="_blank">
+                    <button>MIRÁ EL KIT DE DATOS</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

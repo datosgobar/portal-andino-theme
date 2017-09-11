@@ -1,0 +1,34 @@
+{% set stats = h.get_site_statistics() %}
+{% set config = h.get_theme_config() %}
+
+{% set background = h.get_theme_config('title.background-image') %}
+<div id="title" class="organization-title container-fluid" style="{{ 'background-image:url("%s")' % background if background else '' }}">
+    <div class="background-overlay">
+        <div class="restricted-max-width">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div id="title-container" class="col-xs-12 col-md-8 text-left">
+                    <h1>Organizations</h1>
+
+                    <p class="description">
+                        {% set description = h.get_theme_config('organization.description') %}
+                        {{ description if description else '' }}
+                        {% if h.check_access('organization_create') %}
+                            <a class="edit-description-link" href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_organizations') }}">
+                                {% snippet "svg/edit.svg" %}
+                            </a>
+                        {% endif %}
+                    </p>
+                </div>
+                <div id="stats" class="col-xs-12 col-md-4">
+                    <div>
+                        <p class="stat organizations">{{ "%03d" % h.organizations_with_packages() }}</p>
+
+                        <p class="stats-legend">ORGANIZATION<br>WITH DATA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% resource 'gobar_js/background_ie.js' %}

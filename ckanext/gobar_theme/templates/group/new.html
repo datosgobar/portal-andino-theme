@@ -1,0 +1,66 @@
+{% extends "gobar_page.html" %}
+
+{% block content %}
+    <div id="new-group-container" class="container-fluid">
+        <div class="restricted-max-width">
+            <div id="new-group" class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="back-btn">
+                        <a href="{{ h.url('home') }}">
+                            <i class="icon-chevron-left"></i>
+                            GO BACK
+                        </a>
+                    </div>
+                    <h1>Create specific topic</h1>
+                    {{ c.form | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if h.get_theme_config('groups.imgs', default='not-set') == 'not-set' %}
+        <div id="group-imgs-modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1>How do you want to display the themes of your datasets?</h1>
+                        <p>You will always be able to change it from Settings</p>
+
+                        <div class="container-fluid radio-container">
+                            <label class="img-radio col-xs-12 col-md-6">
+                                <div class="radio-box">
+                                    <img src="/img/config/temas1.svg" class="logo-datahub">
+                                    <div class="radio-description">
+                                        <h2>Topics with icons</h2>
+                                        Show topics with icons and description
+                                    </div>
+                                    <input value="show-icons" type="radio"
+                                           name="group-imgs">
+                                </div>
+                            </label>
+
+                            <label class="img-radio col-xs-12 col-md-6">
+                                <div class="radio-box">
+                                    <img src="/img/config/temas2.svg" class="logo-datahub">
+                                    <div class="radio-description">
+                                        <h2>Topics without icons</h2>
+                                        Show topics with description only
+                                    </div>
+                                    <input value="hide-icons" type="radio" name="group-imgs">
+                                </div>
+                            </label>
+
+                        </div>
+
+                        <div class="modal-actions">
+                            <button id="select-option" type="button" class="btn btn-blue">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% resource 'gobar_js/config/radio_buttons.js' %}
+        {% resource 'gobar_js/config/select_group_format.js' %}
+    {% endif %}
+
+{% endblock %}

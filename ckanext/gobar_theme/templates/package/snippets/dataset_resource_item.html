@@ -1,0 +1,24 @@
+{% set resource_url = h.url_for(controller='package', action='resource_read', id=pkg.name, resource_id=resource.id) %}
+<div class="pkg-container">
+    <div class="pkg-actions">
+        <a href="{{ resource_url }}">
+            <button>VIEW</button>
+        </a>
+        <a href="{{ resource.url }}">
+            <button>DOWNLOAD</button>
+        </a>
+    </div>
+    <a href="{{ resource_url }}">
+        <div class="package-info">
+
+            <h3>{{ resource.name }}</h3>
+
+            <p>{{ h.cut_text(resource.description, 140)|urlize }}</p>
+        </div>
+
+        <div class="pkg-file-img" data-format="{{ resource.format.lower() }}">
+            {% snippet "svg/archivo.svg" %}
+            <p>{{ resource.format.lower() }}</p>
+        </div>
+    </a>
+</div>

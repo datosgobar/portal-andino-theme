@@ -1,0 +1,34 @@
+{% set stats = h.get_site_statistics() %}
+{% set config = h.get_theme_config() %}
+
+{% set background = h.get_theme_config('title.background-image') %}
+<div id="title" class="package-title container-fluid" style="{{ 'background-image:url("%s")' % background if background else '' }}">
+    <div class="background-overlay">
+        <div class="restricted-max-width">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div id="title-container" class="col-xs-12 col-md-6 text-left">
+                    <h1>Datasets</h1>
+
+                    <p class="description">
+                        {% set description = h.get_theme_config('dataset.description') %}
+                        {{ description if description else '' }}
+                        {% if h.check_access('package_create') %}
+                            <a class="edit-description-link" href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_datasets') }}">
+                                {% snippet "svg/edit.svg" %}
+                            </a>
+                        {% endif %}
+                    </p>
+                </div>
+                <div id="stats" class="col-xs-12 col-md-4 col-md-offset-2">
+                    <div class="col-xs-12">
+                        <p class="stat">{{ "%03d" % stats.dataset_count }}</p>
+
+                        <p class="stats-legend datasets">DATASETS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% resource 'gobar_js/background_ie.js' %}

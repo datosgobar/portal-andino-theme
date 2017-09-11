@@ -1,0 +1,91 @@
+{% extends "gobar_page.html" %}
+
+{% block subtitle %} - Developers{% endblock %}
+
+{% block content %}
+
+    <div id="developers-users-container" class="container-fluid gobar-static-container">
+        <div class="restricted-max-width">
+            <div id="developers-users" class="col-xs-12 col-md-10 col-md-offset-1 gobar-static">
+                <div id="pkg-path">
+                    <a href="{{ h.url_for(controller='package', action='search') }}">Datasets</a> /
+                    Developers
+                </div>
+
+                <h2>Developers</h2>
+
+                <h3>The catalog</h3>
+
+                <p>
+                    <strong>Our portal uses the CKAN platform</strong> version 2.5. CKAN is a tool developed by the Open Knowledge Foundation. <strong>This is free software distributed under the GNU Affero General Public License.</strong>
+                </p>
+
+                <p>
+                    <strong>Currently it is one of the most popular platforms</strong> for this type of initiatives. It is used by, among others, the Government of the United Kingdom, the United States, Brazil and Chile.
+                </p>
+
+                <p>
+                    CKAN allows the organization of published data through its dataset and resource schema, as well as programmatic access to them, applying internationally approved standards for metadata generation.
+                </p>
+
+                <h3>Metadata</h3>
+                <p>
+                    To make it easier to navigate the portal and search datasets, we use the metadata standards proposed by default in CKAN (dublin core and dcat).
+                </p>
+
+                <h3>Integrate our data</h3>
+
+                <p>
+                    You can integrate the data and metadata of a dataset by means of the <strong>CKAN API.</strong>
+                </p>
+
+                <p>
+                    <strong>Here is the generic way to query metadata:</strong>
+                </p>
+
+                <pre><code>http://data.soscbaha.org/api/3/action/package_show?id=&lt;id_del_dataset&gt;</code></pre>
+
+                <p>
+                    For example, we could see the metadata of the Organic Structure dataset and authorities of the National Executive Power, consulting:
+                </p>
+
+
+                <div class="source-link-container">
+                    <pre><code>http://data.soscbaha.org/api/3/action/package_show?id=estructura-organica-pen</code></pre>
+                    <a href="http://data.soscbaha.org/api/3/action/package_show?id=estructura-organica-pen"
+                       target="_blank">
+                        <i class="icon-external-link-sign"></i>
+                    </a>
+                </div>
+
+                <p>
+                    This is <strong> the generic way to query data for a resource </strong> within of a specific dataset:
+                </p>
+
+                <pre><code>http://datos.gob.ar/api/3/action/datastore_search?resource_id=&lt;id_del_recurso&gt;</code></pre>
+
+                <p>
+                    An example? We can see the data of a resource of the Organic Structure dataset and authorities of the National Executive, as follows:
+                </p>
+
+                <div class="source-link-container">
+                    <pre><code>http://data.soscbaha.org/api/3/action/datastore_search?resource_id=b705d8c1-650f-43cc-bde6-68850fcecd21</code></pre>
+                    <a href="http://data.soscbaha.org/api/3/action/datastore_search?resource_id=b705d8c1-650f-43cc-bde6-68850fcecd21"
+                       target="_blank">
+                        <i class="icon-external-link-sign"></i>
+                    </a>
+                </div>
+
+                <p class="no-margin">
+                    See more <a href="http://docs.ckan.org/en/latest/api/" target="_blank"> details for using the API. </a>
+                </p>
+
+                <p class="text-center no-margin button-container">
+                    <a href="https://github.com/bishalkc" target="_blank">
+                        <button> GO TO OUR GITHUB </button>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

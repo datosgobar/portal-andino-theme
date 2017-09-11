@@ -1,0 +1,46 @@
+{% extends "gobar_page.html" %}
+
+
+{% block content %}
+    <div class="home">
+        {% set title_template = h.get_theme_config('home.title-template') %}
+        {% if title_template == 'portada1' %}
+            {% snippet "home/title_1.html" %}
+        {% elif title_template == 'portada2' %}
+            {% snippet "home/title_2.html" %}
+        {% elif title_template == 'portada3' %}
+            {% snippet "home/title_3.html" %}
+        {% else %}
+            {% snippet "home/title_4.html" %}
+        {% endif %}
+        {% snippet "home/create_buttons.html" %}
+        {% snippet "home/groups.html" %}
+        {% snippet "home/featured_content.html" %}
+    </div>
+
+    {% set show_greetings = h.get_theme_config('show-greetings', default=True) %}
+    {% set package_create = h.check_access('package_create') %}
+    {% if show_greetings and package_create %}
+        <div id="greetings-modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <i class="icon-remove dismiss-greetings" data-dismiss="modal"></i>
+                        <h1>Ready! See the user guide</h1>
+                        <p>It will help you take the first steps.</p>
+                        <div class="modal-actions">
+                            <span>
+                                <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md"
+                                   target="_blank" class="dismiss-greetings">
+                                    <button type="button" class="btn btn-blue">SEE OPERATION GUIDE</button>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% resource 'gobar_js/config/greetings.js' %}
+    {% endif %}
+
+{% endblock %}
