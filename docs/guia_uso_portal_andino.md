@@ -237,7 +237,7 @@ Hacer que tu portal represente tu organización es muy fácil. Por favor, **and�
 
 ## Integrar Andino con Google Analytics
 
-Por favor, [escribinos](datos@modernizacion.gob.ar) y contanos con qué casilla de e-mail querés tener permisos para ver las métricas de tu Andino. 
+Por favor, [escribinos](mailto:datos@modernizacion.gob.ar) y contanos con qué casilla de e-mail querés tener permisos para ver las métricas de tu Andino. 
 
 ***
 
