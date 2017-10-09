@@ -19,7 +19,7 @@ Como alternativa a la instalación dockerizada existe la posibilidad de tener un
 
 Esta extensión de ckan fue desarrollada siguiendo la [guia de creación de extensiones](http://docs.ckan.org/en/ckan-2.5.2/extensions/tutorial.html).
 
-### Estructura de archivos
+### Estructura de archivos
 
 ```
 - ckanext
