@@ -51,5 +51,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'render_ar_datetime': gobar_helpers.render_ar_datetime,
             'accepted_mime_types': gobar_helpers.accepted_mime_types,
             'valid_length': gobar_helpers.valid_length,
-            'capfirst': gobar_helpers.capfirst
+            'capfirst': gobar_helpers.capfirst,
+            'type_is_numeric': gobar_helpers.type_is_numeric
         }

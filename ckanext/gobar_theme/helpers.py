@@ -203,21 +203,25 @@ def update_frequencies(freq_id=None):
 
 
 def field_types():
-    return {
-        "string": "Texto (string)",
-        "integer": "Número entero (integer)",
-        "number": "Número decimal (number)",
-        "boolean": "Verdadero/falso (boolean)",
-        "time": "Tiempo ISO-8601 (time)",
-        "date": "Fecha ISO-8601 (date)",
-        "date-time": "Fecha y hora ISO-8601 (date-time)",
-        "object": "JSON (object)",
-        "geojson": "GeoJSON (geojson)",
-        "geo_point": "GeoPoint (geo_point)",
-        "array": "Lista de valores en formato JSON (array)",
-        "binary": "Valor binario en base64 (binary)",
-        "any": "Otro (any)"
-    }
+    return [
+        ("string", "Texto (string)"),
+        ("integer", "Número entero (integer)"),
+        ("number", "Número decimal (number)"),
+        ("boolean", "Verdadero/falso (boolean)"),
+        ("time", "Tiempo ISO-8601 (time)"),
+        ("date", "Fecha ISO-8601 (date)"),
+        ("date-time", "Fecha y hora ISO-8601 (date-time)"),
+        ("object", "JSON (object)"),
+        ("geojson", "GeoJSON (geojson)"),
+        ("geo_point", "GeoPoint (geo_point)"),
+        ("array", "Lista de valores en formato JSON (array)"),
+        ("binary", "Valor binario en base64 (binary)"),
+        ("any", "Otro (any)")
+    ]
+
+
+def type_is_numeric(field_type):
+    return field_type in ['integer', 'number']
 
 
 def render_ar_datetime(datetime_):
