@@ -52,5 +52,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'accepted_mime_types': gobar_helpers.accepted_mime_types,
             'valid_length': gobar_helpers.valid_length,
             'capfirst': gobar_helpers.capfirst,
-            'type_is_numeric': gobar_helpers.type_is_numeric
+            'type_is_numeric': gobar_helpers.type_is_numeric,
+            'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one
         }

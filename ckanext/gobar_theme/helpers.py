@@ -264,3 +264,10 @@ def valid_length(data, max_length):
 
 def capfirst(s):
     return s[0].upper() + s[1:]
+
+
+def attributes_has_at_least_one(attr, resource_attributes):
+    for attributes in resource_attributes:
+        if len(attributes.get(attr, '')) > 0:
+            return True
+    return False
