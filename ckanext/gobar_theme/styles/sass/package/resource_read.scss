@@ -36,6 +36,8 @@
         color: $blue-300;
         margin: $top-space 0 0 0;
         font-size: 26px;
+        overfloe: hidden;
+        text-overflow: ellipsis;
       }
       p {
         font-size: 18px;
@@ -112,4 +114,3 @@
     }
   }
 }
-
