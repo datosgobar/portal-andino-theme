@@ -36,6 +36,16 @@ def organization_tree():
     return organizations
 
 
+def get_suborganizations():
+    organizations = organization_tree()
+    suborganizations = []
+    for organization in organizations:
+        if 'children' in organization:
+            for child in organization['children']:
+                suborganizations.append(child['name'])
+    return suborganizations
+
+
 def get_faceted_groups():
     data_dict_page_results = {
         'all_fields': True,
@@ -193,21 +203,25 @@ def update_frequencies(freq_id=None):
 
 
 def field_types():
-    return {
-        "string": "Texto (string)",
-        "integer": "Número entero (integer)",
-        "number": "Número decimal (number)",
-        "boolean": "Verdadero/falso (boolean)",
-        "time": "Tiempo ISO-8601 (time)",
-        "date": "Fecha ISO-8601 (date)",
-        "date-time": "Fecha y hora ISO-8601 (date-time)",
-        "object": "JSON (object)",
-        "geojson": "GeoJSON (geojson)",
-        "geo_point": "GeoPoint (geo_point)",
-        "array": "Lista de valores en formato JSON (array)",
-        "binary": "Valor binario en base64 (binary)",
-        "any": "Otro (any)"
-    }
+    return [
+        ("string", "Texto (string)"),
+        ("integer", "Número entero (integer)"),
+        ("number", "Número decimal (number)"),
+        ("boolean", "Verdadero/falso (boolean)"),
+        ("time", "Tiempo ISO-8601 (time)"),
+        ("date", "Fecha ISO-8601 (date)"),
+        ("date-time", "Fecha y hora ISO-8601 (date-time)"),
+        ("object", "JSON (object)"),
+        ("geojson", "GeoJSON (geojson)"),
+        ("geo_point", "GeoPoint (geo_point)"),
+        ("array", "Lista de valores en formato JSON (array)"),
+        ("binary", "Valor binario en base64 (binary)"),
+        ("any", "Otro (any)")
+    ]
+
+
+def type_is_numeric(field_type):
+    return field_type in ['integer', 'number']
 
 
 def render_ar_datetime(datetime_):
@@ -247,3 +261,18 @@ def accepted_mime_types():
 def package_resources(pkg_id):
     package = logic.get_action('package_show')({}, {'id': pkg_id})
     return package['resources']
+
+
+def valid_length(data, max_length):
+    return len(data) <= max_length
+
+
+def capfirst(s):
+    return s[0].upper() + s[1:]
+
+
+def attributes_has_at_least_one(attr, resource_attributes):
+    for attributes in resource_attributes:
+        if len(attributes.get(attr, '')) > 0:
+            return True
+    return False

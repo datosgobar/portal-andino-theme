@@ -14,6 +14,10 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def get_actions(self):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
+                'group_delete': gobar_actions.group_delete_and_purge,
+                'package_delete': gobar_actions.dataset_delete_and_purge,
+                'resource_delete': gobar_actions.resource_delete_and_purge,
+                'organization_delete': gobar_actions.organization_delete_and_purge,
                 'gobar_status_show': gobar_actions.gobar_status_show}
 
     def update_config(self, config_):
@@ -31,6 +35,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {
             'organization_tree': gobar_helpers.organization_tree,
+            'get_suborganizations': gobar_helpers.get_suborganizations,
             'get_faceted_groups': gobar_helpers.get_faceted_groups,
             'join_groups': gobar_helpers.join_groups,
             'cut_text': gobar_helpers.cut_text,
@@ -45,5 +50,9 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'field_types': gobar_helpers.field_types,
             'render_ar_datetime': gobar_helpers.render_ar_datetime,
             'accepted_mime_types': gobar_helpers.accepted_mime_types,
-            'package_resources': gobar_helpers.package_resources
+            'package_resources': gobar_helpers.package_resources,
+            'valid_length': gobar_helpers.valid_length,
+            'capfirst': gobar_helpers.capfirst,
+            'type_is_numeric': gobar_helpers.type_is_numeric,
+            'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one
         }

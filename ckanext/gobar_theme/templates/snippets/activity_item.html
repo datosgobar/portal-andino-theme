@@ -3,12 +3,16 @@
         <span class="new" title="{{ _('New activity item') }}">{{ _('New activity item') }}</span>
     {% endif %}
     <p>
-        {% set clean_format = activity.data.update({'actor': 'Se'}) %}
+        {% if user_history %}
+          <i class="icon icon-{{ activity.icon }}"></i>
+        {% else %}
+            {% set clean_format = activity.data.update({'actor': 'Se'}) %}
+        {% endif %}
         {% set msg = activity.msg.format(**activity.data) %}
         {% set msg = msg.replace('conjunto de datos', 'dataset') %}
-        {{ h.literal(msg) }}
+        {{ h.literal(msg) }}.
         <span class="date" title="{{ h.render_datetime(activity.timestamp, with_hours=True) }}">
-            {{ h.time_ago_from_timestamp(activity.timestamp)|title }}
+            {{ h.capfirst(h.time_ago_from_timestamp(activity.timestamp)) }}.
         </span>
     </p>
 </li>

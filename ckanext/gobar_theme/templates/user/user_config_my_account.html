@@ -1,0 +1,78 @@
+{% extends "user/user_config_base.html" %}
+
+{% block config %}
+    <div id="user-config-my-account">
+
+        <h1>Datos personales</h1>
+
+        <h2>Usuario</h2>
+        <input name="username" type="text" title="Usuario" value="{{ c.userobj.name }}" disabled="disabled">
+
+        <h2>Nombre y apellido</h2>
+        <input name="full-name" type="text" title="Nombre y apellido" value="{{ c.userobj.fullname or '' }}" disabled="disabled">
+
+        {% set current_email = c.userobj.email or '' %}
+
+        <div class="disabled-input" data-replace-id="email-edit">
+            <h2>E-mail</h2>
+            <div class="can-have-feedback-img">
+                <input name="email" type="text" title="E-mail" value="{{ current_email }}" disabled="disabled">
+                {% snippet "svg/edit.svg" %}
+            </div>
+        </div>
+
+        <div id="email-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_email" data-attr="email">
+            <input type="hidden">
+            <h2>Nuevo e-mail</h2>
+            <div class="can-have-feedback-img">
+                <input name="email" type="text" title="Nuevo e-mail" value="{{ current_email }}" data-default-value="{{ current_email }}">
+            </div>
+            <h2>Repetir e-mail</h2>
+            <div class="can-have-feedback-img">
+                <input name="email-confirmation" type="text" title="Repetir e-mail">
+                <button class="btn btn-blue" id="save-email">
+                    GUARDAR
+                </button>
+                <button class="btn btn-transparent" id="cancel-email">
+                    CANCELAR
+                </button>
+            </div>
+        </div>
+
+        <div class="disabled-input" data-replace-id="password-edit">
+            <h2>Contraseña</h2>
+            <div class="can-have-feedback-img">
+                <input name="password" type="password" title="Contraseña" value="******" disabled="disabled">
+                {% snippet "svg/edit.svg" %}
+            </div>
+        </div>
+
+        <div id="password-edit" class="hidden edit-section" data-endpoint="/configurar/mi_cuenta/cambiar_contraseña" data-attr="password">
+            <h2>Contraseña actual</h2>
+            <div class="can-have-feedback-img">
+                <input name="password" type="password" title="Contraseña actual" data-default-value="">
+            </div>
+
+            <h2>Nueva contraseña</h2>
+            <div class="can-have-feedback-img">
+                <input name="password" type="password" title="Nueva contraseña" data-default-value="">
+            </div>
+
+            <h2>Repetir contraseña</h2>
+            <div class="can-have-feedback-img">
+                <input name="password" type="password" title="Repetir contraseña">
+                <button class="btn btn-blue" id="save-password">
+                    GUARDAR
+                </button>
+                <button class="btn btn-transparent" id="cancel-password">
+                    CANCELAR
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    {% resource 'gobar_js/user_config/user_commons.js' %}
+    {% resource 'gobar_js/user_config/my_account.js' %}
+
+{% endblock %}

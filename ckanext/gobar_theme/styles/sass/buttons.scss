@@ -22,6 +22,10 @@
       background: $blue-200;
       color: white;
     }
+    &[disabled] {
+      opacity: 1;
+      color: white;
+    }
   }
 
   &.btn-red {

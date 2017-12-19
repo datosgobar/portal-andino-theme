@@ -24,7 +24,6 @@ $header-height: 72px;
   #header-spacing {
     $padding: 20px;
     padding: 0 $padding;
-    text-align: center;
 
     .logo-header, .header-links {
       height: $header-height;
@@ -38,35 +37,177 @@ $header-height: 72px;
     }
 
     .header-links {
-      overflow: hidden;
-      a {
+      display: none;
+      text-align: right;
+      @include breakpoint-sm {
+        display: block;
+      }
+      .user-divisor {
+        border-left: solid 2px $blue-300;
+        padding: 14px 0.3em 14px 0;
+        display: inline-block;
+        height: 60%;
+        position: absolute;
+        top: 20%;
+        left: 0;
+      }
+      .header-link:hover + .header-link .user-divisor {
+        border-color: transparent;
+      }
+
+      .header-link {
         color: $blue-300;
-        padding: 0 0.5em;
-        font-size: 90%;
+        margin: 0;
+        padding: 0 0.3em;
+        font-size: 85%;
+        line-height: $header-height;
         display: inline-block;
         height: 100%;
+        cursor: pointer;
+        vertical-align: bottom;
         @include breakpoint-sm {
-          &:hover {
+          &:hover, &.active {
             background: $blue-300;
             color: white;
+            .user-logo path {
+              fill: white!important;
+            }
           }
         }
-      }
-      @include breakpoint-sm {
-        text-align: right;
-        a {
+        @include breakpoint-md {
+          padding: 0 0.5em;
           font-size: 100%;
+        }
+      }
+
+      .header-link.dropdown {
+        position: relative;
+
+        .caret {
+          margin-bottom: 8px;
+        }
+
+        .username {
+          text-transform: uppercase;
+        }
+        .user-logo {
+          height: 30px;
+          vertical-align: middle;
+          margin-left: 10px;
+        }
+
+        ul {
+          margin: 0;
+          display: none;
+          position: absolute;
+          right: 0;
+          width: 250px;
+          background-color: $blue-300;
+          color: white;
+          list-style-type: none;
+          text-align: left;
+          bottom: -160px;
+          @include box-shadow(0 5px 14px -4px rgba(0, 0, 0, 0.5));
+
+          a {
+            li {
+              height: 40px;
+              line-height: 26px;
+              padding: 7px 14px;
+              color: white;
+              &:hover {
+                background: $blue-200;
+              }
+            }
+          }
+        }
+
+        &.active ul {
+          display: block;
         }
       }
     }
 
     .logo-header {
-      @include breakpoint-sm {
-        text-align: left;
+      &.showing-nav {
+        height: auto;
+      }
+
+      .logo-and-xs-icon {
+        height: 100%;
+        position: relative;
+        padding-left: 50px;
+        padding-top: 11px;
+        padding-bottom: 11px;
+        @include breakpoint-sm {
+          padding-left: 0;
+        }
+      }
+
+      .icon-reorder {
+        position: absolute;
+        font-size: 30px;
+        top: 50%;
+        left: 0;
+        $size: 40px;
+        width: $size;
+        height: $size;
+        line-height: $size;
+        text-align: center;
+        margin-top: - $size / 2;
+        border: none;
+        @include border-radius(4px);
+        color: $blue-300;
+        &:hover, &.active {
+          color: white;
+          background: $blue-300;
+        }
+        @include breakpoint-sm {
+          display: none;
+        }
+      }
+
+      .xs-navbar {
+        padding-bottom: 10px;
+        @include breakpoint-sm {
+          display: none;
+        }
+        .navbar-link {
+          line-height: initial;
+          padding: 10px;
+          color: $blue-300;
+          &:hover {
+            background: $blue-300;
+            color: white;
+            cursor: pointer;
+            a {
+              color: white;
+            }
+            .user-logo path {
+              fill: white!important;
+            }
+          }
+          .username {
+              text-transform: uppercase;
+            }
+          .user-logo {
+            height: 20px;
+            vertical-align: middle;
+          }
+        }
+        .dropdown-navbar .navbar-link {
+          padding-left: 15px;
+        }
+      }
+      a {
+       display: inline-block;
+       height: 50px;
+       vertical-align: top;
       }
       .logo-ministerio {
-        height: 100%;
+        height: 50px;
         max-width: 100%;
+        display: block;
       }
     }
   }

@@ -1,13 +1,12 @@
 from ckan.controllers.home import HomeController
 from ckan.controllers.api import ApiController
-from ckan.controllers.user import UserController
-import ckan.lib.helpers as h
-from ckan.common import c, request
+from ckan.common import c
 import ckan.logic as logic
 import ckan.model as model
 import ckan.lib.base as base
 import json
 import ckan.plugins as p
+from ckanext.googleanalytics.controller import GAApiController
 
 
 class GobArHomeController(HomeController):
@@ -58,7 +57,7 @@ class GobArHomeController(HomeController):
         return base.render('about.html')
 
 
-class GobArApiController(ApiController):
+class GobArApiController(GAApiController, ApiController):
 
     def _remove_extra_id_field(self, json_string):
         json_dict = json.loads(json_string)
@@ -89,35 +88,3 @@ class GobArApiController(ApiController):
         status['gobar_artifacts'] = gobar_status
 
         return self._finish_ok(status)
-
-
-class GobArUserController(UserController):
-
-    def read(self, id=None):
-        if id and id == c.user:
-            return super(GobArUserController, self).read(id)
-        return h.redirect_to('home')
-
-    def login(self, error=None):
-        # Do any plugin login stuff
-        for item in p.PluginImplementations(p.IAuthenticator):
-            item.login()
-
-        if 'error' in request.params:
-            h.flash_error(request.params['error'])
-
-        if not c.user:
-            came_from = request.params.get('came_from')
-            if not came_from:
-                came_from = h.url_for(controller='user', action='logged_in',
-                                      __ckan_no_root=True)
-            c.login_handler = h.url_for(
-                self._get_repoze_handler('login_handler_path'),
-                came_from=came_from)
-            if error:
-                vars = {'error_summary': {'': error}}
-            else:
-                vars = {}
-            return base.render('user/login.html', extra_vars=vars)
-        else:
-            return h.redirect_to('home')

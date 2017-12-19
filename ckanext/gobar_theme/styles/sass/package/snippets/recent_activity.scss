@@ -13,6 +13,11 @@
     margin: 0;
     li.item {
       border-bottom: solid 1px $grey-300;
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+      }
     }
   }
 

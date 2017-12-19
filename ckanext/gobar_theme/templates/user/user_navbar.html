@@ -1,0 +1,25 @@
+<div id="navbar" class="col-xs-12 col-sm-4">
+
+    <h2>Mi cuenta</h2>
+    <div class="links-section">
+        {% set user_controller = 'ckanext.gobar_theme.user_controller:GobArUserController' %}
+
+        <a href="{{ h.url_for(controller=user_controller, action='my_account') }}"
+           class="section-link {{ 'active' if c.action == 'my_account' else '' }}">
+            Datos personales
+        </a>
+
+        {% if c.userobj.sysadmin %}
+            <a href="{{ h.url_for(controller=user_controller, action='create_users') }}"
+               class="section-link {{ 'active' if c.action == 'create_users' else '' }}">
+                Crear usuarios
+            </a>
+        {% endif %}
+
+        <a href="{{ h.url_for(controller=user_controller, action='user_history') }}"
+           class="section-link {{ 'active' if c.action == 'user_history' else '' }}">
+            Historial
+        </a>
+    </div>
+
+</div>

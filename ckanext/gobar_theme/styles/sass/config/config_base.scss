@@ -32,7 +32,7 @@
       font-weight: 400;
       margin: 0 0 10px 0;
       font-size: 20px;
-      color: $grey-300;
+      color: $grey-400;
       &.blue {
         color: $blue-300;
       }
@@ -47,6 +47,9 @@
       &:after {
         content: none;
       }
+    }
+    p.error {
+        color: $red-300;
     }
     .radio-container {
       margin-bottom: 30px;
@@ -88,13 +91,17 @@
         }
       }
     }
-    input[type="text"] {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       margin-bottom: 30px;
       padding: 10px;
       height: auto;
       font-size: 16px;
       color: $grey-400;
+      @include placeholder {
+        font-style: italic
+      }
     }
     .checkbox-label {
       font-size: 20px;
@@ -180,6 +187,5 @@
         }
       }
     }
-
   }
 }

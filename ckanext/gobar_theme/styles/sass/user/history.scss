@@ -1,0 +1,91 @@
+#user-config-history {
+  margin-bottom: 50px;
+  ul.activity {
+    position: relative;
+    margin-bottom: 0;
+    &:after {
+      content: '';
+      display: block;
+      border-left: 1px dashed $grey-300;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 14px;
+      z-index: -1;
+    }
+    li.item {
+      display: block;
+      border-bottom: none;
+      p {
+        padding-left: 40px;
+        position: relative;
+      }
+
+      i.icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: $blue-325;
+      }
+
+      img {
+        display: none;
+      }
+
+      .actor a {
+        pointer-events: none;
+      }
+
+      &[class*="deleted"],
+      &[class*="removed"],
+      &[class*="failure"] {
+        i.icon {
+          background: $red-250;
+        }
+        a {
+          pointer-events: none;
+        }
+      }
+
+      &[class*="success"] i.icon,
+      &[class*="added"] i.icon,
+      &[class*="new"] i.icon, {
+        background: $green-400;
+      }
+
+      .date:first-letter {
+        text-transform: uppercase;
+      }
+
+      &:nth-last-child(1) {
+          background: white;
+      }
+    }
+  }
+  .show-more-container {
+    text-align: center;
+    border-top: solid 1px $grey-200;
+    padding-top: 10px;
+    .show-more {
+      cursor: pointer;
+      color: $grey-300;
+      svg {
+        width: 12px;
+        height: 12px;
+        path {
+            fill: $grey-300;
+        }
+      }
+      &.fetching {
+        pointer-events: none;
+        cursor: waiting;
+      }
+      &:hover {
+          color: $grey-400;
+          svg path {
+              fill: $grey-400;
+          }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{% extends "gobar_page.html" %}
+
+{% block subtitle %} - {{ gettext('Error %(error_code)s', error_code=c.code[0]) }}{% endblock %}
+
+{% block content %}
+
+<div id="expired-key">
+    <div id="expired-key-content">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="/img/pantalla-error-link-expirado.svg">
+                        <p class="expired-key-title">Pasó demasiado tiempo y este enlace ya no funciona</p>
+                        <p class="expired-key-desc">Por favor, contactate con el administrador para que puedas crear una nueva contraseña.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
