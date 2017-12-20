@@ -16,7 +16,7 @@ git checkout $latest_ckan_release_branch
 
 python setup.py develop
 #pip install -r requirements.txt --allow-all-external
-pip install -r https://raw.githubusercontent.com/datosgobar/portal-andino-theme/master/dev-requirements.txt --allow-all-external
+pip install -r  wget https://raw.githubusercontent.com/datosgobar/portal-andino-theme/master/dev-requirements.txt --allow-all-external
 pip install -r dev-requirements.txt --allow-all-external
 cd -
 
