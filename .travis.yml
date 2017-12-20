@@ -7,7 +7,10 @@ env:
     - CKANVERSION=2.5
     - CKANVERSION=2.4
     - CKANVERSION=2.3
+addons:
+postgresql: "10"
 install:
+    - sudo apt-get remove -y postgresql-9.2
     - sudo apt-get install postgresql postgresql-contrib libpq-dev python-dev
     - bash bin/travis-build.bash
 services:
