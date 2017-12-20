@@ -10,7 +10,7 @@ env:
 addons:
 postgresql: "10"
 install:
-    - sudo apt-get remove -y postgresql-9.2
+    - sudo pkill -u postgres
     - sudo apt-get install postgresql postgresql-contrib libpq-dev python-dev
     - bash bin/travis-build.bash
 services:
