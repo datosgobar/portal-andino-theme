@@ -10,7 +10,6 @@ env:
 addons:
 postgresql: "10"
 install:
-    - sudo pip uninstall psycopg2
     - sudo pip install psycopg2==2.7.1
     - sudo pkill -u postgres
     - sudo apt-get install postgresql postgresql-contrib libpq-dev python-dev
