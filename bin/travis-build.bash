@@ -16,7 +16,8 @@ git checkout $latest_ckan_release_branch
 
 python setup.py develop
 #pip install -r requirements.txt --allow-all-external
-wget "https://raw.githubusercontent.com/datosgobar/portal-andino-theme/master/dev-requirements.txt" -O own_requirements.txt
+wget "https://raw.githubusercontent.com/datosgobar/portal-andino-theme/fix_build_travis/dev-requirements.txt" -O own_requirements.txt
+    # si esto llega a master, cambiar el link
 pip install -r own_requirements.txt --allow-all-external
 #pip install -r dev-requirements.txt --allow-all-external
 cd -
