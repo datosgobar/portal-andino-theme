@@ -10,7 +10,7 @@ env:
 addons:
 postgresql: "10"
 install:
-    - sudo pip install pgadmin4-1.3-py2.py3-none-any.whl psycopg2==2.7.1
+    - sudo pip install psycopg2==2.7.1
     - sudo pkill -u postgres
     - sudo apt-get install postgresql postgresql-contrib libpq-dev python-dev
     - bash bin/travis-build.bash
