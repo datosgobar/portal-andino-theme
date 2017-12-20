@@ -16,9 +16,9 @@ git checkout $latest_ckan_release_branch
 
 python setup.py develop
 #pip install -r requirements.txt --allow-all-external
-wget "https://raw.githubusercontent.com/datosgobar/portal-andino-theme/master/requirements.txt" -O own_requirements.txt
+wget "https://raw.githubusercontent.com/datosgobar/portal-andino-theme/master/dev-requirements.txt" -O own_requirements.txt
 pip install -r own_requirements.txt --allow-all-external
-pip install -r dev-requirements.txt --allow-all-external
+#pip install -r dev-requirements.txt --allow-all-external
 cd -
 
 echo "Creating the PostgreSQL user and database..."
