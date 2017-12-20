@@ -13,9 +13,14 @@ cd ckan
 export latest_ckan_release_branch='release-v2.5.3'
 echo "CKAN branch: $latest_ckan_release_branch"
 git checkout $latest_ckan_release_branch
+# Temporarily replace psycopg2's version with 2.7.1 which fixes https://github.com/psycopg/psycopg2/issues/594
+sed -i.bak 's/psycopg2\=\=2\.4\.5/psycopg2\=\=2\.7\.1/' requirements.txt
 python setup.py develop
 pip install -r requirements.txt --allow-all-external
 pip install -r dev-requirements.txt --allow-all-external
+# undo requirements.txt modification
+git checkout requirements.txt
+rm requirements.txt.bak
 cd -
 
 echo "Creating the PostgreSQL user and database..."
