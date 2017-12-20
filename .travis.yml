@@ -1,21 +1,13 @@
 language: python
+sudo: required
 python:
     - "2.7"
-env:
-    - CKANVERSION=master
-    - CKANVERSION=2.6
-    - CKANVERSION=2.5
-    - CKANVERSION=2.4
-    - CKANVERSION=2.3
-addons:
-postgresql: "10"
-install:
-    - sudo pip install psycopg2==2.7.1
-    - sudo pkill -u postgres
-    - sudo apt-get install postgresql postgresql-contrib libpq-dev python-dev
-    - bash bin/travis-build.bash
 services:
     -postgresql
+postgresql: "9.1"
+install:
+    - bash bin/travis-build.bash
+    - pip install coveralls
 script: sh bin/travis-run.sh
-after_success: coveralls
-sudo: required
+after_success:
+    - coveralls
