@@ -29,9 +29,12 @@
         {% set yt = h.get_theme_config('social.yt') %}
         <input type="text" title="Youtube" id="yt" name="yt" value="{{- yt if yt else '' -}}">
 
-        <h2>Mail de contacto</h2>
+        <h2>* Mail de contacto</h2>
         {% set mail = h.get_theme_config('social.mail') %}
         <input type="text" title="Mail de contacto" id="mail" name="mail" value="{{- mail if mail else '' -}}">
+        {%  if c.errors.mail_error %}
+            <label style="color: red; margin-bottom: 0">{{ "El mail es inválido o está incompleto" }}</label>
+        {%  endif %}
 
         <div class="submit-container">
             <button class="submit-button" type="submit" name="save">GUARDAR</button>

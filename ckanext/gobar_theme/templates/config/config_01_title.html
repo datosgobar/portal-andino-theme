@@ -5,18 +5,32 @@
     <h1>Título, descripción e imagen del portal</h1>
 
     <form id="title-config" method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
-        <h2>Título</h2>
+        <h2>* Título</h2>
         <p>Podés usar, por ejemplo, Datos + el nombre o las siglas de tu organización.</p>
         {% set title = h.get_theme_config('title.site-title') %}
-        <input name="site-title" type="text" title="Título del portal" placeholder="Título del portal"
-               id="site-title" value="{{ title if title else '' }}">
+        <div class="site-title-div">
+            <input name="site-title" type="text" title="Título del portal" placeholder="Título del portal" class="site-title"
+               id="site-title" style="margin-bottom: 10px;" value="{{ title if title else '' }}">
+            <label style="margin-bottom: 30px;">*Por favor, no superes los 100 caracteres.</label>
+        </div>
 
-        <h2>Descripción del portal</h2>
+        {% if c.errors.title_error %}
+            <label style="color: red; margin-bottom: 30px;">{{ c.errors.title_error }}</label>
+        {% endif %}
+
+        <h2>* Descripción del portal</h2>
         <p>Tené en cuenta que esta es la explicación que le das a tus usuarios sobre lo que van a encontrar en tu portal.</p>
         {% set description = h.get_theme_config('title.site-description') %}
-        <textarea name="site-description" id="description" title="Descripción del portal"
-                  placeholder="Describí el portal. Explicá de qué se trata tu catálogo de datos. Por favor, hacelo en no más de tres líneas."
-        >{{- description if description else '' -}}</textarea>
+        <div class="site-description-div">
+            <textarea name="site-description" title="Descripción del portal" id="site-description" style="margin-bottom: 10px;"
+                      placeholder="Describí el portal. Explicá de qué se trata tu catálogo de datos. Por favor, hacelo en no más de tres líneas."
+            >{{- description if description else '' -}}</textarea>
+            <label style="margin-bottom: 30px;">*Por favor, no superes los 300 caracteres.</label>
+        </div>
+
+        {% if c.errors.description_error %}
+            <label style="color: red; margin-bottom: 30px;">{{ c.errors.description_error }}</label>
+        {% endif %}
 
         <h2>Imagen de fondo</h2>
         {% set image = h.get_theme_config('title.background-image') %}
@@ -32,8 +46,39 @@
         </div>
 
         <div class="submit-container">
-            <button class="submit-button" type="submit" name="save">GUARDAR</button>
+            <button class="submit-button site-config" type="submit" name="save">GUARDAR</button>
         </div>
     </form>
+
+{#    <script>#}
+{#        function validateSiteFields(){#}
+{#            var input = document.getElementById("site-title");#}
+{#            if (input.value.length < 9 || input.value.length > 100){#}
+{#                //event.preventDefault();#}
+{#                if (document.getElementById("title-error") === null){#}
+{#                    var title_label = document.createElement("label");#}
+{#                    var title_node = document.createTextNode("El título debe contener un mínimo de 9 caracteres y un máximo de 100!");#}
+{#                    title_label.appendChild(title_node);#}
+{#                    title_label.style.color = 'red';#}
+{#                    title_label.style.marginBottom = '30px';#}
+{#                    title_label.id = "title-error";#}
+{#                    $(".site-title-div").append(title_label);#}
+{#                }#}
+{#            }#}
+{#            var textarea = document.getElementById("site-description");#}
+{#            if (textarea.value.length < 30 || textarea.value.length > 300){#}
+{#                event.preventDefault();#}
+{#                if (document.getElementById("description-error") === null){#}
+{#                    var description_label = document.createElement("label");#}
+{#                    var description_node = document.createTextNode("La descripción debe contener un mínimo de 30 caracteres y un máximo de 300!");#}
+{#                    description_label.appendChild(description_node);#}
+{#                    description_label.style.color = 'red';#}
+{#                    description_label.style.marginBottom = '30px';#}
+{#                    description_label.id = "description-error";#}
+{#                    $(".site-description-div").append(description_label);#}
+{#                }#}
+{#            }#}
+{#        }#}
+{#    </script>#}
 
 {% endblock %}

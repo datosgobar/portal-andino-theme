@@ -485,9 +485,7 @@ class GobArPackageController(PackageController):
         forms. '''
         if request.method == 'POST' and not data:
             save_action = request.params.get('save')
-            data = data or \
-                   clean_dict(dict_fns.unflatten(tuplize_dict(parse_params(
-                       request.POST))))
+            data = data or clean_dict(dict_fns.unflatten(tuplize_dict(parse_params(request.POST))))
             # we don't want to include save as it is part of the form
             del data['save']
             resource_id = data['id']
@@ -506,7 +504,7 @@ class GobArPackageController(PackageController):
             data_provided = False
             for key, value in data.iteritems():
                 if ((value or isinstance(value, cgi.FieldStorage))
-                    and key not in ['resource_type', 'license_id', 'attributesDescription']):
+                        and key not in ['resource_type', 'license_id', 'attributesDescription']):
                     data_provided = True
                     break
 

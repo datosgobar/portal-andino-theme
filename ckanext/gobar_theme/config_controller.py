@@ -1,3 +1,4 @@
+# coding=utf-8
 import ckan.lib.base as base
 from ckan.common import request, g, c
 import ckan.lib.helpers as h
@@ -6,6 +7,7 @@ import ckan.model as model
 import urlparse
 import json
 import os
+import re
 
 parse_params = logic.parse_params
 abort = base.abort
@@ -20,7 +22,20 @@ class GobArConfigController(base.BaseController):
     def edit_title(self):
         self._authorize()
         if request.method == 'POST':
+
+            # Validating the form's fields
+            c.errors = {}
             params = parse_params(request.params)
+            error_title = len(params['site-title']) < 9
+            error_description = len(params['site-description']) < 30
+            if error_title:
+                c.errors['title_error'] = "Debe contener entre 9 y 100 caracteres!"
+            if error_description:
+                c.errors['description_error'] = "Debe contener entre 30 y 300 caracteres!"
+            if error_description or error_title:
+                return base.render('config/config_01_title.html')
+
+            # No errors found within the form's fields --> Modifications will be done
             config_dict = self._read_config()
             new_title_config = {
                 'site-title': params['site-title'].strip(),
@@ -34,6 +49,7 @@ class GobArConfigController(base.BaseController):
                 new_title_config['background-image'] = self.get_theme_config('title.background-image')
             config_dict['title'] = new_title_config
             self._set_config(config_dict)
+
         return base.render('config/config_01_title.html')
 
     def edit_home(self):
@@ -78,6 +94,10 @@ class GobArConfigController(base.BaseController):
         self._authorize()
         if request.method == 'POST':
             params = parse_params(request.POST)
+            if not re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", params['mail'], re.IGNORECASE):
+                c.errors = {}
+                c.errors['mail_error'] = "El mail es inválido o está incompleto"
+                return base.render('config/config_05_social.html')
             config_dict = self._read_config()
             config_dict['social'] = {
                 'fb': self._url_with_protocol(params['fb'].strip()),
