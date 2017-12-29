@@ -51,45 +51,7 @@ $(function () {
 
     function formIsValid() {
         $('.missing-field').remove();
-
-        if (clickCount > 0) {
-            var canPublish = false;
-            if (clickedPublishButton) {
-               if (hasResources) {
-                    canPublish = true;
-               } else {
-                    canPublish = errorMessages();
-               }
-
-               if (!canPublish) {
-                    window.scrollTo(0, 0);
-                    return canPublish;
-                }
-            } else {
-                return errorMessages();
-            }
-        }
-
-        return true;
-
-        var isValid = true;
-        var errorTemplate = '<div class="missing-field">Completá este dato</div>';
-
-        if (clickCount > 0) {
-            var title = $('#field-name');
-            if (title.val().length == 0){
-                isValid = false;
-                title.after(errorTemplate)
-            }
-
-            isFormValid = isValid && validTitle() && validDesc();
-
-            if (!isFormValid) {
-                window.scrollTo(0, 0);
-            }
-        }
-
-        return isFormValid;
+        return errorMessages();
     }
 
     $('form#resource-edit').submit(function () {
