@@ -1,5 +1,7 @@
 {% import 'macros/form.html' as form %}
 
+
+{% set form_style = c.form_style or c.action %}
 {% set max_length_title = 100 %}
 {% set valid_title = h.valid_length(data.title, max_length_title) %}
 {% if valid_title %}
@@ -12,9 +14,13 @@
 {% set prefix = h.url_for(controller='package', action='read', id='') %}
 {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
 {% set domain = domain|replace("http://", "")|replace("https://", "") %}
-{% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>'} %}
 
+{% if form_style != 'edit' %}
+{% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>'} %}
 {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
+{% else %}
+{{ form.input('name', id='field-name', label=_('URL'), value=(domain + data.name), attrs={'readonly': '', 'disabled': 'true'}, classes=['control-full', 'control-large']) }}
+{%  endif %}
 
 {% set max_length_description = 500 %}
 {% set valid_desc = h.valid_length(data.notes, max_length_description) %}
@@ -55,9 +61,6 @@
     </div>
 {% endif %}
 
-{% set form_style = c.form_style or c.action %}
-
-
 {% if form_style == 'edit' %}
     <div class="control-group">
         <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
@@ -70,6 +73,7 @@
             </select>
         </div>
     </div>
+
 {% else %}
     <input type="hidden" name="private" value="False" id="visibility">
 {% endif %}

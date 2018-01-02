@@ -31,12 +31,19 @@ $(function () {
     function errorMessages() {
         var isValid = true;
         var title = $('#field-name');
+        var description = $('#field-description');
         var errorTemplate = '<div class="missing-field">Completá este dato</div>';
         titleValid = title.val().length > 0;
+        var descriptionValid = description.val().length > 0;
 
         if (!titleValid) {
             isValid = false;
             title.after(errorTemplate);
+            window.scrollTo(0, 0);
+        }
+        if (!descriptionValid) {
+            isValid = false;
+            description.after(errorTemplate);
             window.scrollTo(0, 0);
         }
         return isValid;
@@ -44,45 +51,7 @@ $(function () {
 
     function formIsValid() {
         $('.missing-field').remove();
-
-        if (clickCount > 0) {
-            var canPublish = false;
-            if (clickedPublishButton) {
-               if (hasResources) {
-                    canPublish = true;
-               } else {
-                    canPublish = errorMessages();
-               }
-
-               if (!canPublish) {
-                    window.scrollTo(0, 0);
-                    return canPublish;
-                }
-            } else {
-                return errorMessages();
-            }
-        }
-
-        return true;
-
-        var isValid = true;
-        var errorTemplate = '<div class="missing-field">Completá este dato</div>';
-
-        if (clickCount > 0) {
-            var title = $('#field-name');
-            if (title.val().length == 0){
-                isValid = false;
-                title.after(errorTemplate)
-            }
-
-            isFormValid = isValid && validTitle() && validDesc();
-
-            if (!isFormValid) {
-                window.scrollTo(0, 0);
-            }
-        }
-
-        return isFormValid;
+        return errorMessages();
     }
 
     $('form#resource-edit').submit(function () {
