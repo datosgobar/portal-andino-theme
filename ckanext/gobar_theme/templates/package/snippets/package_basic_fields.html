@@ -19,7 +19,7 @@
 {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>'} %}
 {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 {% else %}
-{{ form.input('name', id='field-name', label=_('URL'), value=(domain + data.name), attrs={'readonly': ''}, classes=['control-full', 'control-large']) }}
+{{ form.input('name', id='field-name', label=_('URL'), value=(domain + data.name), attrs={'readonly': '', 'disabled': 'true'}, classes=['control-full', 'control-large']) }}
 {%  endif %}
 
 {% set max_length_description = 500 %}
