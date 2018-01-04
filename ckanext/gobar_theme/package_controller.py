@@ -1,3 +1,4 @@
+#! coding: utf-8
 from ckan.controllers.package \
     import PackageController, _encode_params, search_url, render, NotAuthorized, check_access, abort, get_action, log
 from urllib import urlencode
@@ -407,6 +408,37 @@ class GobArPackageController(PackageController):
         is_an_update = False
         ckan_phase = request.params.get('_ckan_phase')
         from ckan.lib.search import SearchIndexError
+
+        def pop_groups_from_data_dict_and_get_package_name_and_group_name(a_data_dict):
+            # sacamos los grupos para que no fallen más adelante las validaciones de ckan
+            some_group_names = [group['name'] for group in (a_data_dict['groups'] if 'groups' in a_data_dict else [])]
+            a_data_dict['groups'] = []
+            a_package_name = a_data_dict['name']  # El campo Name identifica unívocamente a un Dataset
+            return a_package_name, some_group_names
+
+        def update_package_group_relation(a_package_name, group_names_to_add):
+            # obtener id del package usando el a_package_name
+            package = model.Package.get(a_package_name)
+
+            # Es necesario eliminar *todos* los objetos `Member` que relacionan `Group`s con `Package`s
+            # ya que vamos a reescribir esas relaciones según el parámetro `group_names_to_add`
+            for group in model.Session.query(model.Group):
+                # con el ID del package queriear los Member con table_id = package_id eliminar
+                members_to_delete = model.Session.query(model.Member).filter(
+                    model.Member.group_id == group.id,
+                    model.Member.table_name == 'package',
+                    model.Member.table_id == package.id)
+                for member in members_to_delete:
+                    model.Session.delete(member)
+            model.Session.commit()  # Hace falta el commit?
+
+            # relaciono los datasets con los grupos correspondientes (que fueron ingresados)
+            for group_name in group_names_to_add:
+                group = model.Group.get(group_name)
+
+                group.add_package_by_name(a_package_name)
+                group.save()
+
         try:
             data_dict = clean_dict(dict_fns.unflatten(
                 tuplize_dict(parse_params(request.POST))))
@@ -419,6 +451,9 @@ class GobArPackageController(PackageController):
 
                 self._validate_dataset(data_dict)
 
+                # Limpiamos el data_dict para poder guardar el DS aun siendo colaborador no miembro del grupo
+                package_name, group_names = pop_groups_from_data_dict_and_get_package_name_and_group_name(data_dict)
+
                 if data_dict.get('pkg_name'):
                     is_an_update = True
                     # This is actually an update not a save
@@ -428,6 +463,9 @@ class GobArPackageController(PackageController):
                     data_dict['state'] = 'draft'
                     # this is actually an edit not a save
                     pkg_dict = get_action('package_update')(context, data_dict)
+
+                    # Restauramos los grupos asignados al dataset (cuando es un update)
+                    update_package_group_relation(package_name, group_names)
 
                     if request.params['save'] == 'go-metadata':
                         # redirect to add metadata
@@ -447,6 +485,9 @@ class GobArPackageController(PackageController):
             data_dict['type'] = package_type
             context['message'] = data_dict.get('log_message', '')
             pkg_dict = get_action('package_create')(context, data_dict)
+
+            # Restauramos los grupos asignados al dataset (cuando es un insert)
+            update_package_group_relation(package_name, group_names)
 
             if ckan_phase and request.params['save'] != 'save-draft':
                 url = h.url_for(controller='package', action='new_resource', id=pkg_dict['name'])
