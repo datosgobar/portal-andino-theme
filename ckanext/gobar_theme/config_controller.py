@@ -26,20 +26,24 @@ class GobArConfigController(base.BaseController):
             # Validating the form's fields
             c.errors = {}
             params = parse_params(request.params)
-            error_title = len(params['site-title']) < 9
-            error_description = len(params['site-description']) < 30
+            error_title = (len(params['site-title']) < 9 or len(params['site-title']) > 100)
+            error_description = (len(params['site-description']) < 30 or len(params['site-description']) > 300)
+            error_organization = (len(params['site-organization']) < 9 or len(params['site-organization']) > 100)
             if error_title:
                 c.errors['title_error'] = "Debe contener entre 9 y 100 caracteres!"
             if error_description:
                 c.errors['description_error'] = "Debe contener entre 30 y 300 caracteres!"
-            if error_description or error_title:
+            if error_organization:
+                c.errors['organization_error'] = "Debe contener entre 9 y 100 caracteres!"
+            if error_description or error_title or error_organization:
                 return base.render('config/config_01_title.html')
 
             # No errors found within the form's fields --> Modifications will be done
             config_dict = self._read_config()
             new_title_config = {
                 'site-title': params['site-title'].strip(),
-                'site-description': params['site-description'].strip()
+                'site-description': params['site-description'].strip(),
+                'site-organization': params['site-organization'].strip()
             }
             if params['image-logic'] == 'new-image':
                 new_title_config['background-image'] = self._save_img(params['background-image'])

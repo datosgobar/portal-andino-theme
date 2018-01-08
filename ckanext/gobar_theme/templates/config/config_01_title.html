@@ -32,6 +32,18 @@
             <label style="color: red; margin-bottom: 30px;">{{ c.errors.description_error }}</label>
         {% endif %}
 
+        <h2>* Organización</h2>
+        {% set organization = h.get_theme_config('title.site-organization') %}
+        <div class="site-organization-div">
+            <input name="site-organization" type="text" title="Organización" placeholder="Ministerio de Modernización" class="site-title"
+               id="site-organization" style="margin-bottom: 10px;" value="{{ organization if organization else '' }}">
+            <label style="margin-bottom: 30px;">*Por favor, no superes los 100 caracteres.</label>
+        </div>
+
+        {% if c.errors.organization_error %}
+            <label style="color: red; margin-bottom: 30px;">{{ c.errors.organization_error }}</label>
+        {% endif %}
+
         <h2>Imagen de fondo</h2>
         {% set image = h.get_theme_config('title.background-image') %}
         <div class="file-upload-container {{ 'with-image' if image else '' }}">
@@ -76,6 +88,19 @@
                     description_label.style.marginBottom = '30px';
                     description_label.id = "description-error";
                     $(".site-description-div").append(description_label);
+                }
+            }
+            var input_organization = document.getElementById("site-organization");
+            if (input_organization.value.length < 9 || input_organization.value.length > 100){
+                event.preventDefault();
+                if (document.getElementById("organization-error") === null){
+                    var organization_label = document.createElement("label");
+                    var organization_node = document.createTextNode("La organización debe contener un mínimo de 9 caracteres y un máximo de 100!");
+                    organization_label.appendChild(organization_node);
+                    organization_label.style.color = 'red';
+                    organization_label.style.marginBottom = '30px';
+                    organization_label.id = "organization-error";
+                    $(".site-organization-div").append(organization_label);
                 }
             }
         }

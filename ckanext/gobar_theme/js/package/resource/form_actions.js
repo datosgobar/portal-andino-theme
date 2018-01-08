@@ -32,9 +32,11 @@ $(function () {
         var isValid = true;
         var title = $('#field-name');
         var description = $('#field-description');
+        var organization = $('#organization-name');
         var errorTemplate = '<div class="missing-field">Completá este dato</div>';
         titleValid = title.val().length > 0;
         var descriptionValid = description.val().length > 0;
+        var organizationValid = organization.val().length > 0;
 
         if (!titleValid) {
             isValid = false;
@@ -45,6 +47,10 @@ $(function () {
             isValid = false;
             description.after(errorTemplate);
             window.scrollTo(0, 0);
+        }
+        if (!organizationValid) {
+            isValid = false;
+            organization.after(errorTemplate);
         }
         return isValid;
     }
