@@ -121,16 +121,16 @@
                 <div class="resource-additional-info col-xs-12 col-md-12 row" style="width: 102% !important;">
                     <h2 class="title-h">Información adicional</h2>
 
-{#                    {% if pkg.maintainer|length > 0 %}#}
+                    {% if pkg.author|length > 0 %}
                         <div class="resource-additional col-xs-12">
                             <div class="col-xs-4 key">
                                 Responsable
                             </div>
                             <div class="col-xs-8 value">
-                                {{ pkg.maintainer }}
+                                {{ pkg.author }}
                             </div>
                         </div>
-{#                    {% endif %}#}
+                    {% endif %}
 
                     <div class="resource-additional col-xs-12">
                         <div class="col-xs-4 key">
