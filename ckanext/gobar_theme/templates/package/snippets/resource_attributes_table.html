@@ -3,49 +3,40 @@
 {% set hasAtLeastOneId = h.attributes_has_at_least_one('id', attributes) %}
 
 {% if attributes|length > 0 %}
-<div class="resource-attributes col-xs-12 no-padding">
-    <h2>Campos del recurso</h2>
-    <table>
-        <colgroup>
-            <col class="col-attribute">
-            <col class="col-attribute">
-            {% if hasAtLeastOneUnit %}
-                <col class="col-attribute">
-            {% endif %}
-            {% if hasAtLeastOneId %}
-                <col class="col-attribute">
-            {% endif %}
-            <col class="col-description">
-        </colgroup>
+<div class="table table-responsive">
+    <h2 class="title-h">Metadatos de este recurso</h2>
+    <table id="metadata-table" class="table table-striped table-bordered"
+           style="margin-bottom: 100px;">
         <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Tipo</th>
+            <tr class="gradient">
+                <th style="width: 20%;">Título de la columna</th>
+                <th>Tipo de dato</th>
+                <th style="width: 40%;">Descripción</th>
                 {% if hasAtLeastOneUnit %}
-                    <th>Unidad</th>
+                    <th>Unidades</th>
                 {% endif %}
                 {% if hasAtLeastOneId %}
                     <th>Identificador</th>
                 {% endif %}
-                <th>Descripción</th>
             </tr>
         </thead>
         <tbody>
         {% for attribute_group in attributes %}
-            <tr>
+            <tr style=" overflow-y:scroll;">
                 <td>{{ attribute_group.get('title', '') }}</td>
                 <td>{{ attribute_group.get('type', '') }}</td>
+                <td>{{ attribute_group.get('description', '') }}</td>
                 {% if hasAtLeastOneUnit %}
                     <td>{{ attribute_group.get('unit', '') }}</td>
                 {% endif %}
                 {% if hasAtLeastOneId %}
                     <td>{{ attribute_group.get('id', '') }}</td>
                 {% endif %}
-                <td>{{ attribute_group.get('description', '') }}</td>
             </tr>
         {% endfor %}
         </tbody>
 
     </table>
 </div>
+
 {% endif %}
