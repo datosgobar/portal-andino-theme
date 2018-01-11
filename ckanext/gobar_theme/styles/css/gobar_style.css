@@ -2153,7 +2153,7 @@ table td[class*=col-], table th[class*=col-] {
 
 .table-responsive {
   min-height: .01%;
-  /*overflow-x: auto; */
+  overflow-x: auto;
 }
 
 @media screen and (max-width: 767px) {
