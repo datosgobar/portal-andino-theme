@@ -5,7 +5,7 @@
     <form>
         {% snippet'package/snippets/resource_nav.html', current='views' %}
         <div class="btn-group">
-            <a class="btn btn-primary dropdown-toggle"  href="#" onclick="myFunction()">
+            <a class="btn btn-primary dropdown-toggle"  href="#" onclick="toggleDropdown()">
                 <i class="icon-plus-sign-alt"></i>
                 {{ _('New view') }}
                 <span class="caret"></span>
@@ -29,7 +29,7 @@
     </form>
 
     <script>
-        function myFunction() {
+        function toggleDropdown() {
             $(".dropdown-menu").toggle();
         }
     </script>
