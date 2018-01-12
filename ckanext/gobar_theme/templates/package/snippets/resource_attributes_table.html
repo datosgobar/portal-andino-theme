@@ -11,29 +11,21 @@
                style="margin-bottom: 100px;">
             <thead>
                 <tr class="gradient">
-                    <th>Título de la columna</th>
-                    <th>Tipo de dato</th>
-                    <th>Descripción</th>
-                    {% if hasAtLeastOneUnit %}
-                        <th>Unidades</th>
-                    {% endif %}
-                    {% if hasAtLeastOneId %}
-                        <th>Identificador</th>
-                    {% endif %}
+                    <th width="300px" style="max-width: 300px; min-width: 300px;">Título de la columna</th>
+                    <th width="120px" style="max-width: 120px;">Tipo de dato</th>
+                    <th width="400px" style="max-width: 400px;">Descripción</th>
+                    <th width="150px" style="max-width: 150px;">Unidades</th>
+                    <th width="130px" style="max-width: 130px;">Identificador</th>
                 </tr>
             </thead>
             <tbody>
             {% for attribute_group in attributes %}
                 <tr style=" overflow-y:scroll;">
-                    <td>{{ attribute_group.get('title', '') }}</td>
-                    <td>{{ attribute_group.get('type', '') }}</td>
-                    <td>{{ attribute_group.get('description', '') }}</td>
-                    {% if hasAtLeastOneUnit %}
-                        <td>{{ attribute_group.get('unit', '') }}</td>
-                    {% endif %}
-                    {% if hasAtLeastOneId %}
-                        <td>{{ attribute_group.get('id', '') }}</td>
-                    {% endif %}
+                    <td width="300px" style="max-width: 300px; min-width: 300px;">{{ attribute_group.get('title', '') }}</td>
+                    <td width="120px" style="max-width: 120px; min-width: 120px;">{{ attribute_group.get('type', '') }}</td>
+                    <td width="400px" style="max-width: 400px; min-width: 400px;">{{ attribute_group.get('description', '') }}</td>
+                    <td width="150px" style="max-width: 150px; min-width: 150px;">{{ attribute_group.get('unit', '') }}</td>
+                    <td class="td_id" width="130px" style="max-width: 130px;">{{ attribute_group.get('id', '') }}</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -44,25 +36,21 @@
 
 {% endif %}
 
+
 <style>
+    .table-fixed {
+        table-layout: fixed;
+    }
 
-.table-fixed {
-    table-layout: fixed;
-}
+    .table-fixed tbody {
+        max-height: 350px;
+        overflow-y: auto;
+        width: 100%;
+        display: block;
+    }
 
-.table-fixed tbody {
-     max-height: 200px;
-     overflow-y: auto;
-     width: 100%;
-}
-
-.table-fixed tbody{
-    display: block;
-}
-
-.table-fixed tr{
-    width: 100%;
-    display: table;
-}
-
+    .table-fixed tr {
+        width: 100%;
+        display: table-row-group;
+    }
 </style>
