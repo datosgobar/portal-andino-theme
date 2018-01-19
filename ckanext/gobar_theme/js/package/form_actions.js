@@ -259,11 +259,19 @@ $(function () {
 
 $(document).ready( function(){
     $('#field-name').bind("keyup change", function() {
-        var field_url = $('#field-name').val();
-        field_url = field_url.replace(/-+/g, '-');
-        if (field_url[0] === '-'){
-            field_url = field_url.substr(1);
+        if (!$('#field-url').attr("was_edited")) {
+            var field_url = $('#field-url').attr("domain") + $('#field-name').val();
+            field_url = field_url.replace(/-+/g, '-');
+            if (field_url[0] === '-') {
+                field_url = field_url.substr(1);
+            }
+            $('#field-url').val(field_url);
         }
-        $('#field-url').val(field_url);
+    });
+});
+
+$(document).ready( function(){
+    $('#field-url').on("keypress", function() {
+        $('#field-url').attr("was_edited", true);
     });
 });
