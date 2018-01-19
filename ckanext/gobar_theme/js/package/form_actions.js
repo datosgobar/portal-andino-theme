@@ -273,5 +273,35 @@ $(document).ready( function(){
 $(document).ready( function(){
     $('#field-url').on("keypress", function() {
         $('#field-url').attr("was_edited", true);
+        $('#field-url').val(removeAccents($('#field-url').val()));
+        $('#field-url').val(changeToValidUrl($('#field-url').val()));
+    });
+});
+
+function removeAccents(strAccents) {
+    var strAccents = strAccents.split('');
+    var strAccentsOut = new Array();
+    var strAccentsLen = strAccents.length;
+    var accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüŠšŸÿýŽž';
+    var accentsOut = "AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuSsYyyZz";
+    for (var y = 0; y < strAccentsLen; y++) {
+        if (accents.indexOf(strAccents[y]) != -1) {
+            strAccentsOut[y] = accentsOut.substr(accents.indexOf(strAccents[y]), 1);
+        } else {
+            strAccentsOut[y] = strAccents[y];
+        }
+    }
+    strAccentsOut = strAccentsOut.join('');
+    return strAccentsOut;
+}
+
+function changeToValidUrl(string){
+    return string.replace(/[^A-Za-z0-9ñÑ.:_/]/g, '-').toLowerCase();
+}
+
+$(document).ready( function(){
+    $('#dataset-edit').on("submit", function() {
+        $('#field-url').val(removeAccents($('#field-url').val()));
+        $('#field-url').val(changeToValidUrl($('#field-url').val()));
     });
 });
