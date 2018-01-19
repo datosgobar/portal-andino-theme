@@ -205,6 +205,19 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_11_metadata_twitter.html')
 
+    def edit_metadata_portal(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            new_metadata_config = {
+                'homepage': params['metadata-homepage'].strip(),
+                'id': params['metadata-id'].strip()
+            }
+            config_dict['portal-metadata'] = new_metadata_config
+            self._set_config(config_dict)
+        return base.render('config/config_12_metadata_portal.html')
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':

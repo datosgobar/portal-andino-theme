@@ -1,0 +1,23 @@
+{% extends "config/config_base.html" %}
+
+{% block config %}
+    <h1 class="small-margin">Metadatos</h1>
+
+    <form method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
+
+        <h2>Homepage (recomendado)</h2>
+        <p>Ingresá el dominio del sitio del portal.</p>
+        {% set homepage = h.get_theme_config('portal-metadata.homepage') %}
+        <input name="metadata-homepage" type="text" title="Homepage" placeholder="www.tusitio.com" value="{{ homepage if homepage else '' }}">
+
+        <h2>Identificador (recomendado)</h2>
+        <p>El identificador debe contener una o más palabras en minúsculas, separadas con guiones medios, sin usar caracteres especiales.
+            Identifica en forma breve, sucinta y declarativa al nodo.</p>
+        {% set id = h.get_theme_config('portal-metadata.id') %}
+        <input name="metadata-id" type="text" title="Identificador" placeholder="desarrollo-social" value="{{ id if id else '' }}">
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">GUARDAR</button>
+        </div>
+    </form>
+{% endblock %}
