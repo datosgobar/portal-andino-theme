@@ -260,7 +260,8 @@ $(function () {
 $(document).ready( function(){
     $('#field-name').bind("keyup change", function() {
         if (!$('#field-url').attr("was_edited")) {
-            var field_url = $('#field-url').attr("domain") + $('#field-name').val();
+            var myDomElement = document.getElementsByClassName( "slug-preview-value" );
+            var field_url = $('#field-url').attr("domain") + $(myDomElement).text();
             field_url = field_url.replace(/-+/g, '-');
             if (field_url[0] === '-') {
                 field_url = field_url.substr(1);
@@ -272,8 +273,9 @@ $(document).ready( function(){
 
 $(document).ready( function(){
     $('#dataset-edit').on("submit", function(e) {
-        var expression = /[https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-        var regex = new RegExp(expression);
+        var regex = new RegExp(
+            /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+        );
         if (!$('#field-url').val().match(regex)) {
             e.preventDefault();
             if (!document.getElementById("error-field-url")){
@@ -285,6 +287,11 @@ $(document).ready( function(){
                 newSpan.style.fontSize = "16px";
                 newSpan.style.marginTop = "5px";
                 $("#field-url").after(newSpan);
+            }
+        }
+        else{
+            if (document.getElementById("error-field-url")){
+                document.getElementById("error-field-url").remove();
             }
         }
     });
