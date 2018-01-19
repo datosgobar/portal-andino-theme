@@ -271,37 +271,21 @@ $(document).ready( function(){
 });
 
 $(document).ready( function(){
-    $('#field-url').on("keypress", function() {
-        $('#field-url').attr("was_edited", true);
-        $('#field-url').val(removeAccents($('#field-url').val()));
-        $('#field-url').val(changeToValidUrl($('#field-url').val()));
-    });
-});
-
-function removeAccents(strAccents) {
-    var strAccents = strAccents.split('');
-    var strAccentsOut = new Array();
-    var strAccentsLen = strAccents.length;
-    var accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüŠšŸÿýŽž';
-    var accentsOut = "AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuSsYyyZz";
-    for (var y = 0; y < strAccentsLen; y++) {
-        if (accents.indexOf(strAccents[y]) != -1) {
-            strAccentsOut[y] = accentsOut.substr(accents.indexOf(strAccents[y]), 1);
-        } else {
-            strAccentsOut[y] = strAccents[y];
+    $('#dataset-edit').on("submit", function(e) {
+        var expression = /[https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        var regex = new RegExp(expression);
+        if (!$('#field-url').val().match(regex)) {
+            e.preventDefault();
+            if (!document.getElementById("error-field-url")){
+                var newSpan = document.createElement('label');
+                var text = document.createTextNode("La URL ingresada no es válida");
+                newSpan.appendChild(text);
+                newSpan.setAttribute("id", "error-field-url");
+                newSpan.style.color = "red";
+                newSpan.style.fontSize = "16px";
+                newSpan.style.marginTop = "5px";
+                $("#field-url").after(newSpan);
+            }
         }
-    }
-    strAccentsOut = strAccentsOut.join('');
-    return strAccentsOut;
-}
-
-function changeToValidUrl(string){
-    return string.replace(/[^A-Za-z0-9ñÑ.:_/]/g, '-').toLowerCase();
-}
-
-$(document).ready( function(){
-    $('#dataset-edit').on("submit", function() {
-        $('#field-url').val(removeAccents($('#field-url').val()));
-        $('#field-url').val(changeToValidUrl($('#field-url').val()));
     });
 });
