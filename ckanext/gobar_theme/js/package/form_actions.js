@@ -261,12 +261,20 @@ $(document).ready( function(){
     $('#field-name').bind("keyup change", function() {
         if (!$('#field-url').attr("was_edited")) {
             var myDomElement = document.getElementsByClassName( "slug-preview-value" );
-            var field_url = $('#field-url').attr("domain") + $(myDomElement).text();
-            field_url = field_url.replace(/-+/g, '-');
-            if (field_url[0] === '-') {
-                field_url = field_url.substr(1);
-            }
-            $('#field-url').val(field_url);
+            var field_url = '';
+            setTimeout(function () {
+                if ($(myDomElement).text() === $('#field-name').val()){
+                    field_url = $('#field-url').attr("domain") + $(myDomElement).text();
+                }
+                else{
+                    field_url = $('#field-url').attr("domain") + $('#field-name').val();
+                }
+                field_url = field_url.replace(/-+/g, '-');
+                if (field_url[0] === '-') {
+                    field_url = field_url.substr(1);
+                }
+                $('#field-url').val(field_url);
+            }, 1000);
         }
     });
 });
@@ -274,7 +282,7 @@ $(document).ready( function(){
 $(document).ready( function(){
     $('#dataset-edit').on("submit", function(e) {
         var regex = new RegExp(
-            /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+            /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-.]{1}[a-z0-9]+)*(\.[a-z0-9]{2,5}|(:[0-9]{1,5}))(\/.*)?$/
         );
         if (!$('#field-url').val().match(regex)) {
             e.preventDefault();

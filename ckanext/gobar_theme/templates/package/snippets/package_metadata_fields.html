@@ -17,7 +17,6 @@
     </div>
 
     {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
-    {% set domain = domain|replace("http://", "")|replace("https://", "") %}
     {% set url_value = data.url if data.url else domain %}
 
     {{ form.input('author', label='* Responsable', id='field-author', value=data.author, error=errors.author, classes=['control-medium']) }}
