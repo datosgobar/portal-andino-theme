@@ -7,6 +7,7 @@ import ckan.lib.formatters as formatters
 import json
 from urlparse import urljoin
 from config_controller import GobArConfigController
+from ckanext.gobar_theme.actions import _get_portal_andino_version
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -276,3 +277,8 @@ def attributes_has_at_least_one(attr, resource_attributes):
         if len(attributes.get(attr, '')) > 0:
             return True
     return False
+
+
+def portal_andino_version():
+    version = _get_portal_andino_version()
+    return version['portal-andino']
