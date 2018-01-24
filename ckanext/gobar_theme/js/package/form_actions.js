@@ -256,3 +256,14 @@ $(function () {
     }, 100);
 
 });
+
+$(document).ready( function(){
+    $('#field-name').bind("keyup change", function() {
+        var field_url = $('#field-name').val();
+        field_url = field_url.replace(/-+/g, '-');
+        if (field_url[0] === '-'){
+            field_url = field_url.substr(1);
+        }
+        $('#field-url').val(field_url);
+    });
+});
