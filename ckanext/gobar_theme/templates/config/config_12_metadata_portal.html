@@ -56,21 +56,23 @@
         </select>
 
         <h4 class="from-country" style="margin-left: 10px;">Provincia</h4>
-        <select class="form-control from-country" id="portal-province" style="margin-bottom: 30px;">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+        {% set provinces = [{"name":"Buenos Aires","code":"1"},{"name": "Córdoba", "code": "2"},{"name": "Uruguay", "code": "3"}] %}
+        {% set prov = h.get_theme_config('portal-metadata.province') %}
+        <select class="form-control from-country" id="portal-province" name="metadata-province" style="margin-bottom: 30px;">
+            {% for province in provinces %}
+                <option value="{{ province.code }}" {{ 'selected' if province.code == prov }}>{{ province.name }}</option>
+            {% endfor %}
         </select>
 {#            <h4 class="portal-province" style="margin-left: 10px; display: none;">Municipio</h4>#}
 {#            <input class="portal-province" name="metadata-municipio" type="text" style="display: none;">#}
         <div class="control-group hidden-extra-select from-country" style="display: block">
             <h4 style="margin-left: 10px;" for="field-language" class="control-label from-country">Municipio</h4>
+            {% set munic = h.get_theme_config('portal-metadata.province') %}
             <div class="controls">
-                <select id="field-language" name="language" class="from-country" data-module="autocomplete"
+                <select class="from-country" id="portal-municipio" name="metadata-municipio" data-module="autocomplete"
                         multiple="multiple" type="select" style="width: 100%; height: 100%;">
                     {% for language in languages %}
-                        <option value="{{ language.code }}" {{ 'selected' if language.code in selected_languages }}>{{ language.name }}</option>
+                        <option value="{{ language.code }}" {{ 'selected' if language.code in munic }}>{{ language.name }}</option>
                     {% endfor %}
                 </select>
             </div>
