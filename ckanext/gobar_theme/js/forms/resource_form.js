@@ -32,7 +32,7 @@ $(function () {
         } else {
             unitContainer.addClass('hidden');
         }
-    })
+    });
 
     function addAttributesHidden() {
         var attributesGroups = $('.resource-attributes-group');
@@ -44,7 +44,7 @@ $(function () {
                 description: attributeGroupEl.find('.resource-col-descrition').val(),
                 type: (attributeGroupEl.find('.resource-col-type').val() || ''),
             };
-            if (typeIsNumeric(attributeGroup.type)) {
+            if ($.isNumeric(attributeGroup.type)) {
                 attributeGroup.unit = attributeGroupEl.find('.resource-col-unit').val()
             }
             var fieldId = attributeGroupEl.find('.resource-col-id').val();

@@ -35,8 +35,14 @@ $(function () {
         var organization = $('#organization-name');
         var errorTemplate = '<div class="missing-field">Completá este dato</div>';
         titleValid = title.val().length > 0;
+        var organizationValid;
         var descriptionValid = description.val().length > 0;
-        var organizationValid = organization.val().length > 0;
+        try{
+            organizationValid = organization.val().length > 0;
+        }
+        catch (err){
+            organizationValid = true
+        }
 
         if (!titleValid) {
             isValid = false;
