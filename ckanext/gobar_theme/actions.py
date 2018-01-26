@@ -12,8 +12,10 @@ from webhelpers.html import literal
 from codecs import open
 from os import path
 import helpers as h
+import logging
 
 _get_action = ckan.logic.get_action
+logger = logging.getLogger(__name__)
 
 
 def package_activity_list_html(context, data_dict):
@@ -110,7 +112,11 @@ def _resource_delete_from_datastore(context, data_dict):
 
 
 def resource_delete_and_purge(context, data_dict):
-    _resource_delete_from_datastore(context, data_dict)
+    not_found_exception = logic.NotFound
+    try:
+        _resource_delete_from_datastore(context, data_dict)
+    except not_found_exception:
+        logger.warning("Se produjo un error buscando el recurso en DataStore")  # TODO: arreglar
     logic.action.delete.resource_delete(context, data_dict)
     _resource_purge(context, data_dict)
 
