@@ -112,10 +112,9 @@ def _resource_delete_from_datastore(context, data_dict):
 
 
 def resource_delete_and_purge(context, data_dict):
-    not_found_exception = logic.NotFound
     try:
         _resource_delete_from_datastore(context, data_dict)
-    except not_found_exception:
+    except logic.NotFound:
         logger.warning("Se produjo un error buscando el recurso en DataStore ( id = " + data_dict['id'] + " )")
         # TODO: arreglar este logeo, no funciona
     logic.action.delete.resource_delete(context, data_dict)
