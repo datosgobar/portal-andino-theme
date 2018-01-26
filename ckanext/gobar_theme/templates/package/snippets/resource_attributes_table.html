@@ -3,49 +3,54 @@
 {% set hasAtLeastOneId = h.attributes_has_at_least_one('id', attributes) %}
 
 {% if attributes|length > 0 %}
-<div class="resource-attributes col-xs-12 no-padding">
-    <h2>Campos del recurso</h2>
-    <table>
-        <colgroup>
-            <col class="col-attribute">
-            <col class="col-attribute">
-            {% if hasAtLeastOneUnit %}
-                <col class="col-attribute">
-            {% endif %}
-            {% if hasAtLeastOneId %}
-                <col class="col-attribute">
-            {% endif %}
-            <col class="col-description">
-        </colgroup>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                {% if hasAtLeastOneUnit %}
-                    <th>Unidad</th>
-                {% endif %}
-                {% if hasAtLeastOneId %}
-                    <th>Identificador</th>
-                {% endif %}
-                <th>Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for attribute_group in attributes %}
-            <tr>
-                <td>{{ attribute_group.get('title', '') }}</td>
-                <td>{{ attribute_group.get('type', '') }}</td>
-                {% if hasAtLeastOneUnit %}
-                    <td>{{ attribute_group.get('unit', '') }}</td>
-                {% endif %}
-                {% if hasAtLeastOneId %}
-                    <td>{{ attribute_group.get('id', '') }}</td>
-                {% endif %}
-                <td>{{ attribute_group.get('description', '') }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
+<div>
+    <h2 class="title-h">Metadatos de este recurso</h2>
 
-    </table>
+    <div class="table table-responsive h500" style="table-layout: fixed;">
+        <table id="metadata-table" class="table table-striped table-bordered table-fixed"
+               style="margin-bottom: 100px;">
+            <thead>
+                <tr class="gradient">
+                    <th width="300px" style="max-width: 300px; min-width: 300px;">Título de la columna</th>
+                    <th width="120px" style="max-width: 120px;">Tipo de dato</th>
+                    <th width="400px" style="max-width: 400px;">Descripción</th>
+                    <th width="150px" style="max-width: 150px;">Unidades</th>
+                    <th width="130px" style="max-width: 130px;">Identificador</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for attribute_group in attributes %}
+                <tr style=" overflow-y:scroll;">
+                    <td width="300px" style="max-width: 300px; min-width: 300px;">{{ attribute_group.get('title', '') }}</td>
+                    <td width="120px" style="max-width: 120px; min-width: 120px;">{{ attribute_group.get('type', '') }}</td>
+                    <td width="400px" style="max-width: 400px; min-width: 400px;">{{ attribute_group.get('description', '') }}</td>
+                    <td width="150px" style="max-width: 150px; min-width: 150px;">{{ attribute_group.get('unit', '') }}</td>
+                    <td class="td_id" width="130px" style="max-width: 130px;">{{ attribute_group.get('id', '') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
 </div>
+
 {% endif %}
+
+
+<style>
+    .table-fixed {
+        table-layout: fixed;
+    }
+
+    .table-fixed tbody {
+        max-height: 350px;
+        overflow-y: auto;
+        width: 100%;
+        display: block;
+    }
+
+    .table-fixed tr {
+        width: 100%;
+        display: table-row-group;
+    }
+</style>

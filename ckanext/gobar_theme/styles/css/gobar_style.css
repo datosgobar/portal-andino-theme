@@ -2153,7 +2153,8 @@ table td[class*=col-], table th[class*=col-] {
 
 .table-responsive {
   min-height: .01%;
-  overflow-x: auto; }
+  overflow-x: auto;
+}
 
 @media screen and (max-width: 767px) {
   .table-responsive {
@@ -10021,6 +10022,59 @@ ul.activity {
 #new-package-container #new-package form .control-group .upload-btn,
 #edit-package-container #edit-package form .control-group .upload-btn {
   margin: 0; }
+
+
+
+
+  /*CUSTOM STYLES PARA TABLA*/
+
+
+
+.gradient {
+  background-image: linear-gradient(90deg, #00baf0, #0076bc);
+  color: #FFFFFF;
+  }
+
+
+.table-striped > tbody > tr:nth-child(2n+1) > td,
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #ebf9ff;
+}
+
+.table-striped tbody tr:nth-child(even) td {
+  background-color: #ffffff;
+}
+
+
+#metadata-table {
+  color:#666666;
+  font-family: 'Roboto', arial, sans-serif;
+}
+
+#metadata-table th {
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+#metadata-table td {
+  text-align: center;
+  font-size: 12px;
+}
+
+.h500 {
+  height: 500px;
+}
+
+.title-h{
+  color: #0695d6 !important;
+  font-size: 32px !important;
+  padding-bottom: 20px !important;
+  border-bottom: 0 !important;
+  font-weight: 500 !important;
+  line-height: 1.1 !important;
+}
+/*# sourceMappingURL=gobar_style.css.map */
 
 .resource-edit-embed-button {
   margin-bottom: 15px;

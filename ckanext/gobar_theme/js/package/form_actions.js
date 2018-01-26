@@ -259,11 +259,48 @@ $(function () {
 
 $(document).ready( function(){
     $('#field-name').bind("keyup change", function() {
-        var field_url = $('#field-name').val();
-        field_url = field_url.replace(/-+/g, '-');
-        if (field_url[0] === '-'){
-            field_url = field_url.substr(1);
+        if (!$('#field-url').attr("was_edited")) {
+            var myDomElement = document.getElementsByClassName( "slug-preview-value" );
+            var field_url = '';
+            setTimeout(function () {
+                if ($(myDomElement).text() === $('#field-name').val()){
+                    field_url = $('#field-url').attr("domain") + $(myDomElement).text();
+                }
+                else{
+                    field_url = $('#field-url').attr("domain") + $('#field-name').val();
+                }
+                field_url = field_url.replace(/-+/g, '-');
+                if (field_url[0] === '-') {
+                    field_url = field_url.substr(1);
+                }
+                $('#field-url').val(field_url);
+            }, 1000);
         }
-        $('#field-url').val(field_url);
+    });
+});
+
+$(document).ready( function(){
+    $('#dataset-edit').on("submit", function(e) {
+        var regex = new RegExp(
+            /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-.]{1}[a-z0-9]+)*(\.[a-z0-9]{2,5}|(:[0-9]{1,5}))(\/.*)?$/
+        );
+        if (!$('#field-url').val().match(regex)) {
+            e.preventDefault();
+            if (!document.getElementById("error-field-url")){
+                var newSpan = document.createElement('label');
+                var text = document.createTextNode("La URL ingresada no es válida");
+                newSpan.appendChild(text);
+                newSpan.setAttribute("id", "error-field-url");
+                newSpan.style.color = "red";
+                newSpan.style.fontSize = "16px";
+                newSpan.style.marginTop = "5px";
+                $("#field-url").after(newSpan);
+            }
+        }
+        else{
+            if (document.getElementById("error-field-url")){
+                document.getElementById("error-field-url").remove();
+            }
+        }
     });
 });
