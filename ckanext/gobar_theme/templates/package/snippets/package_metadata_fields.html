@@ -19,17 +19,17 @@
     {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
     {% set url_value = data.url if data.url else domain %}
 
-    {{ form.input('author', label='* Responsable', id='field-author', value=data.author, error=errors.author, classes=['control-medium']) }}
+    {{ form.input('author', label='* Responsable', id='field-author', value=data.author, error=errors.author, classes=['control-medium'], placeholder="Ej. Subsecretaría de Innovación y Gobierno Abierto") }}
 
-    {{ form.input('author_email', label='E-mail del responsable', id='field-author-email', value=data.author_email, error=errors.author_email, classes=['control-medium']) }}
+    {{ form.input('author_email', label='E-mail del responsable', id='field-author-email', value=data.author_email, error=errors.author_email, classes=['control-medium'], placeholder="Ej. gobiernoabierto@modernizacion.gob.ar") }}
 
-    {{ form.input('maintainer', label='Mantenedor', id='field-maintainer', value=data.maintainer, error=errors.maintainer, classes=['control-medium']) }}
+    {{ form.input('maintainer', label='Mantenedor', id='field-maintainer', value=data.maintainer, error=errors.maintainer, classes=['control-medium'], placeholder="Ej. Dirección de Datos Públicos") }}
 
-    {{ form.input('maintainer_email', label='E-mail del mantenedor', id='field-maintainer-email', value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium']) }}
+    {{ form.input('maintainer_email', label='E-mail del mantenedor', id='field-maintainer-email', value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium'], placeholder="Ej. datospublicos@modernizacion.gob.ar") }}
 
     {{ form.input('Documentación', label='Documentación', type='text', value=h.get_pkg_extra(data, 'Documentación'), classes=['hidden-extra'], placeholder='Ej. https://github.com/gobabiertoAR/datasets-portal/blob/master/presupuesto/presupuesto-documentacion.md') }}
 
-    {{ form.input('Fuente primaria', label='Fuente primaria', type='text', value=h.get_pkg_extra(data, 'Fuente primaria'), classes=['hidden-extra'], placeholder='') }}
+    {{ form.input('Fuente primaria', label='Fuente primaria', type='text', value=h.get_pkg_extra(data, 'Fuente primaria'), classes=['hidden-extra'], placeholder='Ej. Instituto Nacional de Estadística y Censos de la República Argentina (INDEC)') }}
 
     {{ form.input('url', label='Página de referencia', id='field-url', value=url_value, attrs={'domain': domain, 'last_string_added': '', was_edited: false},
                placeholder='Ej. https://www.argentinacompra.gov.ar/contrataciones', error=errors.url, classes=['control-medium']) }}
