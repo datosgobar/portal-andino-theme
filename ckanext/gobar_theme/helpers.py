@@ -8,7 +8,6 @@ import json
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from ckanext.gobar_theme.actions import _get_portal_andino_version
-from ckan.logic.action.get import license_list
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
