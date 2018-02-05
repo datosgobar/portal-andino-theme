@@ -72,13 +72,13 @@
         </select>
 
         <h4 class="from-country" style="margin-left: 10px;">Provincia</h4>
-        {% set provinces = h.get_json_provinces() %}
-        {% set prov = h.get_theme_config('portal-metadata.province') %}
-        {% set all_municipios = h.get_json_municipios() %}
-        {% set jinja_municipios_x_province = {} %}
-        {% set municipios_x_province = h.municipios_with_province() %}
+        {% set provinces = h.get_json_provinces() %} {# lista de provincias traídas de la api #}
+        {% set prov = h.get_theme_config('portal-metadata.province') %} {# provincia traída de la configuración #}
+        {% set all_municipios = h.get_json_municipios() %} {# lista de municipios traídos de la api (usando helper) #}
+        {% set jinja_municipios_x_province = {} %} {# lista de relaciones entre municipios y provincias que se arman acá - ya no se la envía a change_province pero podría volverse a necesitar por el tema de select2 #}
+        {% set municipios_x_province = h.municipios_with_province() %} {# lista de relaciones entre municipios y provincias (usando helper) - mandarla directamente a change_province tira error Unexpected string #}
         {% for m_x_p in municipios_x_province %}
-            {% set x=jinja_municipios_x_province.__setitem__(m_x_p.municipio, m_x_p.province) %}
+            {% set x=jinja_municipios_x_province.__setitem__(m_x_p.municipio, m_x_p.province) %} {# armo la lista para enviarsela a la función js change_province #}
         {% endfor %}
         <select onchange="change_province()" class="form-control from-country" id="portal-province" name="metadata-province" style="margin-bottom: 30px;">
             {% for province in provinces %}
@@ -87,7 +87,7 @@
         </select>
 
         <h4 class="from-country" style="margin-left: 10px;">Municipio</h4>
-        {% set munic = h.get_theme_config('portal-metadata.municipio') or [] %}
+        {% set munic = h.get_theme_config('portal-metadata.municipio') or [] %} {# municipio(s) traído(s) de la configuración #}
             <select class="form-control from-country" id="portal-municipio" name="metadata-municipio"
                     multiple="multiple" style="width: 100%; height: 400px; margin-bottom: 50px;">
                 {% for municipio in all_municipios %}

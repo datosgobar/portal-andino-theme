@@ -96,7 +96,7 @@ $(document).ready(function () {
 //     });
 // });
 
-function change_province() {
+function change_province() { // podría necesitarse la lista de relaciones entre municipios y provincias
     var province_id = $('#portal-province').val();
     $(".municipio-option").each(function () {
         if ($(this).data('province') == province_id){       // no cambiar a '===', porque tiraría False siempre!
