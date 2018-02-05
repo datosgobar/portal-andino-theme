@@ -215,6 +215,11 @@ class GobArConfigController(base.BaseController):
 
             # Horario Argentina = GTM - 3 horas ---> resto 3 mediante timedelta
             last_updated = datetime.datetime.today().replace(microsecond=0) - timedelta(hours=3)
+            try:
+                municipios_list = params['metadata-municipio']
+            except KeyError:
+                # me llegó una lista vacía de municipios
+                municipios_list = []
             new_metadata_config = {
                 'homepage': params['metadata-homepage'].strip(),
                 'id': params['metadata-id'].strip(),
@@ -225,7 +230,7 @@ class GobArConfigController(base.BaseController):
                 'license': params['metadata-license'].strip(),
                 'country': params['metadata-country'].strip(),
                 'province': params['metadata-province'].strip(),
-                'municipio': params['metadata-municipio'],
+                'municipio': municipios_list,
             }
             config_dict['portal-metadata'] = new_metadata_config
             self._set_config(config_dict)

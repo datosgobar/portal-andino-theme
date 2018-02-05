@@ -55,5 +55,8 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'capfirst': gobar_helpers.capfirst,
             'type_is_numeric': gobar_helpers.type_is_numeric,
             'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one,
-            'portal_andino_version': gobar_helpers.portal_andino_version
+            'portal_andino_version': gobar_helpers.portal_andino_version,
+            'get_json_provinces': gobar_helpers.get_json_provinces,
+            'get_json_municipios': gobar_helpers.get_json_municipios,
+            'municipios_with_province': gobar_helpers.municipios_with_province
         }

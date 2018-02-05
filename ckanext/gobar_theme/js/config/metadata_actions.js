@@ -68,3 +68,55 @@ $(document).ready(function () {
         }
     }
 });
+
+                                            // conseguir datos de municipios con ajax
+// $(document).ready(function () {
+//     var municipio_select = $("#portal-municipio");
+//     var province_id = $("#portal-province").children(':selected').val();
+//     var url_to_call = 'http://181.209.63.243/api/v1.0/municipios?max=100&provincia=' + province_id;
+//     $.ajax({
+//         type: "GET",
+//         dataType: 'json',
+//         url: 'https://cors-anywhere.herokuapp.com/' + url_to_call,
+//         success: function (response) {
+//             // municipio_select.find('option').remove();
+//             response['municipios'].sort(function compare(a,b) {
+//                 if (a.nombre < b.nombre)
+//                     return -1;
+//                 if (a.nombre > b.nombre)
+//                     return 1;
+//                 return 0;
+//             });
+//             console.log(response['municipios']);
+//             var x = 0;
+//             for (x = 0; x < response['municipios'].length; x++) {
+//                 municipio_select.append('<option value=' + response['municipios'][x]['id'] + '>' + response['municipios'][x]['nombre'] + '</option>')
+//             }
+//         }
+//     });
+// });
+
+function change_province() {
+    var province_id = $('#portal-province').val();
+    $(".municipio-option").each(function () {
+        if ($(this).data('province') == province_id){       // no cambiar a '===', porque tiraría False siempre!
+            $(this).show();
+        }
+        else{
+            $(this).prop("selected", false);
+            $(this).hide();
+        }
+    });
+}
+
+
+$('.municipio-option').mousedown(function(e) {
+    e.preventDefault();
+    $(this).prop('selected', !$(this).prop('selected'));
+    return false;
+});
+
+
+$(document).ready(function () {
+    change_province();
+});
