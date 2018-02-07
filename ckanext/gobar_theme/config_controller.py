@@ -233,7 +233,7 @@ class GobArConfigController(base.BaseController):
                 'license': params['metadata-license'].strip(),
                 'country': params['metadata-country'].strip(),
                 'province': params['metadata-province'].strip(),
-                'municipio': municipios_list,
+                'districts': municipios_list,
             }
             config_dict['portal-metadata'] = new_metadata_config
             self._set_config(config_dict)
