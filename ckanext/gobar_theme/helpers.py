@@ -5,7 +5,6 @@ from urlparse import urlparse
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
-import urllib2
 from urlparse import urljoin
 from config_controller import GobArConfigController
 
@@ -283,29 +282,3 @@ def portal_andino_version():
     from ckanext.gobar_theme.actions import _get_portal_andino_version
     version = _get_portal_andino_version()
     return version['portal-andino']
-
-
-def get_json_provinces():
-    return sorted(json.loads(urllib2.urlopen('http://181.209.63.243/api/v1.0/provincias').read())['provincias'])
-
-
-def get_json_municipios():
-    import os
-    if not os.path.isfile('./data.txt'):
-        # el límite por default es 10, por lo que hay que especificarle un tope para que lleguen todos los municipios
-        json_municipios = urllib2.urlopen('http://181.209.63.243/api/v1.0/municipios?max=2000').read()
-        municipios = sorted(json.loads(json_municipios)['municipios'], key=lambda y: y['nombre'])
-        with open('data.txt', 'wb+') as outfile:
-            json.dump(municipios, outfile)
-    else:
-        municipios = json.load(open('data.txt'))
-    return municipios
-
-
-def municipios_with_province():
-    municipios = json.load(open('data.txt'))
-    id_list = []
-    for municipio in municipios:
-        id_list.append({"municipio": str(municipio["id"]).replace("u'", '').replace("'", ''),
-                        "province": str(municipio["provincia"]["id"]).replace("u'", '').replace("'", '')})
-    return id_list
