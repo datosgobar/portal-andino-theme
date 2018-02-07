@@ -10,6 +10,7 @@ import urlparse
 import json
 import os
 import re
+import moment
 
 parse_params = logic.parse_params
 abort = base.abort
@@ -213,24 +214,21 @@ class GobArConfigController(base.BaseController):
             params = parse_params(request.POST)
             config_dict = self._read_config()
 
-            # Horario Argentina = GTM - 3 horas ---> resto 3 mediante timedelta
-            last_updated = datetime.datetime.today().replace(microsecond=0) - timedelta(hours=3)
-            try:
-                municipios_list = params['metadata-municipio']
-            except KeyError:
-                # me llegó una lista vacía de municipios
-                municipios_list = []
+            languages = params.get('metadata-languages', [])
+            if not isinstance(languages, list):
+                languages = [languages]
+
             new_metadata_config = {
                 'homepage': params['metadata-homepage'].strip(),
                 'id': params['metadata-id'].strip(),
                 'launch_date': params['metadata-launch_date'].strip(),
                 'licence_conditions': params['metadata-licence_conditions'].strip(),
-                'languages': params.get('metadata-languages', []),
-                'last_updated': str(last_updated),
+                'languages': languages,
+                'last_updated': moment.now().isoformat(),
                 'license': params['metadata-license'].strip(),
                 'country': params['metadata-country'].strip(),
                 'province': params['metadata-province'].strip(),
-                'municipio': municipios_list,
+                'districts': params.get('metadata-municipio', []),
             }
             config_dict['portal-metadata'] = new_metadata_config
             self._set_config(config_dict)

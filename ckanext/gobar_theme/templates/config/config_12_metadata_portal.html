@@ -73,7 +73,7 @@
             <input id="portal-province" value="{{province}}" name="metadata-province" style="margin-bottom: 30px; width: 100%;" />
 
             <h4 class="from-country" style="margin-left: 10px;">Municipio</h4>
-            {% set district = h.get_theme_config('portal-metadata.municipio') or [] %} {# municipio(s) traído(s) de la configuración #}
+            {% set district = h.get_theme_config('portal-metadata.districts') or '' %} {# municipio(s) traído(s) de la configuración #}
             <input id="portal-municipio" value="{{district}}" name="metadata-municipio"
                         multiple="multiple" style="margin-bottom: 50px; width: 100%;" />
         </div>
