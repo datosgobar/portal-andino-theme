@@ -13,7 +13,7 @@
         <p>El identificador debe contener una o más palabras en minúsculas, separadas con guiones medios, sin usar caracteres especiales.
             Identifica en forma breve, sucinta y declarativa al nodo.</p>
         {% set id = h.get_theme_config('portal-metadata.id') %}
-        <input name="metadata-id" type="text" title="Identificador" placeholder="ej: desarrollo-social" value="{{ id if id else '' }}">
+        <input name="metadata-id" type="text" title="Identificador" placeholder="ej: MinModernizacion" value="{{ id if id else '' }}">
 
         <h2 name="launch_date_h2">Fecha de lanzamiento (recomendado)</h2>
         {% set launch_date = h.get_theme_config('portal-metadata.launch_date') %}
@@ -63,37 +63,21 @@
         <p>Ingresá cuál es el alcance geográfico del portal.</p>
 
         <h4 style="margin-left: 10px;">País</h4>
-        {% set countries = [{"name":"1","code":"1"},{"name": "2", "code": "2"},{"name": "3", "code": "3"},{"name": "Argentina", "code": "Arg"}] %}
-        {% set ctry = h.get_theme_config('portal-metadata.country') %}
-        <select class="form-control" id="portal-country" name="metadata-country" style="margin-bottom: 30px;">
-            {% for country in countries %}
-                <option value="{{ country.code }}" {{ 'selected' if country.code == ctry }}>{{ country.name }}</option>
-            {% endfor %}
-        </select>
 
-        <h4 class="from-country" style="margin-left: 10px;">Provincia</h4>
-        {% set provinces = h.get_json_provinces() %} {# lista de provincias traídas de la api #}
-        {% set prov = h.get_theme_config('portal-metadata.province') %} {# provincia traída de la configuración #}
-        {% set all_municipios = h.get_json_municipios() %} {# lista de municipios traídos de la api (usando helper) #}
-        {% set jinja_municipios_x_province = {} %} {# lista de relaciones entre municipios y provincias que se arman acá - ya no se la envía a change_province pero podría volverse a necesitar por el tema de select2 #}
-        {% set municipios_x_province = h.municipios_with_province() %} {# lista de relaciones entre municipios y provincias (usando helper) - mandarla directamente a change_province tira error Unexpected string #}
-        {% for m_x_p in municipios_x_province %}
-            {% set x=jinja_municipios_x_province.__setitem__(m_x_p.municipio, m_x_p.province) %} {# armo la lista para enviarsela a la función js change_province #}
-        {% endfor %}
-        <select onchange="change_province()" class="form-control from-country" id="portal-province" name="metadata-province" style="margin-bottom: 30px;">
-            {% for province in provinces %}
-                <option value="{{ province.id }}" {{ 'selected' if province.id == prov }}>{{ province.nombre }}</option>
-            {% endfor %}
-        </select>
+        {% set country = h.get_theme_config('portal-metadata.country') %}
+        <input id="portal-country" value="{{country}}" name="metadata-country" style="margin-bottom: 30px; width: 100%" />
 
-        <h4 class="from-country" style="margin-left: 10px;">Municipio</h4>
-        {% set munic = h.get_theme_config('portal-metadata.municipio') or [] %} {# municipio(s) traído(s) de la configuración #}
-            <select class="form-control from-country" id="portal-municipio" name="metadata-municipio"
-                    multiple="multiple" style="width: 100%; height: 400px; margin-bottom: 50px;">
-                {% for municipio in all_municipios %}
-                    <option class="from-country municipio-option" data-province={{ municipio.provincia.id }} value="{{ municipio.id }}" {{ 'selected' if municipio.id in munic }}>{{ municipio.nombre }}</option>
-                {% endfor %}
-            </select>
+        <div class="internal">
+            <h4 class="from-country" style="margin-left: 10px;">Provincia</h4>
+            {% set province = h.get_theme_config('portal-metadata.province') %} {# provincia traída de la configuración #}
+            <input id="portal-province" value="{{province}}" name="metadata-province" style="margin-bottom: 30px; width: 100%;" />
+
+            <h4 class="from-country" style="margin-left: 10px;">Municipio</h4>
+            {% set district = h.get_theme_config('portal-metadata.municipio') or [] %} {# municipio(s) traído(s) de la configuración #}
+            <input id="portal-municipio" value="{{district}}" name="metadata-municipio"
+                        multiple="multiple" style="margin-bottom: 50px; width: 100%;" />
+        </div>
+
         {% set last_updated = h.get_theme_config('portal-metadata.last_updated') %}
 
         <h2>Versión del portal: {{ h.portal_andino_version() }} - Última modificación: {{ last_updated }}</h2>
@@ -104,5 +88,6 @@
     </form>
 
     {% resource 'gobar_js/config/metadata_actions.js' %}
+    {% resource 'gobar_js/spatial.js' %}
 
 {% endblock -%}
