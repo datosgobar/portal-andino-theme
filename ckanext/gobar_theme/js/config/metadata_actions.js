@@ -1,21 +1,3 @@
-$(function () {
-    $('#portal-country').on('change', function () {
-        var selected = $(this).find("option:selected").text();
-        var x = 0;
-        var elem = document.getElementsByClassName('from-country');
-        if (selected === 'Argentina') {
-            for (x = 0; x < elem.length; x++) {
-                elem[x].style.display = 'block';
-            }
-        }
-        else {
-            for (x = 0; x < elem.length; x++) {
-                elem[x].style.display = 'none';
-            }
-        }
-    });
-});
-
 $("#submit-metadata-portal").click(function (e) {
     var launch_date = document.getElementsByName("metadata-launch_date");
     if ($(launch_date).val() !== '') {
