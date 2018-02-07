@@ -98,6 +98,9 @@ $(function () {
             var extra = $(extras[i]);
             var inputType = extra.attr('type');
             var name = extra.attr('name');
+            if (!name) {
+                continue;
+            }
             var value;
             if (inputType == 'text') {
                 value = extra.val();

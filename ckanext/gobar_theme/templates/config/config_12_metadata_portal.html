@@ -64,17 +64,17 @@
 
         <h4 style="margin-left: 10px;">País</h4>
 
-        {% set country = h.get_theme_config('portal-metadata.country') %}
-        <input id="portal-country" value="{{country}}" name="metadata-country" style="margin-bottom: 30px; width: 100%" />
+        {% set selected_country = h.get_theme_config('portal-metadata.country') %}
+        <input id="country-field" value="{{ selected_country }}" name="metadata-country" style="margin-bottom: 30px; width: 100%" />
 
         <div class="internal">
             <h4 class="from-country" style="margin-left: 10px;">Provincia</h4>
-            {% set province = h.get_theme_config('portal-metadata.province') %} {# provincia traída de la configuración #}
-            <input id="portal-province" value="{{province}}" name="metadata-province" style="margin-bottom: 30px; width: 100%;" />
+            {% set selected_province = h.get_theme_config('portal-metadata.province') %} {# provincia traída de la configuración #}
+            <input id="province-field" value="{{ selected_province }}" name="metadata-province" style="margin-bottom: 30px; width: 100%;" />
 
             <h4 class="from-country" style="margin-left: 10px;">Municipio</h4>
-            {% set district = h.get_theme_config('portal-metadata.districts') or '' %} {# municipio(s) traído(s) de la configuración #}
-            <input id="portal-municipio" value="{{district}}" name="metadata-municipio"
+            {% set selected_districts = h.get_theme_config('portal-metadata.districts') or '' %} {# municipio(s) traído(s) de la configuración #}
+            <input id="district-field" value="{{ selected_districts }}" name="metadata-municipio"
                         multiple="multiple" style="margin-bottom: 50px; width: 100%;" />
         </div>
 

@@ -60,6 +60,35 @@ def custom_organization_filter(organization_name):
 
 
 class GobArPackageController(PackageController):
+    
+    def __generate_spatial_extra_field(self, data_dict):
+        extras = data_dict['extras']
+
+        def __find_extra(extras, key, create=False):
+            for extra in extras:
+                if extra['key'] == key:
+                    return extra
+            
+            if create:
+                extra = {'key': key}
+                extras.append(extra)
+                return extra
+
+        country = __find_extra(extras, 'country')
+        if country:
+            spatial = __find_extra(extras, 'spatial', True)
+            spatial['value'] = [country['value']]
+
+            province = __find_extra(extras, 'province')
+            if province and province['value']:
+                spatial['value'].append(province['value'])
+
+            district = __find_extra(extras, 'district')
+            if district and district['value']:
+                spatial['value'].append(district['value'])
+            
+            spatial['value'] = ','.join(spatial['value'])
+
 
     def search(self):
         package_type = self._guess_package_type()
@@ -360,6 +389,9 @@ class GobArPackageController(PackageController):
 
             data_dict['type'] = package_type
             context['message'] = data_dict.get('log_message', '')
+
+            self.__generate_spatial_extra_field(data_dict)
+
             pkg_dict = get_action('package_create')(context, data_dict)
 
             # Restauramos los grupos asignados al dataset (cuando es un insert)
@@ -601,6 +633,9 @@ class GobArPackageController(PackageController):
                 del data_dict['save']
             context['message'] = data_dict.get('log_message', '')
             data_dict['id'] = name_or_id
+
+            self.__generate_spatial_extra_field(data_dict)
+
             pkg = get_action('package_update')(context, data_dict)
             c.pkg = context['package']
             c.pkg_dict = pkg

@@ -49,6 +49,25 @@
         </div>
     </div>
 
+    <div class="control-group hidden-extra">
+        <label for="country-field" class="control-label">País</label>
+        {% set selected_country = h.get_pkg_extra(data, 'country') %}
+        <input id="country-field" type="text" value="{{ selected_country }}" name="country" style="width: 384px;" />
+    </div>
+
+    <div class="control-group internal hidden-extra">
+        <label for="province-field" class="control-label">Provincia</label>
+        {% set selected_province = h.get_pkg_extra(data, 'province') %}
+        <input id="province-field" type="text" value="{{ selected_province }}" name="province" style="width: 384px;" />
+    </div>
+
+    <div class="control-group internal hidden-extra">
+        <label for="district-field" class="control-label">Municipio</label>
+        {% set selected_districts = h.get_pkg_extra(data, 'district') %}
+        <input id="district-field" type="text" value="{{ selected_districts }}" name="district"
+                        multiple="multiple" style="width: 384px;" />
+    </div>
+
     <div class="control-group">
         {% set date_has_time = False %}
         <label>Tiempo que cubre el dataset</label>
