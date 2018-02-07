@@ -96,7 +96,10 @@ $(document).ready(function () {
     initDistrictSelect(selectedProvince);
 
     provinceSelect.on('change', function (e) {
-        var selectedProvince = e.added.id;
+        var selectedProvince = null;
+        if (e.added) {
+            selectedProvince = e.added.id;
+        }
         initDistrictSelect(selectedProvince);
     });
 });
