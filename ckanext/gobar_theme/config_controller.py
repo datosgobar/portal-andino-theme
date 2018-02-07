@@ -225,7 +225,7 @@ class GobArConfigController(base.BaseController):
                 'id': params['metadata-id'].strip(),
                 'launch_date': params['metadata-launch_date'].strip(),
                 'licence_conditions': params['metadata-licence_conditions'].strip(),
-                'language': params['metadata-language'].strip(),
+                'languages': params.get('metadata-languages', []),
                 'last_updated': str(last_updated),
                 'license': params['metadata-license'].strip(),
                 'country': params['metadata-country'].strip(),
