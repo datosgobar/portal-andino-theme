@@ -3,8 +3,8 @@ $(document).ready(function () {
 
     var toggleSpatialSelects = function(countryCode) {
         if (ARGENTINA_CODE != countryCode) {
-            $("#portal-province").val('');
-            $("#portal-municipio").val('');
+            $("#province-field").val('');
+            $("#district-field").val('');
 
             $('.internal').hide();
         } else {
@@ -15,7 +15,7 @@ $(document).ready(function () {
     $.ajax({
         url: '/spatial/paises',
     }).done(function(data) {
-        var select = $("#portal-country");
+        var select = $("#country-field");
         var currentValue = select.val();
 
         toggleSpatialSelects(currentValue);
@@ -41,7 +41,7 @@ $(document).ready(function () {
             if (e.added && e.added.id) {
                 countryCode = e.added.id;
             }
-            $("#portal-province").val('');
+            $("#province-field").val('');
             toggleSpatialSelects(countryCode);
         });
     });
@@ -49,7 +49,7 @@ $(document).ready(function () {
     $.ajax({
         url: '/spatial/provincias',
     }).done(function(data) {
-        var select = $("#portal-province");
+        var select = $("#province-field");
         var currentValue = select.val();
         var provinces = {};
 
@@ -67,14 +67,14 @@ $(document).ready(function () {
         });
     });
     
-    var provinceSelect = $("#portal-province");
+    var provinceSelect = $("#province-field");
     var selectedProvince = provinceSelect.val();
 
     var initDistrictSelect = function(selectedProvince) {
         $.ajax({
             url: '/spatial/localidades?provincia_id=' + selectedProvince,
         }).done(function(data) {
-            var select = $("#portal-municipio");
+            var select = $("#district-field");
             var currentValue = select.val();
             var districts = {};
     
@@ -101,7 +101,7 @@ $(document).ready(function () {
         if (e.added) {
             selectedProvince = e.added.id;
         }
-        $("#portal-municipio").val('');
+        $("#district-field").val('');
         initDistrictSelect(selectedProvince);
     });
 });
