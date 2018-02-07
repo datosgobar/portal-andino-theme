@@ -214,6 +214,10 @@ class GobArConfigController(base.BaseController):
             params = parse_params(request.POST)
             config_dict = self._read_config()
 
+            languages = params.get('metadata-languages', [])
+            if not isinstance(languages, list):
+                languages = [languages]
+
             try:
                 municipios_list = params['metadata-municipio']
             except KeyError:
@@ -224,7 +228,7 @@ class GobArConfigController(base.BaseController):
                 'id': params['metadata-id'].strip(),
                 'launch_date': params['metadata-launch_date'].strip(),
                 'licence_conditions': params['metadata-licence_conditions'].strip(),
-                'languages': params.get('metadata-languages', []),
+                'languages': languages,
                 'last_updated': moment.now().isoformat(),
                 'license': params['metadata-license'].strip(),
                 'country': params['metadata-country'].strip(),
