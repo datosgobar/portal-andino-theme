@@ -10,6 +10,7 @@ import urlparse
 import json
 import os
 import re
+import moment
 
 parse_params = logic.parse_params
 abort = base.abort
@@ -213,8 +214,6 @@ class GobArConfigController(base.BaseController):
             params = parse_params(request.POST)
             config_dict = self._read_config()
 
-            # Horario Argentina = GTM - 3 horas ---> resto 3 mediante timedelta
-            last_updated = datetime.datetime.today().replace(microsecond=0) - timedelta(hours=3)
             try:
                 municipios_list = params['metadata-municipio']
             except KeyError:
@@ -226,7 +225,7 @@ class GobArConfigController(base.BaseController):
                 'launch_date': params['metadata-launch_date'].strip(),
                 'licence_conditions': params['metadata-licence_conditions'].strip(),
                 'languages': params.get('metadata-languages', []),
-                'last_updated': str(last_updated),
+                'last_updated': moment.now().isoformat(),
                 'license': params['metadata-license'].strip(),
                 'country': params['metadata-country'].strip(),
                 'province': params['metadata-province'].strip(),
