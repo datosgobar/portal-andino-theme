@@ -14,6 +14,7 @@ class GobArRouter:
         self.config_controller = 'ckanext.gobar_theme.config_controller:GobArConfigController'
         self.user_controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
         self.google_analytics_controller = 'ckanext.gobar_theme.google_analytics_controller:GobArGAController'
+        self.spatial_controller = 'ckanext.gobar_theme.spatial_controller:GobArSpatialController'
 
     def redirect(self, *routes):
         for url_from, url_to in routes:
@@ -33,6 +34,7 @@ class GobArRouter:
         self.connect_api()
         self.connect_template_config()
         self.connect_google_analytics()
+        self.connect_spatial()
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')
@@ -46,6 +48,15 @@ class GobArRouter:
     def connect_google_analytics(self):
         with SubMapper(self.route_map, controller=self.google_analytics_controller) as m:
             m.connect('resource view embed', '/dataset/resource_view_embed/{resource_id}', action='resource_view_embed')
+
+
+    def connect_spatial(self):
+        with SubMapper(self.route_map, controller=self.spatial_controller) as m:
+            m.connect('countries', '/spatial/paises', action='paises'),
+            m.connect('provinces', '/spatial/provincias', action='provincias'),
+            m.connect('districts', '/spatial/localidades', action='localidades'),
+            m.connect('districts', '/spatial/localidades/{province_id}', action='localidades'),
+
 
     def connect_datasets(self):
         with SubMapper(self.route_map, controller=self.package_controller) as m:
@@ -182,6 +193,7 @@ class GobArRouter:
             m.connect('/configurar/acerca', action='edit_about')
             m.connect('/configurar/metadata/google_fb', action='edit_metadata_google_fb')
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')
+            m.connect('/configurar/metadata/portal', action='edit_metadata_portal')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
 
         self.redirect(

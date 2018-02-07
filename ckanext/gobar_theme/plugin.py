@@ -14,11 +14,11 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def get_actions(self):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
-                'group_delete': gobar_actions.group_delete_and_purge,
-                'package_delete': gobar_actions.dataset_delete_and_purge,
-                'resource_delete': gobar_actions.resource_delete_and_purge,
-                'organization_delete': gobar_actions.organization_delete_and_purge,
-                'gobar_status_show': gobar_actions.gobar_status_show}
+            'group_delete': gobar_actions.group_delete_and_purge,
+            'package_delete': gobar_actions.dataset_delete_and_purge,
+            'resource_delete': gobar_actions.resource_delete_and_purge,
+            'organization_delete': gobar_actions.organization_delete_and_purge,
+            'gobar_status_show': gobar_actions.gobar_status_show}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
@@ -54,5 +54,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'valid_length': gobar_helpers.valid_length,
             'capfirst': gobar_helpers.capfirst,
             'type_is_numeric': gobar_helpers.type_is_numeric,
-            'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one
+            'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one,
+            'portal_andino_version': gobar_helpers.portal_andino_version,
+            'municipios_with_province': gobar_helpers.municipios_with_province
         }

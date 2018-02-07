@@ -4,6 +4,8 @@ from ckan.common import request, g, c
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
+import datetime
+from datetime import timedelta
 import urlparse
 import json
 import os
@@ -204,6 +206,35 @@ class GobArConfigController(base.BaseController):
             config_dict['tw-metadata'] = new_metadata_config
             self._set_config(config_dict)
         return base.render('config/config_11_metadata_twitter.html')
+
+    def edit_metadata_portal(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+
+            # Horario Argentina = GTM - 3 horas ---> resto 3 mediante timedelta
+            last_updated = datetime.datetime.today().replace(microsecond=0) - timedelta(hours=3)
+            try:
+                municipios_list = params['metadata-municipio']
+            except KeyError:
+                # me llegó una lista vacía de municipios
+                municipios_list = []
+            new_metadata_config = {
+                'homepage': params['metadata-homepage'].strip(),
+                'id': params['metadata-id'].strip(),
+                'launch_date': params['metadata-launch_date'].strip(),
+                'licence_conditions': params['metadata-licence_conditions'].strip(),
+                'languages': params.get('metadata-languages', []),
+                'last_updated': str(last_updated),
+                'license': params['metadata-license'].strip(),
+                'country': params['metadata-country'].strip(),
+                'province': params['metadata-province'].strip(),
+                'municipio': municipios_list,
+            }
+            config_dict['portal-metadata'] = new_metadata_config
+            self._set_config(config_dict)
+        return base.render(template_name='config/config_12_metadata_portal.html')
 
     def edit_greetings(self):
         self._authorize()

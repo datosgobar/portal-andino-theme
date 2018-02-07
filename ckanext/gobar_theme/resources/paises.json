@@ -1,0 +1,844 @@
+{
+  "paises": [
+    {
+      "code": "AGO",
+      "common_name": "Angola"
+    },
+    {
+      "code": "DZA",
+      "common_name": "Argelia"
+    },
+    {
+      "code": "BEN",
+      "common_name": "Benin"
+    },
+    {
+      "code": "BWA",
+      "common_name": "Botswana"
+    },
+    {
+      "code": "BFA",
+      "common_name": "Burkina Faso"
+    },
+    {
+      "code": "BDI",
+      "common_name": "Burundi"
+    },
+    {
+      "code": "CPV",
+      "common_name": "Cabo Verde"
+    },
+    {
+      "code": "CMR",
+      "common_name": "Camerún"
+    },
+    {
+      "code": "TCD",
+      "common_name": "Chad"
+    },
+    {
+      "code": "COM",
+      "common_name": "Comoras"
+    },
+    {
+      "code": "COG",
+      "common_name": "Congo"
+    },
+    {
+      "code": "CIV",
+      "common_name": "Côte d'Ivoire"
+    },
+    {
+      "code": "DJI",
+      "common_name": "Djibouti"
+    },
+    {
+      "code": "EGY",
+      "common_name": "Egipto"
+    },
+    {
+      "code": "ERI",
+      "common_name": "Eritrea"
+    },
+    {
+      "code": "ESP",
+      "common_name": "España, territorios vinculados en África"
+    },
+    {
+      "code": "ETH",
+      "common_name": "Etiopía"
+    },
+    {
+      "code": "ATF",
+      "common_name": "Francia, territorios vinculados en África"
+    },
+    {
+      "code": "GAB",
+      "common_name": "Gabón"
+    },
+    {
+      "code": "GMB",
+      "common_name": "Gambia"
+    },
+    {
+      "code": "GHA",
+      "common_name": "Ghana"
+    },
+    {
+      "code": "GIN",
+      "common_name": "Guinea"
+    },
+    {
+      "code": "GNB",
+      "common_name": "Guinea Bissau"
+    },
+    {
+      "code": "GNQ",
+      "common_name": "Guinea Ecuatorial"
+    },
+    {
+      "code": "KEN",
+      "common_name": "Kenya"
+    },
+    {
+      "code": "LSO",
+      "common_name": "Lesotho"
+    },
+    {
+      "code": "LBR",
+      "common_name": "Liberia"
+    },
+    {
+      "code": "LBY",
+      "common_name": "Libia"
+    },
+    {
+      "code": "MDG",
+      "common_name": "Madagascar"
+    },
+    {
+      "code": "MWI",
+      "common_name": "Malawi"
+    },
+    {
+      "code": "MLI",
+      "common_name": "Malí"
+    },
+    {
+      "code": "MAR",
+      "common_name": "Marruecos"
+    },
+    {
+      "code": "MUS",
+      "common_name": "Mauricio"
+    },
+    {
+      "code": "MRT",
+      "common_name": "Mauritania"
+    },
+    {
+      "code": "MOZ",
+      "common_name": "Mozambique"
+    },
+    {
+      "code": "NAM",
+      "common_name": "Namibia"
+    },
+    {
+      "code": "NER",
+      "common_name": "Níger"
+    },
+    {
+      "code": "NGA",
+      "common_name": "Nigeria"
+    },
+    {
+      "code": "GBR",
+      "common_name": "Reino Unido, territorios vinculados en África"
+    },
+    {
+      "code": "CAF",
+      "common_name": "República Centroafricana"
+    },
+    {
+      "code": "COD",
+      "common_name": "República Democrática del Congo"
+    },
+    {
+      "code": "RWA",
+      "common_name": "Rwanda"
+    },
+    {
+      "code": "STP",
+      "common_name": "Santo Tomé y Príncipe"
+    },
+    {
+      "code": "SEN",
+      "common_name": "Senegal"
+    },
+    {
+      "code": "SYC",
+      "common_name": "Seychelles"
+    },
+    {
+      "code": "SLE",
+      "common_name": "Sierra Leona"
+    },
+    {
+      "code": "SOM",
+      "common_name": "Somalia"
+    },
+    {
+      "code": "ZAF",
+      "common_name": "Sudáfrica"
+    },
+    {
+      "code": "SDN",
+      "common_name": "Sudán"
+    },
+    {
+      "code": "SSD",
+      "common_name": "Sudán del Sur"
+    },
+    {
+      "code": "SWZ",
+      "common_name": "Swazilandia"
+    },
+    {
+      "code": "TZA",
+      "common_name": "Tanzanía"
+    },
+    {
+      "code": "TGO",
+      "common_name": "Togo"
+    },
+    {
+      "code": "TUN",
+      "common_name": "Túnez"
+    },
+    {
+      "code": "UGA",
+      "common_name": "Uganda"
+    },
+    {
+      "code": "ZMB",
+      "common_name": "Zambia"
+    },
+    {
+      "code": "ZWE",
+      "common_name": "Zimbabwe"
+    },
+    {
+      "code": "ATG",
+      "common_name": "Antigua y Barbuda"
+    },
+    {
+      "code": "ARG",
+      "common_name": "Argentina"
+    },
+    {
+      "code": "ABW",
+      "common_name": "Aruba"
+    },
+    {
+      "code": "BHS",
+      "common_name": "Bahamas"
+    },
+    {
+      "code": "BRB",
+      "common_name": "Barbados"
+    },
+    {
+      "code": "BLZ",
+      "common_name": "Belice"
+    },
+    {
+      "code": "BOL",
+      "common_name": "Bolivia"
+    },
+    {
+      "code": "BOL",
+      "common_name": "Bolivia, zona franca Winner"
+    },
+    {
+      "code": "BRA",
+      "common_name": "Brasil"
+    },
+    {
+      "code": "CAN",
+      "common_name": "Canadá"
+    },
+    {
+      "code": "CHL",
+      "common_name": "Chile"
+    },
+    {
+      "code": "COL",
+      "common_name": "Colombia"
+    },
+    {
+      "code": "CRI",
+      "common_name": "Costa Rica"
+    },
+    {
+      "code": "CUB",
+      "common_name": "Cuba"
+    },
+    {
+      "code": "GRL",
+      "common_name": "Dinamarca, territorios vinculados en América"
+    },
+    {
+      "code": "DMA",
+      "common_name": "Dominica"
+    },
+    {
+      "code": "ECU",
+      "common_name": "Ecuador"
+    },
+    {
+      "code": "SLV",
+      "common_name": "El Salvador"
+    },
+    {
+      "code": "USA",
+      "common_name": "Estados Unidos"
+    },
+    {
+      "code": "VIR",
+      "common_name": "Estados Unidos, territorios vinculados en América"
+    },
+    {
+      "code": "GUF",
+      "common_name": "Francia, territorios vinculados en América"
+    },
+    {
+      "code": "GRD",
+      "common_name": "Granada"
+    },
+    {
+      "code": "GTM",
+      "common_name": "Guatemala"
+    },
+    {
+      "code": "GUY",
+      "common_name": "Guyana"
+    },
+    {
+      "code": "HTI",
+      "common_name": "Haití"
+    },
+    {
+      "code": "HND",
+      "common_name": "Honduras"
+    },
+    {
+      "code": "JAM",
+      "common_name": "Jamaica"
+    },
+    {
+      "code": "MEX",
+      "common_name": "México"
+    },
+    {
+      "code": "NIC",
+      "common_name": "Nicaragua"
+    },
+    {
+      "code": "BES",
+      "common_name": "Países Bajos, territorios vinculados en América"
+    },
+    {
+      "code": "PAN",
+      "common_name": "Panamá"
+    },
+    {
+      "code": "PRY",
+      "common_name": "Paraguay"
+    },
+    {
+      "code": "PER",
+      "common_name": "Perú"
+    },
+    {
+      "code": "PRI",
+      "common_name": "Puerto Rico"
+    },
+    {
+      "code": "DOM",
+      "common_name": "República Dominicana"
+    },
+    {
+      "code": "KNA",
+      "common_name": "San Cristóbal y Nevis"
+    },
+    {
+      "code": "VCT",
+      "common_name": "San Vicente y Las Granadinas"
+    },
+    {
+      "code": "LCA",
+      "common_name": "Santa Lucía"
+    },
+    {
+      "code": "SUR",
+      "common_name": "Suriname"
+    },
+    {
+      "code": "TTO",
+      "common_name": "Trinidad y Tobago"
+    },
+    {
+      "code": "URY",
+      "common_name": "Uruguay"
+    },
+    {
+      "code": "VEN",
+      "common_name": "Venezuela"
+    },
+    {
+      "code": "ANT",
+      "common_name": "Antillas Holandesas"
+    },
+    {
+      "code": "AFG",
+      "common_name": "Afganistán"
+    },
+    {
+      "code": "SAU",
+      "common_name": "Arabia Saudita"
+    },
+    {
+      "code": "ARM",
+      "common_name": "Armenia"
+    },
+    {
+      "code": "AZE",
+      "common_name": "Azerbaiyán"
+    },
+    {
+      "code": "BHR",
+      "common_name": "Bahrein"
+    },
+    {
+      "code": "BGD",
+      "common_name": "Bangladesh"
+    },
+    {
+      "code": "BTN",
+      "common_name": "Bhután"
+    },
+    {
+      "code": "BRN",
+      "common_name": "Brunei"
+    },
+    {
+      "code": "KHM",
+      "common_name": "Camboya"
+    },
+    {
+      "code": "CHN",
+      "common_name": "China"
+    },
+    {
+      "code": "KOR",
+      "common_name": "Corea"
+    },
+    {
+      "code": "PRK",
+      "common_name": "Corea Democrática y Popular"
+    },
+    {
+      "code": "ARE",
+      "common_name": "Emiratos Árabes Unidos"
+    },
+    {
+      "code": "PHL",
+      "common_name": "Filipinas"
+    },
+    {
+      "code": "GEO",
+      "common_name": "Georgia"
+    },
+    {
+      "code": "HKG",
+      "common_name": "Hong Kong (región administrativa especial de China)"
+    },
+    {
+      "code": "IND",
+      "common_name": "India"
+    },
+    {
+      "code": "IDN",
+      "common_name": "Indonesia"
+    },
+    {
+      "code": "IRN",
+      "common_name": "Irán"
+    },
+    {
+      "code": "IRQ",
+      "common_name": "Iraq"
+    },
+    {
+      "code": "ISR",
+      "common_name": "Israel"
+    },
+    {
+      "code": "JPN",
+      "common_name": "Japón"
+    },
+    {
+      "code": "JOR",
+      "common_name": "Jordania"
+    },
+    {
+      "code": "KAZ",
+      "common_name": "Kazajstán"
+    },
+    {
+      "code": "KGZ",
+      "common_name": "Kirguistán"
+    },
+    {
+      "code": "KWT",
+      "common_name": "Kuwait"
+    },
+    {
+      "code": "LAO",
+      "common_name": "Laos"
+    },
+    {
+      "code": "LBN",
+      "common_name": "Líbano"
+    },
+    {
+      "code": "MAC",
+      "common_name": "Macao (región administrativa especial de China)"
+    },
+    {
+      "code": "MYS",
+      "common_name": "Malasia"
+    },
+    {
+      "code": "MDV",
+      "common_name": "Maldivas"
+    },
+    {
+      "code": "MNG",
+      "common_name": "Mongolia"
+    },
+    {
+      "code": "MMR",
+      "common_name": "Myanmar"
+    },
+    {
+      "code": "NPL",
+      "common_name": "Nepal"
+    },
+    {
+      "code": "OMN",
+      "common_name": "Omán"
+    },
+    {
+      "code": "PAK",
+      "common_name": "Pakistán"
+    },
+    {
+      "code": "PSE",
+      "common_name": "Palestina"
+    },
+    {
+      "code": "QAT",
+      "common_name": "Qatar"
+    },
+    {
+      "code": "SGP",
+      "common_name": "Singapur"
+    },
+    {
+      "code": "SYR",
+      "common_name": "Siria"
+    },
+    {
+      "code": "LKA",
+      "common_name": "Sri Lanka"
+    },
+    {
+      "code": "THA",
+      "common_name": "Tailandia"
+    },
+    {
+      "code": "TWN",
+      "common_name": "Taiwan"
+    },
+    {
+      "code": "TJK",
+      "common_name": "Tayikistán"
+    },
+    {
+      "code": "TLS",
+      "common_name": "Timor Leste"
+    },
+    {
+      "code": "TKM",
+      "common_name": "Turkmenistán"
+    },
+    {
+      "code": "UZB",
+      "common_name": "Uzbekistán"
+    },
+    {
+      "code": "VNM",
+      "common_name": "Viet Nam"
+    },
+    {
+      "code": "YEM",
+      "common_name": "Yemen"
+    },
+    {
+      "code": "ALB",
+      "common_name": "Albania"
+    },
+    {
+      "code": "DEU",
+      "common_name": "Alemania"
+    },
+    {
+      "code": "AND",
+      "common_name": "Andorra"
+    },
+    {
+      "code": "AUT",
+      "common_name": "Austria"
+    },
+    {
+      "code": "BLR",
+      "common_name": "Belarús"
+    },
+    {
+      "code": "BEL",
+      "common_name": "Bélgica"
+    },
+    {
+      "code": "BIH",
+      "common_name": "Bosnia y Herzegovina"
+    },
+    {
+      "code": "BGR",
+      "common_name": "Bulgaria"
+    },
+    {
+      "code": "CYP",
+      "common_name": "Chipre"
+    },
+    {
+      "code": "HRV",
+      "common_name": "Croacia"
+    },
+    {
+      "code": "DNK",
+      "common_name": "Dinamarca"
+    },
+    {
+      "code": "SVK",
+      "common_name": "Eslovaquia"
+    },
+    {
+      "code": "SVN",
+      "common_name": "Eslovenia"
+    },
+    {
+      "code": "EST",
+      "common_name": "Estonia"
+    },
+    {
+      "code": "FIN",
+      "common_name": "Finlandia"
+    },
+    {
+      "code": "FRA",
+      "common_name": "Francia"
+    },
+    {
+      "code": "GRC",
+      "common_name": "Grecia"
+    },
+    {
+      "code": "HUN",
+      "common_name": "Hungría"
+    },
+    {
+      "code": "IRL",
+      "common_name": "Irlanda"
+    },
+    {
+      "code": "ISL",
+      "common_name": "Islandia"
+    },
+    {
+      "code": "ITA",
+      "common_name": "Italia"
+    },
+    {
+      "code": "LVA",
+      "common_name": "Letonia"
+    },
+    {
+      "code": "LIE",
+      "common_name": "Liechtenstein"
+    },
+    {
+      "code": "LTU",
+      "common_name": "Lituania"
+    },
+    {
+      "code": "LUX",
+      "common_name": "Luxemburgo"
+    },
+    {
+      "code": "MKD",
+      "common_name": "Macedonia"
+    },
+    {
+      "code": "MLT",
+      "common_name": "Malta"
+    },
+    {
+      "code": "MDA",
+      "common_name": "Moldova"
+    },
+    {
+      "code": "MCO",
+      "common_name": "Mónaco"
+    },
+    {
+      "code": "MNE",
+      "common_name": "Montenegro"
+    },
+    {
+      "code": "NOR",
+      "common_name": "Noruega"
+    },
+    {
+      "code": "NLD",
+      "common_name": "Países Bajos"
+    },
+    {
+      "code": "POL",
+      "common_name": "Polonia"
+    },
+    {
+      "code": "PRT",
+      "common_name": "Portugal"
+    },
+    {
+      "code": "GIB",
+      "common_name": "Reino Unido, territorios vinculados en Europa"
+    },
+    {
+      "code": "CZE",
+      "common_name": "República Checa"
+    },
+    {
+      "code": "ROU",
+      "common_name": "Rumania"
+    },
+    {
+      "code": "RUS",
+      "common_name": "Rusia"
+    },
+    {
+      "code": "SMR",
+      "common_name": "San Marino"
+    },
+    {
+      "code": "SRB",
+      "common_name": "Serbia"
+    },
+    {
+      "code": "SWE",
+      "common_name": "Suecia"
+    },
+    {
+      "code": "CHE",
+      "common_name": "Suiza"
+    },
+    {
+      "code": "TUR",
+      "common_name": "Turquía"
+    },
+    {
+      "code": "UKR",
+      "common_name": "Ucrania"
+    },
+    {
+      "code": "VAT",
+      "common_name": "Vaticano"
+    },
+    {
+      "code": "AUS",
+      "common_name": "Australia"
+    },
+    {
+      "code": "FJI",
+      "common_name": "Fiji"
+    },
+    {
+      "code": "PYF",
+      "common_name": "Francia, territorios vinculados en Oceanía"
+    },
+    {
+      "code": "MNP",
+      "common_name": "Islas Marianas"
+    },
+    {
+      "code": "MHL",
+      "common_name": "Islas Marshall"
+    },
+    {
+      "code": "SLB",
+      "common_name": "Islas Salomón"
+    },
+    {
+      "code": "KIR",
+      "common_name": "Kiribati"
+    },
+    {
+      "code": "FSM",
+      "common_name": "Micronesia"
+    },
+    {
+      "code": "NRU",
+      "common_name": "Nauru"
+    },
+    {
+      "code": "NZL",
+      "common_name": "Nueva Zelandia"
+    },
+    {
+      "code": "PLW",
+      "common_name": "Palau"
+    },
+    {
+      "code": "PNG",
+      "common_name": "Papua Nueva Guinea"
+    },
+    {
+      "code": "WSM",
+      "common_name": "Samoa"
+    },
+    {
+      "code": "TON",
+      "common_name": "Tonga"
+    },
+    {
+      "code": "TUV",
+      "common_name": "Tuvalu"
+    },
+    {
+      "code": "VUT",
+      "common_name": "Vanuatu"
+    }
+  ]
+}

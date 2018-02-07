@@ -10081,3 +10081,7 @@ ul.activity {
 }
 
 /*# sourceMappingURL=gobar_style.css.map */
+
+.select2-container.select2-allowclear .select2-choice .select2-chosen {
+  padding-left: 10px;
+}

@@ -46,6 +46,10 @@
 
     <h2>Metadatos</h2>
     <div class="links-section">
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_metadata_portal') }}"
+           class="section-link {{ 'active' if c.action == 'edit_metadata_portal' else '' }}">
+            Metadatos del portal
+        </a>
         <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_metadata_google_fb') }}"
            class="section-link {{ 'active' if c.action == 'edit_metadata_google_fb' else '' }}">
             Google y Facebook
