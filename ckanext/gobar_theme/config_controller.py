@@ -218,11 +218,6 @@ class GobArConfigController(base.BaseController):
             if not isinstance(languages, list):
                 languages = [languages]
 
-            try:
-                municipios_list = params['metadata-municipio']
-            except KeyError:
-                # me llegó una lista vacía de municipios
-                municipios_list = []
             new_metadata_config = {
                 'homepage': params['metadata-homepage'].strip(),
                 'id': params['metadata-id'].strip(),
@@ -233,7 +228,7 @@ class GobArConfigController(base.BaseController):
                 'license': params['metadata-license'].strip(),
                 'country': params['metadata-country'].strip(),
                 'province': params['metadata-province'].strip(),
-                'districts': municipios_list,
+                'districts': params.get('metadata-municipio', []),
             }
             config_dict['portal-metadata'] = new_metadata_config
             self._set_config(config_dict)

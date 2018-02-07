@@ -41,6 +41,7 @@ $(document).ready(function () {
             if (e.added && e.added.id) {
                 countryCode = e.added.id;
             }
+            $("#portal-province").val('');
             toggleSpatialSelects(countryCode);
         });
     });
@@ -100,6 +101,7 @@ $(document).ready(function () {
         if (e.added) {
             selectedProvince = e.added.id;
         }
+        $("#portal-municipio").val('');
         initDistrictSelect(selectedProvince);
     });
 });
