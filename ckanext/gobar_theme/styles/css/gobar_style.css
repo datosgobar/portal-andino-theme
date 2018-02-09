@@ -9225,18 +9225,42 @@ div#background-container {
   #resource-edit #resource-attributes-form .resource-attributes-group {
     padding-top: 30px;
     border-top: solid 1px #cccccc; }
+    #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-header {
+      border-bottom: solid 1px #cccccc;
+      color: black;
+      font-size: 20px;
+      padding: 5px;
+      margin-bottom: 20px; }
     #resource-edit #resource-attributes-form .resource-attributes-group .icon-remove {
       font-size: 20px;
       position: absolute;
       right: 0;
-      top: -20px;
+      top: 10px;
       cursor: pointer;
       color: #999999; }
-    #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-title-container {
-      padding: 0 15px 0 0; }
+    #resource-edit #resource-attributes-form .resource-attributes-group .add-extra-fields {
+      text-align: center;
+      background-color: #e6f5fc;
+      padding: 20px 0;
+      cursor: pointer;
+      color: #0695d6; }
+    #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-input-container {
+      padding: 0 15px 15px 0; }
+      #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-input-container.resource-col-special-data-container {
+        display: none; }
+      #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-input-container.resource-col-advanced-container {
+        display: none; }
+      #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-input-container .resource-attributes-input-disclaimer {
+        font-size: 15px;
+        color: black;}
+      #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-input-container .blue {
+        font-size: 15px;
+        color: #0695d6;}
+      #resource-edit #resource-attributes-form .resource-attributes-group .resource-attributes-input-container select {
+        height: 40px;
+        margin-bottom: 20px; }
     #resource-edit #resource-attributes-form .resource-attributes-group .other-resource-attributes-container {
       padding: 0 0 0 15px; }
-      #resource-edit #resource-attributes-form .resource-attributes-group .other-resource-attributes-container .resource-col-type,
       #resource-edit #resource-attributes-form .resource-attributes-group .other-resource-attributes-container .resource-col-id {
         height: 40px;
         margin-bottom: 20px; }

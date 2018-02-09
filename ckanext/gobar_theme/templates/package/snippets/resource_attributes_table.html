@@ -16,6 +16,8 @@
                     <th>Descripción</th>
                     <th>Unidades</th>
                     <th>Identificador</th>
+                    <th>Dato especial</th>
+                    <th>Detalle dato</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +28,8 @@
                     <td>{{ attribute_group.get('description', '') }}&nbsp;</td>
                     <td>{{ attribute_group.get('unit', '') }}&nbsp;</td>
                     <td>{{ attribute_group.get('id', '') }}&nbsp;</td>
+                    <td>{{ attribute_group.get('specialType', '') }}&nbsp;</td>
+                    <td>{{ attribute_group.get('specialTypeDetail', '') }}&nbsp;</td>
                 </tr>
             {% endfor %}
             </tbody>
