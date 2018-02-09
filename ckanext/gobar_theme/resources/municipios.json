@@ -1,0 +1,8929 @@
+{
+  "municipios": [
+    {
+      "id": "060868", 
+      "nombre": "VILLA GESELL", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "386154", 
+      "nombre": "CATUA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386021", 
+      "nombre": "PUESTO DEL  MARQUÉS", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386014", 
+      "nombre": "ABRALAITE", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380105", 
+      "nombre": "HUMAHUACA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386007", 
+      "nombre": "ABDÓN CASTRO TOLAY", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386168", 
+      "nombre": "SUSQUES", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386182", 
+      "nombre": "MAIMARÁ", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380126", 
+      "nombre": "CALILEGUA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380133", 
+      "nombre": "FRAILE PINTADO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386028", 
+      "nombre": "YALA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386091", 
+      "nombre": "ARRAYANAL", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060623", 
+      "nombre": "PERGAMINO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "660357", 
+      "nombre": "ROSARIO DE LA FRONTERA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660308", 
+      "nombre": "PICHANAL", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "060091", 
+      "nombre": "BERAZATEGUI", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "460063", 
+      "nombre": "GENERAL BELGRANO", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "540231", 
+      "nombre": "COLONIA WANDA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "660273", 
+      "nombre": "MOLINOS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660329", 
+      "nombre": "RIVADAVIA BANDA NORTE", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660077", 
+      "nombre": "CERRILLOS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660119", 
+      "nombre": "GENERAL GÜEMES", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660364", 
+      "nombre": "CAMPO QUIJANO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660406", 
+      "nombre": "NAZARENO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660385", 
+      "nombre": "ANIMANÁ", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660266", 
+      "nombre": "METÁN", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100035", 
+      "nombre": "ANCASTI", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100231", 
+      "nombre": "TINOGASTA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "660322", 
+      "nombre": "URUNDEL", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "540336", 
+      "nombre": "CARAGUATAY", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "660238", 
+      "nombre": "LA VIÑA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660217", 
+      "nombre": "LA CANDELARIA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660287", 
+      "nombre": "SECLANTÁS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660084", 
+      "nombre": "LA MERCED", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "585119", 
+      "nombre": "PASO AGUERRE", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "100042", 
+      "nombre": "ACONQUIJA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100014", 
+      "nombre": "LA PUERTA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100133", 
+      "nombre": "HUILLAPIMA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "060581", 
+      "nombre": "NECOCHEA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "460035", 
+      "nombre": "CHAMICAL", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460014", 
+      "nombre": "CAPITAL", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460126", 
+      "nombre": "SANAGASTA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "700007", 
+      "nombre": "ALBARDÓN", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "500112", 
+      "nombre": "SANTA ROSA", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "700084", 
+      "nombre": "RIVADAVIA", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700056", 
+      "nombre": "JÁCHAL", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "500119", 
+      "nombre": "TUNUYÁN", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500063", 
+      "nombre": "LUJÁN DE CUYO", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500056", 
+      "nombre": "LAVALLE", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500035", 
+      "nombre": "JUNÍN", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500098", 
+      "nombre": "SAN MARTÍN", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "142021", 
+      "nombre": "CAÑADA DEL  SAUCE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "540210", 
+      "nombre": "PUERTO ESPERANZA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540147", 
+      "nombre": "COLONIA VICTORIA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540245", 
+      "nombre": "ARROYO DEL  MEDIO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540266", 
+      "nombre": "DOS ARROYOS", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540497", 
+      "nombre": "SAN JAVIER", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060028", 
+      "nombre": "ALMIRANTE BROWN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540371", 
+      "nombre": "COLONIA ALBERDI", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540175", 
+      "nombre": "BERNARDO DE IRIGOYEN", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540364", 
+      "nombre": "CAMPO VIERA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540287", 
+      "nombre": "OLEGARIO V. ANDRADE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060154", 
+      "nombre": "CARLOS TEJEDOR", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540406", 
+      "nombre": "PANAMBI", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "425007", 
+      "nombre": "ADOLFO VAN PRAET", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "060547", 
+      "nombre": "MONTE", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540140", 
+      "nombre": "COLONIA DELICIA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "420116", 
+      "nombre": "DORILA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "580014", 
+      "nombre": "AÑELO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585126", 
+      "nombre": "QUILI MALAL", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "425119", 
+      "nombre": "QUETREQUÉN", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "142630", 
+      "nombre": "CHALACEA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "585112", 
+      "nombre": "EL SAUCE", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585098", 
+      "nombre": "VILLA DEL  NAHUEVE", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580175", 
+      "nombre": "EL CHOLAR", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580182", 
+      "nombre": "EL HUECÚ", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580189", 
+      "nombre": "TAQUIMILÁN", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580056", 
+      "nombre": "NEUQUÉN", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580042", 
+      "nombre": "CENTENARIO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585021", 
+      "nombre": "LOS CHIHUIDOS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "060238", 
+      "nombre": "DOLORES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "580238", 
+      "nombre": "MARIANO MORENO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585028", 
+      "nombre": "PILO LIL", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "141743", 
+      "nombre": "WENCESLAO ESCALANTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "220161", 
+      "nombre": "MAKALLÉ", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "820042", 
+      "nombre": "RAFAELA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "220336", 
+      "nombre": "LA CLOTILDE", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "420252", 
+      "nombre": "MIGUEL CANÉ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "220063", 
+      "nombre": "PUERTO BERMEJO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "824191", 
+      "nombre": "MARGARITA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "220434", 
+      "nombre": "CAPITÁN SOLARI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "823841", 
+      "nombre": "SAN FABIÁN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822182", 
+      "nombre": "COLONIA ITURRASPE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "142952", 
+      "nombre": "COLONIA SAN PEDRO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "220210", 
+      "nombre": "AVIA TERAI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220007", 
+      "nombre": "CONCEPCIÓN DEL  BERMEJO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220028", 
+      "nombre": "TACO POZO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "180238", 
+      "nombre": "MARIANO I. LOZA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180070", 
+      "nombre": "PERUGORRÍA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "822476", 
+      "nombre": "LA VANGUARDIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180105", 
+      "nombre": "ESTACIÓN TORRENT", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180413", 
+      "nombre": "CHAVARRÍA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180406", 
+      "nombre": "PEDRO R. FERNÁNDEZ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180427", 
+      "nombre": "GARRUCHOS", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "822280", 
+      "nombre": "JOSEFINA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "420011", 
+      "nombre": "ALGARROBO DEL  ÁGUILA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "180112", 
+      "nombre": "CAÁ CATÍ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180322", 
+      "nombre": "PASO DE LA PATRIA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180143", 
+      "nombre": "SAN ISIDRO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "823596", 
+      "nombre": "LAS PALMERAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180154", 
+      "nombre": "RAMADA PASO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060511", 
+      "nombre": "MAIPÚ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "820035", 
+      "nombre": "FRONTERA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "060140", 
+      "nombre": "CAPITÁN SARMIENTO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060638", 
+      "nombre": "PILAR", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060497", 
+      "nombre": "LUJÁN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060210", 
+      "nombre": "CHACABUCO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060385", 
+      "nombre": "GENERAL VIAMONTE", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060329", 
+      "nombre": "GENERAL LAS  HERAS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060525", 
+      "nombre": "MARCOS PAZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060778", 
+      "nombre": "SAN VICENTE", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060574", 
+      "nombre": "NAVARRO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060105", 
+      "nombre": "BOLÍVAR", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060245", 
+      "nombre": "ENSENADA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060448", 
+      "nombre": "LAPRIDA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060035", 
+      "nombre": "AVELLANEDA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060098", 
+      "nombre": "BERISSO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060882", 
+      "nombre": "ZÁRATE", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060462", 
+      "nombre": "LEANDRO N. ALEM", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "823330", 
+      "nombre": "SAN BERNARDO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823960", 
+      "nombre": "SILVA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823694", 
+      "nombre": "CACIQUE ARIACAIQUÍN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822364", 
+      "nombre": "SUSANA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823617", 
+      "nombre": "MONTE OSCURIDAD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823512", 
+      "nombre": "COLONIA BOSSI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823652", 
+      "nombre": "SANTURCE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823589", 
+      "nombre": "LAS AVISPAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823554", 
+      "nombre": "HUANQUEROS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820091", 
+      "nombre": "AVELLANEDA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820224", 
+      "nombre": "CERES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823680", 
+      "nombre": "VILLA TRINIDAD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824149", 
+      "nombre": "FORTÍN OLMOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822868", 
+      "nombre": "VILLA ANA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823659", 
+      "nombre": "SOLEDAD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823302", 
+      "nombre": "JUAN DE GARAY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823281", 
+      "nombre": "ESTEBAN RAMS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820231", 
+      "nombre": "SAN CRISTÓBAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823911", 
+      "nombre": "LA PENCA Y CARAGUATÁ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823323", 
+      "nombre": "POZO BORRADO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820105", 
+      "nombre": "MALABRIGO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822777", 
+      "nombre": "EL ARAZÁ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824205", 
+      "nombre": "TOBA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820336", 
+      "nombre": "VERA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824191", 
+      "nombre": "MARGARITA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822826", 
+      "nombre": "LANTERI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824065", 
+      "nombre": "CASTELAR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822385", 
+      "nombre": "VILA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822322", 
+      "nombre": "PUEBLO MARINI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824128", 
+      "nombre": "SAN MART", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824135", 
+      "nombre": "TRAILL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824079", 
+      "nombre": "CRISPI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822910", 
+      "nombre": "LUCIO V. LÓPEZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823743", 
+      "nombre": "CAMPO PIAGGIO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823078", 
+      "nombre": "FRANCK", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823127", 
+      "nombre": "LAS TUNAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823190", 
+      "nombre": "SA PEREYRA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823141", 
+      "nombre": "MATILDE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823729", 
+      "nombre": "BARRANCAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823820", 
+      "nombre": "MACIEL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823155", 
+      "nombre": "PILAR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823043", 
+      "nombre": "COLONIA SAN JOSÉ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823099", 
+      "nombre": "HUMBOLDT", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822119", 
+      "nombre": "ATALIVA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822980", 
+      "nombre": "CANDIOTI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822371", 
+      "nombre": "TACURAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823421", 
+      "nombre": "PIÑERO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822882", 
+      "nombre": "BUSTINZA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822987", 
+      "nombre": "EMILIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823134", 
+      "nombre": "MARÍA LUISA\r\nMARÍA LUISA\r\nMARÍA LUISA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820014", 
+      "nombre": "LAS PAREJAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "142644", 
+      "nombre": "COMECHINGONES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822728", 
+      "nombre": "SAN GREGORIO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "140679", 
+      "nombre": "COSQUÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "820189", 
+      "nombre": "FUNES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "420259", 
+      "nombre": "MIGUEL RIGLOS", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "820028", 
+      "nombre": "CASILDA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823449", 
+      "nombre": "URANGA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "142924", 
+      "nombre": "LUYABA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822511", 
+      "nombre": "RUEDA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822595", 
+      "nombre": "CAÑADA DEL  UCLE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822609", 
+      "nombre": "CARRERAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822651", 
+      "nombre": "HUGHES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822644", 
+      "nombre": "ELORTONDO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822742", 
+      "nombre": "SANTA ISABEL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822714", 
+      "nombre": "SAN EDUARDO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "625252", 
+      "nombre": "PILQUINIYEU", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "822049", 
+      "nombre": "BIGAND", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823386", 
+      "nombre": "CARMEN DEL  SAUCE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820196", 
+      "nombre": "GRANADERO BAIGORRIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823988", 
+      "nombre": "CORONEL ARNOLD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "260140", 
+      "nombre": "SARMIENTO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "822931", 
+      "nombre": "SALTO GRANDE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823687", 
+      "nombre": "ALEJANDRA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823778", 
+      "nombre": "GABOTO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822574", 
+      "nombre": "AARÓN CASTELLANOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620077", 
+      "nombre": "SAN CARLOS DE BARILOCHE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620217", 
+      "nombre": "COMALLO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "822805", 
+      "nombre": "GUADALUPE NORTE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822210", 
+      "nombre": "EGUSQUIZA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823764", 
+      "nombre": "DESVÍO ARIJÓN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620161", 
+      "nombre": "GRAL. ROCA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620084", 
+      "nombre": "GRAL. CONESA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620028", 
+      "nombre": "CHOELE CHOEL", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620021", 
+      "nombre": "CHIMPAY", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620112", 
+      "nombre": "CERVANTES", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268035", 
+      "nombre": "GASTRE", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "620273", 
+      "nombre": "DINA HUAPI", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "829999", 
+      "nombre": "LAS GRUTAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "260056", 
+      "nombre": "RADA TILLY", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268084", 
+      "nombre": "LOS ALTARES", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "625077", 
+      "nombre": "AGUADA GUZMAN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625126", 
+      "nombre": "YAMINUÉ", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625196", 
+      "nombre": "AGUADA DE GUERRA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625070", 
+      "nombre": "MENCUEN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625140", 
+      "nombre": "PILQUINIYEU DEL  LIMAY", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620014", 
+      "nombre": "VIEDMA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "260126", 
+      "nombre": "ALTO RÍO SENGUER", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268091", 
+      "nombre": "ALDEA BELEIRO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "265014", 
+      "nombre": "28 DE JULIO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260091", 
+      "nombre": "DOLAVON", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "265028", 
+      "nombre": "PUERTO PIRÁMIDES", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "420308", 
+      "nombre": "RANCUL", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420049", 
+      "nombre": "BERNARDO LARROUDE", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420084", 
+      "nombre": "CEBALLOS", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420175", 
+      "nombre": "INTENDENTE ALVEAR", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420287", 
+      "nombre": "PUELÉN", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420168", 
+      "nombre": "INGENIERO LUIGGI", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420119", 
+      "nombre": "EDUARDO CASTEX", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420406", 
+      "nombre": "VILLA MIRASOL", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420413", 
+      "nombre": "WINIFREDA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420399", 
+      "nombre": "VICTORICA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "140084", 
+      "nombre": "AGUA DE ORO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143225", 
+      "nombre": "ALDEA SANTA MARÍA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141589", 
+      "nombre": "ALTO ALEGRE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142609", 
+      "nombre": "ATAHONA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140280", 
+      "nombre": "AUSONIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140210", 
+      "nombre": "BUCHARDO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142014", 
+      "nombre": "CALMAYO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143120", 
+      "nombre": "CAMINIAGA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143176", 
+      "nombre": "CAPILLA DEL  SITÓN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140497", 
+      "nombre": "CAPITÁN GENERAL B. O'HIGGINS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142483", 
+      "nombre": "CHARBONIER", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142553", 
+      "nombre": "CHUCUL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141428", 
+      "nombre": "COLONIA ALMADA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142931", 
+      "nombre": "COLONIA ANITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142938", 
+      "nombre": "COLONIA ITURRASPE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142658", 
+      "nombre": "EL CRISPÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142665", 
+      "nombre": "ESQUINA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142105", 
+      "nombre": "EL MANZANO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140819", 
+      "nombre": "ELENA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140007", 
+      "nombre": "EMBALSE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142112", 
+      "nombre": "ESTACIÓN GENERAL PAZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140105", 
+      "nombre": "ESTACIÓN JUÁREZ CELMAN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142749", 
+      "nombre": "EUFRASIO LOZA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143008", 
+      "nombre": "FALDA DEL  CARMEN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140532", 
+      "nombre": "GENERAL BALDISSERA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140413", 
+      "nombre": "GENERAL CABRERA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140420", 
+      "nombre": "GENERAL DEHEZA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140539", 
+      "nombre": "GENERAL ROCA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142378", 
+      "nombre": "GUASAPAMPA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140553", 
+      "nombre": "INRIVILLE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140231", 
+      "nombre": "ITALÓ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141659", 
+      "nombre": "JUSTINIANO POSSE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142672", 
+      "nombre": "KILÓMETRO 658", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140119", 
+      "nombre": "LA CALERA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142560", 
+      "nombre": "LA CAROLINA \"EL POTOSI\"", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140903", 
+      "nombre": "LA PARA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142896", 
+      "nombre": "LA POBLACIÓN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140910", 
+      "nombre": "LA PUERTA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140126", 
+      "nombre": "LA GRANJA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143022", 
+      "nombre": "LA PAISANITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141274", 
+      "nombre": "LA TORDILLA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140630", 
+      "nombre": "LABOULAYE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142567", 
+      "nombre": "LAS ALBAHACAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142035", 
+      "nombre": "LAS CALERAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140840", 
+      "nombre": "LAS HIGUERAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141519", 
+      "nombre": "LAS PEÑAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142910", 
+      "nombre": "LOS CERRILLOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142700", 
+      "nombre": "LAS SALADAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140707", 
+      "nombre": "LOS COCOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142042", 
+      "nombre": "LOS MOLINOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142049", 
+      "nombre": "LOS REARTES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142504", 
+      "nombre": "MAYU SUMAJ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140140", 
+      "nombre": "MENDIOLAZA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141092", 
+      "nombre": "MINA CLAVERO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140917", 
+      "nombre": "MONTE CRISTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142231", 
+      "nombre": "ONAGOITY", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143155", 
+      "nombre": "PAMPAYASTA NORTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142861", 
+      "nombre": "PANAHOLMA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141708", 
+      "nombre": "PASCANAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142238", 
+      "nombre": "PINCEN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143134", 
+      "nombre": "POZO NUEVO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141715", 
+      "nombre": "PUEBLO ITALIANO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141071", 
+      "nombre": "RÍO SEGUNDO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141491", 
+      "nombre": "RÍO TERCERO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140644", 
+      "nombre": "ROSALES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140595", 
+      "nombre": "SAIRA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140714", 
+      "nombre": "SAN ESTEBAN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143064", 
+      "nombre": "SAN CLEMENTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141561", 
+      "nombre": "SAN JOSÉ DE LA DORMIDA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141568", 
+      "nombre": "SAN JOSÉ DE LAS  SALINAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142728", 
+      "nombre": "TINOCO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141729", 
+      "nombre": "SAN MARCOS SUD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140882", 
+      "nombre": "SANTA CATALINA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140721", 
+      "nombre": "SANTA MARÍA DE PUNILLA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142070", 
+      "nombre": "SEGUNDA USINA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141344", 
+      "nombre": "SATURNINO MARÍA LASPIUR", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140196", 
+      "nombre": "SERREZUELA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140728", 
+      "nombre": "TANTI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140343", 
+      "nombre": "TICINO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140742", 
+      "nombre": "VILLA CARLOS PAZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141407", 
+      "nombre": "TOLEDO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140735", 
+      "nombre": "VALLE HERMOSO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "749175", 
+      "nombre": "FORTIN EL PATRIA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "141505", 
+      "nombre": "VILLA ASCASUBI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143078", 
+      "nombre": "VILLA CIUDAD DE AMÉRICA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142084", 
+      "nombre": "VILLA CIUDAD PARQUE LOS  REARTES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142595", 
+      "nombre": "VILLA EL CHACAY", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143085", 
+      "nombre": "VILLA DEL  PRADO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140749", 
+      "nombre": "VILLA GIARDINO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "740098", 
+      "nombre": "STA ROSA DEL  CONLARA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "140357", 
+      "nombre": "VILLA MARÍA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142091", 
+      "nombre": "VILLA QUILLINZO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142980", 
+      "nombre": "VILLA SAN ESTEBAN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143113", 
+      "nombre": "VILLA SAN ISIDRO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142546", 
+      "nombre": "VILLA RÍO ICHO CRUZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142329", 
+      "nombre": "PASO DEL  DURAZNO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140672", 
+      "nombre": "CAPILLA DEL  MONTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "746315", 
+      "nombre": "PASO GRANDE", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740133", 
+      "nombre": "SAN LUIS", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746280", 
+      "nombre": "ZANJITAS", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746301", 
+      "nombre": "LAS CHACRAS", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746098", 
+      "nombre": "VILLA DEL  CARMEN", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740035", 
+      "nombre": "V, GRAL, ROCA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746021", 
+      "nombre": "NOGOLI", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740105", 
+      "nombre": "MERLO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740056", 
+      "nombre": "NASCHEL", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908203", 
+      "nombre": "LAMADRID", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908637", 
+      "nombre": "TAPIA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908630", 
+      "nombre": "SAN PEDRO DE COLALAO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908070", 
+      "nombre": "VILLA PADRE MONTI", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908280", 
+      "nombre": "EL MOJON", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908126", 
+      "nombre": "LOS PEREYRAS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908490", 
+      "nombre": "ATAHONA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908168", 
+      "nombre": "ALTO VERDE Y LOS  GUCHEA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908539", 
+      "nombre": "SAN PEDRO Y SAN ANTONIO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908525", 
+      "nombre": "PAMPA MAYO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908413", 
+      "nombre": "LOS SOSA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900007", 
+      "nombre": "MUNICIPALIDAD DE BURRUYACU", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908245", 
+      "nombre": "RUMIPUNCO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908350", 
+      "nombre": "VILLA DE LEALES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908322", 
+      "nombre": "MANUEL GARCIA FERNANDEZ", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908231", 
+      "nombre": "EL SACRIFICIO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900049", 
+      "nombre": "MUNICIPALIDAD DE GRANEROS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900028", 
+      "nombre": "MUNICIPALIDAD DE BANDA DEL  RIO SALI", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908427", 
+      "nombre": "SANTA LUCIA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908532", 
+      "nombre": "RIO CHICO Y NUEVA TRINIDAD", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908357", 
+      "nombre": "EL MANANTIAL", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "220182", 
+      "nombre": "JUAN JOSÉ CASTELLI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "386273", 
+      "nombre": "YAVI", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386077", 
+      "nombre": "RINCONADA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386056", 
+      "nombre": "HIPÓLITO YRIGOYEN", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380014", 
+      "nombre": "ABRA PAMPA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060357", 
+      "nombre": "GENERAL PUEYRREDÓN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "386252", 
+      "nombre": "CANGREJILLOS", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386210", 
+      "nombre": "CASPALÁ", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386217", 
+      "nombre": "PAMPICHUELA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386238", 
+      "nombre": "VALLE GRANDE", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380147", 
+      "nombre": "YUTO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386126", 
+      "nombre": "VINALITO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060861", 
+      "nombre": "VICENTE LÓPEZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "386098", 
+      "nombre": "EL FUERTE", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380203", 
+      "nombre": "LA MENDIETA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "660035", 
+      "nombre": "LAS LAJITAS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660231", 
+      "nombre": "CORONEL MOLDES", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660161", 
+      "nombre": "TARTAGAL", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "380063", 
+      "nombre": "MONTERRICO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "660091", 
+      "nombre": "CHICOANA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "386042", 
+      "nombre": "PAMPA BLANCA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "660203", 
+      "nombre": "EL JARDÍN", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660154", 
+      "nombre": "PROFESOR SALVADOR MAZZA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "386035", 
+      "nombre": "AGUAS CALIENTES", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "660252", 
+      "nombre": "TOLAR GRANDE", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660056", 
+      "nombre": "CAFAYATE", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660392", 
+      "nombre": "SAN CARLOS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660350", 
+      "nombre": "EL POTRERO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100084", 
+      "nombre": "LONDRES", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "268119", 
+      "nombre": "BUEN PASTO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "660210", 
+      "nombre": "EL TALA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100112", 
+      "nombre": "SAN FERNANDO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "268056", 
+      "nombre": "CARRENLEUFÚ", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "660140", 
+      "nombre": "GENERAL BALLIVIÁN", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "580154", 
+      "nombre": "LAS OVEJAS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "660049", 
+      "nombre": "PAYOGASTA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100203", 
+      "nombre": "SAN JOSÉ", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100196", 
+      "nombre": "SAUJIL", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "060466", 
+      "nombre": "LEZAMA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "141554", 
+      "nombre": "LUCIO V. MANSILLA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "700042", 
+      "nombre": "CHIMBAS", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "460070", 
+      "nombre": "GENERAL JUAN FACUNDO QUIROGA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "700119", 
+      "nombre": "VALLE FÉRTIL", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700112", 
+      "nombre": "ULLUM", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700133", 
+      "nombre": "ZONDA", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "540420", 
+      "nombre": "COLONIA POLANA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "700091", 
+      "nombre": "SAN MARTÍN", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "822133", 
+      "nombre": "BAUER Y SIGEL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822245", 
+      "nombre": "FIDELA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "700014", 
+      "nombre": "ANGACO", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "220329", 
+      "nombre": "LAS BREÑAS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220035", 
+      "nombre": "GENERAL VEDIA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "142266", 
+      "nombre": "CAÑADA DE RÍO PINTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822350", 
+      "nombre": "SAN VICENTE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "540098", 
+      "nombre": "SANTA ANA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "142735", 
+      "nombre": "CERRO COLORADO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "540441", 
+      "nombre": "GOBERNADOR ROCA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540462", 
+      "nombre": "SAN IGNACIO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540238", 
+      "nombre": "ALMAFUERTE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540028", 
+      "nombre": "TRES CAPONES", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540014", 
+      "nombre": "AZARA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540399", 
+      "nombre": "OBERA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540308", 
+      "nombre": "GARUHAPE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540378", 
+      "nombre": "GRAL. ALVEAR", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540392", 
+      "nombre": "LOS HELECHOS", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540504", 
+      "nombre": "SAN PEDRO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540455", 
+      "nombre": "JARDIN AMERICA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060854", 
+      "nombre": "25 DE MAYO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540357", 
+      "nombre": "CAMPO RAMON", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060693", 
+      "nombre": "ROQUE PÉREZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540035", 
+      "nombre": "ARISTOBULO DEL  VALLE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540105", 
+      "nombre": "FACHINAL", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "585105", 
+      "nombre": "OCTAVIO PICO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580203", 
+      "nombre": "BUTA RANQUIL", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "425098", 
+      "nombre": "MAISONNAVE", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "540112", 
+      "nombre": "ARUPA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "580028", 
+      "nombre": "LAS COLORADAS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580168", 
+      "nombre": "CAVIAHUE-COPAHUE", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580091", 
+      "nombre": "VISTA ALEGRE", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "141197", 
+      "nombre": "COLONIA MARINA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "580021", 
+      "nombre": "SAN PATRICIO DEL  CHAÑAR", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "420238", 
+      "nombre": "MAURICIO MAYER", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "585049", 
+      "nombre": "COYUCO-COCHICO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "220119", 
+      "nombre": "CHOROTIS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220420", 
+      "nombre": "SAMUHÚ", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "142224", 
+      "nombre": "NICOLÁS BRUZZONE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "220238", 
+      "nombre": "LAGUNA BLANCA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "140077", 
+      "nombre": "CÓRDOBA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "220371", 
+      "nombre": "MARGARITA BELÉN", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220357", 
+      "nombre": "PRESIDENCIA DE LA PLAZA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220455", 
+      "nombre": "LAS GARCITAS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "822315", 
+      "nombre": "PRESIDENTE ROCA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "220280", 
+      "nombre": "PAMPA ALMIRÓN", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220273", 
+      "nombre": "LAGUNA LIMPIA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220476", 
+      "nombre": "MACHAGAI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220189", 
+      "nombre": "MIRAFLORES", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "180455", 
+      "nombre": "SAUCE", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180084", 
+      "nombre": "ESQUINA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180217", 
+      "nombre": "YATAYTÍ CALLE", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180140", 
+      "nombre": "GOYA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180210", 
+      "nombre": "SANTA LUCÍA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180196", 
+      "nombre": "GOBERNADOR MARTÍNEZ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "822049", 
+      "nombre": "BIGAND", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822224", 
+      "nombre": "ESTACIÓN CLUCELLAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "422007", 
+      "nombre": "CASA DE PIEDRA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "180056", 
+      "nombre": "TATACUÁ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180357", 
+      "nombre": "COLONIA CARLOS PELLEGRINI", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "823631", 
+      "nombre": "PALACIOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180308", 
+      "nombre": "SALADAS", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180186", 
+      "nombre": "VILLA OLIVARI", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180161", 
+      "nombre": "COLONIA LIEBIG'S", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180126", 
+      "nombre": "LOMAS DE VALLEJOS", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "420196", 
+      "nombre": "LA HUMADA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "180385", 
+      "nombre": "LORETO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180182", 
+      "nombre": "SAN CARLOS", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180147", 
+      "nombre": "ITATÍ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180021", 
+      "nombre": "CORRIENTES", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060560", 
+      "nombre": "MORENO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060791", 
+      "nombre": "TANDIL", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060203", 
+      "nombre": "CORONEL SUÁREZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060616", 
+      "nombre": "PELLEGRINI", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060260", 
+      "nombre": "ESTEBAN ECHEVERRÍA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060714", 
+      "nombre": "SALTO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060413", 
+      "nombre": "JUNÍN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "822238", 
+      "nombre": "EUSTOLIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "060364", 
+      "nombre": "GENERAL RODRÍGUEZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060224", 
+      "nombre": "CHIVILCOY", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060434", 
+      "nombre": "LANÚS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060063", 
+      "nombre": "BALCARCE", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060406", 
+      "nombre": "HIPÓLITO YRIGOYEN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060749", 
+      "nombre": "SAN FERNANDO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "823918", 
+      "nombre": "MARCELINO ESCALADA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820259", 
+      "nombre": "SAN JUSTO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823666", 
+      "nombre": "SUARDI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823540", 
+      "nombre": "DOS ROSAS Y LA LEGUA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822560", 
+      "nombre": "SALADERO MARIANO CABAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823792", 
+      "nombre": "PUEBLO IRIGOYEN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822798", 
+      "nombre": "FLORENCIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820112", 
+      "nombre": "RECONQUISTA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823701", 
+      "nombre": "COLONIA DURÁN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822784", 
+      "nombre": "EL RABÓN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824142", 
+      "nombre": "CAÑADA OMBÚ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823344", 
+      "nombre": "VILLA MINETTI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823568", 
+      "nombre": "COLONIA LA CLARA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823904", 
+      "nombre": "LA CRIOLLA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824170", 
+      "nombre": "INTIYACO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823309", 
+      "nombre": "LOGROÑO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822819", 
+      "nombre": "LA SARITA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824177", 
+      "nombre": "LA GALLARETA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823932", 
+      "nombre": "PEDRO GÓMEZ CELLO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824086", 
+      "nombre": "LANDETA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820308", 
+      "nombre": "EL TRÉBOL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824093", 
+      "nombre": "LAS BANDURRIAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822749", 
+      "nombre": "TEODELINA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823757", 
+      "nombre": "CENTENO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820252", 
+      "nombre": "GÁLVEZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823806", 
+      "nombre": "LOMA ALTA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822756", 
+      "nombre": "WHEELWRIGHT", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "420063", 
+      "nombre": "CALEUFÚ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "823785", 
+      "nombre": "GESSLER", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823197", 
+      "nombre": "SAN AGUSTÍN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823827", 
+      "nombre": "MONJE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823001", 
+      "nombre": "MONTE VERA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823834", 
+      "nombre": "SAN EUGENIO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823799", 
+      "nombre": "LARRECHEA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823022", 
+      "nombre": "SAN JOSÉ DEL  RINCÓN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823050", 
+      "nombre": "CULULÚ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824072", 
+      "nombre": "COLONIA BELGRANO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823183", 
+      "nombre": "RIVADAVIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823071", 
+      "nombre": "FELICIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141218", 
+      "nombre": "COLONIA VIGNAUD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "823260", 
+      "nombre": "SANTO DOMINGO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823106", 
+      "nombre": "ITUZAINGÓ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823057", 
+      "nombre": "ELISA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822007", 
+      "nombre": "BOUQUET", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822896", 
+      "nombre": "CLASON", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820070", 
+      "nombre": "RUFINO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822077", 
+      "nombre": "LOS MOLINOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823358", 
+      "nombre": "ALBARELLOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822455", 
+      "nombre": "GODOY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822063", 
+      "nombre": "CHAÑAR LADEADO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823365", 
+      "nombre": "ÁLVAREZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823351", 
+      "nombre": "ACEBAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824037", 
+      "nombre": "VILLA MUGUETA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823442", 
+      "nombre": "SOLDINI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824002", 
+      "nombre": "LUIS PALACIOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822917", 
+      "nombre": "OLIVEROS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822966", 
+      "nombre": "CABAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822679", 
+      "nombre": "MAGGIOLO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "625028", 
+      "nombre": "EL MANSO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "823463", 
+      "nombre": "ZAVALLA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620154", 
+      "nombre": "GRAL. FDEZ. ORO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "823393", 
+      "nombre": "CORONEL BOGADO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822910", 
+      "nombre": "LUCIO V. LÓPEZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823372", 
+      "nombre": "ALVEAR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820056", 
+      "nombre": "VILLA CONSTITUCIÓN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141099", 
+      "nombre": "NONO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "620266", 
+      "nombre": "MAQUINCHAO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620238", 
+      "nombre": "SIERRA GRANDE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620189", 
+      "nombre": "MINISTRO RAMOS MEXIA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "823715", 
+      "nombre": "ROMANG", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824009", 
+      "nombre": "PUJATO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620231", 
+      "nombre": "SAN ANTONIO OESTE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268028", 
+      "nombre": "DIQUE FLORENTINO AMEGHINO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "620049", 
+      "nombre": "LAMARQUE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620035", 
+      "nombre": "CORONEL BELISLE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620126", 
+      "nombre": "CINCO SALTOS", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620105", 
+      "nombre": "CATRIEL", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620210", 
+      "nombre": "RÌO COLORADO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625014", 
+      "nombre": "SAN JAVIER", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625189", 
+      "nombre": "SIERRA PAILEMAN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625105", 
+      "nombre": "PEÑAS BLANCAS", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268070", 
+      "nombre": "PASO DEL  SAPO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "625112", 
+      "nombre": "VALLE AZUL", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625042", 
+      "nombre": "VILLA LLANQUIN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625210", 
+      "nombre": "COMICO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625238", 
+      "nombre": "MAMUEL CHOIQUE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625056", 
+      "nombre": "EL CUY", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "260119", 
+      "nombre": "TRELEW", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260098", 
+      "nombre": "GAIMAN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260070", 
+      "nombre": "CORCOVADO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "420140", 
+      "nombre": "GENERAL CAMPOS", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420035", 
+      "nombre": "ARATA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425140", 
+      "nombre": "SARAH", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420105", 
+      "nombre": "CORONEL HILARIO LAGOS", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420301", 
+      "nombre": "QUEMÚ QUEMÚ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420350", 
+      "nombre": "TELÉN", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425147", 
+      "nombre": "SPELUZZI", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420217", 
+      "nombre": "LONQUIMAY", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420336", 
+      "nombre": "SANTA ROSA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425049", 
+      "nombre": "CHACHARRAMENDI", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425042", 
+      "nombre": "CUCHILLO CÓ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420021", 
+      "nombre": "ALTA ITALIA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420280", 
+      "nombre": "PUELCHES", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420315", 
+      "nombre": "REALICÓ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "140385", 
+      "nombre": "ALEJANDRO ROCA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140476", 
+      "nombre": "ALEJO LEDESMA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141421", 
+      "nombre": "ALMAFUERTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142133", 
+      "nombre": "ALTO DE LOS  QUEBRACHOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141176", 
+      "nombre": "ARROYITO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141596", 
+      "nombre": "BALLESTEROS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143169", 
+      "nombre": "CANDELARIA SUD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141610", 
+      "nombre": "BELL VILLE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140791", 
+      "nombre": "BULNES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140399", 
+      "nombre": "CARNERILLO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142476", 
+      "nombre": "CASA GRANDE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142616", 
+      "nombre": "CAÑADA DE MACHADO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140406", 
+      "nombre": "CHARRAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140287", 
+      "nombre": "CHAZÓN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143204", 
+      "nombre": "CHURQUI CAÑADA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142357", 
+      "nombre": "CIÉNAGA DEL  CORO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142280", 
+      "nombre": "COPACABANA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140812", 
+      "nombre": "CORONEL MOLDES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140518", 
+      "nombre": "CORRAL DE BUSTOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142763", 
+      "nombre": "LA RINCONADA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143211", 
+      "nombre": "EL RODEO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141246", 
+      "nombre": "EL TÍO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142448", 
+      "nombre": "LEGUIZAMÓN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142168", 
+      "nombre": "LA BATEA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142161", 
+      "nombre": "GUANACO MUERTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141449", 
+      "nombre": "HERNANDO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142812", 
+      "nombre": "IMPIRA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140112", 
+      "nombre": "JESÚS MARÍA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140567", 
+      "nombre": "LEONES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142182", 
+      "nombre": "LAS CAÑADAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142693", 
+      "nombre": "LAS GRAMILLAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142854", 
+      "nombre": "LAS RABONAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140441", 
+      "nombre": "LOS CISNES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142917", 
+      "nombre": "LOS HORNILLOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143190", 
+      "nombre": "LOS MISTOLES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140574", 
+      "nombre": "LOS SURGENTES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141673", 
+      "nombre": "MONTE LEÑA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140924", 
+      "nombre": "OBISPO TREJO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141050", 
+      "nombre": "ONCATIVO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141701", 
+      "nombre": "ORDÓÑEZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141484", 
+      "nombre": "PAMPAYASTA SUD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140931", 
+      "nombre": "PIQUILLÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142966", 
+      "nombre": "PLAZA LUXARDO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140378", 
+      "nombre": "QUILINO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143057", 
+      "nombre": "RAFAEL GARCÍA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140861", 
+      "nombre": "RÍO CUARTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141330", 
+      "nombre": "SACANTA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142343", 
+      "nombre": "SALADILLO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140056", 
+      "nombre": "SAN AGUSTÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142511", 
+      "nombre": "SAN ANTONIO DE ARREDONDO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141337", 
+      "nombre": "SAN FRANCISCO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141134", 
+      "nombre": "SAN JAVIER Y YACANTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142868", 
+      "nombre": "SAN LORENZO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140189", 
+      "nombre": "SAN MARCOS SIERRAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141358", 
+      "nombre": "TRÁNSITO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140469", 
+      "nombre": "UCACHA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140651", 
+      "nombre": "SERRANO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143197", 
+      "nombre": "SIMBOLAR", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141533", 
+      "nombre": "SINSACATE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140896", 
+      "nombre": "VICUÑA MACKENNA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141113", 
+      "nombre": "VILLA CURA BROCHERO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141148", 
+      "nombre": "VILLA DE LAS  ROSAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142441", 
+      "nombre": "VILLA DE POCHO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142077", 
+      "nombre": "VILLA AMANCAY", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141365", 
+      "nombre": "VILLA CONCEPCIÓN DEL  TÍO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142350", 
+      "nombre": "VILLA ELISA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140042", 
+      "nombre": "VILLA DEL  DIQUE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "746266", 
+      "nombre": "P. DE LOS  FUNES", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740028", 
+      "nombre": "SAN FRANCISCO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "140049", 
+      "nombre": "VILLA GENERAL BELGRANO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142301", 
+      "nombre": "VILLA GUTIÉRREZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "746273", 
+      "nombre": "SAN JERONIMO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "141120", 
+      "nombre": "VILLA SARMIENTO (S. A.)", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141582", 
+      "nombre": "VILLA TULUMBA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140070", 
+      "nombre": "VILLA YACANTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "746287", 
+      "nombre": "LAS VERTIENTES", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740140", 
+      "nombre": "SAN MARTIN", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746322", 
+      "nombre": "V, DE PRAGA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746091", 
+      "nombre": "SAN PABLO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740063", 
+      "nombre": "TILISARAO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746014", 
+      "nombre": "LA CALERA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746203", 
+      "nombre": "CARPINTERIA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908294", 
+      "nombre": "ESTACION ARAOZ Y TACANAS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "746126", 
+      "nombre": "JUAN LLERENA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740049", 
+      "nombre": "CONCARAN", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746077", 
+      "nombre": "PAPAGAYOS", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746273", 
+      "nombre": "SAN JERONIMO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "749007", 
+      "nombre": "LA PUNTA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746154", 
+      "nombre": "ARIZONA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "749182", 
+      "nombre": "FORTUNA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908210", 
+      "nombre": "TACO RALO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908567", 
+      "nombre": "AMAICHA DEL  VALLE", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908035", 
+      "nombre": "EL TIMBO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908595", 
+      "nombre": "ANCAJULI", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908602", 
+      "nombre": "EL CADILLAL", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908644", 
+      "nombre": "CEVIL REDONDO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908014", 
+      "nombre": "EL CHAÑAR", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908406", 
+      "nombre": "LEON ROUGES Y SANTA ROSA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908266", 
+      "nombre": "YANIMA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900084", 
+      "nombre": "MUNICIPALIDAD DE MONTEROS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900056", 
+      "nombre": "MUNICIPALIDAD DE JUAN BAUTISTA ALBERDI", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908224", 
+      "nombre": "COMUNA VILLA BELGRANO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908518", 
+      "nombre": "MONTEAGUDO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908462", 
+      "nombre": "EL POLEAR", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908189", 
+      "nombre": "TRINIDAD", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900119", 
+      "nombre": "MUNICIPALIDAD DE TAFI VIEJO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908028", 
+      "nombre": "EL PUESTITO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908161", 
+      "nombre": "ALPACHIRI Y EL MOLINO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908007", 
+      "nombre": "7 DE ABRIL", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908287", 
+      "nombre": "ESQUINA Y MANCOPA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908217", 
+      "nombre": "ESCABA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908252", 
+      "nombre": "SAN IGNACIO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908399", 
+      "nombre": "EL CERCADO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908420", 
+      "nombre": "RIO SECO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908546", 
+      "nombre": "SANTA CRUZ Y LA TUNA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900021", 
+      "nombre": "MUNICIPALIDAD DE ALDERETES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908588", 
+      "nombre": "RACO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908651", 
+      "nombre": "SAN JAVIER", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "386133", 
+      "nombre": "CIENEGUILLAS", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386140", 
+      "nombre": "CUSI CUSI", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386266", 
+      "nombre": "PUMAHUASI", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060644", 
+      "nombre": "PINAMAR", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "386189", 
+      "nombre": "PURMAMARCA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386161", 
+      "nombre": "CORANZULI", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380119", 
+      "nombre": "CAIMANCITO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "500021", 
+      "nombre": "GODOY CRUZ", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "380238", 
+      "nombre": "EL TALAR", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380140", 
+      "nombre": "LIBERTADOR GENERAL SAN MARTÍN", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380035", 
+      "nombre": "SAN SALVADOR DE JUJUY", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "660112", 
+      "nombre": "EL BORDO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660168", 
+      "nombre": "GUACHIPAS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "060420", 
+      "nombre": "LA COSTA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060721", 
+      "nombre": "SALLIQUELÓ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060819", 
+      "nombre": "TORNQUIST", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060805", 
+      "nombre": "TIGRE", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "660133", 
+      "nombre": "EMBARCACIÓN", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660343", 
+      "nombre": "SANTA VICTORIA ESTE", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660224", 
+      "nombre": "LA POMA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "460021", 
+      "nombre": "CASTRO BARROS", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "660105", 
+      "nombre": "CAMPO SANTO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100063", 
+      "nombre": "BELÉN", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "660021", 
+      "nombre": "GENERAL PIZARRO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "540315", 
+      "nombre": "LEONI", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "660042", 
+      "nombre": "CACHI", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "140322", 
+      "nombre": "LUCA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "100098", 
+      "nombre": "PUERTA DE CORRAL QUEMADO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100189", 
+      "nombre": "POMÁN", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100185", 
+      "nombre": "MUTQUÍN", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "220315", 
+      "nombre": "ENRIQUE URIEN", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220385", 
+      "nombre": "BARRANQUERAS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "100213", 
+      "nombre": "LOS ALTOS", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "460112", 
+      "nombre": "ROSARIO VERA PEÑALOZA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "060833", 
+      "nombre": "TRES ARROYOS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060655", 
+      "nombre": "PUNTA INDIO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060126", 
+      "nombre": "CAMPANA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "460105", 
+      "nombre": "INDEPENDENCIA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460084", 
+      "nombre": "GENERAL OCAMPO", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460028", 
+      "nombre": "CORONEL FELIPE VARELA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "220469", 
+      "nombre": "CHARADAI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "460042", 
+      "nombre": "CHILECITO", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460056", 
+      "nombre": "GENERAL ÁNGEL VICENTE PEÑALOZA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "700049", 
+      "nombre": "IGLESIA", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "823981", 
+      "nombre": "ALDAO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "700077", 
+      "nombre": "RAWSON", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700126", 
+      "nombre": "25 DE MAYO", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "500126", 
+      "nombre": "TUPUNGATO", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500007", 
+      "nombre": "CAPITAL", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "540224", 
+      "nombre": "LIBERTAD", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540168", 
+      "nombre": "SANTIAGO DE LINIERS", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "822343", 
+      "nombre": "SAN ANTONIO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "540070", 
+      "nombre": "CERRO CORA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540084", 
+      "nombre": "MARTIRES", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "220364", 
+      "nombre": "COLONIA BENITEZ", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "540483", 
+      "nombre": "ITACARUARE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540133", 
+      "nombre": "SANTA MARIA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "220378", 
+      "nombre": "QUITILIPI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "420322", 
+      "nombre": "ROLÓN", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "540042", 
+      "nombre": "CAMPO GRANDE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540329", 
+      "nombre": "RUIZ DE MONTOYA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540490", 
+      "nombre": "MOJON GRANDE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540189", 
+      "nombre": "SAN ANTONIO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540259", 
+      "nombre": "CERRO AZUL", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540518", 
+      "nombre": "COLONIA AURORA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540217", 
+      "nombre": "IGUAZU", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060588", 
+      "nombre": "9 DE JULIO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540294", 
+      "nombre": "CAPIOVI", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540182", 
+      "nombre": "COMANDANTE A. GUACURARY", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "580231", 
+      "nombre": "LAS LAJAS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580245", 
+      "nombre": "ZAPALA", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580217", 
+      "nombre": "PICÚN LEUFÚ", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585035", 
+      "nombre": "SANTO TOMÁS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585077", 
+      "nombre": "GUAÑACOS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580252", 
+      "nombre": "VILLA PEHUENIA", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580112", 
+      "nombre": "JUNÍN DE LOS  ANDES", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580007", 
+      "nombre": "ALUMINÉ", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585147", 
+      "nombre": "RAMÓN CASTRO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "142406", 
+      "nombre": "CHANCANÍ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "580070", 
+      "nombre": "PLOTTIER", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580147", 
+      "nombre": "HUINGANCO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580084", 
+      "nombre": "VILLA EL CHOCÓN", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580224", 
+      "nombre": "BAJADA DEL  AGRIO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580098", 
+      "nombre": "CHOS MALAL", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "822392", 
+      "nombre": "VILLA SAN JOSÉ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "585084", 
+      "nombre": "MANZANO AMARGO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585063", 
+      "nombre": "CHORRIACA", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585154", 
+      "nombre": "VILLA DEL  PUENTE PICÚN LEUFÚ", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585140", 
+      "nombre": "LOS CATUTOS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "220392", 
+      "nombre": "BASAIL", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220308", 
+      "nombre": "CORONEL DU GRATY", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220406", 
+      "nombre": "PUERTO VILELAS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220231", 
+      "nombre": "COLONIA POPULAR", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220350", 
+      "nombre": "SAN BERNARDO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220147", 
+      "nombre": "LAPACHITO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220140", 
+      "nombre": "LA ESCONDIDA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220427", 
+      "nombre": "VILLA BERTHET", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220105", 
+      "nombre": "GENERAL PINEDO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220056", 
+      "nombre": "LAS PALMAS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220049", 
+      "nombre": "LA LEONESA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "823750", 
+      "nombre": "CASALEGNO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823722", 
+      "nombre": "AROCENA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "220252", 
+      "nombre": "CIERVO PETISO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220021", 
+      "nombre": "PAMPA DEL  INFIERNO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220169", 
+      "nombre": "MISIÓN NUEVA POMPEYA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "822308", 
+      "nombre": "PLAZA CLUCELLAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180063", 
+      "nombre": "CURUZÚ CUATIÁ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180364", 
+      "nombre": "GUAVIRAVÍ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180301", 
+      "nombre": "TAPEBICUÁ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "822497", 
+      "nombre": "PAVÓN ARRIBA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822490", 
+      "nombre": "PAVÓN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "420154", 
+      "nombre": "GENERAL SAN MARTÍN", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "180417", 
+      "nombre": "COLONIA PANDO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180420", 
+      "nombre": "SAN ROQUE", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "822112", 
+      "nombre": "ANGÉLICA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823246", 
+      "nombre": "SANTA MARÍA CENTRO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180042", 
+      "nombre": "CONCEPCIÓN", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "823603", 
+      "nombre": "MOISÉS VILLE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180035", 
+      "nombre": "COLONIA SANTA ROSA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180448", 
+      "nombre": "SANTO TOMÉ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180434", 
+      "nombre": "GOBERNADOR ING. VALENTÍN VIRASORO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180392", 
+      "nombre": "SAN MIGUEL", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180077", 
+      "nombre": "EMPEDRADO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180175", 
+      "nombre": "SAN ANTONIO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180028", 
+      "nombre": "RIACHUELO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060707", 
+      "nombre": "SALADILLO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "180329", 
+      "nombre": "SAN COSME", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060308", 
+      "nombre": "GENERAL GUIDO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060014", 
+      "nombre": "ADOLFO GONZALES CHAVES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060539", 
+      "nombre": "MERLO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060532", 
+      "nombre": "MERCEDES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060760", 
+      "nombre": "SAN MIGUEL", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060469", 
+      "nombre": "LINCOLN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "822406", 
+      "nombre": "ZENÓN PEREYRA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "060784", 
+      "nombre": "SUIPACHA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060287", 
+      "nombre": "GENERAL ALVEAR", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060658", 
+      "nombre": "QUILMES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "822294", 
+      "nombre": "MARÍA JUANA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "060322", 
+      "nombre": "GENERAL LA MADRID", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060042", 
+      "nombre": "AYACUCHO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060294", 
+      "nombre": "GENERAL ARENALES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060679", 
+      "nombre": "RIVADAVIA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060602", 
+      "nombre": "PATAGONES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060084", 
+      "nombre": "BENITO JUÁREZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060175", 
+      "nombre": "COLÓN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060700", 
+      "nombre": "SAAVEDRA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060812", 
+      "nombre": "TORDILLO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060665", 
+      "nombre": "RAMALLO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "823862", 
+      "nombre": "ANGELONI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823953", 
+      "nombre": "SAN MART", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823939", 
+      "nombre": "RAMAYÓN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823484", 
+      "nombre": "AMBROSETTI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822259", 
+      "nombre": "GARIBALDI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "82119", 
+      "nombre": "VILLA OCAMPO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823547", 
+      "nombre": "HERSILIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822532", 
+      "nombre": "THEOBALD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823295", 
+      "nombre": "GREGORIA PÉREZ DE DENIS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820256", 
+      "nombre": "SAN GENARO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823337", 
+      "nombre": "SANTA MARGARITA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823288", 
+      "nombre": "GATO COLORADO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822763", 
+      "nombre": "ARROYO CEIBAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823330", 
+      "nombre": "SAN BERNARDO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823533", 
+      "nombre": "CURUPAITY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823582", 
+      "nombre": "LA RUBIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823505", 
+      "nombre": "COLONIA ANA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823498", 
+      "nombre": "CAPIVARA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823624", 
+      "nombre": "ÑANDUCITA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823561", 
+      "nombre": "LA CABRAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824100", 
+      "nombre": "LAS PETACAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823890", 
+      "nombre": "GOBERNADOR CRESPO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823673", 
+      "nombre": "VILLA SARALEGUI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822770", 
+      "nombre": "BERNA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822812", 
+      "nombre": "INGENIERO CHANOURDIE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823883", 
+      "nombre": "ESTHER", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823925", 
+      "nombre": "NARÉ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822840", 
+      "nombre": "LOS LAURELES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "425133", 
+      "nombre": "RUCANELO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "824051", 
+      "nombre": "CARLOS PELLEGRINI", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824107", 
+      "nombre": "LOS CARDOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823736", 
+      "nombre": "BERNARDO DE IRIGOYEN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823239", 
+      "nombre": "SANTA CLARA DE BUENA VISTA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822469", 
+      "nombre": "JUNCAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823211", 
+      "nombre": "SAN CARLOS SUD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823232", 
+      "nombre": "SAN MARIANO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820168", 
+      "nombre": "SAN CARLOS CENTRO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "425112", 
+      "nombre": "PICHI HUINCA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "820154", 
+      "nombre": "SANTO TOMÉ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823176", 
+      "nombre": "PUJATO NORTE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823064", 
+      "nombre": "EMPALME SAN CARLOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820161", 
+      "nombre": "ESPERANZA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822567", 
+      "nombre": "SANTA ROSA DE CALCHINES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823267", 
+      "nombre": "SARMIENTO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "140980", 
+      "nombre": "CALCHÍN OESTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "823092", 
+      "nombre": "HIPATÍA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823162", 
+      "nombre": "PROGRESO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822196", 
+      "nombre": "COLONIA RAQUEL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820140", 
+      "nombre": "LAGUNA PAIVA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820021", 
+      "nombre": "LAS ROSAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822014", 
+      "nombre": "MONTES DE OCA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820133", 
+      "nombre": "TOTORAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822504", 
+      "nombre": "PEYRANO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "142056", 
+      "nombre": "LUTTI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822427", 
+      "nombre": "CAÑADA RICA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822042", 
+      "nombre": "BERABEVÚ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823995", 
+      "nombre": "FUENTES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822462", 
+      "nombre": "JUAN BERNABÉ MOLINA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823379", 
+      "nombre": "ARMINDA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822665", 
+      "nombre": "LABORDEBOY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822602", 
+      "nombre": "CARMEN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822658", 
+      "nombre": "LA CHISPA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822686", 
+      "nombre": "MARÍA TERESA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820126", 
+      "nombre": "CAÑADA DE GÓMEZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "260049", 
+      "nombre": "COMODORO RIVADAVIA", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "82210", 
+      "nombre": "ROSARIO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "625154", 
+      "nombre": "ARROYO VENTANA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "820217", 
+      "nombre": "VILLA GOBERNADOR GÁLVEZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141694", 
+      "nombre": "NOETINGER", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "620252", 
+      "nombre": "ING. JACOBACCI", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620224", 
+      "nombre": "PILCANIYEU", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620007", 
+      "nombre": "GUARDIA MITRE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620168", 
+      "nombre": "INGENIERO HUERGO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625182", 
+      "nombre": "NAHUEL NIYEU", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625175", 
+      "nombre": "CHIPAUQUIL", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625168", 
+      "nombre": "AGUADA CECILIO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625147", 
+      "nombre": "ARROYO LOS  BERROS", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268147", 
+      "nombre": "DR. ATILIO OSCAR VIGLIONE", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "625259", 
+      "nombre": "PRAHUANIYEU", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "420364", 
+      "nombre": "TOMÁS MANUEL ANCHORENA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "625203", 
+      "nombre": "COLAN CONHUÉ", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625098", 
+      "nombre": "NAUPA HUEN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620014", 
+      "nombre": "VIEDMA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "260147", 
+      "nombre": "GOBERNADOR COSTA", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "420343", 
+      "nombre": "SANTA TERESA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420231", 
+      "nombre": "MACACHÍN", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420294", 
+      "nombre": "QUEHUÉ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420098", 
+      "nombre": "CONHELO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420210", 
+      "nombre": "LA MARUJA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420126", 
+      "nombre": "EMBAJADOR MARTINI", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420329", 
+      "nombre": "SANTA ISABEL", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420224", 
+      "nombre": "LUAN TORO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420133", 
+      "nombre": "GENERAL ACHA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425154", 
+      "nombre": "UNANUE", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425084", 
+      "nombre": "LIMAY MAHUIDA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "142007", 
+      "nombre": "AMBOY", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142833", 
+      "nombre": "AMBUL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140483", 
+      "nombre": "ARIAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142259", 
+      "nombre": "AVELLANEDA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141617", 
+      "nombre": "BENJAMÍN GOULD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142994", 
+      "nombre": "BOUWER", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142742", 
+      "nombre": "CHAÑAR VIEJO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142336", 
+      "nombre": "COLONIA BARGE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143239", 
+      "nombre": "COLONIA BREMEN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140098", 
+      "nombre": "COLONIA TIROLESA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140805", 
+      "nombre": "CORONEL BAIGORRIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142147", 
+      "nombre": "CRUZ DE CAÑA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141225", 
+      "nombre": "DEVOTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141232", 
+      "nombre": "EL ARAÑADO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142154", 
+      "nombre": "EL BRETE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140294", 
+      "nombre": "ETRURIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140847", 
+      "nombre": "LAS VERTIENTES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140546", 
+      "nombre": "GUATIMOZÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140427", 
+      "nombre": "HUANCHILLA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140686", 
+      "nombre": "HUERTA GRANDE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140238", 
+      "nombre": "JOVITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140826", 
+      "nombre": "LA CAUTIVA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143183", 
+      "nombre": "LA PAMPA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141127", 
+      "nombre": "LA PAZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142385", 
+      "nombre": "LA PLAYA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140315", 
+      "nombre": "LA PLAYOSA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140245", 
+      "nombre": "MATTALDI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141547", 
+      "nombre": "LAS ARRIAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142028", 
+      "nombre": "LAS BAJADAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142413", 
+      "nombre": "LAS PALMAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142287", 
+      "nombre": "LOS POZOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142203", 
+      "nombre": "MEDIA NARANJA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141036", 
+      "nombre": "MANFREDI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141302", 
+      "nombre": "MIRAMAR", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140588", 
+      "nombre": "MONTE BUEY", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140854", 
+      "nombre": "MONTE DE LOS  GAUCHOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141680", 
+      "nombre": "MONTE MAÍZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140448", 
+      "nombre": "OLAETA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142210", 
+      "nombre": "PASO VIEJO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142714", 
+      "nombre": "PLAZA DE MERCEDES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142777", 
+      "nombre": "PUESTO DE CASTRO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143162", 
+      "nombre": "PUNTA DEL  AGUA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142784", 
+      "nombre": "RAYO CORTADO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140455", 
+      "nombre": "REDUCCIÓN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140147", 
+      "nombre": "RÍO CEBALLOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140602", 
+      "nombre": "SAN CARLOS MINAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142427", 
+      "nombre": "SAN GERÓNIMO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142875", 
+      "nombre": "SAN VICENTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140462", 
+      "nombre": "SANTA EUFEMIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140035", 
+      "nombre": "SANTA ROSA DE CALAMUCHITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141351", 
+      "nombre": "SEEBER", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141498", 
+      "nombre": "TANCACHA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142434", 
+      "nombre": "TALA CAÑADA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142525", 
+      "nombre": "TALA HUASI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140889", 
+      "nombre": "TOSQUITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140168", 
+      "nombre": "UNQUILLO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141736", 
+      "nombre": "VIAMONTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140175", 
+      "nombre": "VILLA ALLENDE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143092", 
+      "nombre": "VILLA LA BOLSA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141085", 
+      "nombre": "VILLA DEL  ROSARIO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140952", 
+      "nombre": "VILLA FONTANA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "746035", 
+      "nombre": "CAROLINA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "141540", 
+      "nombre": "VILLA DEL  TOTORAL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140252", 
+      "nombre": "VILLA HUIDOBRO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143106", 
+      "nombre": "VILLA PARQUE SANTA ANA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142532", 
+      "nombre": "VILLA PARQUE SIQUIMAN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140658", 
+      "nombre": "VILLA ROSSI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140945", 
+      "nombre": "SANTA ROSA DE RÍO PRIMERO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140259", 
+      "nombre": "VILLA VALERIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140021", 
+      "nombre": "LOS CÓNDORES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "746189", 
+      "nombre": "NAVIA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740077", 
+      "nombre": "VILLA MERCEDES", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746231", 
+      "nombre": "ALTO PELADO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746238", 
+      "nombre": "ALTO PENCOSO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746308", 
+      "nombre": "LAS LAGUNAS", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746084", 
+      "nombre": "RENCA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746028", 
+      "nombre": "V, DE LA QUEBRADA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746224", 
+      "nombre": "TALITA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746105", 
+      "nombre": "VILLA LARCA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746210", 
+      "nombre": "LAFINUR", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908497", 
+      "nombre": "BUENA VISTA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "746196", 
+      "nombre": "NUEVA GALIA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908616", 
+      "nombre": "LOS NOGALES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908105", 
+      "nombre": "LA FLORIDA Y LUISIANA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908371", 
+      "nombre": "SAN PABLO Y VILLA NOUGUES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908259", 
+      "nombre": "SAN JOSE DE LA COCHA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900112", 
+      "nombre": "MUNICIPALIDAD DE LAS  TALITAS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908483", 
+      "nombre": "SANTA ANA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908553", 
+      "nombre": "VILLA DE CHICLIGASTA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908196", 
+      "nombre": "MEDINA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908182", 
+      "nombre": "GASTONA Y BELICHA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908392", 
+      "nombre": "CAPITAN CACERES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908441", 
+      "nombre": "SOLDADO MALDONADO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908301", 
+      "nombre": "LAS TALAS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908336", 
+      "nombre": "RIO COLORADO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908448", 
+      "nombre": "TENIENTE BERDINA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908581", 
+      "nombre": "EL MOLLAR", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908469", 
+      "nombre": "LOS SARMIENTO Y LA TIPA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908476", 
+      "nombre": "MONTE BELLO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908084", 
+      "nombre": "DELFIN GALLO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "820277", 
+      "nombre": "VENADO TUERTO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "386147", 
+      "nombre": "SANTA CATALINA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386245", 
+      "nombre": "BARRIOS", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060518", 
+      "nombre": "MAR CHIQUITA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "386259", 
+      "nombre": "EL CÓNDOR", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386175", 
+      "nombre": "HUACALERA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380091", 
+      "nombre": "EL AGUILAR", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386224", 
+      "nombre": "SAN FRANCISCO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386203", 
+      "nombre": "VOLCÁN", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386119", 
+      "nombre": "EL PIQUETE", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386084", 
+      "nombre": "SAN ANTONIO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386112", 
+      "nombre": "ROSARIO DE RÍO GRANDE", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "660007", 
+      "nombre": "APOLINARIO SARAVIA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660182", 
+      "nombre": "ISLA DE CAÑAS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660259", 
+      "nombre": "EL GALPÓN", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "386049", 
+      "nombre": "PUESTO VIEJO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060196", 
+      "nombre": "CORONEL PRINGLES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "660294", 
+      "nombre": "COLONIA SANTA ROSA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660245", 
+      "nombre": "SAN ANTONIO DE LOS  COBRES", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660280", 
+      "nombre": "RÍO PIEDRAS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660378", 
+      "nombre": "ANGASTACO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660126", 
+      "nombre": "AGUARAY", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660413", 
+      "nombre": "SANTA VICTORIA OESTE", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660301", 
+      "nombre": "HIPÓLITO YRIGOYEN", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100056", 
+      "nombre": "ANTOFAGASTA DE LA SIERRA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100224", 
+      "nombre": "FIAMBALÁ", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "660070", 
+      "nombre": "SAN LORENZO", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100105", 
+      "nombre": "PUERTA DE SAN JOSÉ", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100077", 
+      "nombre": "HUALFÍN", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100119", 
+      "nombre": "VILLA VIL", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "660315", 
+      "nombre": "SAN RAMÓN DE LA NUEVA ORÁN", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660098", 
+      "nombre": "EL CARRIL", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660336", 
+      "nombre": "RIVADAVIA BANDA SUR", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "100147", 
+      "nombre": "EL ALTO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "060351", 
+      "nombre": "GENERAL PINTO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "100161", 
+      "nombre": "FRAY MAMERTO ESQUIÚ", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "060742", 
+      "nombre": "SAN CAYETANO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060189", 
+      "nombre": "CORONEL DORREGO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060218", 
+      "nombre": "CHASCOMÚS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "100154", 
+      "nombre": "TAPSO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "700028", 
+      "nombre": "SAN JUAN", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700063", 
+      "nombre": "9 DE JULIO", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "500028", 
+      "nombre": "GUAYMALLÉN", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500084", 
+      "nombre": "RIVADAVIA", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500105", 
+      "nombre": "SAN RAFAEL", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "540273", 
+      "nombre": "OBERNADOR LOPEZ", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "220077", 
+      "nombre": "PRESIDENCIA ROQUE SÁENZ PEÑA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "540350", 
+      "nombre": "PIRAY", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540154", 
+      "nombre": "ELDORADO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "220042", 
+      "nombre": "ISLA DEL  CERRITO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "540056", 
+      "nombre": "BOMPPLAND", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "822336", 
+      "nombre": "SAGUIER", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "540021", 
+      "nombre": "SAN JOSE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "420077", 
+      "nombre": "CATRILÓ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "540252", 
+      "nombre": "CAA-YARI", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060119", 
+      "nombre": "BRANDSEN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540476", 
+      "nombre": "AMEGHINO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540511", 
+      "nombre": "ALBA POSSE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540203", 
+      "nombre": "SAN VICENTE", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "180091", 
+      "nombre": "PUEBLO LIBERTADOR", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180273", 
+      "nombre": "MONTE CASEROS", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060147", 
+      "nombre": "CARLOS CASARES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060609", 
+      "nombre": "PEHUAJÓ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540322", 
+      "nombre": "PUERTO RICO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540196", 
+      "nombre": "EL SOBERBIO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540049", 
+      "nombre": "DOS DE MAYO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "585014", 
+      "nombre": "AGUADA SAN ROQUE", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585133", 
+      "nombre": "COVUNCO ABAJO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "540091", 
+      "nombre": "ROFUNDIDAD", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "580196", 
+      "nombre": "BARRANCAS", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580140", 
+      "nombre": "ANDACOLLO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580077", 
+      "nombre": "SENILLOSA", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "425014", 
+      "nombre": "AGUSTONI", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "585070", 
+      "nombre": "VILLA TRAFUL", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "060049", 
+      "nombre": "AZUL", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "580063", 
+      "nombre": "PLAZA HUINCUL", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580105", 
+      "nombre": "TRICAO MALAL", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585091", 
+      "nombre": "VARVARCO - INVERNADA VIEJA", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "585042", 
+      "nombre": "SAUZAL BONITO", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580133", 
+      "nombre": "VILLA LA ANGOSTURA", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "220413", 
+      "nombre": "RESISTENCIA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "824184", 
+      "nombre": "LOS AMORES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "220098", 
+      "nombre": "GENERAL CAPDEVILA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220462", 
+      "nombre": "COTE LAI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "822126", 
+      "nombre": "AURELIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "220154", 
+      "nombre": "LA VERDE", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220343", 
+      "nombre": "LA TIGRA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220217", 
+      "nombre": "CAMPO LARGO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220113", 
+      "nombre": "CORZUELA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "140273", 
+      "nombre": "ARROYO CABRAL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "220070", 
+      "nombre": "PUERTO EVA PERÓN", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220224", 
+      "nombre": "NAPENAY", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220014", 
+      "nombre": "LOS FRENTONES", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220182", 
+      "nombre": "JUAN JOSÉ CASTELLI", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220203", 
+      "nombre": "VILLA RÍO BERMEJITO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220294", 
+      "nombre": "PRESIDENCIA ROCA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220287", 
+      "nombre": "PAMPA DEL  INDIO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220175", 
+      "nombre": "FUERTE ESPERANZA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "180280", 
+      "nombre": "BONPLAND", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180294", 
+      "nombre": "PASO DE LOS  LIBRES", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180189", 
+      "nombre": "CRUZ DE LOS  MILAGROS", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180399", 
+      "nombre": "9 DE JULIO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180245", 
+      "nombre": "MERCEDES", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180007", 
+      "nombre": "BELLA VISTA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180441", 
+      "nombre": "JOSE RAFAEL GOMEZ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180315", 
+      "nombre": "SAN LORENZO", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180133", 
+      "nombre": "PALMAR GRANDE", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180343", 
+      "nombre": "HERLITZKA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060441", 
+      "nombre": "LA PLATA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "180014", 
+      "nombre": "BERÓN DE ASTRADA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180336", 
+      "nombre": "SANTA ANA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180266", 
+      "nombre": "MOCORETÁ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060455", 
+      "nombre": "LAS FLORES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "180168", 
+      "nombre": "ITUZAINGÓ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060735", 
+      "nombre": "SAN ANTONIO DE ARECO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060427", 
+      "nombre": "LA MATANZA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060056", 
+      "nombre": "BAHÍA BLANCA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060875", 
+      "nombre": "VILLARINO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060648", 
+      "nombre": "PRESIDENTE PERÓN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060266", 
+      "nombre": "EXALTACIÓN DE LA CRUZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060371", 
+      "nombre": "GENERAL SAN MARTÍN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "823610", 
+      "nombre": "MONIGOTES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "060270", 
+      "nombre": "EZEIZA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060840", 
+      "nombre": "TRES DE FEBRERO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060021", 
+      "nombre": "ALBERTI", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060483", 
+      "nombre": "LOBOS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060630", 
+      "nombre": "PILA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060134", 
+      "nombre": "CAÑUELAS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060798", 
+      "nombre": "TAPALQUÉ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060231", 
+      "nombre": "DAIREAUX", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060847", 
+      "nombre": "TRES LOMAS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060770", 
+      "nombre": "SAN PEDRO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060277", 
+      "nombre": "FLORENTINO AMEGHINO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "823876", 
+      "nombre": "COLONIA DOLORES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823708", 
+      "nombre": "LA BRAVA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822553", 
+      "nombre": "HELVECIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822693", 
+      "nombre": "MELINCUÉ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822546", 
+      "nombre": "COLONIA MASCIAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824163", 
+      "nombre": "GOLONDRINA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824023", 
+      "nombre": "SAN JERÓNIMO SUD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823526", 
+      "nombre": "CONSTANZA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822861", 
+      "nombre": "TACUARENDÍ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822875", 
+      "nombre": "VILLA GUILLERMINA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823645", 
+      "nombre": "SAN GUILLERMO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823575", 
+      "nombre": "LA LUCILA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823316", 
+      "nombre": "MONTEFIORE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823897", 
+      "nombre": "LA CAMILA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "260077", 
+      "nombre": "ESQUEL", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "820329", 
+      "nombre": "CALCHAQUÍ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822168", 
+      "nombre": "CASTELLANOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824198", 
+      "nombre": "TARTAGAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822847", 
+      "nombre": "NICANOR MOLINAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823869", 
+      "nombre": "CAYASTACITO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822833", 
+      "nombre": "LAS GARZAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824156", 
+      "nombre": "GARABATO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822378", 
+      "nombre": "TACURALES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822231", 
+      "nombre": "EUSEBIA Y CAROLINA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822203", 
+      "nombre": "CORONEL FRAGA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820322", 
+      "nombre": "SASTRE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820294", 
+      "nombre": "ROLDÁN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824114", 
+      "nombre": "MARÍA SUSANA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620175", 
+      "nombre": "MAINQUE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "823204", 
+      "nombre": "SAN CARLOS NORTE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823148", 
+      "nombre": "NUEVO TORINO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823225", 
+      "nombre": "SAN JERÓNIMO NORTE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823036", 
+      "nombre": "CAVOUR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822252", 
+      "nombre": "GALISTEO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822952", 
+      "nombre": "ARROYO AGUIAR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823274", 
+      "nombre": "SOUTOMAYOR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "142098", 
+      "nombre": "COLONIA VICENTE AGÜERO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142805", 
+      "nombre": "COLONIA VIDELA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "823085", 
+      "nombre": "GRUTLY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822287", 
+      "nombre": "LEHMANN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822966", 
+      "nombre": "CABAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823169", 
+      "nombre": "PROVIDENCIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823113", 
+      "nombre": "JACINTO L. ARAUZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822301", 
+      "nombre": "MAUA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822154", 
+      "nombre": "COLONIA BICHA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820049", 
+      "nombre": "SUNCHALES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822903", 
+      "nombre": "CORREA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822413", 
+      "nombre": "ALCORTA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822483", 
+      "nombre": "M9XIMO PAZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141029", 
+      "nombre": "LUQUE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "820007", 
+      "nombre": "ARMSTRONG", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822924", 
+      "nombre": "PUEBLO ANDINO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141435", 
+      "nombre": "CORRALITO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822448", 
+      "nombre": "GENERAL GELLY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822525", 
+      "nombre": "SARGENTO CABRAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823470", 
+      "nombre": "CORONEL DOMÍNGUEZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822028", 
+      "nombre": "AREQUITO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822035", 
+      "nombre": "ARTEAGA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823435", 
+      "nombre": "PUEBLO MUÑOZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141043", 
+      "nombre": "MATORRALES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822623", 
+      "nombre": "CHOVET", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822707", 
+      "nombre": "MURPHY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822105", 
+      "nombre": "VILLADA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822420", 
+      "nombre": "BOMBAL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820084", 
+      "nombre": "VILLA CAÑÁS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822070", 
+      "nombre": "GÖDEKEN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822721", 
+      "nombre": "SAN FRANCISCO DE SANTA FE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822700", 
+      "nombre": "MIGUEL TORRES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620133", 
+      "nombre": "CIPOLLETTI", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "822616", 
+      "nombre": "CHAPUY", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822518", 
+      "nombre": "SANTA TERESA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822889", 
+      "nombre": "CARRIZALES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "82287", 
+      "nombre": "PUERTO GENERAL SAN MARTÍN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820280", 
+      "nombre": "FRAY LUIS BELTRÁN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820266", 
+      "nombre": "CAPITÁN BERMÚDEZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823414", 
+      "nombre": "IBARLUCEA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "265021", 
+      "nombre": "PASO DE INDIOS", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "823428", 
+      "nombre": "PUEBLO ESTHER", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620203", 
+      "nombre": "ÑORQUINCO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620070", 
+      "nombre": "EL BOLSON", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268098", 
+      "nombre": "DOCTOR RICARDO ROJAS", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268105", 
+      "nombre": "FACUNDO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "620091", 
+      "nombre": "ALLEN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620147", 
+      "nombre": "GRAL. ENRIQUE GODOY", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268112", 
+      "nombre": "LAGO BLANCO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "625035", 
+      "nombre": "PASO FLORES", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625217", 
+      "nombre": "CLEMENTE ONELLI", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625119", 
+      "nombre": "RINCON DE TRENETA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625224", 
+      "nombre": "EL CAIN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "260161", 
+      "nombre": "RÍO PICO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260021", 
+      "nombre": "EL HOYO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260028", 
+      "nombre": "EL MAITÉN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260035", 
+      "nombre": "EPUYÉN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260014", 
+      "nombre": "CHOLILA", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260007", 
+      "nombre": "PUERTO MADRYN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260105", 
+      "nombre": "TECKA", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260112", 
+      "nombre": "RAWSON", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "425091", 
+      "nombre": "LOVENTUÉ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420070", 
+      "nombre": "CARRO QUEMADO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420042", 
+      "nombre": "ATALIVA ROCA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420056", 
+      "nombre": "BERNASCONI", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420245", 
+      "nombre": "METILEO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420378", 
+      "nombre": "URIBURU", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425105", 
+      "nombre": "PERÚ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420147", 
+      "nombre": "GENERAL PICO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425070", 
+      "nombre": "GOBERNADOR DUVAL", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425063", 
+      "nombre": "FALUCHO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420028", 
+      "nombre": "ANGUIL", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "140770", 
+      "nombre": "ALCIRA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143232", 
+      "nombre": "ANA ZUMARÁN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142308", 
+      "nombre": "ASSUNTA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141183", 
+      "nombre": "BALNEARIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141624", 
+      "nombre": "CANALS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141190", 
+      "nombre": "BRINKMANN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142469", 
+      "nombre": "CABALANGO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140490", 
+      "nombre": "CAMILO ALDAO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142623", 
+      "nombre": "CAPILLA DE LOS  REMEDIOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140987", 
+      "nombre": "CAPILLA DEL  CARMEN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140994", 
+      "nombre": "CARRILOBO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141631", 
+      "nombre": "CHILIBROSTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142273", 
+      "nombre": "CHUÑA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143127", 
+      "nombre": "CHUÑA HUASI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141638", 
+      "nombre": "CINTRA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142959", 
+      "nombre": "COLONIA VALTELINA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140091", 
+      "nombre": "COLONIA CAROYA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140182", 
+      "nombre": "CRUZ DEL  EJE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141442", 
+      "nombre": "DALMACIO VÉLEZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140371", 
+      "nombre": "DEÁN FUNES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142371", 
+      "nombre": "ESTANCIA DE GUADALUPE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141253", 
+      "nombre": "FREYRE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142756", 
+      "nombre": "GÜTEMBERG", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141652", 
+      "nombre": "IDIAZABAL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140560", 
+      "nombre": "ISLA VERDE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140434", 
+      "nombre": "LA CARLOTA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140014", 
+      "nombre": "LA CRUZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143015", 
+      "nombre": "LA CUMBRECITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143036", 
+      "nombre": "LA SERRANITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142847", 
+      "nombre": "LAS CALLES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143148", 
+      "nombre": "LAS ISLETILLAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141463", 
+      "nombre": "LAS PERDICES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142196", 
+      "nombre": "LOS CHAÑARITOS (C.D. EJE)", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142903", 
+      "nombre": "LAS TAPIAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141281", 
+      "nombre": "LAS VARAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141288", 
+      "nombre": "LAS VARILLAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142770", 
+      "nombre": "LOS HOYOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141393", 
+      "nombre": "MALAGUEÑO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140581", 
+      "nombre": "MARCOS JUÁREZ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141687", 
+      "nombre": "MORRISON", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141400", 
+      "nombre": "MONTE RALO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142294", 
+      "nombre": "OLIVARES DE SAN NICOLÁS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143050", 
+      "nombre": "POTRERO DE GARAY", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142245", 
+      "nombre": "RANQUELES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140938", 
+      "nombre": "RÍO PRIMERO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143218", 
+      "nombre": "ROSARIO DEL  SALADILLO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142721", 
+      "nombre": "SAGRADA FAMILIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140154", 
+      "nombre": "SALDÁN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140609", 
+      "nombre": "SALSACATE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140161", 
+      "nombre": "SALSIPUEDES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140868", 
+      "nombre": "SAMPACHO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140875", 
+      "nombre": "SAN BASILIO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141414", 
+      "nombre": "SAN FRANCISCO DEL  CHAÑAR", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141575", 
+      "nombre": "SAN PEDRO NORTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141078", 
+      "nombre": "SANTIAGO TEMPLE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142882", 
+      "nombre": "SAUCE ARRIBA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140959", 
+      "nombre": "SEBASTIÁN ELCANO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142392", 
+      "nombre": "TALAINI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140336", 
+      "nombre": "SILVIO PELLICO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140350", 
+      "nombre": "TÍO PUJIO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142973", 
+      "nombre": "TORO PUJIO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142399", 
+      "nombre": "TOSNO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143071", 
+      "nombre": "VALLE DE ANISACATE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142539", 
+      "nombre": "VILLA SANTA CRUZ DEL  LAGO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142602", 
+      "nombre": "WASHINGTON", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "746133", 
+      "nombre": "LA PUNILLA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746259", 
+      "nombre": "EL VOLCAN", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746252", 
+      "nombre": "BEAZLEY", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740108", 
+      "nombre": "DESAGUADERO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746070", 
+      "nombre": "CORTADERAS", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740007", 
+      "nombre": "CANDELARIA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908560", 
+      "nombre": "MUNICIPALIDAD DE YERBA BUENA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908315", 
+      "nombre": "LOS PUESTOS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "746007", 
+      "nombre": "LEANDRO N. ALEM", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740038", 
+      "nombre": "ESTANCIA GRANDE", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "900133", 
+      "nombre": "YERBA BUENA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "740070", 
+      "nombre": "JUSTO DARACT", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746063", 
+      "nombre": "SALADILLO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746161", 
+      "nombre": "BAGUAL", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "749119", 
+      "nombre": "JUAN JORBA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746140", 
+      "nombre": "LAVAISSE", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908609", 
+      "nombre": "LA ESPERANZA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908574", 
+      "nombre": "COLALAO DEL  VALLE", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908147", 
+      "nombre": "RANCHILLOS Y SAN MIGUEL", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908273", 
+      "nombre": "AGUA DULCE Y LA SOLEDAD", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908063", 
+      "nombre": "BENJAMIN ARAOZ Y EL TAJAMAR", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908042", 
+      "nombre": "GARMENDIA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908112", 
+      "nombre": "LAS CEJAS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908077", 
+      "nombre": "COLOMBRES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900014", 
+      "nombre": "MUNICIPALIDAD DE SAN MIGUEL DE TUCUMAN", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900035", 
+      "nombre": "MUNICIPALIDAD DE CONCEPCION", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908175", 
+      "nombre": "ARCADIA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908329", 
+      "nombre": "QUILMES Y LOS  SUELDOS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908308", 
+      "nombre": "LOS GOMEZ", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908091", 
+      "nombre": "EL BRACHO Y EL CEVILAR", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908098", 
+      "nombre": "EL NARANJITO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908511", 
+      "nombre": "MANUELA PEDRAZA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900091", 
+      "nombre": "MUNICIPALIDAD DE AGUILARES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "620133", 
+      "nombre": "CIPOLLETTI", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "380406", 
+      "nombre": "LA QUIACA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060280", 
+      "nombre": "GENERAL ALVARADO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "386070", 
+      "nombre": "MINA PIRQUITAS", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386063", 
+      "nombre": "TRES CRUCES", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380329", 
+      "nombre": "TILCARA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386231", 
+      "nombre": "SANTA ANA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "386196", 
+      "nombre": "TUMBAYA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380245", 
+      "nombre": "PALMA SOLA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380154", 
+      "nombre": "PALPALÁ", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380196", 
+      "nombre": "LA ESPERANZA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "060336", 
+      "nombre": "GENERAL LAVALLE", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060505", 
+      "nombre": "MAGDALENA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060672", 
+      "nombre": "RAUCH", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "386105", 
+      "nombre": "RODEÍTO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380252", 
+      "nombre": "SANTA CLARA", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380056", 
+      "nombre": "EL CARMEN", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "380077", 
+      "nombre": "PERICO", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "660147", 
+      "nombre": "GENERAL MOSCONI", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660399", 
+      "nombre": "LOS TOLDOS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660189", 
+      "nombre": "LA CALDERA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660175", 
+      "nombre": "IRUYA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "460098", 
+      "nombre": "VINCHINA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "540280", 
+      "nombre": "LEANDRO N. ALEM", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "380224", 
+      "nombre": "SAN PEDRO DE JUJUY", 
+      "provincia_id": "38"
+    }, 
+    {
+      "id": "100238", 
+      "nombre": "VALLE VIEJO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100091", 
+      "nombre": "POZO DE PIEDRA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "540343", 
+      "nombre": "MONTECARLO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "660028", 
+      "nombre": "JOAQUÍN V. GONZÁLEZ", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660063", 
+      "nombre": "SALTA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660196", 
+      "nombre": "VAQUEROS", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660014", 
+      "nombre": "EL QUEBRACHAL", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "660371", 
+      "nombre": "ROSARIO DE LERMA", 
+      "provincia_id": "66"
+    }, 
+    {
+      "id": "580119", 
+      "nombre": "SAN MARTÍN DE LOS  ANDES", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "100210", 
+      "nombre": "SANTA MARÍA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100049", 
+      "nombre": "ANDALGALÁ", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100028", 
+      "nombre": "LOS VARELA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100021", 
+      "nombre": "LAS JUNTAS", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100007", 
+      "nombre": "EL RODEO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100217", 
+      "nombre": "SANTA ROSA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100175", 
+      "nombre": "RECREO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100126", 
+      "nombre": "CAPAYÁN", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100140", 
+      "nombre": "SAN FERNANDO DEL  VALLE DE CATAMARCA", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100070", 
+      "nombre": "CORRAL QUEMADO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "460007", 
+      "nombre": "ARAUCO", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460077", 
+      "nombre": "GENERAL LAMADRID", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "100168", 
+      "nombre": "ICAÑO", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "100182", 
+      "nombre": "PACLÍN", 
+      "provincia_id": "10"
+    }, 
+    {
+      "id": "823519", 
+      "nombre": "COLONIA ROSA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "540448", 
+      "nombre": "HIPOLITO IRIGOYEN", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "460091", 
+      "nombre": "GENERAL SAN MARTÍN", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460049", 
+      "nombre": "FAMATINA", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "460119", 
+      "nombre": "SAN BLAS DE LOS  SAUCES", 
+      "provincia_id": "46"
+    }, 
+    {
+      "id": "822329", 
+      "nombre": "RAMONA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "700098", 
+      "nombre": "SANTA LUCÍA", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700070", 
+      "nombre": "POCITO", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700105", 
+      "nombre": "SARMIENTO", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700035", 
+      "nombre": "CAUCETE", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "700021", 
+      "nombre": "CALINGASTA", 
+      "provincia_id": "70"
+    }, 
+    {
+      "id": "500042", 
+      "nombre": "LA PAZ", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500070", 
+      "nombre": "MAIPÚ", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500014", 
+      "nombre": "GENERAL ALVEAR", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500091", 
+      "nombre": "SAN CARLOS", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500049", 
+      "nombre": "LAS HERAS", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "500077", 
+      "nombre": "MALARGÜE", 
+      "provincia_id": "50"
+    }, 
+    {
+      "id": "540161", 
+      "nombre": "9 DE JULIO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540077", 
+      "nombre": "LORETO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540469", 
+      "nombre": "ANTO PIPO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540427", 
+      "nombre": "CORPUS", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "220301", 
+      "nombre": "TRES ISLETAS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "822357", 
+      "nombre": "SANTA CLARA DE SAGUIER", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "140798", 
+      "nombre": "CHAJÁN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "540063", 
+      "nombre": "CANDELARIA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540126", 
+      "nombre": "CONCEOCION DE LA  SIERRA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540385", 
+      "nombre": "GUARANI", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060392", 
+      "nombre": "GENERAL VILLEGAS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060168", 
+      "nombre": "CASTELLI", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "220441", 
+      "nombre": "COLONIAS ELISA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "540525", 
+      "nombre": "25 DE MAYO", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "220448", 
+      "nombre": "COLONIAS UNIDAS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "180259", 
+      "nombre": "JUAN PUJOL", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "540434", 
+      "nombre": "ENERAL J.J. URQUIZA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540413", 
+      "nombre": "SAN MARTIN", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540301", 
+      "nombre": "EL ALCAZAR", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "540119", 
+      "nombre": "POSADAS", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "060826", 
+      "nombre": "TRENQUE LAUQUEN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060301", 
+      "nombre": "GENERAL BELGRANO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "540007", 
+      "nombre": "APOSTOLES", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "580210", 
+      "nombre": "RINCÓN DE LOS  SAUCES", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580035", 
+      "nombre": "PIEDRA DEL  ÁGUILA", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580161", 
+      "nombre": "LOS MICHES", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580126", 
+      "nombre": "LONCOPUÉ", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "060595", 
+      "nombre": "OLAVARRÍA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "585056", 
+      "nombre": "VILLA CURI LEUVÚ", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "580049", 
+      "nombre": "CUTRAL CÓ", 
+      "provincia_id": "58"
+    }, 
+    {
+      "id": "141204", 
+      "nombre": "COLONIA PROSPERIDAD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "549999", 
+      "nombre": "VILLA LAGO MELIQUINA", 
+      "provincia_id": "54"
+    }, 
+    {
+      "id": "220126", 
+      "nombre": "SANTA SYLVINA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220112", 
+      "nombre": "HERMOSO CAMPO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220322", 
+      "nombre": "VILLA ÁNGELA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220399", 
+      "nombre": "FONTANA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "141309", 
+      "nombre": "MORTEROS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "220254", 
+      "nombre": "PUERTO TIROL", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "141211", 
+      "nombre": "COLONIA SAN BARTOLOMÉ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "220091", 
+      "nombre": "GANCEDO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220084", 
+      "nombre": "CHARATA", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220266", 
+      "nombre": "LA EDUVIGIS", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220259", 
+      "nombre": "GRAL. SAN MARTENGENERAL SAN MARTÍN\r\nGENERAL SAN MARTÍN\r\nGENERAL SAN MARTÍN\r\nGENERAL SAN MARTÍN", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "220168", 
+      "nombre": "EL SAUZALITO", 
+      "provincia_id": "22"
+    }, 
+    {
+      "id": "180252", 
+      "nombre": "COLONIA LIBERTAD", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180287", 
+      "nombre": "PARADA PUCHETA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180378", 
+      "nombre": "YAPEYÚ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180203", 
+      "nombre": "LAVALLE", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180231", 
+      "nombre": "FELIPE YOFRÉ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180137", 
+      "nombre": "CAROLINA", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "824044", 
+      "nombre": "CAÑADA ROSQUÍN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180098", 
+      "nombre": "ALVEAR", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180371", 
+      "nombre": "LA CRUZ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180049", 
+      "nombre": "TABAY", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "822175", 
+      "nombre": "COLONIA CELLO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "180224", 
+      "nombre": "MBURUCUYÁ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180119", 
+      "nombre": "ITÁ IBATÉ", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "180350", 
+      "nombre": "SAN LUIS DEL  PALMAR", 
+      "provincia_id": "18"
+    }, 
+    {
+      "id": "060686", 
+      "nombre": "ROJAS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060252", 
+      "nombre": "ESCOBAR", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060343", 
+      "nombre": "GENERAL PAZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060412", 
+      "nombre": "JOSÉ C. PAZ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060315", 
+      "nombre": "GENERAL JUAN MADARIAGA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060007", 
+      "nombre": "ADOLFO ALSINA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060651", 
+      "nombre": "PUÁN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060077", 
+      "nombre": "ARRECIFES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060161", 
+      "nombre": "CARMEN DE ARECO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060728", 
+      "nombre": "SAN ANDRÉS DE GILES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060515", 
+      "nombre": "MALVINAS ARGENTINAS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060408", 
+      "nombre": "HURLINGHAM", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060560", 
+      "nombre": "MORÓN", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060410", 
+      "nombre": "ITUZAINGÓ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060490", 
+      "nombre": "LOMAS DE ZAMORA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060274", 
+      "nombre": "FLORENCIO VARELA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060112", 
+      "nombre": "BRAGADO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "420112", 
+      "nombre": "DOBLAS", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "060399", 
+      "nombre": "GUAMINÍ", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060182", 
+      "nombre": "CORONEL DE MARINA LEONARDO ROSALES", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060070", 
+      "nombre": "BARADERO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060756", 
+      "nombre": "SAN ISIDRO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "823974", 
+      "nombre": "VIDELA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "060553", 
+      "nombre": "MONTE HERMOSO", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060476", 
+      "nombre": "LOBERÍA", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "060763", 
+      "nombre": "SAN NICOLÁS", 
+      "provincia_id": "06"
+    }, 
+    {
+      "id": "820245", 
+      "nombre": "CORONDA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822938", 
+      "nombre": "SERODINO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "420273", 
+      "nombre": "PARERA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "820098", 
+      "nombre": "LAS TOSCAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822854", 
+      "nombre": "SAN ANTONIO DE OBLIGADO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823491", 
+      "nombre": "ARRUFO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822140", 
+      "nombre": "BELLA ITALIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823477", 
+      "nombre": "AGUARÁ GRANDE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823638", 
+      "nombre": "PORTUGALETE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823967", 
+      "nombre": "VERA Y PINTADO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822217", 
+      "nombre": "ESMERALDA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820175", 
+      "nombre": "TOSTADO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "260133", 
+      "nombre": "RÍO MAYO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "822266", 
+      "nombre": "HUGENTOBLER", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820238", 
+      "nombre": "SAN JAVIER", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820315", 
+      "nombre": "SAN JORGE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824058", 
+      "nombre": "CASAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824121", 
+      "nombre": "PIAMONTE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823218", 
+      "nombre": "SAN JERÓNIMO DEL  SAUCE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823771", 
+      "nombre": "DÍAZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823029", 
+      "nombre": "SAUCE VIEJO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820147", 
+      "nombre": "SANTA FE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823253", 
+      "nombre": "SANTA MARÍA NORTE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822959", 
+      "nombre": "ARROYO LEYES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "140973", 
+      "nombre": "CALCHÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "820144", 
+      "nombre": "RECREO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822539", 
+      "nombre": "CAYASTÁ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822973", 
+      "nombre": "CAMPO ANDINO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820203", 
+      "nombre": "PÉREZ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822945", 
+      "nombre": "VILLA ELOÍSA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823008", 
+      "nombre": "NELSON", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822994", 
+      "nombre": "LLAMBI CAMPBELL", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823120", 
+      "nombre": "LA PELADA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822273", 
+      "nombre": "HUMBERTO PRIMO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822399", 
+      "nombre": "VIRGINIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822630", 
+      "nombre": "CHRISTOPHERSEN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822581", 
+      "nombre": "AMENÁBAR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822021", 
+      "nombre": "TORTUGAS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822672", 
+      "nombre": "LAZZARINO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822637", 
+      "nombre": "DIEGO DE ALVEAR", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823981", 
+      "nombre": "ALDAO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141008", 
+      "nombre": "COSTASACATE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822434", 
+      "nombre": "CEPEDA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "420161", 
+      "nombre": "GUATRACHÉ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "822091", 
+      "nombre": "SAN JOSÉ DE LA ESQUINA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822441", 
+      "nombre": "EMPALME VILLA CONSTITUCIÓN", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822098", 
+      "nombre": "SANFORD", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "141295", 
+      "nombre": "MARULL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "822084", 
+      "nombre": "LOS QUIRQUINCHOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820273", 
+      "nombre": "CARCARAÑÁ", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820063", 
+      "nombre": "FIRMAT", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822588", 
+      "nombre": "CAFFERATA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "822735", 
+      "nombre": "SANCTI SPIRITU", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "824030", 
+      "nombre": "TIMBÚES", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820301", 
+      "nombre": "SAN LORENZO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "260063", 
+      "nombre": "CAMARONES", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "823407", 
+      "nombre": "GENERAL LAGOS", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "820182", 
+      "nombre": "ARROYO SECO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823456", 
+      "nombre": "VILLA AMELIA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "823400", 
+      "nombre": "FIGHIERA", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "625231", 
+      "nombre": "LAGUNA BLANCA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "822791", 
+      "nombre": "EL SOMBRERITO", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "620259", 
+      "nombre": "LOS MENUCOS", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620245", 
+      "nombre": "VALCHETA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620196", 
+      "nombre": "SIERRA COLORADA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268021", 
+      "nombre": "CERRO CENTINELA", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "824016", 
+      "nombre": "RICARDONE", 
+      "provincia_id": "82"
+    }, 
+    {
+      "id": "268063", 
+      "nombre": "COLAN CONHUÉ", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268014", 
+      "nombre": "CUSHAMEN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "620063", 
+      "nombre": "POMONA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620056", 
+      "nombre": "LUIS BELTRAN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620042", 
+      "nombre": "DARWIN", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620119", 
+      "nombre": "CHICHINALES", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "268126", 
+      "nombre": "GAN GAN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "620140", 
+      "nombre": "CONTRALMIRANTE CORDERO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620098", 
+      "nombre": "CAMPO GRANDE", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "620182", 
+      "nombre": "VILLA REGINA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "265007", 
+      "nombre": "GUALJAINA", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268042", 
+      "nombre": "LAGUNITA SALADA", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268077", 
+      "nombre": "LAS PLUMAS", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "625161", 
+      "nombre": "CONA NIYEU", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "625245", 
+      "nombre": "OJOS DE AGUA", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "425126", 
+      "nombre": "RELMO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "625266", 
+      "nombre": "RIO CHICO", 
+      "provincia_id": "62"
+    }, 
+    {
+      "id": "260042", 
+      "nombre": "LAGO PUELO", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268049", 
+      "nombre": "ALDEA EPULEF", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260154", 
+      "nombre": "JOSÉ DE SAN MARTÍN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "268133", 
+      "nombre": "TELSEN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "260084", 
+      "nombre": "TREVELÍN", 
+      "provincia_id": "26"
+    }, 
+    {
+      "id": "420007", 
+      "nombre": "ABRAMO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420371", 
+      "nombre": "TRENEL", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420357", 
+      "nombre": "TOAY", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420266", 
+      "nombre": "MONTE NIEVAS", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420091", 
+      "nombre": "COLONIA BARÓN", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420014", 
+      "nombre": "ALPACHIRI", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420182", 
+      "nombre": "JACINTO ARAUZ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420189", 
+      "nombre": "LA ADELA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425028", 
+      "nombre": "COLONIA SANTA MARÍA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "425077", 
+      "nombre": "LA REFORMA", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420385", 
+      "nombre": "VEINTICINCO DE MAYO", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "420392", 
+      "nombre": "VÉRTIZ", 
+      "provincia_id": "42"
+    }, 
+    {
+      "id": "140756", 
+      "nombre": "ACHIRAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140763", 
+      "nombre": "ADELIA MARÍA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141162", 
+      "nombre": "ALICIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140777", 
+      "nombre": "ALPA CORRAL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141372", 
+      "nombre": "ALTA GRACIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141169", 
+      "nombre": "ALTOS DE CHIPIÓN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142987", 
+      "nombre": "ANISACATE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142840", 
+      "nombre": "ARROYO LOS  PATOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141603", 
+      "nombre": "BALLESTEROS SUD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142140", 
+      "nombre": "BAÑADO DE SOTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140392", 
+      "nombre": "BENGOLEA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140784", 
+      "nombre": "BERROTARÁN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140665", 
+      "nombre": "BIALET MASSÉ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140504", 
+      "nombre": "CAVANAGH", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141512", 
+      "nombre": "CAÑADA DE LUQUE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141001", 
+      "nombre": "COLAZO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141645", 
+      "nombre": "COLONIA BISMARCK", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140511", 
+      "nombre": "COLONIA ITALIANA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142637", 
+      "nombre": "COLONIA LAS  CUATRO ESQUINAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142945", 
+      "nombre": "COLONIA LAS  PICHANAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142889", 
+      "nombre": "CONLARA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140525", 
+      "nombre": "CRUZ ALTA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142490", 
+      "nombre": "CUESTA BLANCA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140217", 
+      "nombre": "DEL CAMPILLO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141379", 
+      "nombre": "DESPEÑADEROS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142651", 
+      "nombre": "DIEGO DE ROJAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143001", 
+      "nombre": "DIQUE CHICO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142364", 
+      "nombre": "EL CHACHO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141239", 
+      "nombre": "EL FORTÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142315", 
+      "nombre": "EL RASTREADOR", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142497", 
+      "nombre": "ESTANCIA VIEJA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143141", 
+      "nombre": "GENERAL FOTHERINGHAM", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140616", 
+      "nombre": "GENERAL LEVALLE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140301", 
+      "nombre": "LA LAGUNA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140224", 
+      "nombre": "HUINCA RENANCÓ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141456", 
+      "nombre": "JAMES CRAIK", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140623", 
+      "nombre": "LA CESIRA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141267", 
+      "nombre": "LA PAQUITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140693", 
+      "nombre": "LA CUMBRE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142679", 
+      "nombre": "LA POSTA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142686", 
+      "nombre": "LA QUINTA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143029", 
+      "nombre": "LA RANCHERITA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140700", 
+      "nombre": "LA FALDA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141260", 
+      "nombre": "LA FRANCIA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142175", 
+      "nombre": "LA HIGUERA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140308", 
+      "nombre": "LA PALESTINA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143043", 
+      "nombre": "LOS CEDROS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141666", 
+      "nombre": "LABORDE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141015", 
+      "nombre": "LAGUNA LARGA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140833", 
+      "nombre": "LAS ACEQUIAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141022", 
+      "nombre": "LAS JUNTURAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142574", 
+      "nombre": "LAS PEÑAS SUD", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142189", 
+      "nombre": "LAS PLAYAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142819", 
+      "nombre": "LOS CHAÑARITOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142420", 
+      "nombre": "LOS TALARES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141470", 
+      "nombre": "LOS ZORROS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141386", 
+      "nombre": "LOZADA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142581", 
+      "nombre": "MALENA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140637", 
+      "nombre": "MELO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140133", 
+      "nombre": "MALVINAS ARGENTINAS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142707", 
+      "nombre": "MAQUINISTA GALLINI", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142119", 
+      "nombre": "MI GRANJA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141477", 
+      "nombre": "OLIVA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142322", 
+      "nombre": "PACHECO DE MELO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140329", 
+      "nombre": "PASCO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141057", 
+      "nombre": "PILAR", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141316", 
+      "nombre": "PORTEÑA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141064", 
+      "nombre": "POZO DEL  MOLLE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141323", 
+      "nombre": "QUEBRACHO HERRADO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142826", 
+      "nombre": "RINCÓN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142455", 
+      "nombre": "RÍO BAMBA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140028", 
+      "nombre": "RÍO DE LOS  SAUCES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141722", 
+      "nombre": "SAN ANTONIO DE LITÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141141", 
+      "nombre": "SAN JOSÉ", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142063", 
+      "nombre": "SAN IGNACIO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142462", 
+      "nombre": "SAN JOAQUÍN", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141106", 
+      "nombre": "SAN PEDRO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142518", 
+      "nombre": "SAN ROQUE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142791", 
+      "nombre": "SANTA ELENA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142217", 
+      "nombre": "TUCLAME", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141526", 
+      "nombre": "SARMIENTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142798", 
+      "nombre": "VILLA CANDELARIA NORTE", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142588", 
+      "nombre": "SUCO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140966", 
+      "nombre": "VILLA DE MARÍA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142126", 
+      "nombre": "VILLA CERRO AZUL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140203", 
+      "nombre": "VILLA DE SOTO", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "141155", 
+      "nombre": "VILLA DOLORES", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "749999", 
+      "nombre": "LOS CAJONES", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "143099", 
+      "nombre": "VILLA LOS  AROMOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "143246", 
+      "nombre": "VILLA LOS  PATOS", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140364", 
+      "nombre": "VILLA NUEVA", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "140063", 
+      "nombre": "VILLA RUMIPAL", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "142252", 
+      "nombre": "VILLA SARMIENTO (G.R.)", 
+      "provincia_id": "14"
+    }, 
+    {
+      "id": "740014", 
+      "nombre": "LUJAN", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740021", 
+      "nombre": "QUINES", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740119", 
+      "nombre": "JUANA KOSLAY", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746042", 
+      "nombre": "EL TRAPICHE", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746049", 
+      "nombre": "FRAGA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746168", 
+      "nombre": "BATAVIA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740073", 
+      "nombre": "RANQUELES", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746245", 
+      "nombre": "BALDE", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746294", 
+      "nombre": "LAS AGUADAS", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908133", 
+      "nombre": "LOS PEREZ", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "746217", 
+      "nombre": "LOS MOLLES", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740042", 
+      "nombre": "LA TOMA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "900098", 
+      "nombre": "MUNICIPALIDAD DE SIMOCA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "740091", 
+      "nombre": "UNION", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "740084", 
+      "nombre": "BUENA ESPERANZA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746147", 
+      "nombre": "ANCHORENA", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "746112", 
+      "nombre": "SAN JOSE DEL  MORRO", 
+      "provincia_id": "74"
+    }, 
+    {
+      "id": "908364", 
+      "nombre": "SAN FELIPE Y SANTA BARBARA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908021", 
+      "nombre": "EL NARANJO Y EL SUNCHAL", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908623", 
+      "nombre": "CHOROMORO", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900126", 
+      "nombre": "MUNICIPALIDAD DE TRANCAS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908140", 
+      "nombre": "LOS RALOS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908056", 
+      "nombre": "LA RAMADA Y LA CRUZ", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908455", 
+      "nombre": "VILLA QUINTEROS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908049", 
+      "nombre": "GDOR. PIEDRABUENA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900070", 
+      "nombre": "MUNICIPALIDAD DE BELLA VISTA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908343", 
+      "nombre": "SANTA ROSA DE LEALES Y L. BLANCA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908119", 
+      "nombre": "LOS BULACIOS Y LOS  VILLAGRAS", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908154", 
+      "nombre": "SAN ANDRES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908238", 
+      "nombre": "HUASA PAMPA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900063", 
+      "nombre": "MUNICIPALIDAD DE LA COCHA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908378", 
+      "nombre": "ACHERAL", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900077", 
+      "nombre": "MUNICIPALIDAD DE LULES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900042", 
+      "nombre": "MUNICIPALIDAD DE FAMAILLA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "900105", 
+      "nombre": "MUNICIPALIDAD DE TAFI DEL  VALLE", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908504", 
+      "nombre": "CIUDACITA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908434", 
+      "nombre": "SARGENTO MOYA", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "908385", 
+      "nombre": "AMBERES", 
+      "provincia_id": "90"
+    }, 
+    {
+      "id": "580077", 
+      "nombre": "SENILLOSA", 
+      "provincia_id": "58"
+    }
+  ]
+}

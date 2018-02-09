@@ -72,13 +72,13 @@ $(document).ready(function () {
 
     var initDistrictSelect = function(selectedProvince) {
         $.ajax({
-            url: '/spatial/localidades?provincia_id=' + selectedProvince,
+            url: '/spatial/municipios?provincia_id=' + selectedProvince,
         }).done(function(data) {
             var select = $("#district-field");
             var currentValue = select.val();
             var districts = {};
     
-            districts.results = $.map(data.localidades, function (obj) {
+            districts.results = $.map(data.municipios, function (obj) {
                 obj.text = obj.text || obj.nombre;
                 obj.selected = currentValue == obj.code
     

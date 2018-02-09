@@ -56,6 +56,8 @@ class GobArRouter:
             m.connect('provinces', '/spatial/provincias', action='provincias'),
             m.connect('districts', '/spatial/localidades', action='localidades'),
             m.connect('districts', '/spatial/localidades/{province_id}', action='localidades'),
+            m.connect('districts', '/spatial/municipios', action='municipios'),
+            m.connect('districts', '/spatial/municipios/{province_id}', action='municipios'),
 
 
     def connect_datasets(self):
