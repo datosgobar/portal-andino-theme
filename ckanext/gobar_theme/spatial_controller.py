@@ -37,7 +37,7 @@ class GobArSpatialController(BaseController):
             return json.dumps(districts)
 
     def localidades(self):
-        return __local_administrative_unit('localidades.json', 'localidades')
+        return self.__local_administrative_unit('localidades.json', 'localidades')
 
     def municipios(self):
-        return __local_administrative_unit('municipios.json', 'municipios')
+        return self.__local_administrative_unit('municipios.json', 'municipios')
