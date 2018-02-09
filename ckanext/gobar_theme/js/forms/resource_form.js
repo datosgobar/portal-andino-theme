@@ -44,7 +44,7 @@ $(function () {
                 description: attributeGroupEl.find('.resource-col-descrition').val(),
                 type: (attributeGroupEl.find('.resource-col-type').val() || ''),
             };
-            if ($.isNumeric(attributeGroup.type)) {
+            if (typeIsNumeric(attributeGroup.type)) {
                 attributeGroup.unit = attributeGroupEl.find('.resource-col-unit').val()
             }
             var fieldId = attributeGroupEl.find('.resource-col-id').val();
