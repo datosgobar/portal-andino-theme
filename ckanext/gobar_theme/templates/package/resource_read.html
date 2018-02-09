@@ -2,6 +2,11 @@
 
 {% block subtitle %} - {{ c.resource.name }}{% endblock %}
 
+{%- block styles -%}
+    {{ super() }}
+    {%- resource 'gobar_css/table.css' -%}
+{%- endblock -%}
+
 {% set pkg = c.pkg_dict or pkg_dict %}
 {% set res = c.resource %}
 
