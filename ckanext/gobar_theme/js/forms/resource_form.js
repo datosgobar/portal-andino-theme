@@ -54,12 +54,20 @@ $(function () {
             var attributeGroup = {
                 title: attributeGroupEl.find('.resource-col-name').val(),
                 description: attributeGroupEl.find('.resource-col-description').val(),
-                type: (attributeGroupEl.find('.resource-col-type').val() || ''),
-                unit: attributeGroupEl.find('.resource-col-unit').val(),
-                id: (attributeGroupEl.find('.resource-col-id').val() || ''),
-                specialType: (attributeGroupEl.find('.resource-col-special-data').val() || ''),
-                specialTypeDetail: (attributeGroupEl.find('.resource-col-special-data-detail').val() || ''),
+                type: (attributeGroupEl.find('.resource-col-type').val() || '')
             };
+
+            var updateAttributesIfValueExist = function(attributeGroup, attributeName, selector) {
+                var value = (attributeGroupEl.find(slector).val() || '');
+                if (value != null && value != '') {
+                    attributeGroup[attributeName] = value;
+                }
+            }
+
+            updateAttributesIfValueExist(attributeGroup, 'units', '.resource-col-units');
+            updateAttributesIfValueExist(attributeGroup, 'id', '.resource-col-id');
+            updateAttributesIfValueExist(attributeGroup, 'specialType', '.resource-col-special-data');
+            updateAttributesIfValueExist(attributeGroup, 'specialTypeDetail', '.resource-col-special-data-detail');
 
             if (attributeGroup.title.length > 0 || attributeGroup.type.length > 0 || attributeGroup.description.length > 0) {
                 attributes.push(attributeGroup);
@@ -85,10 +93,10 @@ $(function () {
             var attributeGroupEl = $(attributesGroups[i]);
 
             // Avanzados
-            var unit = attributeGroupEl.find('.resource-col-unit').val();
+            var units = attributeGroupEl.find('.resource-col-units').val();
             var id = (attributeGroupEl.find('.resource-col-id').val() || '');
 
-            if (hasValue(unit) || hasValue(id)) {
+            if (hasValue(units) || hasValue(id)) {
                 // Muestro el form y oculto el botón
                 attributeGroupEl.find('.add-extra-fields-advanced').hide();
                 attributeGroupEl.find('.resource-col-advanced-container').show();
