@@ -1,6 +1,12 @@
 $(function () {
     var TIME_INDEX_SPECIAL_TYPE = 'time_index';
 
+    var resetColumnHeadersCounter = function() {
+        $('.resource-attributes-header > div').each(function(index) {
+            $( this ).text('Columna ' + (index + 1));
+        });
+    }
+
     var resetAdvancedAndSpecialButtonsAndInputs = function(parent) {
         parent.find('.add-extra-fields-advanced').show();
         parent.find('.resource-col-advanced-container').hide();
@@ -14,6 +20,8 @@ $(function () {
         resetAdvancedAndSpecialButtonsAndInputs(newCol);
 
         $('.resource-attributes-actions').before(newCol);
+
+        resetColumnHeadersCounter();
     });
 
     $(document).on('change', '.resource-col-special-data', function(e) {
@@ -36,6 +44,8 @@ $(function () {
                 colToRemove.remove()
             }
         }
+
+        resetColumnHeadersCounter();
     });
 
     $(document).on('click', '.add-extra-fields-advanced', function (e) {
@@ -91,6 +101,8 @@ $(function () {
 
     var init = function() {
         // Inicializa el formulario (los medatatos de campo)
+        resetColumnHeadersCounter();
+
         var attributesGroups = $('.resource-attributes-group');
 
         var hasValue = function(thing) {
