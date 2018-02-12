@@ -2,6 +2,11 @@
 
 {% block subtitle %} - {{ c.resource.name }}{% endblock %}
 
+{%- block styles -%}
+    {{ super() }}
+    {%- resource 'gobar_css/table.css' -%}
+{%- endblock -%}
+
 {% set pkg = c.pkg_dict or pkg_dict %}
 {% set res = c.resource %}
 
@@ -98,6 +103,8 @@
                         {% endif %}
                     {% endif %}
                 </div>
+
+                {% snippet "package/snippets/resource_attributes_table.html", res=res %}
 
                 {% set has_more_resources = pkg.resources and pkg.resources|length > 1 %}
 

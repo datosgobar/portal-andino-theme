@@ -1,8 +1,8 @@
 <div id="resource-attributes-form">
     <div class="control-group control-full">
-        <h2 class="blue">Documentación del recurso</h2>
+        <h2 class="blue">Documentación de los campos del recurso</h2>
         <p>
-            Usá esta sección para contarle a los usuarios del recurso qué información pueden encontrar en cada campo y como usarla.
+            Usá esta sección para contarle a los usuarios del recurso qué información pueden encontrar en cada campo y cómo usarla.
         </p>
     </div>
 
@@ -12,21 +12,24 @@
     {% for attribute_group in attributes %}
         <div class="resource-attributes-group">
             <div class="control-group control-full">
+                <div class="resource-attributes-header">
+                    <div>Columna</div>
+                    <i class="icon-remove remove-col"></i>
+                </div>
 
-                <i class="icon-remove remove-col"></i>
-
-                <div class="col-xs-6 resource-attributes-title-container">
+                <div class="col-xs-6 resource-attributes-input-container">
                     <label class="control-label">Título de la columna</label>
                     <div class="controls">
                         <input class="resource-col-name" type="text" title="Título de la columna"
                                placeholder="Ej: audiencia_fecha" value="{{ attribute_group['title'] }}">
                     </div>
+                    <div class="resource-attributes-input-disclaimer">Te recomendamos no superar los 40 caracteres</div>
                 </div>
-
-                <div class="col-xs-6 other-resource-attributes-container">
+                
+                <div class="col-xs-6 resource-attributes-input-container">
                     <label class="control-label">Tipo de dato</label>
                     <div class="controls">
-                        <select class="resource-col-type">
+                        <select class="resource-attributes-input-col-type resource-col-type">
                             {% set selected_type = attribute_group['type'] %}
                             <option {{ 'selected=true' if not selected_type or selected_type|length == 0 }}
                                     disabled="disabled">Ej.: date
@@ -37,25 +40,79 @@
                             {% endfor %}
                         </select>
                     </div>
+                </div>
 
-                    <div class="resource-attributes-unit-container {{ 'hidden' if not h.type_is_numeric(selected_type) }}">
-                        <label class="control-label">Unidad</label>
-                        <div class="controls">
-                            <input class="resource-col-unit" type="text" title="Unidad"
-                                   placeholder="" value="{{ attribute_group['unit'] }}">
-                        </div>
+                <div class="col-xs-12 resource-attributes-input-container">
+                    <label class="control-label">Descripción de la columna</label>
+                    <textarea title="Descripción de la columna" class="resource-col-description"
+                                placeholder="Ej: Fecha en la que se hizo una audiencia pública."
+                    rows="5">{{ attribute_group.description }}</textarea>
+                    
+                    <div class="resource-attributes-input-disclaimer">Por favor, no superes los 200 caracteres.</div>
+                </div>
+
+                <div class="col-xs-12 resource-attributes-input-container resource-col-advanced-container">
+                    <h3 class="blue">Campos avanzados</h3>
+                    <div class="resource-attributes-input-disclaimer">Desde aquí puedes agregarle la unidad de medida y un identificador a la columna. Estos campos son opcionales.</div>
+                </div>
+
+                <div class="col-xs-6 resource-attributes-input-container resource-col-advanced-container">
+                    <label class="control-label">Unidad</label>
+                    <div class="controls">
+                        <input class="resource-col-units" type="text" title="Unidad"
+                                placeholder="Ej: Pesos de 1995" value="{{ attribute_group['units'] }}">
                     </div>
+                </div>
 
+                <div class="col-xs-6 resource-attributes-input-container resource-col-advanced-container">
                     <label class="control-label">Identificador</label>
                     <div class="controls">
                         <input class="resource-col-id" type="text" title="Identificador"
-                               placeholder="" value="{{ attribute_group['id'] }}">
+                                placeholder="Ej: PBI_1" value="{{ attribute_group['id'] }}">
                     </div>
+                </div>
 
-                    <label class="control-label">Descripción de la columna</label>
-                    <textarea title="Descripción de la columna" class="resource-col-descrition"
-                              placeholder="Ej: Fecha en la que se hizo una audiencia pública."
-                    rows="5">{{ attribute_group.description }}</textarea>
+                <div class="col-xs-12 resource-attributes-input-container resource-col-special-data-container">
+                    <h3 class="blue">Campos especiales</h3>
+                    <div class="resource-attributes-input-disclaimer">Desde aquí puedes agregar un tipo de dato especial (como un índice de tiempo) y su detalle. Estos campos son opcionales.</div>
+                </div>
+
+                <div class="col-xs-6 resource-attributes-input-container resource-col-special-data-container">
+                    <label class="control-label">Tipo de dato especial</label>
+                    <div class="controls">
+                        {% set selected_special_type = attribute_group['specialType'] %}
+                        {% set time_index_value = "time_index" %}
+                        <select class="resource-col-special-data">
+                            <option></option>
+                            <option value="time_index" {{ 'selected' if time_index_value == selected_special_type }}>Indice de tiempo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 resource-attributes-input-container resource-col-special-data-container">
+                    <label class="control-label">Detalle del tipo de dato especial</label>
+                    <div class="controls">
+                        {% set frequencies = h.update_frequencies() %}
+                        {% set selected_freq = attribute_group['specialTypeDetail'] %}
+                        <select class="resource-col-special-data-detail" {{ 'disabled' if time_index_value != selected_special_type }}>
+                            <option {{ 'selected=true' if not selected_freq or selected_freq|length == 0 }}></option>
+                            {% for frequencie in frequencies %}
+                                <option value="{{ frequencie[0] }}" {{ 'selected' if frequencie[0] == selected_freq }}>{{ frequencie[1].decode('utf-8') }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 resource-attributes-input-container add-extra-fields-advanced">
+                    <div class="add-extra-fields">
+                        + Agregar campos avanzados
+                    </div>
+                </div>
+
+                <div class="col-xs-6 resource-attributes-input-container add-extra-fields-special">
+                    <div class="add-extra-fields">
+                        + Agregar campos especiales
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +124,22 @@
 
     <input id="attributes-description" type="hidden"
            name="attributesDescription" value="{{ data['attributesDescription'] }}">
+
+    <div id="delete-col-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1>Eliminar columna</h1>
+                    <div>¿Estás seguro que deseas eliminar la columna?</div>
+                    <div class="modal-actions">
+                        <button class="btn" type="button" data-dismiss="modal">CANCELAR</button>
+                        <button class="btn btn-danger" type="button" data-dismiss="modal" id="delete-col-btn">ELIMINAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
 </div>
 
 {% resource 'gobar_js/forms/resource_form.js' %}
