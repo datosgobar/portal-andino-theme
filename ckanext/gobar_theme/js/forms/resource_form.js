@@ -1,10 +1,18 @@
 $(function () {
     var TIME_INDEX_SPECIAL_TYPE = 'time_index';
 
+    var resetAdvancedAndSpecialButtonsAndInputs = function(parent) {
+        parent.find('.add-extra-fields-advanced').show();
+        parent.find('.resource-col-advanced-container').hide();
+        parent.find('.add-extra-fields-special').show();
+        parent.find('.resource-col-special-data-container').hide();
+    }
+
     $('#add-col').on('click', function () {
         var newCol = $($('.resource-attributes-group')[0]).clone();
         newCol.find('input, select, textarea').val('');
-        // TODO: Ocultar avanzados y especiales
+        resetAdvancedAndSpecialButtonsAndInputs(newCol);
+
         $('.resource-attributes-actions').before(newCol);
     });
 
@@ -23,7 +31,7 @@ $(function () {
             var isTheOnlyOne = $('.resource-attributes-group').length == 1;
             if (isTheOnlyOne) {
                 colToRemove.find('input, select, textarea').val('');
-                // TODO: Ocultar avanzados y especiales
+                resetAdvancedAndSpecialButtonsAndInputs(colToRemove);
             } else {
                 colToRemove.remove()
             }
@@ -58,7 +66,7 @@ $(function () {
             };
 
             var updateAttributesIfValueExist = function(attributeGroup, attributeName, selector) {
-                var value = (attributeGroupEl.find(slector).val() || '');
+                var value = (attributeGroupEl.find(selector).val() || '');
                 if (value != null && value != '') {
                     attributeGroup[attributeName] = value;
                 }
