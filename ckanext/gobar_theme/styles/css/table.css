@@ -21,15 +21,14 @@
 
 .header-fixed > tbody {
     overflow-y: auto;
-    height: 400px;
-}
-
-.header-fixed > thead {
-    padding-right: 15px;
+    max-height: 400px;
 }
 
 .header-fixed > tbody > tr > td,
 .header-fixed > thead > tr > th {
     width: 14.25%;
     float: left;
+}
+.header-fixed.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #ebf9ff;
 }

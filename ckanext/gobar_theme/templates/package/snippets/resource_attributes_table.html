@@ -3,12 +3,9 @@
 {% set hasAtLeastOneId = h.attributes_has_at_least_one('id', attributes) %}
 
 {% if attributes|length > 0 %}
-<div>
-    <h2 class="title-h">Metadatos de este recurso</h2>
+<h2 class="title-h">Metadatos de este recurso</h2>
 
-    <div class="h500">
-        <table id="metadata-table" class="table table table-striped table-bordered header-fixed"
-               style="margin-bottom: 100px;">
+        <table id="metadata-table" class="table table-striped header-fixed">
             <thead>
                 <tr class="gradient">
                     <th>Título de la columna</th>
@@ -35,7 +32,5 @@
             </tbody>
 
         </table>
-    </div>
-</div>
 
 {% endif %}
