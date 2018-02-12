@@ -124,6 +124,22 @@
 
     <input id="attributes-description" type="hidden"
            name="attributesDescription" value="{{ data['attributesDescription'] }}">
+
+    <div id="delete-col-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1>Eliminar columna</h1>
+                    <div>¿Estás seguro que deseas eliminar la columna?</div>
+                    <div class="modal-actions">
+                        <button class="btn" type="button" data-dismiss="modal">CANCELAR</button>
+                        <button class="btn btn-danger" type="button" data-dismiss="modal" id="delete-col-btn">ELIMINAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
 </div>
 
 {% resource 'gobar_js/forms/resource_form.js' %}

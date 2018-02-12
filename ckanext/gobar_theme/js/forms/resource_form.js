@@ -4,6 +4,7 @@ $(function () {
     var resetColumnHeadersCounter = function() {
         $('.resource-attributes-header > div').each(function(index) {
             $( this ).text('Columna ' + (index + 1));
+            $($( this ).siblings()[0]).attr('data-index', index);  // Add calculated id as data-index to use to delete the column
         });
     }
 
@@ -33,19 +34,22 @@ $(function () {
         specialTypeDetail.val('');
     });
 
-    $(document).on('click', '.remove-col', function (e) {
-        if (confirm("¿Seguro que desea eliminar la columna?")) {
-            var colToRemove = $(e.currentTarget).parents('.resource-attributes-group');
-            var isTheOnlyOne = $('.resource-attributes-group').length == 1;
-            if (isTheOnlyOne) {
-                colToRemove.find('input, select, textarea').val('');
-                resetAdvancedAndSpecialButtonsAndInputs(colToRemove);
-            } else {
-                colToRemove.remove()
-            }
+    $(document).on('click', '#delete-col-btn', function(e) {
+        var columnIdToRemove = $(e.currentTarget).data('col-to-delete');  // Get the index of the col to remove
+        var colToRemove = $('i.remove-col[data-index="' + columnIdToRemove + '"]').parents('.resource-attributes-group');
+        var isTheOnlyOne = $('.resource-attributes-group').length == 1;
+        if (isTheOnlyOne) {
+            colToRemove.find('input, select, textarea').val('');
+            resetAdvancedAndSpecialButtonsAndInputs(colToRemove);
+        } else {
+            colToRemove.remove()
         }
-
         resetColumnHeadersCounter();
+    });
+
+    $(document).on('click', '.remove-col', function (e) {
+        $('#delete-col-btn').data('col-to-delete', $(e.currentTarget).data('index'));  // Propagate the column ID as data of the delete button of the modal
+        $('#delete-col-modal').modal();
     });
 
     $(document).on('click', '.add-extra-fields-advanced', function (e) {
