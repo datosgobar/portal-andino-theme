@@ -8,29 +8,28 @@
         <table id="metadata-table" class="table table-striped header-fixed">
             <thead>
                 <tr class="gradient">
-                    <th>Título de la columna</th>
-                    <th>Tipo de dato</th>
-                    <th>Descripción</th>
-                    <th>Unidades</th>
-                    <th>Identificador</th>
-                    <th>Dato especial</th>
-                    <th>Detalle dato</th>
+                    <th style="width: 13%; height: 80px;">Título de la columna</th>
+                    <th style="width:  7%; height: 80px;">Tipo de dato</th>
+                    <th style="width: 33%; height: 80px;">Descripción</th>
+                    <th style="width: 16%; height: 80px;">Unidad de medida</th>
+                    <th style="width: 17%; height: 80px;">Identificador</th>
+                    <th style="width:  7%; height: 80px;">Tipo de dato especial</th>
+                    <th style="width:  7%; height: 80px;">Detalle de tipo especial</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="metadata-body">
             {% for attribute_group in attributes %}
                 <tr>
-                    <td>{{ attribute_group.get('title', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('type', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('description', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('units', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('id', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('specialType', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('specialTypeDetail', '') }}&nbsp;</td>
+                    <td class="col_title"         style="width: 13%;">{{ attribute_group.get('title', '') }}&nbsp;</td>
+                    <td class="type"              style="width:  7%;">{{ attribute_group.get('type', '') }}&nbsp;</td>
+                    <td class="description"       style="width: 33%;">{{ attribute_group.get('description', '') }}&nbsp;</td>
+                    <td class="units"             style="width: 16%;">{{ attribute_group.get('units', '') }}&nbsp;</td>
+                    <td class="id"                style="width: 17%;">{{ attribute_group.get('id', '') }}&nbsp;</td>
+                    <td class="specialType"       style="width:  7%;">{{ attribute_group.get('specialType', '') }}&nbsp;</td>
+                    <td class="specialTypeDetail" style="width:  7%;">{{ attribute_group.get('specialTypeDetail', '') }}&nbsp;</td>
                 </tr>
             {% endfor %}
             </tbody>
-
         </table>
 
 {% endif %}
