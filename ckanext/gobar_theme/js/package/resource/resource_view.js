@@ -11,7 +11,6 @@ $(function () {
 $(window).load(function(){
     var body =  $('#metadata-table > tbody');
     if (body.get(0).scrollHeight > body.height()){
-        alert("HOLA");
         $('.col_title').each(function(index, element) {
             element.style.setProperty( 'width', '13%', 'important' );
         });
@@ -34,8 +33,5 @@ $(window).load(function(){
             element.style.setProperty( 'width', '6%', 'important' );
             element.style.setProperty( 'padding-right', '0', 'important' );
         });
-    }
-    else{
-        alert("Nope");
     }
 });
