@@ -44,17 +44,6 @@
                 <div class="resource-additional-info col-xs-12 col-md-12 row"
                      style="border-bottom: 0; width: 103%; margin-bottom: 20px;">
                     <h2 class="title-h" style="padding-bottom: 0 !important;">Previsualización</h2>
-
-                    {% for resource in pkg.resources %}
-                        {% if resource.id == res.id %}
-                            {% if resource.format == "" or resource.format|lower not in h.accepted_mime_types() %}
-                                {% set format = "otro" %}
-                            {% else %}
-                                {% set format = resource.format %}
-                            {% endif %}
-                            {% snippet "package/snippets/dataset_resource_item.html", pkg=pkg, resource=resource, format=format %}
-                        {% endif %}
-                    {% endfor %}
                 </div>
 
 
