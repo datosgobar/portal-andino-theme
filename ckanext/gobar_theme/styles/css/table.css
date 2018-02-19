@@ -37,3 +37,34 @@
     align-items: center;
     justify-content:center;
 }
+
+.header-fixed > thead > tr > th{
+    height: 80px;
+}
+
+.header-fixed > thead > tr > th:nth-child(1),
+.header-fixed > tbody > tr > td:nth-child(1) {
+    width: 13%;
+}
+.header-fixed > thead > tr > th:nth-child(2),
+.header-fixed > tbody > tr > td:nth-child(2){
+    width: 7%;
+}
+.header-fixed > thead > tr > th:nth-child(3),
+.header-fixed > tbody > tr > td:nth-child(3){
+    width: 33%;
+}
+.header-fixed > thead > tr > th:nth-child(4),
+.header-fixed > tbody > tr > td:nth-child(4){
+    width: 16%;
+}
+.header-fixed > thead > tr > th:nth-child(5),
+.header-fixed > tbody > tr > td:nth-child(5){
+    width: 17%;
+}
+.header-fixed > thead > tr > th:nth-child(6),
+.header-fixed > thead > tr > th:nth-child(7),
+.header-fixed > tbody > tr > td:nth-child(6),
+.header-fixed > tbody > tr > td:nth-child(7){
+    width: 7%;
+}
