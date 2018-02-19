@@ -20,12 +20,12 @@
             <tbody id="metadata-body">
             {% for attribute_group in attributes %}
                 <tr>
-                    <td class="col_title"        >{{ attribute_group.get('title', '') }}&nbsp;</td>
-                    <td class="type"             >{{ attribute_group.get('type', '') }}&nbsp;</td>
-                    <td class="description"      >{{ attribute_group.get('description', '') }}&nbsp;</td>
-                    <td class="units"            >{{ attribute_group.get('units', '') }}&nbsp;</td>
-                    <td class="id"               >{{ attribute_group.get('id', '') }}&nbsp;</td>
-                    <td class="specialType"      >{{ attribute_group.get('specialType', '') }}&nbsp;</td>
+                    <td>{{ attribute_group.get('title', '') }}&nbsp;</td>
+                    <td>{{ attribute_group.get('type', '') }}&nbsp;</td>
+                    <td class="description">{{ attribute_group.get('description', '') }}&nbsp;</td>
+                    <td>{{ attribute_group.get('units', '') }}&nbsp;</td>
+                    <td>{{ attribute_group.get('id', '') }}&nbsp;</td>
+                    <td>{{ attribute_group.get('specialType', '') }}&nbsp;</td>
                     <td class="specialTypeDetail">{{ attribute_group.get('specialTypeDetail', '') }}&nbsp;</td>
                 </tr>
             {% endfor %}
