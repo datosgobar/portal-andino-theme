@@ -106,24 +106,6 @@
 
                 {% snippet "package/snippets/resource_attributes_table.html", res=res %}
 
-                {% set has_more_resources = pkg.resources and pkg.resources|length > 1 %}
-
-                {% if has_more_resources %}
-                        <div class="resource-alternative-packages col-xs-12 col-md-12 row" style="border-bottom: 0; width: 103%;">
-                            <h2 class="title-h">Otros recursos de este dataset</h2>
-                            {% for resource in pkg.resources %}
-                                {% if resource.id != res.id %}
-                                    {% if resource.format == "" or resource.format|lower not in h.accepted_mime_types() %}
-                                        {% set format = "otro" %}
-                                    {% else %}
-                                        {% set format = resource.format %}
-                                    {% endif %}
-                                    {% snippet "package/snippets/dataset_resource_item.html", pkg=pkg, resource=resource, format=format %}
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                {% endif %}
-
                 <div class="resource-additional-info col-xs-12 col-md-12 row" style="width: 102% !important;">
                     <h2 class="title-h">Información adicional</h2>
 
@@ -194,6 +176,27 @@
                     </div>
 
                 </div>
+
+
+
+                {% set has_more_resources = pkg.resources and pkg.resources|length > 1 %}
+
+                {% if has_more_resources %}
+                    <div class="resource-alternative-packages col-xs-12 col-md-12 row" style="border-bottom: 0; width: 103%;">
+                        <h2 class="title-h">Otros recursos de este dataset</h2>
+                        {% for resource in pkg.resources %}
+                            {% if resource.id != res.id %}
+                                {% if resource.format == "" or resource.format|lower not in h.accepted_mime_types() %}
+                                    {% set format = "otro" %}
+                                {% else %}
+                                    {% set format = resource.format %}
+                                {% endif %}
+                                {% snippet "package/snippets/dataset_resource_item.html", pkg=pkg, resource=resource, format=format %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            
             </div>
         </div>
     </div>
