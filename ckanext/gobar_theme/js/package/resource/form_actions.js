@@ -92,15 +92,13 @@ $(function () {
     });
 });
 
-
-$('form#resource-edit').on('submit', function (e) {
+$('form#resource-edit').on('submit', function () {
     var input_file_name = $('#form-file-name');
     if (input_file_name.css("display") === 'none'){
-        alert("Display = none");
-        var url_value = $('#field-image-url').val();
-        alert("Agarré como valor de la url: " + url_value);
-        input_file_name.val(url_value);
-        alert("Ahora el input del file name tiene como valor: " + input_file_name.val());
+        input_file_name.val($('#field-image-url').val());
     }
-
 });
+
+function display_filename_input(){
+    $('#form-file-name').css("display", "inline-block")
+}
