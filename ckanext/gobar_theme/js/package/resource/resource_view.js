@@ -11,27 +11,12 @@ $(function () {
 $(window).load(function(){
     var body =  $('#metadata-table > tbody');
     if (body.get(0).scrollHeight > body.height()){
-        $('.col_title').each(function(index, element) {
-            element.style.setProperty( 'width', '13%', 'important' );
-        });
-        $('.type').each(function(index, element) {
-            element.style.setProperty( 'width', '7%', 'important' );
-        });
         $('.description').each(function(index, element) {
-            element.style.setProperty( 'width', '34%', 'important' );
-        });
-        $('.units').each(function(index, element) {
-            element.style.setProperty( 'width', '16%', 'important' );
-        });
-        $('.id').each(function(index, element) {
-            element.style.setProperty( 'width', '17%', 'important' );
-        });
-        $('.specialType').each(function(index, element) {
-            element.style.setProperty( 'width', '7%', 'important' );
+            element.style.setProperty( 'width', '34%' );
         });
         $('.specialTypeDetail').each(function(index, element) {
-            element.style.setProperty( 'width', '6%', 'important' );
-            element.style.setProperty( 'padding-right', '0', 'important' );
+            element.style.setProperty( 'width', '6%' );
+            element.style.setProperty( 'padding-right', '0' );
         });
     }
 });
