@@ -1,6 +1,11 @@
 {% set attributes = h.json_loads(res['attributesDescription'] or '[]') %}
+{% set hasAtLeastOneTitle = h.attributes_has_at_least_one('title', attributes) %}
+{% set hasAtLeastOneType = h.attributes_has_at_least_one('type', attributes) %}
+{% set hasAtLeastOneDescription = h.attributes_has_at_least_one('description', attributes) %}
 {% set hasAtLeastOneUnit = h.attributes_has_at_least_one('unit', attributes) %}
 {% set hasAtLeastOneId = h.attributes_has_at_least_one('id', attributes) %}
+{% set hasAtLeastOneSpecialType = h.attributes_has_at_least_one('specialType', attributes) %}
+{% set hasAtLeastOnespecialTypeDetail = h.attributes_has_at_least_one('specialTypeDetail', attributes) %}
 
 {% if attributes|length > 0 %}
 <h2 class="title-h">Campos de este recurso</h2>
@@ -8,25 +13,25 @@
         <table id="metadata-table" class="table table-striped header-fixed">
             <thead>
                 <tr class="gradient">
-                    <th>Título de la columna</th>
-                    <th>Tipo de dato</th>
-                    <th>Descripción</th>
-                    <th>Unidad de medida</th>
-                    <th>Identificador</th>
-                    <th>Tipo de dato especial</th>
-                    <th>Detalle de tipo especial</th>
+                    <th class="m-title">Título de la columna</th>
+                    <th class="m-type">Tipo de dato</th>
+                    <th class="m-description">Descripción</th>
+                    <th class="m-units">Unidad de medida</th>
+                    <th class="m-id">Identificador</th>
+                    <th class="m-specialType">Tipo de dato especial</th>
+                    <th class="m-specialTypeDetail">Detalle de tipo especial</th>
                 </tr>
             </thead>
             <tbody id="metadata-body">
             {% for attribute_group in attributes %}
                 <tr>
-                    <td>{{ attribute_group.get('title', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('type', '') }}&nbsp;</td>
-                    <td class="description">{{ attribute_group.get('description', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('units', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('id', '') }}&nbsp;</td>
-                    <td>{{ attribute_group.get('specialType', '') }}&nbsp;</td>
-                    <td class="specialTypeDetail">{{ attribute_group.get('specialTypeDetail', '') }}&nbsp;</td>
+                    <td class="m-title">{{ attribute_group.get('title', '') }}&nbsp;</td>
+                    <td class="m-type">{{ attribute_group.get('type', '') }}&nbsp;</td>
+                    <td class="m-description">{{ attribute_group.get('description', '') }}&nbsp;</td>
+                    <td class="m-units">{{ attribute_group.get('units', '') }}&nbsp;</td>
+                    <td class="m-id">{{ attribute_group.get('id', '') }}&nbsp;</td>
+                    <td class="m-specialType">{{ attribute_group.get('specialType', '') }}&nbsp;</td>
+                    <td class="m-specialTypeDetail">{{ attribute_group.get('specialTypeDetail', '') }}&nbsp;</td>
                 </tr>
             {% endfor %}
             </tbody>
