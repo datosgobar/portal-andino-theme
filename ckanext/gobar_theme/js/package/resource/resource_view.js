@@ -10,6 +10,8 @@ $(function () {
 
 $(window).load(function(){
 
+    alert("HOLA");
+
     function columnHasSomething(string){
         var flag = 0;
         $(string).each(function(index) {
