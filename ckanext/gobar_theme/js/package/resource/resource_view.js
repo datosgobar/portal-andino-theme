@@ -94,7 +94,8 @@ $(window).load(function(){
     if (body.get(0).scrollHeight > body.height()){
         $("td.m-specialTypeDetail").css("padding-right", 0);
         $("td.m-specialTypeDetail").width(parseInt($("td.m-specialTypeDetail").width()) - body.width()*0.01);
-        $("td.m-description").width(parseInt($("td.m-description").width()) + body.width()*0.01);
+        $("td.m-description").width(parseInt($("td.m-description").width()) + body.width()*0.005);
+        $("td.m-specialType").width(parseInt($("td.m-specialType").width()) + body.width()*0.005);
     }
 
 });
