@@ -10,7 +10,7 @@ $(function () {
 
 $(window).load(function(){
 
-    alert("HOLA");
+    console.log("HOLA1");
 
     function columnHasSomething(string){
         var flag = 0;
@@ -24,6 +24,7 @@ $(window).load(function(){
     }
 
     function getScrollbarWidth() {
+        console.log("Buscando la sidebar");
         var outer = document.createElement("div");
         outer.style.visibility = "hidden";
         outer.style.width = "100px";
@@ -63,6 +64,7 @@ $(window).load(function(){
     var width_used = 0;
     var distribution = 0;
     for(var key in dict) {
+        console.log("Encontré " + key + " con " + dict[key]);
         if (dict[key] === 1){
             columns_to_show++;
             width_used = width_used + $("th.m-" + key).outerWidth();
@@ -98,5 +100,7 @@ $(window).load(function(){
         $("td.m-specialTypeDetail").width(parseInt($("td.m-specialTypeDetail").width()) - body.width()*0.01);
         $("td.m-description").width(parseInt($("td.m-description").width()) + body.width()*0.01);
     }
+
+    console.log("Terminé");
 
 });
