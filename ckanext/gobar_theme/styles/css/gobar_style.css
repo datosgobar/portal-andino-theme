@@ -10115,3 +10115,16 @@ ul.activity {
 .select2-container.select2-allowclear .select2-choice .select2-chosen {
   padding-left: 10px;
 }
+
+.icon-ellipsis-vertical {
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  cursor: pointer;
+  color: #999999;
+}
+
+.remove-column-menu-option span {
+  color: red;
+}

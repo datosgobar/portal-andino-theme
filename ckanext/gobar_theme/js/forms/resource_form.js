@@ -36,20 +36,15 @@ $(function () {
 
     $(document).on('click', '#delete-col-btn', function(e) {
         var columnIdToRemove = $(e.currentTarget).data('col-to-delete');  // Get the index of the col to remove
-        var colToRemove = $('i.remove-col[data-index="' + columnIdToRemove + '"]').parents('.resource-attributes-group');
+        var colToRemove = $('i.col-options[data-index="' + columnIdToRemove + '"]').parents('.resource-attributes-group');
         var isTheOnlyOne = $('.resource-attributes-group').length == 1;
         if (isTheOnlyOne) {
-            colToRemove.find('input, select, textarea').val('');
+            colToRemove.find('input, select, textarea').val('');  // Elimina los datos de la sección de la columna, pero deja la sección
             resetAdvancedAndSpecialButtonsAndInputs(colToRemove);
         } else {
             colToRemove.remove()
         }
         resetColumnHeadersCounter();
-    });
-
-    $(document).on('click', '.remove-col', function (e) {
-        $('#delete-col-btn').data('col-to-delete', $(e.currentTarget).data('index'));  // Propagate the column ID as data of the delete button of the modal
-        $('#delete-col-modal').modal();
     });
 
     $(document).on('click', '.add-extra-fields-advanced', function (e) {
@@ -136,6 +131,29 @@ $(function () {
                 attributeGroupEl.find('.resource-col-special-data-container').show();
             }
         }
+
+        var menu = new BootstrapMenu('.col-options', {
+            menuEvent: 'click',
+            fetchElementData: function($elem) {
+                return $elem.data('index');
+            },
+            actions: {
+                sortColumns: {
+                    name: 'Reordenar columnas',
+                    onClick: function() {
+                        alert("Próximamente");
+                    }
+                },
+                removeColumn: {
+                    name: 'Eliminar columna',
+                    classNames: 'remove-column-menu-option',
+                    onClick: function(columnId) {
+                        $('#delete-col-btn').data('col-to-delete', columnId);  // Propagate the column ID as data of the delete button of the modal
+                        $('#delete-col-modal').modal();
+                    }
+                }
+            }   
+        });
     }
 
     init();
