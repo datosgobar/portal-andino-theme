@@ -10170,4 +10170,5 @@ ul.sort-col-list li.placeholder:before {
 
 div#sort-col-modal div.modal-body {
   overflow-x: hidden;
+  max-height: inherit;
 }
