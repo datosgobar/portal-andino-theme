@@ -10115,3 +10115,16 @@ ul.activity {
 .select2-container.select2-allowclear .select2-choice .select2-chosen {
   padding-left: 10px;
 }
+
+.input-prepend {
+  width: 100%;
+}
+
+.input-prepend .bfc {
+  width: auto;
+  overflow: hidden;
+}
+
+.input-prepend .add-on {
+  float: left;
+}
