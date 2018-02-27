@@ -10157,6 +10157,7 @@ body.dragging, body.dragging * {
 ul.sort-col-list li.dragged {
   position: absolute;
   opacity: 0.5;
+  border-bottom: 1px solid #999999;
   z-index: 2000;
 }
 
