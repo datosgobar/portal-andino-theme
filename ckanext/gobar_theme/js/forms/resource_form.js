@@ -35,8 +35,8 @@ $(function () {
     });
 
     $(document).on('click', '#delete-col-btn', function(e) {
-        var columnIdToRemove = $(e.currentTarget).data('col-to-delete');  // Get the index of the col to remove
-        var colToRemove = $('i.col-options[data-index="' + columnIdToRemove + '"]').parents('.resource-attributes-group');
+        var columnIndexToRemove = $(e.currentTarget).data('col-to-delete');  // Obtengo el _index_ de la columna a eliminar
+        var colToRemove = $('i.col-options[data-index="' + columnIndexToRemove + '"]').parents('.resource-attributes-group');
         var isTheOnlyOne = $('.resource-attributes-group').length == 1;
         if (isTheOnlyOne) {
             colToRemove.find('input, select, textarea').val('');  // Elimina los datos de la sección de la columna, pero deja la sección
@@ -187,8 +187,8 @@ $(function () {
                 removeColumn: {
                     name: 'Eliminar columna',
                     classNames: 'remove-column-menu-option',
-                    onClick: function(columnId) {
-                        $('#delete-col-btn').data('col-to-delete', columnId);  // Propagate the column ID as data of the delete button of the modal
+                    onClick: function(columnIndex) {
+                        $('#delete-col-btn').data('col-to-delete', columnIndex);  // Propagate the column Index as data of the delete button of the modal
                         $('#delete-col-modal').modal();
                     }
                 }
