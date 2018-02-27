@@ -172,7 +172,7 @@ $(function () {
                             var attributeGroupEl = $(attributesGroups[i]);
                             
                             var text = attributeGroupEl.find('.resource-col-name').val();
-                            var index = attributeGroupEl.find('.resource-attributes-header > i').data('index');
+                            var index = attributeGroupEl.find('.resource-attributes-header > i.col-options').data('index');
 
                             // Genero y agrego un elemento al contenedor
                             sortableElementsContainer.append(generateSortableElement(index, text));
