@@ -10115,3 +10115,9 @@ ul.activity {
 .select2-container.select2-allowclear .select2-choice .select2-chosen {
   padding-left: 10px;
 }
+
+.form-error-message {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
