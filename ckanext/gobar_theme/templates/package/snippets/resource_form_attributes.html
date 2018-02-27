@@ -9,6 +9,7 @@
     {% set attributes = h.json_loads(data['attributesDescription'] or '[]') %}
     {% set attributes = attributes|length == 0 and attributes + [{}] or attributes %}
 
+    <div class="resource-attributes-group-container">
     {% for attribute_group in attributes %}
         <div class="resource-attributes-group">
             <div class="control-group control-full">
@@ -117,6 +118,7 @@
             </div>
         </div>
     {% endfor %}
+    </div>
 
     <div class="resource-attributes-actions">
         <span id="add-col" class="btn btn-blue">AGREGAR OTRA COLUMNA</span>
@@ -134,6 +136,22 @@
                     <div class="modal-actions">
                         <button class="btn" type="button" data-dismiss="modal">CANCELAR</button>
                         <button class="btn btn-danger" type="button" data-dismiss="modal" id="delete-col-btn">ELIMINAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sort-col-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1>Reordenamiento de columnas</h1>
+                    <div>Desde aquí puedes ordenar las columnas para que muestren como se necesiten.</div>
+                    <ul class="sort-col-list">
+                    </ul>
+                    <div class="modal-actions">
+                        <button class="btn btn-blue" type="button" data-dismiss="modal" id="btn-save-col-sort">GUARDAR</button>
                     </div>
                 </div>
             </div>

@@ -132,6 +132,20 @@ $(function () {
             }
         }
 
+        $(document).on('click', '#btn-save-col-sort', function(e) {
+            var newOrders = $("ul.sort-col-list").sortable('serialize').get()[0];
+
+            for (var i = 0; i < newOrders.length; i++) {
+                var newOrder = newOrders[i];
+                // Al quitar del dom y agregarlos de nuevo al final según el orden especificado
+                // en "New Order" dejo los campos ordenados como corresponde.
+                var colunmDefinition = $('i.col-options[data-index=' + newOrder.index + ']').parents('.resource-attributes-group').detach();
+                colunmDefinition.appendTo('.resource-attributes-group-container');
+            }
+
+            resetColumnHeadersCounter();
+        });
+
         var menu = new BootstrapMenu('.col-options', {
             menuEvent: 'click',
             fetchElementData: function($elem) {
@@ -141,7 +155,33 @@ $(function () {
                 sortColumns: {
                     name: 'Reordenar columnas',
                     onClick: function() {
-                        alert("Próximamente");
+                        // Genero los elementos del DOM que representan las columnas ordenables
+                        // Template: <li data-index="0"><i class="icon-ellipsis-vertical"></i>Columna 1</li>
+                        var generateSortableElement = function(index, text) {
+                            text = text || "Columna " + (index + 1);  // Defaulteo el texto a mostrar si no me mandaron nada
+                            var div = document.createElement('div');
+                            div.innerHTML = '<li data-index="' + index + '"><i class="icon-ellipsis-vertical"></i>' + text + '</li>';
+
+                            return div.firstChild;
+                        }
+
+                        var sortableElementsContainer = $('ul.sort-col-list');
+                        sortableElementsContainer.empty();
+                        var attributesGroups = $('.resource-attributes-group');
+                        for (var i = 0; i < attributesGroups.length; i++) {
+                            var attributeGroupEl = $(attributesGroups[i]);
+                            
+                            var text = attributeGroupEl.find('.resource-col-name').val();
+                            var index = attributeGroupEl.find('.resource-attributes-header > i').data('index');
+
+                            // Genero y agrego un elemento al contenedor
+                            sortableElementsContainer.append(generateSortableElement(index, text));
+                        }
+
+                        var columns = $("ul.sort-col-list").sortable({
+                            group: 'sort-col-list'
+                        });
+                        $('#sort-col-modal').modal();
                     }
                 },
                 removeColumn: {
