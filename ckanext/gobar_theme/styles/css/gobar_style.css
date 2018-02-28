@@ -10116,6 +10116,19 @@ ul.activity {
   padding-left: 10px;
 }
 
+.input-prepend {
+  width: 100%;
+}
+
+.input-prepend .bfc {
+  width: auto;
+  overflow: hidden;
+}
+
+.input-prepend .add-on {
+  float: left;
+}
+
 .icon-ellipsis-vertical.col-options {
   font-size: 20px;
   position: absolute;
@@ -10172,3 +10185,4 @@ div#sort-col-modal div.modal-body {
   overflow-x: hidden;
   max-height: inherit;
 }
+
