@@ -1,13 +1,14 @@
 $(function() {
 
-    $('form:has(input.url-field[type=text])').on('submit', function(event) {
+    $('form:has(input.url-field[type=text]), form:has(div.url-field > div > input[type=text])').on('submit', function(event) {
+
         var URL_VALIDATION_REGEX = new RegExp(
             /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-.]{1}[a-z0-9]+)*(\.[a-z0-9]{2,5}|(:[0-9]{1,5}))(\/.*)?$/
         );
 
         var HEADER_HEIGHT = $('#header').height();
 
-        $(event.target).find('input.url-field[type=text]').each(function(index) {
+        $(event.target).find('input.url-field[type=text], div.url-field > div > input[type=text]').each(function(index) {
             // Si la validación falla, abortar el submit y mostrar un mensaje de validación
             var that = $(this);
             if (that.val() && !that.val().match(URL_VALIDATION_REGEX)) {
