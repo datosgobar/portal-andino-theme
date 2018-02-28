@@ -40,9 +40,15 @@
                         <button>DESCARGAR</button>
                     </a>
                 </div>
+                <div class="col-xs-12 title">
+                    <a href="{{ res.url }}">
+                        <button class="btn" style="background-color: white; border:1px solid blue; color: blue; width: 150px; white-space: normal;">CONSULTAR EN EL PORTAL DE ORIGEN</button>
+                    </a>
+                </div>
 
+        <div class="resource-previsualization" data-url="{{ pkg.url }}">
                 <div class="resource-additional-info col-xs-12 col-md-12 row"
-                     style="border-bottom: 0; width: 103%; margin-bottom: 20px;">
+                     style="border-bottom: 0; width: 103%; margin-bottom: 20px; margin-top: 30px;">
                     <h2 class="title-h" style="padding-bottom: 0 !important;">Previsualización</h2>
                 </div>
 
@@ -92,7 +98,7 @@
                         {% endif %}
                     {% endif %}
                 </div>
-
+        </div>
                 {% snippet "package/snippets/resource_attributes_table.html", res=res %}
 
                 <div class="resource-additional-info col-xs-12 col-md-12 row" style="width: 102% !important;">

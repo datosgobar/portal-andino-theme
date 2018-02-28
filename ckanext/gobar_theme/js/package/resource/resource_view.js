@@ -99,3 +99,8 @@ $(window).load(function(){
     }
 
 });
+
+$(function () {
+    var resource_url = $('div.resource-previsualization').data('url');
+    alert(resource_url);
+});
