@@ -91,3 +91,14 @@ $(function () {
         $('textarea[data-valid-desc-length]').on('change input keyup', validateDesc)
     });
 });
+
+$('form#resource-edit').on('submit', function () {
+    var input_file_name = $('#form-file-name');
+    if (input_file_name.css("display") === 'none'){
+        input_file_name.val($('#field-image-url').val());
+    }
+});
+
+function display_filename_input(){
+    $('#form-file-name').css("display", "inline-block")
+}

@@ -51,7 +51,7 @@ this.ckan.module('gobar-image-upload', function($, _) {
         .appendTo(this.el);
 
       // Button to set the field to be a URL
-      this.button_url = $('<span class="btn url-btn">'+this.i18n('url')+'</span>')
+      this.button_url = $('<span onclick="display_filename_input()" class="btn url-btn">'+this.i18n('url')+'</span>')
         .prop('title', this.i18n('url_tooltip'))
         .on('click', this._onFromWeb)
         .insertAfter(this.input);

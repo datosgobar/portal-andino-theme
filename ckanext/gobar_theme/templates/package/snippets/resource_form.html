@@ -57,16 +57,18 @@
             {% set is_upload = (data.url_type == 'upload') %}
             {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
          is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
-         upload_label=_('File'), url_label=_('URL')) }}
+         upload_label=_('File'), url_label=_('Archivo')) }}
 
-         {% set valid_file_name = h.valid_length(data.fileName, max_length_file_name) %}
-         {% if valid_file_name %}
-             {% set after_desc_file_name = ["Por favor, no superes los ", max_length_file_name, " caracteres."] %}
-         {% else %}
-             {% set after_desc_file_name = ["Por favor, para que el nombre del archivo sea más claro, <b>no superes los ", max_length_file_name, " caracteres.</b>"] %}
-         {% endif %}
-            {{ form.input_custom('fileName', id='field-file-name', label='Nombre del archivo', placeholder='Ej: estructura-organica.csv', value=data.fileName, error=errors.fileName, classes=['control-full'], attrs={'data-valid-file-name-length': max_length_file_name}, after_desc=after_desc_file_name|join|safe, max_length=max_length_file_name) }}
-         {% endblock %}
+            <div id="form-file-name" style="display: none">
+                {% set valid_file_name = h.valid_length(data.fileName, max_length_file_name) %}
+                {% if valid_file_name %}
+                    {% set after_desc_file_name = ["Por favor, no superes los ", max_length_file_name, " caracteres."] %}
+                {% else %}
+                    {% set after_desc_file_name = ["Por favor, para que el nombre del archivo sea más claro, <b>no superes los ", max_length_file_name, " caracteres.</b>"] %}
+                {% endif %}
+                {{ form.input_custom('fileName', id='field-file-name', label='Nombre del archivo', placeholder='Ej: estructura-organica.csv', value=data.fileName, error=errors.fileName, classes=['control-full'], attrs={'data-valid-file-name-length': max_length_file_name}, after_desc=after_desc_file_name|join|safe, max_length=max_length_file_name) }}
+            </div>
+        {% endblock %}
 
         {% block basic_fields_format %}
             {% set format_attrs = {'data-module': 'autocomplete', 'data-module-source': '/api/2/util/resource/format_autocomplete?incomplete=?'} %}
