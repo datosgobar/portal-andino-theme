@@ -9855,6 +9855,11 @@ ul.activity {
         color: #0695d6; }
     #template-config-container #template-config .with-bottom-margin {
       margin-bottom: 30px; }
+    #template-config-container #template-config label.form-error-message {
+      color: red;
+      font-size: 16px;
+      position: relative;
+      top: -20px; }
     #template-config-container #template-config p, #template-config-container #template-config label {
       margin: 0 0 10px 0;
       font-weight: 400;
@@ -10116,8 +10121,3 @@ ul.activity {
   padding-left: 10px;
 }
 
-.form-error-message {
-  color: red;
-  font-size: 16px;
-  margin-bottom: 30px;
-}
