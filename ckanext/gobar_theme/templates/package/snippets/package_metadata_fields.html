@@ -19,11 +19,11 @@
     {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
     {% set url_value = data.url if data.url else domain %}
 
-    {{ form.input('author', label='* Responsable', id='field-author', value=data.author, error=errors.author, classes=['control-medium'], placeholder="Ej. Subsecretaría de Innovación y Gobierno Abierto") }}
+    {{ form.textarea('author', label='* Responsable', id='field-author', value=data.author, error=errors.author, classes=['control-full'], rows=2, placeholder="Ej. Ministerio de Modernización. Secretaría de Gestión e Innovación Pública. Subsecretaría de Innovación Pública y Gobierno Abierto.") }}
 
     {{ form.input('author_email', label='E-mail del responsable', id='field-author-email', value=data.author_email, error=errors.author_email, classes=['control-medium'], placeholder="Ej. gobiernoabierto@modernizacion.gob.ar") }}
 
-    {{ form.input('maintainer', label='Mantenedor', id='field-maintainer', value=data.maintainer, error=errors.maintainer, classes=['control-medium'], placeholder="Ej. Dirección de Datos Públicos") }}
+    {{ form.textarea('maintainer', label='Mantenedor', id='field-maintainer', value=data.maintainer, error=errors.maintainer, classes=['control-full'], rows=3, placeholder="Ej. Ministerio de Modernización. Secretaría de Gestión e Innovación Pública. Subsecretaría de Innovación Pública y Gobierno Abierto. Dirección Nacional de Datos e Información Pública. Dirección de Datos Públicos.") }}
 
     {{ form.input('maintainer_email', label='E-mail del mantenedor', id='field-maintainer-email', value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium'], placeholder="Ej. datospublicos@modernizacion.gob.ar") }}
 
