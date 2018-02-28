@@ -10115,3 +10115,60 @@ ul.activity {
 .select2-container.select2-allowclear .select2-choice .select2-chosen {
   padding-left: 10px;
 }
+
+.icon-ellipsis-vertical.col-options {
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  cursor: pointer;
+  color: #999999;
+}
+
+.remove-column-menu-option span {
+  color: red;
+}
+
+.sort-col-list li i.icon-ellipsis-vertical {
+  padding-right: 10px;
+  font-size: 20px;
+  color: #999999;
+}
+
+.sort-col-list li {
+  border: 1px solid #999999;
+  border-bottom: none;
+  padding: 10px;
+}
+
+.sort-col-list li:last-child {
+  border-bottom: 1px solid #999999;
+}
+
+ul.sort-col-list {
+  list-style-type: none;
+  margin: 25px 0;
+}
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+ul.sort-col-list li.dragged {
+  position: absolute;
+  opacity: 0.5;
+  border-bottom: 1px solid #999999;
+  z-index: 2000;
+}
+
+ul.sort-col-list li.placeholder {
+  position: relative;
+}
+ul.sort-col-list li.placeholder:before {
+  position: absolute;
+}
+
+div#sort-col-modal div.modal-body {
+  overflow-x: hidden;
+  max-height: inherit;
+}

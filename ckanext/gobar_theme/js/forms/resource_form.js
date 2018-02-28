@@ -35,21 +35,16 @@ $(function () {
     });
 
     $(document).on('click', '#delete-col-btn', function(e) {
-        var columnIdToRemove = $(e.currentTarget).data('col-to-delete');  // Get the index of the col to remove
-        var colToRemove = $('i.remove-col[data-index="' + columnIdToRemove + '"]').parents('.resource-attributes-group');
+        var columnIndexToRemove = $(e.currentTarget).data('col-to-delete');  // Obtengo el _index_ de la columna a eliminar
+        var colToRemove = $('i.col-options[data-index="' + columnIndexToRemove + '"]').parents('.resource-attributes-group');
         var isTheOnlyOne = $('.resource-attributes-group').length == 1;
         if (isTheOnlyOne) {
-            colToRemove.find('input, select, textarea').val('');
+            colToRemove.find('input, select, textarea').val('');  // Elimina los datos de la sección de la columna, pero deja la sección
             resetAdvancedAndSpecialButtonsAndInputs(colToRemove);
         } else {
             colToRemove.remove()
         }
         resetColumnHeadersCounter();
-    });
-
-    $(document).on('click', '.remove-col', function (e) {
-        $('#delete-col-btn').data('col-to-delete', $(e.currentTarget).data('index'));  // Propagate the column ID as data of the delete button of the modal
-        $('#delete-col-modal').modal();
     });
 
     $(document).on('click', '.add-extra-fields-advanced', function (e) {
@@ -136,6 +131,69 @@ $(function () {
                 attributeGroupEl.find('.resource-col-special-data-container').show();
             }
         }
+
+        $(document).on('click', '#btn-save-col-sort', function(e) {
+            var newOrders = $("ul.sort-col-list").sortable('serialize').get()[0];
+
+            for (var i = 0; i < newOrders.length; i++) {
+                var newOrder = newOrders[i];
+                // Al quitar del dom y agregarlos de nuevo al final según el orden especificado
+                // en "New Order" dejo los campos ordenados como corresponde.
+                var colunmDefinition = $('i.col-options[data-index=' + newOrder.index + ']').parents('.resource-attributes-group').detach();
+                colunmDefinition.appendTo('.resource-attributes-group-container');
+            }
+
+            resetColumnHeadersCounter();
+        });
+
+        var menu = new BootstrapMenu('.col-options', {
+            menuEvent: 'click',
+            fetchElementData: function($elem) {
+                return $elem.data('index');
+            },
+            actions: {
+                sortColumns: {
+                    name: 'Reordenar columnas',
+                    onClick: function() {
+                        // Genero los elementos del DOM que representan las columnas ordenables
+                        // Template: <li data-index="0"><i class="icon-ellipsis-vertical"></i>Columna 1</li>
+                        var generateSortableElement = function(index, text) {
+                            text = text || "Columna " + (index + 1);  // Defaulteo el texto a mostrar si no me mandaron nada
+                            var div = document.createElement('div');
+                            div.innerHTML = '<li data-index="' + index + '"><i class="icon-ellipsis-vertical"></i>' + text + '</li>';
+
+                            return div.firstChild;
+                        }
+
+                        var sortableElementsContainer = $('ul.sort-col-list');
+                        sortableElementsContainer.empty();
+                        var attributesGroups = $('.resource-attributes-group');
+                        for (var i = 0; i < attributesGroups.length; i++) {
+                            var attributeGroupEl = $(attributesGroups[i]);
+                            
+                            var text = attributeGroupEl.find('.resource-col-name').val();
+                            var index = attributeGroupEl.find('.resource-attributes-header > i.col-options').data('index');
+
+                            // Genero y agrego un elemento al contenedor
+                            sortableElementsContainer.append(generateSortableElement(index, text));
+                        }
+
+                        var columns = $("ul.sort-col-list").sortable({
+                            group: 'sort-col-list'
+                        });
+                        $('#sort-col-modal').modal();
+                    }
+                },
+                removeColumn: {
+                    name: 'Eliminar columna',
+                    classNames: 'remove-column-menu-option',
+                    onClick: function(columnIndex) {
+                        $('#delete-col-btn').data('col-to-delete', columnIndex);  // Propagate the column Index as data of the delete button of the modal
+                        $('#delete-col-modal').modal();
+                    }
+                }
+            }   
+        });
     }
 
     init();
