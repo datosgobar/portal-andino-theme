@@ -4,10 +4,10 @@
 
     <form method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
 
-        <h2>Homepage (recomendado)</h2>
+        <h2>URL del portal (recomendado)</h2>
         <p>Ingresá el dominio del sitio del portal.</p>
         {% set homepage = h.get_theme_config('portal-metadata.homepage') %}
-        <input name="metadata-homepage" class="url-field" type="text" title="Homepage" placeholder="ej: www.tusitio.com" value="{{ homepage if homepage else '' }}">
+        <input name="metadata-homepage" class="url-field" type="text" title="URL del portal" placeholder="ej: www.tusitio.com" value="{{ homepage if homepage else '' }}">
 
         <h2>Identificador (recomendado)</h2>
         <p>El identificador debe contener una o más palabras en minúsculas, separadas con guiones medios, sin usar caracteres especiales.
