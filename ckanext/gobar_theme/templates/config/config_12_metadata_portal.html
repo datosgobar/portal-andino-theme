@@ -7,7 +7,7 @@
         <h2>URL del portal (recomendado)</h2>
         <p>Ingresá el dominio del sitio del portal.</p>
         {% set homepage = h.get_theme_config('portal-metadata.homepage') %}
-        <input name="metadata-homepage" type="text" title="URL del portal" placeholder="ej: www.tusitio.com" value="{{ homepage if homepage else '' }}">
+        <input name="metadata-homepage" class="url-field" type="text" title="URL del portal" placeholder="ej: www.tusitio.com" value="{{ homepage if homepage else '' }}">
 
         <h2>Identificador (recomendado)</h2>
         <p>El identificador debe contener una o más palabras en minúsculas, separadas con guiones medios, sin usar caracteres especiales.
@@ -88,6 +88,7 @@
     </form>
 
     {% resource 'gobar_js/config/metadata_actions.js' %}
+    {% resource 'gobar_js/forms/autovalidations/urls.js' %}
     {% resource 'gobar_js/spatial.js' %}
 
 {% endblock -%}

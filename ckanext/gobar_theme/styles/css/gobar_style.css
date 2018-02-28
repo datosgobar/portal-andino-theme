@@ -9855,6 +9855,11 @@ ul.activity {
         color: #0695d6; }
     #template-config-container #template-config .with-bottom-margin {
       margin-bottom: 30px; }
+    #template-config-container #template-config label.form-error-message {
+      color: red;
+      font-size: 16px;
+      position: relative;
+      top: -20px; }
     #template-config-container #template-config p, #template-config-container #template-config label {
       margin: 0 0 10px 0;
       font-weight: 400;
@@ -10185,4 +10190,3 @@ div#sort-col-modal div.modal-body {
   overflow-x: hidden;
   max-height: inherit;
 }
-
