@@ -9076,6 +9076,11 @@ div#background-container {
               background: #0695d6; }
       #edit-package-container #edit-package form .control-group, #edit-package-container #new-package form .control-group, #new-package-container #edit-package form .control-group, #new-package-container #new-package form .control-group {
         margin: 0 0 30px 0; }
+
+        #edit-package-container #edit-package form .control-group label.form-error-message, #edit-package-container #new-package form .control-group label.form-error-message, #new-package-container #edit-package form .control-group label.form-error-message, #new-package-container #new-package form .control-group label.form-error-message {
+          margin: 10px 0 0 0;
+          font-size: 16px;
+          color: red; }
         #edit-package-container #edit-package form .control-group label, #edit-package-container #new-package form .control-group label, #new-package-container #edit-package form .control-group label, #new-package-container #new-package form .control-group label {
           font-size: 20px;
           color: #999999;
