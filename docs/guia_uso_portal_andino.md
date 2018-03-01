@@ -14,6 +14,8 @@
   - [Temas](#temas)
   - [Datasets](#datasets)
   - [Recursos](#recursos)
+  - [Campos de un recurso](#campos-de-un-recurso)
+  - [Series de tiempo](#series-de-tiempo)
   - [Etiquetas](#etiquetas)
 - [Personalizar el portal](#personalizar-el-portal)
 - [Integrar Andino con Google Analytics](#integrar-andino-con-google-analytics)
@@ -174,18 +176,18 @@ Ingresá a tu cuenta y andá a **Página principal > Crear dataset**.
 
 Cada dataset está formado por, al menos, un recurso. Por eso decimos que los recursos son la pieza de información más pequeña del catálogo y los verdaderos activos de datos del portal. 
 
-##### ¿Dónde los veo en el portal?
+#### ¿Dónde los veo en el portal?
 
 Página principal > Datasets > Clic en el recurso específico.
 
-##### Buenas prácticas al crear recursos
+#### Buenas prácticas al crear recursos
 Seguí los mismos criterios de escritura que con los datasets. 
 
 * **Títulos de los recursos**: intentá no superar los 150 caracteres. 
 
 * **Descripción de los recursos**: intentá no superar los 200 caracteres.
 
-##### ¿Cómo los creo?
+#### ¿Cómo los creo?
 
 Ingresá a tu cuenta y andá a Página principal > Crear dataset. Una vez que completes el dataset, podrás agregar recursos. 
 
@@ -193,6 +195,50 @@ Ingresá a tu cuenta y andá a Página principal > Crear dataset. Una vez que co
 
 Al igual que con los datasets, siempre podrás editar los recursos que hayas creado. Para eso, ingresá a tu cuenta > Página principal > Datasets > Editar dataset > Editar recursos. 
 ***
+### Campos de un recurso
+
+Los recursos pueden tener mucha información y ser difíciles de comprender, para ayudar a los usuarios que ven nuestros recursos, Andino permite documentar qué contiene cada campo.
+
+#### ¿Dónde los veo en el portal?
+
+Los recursos que tengan información sobre sus campos se visualizarán en la vista de un recurso.
+
+IMAGEN
+
+#### Buenas prácticas al cargar campos de un recurso
+
+Puede ser de mucha ayuda para los usuarios que siempre cargues al menos los siguientes campos:
+- Título de la columna
+- Tipo de dato
+- Descripción
+
+También podés usar estos campos para documentar aspectos más avanzados de las columnas de un recurso:
+- Unidad de medida
+- Identificador
+- Tipo de dato especial
+- Detalle de tipo especial
+
+***
+
+### Series de tiempo
+
+Andino permite documentar recursos que publican ** series de tiempo **.
+
+#### ¿Cómo documento una serie de tiempo?
+En el formulario de carga de un recurso vas a encontrar campos avanzados y especiales que necesitás usar para documentar las columnas de una tabla que contiene series de tiempo.
+
+Los campos **Tipo de dato especial** y **Detalle de tipo especial** te permiten marcar la columna del índice de tiempo y qué frecuencia tiene. 
+
+IMAGEN
+
+Los campos  **Unidad de medida **e** Identificador** te permiten documentar cada una de las columnas que son series de tiempo.
+
+IMAGEN
+
+Para conocer más sobre series de tiempo mirá la [documentación completa](http://paquete-apertura-datos.readthedocs.io/es/stable/guia_metadatos.html#series-de-tiempo "documentación completa") en el perfil de metadatos.
+
+***
+
 ### Etiquetas
 
 Son las palabras que ayudan a los usuarios a filtrar y encontrar los datasets. Cuanto más amplia y uniforme sea la lista de Etiquetas, mayor es su poder de ayuda. 
