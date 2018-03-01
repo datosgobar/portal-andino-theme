@@ -203,7 +203,7 @@ Los recursos pueden tener mucha información y ser difíciles de comprender, par
 
 Los recursos que tengan información sobre sus campos se visualizarán en la vista de un recurso.
 
-IMAGEN
+![alt text](assets/portal-andino-metadatos.jpg "metadatos")
 
 #### Buenas prácticas al cargar campos de un recurso
 
@@ -229,11 +229,11 @@ En el formulario de carga de un recurso vas a encontrar campos avanzados y espec
 
 Los campos **Tipo de dato especial** y **Detalle de tipo especial** te permiten marcar la columna del índice de tiempo y qué frecuencia tiene. 
 
-IMAGEN
+![alt text](assets/portal-andino-campos-especiales.jpg "campos-especiales")
 
 Los campos  **Unidad de medida **e** Identificador** te permiten documentar cada una de las columnas que son series de tiempo.
 
-IMAGEN
+![alt text](assets/portal-andino-campos-avanzados.jpg "campos-avanzados")
 
 Para conocer más sobre series de tiempo mirá la [documentación completa](http://paquete-apertura-datos.readthedocs.io/es/stable/guia_metadatos.html#series-de-tiempo "documentación completa") en el perfil de metadatos.
 
