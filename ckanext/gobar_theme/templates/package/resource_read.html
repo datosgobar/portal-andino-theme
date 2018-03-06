@@ -19,6 +19,7 @@
 
 
 {% block content %}
+
     <div class="resource-container container-fluid">
         <div class="restricted-max-width">
             <div class="resource col-xs-12 col-md-10 col-md-offset-1">
@@ -27,73 +28,81 @@
                     <a href="{{ h.url_for(controller='package', action='search') }}">{{ title if title else '' }}</a> / <a href="{{ h.url_for(controller='package', action='read', id=pkg.name) }}">Dataset</a> / Recurso
 
                     {% set can_edit = h.check_access('package_update', {'id':pkg.id }) %}
-
                     {% if can_edit %}
                         {% link_for 'EDITAR RECURSO', controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-blue edit-resource' %}
                     {% endif %}
                 </div>
-                <div class="col-xs-12 title">
+                <div class="col-xs-10 title">
                     <h1>{{ res.name }}</h1>
 
                     <p>{{ res.description }}</p>
-                    <a href="{{ res.url }}">
-                        <button>DESCARGAR</button>
-                    </a>
                 </div>
+                <div class="col-xs-2 resource-actions">
+                    <a class="btn btn-green btn-block" href="{{ res.url }}">DESCARGAR</a>
 
-                <div class="resource-additional-info col-xs-12 col-md-12 row"
-                     style="border-bottom: 0; width: 103%; margin-bottom: 20px;">
-                    <h2 class="title-h" style="padding-bottom: 0 !important;">Previsualización</h2>
-                </div>
-
-
-                <div class="data-preview hidden-xs hidden-sm col-md-12">
-                    {% set resource_preview = h.resource_preview(c.resource, c.package) %}
-                    {% snippet "package/snippets/resource_views_list.html",
-                        views=resource_views,
-                        pkg=pkg,
-                        is_edit=false,
-                        view_id=current_resource_view['id'],
-                        resource_preview=resource_preview,
-                        resource=c.resource,
-                        extra_class="nav-tabs-plain" %}
-                    {% set resource_preview = h.resource_preview(c.resource, c.package) %}
-                    {% set views_created = res.has_views or resource_preview %}
-                    {% if views_created %}
-                        {% if resource_preview and not current_resource_view %}
-                            {{ h.resource_preview(c.resource, c.package) }}
-                        {% else %}
-                            {% for resource_view in resource_views %}
-                                {% if resource_view == current_resource_view %}
-                                    {% snippet 'package/snippets/resource_view.html',
-                             resource_view=resource_view,
-                             resource=c.resource,
-                             package=c.package %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    {% else %}
-                        {% if h.check_access('resource_view_create', {'resource_id': c.resource.id}) %}
-                            <p class="muted">
-                                <i class="icon-info-sign"></i>
-                                {{ _("Not seeing the views you were expecting?") }}
-                                <a href="javascript:void(0);" data-toggle="collapse"
-                                   data-target="#data-view-info">
-                                    {{ _('Click here for more information.') }}</a>
-                            </p>
-                            <div id="data-view-info" class="collapse">
-                                <p>{{ _('Here are some reasons you may not be seeing expected views:') }}</p>
-                                <ul>
-                                    <li>{{ _("No view has been created that is suitable for this resource") }}</li>
-                                    <li>{{ _("The site administrators may not have enabled the relevant view plugins") }}</li>
-                                    <li>{{ _("If a view requires the DataStore, the DataStore plugin may not be enabled, or the data may not have been pushed to the DataStore, or the DataStore hasn't finished processing the data yet") }}</li>
-                                </ul>
-                            </div>
-                        {% endif %}
+                    {% set distribution_metadata = h.get_distribution_metadata(ds_identifier=pkg.id, resource_title=res.name) %}
+                    {% if not h.is_distribution_local(distribution_metadata) %}
+                        {% set accessURL = distribution_metadata['accessURL'] %}
+                        <a class="btn btn-block btn-outline-primary" href="{{ accessURL }}" target="_blank">CONSULTAR EN EL<br>PORTAL DE ORIGEN</a>
                     {% endif %}
                 </div>
 
-                {% snippet "package/snippets/resource_attributes_table.html", res=res %}
+                <div class="resource-previsualization" style="display: {{ block if res.datastore_active else none }}">
+                    <div class="resource-additional-info col-xs-12 col-md-12 row"
+                         style="border-bottom: 0; width: 103%; margin-bottom: 20px; margin-top: 30px;">
+                        <h2 class="title-h" style="padding-bottom: 0 !important;">Previsualización</h2>
+                    </div>
+
+                    <div class="data-preview hidden-xs hidden-sm col-md-12">
+                        {% set resource_preview = h.resource_preview(c.resource, c.package) %}
+                        {% snippet "package/snippets/resource_views_list.html",
+                            views=resource_views,
+                            pkg=pkg,
+                            is_edit=false,
+                            view_id=current_resource_view['id'],
+                            resource_preview=resource_preview,
+                            resource=c.resource,
+                            extra_class="nav-tabs-plain" %}
+                        {% set resource_preview = h.resource_preview(c.resource, c.package) %}
+                        {% set views_created = res.has_views or resource_preview %}
+                        {% if views_created %}
+                            {% if resource_preview and not current_resource_view %}
+                                {{ h.resource_preview(c.resource, c.package) }}
+                            {% else %}
+                                {% for resource_view in resource_views %}
+                                    {% if resource_view == current_resource_view %}
+                                        {% snippet 'package/snippets/resource_view.html',
+                                 resource_view=resource_view,
+                                 resource=c.resource,
+                                 package=c.package %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}
+                            {% if h.check_access('resource_view_create', {'resource_id': c.resource.id}) %}
+                                <p class="muted">
+                                    <i class="icon-info-sign"></i>
+                                    {{ _("Not seeing the views you were expecting?") }}
+                                    <a href="javascript:void(0);" data-toggle="collapse"
+                                       data-target="#data-view-info">
+                                        {{ _('Click here for more information.') }}</a>
+                                </p>
+                                <div id="data-view-info" class="collapse">
+                                    <p>{{ _('Here are some reasons you may not be seeing expected views:') }}</p>
+                                    <ul>
+                                        <li>{{ _("No view has been created that is suitable for this resource") }}</li>
+                                        <li>{{ _("The site administrators may not have enabled the relevant view plugins") }}</li>
+                                        <li>{{ _("If a view requires the DataStore, the DataStore plugin may not be enabled, or the data may not have been pushed to the DataStore, or the DataStore hasn't finished processing the data yet") }}</li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-12 row" style="margin-top: 75px;">
+                    {% snippet "package/snippets/resource_attributes_table.html", res=res %}
+                </div>
 
                 <div class="resource-additional-info col-xs-12 col-md-12 row" style="width: 102% !important;">
                     <h2 class="title-h">Información adicional</h2>

@@ -56,4 +56,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'type_is_numeric': gobar_helpers.type_is_numeric,
             'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one,
             'portal_andino_version': gobar_helpers.portal_andino_version,
+            'get_distribution_metadata': gobar_helpers.get_distribution_metadata,
+            'is_distribution_local': gobar_helpers.is_distribution_local,
         }
