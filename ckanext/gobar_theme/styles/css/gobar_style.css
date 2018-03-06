@@ -9334,7 +9334,6 @@ div#background-container {
         float: right; }
     .resource-container .resource .title {
       padding-left: 0;
-      padding-right: 120px;
       margin-bottom: 15px; }
       .resource-container .resource .title h1 {
         color: #0695d6;
@@ -10194,4 +10193,20 @@ ul.sort-col-list li.placeholder:before {
 div#sort-col-modal div.modal-body {
   overflow-x: hidden;
   max-height: inherit;
+}
+
+
+.resource-container .resource .resource-actions {
+    padding: 0;
+}
+
+.resource-container .resource .resource-actions > .btn {
+    float: right;
+    margin-top: 20px;
+}
+
+.btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:focus {
+     border: 1px solid blue;
+     color: blue;
+     background: white;
 }

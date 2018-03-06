@@ -99,19 +99,3 @@ $(window).load(function(){
     }
 
 });
-
-$(function () {
-    var resource_url = $('div.resource-previsualization').data('url');
-    alert(resource_url);
-//    if (window.location.href === resource_url){
-//        alert(resource_url);
-//    }
-//    else{
-//        alert("La pifié, es de otro nodo. \n La url actual es " + window.location.href + "\n La url del rc es " + resource_url);
-////        $('div.resource-previsualization').css('display', 'none');
-//    }
-    if (resource_url){
-        $('div.resource-previsualization').css('display', 'none');
-        $('.original-portal').css('display', 'block');
-    }
-});

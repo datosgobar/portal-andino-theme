@@ -1,4 +1,6 @@
 # coding=utf-8
+from pylons.config import config
+
 import ckan.logic as logic
 import ckan.lib.helpers as ckan_helpers
 from urlparse import urlparse
@@ -7,6 +9,7 @@ import ckan.lib.formatters as formatters
 import json
 from urlparse import urljoin
 from config_controller import GobArConfigController
+from pydatajson.core import DataJson
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -282,3 +285,16 @@ def portal_andino_version():
     from ckanext.gobar_theme.actions import _get_portal_andino_version
     version = _get_portal_andino_version()
     return version['portal-andino']
+
+
+def get_distribution_metadata(ds_identifier, resource_title):
+    ckan_site_url = config.get('ckan.site_url')
+    datajson = DataJson(ckan_site_url + '/data.json')
+    dist = datajson.get_distribution(title=resource_title, dataset_identifier=ds_identifier)
+    return dist
+
+
+def is_distribution_local(distribution_metadata):
+    ckan_site_url = config.get('ckan.site_url')
+    accessURL = distribution_metadata.get('accessURL', '')
+    return accessURL.startswith(ckan_site_url)
