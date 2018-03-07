@@ -40,3 +40,10 @@ function convert_ddmmyyyy_to_mmddyyyy(date) {
     year = date.charAt(6) + date.charAt(7) + date.charAt(8) + date.charAt(9);
     return month + date.charAt(2) + day + date.charAt(5) + year;
 }
+
+$(function () {
+    $('#date-from').datepicker({
+        language: 'es',
+        today: "Hoy"
+    });
+});
