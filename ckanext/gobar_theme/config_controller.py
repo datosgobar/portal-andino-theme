@@ -221,7 +221,7 @@ class GobArConfigController(base.BaseController):
             new_metadata_config = {
                 'homepage': params['metadata-homepage'].strip(),
                 'id': params['metadata-id'].strip(),
-                'launch_date': params['metadata-launch_date'][1],
+                'launch_date': params['metadata-launch_date'],
                 'licence_conditions': params['metadata-licence_conditions'].strip(),
                 'languages': languages,
                 'last_updated': moment.now().isoformat(),

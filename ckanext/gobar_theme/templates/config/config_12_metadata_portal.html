@@ -17,41 +17,19 @@
 
         <h2 name="launch_date_h2">Fecha de lanzamiento (recomendado)</h2>
         {% set launch_date = h.get_theme_config('portal-metadata.launch_date') %}
-        <input name="metadata-launch_date" type="text" title="Fecha de lanzamiento" placeholder="DD/MM/AAAA"
-               value="{{ launch_date if launch_date else '' }}">
+        <!--<input name="metadata-launch_date" type="text" title="Fecha de lanzamiento"-->
+               <!--value="{{ launch_date if launch_date else '' }}">-->
 
 
 
 {# ========================================================= #}
     <div class="control-group">
-        {% set date_has_time = False %}
-        <label>Tiempo que cubre el dataset</label>
-        <label class="detail-hour">
-            <input type="checkbox" id="date_with_time" {{ 'checked' if date_has_time else '' }}>
-            ¿Querés detallar la hora?
-        </label>
         <table class="date-picker" data-dates="{{ h.get_pkg_extra(data, 'dateRange') }}">
             <tr>
                 <td>
-                    <label class="picker-date-from">Desde <input type="text" id="date-from" name="metadata-launch_date" value="{{ launch_date if launch_date else '' }}"></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="hidden hour-picker-from">
-                        {% set hours = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"] %}
-                        <select id="date-from-hour">
-                            {% for hour in hours %}
-                                <option val="{{ hour }}">{{ hour }}</option>
-                            {% endfor %}
-                        </select>
-                        {% set minutes = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"] %}
-                        <select id="date-from-minute">
-                            {% for minute in minutes %}
-                                <option val="{{ minute }}">{{ minute }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                    <label class="picker-date-from">
+                        <input name="metadata-launch_date" type="text" title="Fecha de lanzamiento" id="date-from" placeholder="DD/MM/AAAA"
+                               value="{{ launch_date if launch_date else '' }}"></label>
                 </td>
             </tr>
         </table>

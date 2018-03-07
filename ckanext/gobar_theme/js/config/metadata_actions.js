@@ -41,57 +41,9 @@ function convert_ddmmyyyy_to_mmddyyyy(date) {
     return month + date.charAt(2) + day + date.charAt(5) + year;
 }
 
-
-
-
-
-
-
 $(function () {
-
-    // var dateFrom = $('#date-from').datepicker('getDate');
-    // if (dateFrom) {
-    //     var withHours = $('#date_with_time').is(':checked');
-    //     if (withHours && dateFrom) {
-    //         var hoursFrom = $('#date-from-hour option:selected').val();
-    //         var minutesFrom = $('#date-from-minute option:selected').val();
-    //         dateFrom.setHours(hoursFrom, minutesFrom);
-    //     }
-    //     var value = '';
-    //     if (dateFrom) {
-    //         value = dateFrom.toISOString();  TODO: este bloque hace que el calendario aparezca siempre en inglés y necesito que esté en español
-    //     addExtra('dateRange', value);        TODO: además, acá necesito pegarle la hora y los minutos para que esté en el data.json
-    // }                                        TODO: ver qué parte del bloque hace que funcione mal
-
-
     $('#date-from').datepicker({
-        language: 'es'
+        language: 'es',
+        today: "Hoy"
     });
-
-    var dates = $('.date-picker').data('dates');
-    var dateFrom;
-    if (dates.indexOf('/')) {
-        dates = dates.split('/');
-        dateFrom = new Date(dates[0]);
-    } else {
-        dateFrom = new Date(dates);
-    }
-    if (dateFrom instanceof Date && isFinite(dateFrom)) {
-        $('#date-from').datepicker('setDate', dateFrom);
-        var hoursFrom = dateFrom.getHours();
-        var minutesFrom = dateFrom.getMinutes();
-        if (hoursFrom != 0 || minutesFrom != 0) {
-            hoursFrom = hoursFrom < 10 ? '0' + hoursFrom : hoursFrom.toString();
-            minutesFrom = minutesFrom < 10 ? '0' + minutesFrom : minutesFrom.toString();
-            $('#date_with_time').prop('checked', true);
-            $('#date-from-hour').val(hoursFrom);
-            $('#date-from-minute').val(minutesFrom);
-        }
-    }
-
-    $('#date_with_time').on('change', function (e) {
-        var showHours = $(e.currentTarget).is(':checked');
-        $('.hour-picker-from').toggleClass('hidden', !showHours);
-    });
-
 });
