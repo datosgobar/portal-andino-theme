@@ -10217,15 +10217,15 @@ div#sort-col-modal div.modal-body {
 }
 
 hr.section {
-  margin: 5px 0;
+  margin: 5px 0 30px 0;
   border: 0;
   border-top: 1px solid #ccc;
 }
 
-div.sections-container{
-  margin: 20px 0;
-}
-
 div.basic-about, div.advanced-about{
   display: none;
+}
+
+div.explanation {
+  margin-bottom: 10px;
 }
