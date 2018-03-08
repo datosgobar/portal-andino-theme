@@ -7397,6 +7397,10 @@ div#background-container {
   #recover-password.modal .can-have-feedback-img.fullname-feedback .feedback-img {
     left: auto;
     right: 8px; }
+  #template-config-container #template-config select{
+    margin-bottom: 40px;
+    width: 100%;
+    height: auto; }
 
 #password-reset.modal {
   width: 500px;
@@ -9846,7 +9850,7 @@ ul.activity {
     #template-config-container #template-config h1 {
       color: #0695d6;
       font-weight: 400;
-      margin: 50px 0 30px 0;
+      margin: 50px 0 10px 0;
       font-size: 40px; }
       #template-config-container #template-config h1.small-margin {
         margin-bottom: 10px; }
@@ -9865,7 +9869,7 @@ ul.activity {
       position: relative;
       top: -20px; }
     #template-config-container #template-config p, #template-config-container #template-config label {
-      margin: 0 0 10px 0;
+      margin: 0 0 30px 0;
       font-weight: 400;
       font-size: 16px; }
       #template-config-container #template-config p:after, #template-config-container #template-config label:after {
@@ -9980,7 +9984,7 @@ ul.activity {
       color: #767676;
       width: 100%;
       font-size: 16px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       padding: 10px;
       height: 100px; }
     #template-config-container #template-config .submit-container {
@@ -9991,6 +9995,7 @@ ul.activity {
         background-color: #0695d6;
         color: white;
         border: none;
+        float: right;
         -o-border-radius: 4px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
@@ -10209,4 +10214,14 @@ div#sort-col-modal div.modal-body {
      border: 1px solid blue;
      color: blue;
      background: white;
+}
+
+hr.section {
+  margin: 5px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+div.sections-container{
+  margin: 20px 0;
 }
