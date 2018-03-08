@@ -10225,3 +10225,7 @@ hr.section {
 div.sections-container{
   margin: 20px 0;
 }
+
+div.basic-about, div.advanced-about{
+  display: none;
+}

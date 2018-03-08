@@ -14,7 +14,7 @@
         </select>
 
 
-        <div class="basic">
+        <div class="basic-about">
             <h2 class="explanation basic">Información básica</h2>
             <label class="explanation basic">Contá qué son los datasets de tu portal. Aprovechá y explicá qué son los datos
             abiertos, e invitá a tus usuarios a que los usen, los modifiquen y los compartan.</label>
@@ -31,7 +31,7 @@
         </div>
 
 
-        <div class="advanced">
+        <div class="advanced-about">
             <h2 class="explanation advanced">Secciones personalizadas</h2>
             <label class="explanation advanced">Para agregar una nueva sección, podés crear archivos .html en la carpeta
                 "custom". Te sugerimos guiarte viendo el archivo "seccion-acerca.html". Lo único que tenés que completar
@@ -58,4 +58,7 @@
             <button class="submit-button" type="submit" name="save">GUARDAR CAMBIOS</button>
         </div>
     </form>
+
+{% resource 'gobar_js/config/about_actions.js' %}
+
 {% endblock %}
