@@ -10,14 +10,14 @@
         <select>
             <option>No quiero una sección de acerca</option>
             <option>Quiero una sección de acerca que dé información básica</option>
-            <option>Quiero secciones personalizadas (avanzado)</option>
+            <option selected>Quiero secciones personalizadas (avanzado)</option>
         </select>
 
 
         <div class="basic-about">
             <div class="explanation">
-                <h2 class="explanation basic">Información básica</h2>
-                <label class="explanation basic">Contá qué son los datasets de tu portal. Aprovechá y explicá qué son los datos
+                <h2>Información básica</h2>
+                <label>Contá qué son los datasets de tu portal. Aprovechá y explicá qué son los datos
                     abiertos, e invitá a tus usuarios a que los usen, los modifiquen y los compartan.</label>
             </div>
 
@@ -43,23 +43,45 @@
             </div>
 
 
+            <!--
+            '[{ "title": "x1", "fileName": "y1" }, { "title": "x2", "fileName": "y2" }]'
+             -->
+            {% set sections = h.json_loads('[{ "title": "x1", "fileName": "y1" }, { "title": "x2", "fileName": "y2" }]') %}
+            {% set sections = h.get_theme_config('about.sections', []) %}
             <div class="sections-container">
-                <!-- for -->
-                <!-- div -->
-                <button type="button" class="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h2 class="section">Sección </h2>
-                <hr class="section">
+                {% if sections|length > 1 %}
+                    {% for section in sections %}
+                        <!-- div -->
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h2 class="section">Sección</h2>
+                        <hr class="section">
 
-                <h2>Título</h2>
-                <input name="about-section-title" type="text" title="Título" value="">
+                        <h2>Título</h2>
+                        <input name="about-section-title" type="text" title="Título" value="{{ section.title }}">
 
-                <h2>Nombre del archivo</h2>
-                <input name="about-section-filename" type="text" title="Nombre del archivo" value="">
+                        <h2>Nombre del archivo</h2>
+                        <input name="about-section-filename" type="text" title="Nombre del archivo" value="{{ section.fileName }}">
+                        <!-- /div -->
+                    {% endfor %}
+                {% else %}
+                    <!-- div -->
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 class="section">Sección</h2>
+                    <hr class="section">
 
-                <!-- /div -->
-                <!-- endfor -->
+                    <h2>Título</h2>
+                    <input name="about-section-title" type="text" title="Título" value="">
+
+                    <h2>Nombre del archivo</h2>
+                    <input name="about-section-filename" type="text" title="Nombre del archivo" value="">
+                    <!-- /div -->
+                {% endif %}
+
+                <input type="hidden" id="about-sections" value="" />
             </div>
         </div>
 

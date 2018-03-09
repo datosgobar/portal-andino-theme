@@ -164,7 +164,8 @@ class GobArConfigController(base.BaseController):
             config_dict['about'] = {
                 'title': params['about-title'].strip(),
                 'description': params['about-description'].strip(),
-                'show-about': 'show-about' in params
+                'show-about': 'show-about' in params,
+                'sections': params['about-sections', []],
             }
             self._set_config(config_dict)
         return base.render('config/config_09_about.html')
