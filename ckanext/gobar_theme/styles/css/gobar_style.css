@@ -9854,6 +9854,9 @@ ul.activity {
       font-size: 40px; }
       #template-config-container #template-config h1.small-margin {
         margin-bottom: 10px; }
+      #template-config-container #template-config h1.section-deletion{
+        color: red;
+      }
     #template-config-container #template-config h2 {
       font-weight: 400;
       margin: 0 0 10px 0;
@@ -10238,4 +10241,16 @@ button#add-another-section{
   margin-top: 40px;
   background-color: #e6f5fc;
   cursor: pointer;
+}
+
+div.section-deletion{
+  text-align: center;
+}
+
+button.section-deletion{
+  background-color: red;
+}
+
+div.section-div{
+  margin-bottom: 40px;
 }

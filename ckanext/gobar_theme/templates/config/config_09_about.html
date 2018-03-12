@@ -4,7 +4,8 @@
 {% block config %}
     <h1>Acerca (opcional)</h1>
     <label>Desde aquí podés seleccionar qué tipo de información querés contar de tu portal. <br>
-    Podés elegir entre brindar una información básica, secciones personalizadas, o elegir no tener esta sección.</label>
+        Podés elegir entre brindar una información básica, secciones personalizadas, o elegir no tener esta
+        sección.</label>
 
     <form method="post" action="" data-module="basic-form">
         <h2>Seleccioná una opción</h2>
@@ -38,12 +39,30 @@
             <div class="explanation">
                 <h2>Secciones personalizadas</h2>
                 <label>Para agregar una nueva sección, podés crear archivos .html en la carpeta
-                    "custom". Te sugerimos guiarte viendo el archivo "seccion-acerca.html". Lo único que tenés que completar
+                    "custom". Te sugerimos guiarte viendo el archivo "seccion-acerca.html". Lo único que tenés que
+                    completar
                     aquí es el nombre de ese archivo y qué título llevará la sección.
                 </label>
             </div>
 
             {% set sections = h.get_theme_config('about.sections', []) %}
+
+            <div id="delete-section-modal" class="modal section-deletion" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h1 class="section-deletion">Eliminar sección</h1>
+                            <div>¿Estás seguro que deseás eliminar la sección?</div>
+                            <div class="modal-actions">
+                                <button class="btn" type="button" data-dismiss="modal">CANCELAR</button>
+                                <button class="btn section-deletion" type="button" data-dismiss="modal" id="delete-section-btn">
+                                    ELIMINAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="sections-container">
                 {% if sections|length > 0 %}
@@ -56,31 +75,35 @@
                             <hr class="section">
 
                             <h2>Título</h2>
-                            <input class="about-section-title" name="about-section-title" type="text" title="Título" value="{{ section.title }}">
+                            <input class="about-section-title" name="about-section-title" type="text" title="Título"
+                                   value="{{ section.title }}">
 
                             <h2>Nombre del archivo</h2>
-                            <input class="about-section-filename" name="about-section-filename" type="text" title="Nombre del archivo" value="{{ section.fileName }}">
+                            <input class="about-section-filename" name="about-section-filename" type="text"
+                                   title="Nombre del archivo" value="{{ section.fileName }}">
                         </div>
                     {% endfor %}
                 {% else %}
                     <div class="section-div">
                         <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">x</span>
                         </button>
                         <h2 class="section">Sección</h2>
                         <hr class="section">
 
                         <h2>Título</h2>
-                        <input class="about-section-title" name="about-section-title" type="text" title="Título" value="">
+                        <input class="about-section-title" name="about-section-title" type="text" title="Título"
+                               value="">
 
                         <h2>Nombre del archivo</h2>
-                        <input class="about-section-filename" name="about-section-filename" type="text" title="Nombre del archivo" value="">
+                        <input class="about-section-filename" name="about-section-filename" type="text"
+                               title="Nombre del archivo" value="">
                     </div>
                 {% endif %}
 
                 <button id="add-another-section" type="button">+ Agregar nueva sección</button>
 
-                <input type="hidden" name="about-sections" id="about-sections" value="" />
+                <input type="hidden" name="about-sections" id="about-sections" value=""/>
 
             </div>
         </div>
@@ -91,6 +114,6 @@
         </div>
     </form>
 
-{% resource 'gobar_js/config/about_actions.js' %}
+    {% resource 'gobar_js/config/about_actions.js' %}
 
 {% endblock %}

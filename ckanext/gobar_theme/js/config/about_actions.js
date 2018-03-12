@@ -49,28 +49,17 @@ $('form').on('submit', function (e) {
     $('#about-sections').val(JSON.stringify(sections));
 });
 
+$('button.close').on('click', function () {
+    var parent_div = $(this).parent();
+    $('#delete-section-modal').modal(parent_div);
 
-// $('form').on('submit', function (e) {
-//     alert("empiezo");
-//     var sections = [];
-//     // $('div.section-div').each(function (i, obj) {
-//         $('div.section-div input').each(function () {
-//             if($(this).hasClass('about-section-title')){
-//                 alert("Título: " + this.value);
-//             }
-//             if($(this).hasClass('about-section-filename')){
-//                 alert("Filename: " + this.value);
-//             }
-// });
-//     var title_input = obj.getElementsByClassName("about-section-title")[0].val();
-//     alert(title_input);
-//     var filename_input = obj.getElementsByClassName("about-section-filename")[0].val();
-//     alert(filename_input);
-//     // var section = '{'
-//     //                 + '"title": ' + title_input + ','
-//     //                 + '"fileName: ' + filename_input
-//         //     //             + '}';
-//         //     var section = JSON.stringify({title: title_input, fileName: filename_input});
-//         //     sections.push(section);
-//     });
-// });
+    $(document).on('click', '#delete-section-btn', function(e) {
+        var isTheOnlyOne = $('div.section-div').length === 1;
+        if (isTheOnlyOne) {
+            parent_div.find('input').val('');  // Elimina los datos de la sección
+        } else {
+            parent_div.remove();
+        }
+    });
+    
+});
