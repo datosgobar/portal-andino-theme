@@ -10229,3 +10229,13 @@ div.basic-about, div.advanced-about{
 div.explanation {
   margin-bottom: 10px;
 }
+
+button#add-another-section{
+  color: #0695d6;
+  text-align: center;
+  width: 100%;
+  height: 80px;
+  margin-top: 40px;
+  background-color: #e6f5fc;
+  cursor: pointer;
+}

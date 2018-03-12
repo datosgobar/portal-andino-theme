@@ -1,4 +1,5 @@
 {% extends "config/config_base.html" %}
+<meta charset="UTF-8">
 
 {% block config %}
     <h1>Acerca (opcional)</h1>
@@ -42,13 +43,10 @@
                 </label>
             </div>
 
-
-            <!--
-            '[{ "title": "x1", "fileName": "y1" }, { "title": "x2", "fileName": "y2" }]'
-             -->
             {% set sections = h.get_theme_config('about.sections', []) %}
+
             <div class="sections-container">
-                {% if sections|length > 1 %}
+                {% if sections|length > 0 %}
                     {% for section in sections %}
                         <div class="section-div">
                             <button type="button" class="close" aria-label="Close">
@@ -80,7 +78,10 @@
                     </div>
                 {% endif %}
 
+                <button id="add-another-section" type="button">+ Agregar nueva sección</button>
+
                 <input type="hidden" name="about-sections" id="about-sections" value="" />
+
             </div>
         </div>
 

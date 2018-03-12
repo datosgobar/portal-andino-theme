@@ -21,6 +21,12 @@ function show_specific_content(selected_value) {
     }
 }
 
+$('button#add-another-section').on('click', function (e) {
+   e.preventDefault();
+    var new_div = '<div class="section-div"><button type="button" class="close" aria-label="Close"><span aria-hidden="true">x</span></button><h2 class="section">Sección</h2><hr class="section"><h2>Título</h2><input class="about-section-title" name="about-section-title" type="text" title="Título" value=""><h2>Nombre del archivo</h2><input class="about-section-filename" name="about-section-filename" type="text" title="Nombre del archivo" value=""></div>';
+    $('button#add-another-section').before(new_div);
+});
+
 $('form').on('submit', function (e) {
     var sections = [];
     $('div.section-div').each(function () {
@@ -37,14 +43,10 @@ $('form').on('submit', function (e) {
             }
         });
 
-        // var section = JSON.stringify({title: title_input, fileName: filename_input});
-        var section = '{'
-            + '"title": ' + title_input + ','
-            + '"fileName": ' + filename_input
-            + '}';
+        var section = {title: title_input, fileName: filename_input};
         sections.push(section);
     });
-    $('#about-sections').val(sections);
+    $('#about-sections').val(JSON.stringify(sections));
 });
 
 
