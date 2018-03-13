@@ -16,7 +16,7 @@ except ImportError:
     sslerror = None
 MailerException = ckan_mailer.MailerException
 
-andino_address = 'no-reply@andino.datos.gob.ar'
+andino_address = config.get('smtp.mail_from')
 
 reset_password_subject = u'Recuperemos tu contraseña de {site_title}'
 
