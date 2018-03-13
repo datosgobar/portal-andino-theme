@@ -28,7 +28,7 @@
                             </a>
                         </div>
                     {% endif %}
-                    {% if h.get_theme_config('about.show-about') %}
+                    {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' %}
                         <div class="navbar-link">
                             <a href="{{ h.url('gobar_about') }}">
                                 ACERCA
@@ -78,7 +78,7 @@
                             DATOS</a>
                     {%- endif -%}
 
-                    {% if h.get_theme_config('about.show-about') %}
+                    {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' %}
                         <a class="header-link" href="{{ h.url('gobar_about') }}">ACERCA</a>
                     {%- endif -%}
 
