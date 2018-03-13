@@ -139,8 +139,7 @@ def assemble_email(msg_plain_body, msg_html_body, msg_subject, recipient_name, r
     msg.attach(text_msg)
     msg.attach(html_msg)
     msg['Subject'] = Header(msg_subject.encode('utf-8'), 'utf-8')
-    site_title = gobar_helpers.get_theme_config('title.site-title', 'Portal Andino')
-    msg['From'] = "%s <%s>" % (site_title, andino_address)
+    msg['From'] = andino_address
     recipient = u"%s <%s>" % (recipient_name, recipient_email)
     msg['To'] = Header(recipient, 'utf-8')
     msg['Date'] = Utils.formatdate(time())
