@@ -7,12 +7,18 @@
         Podés elegir entre brindar una información básica, secciones personalizadas, o elegir no tener esta
         sección.</label>
 
+    {% set current_type = h.get_theme_config('about.about-type') %}
+    {% set types = [
+        {"name": "No quiero una sección de acerca"},
+        {"name": "Quiero una sección de acerca que dé información básica"},
+        {"name": "Quiero secciones personalizadas (avanzado)"},
+    ] %}
     <form method="post" action="" data-module="basic-form">
         <h2>Seleccioná una opción</h2>
-        <select>
-            <option>No quiero una sección de acerca</option>
-            <option>Quiero una sección de acerca que dé información básica</option>
-            <option selected>Quiero secciones personalizadas (avanzado)</option>
+        <select name="about-type">
+            {% for type in types %}
+                <option value="{{ type.name }}" {{ 'selected' if type.name == current_type }}>{{ type.name }}</option>
+            {% endfor %}
         </select>
 
 
