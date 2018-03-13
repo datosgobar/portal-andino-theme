@@ -45,8 +45,10 @@ $('form').on('submit', function () {
             }
         });
 
-        var section = {title: title_input, fileName: filename_input};
-        sections.push(section);
+        if(title_input !== '' || filename_input !== ''){
+            var section = {title: title_input, fileName: filename_input};
+            sections.push(section);
+        }
     });
     $('#about-sections').val(JSON.stringify(sections));
 });
@@ -58,7 +60,7 @@ $('button.close').on('click', function () {
     $(document).on('click', '#delete-section-btn', function () {
         var isTheOnlyOne = $('div.section-div').length === 1;
         if (isTheOnlyOne) {
-            parent_div.find('input').val('');  // Elimina los datos de la sección  todo: chequear que una seccion no se envie vacia
+            parent_div.find('input').val('');  // Elimina los datos de la sección
         } else {
             parent_div.remove();
         }
