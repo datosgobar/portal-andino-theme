@@ -31,8 +31,10 @@ $(function() {
         writeDivIndexes();
     });
 
-    $('form').on('submit', function () {
+    $('form').on('submit', function (e) {
         var sections = [];
+        var filenames = [];
+        var repeated_filename = false;
         $('div.section-div').each(function () {
             var all_inputs = $(this).find('input');
             var title_input = "";
@@ -44,6 +46,25 @@ $(function() {
                 }
                 if ($(this).hasClass('about-section-filename')) {
                     filename_input = this.value;
+                    if(filenames.indexOf(filename_input) >= 0){
+                        if (!document.getElementById("error-launch-date")) { // if parent doesn't have error
+                            var newLabel = document.createElement('label');
+                            var text = document.createTextNode("Ya se ingresó un nombre de archivo idéntico a este.");
+                            newLabel.appendChild(text);
+                            newLabel.className += 'filename-error-message';
+                            newLabel.style.color = "red";
+                            newLabel.style.fontSize = "16px";
+                            newLabel.style.marginBottom = "30px";
+                            $(this).after(newLabel);
+                        }
+                        repeated_filename = true;
+                    }
+                    else {
+                        filenames.push(filename_input);
+                        if($(this).next('label.filename-error-message').length){
+                            $(this).next('label.filename-error-message').remove();
+                        }
+                    }
                 }
             });
 
@@ -51,8 +72,16 @@ $(function() {
                 var section = {title: title_input, fileName: filename_input};
                 sections.push(section);
             }
+
         });
-        $('#about-sections').val(JSON.stringify(sections));
+        if(repeated_filename){
+            alert("Error");
+            e.preventDefault();
+        }
+        else{
+            alert("No hubo error");
+            $('#about-sections').val(JSON.stringify(sections));
+        }
     });
 
     $(document).on('click', 'button.close', function () {
@@ -82,7 +111,6 @@ $(function() {
     function createSectionDiv() {
         var div = $($('div.section-div')[0]).clone();
         div.find('input').val('');
-        alert(div);
         return div;
     }
 

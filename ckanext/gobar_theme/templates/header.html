@@ -1,3 +1,4 @@
+
 <div id="header" class="container-fluid">
     <div class="restricted-max-width">
         <div id="header-spacing" class="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -79,7 +80,40 @@
                     {%- endif -%}
 
                     {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' %}
-                        <a class="header-link" href="{{ h.url('gobar_about') }}">ACERCA</a>
+                        {% set header_sections = h.get_theme_config('about.sections', []) %}
+                        <span class="header-link dropdown">
+                            ACERCA <span class="caret"></span>
+                            <ul class="about-dropdown" style="bottom:-120px;">
+
+                                {% if header_sections|length > 0 %}
+                                    {% for header_section in header_sections %}
+                                        <a href="{{ h.url('gobar_our_site') }}">
+                                            <li>{{ header_section.title }}</li>
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="section-div">
+                                        <a href="#">
+                                            <li>No hay secciones</li>
+                                        </a>
+                                    </div>
+                                {% endif %}
+
+
+
+{#                                <a href="{{ h.url('gobar_our_site') }}">#}
+{#                                    <li>NUESTRO PORTAL</li>#}
+{#                                </a>#}
+{##}
+{#                                <a href="{{ h.url('gobar_legal') }}">#}
+{#                                    <li>MARCO LEGAL</li>#}
+{#                                </a>#}
+{##}
+{#                                <a href="{{ h.url('gobar_glossary') }}">#}
+{#                                    <li>GLOSARIO</li>#}
+{#                                </a>#}
+                            </ul>
+                        </span>
                     {%- endif -%}
 
                     {%- if c.userobj -%}
