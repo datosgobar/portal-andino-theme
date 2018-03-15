@@ -76,11 +76,9 @@ $(function() {
 
             });
             if(repeated_filename){
-                alert("NO HAGO NADA");
                 e.preventDefault();
             }
             else{
-                alert("Joya.");
                 $('#about-sections').val(JSON.stringify(sections));
             }
         }
