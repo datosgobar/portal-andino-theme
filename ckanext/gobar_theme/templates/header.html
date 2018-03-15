@@ -2,6 +2,9 @@
 <div id="header" class="container-fluid">
     <div class="restricted-max-width">
         <div id="header-spacing" class="col-xs-12 col-sm-10 col-sm-offset-1">
+
+            {% set header_sections = h.get_theme_config('about.sections', []) %}
+
             <div class="col-xs-12 col-sm-5 no-padding logo-header">
                 <div class="logo-and-xs-icon">
                     <i class="icon-reorder" aria-hidden="true"></i>
@@ -22,6 +25,7 @@
                             DATASETS
                         </a>
                     </div>
+                    <hr>
                     {% if h.get_theme_config('organization.show-organizations') %}
                         <div class="navbar-link">
                             <a href="{{ h.url_for(controller='organization', action='index') }}">
@@ -29,13 +33,38 @@
                             </a>
                         </div>
                     {% endif %}
-                    {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' %}
-                        <div class="navbar-link">
-                            <a href="{{ h.url('gobar_about') }}">
+
+                    {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' and
+                          h.get_theme_config('about.about-type') != 'None'%}
+
+                        {% if h.get_theme_config('about.about-type') == 'Quiero secciones personalizadas (avanzado)' %}
+                            <div class="navbar-link dropdown-navbar-link">
                                 ACERCA
-                            </a>
-                        </div>
-                    {% endif %}
+                            </div>
+                            <div class="about-dropdown dropdown-navbar hidden">
+
+                                {% if header_sections|length > 0 %}
+                                    {% for header_section in header_sections %}
+                                        <div class="navbar-link">
+                                            <a href="{{ h.url('gobar_our_site') }}">
+                                                {{ header_section.title }}
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div style="text-align: center">
+                                        <p>No hay secciones</p>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        {% else %}
+                            <a class="header-link" href="{{ h.url('about') }}">ACERCA</a>
+                        {% endif %}
+
+                        <hr>
+
+                    {%- endif -%}
 
                     <div class="navbar-link dropdown-navbar-link">
                         <span class="username">{{ c.userobj.name }}</span> {% snippet "svg/user-logo.svg" %}
@@ -84,7 +113,6 @@
 
                         {% if h.get_theme_config('about.about-type') == 'Quiero secciones personalizadas (avanzado)' %}
 
-                            {% set header_sections = h.get_theme_config('about.sections', []) %}
                             <span class="header-link dropdown">
                                 ACERCA <span class="caret"></span>
                                 <ul class="about-dropdown" style="bottom:-120px;">
