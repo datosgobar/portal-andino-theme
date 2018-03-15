@@ -32,55 +32,57 @@ $(function() {
     });
 
     $('form').on('submit', function (e) {
-        var sections = [];
-        var filenames = [];
-        var repeated_filename = false;
-        $('div.section-div').each(function () {
-            var all_inputs = $(this).find('input');
-            var title_input = "";
-            var filename_input = "";
+        if($('select').val() === 'Quiero secciones personalizadas (avanzado)'){
+            var sections = [];
+            var filenames = [];
+            var repeated_filename = false;
+            $('div.section-div').each(function () {
+                var all_inputs = $(this).find('input');
+                var title_input = "";
+                var filename_input = "";
 
-            all_inputs.each(function () {
-                if ($(this).hasClass('about-section-title')) {
-                    title_input = this.value;
-                }
-                if ($(this).hasClass('about-section-filename')) {
-                    filename_input = this.value;
-                    if(filenames.indexOf(filename_input) >= 0){
-                        if (!document.getElementById("error-launch-date")) { // if parent doesn't have error
-                            var newLabel = document.createElement('label');
-                            var text = document.createTextNode("Ya se ingresó un nombre de archivo idéntico a este.");
-                            newLabel.appendChild(text);
-                            newLabel.className += 'filename-error-message';
-                            newLabel.style.color = "red";
-                            newLabel.style.fontSize = "16px";
-                            newLabel.style.marginBottom = "30px";
-                            $(this).after(newLabel);
-                        }
-                        repeated_filename = true;
+                all_inputs.each(function () {
+                    if ($(this).hasClass('about-section-title')) {
+                        title_input = this.value;
                     }
-                    else {
-                        filenames.push(filename_input);
-                        if($(this).next('label.filename-error-message').length){
-                            $(this).next('label.filename-error-message').remove();
+                    if ($(this).hasClass('about-section-filename')) {
+                        filename_input = this.value;
+                        if(filenames.indexOf(filename_input) >= 0){
+                            if (!document.getElementById("error-launch-date")) { // if parent doesn't have error messages
+                                var newLabel = document.createElement('label');
+                                var text = document.createTextNode("Ya se ingresó un nombre de archivo idéntico a este.");
+                                newLabel.appendChild(text);
+                                newLabel.className += 'filename-error-message';
+                                newLabel.style.color = "red";
+                                newLabel.style.fontSize = "16px";
+                                newLabel.style.marginBottom = "30px";
+                                $(this).after(newLabel);
+                            }
+                            repeated_filename = true;
+                        }
+                        else {
+                            filenames.push(filename_input);
+                            if($(this).next('label.filename-error-message').length){
+                                $(this).next('label.filename-error-message').remove();
+                            }
                         }
                     }
+                });
+
+                if (title_input !== '' || filename_input !== '') {
+                    var section = {title: title_input, fileName: filename_input};
+                    sections.push(section);
                 }
+
             });
-
-            if (title_input !== '' || filename_input !== '') {
-                var section = {title: title_input, fileName: filename_input};
-                sections.push(section);
+            if(repeated_filename){
+                alert("NO HAGO NADA");
+                e.preventDefault();
             }
-
-        });
-        if(repeated_filename){
-            alert("Error");
-            e.preventDefault();
-        }
-        else{
-            alert("No hubo error");
-            $('#about-sections').val(JSON.stringify(sections));
+            else{
+                alert("Joya.");
+                $('#about-sections').val(JSON.stringify(sections));
+            }
         }
     });
 
