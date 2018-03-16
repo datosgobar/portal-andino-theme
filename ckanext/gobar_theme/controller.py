@@ -4,6 +4,7 @@ from ckan.common import c
 import ckan.logic as logic
 import ckan.model as model
 import ckan.lib.base as base
+from ckan.lib.base import request
 import json
 import ckan.plugins as p
 from ckanext.googleanalytics.controller import GAApiController
@@ -56,6 +57,16 @@ class GobArHomeController(HomeController):
     def about(self):
         return base.render('about.html')
 
+    def section(self):
+        import ckanext.gobar_theme.helpers as gobar_helpers
+        filename = ''
+        sections = gobar_helpers.get_theme_config('about.sections', [])
+        last_slash_index = request.url.rfind('/')
+        title = request.url[last_slash_index+1:len(request.url)]
+        for section in sections:
+            if section['title'] == title:
+                filename = section['fileName']
+        return base.render('section_view.html', extra_vars={'filename': filename})
 
 class GobArApiController(GAApiController, ApiController):
 

@@ -119,7 +119,7 @@
 
                                     {% if header_sections|length > 0 %}
                                         {% for header_section in header_sections %}
-                                            <a href="{{ h.url('gobar_our_site') }}">
+                                            <a href="{{ h.url('section', title=header_section.title) }}">
                                                 <li>{{ header_section.title }}</li>
                                             </a>
                                         {% endfor %}
