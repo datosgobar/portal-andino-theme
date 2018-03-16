@@ -62,15 +62,14 @@ class GobArHomeController(HomeController):
     def view_about_section(self, title):
         sections = gobar_helpers.get_theme_config('about.sections', [])
 
-        filename = ''
         for section in sections:
             if section['title'] == title:
-                filename = section['filename']
+                # la variable `section` contiene la sección buscada
                 break
         else:
             base.abort(404, u'Sección no encontrada')
 
-        return base.render('section_view.html', extra_vars={'filename': filename})
+        return base.render('section_view.html', extra_vars={'section': section})
 
 class GobArApiController(GAApiController, ApiController):
 

@@ -92,7 +92,7 @@ $(function() {
                         label_class = 'filename-error-message';
                         if(filename_input.length === 0){
                             text = "El nombre de archivo está vacío.";
-                            insertErrorForInput(current_div, $(this), text, label_class)
+                            insertErrorForInput(current_div, $(this), text, label_class);
                             filename_error = true;
                         }
                         else {

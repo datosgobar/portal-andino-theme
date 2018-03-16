@@ -1,5 +1,7 @@
 {% extends "gobar_page.html" %}
 
+{% block subtitle %} - {{ section.title }}{% endblock %}
+
 {%- block content %}
-    {% include '%s' % filename %}
+    {% include '%s' % section.filename %}
 {% endblock -%}
