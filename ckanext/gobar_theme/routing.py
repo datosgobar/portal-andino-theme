@@ -47,7 +47,7 @@ class GobArRouter:
         )
 
     def connect_section(self):
-        self.home_routes.connect('section', '/acerca/seccion/{title}', action='section')
+        self.home_routes.connect('section', '/acerca/seccion/{title}', action='view_about_section')
 
     def connect_google_analytics(self):
         with SubMapper(self.route_map, controller=self.google_analytics_controller) as m:

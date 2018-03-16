@@ -1,3 +1,4 @@
+#coding: utf-8
 from ckan.controllers.home import HomeController
 from ckan.controllers.api import ApiController
 from ckan.common import c
@@ -8,6 +9,7 @@ from ckan.lib.base import request
 import json
 import ckan.plugins as p
 from ckanext.googleanalytics.controller import GAApiController
+import ckanext.gobar_theme.helpers as gobar_helpers
 
 
 class GobArHomeController(HomeController):
@@ -57,15 +59,17 @@ class GobArHomeController(HomeController):
     def about(self):
         return base.render('about.html')
 
-    def section(self):
-        import ckanext.gobar_theme.helpers as gobar_helpers
-        filename = ''
+    def view_about_section(self, title):
         sections = gobar_helpers.get_theme_config('about.sections', [])
-        last_slash_index = request.url.rfind('/')
-        title = request.url[last_slash_index+1:len(request.url)]
+
+        filename = ''
         for section in sections:
             if section['title'] == title:
-                filename = section['fileName']
+                filename = section['filename']
+                break
+        else:
+            base.abort(404, u'Sección no encontrada')
+
         return base.render('section_view.html', extra_vars={'filename': filename})
 
 class GobArApiController(GAApiController, ApiController):

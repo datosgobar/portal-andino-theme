@@ -32,36 +32,71 @@ $(function() {
     });
 
     $('form').on('submit', function (e) {
+
+        function createErrorLabel (text, label_class){
+            var newLabel = document.createElement('label');
+            newLabel.appendChild(document.createTextNode(text));
+            newLabel.className += label_class;
+            newLabel.style.color = "red";
+            newLabel.style.fontSize = "16px";
+            newLabel.style.marginBottom = "30px";
+            return newLabel;
+        }
+
+        function insertErrorForInput(current_div, current_input, text, label_class){
+            if (current_div.find("label." + label_class).length === 0) { // si el div padre aún no tiene errores
+                current_input.after(createErrorLabel(text, label_class));
+                return true;
+            }
+            return false; // no hubo error --> no se agregó ningún label
+        }
+
         if($('select').val() === 'Quiero secciones personalizadas (avanzado)'){
             var sections = [];
-            var filenames = [];
-            var repeated_filename = false;
+            var entered_filenames = [];
+            var filename_error = false;
+            var entered_titles = [];
+            var title_error = false;
+            var current_div;
             $('div.section-div').each(function () {
                 var all_inputs = $(this).find('input');
                 var title_input = "";
                 var filename_input = "";
-
+                var text = '';
+                var label_class = '';
+                var result = false;
+                current_div = $(this);
                 all_inputs.each(function () {
                     if ($(this).hasClass('about-section-title')) {
                         title_input = this.value;
+                        label_class = 'title-error-message';
+                        if(entered_titles.indexOf(title_input) >= 0){ // chequeo si este título ya fue ingresado
+                            text = "Ya se ingresó un título idéntico a este.";
+                            insertErrorForInput(current_div, $(this), text, label_class);
+                            title_error = true;
+                        }
+                        else if(title_input.length === 0){
+                            text = "El título está vacío.";
+                            insertErrorForInput(current_div, $(this), text, label_class)
+                            title_error = true;
+                        }
+                        else {
+                            entered_titles.push(title_input);
+                            if($(this).next('label.title-error-message').length){
+                                $(this).next('label.title-error-message').remove();
+                            }
+                        }
                     }
                     if ($(this).hasClass('about-section-filename')) {
                         filename_input = this.value;
-                        if(filenames.indexOf(filename_input) >= 0){
-                            if (!document.getElementById("error-launch-date")) { // if parent doesn't have error messages
-                                var newLabel = document.createElement('label');
-                                var text = document.createTextNode("Ya se ingresó un nombre de archivo idéntico a este.");
-                                newLabel.appendChild(text);
-                                newLabel.className += 'filename-error-message';
-                                newLabel.style.color = "red";
-                                newLabel.style.fontSize = "16px";
-                                newLabel.style.marginBottom = "30px";
-                                $(this).after(newLabel);
-                            }
-                            repeated_filename = true;
+                        label_class = 'filename-error-message';
+                        if(filename_input.length === 0){
+                            text = "El nombre de archivo está vacío.";
+                            insertErrorForInput(current_div, $(this), text, label_class)
+                            filename_error = true;
                         }
                         else {
-                            filenames.push(filename_input);
+                            entered_filenames.push(filename_input);
                             if($(this).next('label.filename-error-message').length){
                                 $(this).next('label.filename-error-message').remove();
                             }
@@ -70,12 +105,12 @@ $(function() {
                 });
 
                 if (title_input !== '' || filename_input !== '') {
-                    var section = {title: title_input, fileName: filename_input};
+                    var section = {title: title_input, filename: filename_input};
                     sections.push(section);
                 }
 
             });
-            if(repeated_filename){
+            if(filename_error || title_error){
                 e.preventDefault();
             }
             else{
