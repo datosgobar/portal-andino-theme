@@ -1,101 +1,131 @@
 $(function () {
+
     $('a#embeber').on('click', function () {
         var id = $('a#embeber').data('module-resource-id');
          $.ajax({
             url: '/dataset/resource_view_embed/' + id,
             type: 'POST'
         });
-    })
-});
+    });
 
-$(window).load(function(){
+    var getScrollbarWidth = function () {
+        /**
+         * Calcula el ancho de una scrollbar en distintos navegadores
+         */
+        if (!getScrollbarWidth.value) {
+            var outer = document.createElement("div");
+            outer.style.visibility = "hidden";
+            outer.style.width = "100px";
+            outer.style.msOverflowStyle = "scrollbar"; // needed for WinJS apps
+            document.body.appendChild(outer);
+            var widthNoScroll = outer.offsetWidth;
+            // force scrollbars
+            outer.style.overflow = "scroll";
+            // add innerdiv
+            var inner = document.createElement("div");
+            inner.style.width = "100%";
+            outer.appendChild(inner);
+            var widthWithScroll = inner.offsetWidth;
+            // remove divs
+            outer.parentNode.removeChild(outer);
 
-    function columnHasSomething(string){
-        var flag = 0;
-        $(string).each(function(index) {
-            if ($(this).text().trim().length){
-                flag = 1;
-                return false;
-            }
-        });
-        return flag;
-    }
+            getScrollbarWidth.value = widthNoScroll - widthWithScroll;
+        }
 
-    function getScrollbarWidth() {
-        var outer = document.createElement("div");
-        outer.style.visibility = "hidden";
-        outer.style.width = "100px";
-        outer.style.msOverflowStyle = "scrollbar"; // needed for WinJS apps
-        document.body.appendChild(outer);
-        var widthNoScroll = outer.offsetWidth;
-        // force scrollbars
-        outer.style.overflow = "scroll";
-        // add innerdiv
-        var inner = document.createElement("div");
-        inner.style.width = "100%";
-        outer.appendChild(inner);
-        var widthWithScroll = inner.offsetWidth;
-        // remove divs
-        outer.parentNode.removeChild(outer);
-        return widthNoScroll - widthWithScroll;
-    }
-
-
-    var dict = {
-        title: 0,
-        type: 0,
-        description: 0,
-        units: 0,
-        id: 0,
-        specialType: 0,
-        specialTypeDetail: 0
+        return getScrollbarWidth.value;
     };
 
-    for(var key in dict) {
-        dict[key] = columnHasSomething('td.m-' + key);
-    }
+    var columnHasAnyValue = function (cellSelector) {
+        /**
+         * Itera por todas las celdas que matcheen el selector.
+         * Devuelve un valor booleano que indica si alguna tiene algún valor.
+         */
+        var hasAnyValue = false;
+        $(cellSelector).each(function(index) {
+            if ($(this).text().trim().length > 0) {
+                hasAnyValue = true;
+                return;
+            }
+        });
+        return hasAnyValue;
+    };
 
-    var body = $('#metadata-table > tbody');
-    var total_width_to_distribute = 0;
-    var columns_to_show = 0;
-    var width_used = 0;
-    var distribution = 0;
-    for(var key in dict) {
-        if (dict[key] === 1){
-            columns_to_show++;
-            width_used = width_used + $("th.m-" + key).outerWidth();
+    var redrawAttributesTable = function () {
+        var tableColumns = {
+            title: {
+                initialPercentage: .13,
+                finalPercentage: .13,
+                visible: true
+            },
+            type: {
+                initialPercentage: .07,
+                finalPercentage: .07,
+                visible: true
+            },
+            description: {
+                initialPercentage: .33,
+                finalPercentage: .33,
+                visible: true
+            },
+            units: {
+                initialPercentage: .16,
+                finalPercentage: .16,
+                visible: true
+            },
+            id: {
+                initialPercentage: .17,
+                finalPercentage: .17,
+                visible: true
+            },
+            specialType: {
+                initialPercentage: .07,
+                finalPercentage: .07,
+                visible: true
+            },
+            specialTypeDetail: {
+                initialPercentage: .07,
+                finalPercentage: .07,
+                visible: true
+            }
         }
-        else{
-            total_width_to_distribute = total_width_to_distribute + $("th.m-" + key).outerWidth();
-        }
-    }
-    if (columns_to_show !== Object.keys(dict).length){
-        if (body.get(0).scrollHeight > body.height()){
-                distribution = (body.width() - getScrollbarWidth() - width_used)/columns_to_show;
-        }
-        else {
-            distribution = (body.width() - width_used)/columns_to_show;
-        }
-    }
 
-    for(var key in dict) {
-        if (dict[key] === 0) {
-            $("th.m-" + key).css('display', 'none');
-            $("td.m-" + key).css('display', 'none');
-        }
-    }
-    for(var key in dict){
-        if (dict[key] === 1){
-            $("th.m-" + key).width($("th.m-" + key).width() + distribution);
-            $("td.m-" + key).width($("td.m-" + key).width() + distribution);
-        }
-    }
+        var tableBody = $('#metadata-table > tbody');
+        var columnsWithValues = 0;
+        var percentageToDistribute = 0;
+    
+        for(var columnName in tableColumns) {
+            tableColumns[columnName].visible = columnHasAnyValue('td.m-' + columnName);
 
-    if (body.get(0).scrollHeight > body.height()){
-        $("td.m-specialTypeDetail").css("padding-right", 0);
-        $("td.m-specialTypeDetail").width(parseInt($("td.m-specialTypeDetail").width()) - body.width()*0.01);
-        $("td.m-description").width(parseInt($("td.m-description").width()) + body.width()*0.005);
-        $("td.m-specialType").width(parseInt($("td.m-specialType").width()) + body.width()*0.005);
-    }
+            if (tableColumns[columnName].visible) {
+                columnsWithValues++;
+            } else {
+                percentageToDistribute += tableColumns[columnName].initialPercentage;
+                tableColumns[columnName].finalPercentage = 0;
+            }
+        }
 
+        if (tableBody.get(0).scrollHeight > tableBody.height()) {
+            // Hay un scroll, ajusto las últimas dos columnas
+            $("#metadata-table th:nth-last-child(-n+2)").css('padding-right', '4%');
+        }
+
+        percentageToDistribute = percentageToDistribute / columnsWithValues;
+        for(var columnName in tableColumns) {
+            if (tableColumns[columnName].visible) {
+                // Reparto el ancho disponible a las columnas visibles
+                tableColumns[columnName].finalPercentage += percentageToDistribute;
+                $("th.m-" + columnName).css("width", "" + (tableColumns[columnName].finalPercentage * 100) + "%");
+                $("td.m-" + columnName).css("width", "" + (tableColumns[columnName].finalPercentage * 100) + "%");
+            } else {
+                $("th.m-" + columnName).css("display", "none");
+                $("td.m-" + columnName).css("display", "none");
+            }
+        }
+    };
+
+    redrawAttributesTable();
+
+    $( window ).resize(function() {
+        redrawAttributesTable();
+    });
 });
