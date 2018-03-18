@@ -148,7 +148,7 @@
                                     Frecuencia de actualización
                                 </div>
                                 <div class="col-xs-8 value">
-                                    {{ h.update_frequencies(extra.value)[1].decode('utf-8') or _('unknown') }}
+                                    {{ h.update_frequencies(extra.value)[1] or _('unknown') }}
                                 </div>
                             </div>
                         {% endif %}

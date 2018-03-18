@@ -10,7 +10,7 @@
             <select id="update-freq" name="updateFrequency" type="select">
                 <option {{ 'selected=true' if not selected_freq or selected_freq|length == 0 }} disabled="disabled"></option>
                 {% for frequencie in frequencies %}
-                    <option value="{{ frequencie[0] }}" {{ 'selected' if frequencie[0] == selected_freq }}>{{ frequencie[1].decode('utf-8') }}</option>
+                    <option value="{{ frequencie[0] }}" {{ 'selected' if frequencie[0] == selected_freq }}>{{ frequencie[1] }}</option>
                 {% endfor %}
             </select>
         </div>
