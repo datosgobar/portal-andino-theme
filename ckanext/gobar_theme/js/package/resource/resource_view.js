@@ -121,6 +121,8 @@ $(function () {
                 $("td.m-" + columnName).css("display", "none");
             }
         }
+
+        $('#metadata-table').show();
     };
 
     redrawAttributesTable();
