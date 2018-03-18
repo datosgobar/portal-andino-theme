@@ -26,12 +26,33 @@
             {% for attribute_group in attributes %}
                 <tr>
                     <td class="m-title">{{ attribute_group.get('title', '') }}&nbsp;</td>
-                    <td class="m-type">{{ attribute_group.get('type', '') }}&nbsp;</td>
+                    <td class="m-type">
+                        {% set attribute_type = attribute_group.get('type', '') %}
+                        {% if attribute_type %}
+                            {{ h.field_types(attribute_type)[1] }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </td>
                     <td class="m-description">{{ attribute_group.get('description', '') }}&nbsp;</td>
                     <td class="m-units">{{ attribute_group.get('units', '') }}&nbsp;</td>
                     <td class="m-id">{{ attribute_group.get('id', '') }}&nbsp;</td>
-                    <td class="m-specialType">{{ attribute_group.get('specialType', '') }}&nbsp;</td>
-                    <td class="m-specialTypeDetail">{{ attribute_group.get('specialTypeDetail', '') }}&nbsp;</td>
+                    <td class="m-specialType">
+                        {% set special_type = attribute_group.get('specialType', '') %}
+                        {% if special_type %}
+                            {{ h.special_field_types(special_type)[1] }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </td>
+                    <td class="m-specialTypeDetail">
+                        {% set special_type_detail = attribute_group.get('specialTypeDetail', '') %}
+                        {% if special_type_detail %}
+                            {{ h.update_frequencies(special_type_detail)[1] }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

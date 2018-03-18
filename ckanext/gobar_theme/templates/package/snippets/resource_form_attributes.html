@@ -37,7 +37,7 @@
                             </option>
                             {% for field_type in h.field_types() %}
                                 <option value="{{ field_type[0] }}" {{ 'selected=true' if field_type[0] == selected_type }}
-                                >{{ field_type[1].decode('utf-8') }}</option>
+                                >{{ field_type[1] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -81,11 +81,15 @@
                 <div class="col-xs-6 resource-attributes-input-container resource-col-special-data-container">
                     <label class="control-label">Tipo de dato especial</label>
                     <div class="controls">
+                        {% set special_types = h.special_field_types() %}
                         {% set selected_special_type = attribute_group['specialType'] %}
-                        {% set time_index_value = "time_index" %}
                         <select class="resource-col-special-data">
-                            <option></option>
-                            <option value="time_index" {{ 'selected' if time_index_value == selected_special_type }}>Indice de tiempo</option>
+                                <option {{ 'selected=true' if not selected_special_type or selected_special_type|length == 0 }}
+                                    disabled="disabled">Ej.: Índice de tiempo
+                                </option>
+                            {% for special_type in special_types %}
+                            <option value="{{ special_type[0] }}" {{ 'selected' if special_type[0] == selected_special_type }}>{{ special_type[1] }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -95,10 +99,11 @@
                     <div class="controls">
                         {% set frequencies = h.update_frequencies() %}
                         {% set selected_freq = attribute_group['specialTypeDetail'] %}
+                        {% set time_index_value = 'time_index' %}
                         <select class="resource-col-special-data-detail" {{ 'disabled' if time_index_value != selected_special_type }}>
                             <option {{ 'selected=true' if not selected_freq or selected_freq|length == 0 }}></option>
                             {% for frequencie in frequencies %}
-                                <option value="{{ frequencie[0] }}" {{ 'selected' if frequencie[0] == selected_freq }}>{{ frequencie[1].decode('utf-8') }}</option>
+                                <option value="{{ frequencie[0] }}" {{ 'selected' if frequencie[0] == selected_freq }}>{{ frequencie[1] }}</option>
                             {% endfor %}
                         </select>
                     </div>
