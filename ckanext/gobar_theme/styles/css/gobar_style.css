@@ -10206,7 +10206,7 @@ div#sort-col-modal div.modal-body {
 }
 
 .btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:focus {
-     border: 1px solid blue;
-     color: blue;
+     border: 1px solid #0695d6;
+     color: #0695d6;
      background: white;
 }

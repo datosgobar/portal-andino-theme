@@ -23,7 +23,7 @@
     <div class="resource-container container-fluid">
         <div class="restricted-max-width">
             <div class="resource col-xs-12 col-md-10 col-md-offset-1">
-                <div class="col-xs-12 back-to-pkg">
+                <div class="col-md-12 back-to-pkg">
                     {% set title = h.get_theme_config('title.site-title') %}
                     <a href="{{ h.url_for(controller='package', action='search') }}">{{ title if title else '' }}</a> / <a href="{{ h.url_for(controller='package', action='read', id=pkg.name) }}">Dataset</a> / Recurso
 
@@ -32,12 +32,12 @@
                         {% link_for 'EDITAR RECURSO', controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn btn-blue edit-resource' %}
                     {% endif %}
                 </div>
-                <div class="col-xs-10 title">
+                <div class="col-md-10 col-xs-12 title">
                     <h1>{{ res.name }}</h1>
 
                     <p>{{ res.description }}</p>
                 </div>
-                <div class="col-xs-2 resource-actions">
+                <div class="col-md-2 col-xs-12 resource-actions">
                     <a class="btn btn-green btn-block" href="{{ res.url }}">DESCARGAR</a>
 
                     {% set distribution_metadata = h.get_distribution_metadata(ds_identifier=pkg.id, resource_title=res.name) %}
@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-12 row" style="margin-top: 75px;">
+                <div class="col-xs-12 col-md-12 row">
                     {% snippet "package/snippets/resource_attributes_table.html", res=res %}
                 </div>
 
