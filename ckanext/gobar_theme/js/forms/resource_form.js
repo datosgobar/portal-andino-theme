@@ -149,7 +149,7 @@ $(function () {
         var menu = new BootstrapMenu('.col-options', {
             menuEvent: 'click',
             fetchElementData: function($elem) {
-                return $elem.data('index');
+                return $elem.attr('data-index');
             },
             actions: {
                 sortColumns: {
