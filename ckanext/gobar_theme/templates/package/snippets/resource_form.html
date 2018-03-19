@@ -56,16 +56,17 @@
         {% block basic_fields_distribution_type %}
             <div class="control-group">
                 {% set distribution_types = [
-                    {"name": "Archivo de datos", "code": "api"},
-                    {"name": "API", "code": "code"},
-                    {"name": "Código", "code": "documentation"},
-                    {"name": "Documentación", "code": "file.upload"},
+                    {"name": "Archivo de datos", "code": "file.upload"},
+                    {"name": "API", "code": "api"},
+                    {"name": "Código", "code": "code"},
+                    {"name": "Documentación", "code": "documentation"},
                 ] %}
-                {# obtener tipo actual del server #}
+                {% set resource_type = data.get('resource_type') %}
                 <label class="control-label" for="distribution-type">Tipo de recurso</label>
-                <select id="distribution-type" name="distribution-type" class="resource-select">
+                <select id="distribution-type" name="resource_type" class="resource-select">
+                    <option selected disabled hidden style="color: red">Ej.: Archivo de datos, Código, API, etc.</option>
                     {% for type in distribution_types %}
-                        <option class="distribution-type-option" value="{{ type.code }}" {# {{ 'selected' if license.code == lic }} #}>{{ type.name }}</option>
+                        <option class="distribution-type-option" value="{{ type.code }}" {{ 'selected' if type.code == resource_type }} >{{ type.name }}</option>
                     {% endfor %}
                 </select>
             </div>

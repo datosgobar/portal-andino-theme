@@ -1,6 +1,6 @@
 /* Image Upload
- * 
- */  
+ *
+ */
 this.ckan.module('gobar-image-upload', function($, _) {
   return {
     /* options object can be extended using data-module-* attributes */

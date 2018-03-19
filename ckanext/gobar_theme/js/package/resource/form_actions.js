@@ -94,7 +94,6 @@ $(function () {
             $(document.getElementById('form-licence')).css('display', 'block');
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
-            // ???
         }
     });
 

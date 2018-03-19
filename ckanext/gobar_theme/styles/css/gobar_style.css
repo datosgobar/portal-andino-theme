@@ -10216,3 +10216,7 @@ div#sort-col-modal div.modal-body {
 select.resource-select{
   height: auto;
 }
+
+option.distribution-type-option{
+  color: black;
+}
