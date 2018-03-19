@@ -9107,6 +9107,8 @@ div#background-container {
         #edit-package-container #edit-package form .control-group select, #edit-package-container #new-package form .control-group select, #new-package-container #edit-package form .control-group select, #new-package-container #new-package form .control-group select {
           width: 24em;
           max-width: 100%; }
+          #edit-package-container #edit-package form .control-group select, #edit-package-container #new-package form .control-group select, #new-package-container #edit-package form .control-group select, #new-package-container #new-package form .resource-select .control-group select {
+            width: 100%; }
         #edit-package-container #edit-package form .control-group .controls, #edit-package-container #new-package form .control-group .controls, #new-package-container #edit-package form .control-group .controls, #new-package-container #new-package form .control-group .controls {
           margin: 0; }
           #edit-package-container #edit-package form .control-group .controls.editor textarea, #edit-package-container #new-package form .control-group .controls.editor textarea, #new-package-container #edit-package form .control-group .controls.editor textarea, #new-package-container #new-package form .control-group .controls.editor textarea {
@@ -10209,4 +10211,8 @@ div#sort-col-modal div.modal-body {
      border: 1px solid #0695d6;
      color: #0695d6;
      background: white;
+}
+
+select.resource-select{
+  height: auto;
 }

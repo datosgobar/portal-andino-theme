@@ -66,8 +66,45 @@ $(function () {
         return errorMessages();
     }
 
+    $('select#distribution-type').on('change', function () {
+        var selected_type = $(document.getElementById('distribution-type')).val();
+        if(selected_type === 'api'){
+            $(document.getElementById('resource-attributes-form')).css('display', 'none');
+            hideAndEmpty($(document.getElementById('form-format')));
+            $(document.getElementById('form-licence')).css('display', 'block');
+            $('span#url-button').click();
+        }
+        else if(selected_type === 'code'){
+            $(document.getElementById('resource-attributes-form')).css('display', 'none');
+            hideAndEmpty($(document.getElementById('form-format')));
+            hideAndEmpty($(document.getElementById('form-licence')));
+            hideAndEmpty($('#form-file-name'));
+            $('i.icon-remove').click();
+        }
+        else if(selected_type === 'documentation'){
+            $(document.getElementById('resource-attributes-form')).css('display', 'none');
+            $(document.getElementById('form-format')).css('display', 'block');
+            hideAndEmpty($(document.getElementById('form-licence')));
+            hideAndEmpty($('#form-file-name'));
+            $('i.icon-remove').click();
+        }
+        else if(selected_type === 'file.upload' || selected_type === 'file'){
+            $(document.getElementById('resource-attributes-form')).css('display', 'block');
+            $(document.getElementById('form-format')).css('display', 'block');
+            $(document.getElementById('form-licence')).css('display', 'block');
+            hideAndEmpty($('#form-file-name'));
+            $('i.icon-remove').click();
+            // ???
+        }
+    });
+
+    function hideAndEmpty(element){
+        element.css('display', 'none');
+        element.val('');
+    }
+
     $('form#resource-edit').submit(function () {
-        return formIsValid();
+        formIsValid();
     });
 
     $('button#again-button').on('click', function(){
@@ -90,4 +127,5 @@ $(function () {
         validateDesc()
         $('textarea[data-valid-desc-length]').on('change input keyup', validateDesc)
     });
+
 });
