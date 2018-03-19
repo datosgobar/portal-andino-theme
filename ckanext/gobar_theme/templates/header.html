@@ -109,7 +109,7 @@
                     {%- endif -%}
 
                     {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' and
-                          h.get_theme_config('about.about-type') != 'None'%}
+                          h.get_theme_config('about.about-type')  is not none %}
 
                         {% if h.get_theme_config('about.about-type') == 'Quiero secciones personalizadas (avanzado)' %}
 
