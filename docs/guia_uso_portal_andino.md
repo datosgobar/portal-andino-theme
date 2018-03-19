@@ -113,6 +113,53 @@ Como la sección Organizaciones con datos es opcional, podés elegir que se vea 
 ![alt text](assets/portal-andino-sec-org-02.png "sec-op-org")
 
 ***
+### Sección Acerca
+
+**Esta sección es opcional**. Te permite darle la oportunidad a los usuarios de tu portal de leer información del mismo para un mejor entendimiento.
+
+#### Tipos de Acerca
+
+Existen tres tipos diferentes que vas a poder elegir:
+
+* **Sin sección de acerca**: para cuando se decida no mostrar información.
+
+* **Sección con información básica**: existirá un botón que lleve al usuario a una página donde encontrará información básica sobre el portal (un título y una descripción). Estará ubicado en Página Principal > **Acerca**.
+
+* **Secciones personalizadas**: se crearán varias secciones personalizadas que vas a poder modificar a gusto. El botón Acerca ahora desplegará un menú que contendrá todas y cada una de las secciones que hayas añadido al portal. Para cada sección, se necesitará un archivo (con formato .html) con el contenido que quieras mostrar.
+
+#### ¿Cómo elijo el tipo de Acerca?
+
+Andá a Página Principal > Usuario > Configuración > **Otras secciones del portal > Acerca (opcional)**
+
+![alt text](assets/portal-andino-sec-acerca.png "sec-acerca")
+
+![alt text](assets/portal-andino-sec-acerca-02.png "sec-acerca-02")
+
+#### ¿Cómo puedo escribir y mostrar información básica?
+
+Habiendo elegido la **segunda opción**, podés modificar el título y la descripción.
+
+![alt text](assets/portal-andino-sec-acerca-03.png "sec-acerca-03")
+
+#### ¿Cómo puedo crear y mostrar mis secciones personalizadas?
+
+Habiendo elegido la **tercera opción**, podrás ir creando tus secciones escribiendo un título y un nombre de archivo. Recordá que, para cada sección, será necesario guardar un archivo (con formato .html) para que el portal pueda mostrar su contenido.
+
+![alt text](assets/portal-andino-sec-acerca-04.png "sec-acerca-04")
+
+#### ¿Dónde añado los archivos requeridos para las secciones?
+
+Dentro del container, dichos archivos deben ser guardados en el directorio **/var/lib/ckan/theme_config/templates/**.
+
+De no existir la carpeta /templates, se deberá crearla utilizando dos comandos:
+
+* mkdir /var/lib/ckan/theme_config/templates
+
+* chown <tu usuario>:<tu usuario> /var/lib/ckan/theme_config/templates/
+
+Dentro de cada archivo deberá estar el contenido de su sección correspondiente. Por favor, **no te olvides** de que el nombre del archivo **debe coincidir** con lo escrito en el campo 'Nombre del archivo' de la sección.
+
+***
 ### Temas
 
 Son las categorías en las que se pueden clasificar todos los datasets de tu portal. Hay dos taxonomías de temas:
