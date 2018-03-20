@@ -9,26 +9,32 @@ $(function() {
         var HEADER_HEIGHT = $('#header').height();
 
         $(event.target).find('input.url-field[type=text], div.url-field > div > input[type=text]').each(function(index) {
-            // Si la validación falla, abortar el submit y mostrar un mensaje de validación
-            var that = $(this);
-            if (that.val() && !that.val().match(URL_VALIDATION_REGEX)) {
-                // Agrego el mensaje de error
-
-                if (!that.data('validation-failed')) {
-                    var errorMessageTemplate = '<label for="' + (that.attr('id') || '') + '" class="form-error-message">La url ingresada no es válida</label>';
-                    that.after(errorMessageTemplate);
-
-                    $('html, body').animate({
-                        scrollTop: (that.first().offset().top - HEADER_HEIGHT)
-                    }, 500);
-
-                    that.data('validation-failed', true);
-                }
-
-                event.preventDefault();  // Evitamos que el form haga el submit
-            } else {
-                that.data('validation-failed', false);
+            if ( $('input').is('[readonly]') ){
+                alert("READ ONLY");
             }
-        })
+            else{
+
+                // Si la validación falla, abortar el submit y mostrar un mensaje de validación
+                var that = $(this);
+                if (that.val() && !that.val().match(URL_VALIDATION_REGEX)) {
+                    // Agrego el mensaje de error
+
+                    if (!that.data('validation-failed')) {
+                        var errorMessageTemplate = '<label for="' + (that.attr('id') || '') + '" class="form-error-message">La url ingresada no es válida</label>';
+                        that.after(errorMessageTemplate);
+
+                        $('html, body').animate({
+                            scrollTop: (that.first().offset().top - HEADER_HEIGHT)
+                        }, 500);
+
+                        that.data('validation-failed', true);
+                    }
+
+                    event.preventDefault();  // Evitamos que el form haga el submit
+                } else {
+                    that.data('validation-failed', false);
+                }
+            }
+        });
     });
 });

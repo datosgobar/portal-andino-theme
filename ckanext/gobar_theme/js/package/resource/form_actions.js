@@ -58,6 +58,9 @@ $(function () {
             isValid = false;
             organization.after(errorTemplate);
         }
+        if(!isValid){
+
+        }
         return isValid;
     }
 
@@ -72,6 +75,8 @@ $(function () {
             $('#resource-attributes-form').hide();
             hideAndEmpty($('#form-format'));
             $('#form-licence').show();
+            $('a.btn-remove-url').click();
+            $('input[type=file]#field-image-upload').val('');
             $('span#url-button').click();
         }
         else if(selected_type === 'code'){
@@ -80,6 +85,7 @@ $(function () {
             hideAndEmpty($('#form-licence'));
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
+            $('input[type=file]#field-image-upload').val('');
         }
         else if(selected_type === 'documentation'){
             $('#resource-attributes-form').hide();
@@ -87,6 +93,7 @@ $(function () {
             hideAndEmpty($('#form-licence'));
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
+            $('input[type=file]#field-image-upload').val('');
         }
         else if(selected_type === 'file.upload' || selected_type === 'file'){
             $('#resource-attributes-form').show();
@@ -94,6 +101,7 @@ $(function () {
             $('#form-licence').show();
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
+            $('input[type=file]#field-image-upload').val('');
         }
     });
 
@@ -103,7 +111,7 @@ $(function () {
     }
 
     $('form#resource-edit').submit(function () {
-        formIsValid();
+        return formIsValid();
     });
 
     $('button#again-button').on('click', function(){
