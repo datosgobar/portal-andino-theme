@@ -234,6 +234,18 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render(template_name='config/config_12_metadata_portal.html')
 
+    def edit_apis(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            config_dict['apis'] = {
+                'description': params['apis-description'].strip(),
+                'show-apis': 'show-apis' in params
+            }
+            self._set_config(config_dict)
+        return base.render('config/config_13_apis.html')
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':

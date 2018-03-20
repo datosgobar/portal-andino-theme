@@ -56,6 +56,9 @@ class GobArHomeController(HomeController):
     def about(self):
         return base.render('about.html')
 
+    def apis(self):
+        return base.render('apis/apis.html')
+
 
 class GobArApiController(GAApiController, ApiController):
 

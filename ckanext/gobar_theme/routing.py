@@ -26,6 +26,7 @@ class GobArRouter:
         self.connect_datasets()
         self.connect_organizations()
         self.connect_groups()
+        self.connect_apis()
         self.connect_users()
         self.remove_dashboard()
         self.remove_tags()
@@ -59,6 +60,11 @@ class GobArRouter:
             m.connect('districts', '/spatial/municipios', action='municipios'),
             m.connect('districts', '/spatial/municipios/{province_id}', action='municipios'),
 
+    def connect_apis(self):
+        self.home_routes.connect('gobar_apis', '/apis', action='apis')
+        self.redirect(
+            ('/apis', '/apis'),
+        )
 
     def connect_datasets(self):
         with SubMapper(self.route_map, controller=self.package_controller) as m:
@@ -193,6 +199,7 @@ class GobArRouter:
             m.connect('/configurar/datasets', action='edit_datasets')
             m.connect('/configurar/organizaciones', action='edit_organizations')
             m.connect('/configurar/acerca', action='edit_about')
+            m.connect('/configurar/apis', action='edit_apis')
             m.connect('/configurar/metadata/google_fb', action='edit_metadata_google_fb')
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')
             m.connect('/configurar/metadata/portal', action='edit_metadata_portal')
