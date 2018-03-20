@@ -10220,3 +10220,7 @@ select.resource-select{
 option.distribution-type-option{
   color: black;
 }
+
+div#form-file-name{
+  width: 100%;
+}
