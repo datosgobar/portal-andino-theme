@@ -67,38 +67,38 @@ $(function () {
     }
 
     $('select#distribution-type').on('change', function () {
-        var selected_type = $(document.getElementById('distribution-type')).val();
+        var selected_type = $('#distribution-type').val();
         if(selected_type === 'api'){
-            $(document.getElementById('resource-attributes-form')).css('display', 'none');
-            hideAndEmpty($(document.getElementById('form-format')));
-            $(document.getElementById('form-licence')).css('display', 'block');
+            $('#resource-attributes-form').hide();
+            hideAndEmpty($('#form-format'));
+            $('#form-licence').show();
             $('span#url-button').click();
         }
         else if(selected_type === 'code'){
-            $(document.getElementById('resource-attributes-form')).css('display', 'none');
-            hideAndEmpty($(document.getElementById('form-format')));
-            hideAndEmpty($(document.getElementById('form-licence')));
+            $('#resource-attributes-form').hide();
+            hideAndEmpty($('#form-format'));
+            hideAndEmpty($('#form-licence'));
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
         }
         else if(selected_type === 'documentation'){
-            $(document.getElementById('resource-attributes-form')).css('display', 'none');
-            $(document.getElementById('form-format')).css('display', 'block');
-            hideAndEmpty($(document.getElementById('form-licence')));
+            $('#resource-attributes-form').hide();
+            $('#form-format').show();
+            hideAndEmpty($('#form-licence'));
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
         }
         else if(selected_type === 'file.upload' || selected_type === 'file'){
-            $(document.getElementById('resource-attributes-form')).css('display', 'block');
-            $(document.getElementById('form-format')).css('display', 'block');
-            $(document.getElementById('form-licence')).css('display', 'block');
+            $('#resource-attributes-form').show();
+            $('#form-format').show();
+            $('#form-licence').show();
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
         }
     });
 
     function hideAndEmpty(element){
-        element.css('display', 'none');
+        element.hide();
         element.val('');
     }
 

@@ -231,6 +231,24 @@ def field_types(field_type_id=None):
     return field_types
 
 
+def distribution_types(distribution_type_id=None):
+    distribution_types = [
+        ("file.upload", u"Archivo de datos"),
+        ("api", u"API"),
+        ("code", u"Código"),
+        ("documentation", u"Documentación")
+    ]
+
+    if distribution_type_id:
+        filtered_distribution_type = \
+            filter(lambda distribution_type: distribution_type[0] == distribution_type_id, distribution_types)
+        if len(filtered_distribution_type) > 0:
+            return filtered_distribution_type[0]
+        return None
+
+    return distribution_types
+
+
 def special_field_types(special_field_type_id=None):
     special_field_types = [
         ("time_index", u"Índice de tiempo"),
