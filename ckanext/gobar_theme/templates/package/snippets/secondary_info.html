@@ -140,7 +140,7 @@
         </div>
         {% endif %}
 
-        {% set source_url = h.get_pkg_extra(pkg, 'Fuente primaria') %}
+        {% set source_url = h.get_pkg_extra(pkg, 'source') %}
         {% if source_url and source_url.strip()|length > 0 %}
             <div class="row">
             <div class="col-xs-5 title">

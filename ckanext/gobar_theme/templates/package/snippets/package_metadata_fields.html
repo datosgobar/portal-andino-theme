@@ -29,7 +29,7 @@
 
     {{ form.input('Documentación', label='Documentación', type='text', value=h.get_pkg_extra(data, 'Documentación'), classes=['hidden-extra'], placeholder='Ej. https://github.com/gobabiertoAR/datasets-portal/blob/master/presupuesto/presupuesto-documentacion.md') }}
 
-    {{ form.input('Fuente primaria', label='Fuente primaria', type='text', value=h.get_pkg_extra(data, 'Fuente primaria'), classes=['hidden-extra'], placeholder='Ej. Instituto Nacional de Estadística y Censos de la República Argentina (INDEC)') }}
+    {{ form.input('source', label='Fuente primaria', type='text', value=h.get_pkg_extra(data, 'source'), classes=['hidden-extra'], placeholder='Ej. Instituto Nacional de Estadística y Censos de la República Argentina (INDEC)') }}
 
     {{ form.input('url', label='Página de referencia', id='field-url', value=url_value, attrs={'domain': domain, 'last_string_added': '', was_edited: false},
                placeholder='Ej. https://www.argentinacompra.gov.ar/contrataciones', error=errors.url, classes=['control-medium']) }}
