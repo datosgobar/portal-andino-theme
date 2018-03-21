@@ -111,7 +111,27 @@ $(function () {
     }
 
     $('form#resource-edit').submit(function () {
-        return formIsValid();
+        var isValid = formIsValid();
+
+        if (isValid) {
+            // Fijo el valor del tipo de distribución
+            var distributionType = $('select#distribution-type');
+            var selectedDistributionType = distributionType.val();
+            if (selectedDistributionType === 'file' || selectedDistributionType === 'file.upload') {
+                // Seteo el valor correcto para `distribution-type` según si se trata de un upload o de una URL
+                // Si el input type file oculto no tiene valor, se trata de un file, si no, es un file.upload
+                var isFileUpload = $('input[type=file]#field-image-upload').val() != '';
+                if (isFileUpload) {
+                    selectedDistributionType = 'file.upload';
+                } else {
+                    selectedDistributionType = 'file';
+                }
+
+                distributionType.val(selectedDistributionType);
+            }
+        }
+
+        return isValid;
     });
 
     $('button#again-button').on('click', function(){
