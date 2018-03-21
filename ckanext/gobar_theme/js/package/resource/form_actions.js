@@ -58,12 +58,60 @@ $(function () {
             isValid = false;
             organization.after(errorTemplate);
         }
+        if(!isValid){
+
+        }
         return isValid;
     }
 
     function formIsValid() {
         $('.missing-field').remove();
         return errorMessages();
+    }
+
+    $('select#distribution-type').on('change', function () {
+        var selected_type = $('#distribution-type').val();
+        if(selected_type === 'api'){
+            $('#resource-attributes-form').hide();
+            hideAndEmpty($('#form-format'));
+            $('#form-licence').show();
+            $('a.btn-remove-url').click();
+            $('input[type=file]#field-image-upload').val('');
+            $('span#url-button').click();
+            $('div#form-icon-url').show();
+        }
+        else if(selected_type === 'code'){
+            $('#resource-attributes-form').hide();
+            hideAndEmpty($('#form-format'));
+            hideAndEmpty($('#form-licence'));
+            hideAndEmpty($('#form-file-name'));
+            $('i.icon-remove').click();
+            $('input[type=file]#field-image-upload').val('');
+            $('div#form-icon-url').hide();
+        }
+        else if(selected_type === 'documentation'){
+            $('#resource-attributes-form').hide();
+            $('#form-format').show();
+            hideAndEmpty($('#form-licence'));
+            hideAndEmpty($('#form-file-name'));
+            $('i.icon-remove').click();
+            $('input[type=file]#field-image-upload').val('');
+            $('div#form-icon-url').hide();
+        }
+        else if(selected_type === 'file.upload' || selected_type === 'file'){
+            $('#resource-attributes-form').show();
+            $('#form-format').show();
+            $('#form-licence').show();
+            hideAndEmpty($('#form-file-name'));
+            $('i.icon-remove').click();
+            $('input[type=file]#field-image-upload').val('');
+            $('div#form-icon-url').hide();
+        }
+    });
+
+    function hideAndEmpty(element){
+        element.hide();
+        element.val('');
     }
 
     $('form#resource-edit').submit(function () {
@@ -90,4 +138,5 @@ $(function () {
         validateDesc()
         $('textarea[data-valid-desc-length]').on('change input keyup', validateDesc)
     });
+
 });

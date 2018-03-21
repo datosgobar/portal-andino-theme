@@ -1,0 +1,23 @@
+{% extends "config/config_base.html" %}
+{% block config %}
+    <h1>APIs</h1>
+
+    <form method="post" action="" data-module="basic-form">
+        <label class="with-bottom-margin checkbox-label">
+            <input type="checkbox"
+                   name="show-apis" {{ 'checked="checked"' if h.get_theme_config('apis.show-apis') else '' }}>
+            ¿Querés que esta sección se vea en tu portal?
+        </label>
+
+        <h2>Descripción</h2>
+        {% set description = h.get_theme_config('apis.description') %}
+        <textarea id="apis-description" title="Descripción de la sección APIs"
+                  name="apis-description"
+                  placeholder="Estos son servicios web de datos públicos disponibilizados por organismos de gobierno de la República Argentina."
+        >{{- description if description else '' -}}</textarea>
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">GUARDAR</button>
+        </div>
+    </form>
+{% endblock -%}

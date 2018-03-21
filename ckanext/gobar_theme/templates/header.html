@@ -34,6 +34,14 @@
                         </div>
                     {% endif %}
 
+                    {% if h.get_theme_config('apis.show-apis') %}
+                        <div class="navbar-link">
+                            <a href="{{ h.url('gobar_apis') }}">
+                                APIs
+                            </a>
+                        </div>
+                    {% endif %}
+
                     {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' and
                           h.get_theme_config('about.about-type') != 'None'%}
 
@@ -106,6 +114,12 @@
                     {%- if h.get_theme_config('organization.show-organizations') -%}
                         <a class="header-link" href="{{ h.url_for(controller='organization', action='index') }}">ORGANIZACIONES CON
                             DATOS</a>
+                    {%- endif -%}
+
+                    {%- if h.get_theme_config('apis.show-apis') -%}
+                        <a class="header-link" href="{{ h.url('gobar_apis') }}">
+                            APIs
+                        </a>
                     {%- endif -%}
 
                     {% if h.get_theme_config('about.about-type') != 'No quiero una sección de acerca' and

@@ -53,24 +53,50 @@
             {{ form.markdown_custom('description', id='field-description', label='* Descripción del recurso', placeholder='Ej: Detalle de los pedidos de información hechos al Estado en 2015.', value=data.description, error=errors.description, attrs={'data-valid-desc-length': max_length_description}, after_desc=after_desc_description|join|safe, max_length=max_length_description) }}
         {% endblock %}
 
+        {% block basic_fields_distribution_type %}
+            <div class="control-group">
+                {% set distribution_types = h.distribution_types() %}
+                {% set resource_type = data.get('resource_type') %}
+                <label class="control-label" for="distribution-type">Tipo de recurso</label>
+                <select id="distribution-type" name="resource_type" class="resource-select">
+                    <option selected disabled hidden>Ej.: Archivo de datos, Código, API, etc.</option>
+                    {% for type in distribution_types %}
+                        <option class="distribution-type-option" value="{{ resource_type if resource_type and resource_type.startswith(type[0]) else type[0] }}" {{ 'selected' if resource_type and resource_type.startswith(type[0]) }} >{{ type[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endblock %}
+
         {% block basic_fields_url %}
             {% set is_upload = (data.url_type == 'upload') %}
             {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
          is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
          upload_label=_('File'), url_label=_('URL')) }}
 
-         {% set valid_file_name = h.valid_length(data.fileName, max_length_file_name) %}
-         {% if valid_file_name %}
-             {% set after_desc_file_name = ["Por favor, no superes los ", max_length_file_name, " caracteres."] %}
-         {% else %}
-             {% set after_desc_file_name = ["Por favor, para que el nombre del archivo sea más claro, <b>no superes los ", max_length_file_name, " caracteres.</b>"] %}
-         {% endif %}
-            {{ form.input_custom('fileName', id='field-file-name', label='Nombre del archivo', placeholder='Ej: estructura-organica.csv', value=data.fileName, error=errors.fileName, classes=['control-full'], attrs={'data-valid-file-name-length': max_length_file_name}, after_desc=after_desc_file_name|join|safe, max_length=max_length_file_name) }}
-         {% endblock %}
+            {% set resource_type = data.get('resource_type') %}
+            <div id="form-icon-url" style="{{ 'display: none;' if resource_type != 'api'}}">
+                {% set icon_is_upload = false %}
+                {{ form.image_upload(data, errors, field_url='icon_url', field_upload='icon_upload', field_clear='clear_icon_upload',
+                is_upload_enabled=h.uploads_enabled(), is_url=not icon_is_upload, is_upload=icon_is_upload,
+                upload_label='Ícono', url_label=_('URL del Ícono'), id_prefix='icon-image') }}
+            </div>
+
+            <div id="form-file-name" style="display: none">
+                {% set valid_file_name = h.valid_length(data.fileName, max_length_file_name) %}
+                {% if valid_file_name %}
+                    {% set after_desc_file_name = ["Por favor, no superes los ", max_length_file_name, " caracteres."] %}
+                {% else %}
+                    {% set after_desc_file_name = ["Por favor, para que el nombre del archivo sea más claro, <b>no superes los ", max_length_file_name, " caracteres.</b>"] %}
+                {% endif %}
+                {{ form.input_custom('fileName', id='field-file-name', label='Nombre del archivo', placeholder='Ej: estructura-organica.csv', value=data.fileName, error=errors.fileName, classes=['control-full'], attrs={'data-valid-file-name-length': max_length_file_name}, after_desc=after_desc_file_name|join|safe, max_length=max_length_file_name) }}
+            </div>
+        {% endblock %}
 
         {% block basic_fields_format %}
-            {% set format_attrs = {'data-module': 'autocomplete', 'data-module-source': '/api/2/util/resource/format_autocomplete?incomplete=?'} %}
-            {{ form.input('format', id='field-format', label=_('Format'), placeholder='Ej.: CSV, XML o JSON.', value=data.format, error=errors.format, classes=['control-medium'], attrs=format_attrs) }}
+            <div id="form-format">
+                {% set format_attrs = {'data-module': 'autocomplete', 'data-module-source': '/api/2/util/resource/format_autocomplete?incomplete=?'} %}
+                {{ form.input('format', id='field-format', label=_('Format'), placeholder='Ej.: CSV, XML o JSON.', value=data.format, error=errors.format, classes=['control-medium'], attrs=format_attrs) }}
+            </div>
         {% endblock %}
     {% endblock basic_fields %}
 

@@ -1,6 +1,6 @@
 /* Image Upload
- * 
- */  
+ *
+ */
 this.ckan.module('gobar-image-upload', function($, _) {
   return {
     /* options object can be extended using data-module-* attributes */
@@ -53,13 +53,16 @@ this.ckan.module('gobar-image-upload', function($, _) {
       // Button to set the field to be a URL
       this.button_url = $('<span class="btn url-btn">'+this.i18n('url')+'</span>')
         .prop('title', this.i18n('url_tooltip'))
+        .prop('id', 'url-button')
         .on('click', this._onFromWeb)
+        .on('click', this.url_button_actions)
         .insertAfter(this.input);
 
       // Button to attach local file to the form
       this.button_upload = $('<label for="field-image-upload" class="file-upload-label">' +
           '<span class="btn upload-btn">'+this.i18n('upload')+'</span>' +
         '</label>')
+        .on('click', this.file_upload_label_actions)
         .insertAfter(this.input);
 
       // Button for resetting the form when there is a URL set
@@ -102,6 +105,16 @@ this.ckan.module('gobar-image-upload', function($, _) {
       if (this.options.is_upload) {
         this.field_clear.val('true');
       }
+    },
+
+    url_button_actions: function() {
+      $('#form-file-name').css("display", "inline-block");
+      $('option.distribution-type-option[value="file.upload"]').val('file');
+    },
+
+    file_upload_label_actions: function() {
+      $('#form-file-name').css("display", "none");
+      $('option.distribution-type-option[value="file"]').val('file.upload');
     },
 
     /* Event listener for resetting the field back to the blank state

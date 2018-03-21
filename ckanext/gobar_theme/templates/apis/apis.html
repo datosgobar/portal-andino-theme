@@ -1,0 +1,80 @@
+{% extends "config/config_base.html" %}
+
+{% block content %}
+    <div class="home">
+        {% set background = h.get_theme_config('title.background-image') %}
+        <div id="title" class="container-fluid title-variant-4"
+             style="{{ 'background-image:url("%s")' % background if background else '' }}">
+            <div class="background-overlay no-padding-bottom">
+                <div class="restricted-max-width">
+                    <div class="col-xs-12 col-md-10 col-md-offset-1">
+                        <div id="title-container" class="col-xs-12 col-md-8 text-left">
+                            {% set title = 'APIs' %}
+                            <h1>APIs</h1>
+                            <p class="description">
+                                {% set description = h.get_theme_config('apis.description') %}
+                                {{ description if description else '' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="margin-top: 50px;">
+            <div class="dataset-list">
+
+                {% for api in c.apis %}
+                <a href="{{ api.accessURL or '/dataset/%(package_id)s/resource/%(id)s' % api }}" class="dataset-item">
+                    <div class=" col-xs-12 col-md-4">
+                        <div class="dataset-container">
+                            <div class="dataset-border">
+                                <div class="restricted-max-width">
+                                    <img src="{{ api.icon_url or '/img/iconos-03.svg' }}" class="api-icon-img" style="max-width: 70px">
+                                    <div class="dataset-content col-xs-9">
+                                        <h3 class="dataset-title">{{ api.name }}</h3>
+                                        <div class="dataset-notes">{{ api.description }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+
+                <a href="{{ h.url('gobar_about_ckan') }}" class="dataset-item">
+                    <div class=" col-xs-12 col-md-4">
+                        <div class="dataset-container">
+                            <div class="dataset-border">
+                                <div class="restricted-max-width">
+                                    <img src="/img/iconos-03.svg" class="api-icon-img" style="max-width: 70px">
+                                    <div class="dataset-content col-xs-9">
+                                        <h3 class="dataset-title">CKAN</h3>
+                                        <div class="dataset-notes">Consultá los metadatos de los datasets y
+                                            distribuciones del Portal a través de la API de CKAN.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        {% if h.get_theme_config('social.github') %}
+        <div class="row">
+            <div style="display: flex; justify-content: space-around; align-items: center; margin: 50px 0 150px 0;">
+                <p class="text-center no-margin button-container gobar-static-container">
+                    <a href="{{ h.get_theme_config('social.github') }}" target="_blank">
+                        <button>IR A NUESTRO GITHUB</button>
+                    </a>
+                </p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

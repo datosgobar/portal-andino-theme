@@ -49,6 +49,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'json_loads': gobar_helpers.json_loads,
             'update_frequencies': gobar_helpers.update_frequencies,
             'field_types': gobar_helpers.field_types,
+            'distribution_types': gobar_helpers.distribution_types,
             'special_field_types': gobar_helpers.special_field_types,
             'render_ar_datetime': gobar_helpers.render_ar_datetime,
             'accepted_mime_types': gobar_helpers.accepted_mime_types,

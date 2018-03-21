@@ -50,6 +50,19 @@ class GobArHomeController(HomeController):
             return segmented_packages
         return []
 
+    def _packages_with_resource_type_equal_to_api(self):
+        context = {
+            'model': model,
+            'session': model.Session,
+            'user': c.user or c.author
+        }
+        data_dict = {
+            'query': 'resource_type:api',
+            'limit': None,
+            'offset': 0,
+        }
+        return logic.get_action('resource_search')(context, data_dict).get('results', [])
+
     def index(self):
         c.groups = self._list_groups()
         c.sorted_groups = sorted(c.groups, key=lambda x: x['display_name'].lower())
@@ -58,6 +71,13 @@ class GobArHomeController(HomeController):
 
     def about(self):
         return base.render('about.html')
+
+    def about_ckan(self):
+        return base.render('about_ckan.html')
+
+    def apis(self):
+        c.apis = self._packages_with_resource_type_equal_to_api()
+        return base.render('apis/apis.html')
 
     def view_about_section(self, title):
         sections = gobar_helpers.get_theme_config('about.sections', [])

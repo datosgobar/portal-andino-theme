@@ -9111,6 +9111,8 @@ div#background-container {
         #edit-package-container #edit-package form .control-group select, #edit-package-container #new-package form .control-group select, #new-package-container #edit-package form .control-group select, #new-package-container #new-package form .control-group select {
           width: 24em;
           max-width: 100%; }
+          #edit-package-container #edit-package form .control-group select, #edit-package-container #new-package form .control-group select, #new-package-container #edit-package form .control-group select, #new-package-container #new-package form .resource-select .control-group select {
+            width: 100%; }
         #edit-package-container #edit-package form .control-group .controls, #edit-package-container #new-package form .control-group .controls, #new-package-container #edit-package form .control-group .controls, #new-package-container #new-package form .control-group .controls {
           margin: 0; }
           #edit-package-container #edit-package form .control-group .controls.editor textarea, #edit-package-container #new-package form .control-group .controls.editor textarea, #new-package-container #edit-package form .control-group .controls.editor textarea, #new-package-container #new-package form .control-group .controls.editor textarea {
@@ -10219,6 +10221,18 @@ div#sort-col-modal div.modal-body {
      background: white;
 }
 
+select.resource-select{
+  height: auto;
+}
+
+option.distribution-type-option{
+  color: black;
+}
+
+div#form-file-name{
+  width: 100%;
+}
+
 hr.section {
   margin: 5px 0 30px 0;
   border: 0;
@@ -10253,4 +10267,24 @@ button.section-deletion{
 
 div.section-div{
   margin-bottom: 40px;
+}
+
+.gobar-static-container button {
+    color: white;
+    background-color: #17b2f8;
+    border: none;
+    padding: 10px 18px;
+    font-size: 18px;
+    -o-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.js .image-upload #icon-image-upload {
+  left: -99999px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
 }
