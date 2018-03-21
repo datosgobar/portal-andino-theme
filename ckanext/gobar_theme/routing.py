@@ -43,6 +43,7 @@ class GobArRouter:
 
     def connect_static(self):
         self.home_routes.connect('gobar_about', '/acerca', action='about')
+        self.home_routes.connect('gobar_about_ckan', '/acerca/ckan', action='about_ckan')
         self.redirect(
             ('/about', '/acerca')
         )

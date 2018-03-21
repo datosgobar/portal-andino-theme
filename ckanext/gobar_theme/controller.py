@@ -72,6 +72,9 @@ class GobArHomeController(HomeController):
     def about(self):
         return base.render('about.html')
 
+    def about_ckan(self):
+        return base.render('about_ckan.html')
+
     def apis(self):
         c.apis = self._packages_with_resource_type_equal_to_api()
         return base.render('apis/apis.html')

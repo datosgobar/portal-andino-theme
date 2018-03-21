@@ -26,24 +26,6 @@
         <div class="row" style="margin-top: 50px;">
             <div class="dataset-list">
 
-                <a href="http://datos.gob.ar/acerca/desarrolladores" class="dataset-item">
-                    <div class=" col-xs-12 col-md-4">
-                        <div class="dataset-container">
-                            <div class="dataset-border">
-                                <div class="restricted-max-width">
-                                    <img src="/img/iconos-03.svg" class="api-icon-img" style="max-width: 70px">
-                                    <div class="dataset-content col-xs-9">
-                                        <h3 class="dataset-title">CKAN</h3>
-                                        <div class="dataset-notes">Consultá los metadatos de los datasets y
-                                            distribuciones del Portal a través de la API de CKAN.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
                 {% for api in c.apis %}
                 <a href="{{ api.accessURL or '/dataset/%(package_id)s/resource/%(id)s' % api }}" class="dataset-item">
                     <div class=" col-xs-12 col-md-4">
@@ -61,6 +43,24 @@
                     </div>
                 </a>
                 {% endfor %}
+
+                <a href="{{ h.url('gobar_about_ckan') }}" class="dataset-item">
+                    <div class=" col-xs-12 col-md-4">
+                        <div class="dataset-container">
+                            <div class="dataset-border">
+                                <div class="restricted-max-width">
+                                    <img src="/img/iconos-03.svg" class="api-icon-img" style="max-width: 70px">
+                                    <div class="dataset-content col-xs-9">
+                                        <h3 class="dataset-title">CKAN</h3>
+                                        <div class="dataset-notes">Consultá los metadatos de los datasets y
+                                            distribuciones del Portal a través de la API de CKAN.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
 
