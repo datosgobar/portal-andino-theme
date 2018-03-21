@@ -61,7 +61,7 @@
                 <select id="distribution-type" name="resource_type" class="resource-select">
                     <option selected disabled hidden>Ej.: Archivo de datos, Código, API, etc.</option>
                     {% for type in distribution_types %}
-                        <option class="distribution-type-option" value="{{ type[0] }}" {{ 'selected' if type[0] == resource_type }} >{{ type[1] }}</option>
+                        <option class="distribution-type-option" value="{{ resource_type if resource_type.startswith(type[0]) else type[0] }}" {{ 'selected' if resource_type.startswith(type[0]) }} >{{ type[1] }}</option>
                     {% endfor %}
                 </select>
             </div>
