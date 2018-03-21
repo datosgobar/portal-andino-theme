@@ -9,11 +9,7 @@ $(function() {
         var HEADER_HEIGHT = $('#header').height();
 
         $(event.target).find('input.url-field[type=text], div.url-field > div > input[type=text]').each(function(index) {
-            if ( $('input').is('[readonly]') ){
-                alert("READ ONLY");
-            }
-            else{
-
+            if ( !$('input').is('[readonly]') ){
                 // Si la validación falla, abortar el submit y mostrar un mensaje de validación
                 var that = $(this);
                 if (that.val() && !that.val().match(URL_VALIDATION_REGEX)) {
