@@ -171,8 +171,7 @@ def _get_portal_andino_version():
     portal_dir = path.abspath(path.join(os.getcwd(), 'portal/'))
     try:
         with open(path.join(portal_dir, 'version')) as file:
-            version = file.read()
-            version = re.sub('[^\d\.]', '', version)
+            version = file.read().strip()
     except:
         version = None
     return {'portal-andino': version}

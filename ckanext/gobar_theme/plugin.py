@@ -22,6 +22,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
+        toolkit.add_template_directory(config_, '/var/lib/ckan/theme_config/templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('styles/css', 'gobar_css')
         toolkit.add_resource('js', 'gobar_js')

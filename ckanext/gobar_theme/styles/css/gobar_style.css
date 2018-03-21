@@ -7397,6 +7397,10 @@ div#background-container {
   #recover-password.modal .can-have-feedback-img.fullname-feedback .feedback-img {
     left: auto;
     right: 8px; }
+  #template-config-container #template-config select{
+    margin-bottom: 40px;
+    width: 100%;
+    height: auto; }
 
 #password-reset.modal {
   width: 500px;
@@ -9848,10 +9852,13 @@ ul.activity {
     #template-config-container #template-config h1 {
       color: #0695d6;
       font-weight: 400;
-      margin: 50px 0 30px 0;
+      margin: 50px 0 10px 0;
       font-size: 40px; }
       #template-config-container #template-config h1.small-margin {
         margin-bottom: 10px; }
+      #template-config-container #template-config h1.section-deletion{
+        color: red;
+      }
     #template-config-container #template-config h2 {
       font-weight: 400;
       margin: 0 0 10px 0;
@@ -9867,7 +9874,7 @@ ul.activity {
       position: relative;
       top: -20px; }
     #template-config-container #template-config p, #template-config-container #template-config label {
-      margin: 0 0 10px 0;
+      margin: 0 0 30px 0;
       font-weight: 400;
       font-size: 16px; }
       #template-config-container #template-config p:after, #template-config-container #template-config label:after {
@@ -9982,7 +9989,7 @@ ul.activity {
       color: #767676;
       width: 100%;
       font-size: 16px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       padding: 10px;
       height: 100px; }
     #template-config-container #template-config .submit-container {
@@ -9993,6 +10000,7 @@ ul.activity {
         background-color: #0695d6;
         color: white;
         border: none;
+        float: right;
         -o-border-radius: 4px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
@@ -10223,4 +10231,40 @@ option.distribution-type-option{
 
 div#form-file-name{
   width: 100%;
+}
+
+hr.section {
+  margin: 5px 0 30px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+div.basic-about, div.advanced-about{
+  display: none;
+}
+
+div.explanation {
+  margin-bottom: 10px;
+}
+
+button#add-another-section{
+  color: #0695d6;
+  text-align: center;
+  width: 100%;
+  height: 80px;
+  margin-top: 20px;
+  background-color: #e6f5fc;
+  cursor: pointer;
+}
+
+div.section-deletion{
+  text-align: center;
+}
+
+button.section-deletion{
+  background-color: red;
+}
+
+div.section-div{
+  margin-bottom: 40px;
 }
