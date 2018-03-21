@@ -23,6 +23,7 @@ class GobArRouter:
     def set_routes(self):
         self.connect_home()
         self.connect_static()
+        self.connect_section()
         self.connect_datasets()
         self.connect_organizations()
         self.connect_groups()
@@ -45,6 +46,9 @@ class GobArRouter:
         self.redirect(
             ('/about', '/acerca')
         )
+
+    def connect_section(self):
+        self.home_routes.connect('section', '/acerca/seccion/{title}', action='view_about_section')
 
     def connect_google_analytics(self):
         with SubMapper(self.route_map, controller=self.google_analytics_controller) as m:

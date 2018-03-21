@@ -161,10 +161,16 @@ class GobArConfigController(base.BaseController):
         if request.method == 'POST':
             params = parse_params(request.POST)
             config_dict = self._read_config()
+            try:
+                new_sections = [params.get('about-sections')]
+                json_sections = json.loads(new_sections[0])
+            except ValueError:  # no se envió ningún JSON (no se usa el tipo avanzado de 'Acerca')
+                json_sections = []
             config_dict['about'] = {
                 'title': params['about-title'].strip(),
                 'description': params['about-description'].strip(),
-                'show-about': 'show-about' in params
+                'about-type': params['about-type'],
+                'sections': (json_sections or []),
             }
             self._set_config(config_dict)
         return base.render('config/config_09_about.html')
