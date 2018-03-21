@@ -10268,3 +10268,15 @@ button.section-deletion{
 div.section-div{
   margin-bottom: 40px;
 }
+
+.gobar-static-container button {
+    color: white;
+    background-color: #17b2f8;
+    border: none;
+    padding: 10px 18px;
+    font-size: 18px;
+    -o-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}

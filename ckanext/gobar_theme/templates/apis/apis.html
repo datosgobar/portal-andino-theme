@@ -23,7 +23,7 @@
     </div>
 
     <div class="container">
-        <div class="row" style="margin-top:50px;">
+        <div class="row" style="margin-top: 50px;">
             <div class="dataset-list">
 
                 <a href="http://datos.gob.ar/acerca/desarrolladores" class="dataset-item">
@@ -31,7 +31,7 @@
                         <div class="dataset-container">
                             <div class="dataset-border">
                                 <div class="restricted-max-width">
-                                    <img src="/svg/iconos-03.svg" class="api-icon-img" style="max-width: 70px">
+                                    <img src="/img/iconos-03.svg" class="api-icon-img" style="max-width: 70px">
                                     <div class="dataset-content col-xs-9">
                                         <h3 class="dataset-title">CKAN</h3>
                                         <div class="dataset-notes">Consultá los metadatos de los datasets y
@@ -46,15 +46,17 @@
             </div>
         </div>
 
+        {% if h.get_theme_config('social.github') %}
         <div class="row">
             <div style="display: flex; justify-content: space-around; align-items: center; margin: 50px 0 150px 0;">
                 <p class="text-center no-margin button-container gobar-static-container">
-                    <a href="https://github.com/datosgobar" target="_blank">
+                    <a href="{{ h.get_theme_config('social.github') }}" target="_blank">
                         <button>IR A NUESTRO GITHUB</button>
                     </a>
                 </p>
             </div>
         </div>
+        {% endif %}
     </div>
 
 {% endblock %}
