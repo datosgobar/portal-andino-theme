@@ -74,7 +74,8 @@ $(function () {
         if(selected_type === 'api'){
             $('#resource-attributes-form').hide();
             hideAndEmpty($('#form-format'));
-            $('#form-licence').show();
+            hideAndEmpty($('#form-file-name'));
+            $('#form-license').show();
             $('a.btn-remove-url').click();
             $('input[type=file]#field-image-upload').val('');
             $('span#url-button').click();
@@ -83,7 +84,7 @@ $(function () {
         else if(selected_type === 'code'){
             $('#resource-attributes-form').hide();
             hideAndEmpty($('#form-format'));
-            hideAndEmpty($('#form-licence'));
+            hideAndEmpty($('#form-license'));
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
@@ -92,7 +93,7 @@ $(function () {
         else if(selected_type === 'documentation'){
             $('#resource-attributes-form').hide();
             $('#form-format').show();
-            hideAndEmpty($('#form-licence'));
+            hideAndEmpty($('#form-license'));
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
@@ -101,7 +102,7 @@ $(function () {
         else if(selected_type === 'file.upload' || selected_type === 'file'){
             $('#resource-attributes-form').show();
             $('#form-format').show();
-            $('#form-licence').show();
+            $('#form-license').show();
             hideAndEmpty($('#form-file-name'));
             $('i.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
