@@ -35,6 +35,7 @@ this.ckan.module('gobar-image-upload', function($, _) {
       var field_clear = 'input[name="' + options.field_clear + '"]';
 
       this.input = $(field_upload, this.el);
+      this.input.addClass('field-image-upload');
       this.field_url = $(field_url, this.el).parents('.control-group');
       this.field_image = this.input.parents('.control-group');
       this.field_url_input = $('input', this.field_url);
@@ -59,7 +60,7 @@ this.ckan.module('gobar-image-upload', function($, _) {
         .insertAfter(this.input);
 
       // Button to attach local file to the form
-      this.button_upload = $('<label for="field-image-upload" class="file-upload-label">' +
+      this.button_upload = $('<label for=' + this.input.attr('id') + ' class="file-upload-label">' +
           '<span class="btn upload-btn">'+this.i18n('upload')+'</span>' +
         '</label>')
         .on('click', this.file_upload_label_actions)
@@ -109,12 +110,19 @@ this.ckan.module('gobar-image-upload', function($, _) {
 
     url_button_actions: function() {
       $('#form-file-name').css("display", "inline-block");
+
+      // TODO: Este script es propio del formulario de resource. No corresponde a este script.
       $('option.distribution-type-option[value="file.upload"]').val('file');
     },
 
     file_upload_label_actions: function() {
-      $('#form-file-name').css("display", "none");
-      $('option.distribution-type-option[value="file"]').val('file.upload');
+      $('input#' + $( event.target ).parent().attr('for')).click();  // Disparo el click en el input[type=file]
+
+      // TODO: Este script es propio del formulario de resource. No corresponde a este script.
+      if($('form#resource-edit').length > 0){
+        $('#form-file-name').css("display", "none");
+        $('option.distribution-type-option[value="file"]').val('file.upload');
+      }
     },
 
     /* Event listener for resetting the field back to the blank state

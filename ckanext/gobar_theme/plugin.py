@@ -1,3 +1,4 @@
+from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.plugins import implements, IRoutes
@@ -11,6 +12,16 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(IRoutes, inherit=True)
     implements(plugins.ITemplateHelpers)
     implements(plugins.IActions)
+    implements(plugins.IUploader)
+
+    def get_resource_uploader(self, data_dict):
+        return GobArThemeResourceUploader(data_dict)
+
+    def get_uploader(self, *_):
+        '''
+        No nos interesa proveer un uploader para el plugin, se usa el default de CKAN.
+        '''
+        return None
 
     def get_actions(self):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
