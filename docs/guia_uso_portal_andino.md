@@ -12,6 +12,7 @@
   - [Organizaciones](#organizaciones)
   - [Sección Organizaciones con datos](#secci%C3%B3n-organizaciones-con-datos)
   - [Temas](#temas)
+  - [Sección Acerca](#acerca)
   - [Datasets](#datasets)
   - [Recursos](#recursos)
   - [Campos de un recurso](#campos-de-un-recurso)
@@ -151,11 +152,13 @@ Habiendo elegido la **tercera opción**, podrás ir creando tus secciones escrib
 
 Dentro del container, dichos archivos deben ser guardados en el directorio **/var/lib/ckan/theme_config/templates/** .
 
-De no existir la carpeta /templates, se deberá crearla utilizando dos comandos:
+De no existir la carpeta **/templates**, se deberá crearla utilizando dos comandos:
 
 * mkdir /var/lib/ckan/theme_config/templates
 
-* chown {tu usuario}:{tu usuario} /var/lib/ckan/theme_config/templates/
+* chown www-data:www-data /var/lib/ckan/theme_config/templates/
+
+(www-data es el usuario con el que se corre el proceso apache en el sistema operativo **Ubuntu**)
 
 Dentro de cada archivo deberá estar el contenido de su sección correspondiente. Por favor, **no te olvides** de que el nombre del archivo **debe coincidir** con lo escrito en el campo 'Nombre del archivo' de la sección.
 
