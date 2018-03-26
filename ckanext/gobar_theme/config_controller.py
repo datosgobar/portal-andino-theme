@@ -19,8 +19,7 @@ NotAuthorized = logic.NotAuthorized
 
 
 class GobArConfigController(base.BaseController):
-    #IMG_DIR = '/usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/'
-    IMG_DIR = '/theme/ckanext/gobar_theme/public/user_images/'
+    IMG_DIR = '/usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/'
     CONFIG_PATH = '/var/lib/ckan/theme_config/settings.json'
 
     def edit_title(self):

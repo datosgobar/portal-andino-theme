@@ -38,7 +38,7 @@
                     <p>{{ res.description }}</p>
                 </div>
                 <div class="col-md-2 col-xs-12 resource-actions">
-                    <a class="btn btn-green btn-block" href="{{ res.url }}">{{ 'DESCARGAR' if res.resource_type != 'api' else 'A DEFINIR' }}</a>
+                    <a class="btn btn-green btn-block" href="{{ res.url }}">DESCARGAR</a>
 
                     {% set distribution_metadata = h.get_distribution_metadata(ds_identifier=pkg.id, resource_title=res.name) %}
                     {% if not h.is_distribution_local(distribution_metadata) %}

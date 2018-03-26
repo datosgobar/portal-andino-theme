@@ -20,17 +20,6 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
 
         # Hacer el init para el ícono `icon_upload`
 
-        path = self.get_storage_path()
-        if not path:
-            self.storage_path = None
-            return
-        self.storage_path = os.path.join(path, 'resources')
-        try:
-            os.makedirs(self.storage_path)
-        except OSError, e:
-            # errno 17 is file already exists
-            if e.errno != 17:
-                raise
         self.filename = None
 
         resource_id = data_dict.get('id')
@@ -49,7 +38,7 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
     def upload(self, id, max_size=10):
         super(GobArThemeResourceUploader, self).upload(id, max_size)
 
-        if not self.storage_path or not self.filename:
+        if not self.filename:
             return
 
         # Hacer el upload para el ícono
@@ -64,21 +53,3 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
             output_file.write(data)
         output_file.close()
         return
-
-    def get_storage_path(self):
-        global _storage_path
-
-        # None means it has not been set. False means not in config.
-        if _storage_path is None:
-            storage_path = config.get('ckan.storage_path')
-            ofs_impl = config.get('ofs.impl')
-            ofs_storage_dir = config.get('ofs.storage_dir')
-            if storage_path:
-                _storage_path = storage_path
-            elif ofs_impl == 'pairtree' and ofs_storage_dir:
-                _storage_path = ofs_storage_dir
-                return _storage_path
-            else:
-                _storage_path = False
-
-        return _storage_path
