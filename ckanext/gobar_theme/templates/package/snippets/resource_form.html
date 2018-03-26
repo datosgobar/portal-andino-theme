@@ -71,14 +71,14 @@
             {% set is_upload = (data.url_type == 'upload') %}
             {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
          is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
-         upload_label=_('File'), url_label=_('URL')) }}
+         upload_label=_('File'), url_label=_('URL'), id_prefix='resource') }}
 
             {% set resource_type = data.get('resource_type') %}
             <div id="form-icon-url" style="{{ 'display: none;' if resource_type != 'api'}}">
                 {% set icon_is_upload = false %}
                 {{ form.image_upload(data, errors, field_url='icon_url', field_upload='icon_upload', field_clear='clear_icon_upload',
                 is_upload_enabled=h.uploads_enabled(), is_url=not icon_is_upload, is_upload=icon_is_upload,
-                upload_label='Ícono', url_label=_('URL del Ícono'), id_prefix='icon-image') }}
+                upload_label='Ícono', url_label=_('URL del Ícono'), id_prefix='icon') }}
             </div>
 
             <div id="form-file-name" style="display: none">
@@ -183,3 +183,4 @@
 {% resource 'gobar_js/package/resource/form_actions.js' %}
 {% resource 'gobar_js/forms/confirm_delete.js' %}
 {% resource 'gobar_js/forms/autovalidations/urls.js' %}
+{% resource 'gobar_js/package/resource/urls_and_icons.js' %}

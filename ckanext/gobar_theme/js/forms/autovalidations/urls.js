@@ -18,7 +18,6 @@ $(function() {
                     if (!that.data('validation-failed')) {
                         var errorMessageTemplate = '<label for="' + (that.attr('id') || '') + '" class="form-error-message">La url ingresada no es válida</label>';
                         that.after(errorMessageTemplate);
-
                         $('html, body').animate({
                             scrollTop: (that.first().offset().top - HEADER_HEIGHT)
                         }, 500);
