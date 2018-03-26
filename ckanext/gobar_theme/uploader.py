@@ -12,6 +12,7 @@ config = pylons.config
 _storage_path = None
 _ufs = None
 
+
 class GobArThemeResourceUploader(uploader.ResourceUpload):
 
     def __init__(self, data_dict):
@@ -40,7 +41,7 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
             self.filename = '%s-%s' % (resource_id, upload_field_storage.filename)
             self.upload_file = upload_field_storage.file
 
-            data_dict['icon_url'] = '/user_images/%s' % self.filename
+            data_dict['icon_url'] = config.get('ckan.site_url') + '/user_images/%s' % self.filename
             data_dict['icon_url_type'] = 'upload'
         elif self.clear:
             data_dict['icon_url_type'] = ''
@@ -63,11 +64,6 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
             output_file.write(data)
         output_file.close()
         return
-
-
-
-
-
 
     def get_storage_path(self):
         global _storage_path
