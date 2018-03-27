@@ -1,6 +1,8 @@
 # coding=utf-8
 import ckan.lib.base as base
 from ckan.common import request, g, c
+from pylons import config as ckan_config
+import redis
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
@@ -279,22 +281,23 @@ class GobArConfigController(base.BaseController):
     @classmethod
     def _read_config(cls):
         try:
-            gobar_config = json.loads(g.GOBAR_CONFIG)
+            andino_config = cls._redis_cli().get('andino-config')
+            gobar_config = json.loads(andino_config)
         except Exception:
-            with open(cls.CONFIG_PATH) as json_data:
+            with open(GobArConfigController.CONFIG_PATH) as json_data:
                 try:
                     gobar_config = json.load(json_data)
                 except Exception:
                     gobar_config = {}
-                g.GOBAR_CONFIG = json.dumps(gobar_config)
+                cls._redis_cli().set('andino-config', json.dumps(gobar_config))
 
         return gobar_config
 
     @classmethod
     def _set_config(cls, config_dict):
         json_string = json.dumps(config_dict, sort_keys=True, indent=2)
-        g.GOBAR_CONFIG = json_string
-        with open(cls.CONFIG_PATH, 'w') as json_data:
+        cls._redis_cli().set('andino-config', json_string)
+        with open(GobArConfigController.CONFIG_PATH, 'w') as json_data:
             json_data.write(json_string)
 
     @classmethod
@@ -322,3 +325,14 @@ class GobArConfigController(base.BaseController):
             output_file.write(data)
         output_file.close()
         return os.path.join('/user_images/', field_storage.filename)
+
+    @classmethod
+    def _redis_cli(cls):
+        if not getattr(cls, '_redis', None):
+            redis_url = ckan_config.get('ckan.redis.url')
+            pr = urlparse.urlparse(redis_url)
+            db = os.path.basename(pr.path)
+
+            cls._redis = redis.StrictRedis(host=pr.hostname, port=pr.port, db=db)
+
+        return cls._redis
