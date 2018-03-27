@@ -2,6 +2,7 @@
 import ckan.lib.mailer as ckan_mailer
 import ckanext.gobar_theme.helpers as gobar_helpers
 import smtplib
+import paste.deploy.converters
 import ckan
 from pylons import config
 from email.header import Header
@@ -150,6 +151,8 @@ def assemble_email(msg_plain_body, msg_html_body, msg_subject, recipient_name, r
 def send_mail(msg, recipient_email):
     smtp_connection = smtplib.SMTP()
     smtp_server = config.get('smtp.server', 'localhost')
+    smtp_starttls = paste.deploy.converters.asbool(
+        config.get('smtp.starttls'))
     smtp_user = config.get('smtp.user')
     smtp_password = config.get('smtp.password')
     return_value = {'success': False}
@@ -160,6 +163,8 @@ def send_mail(msg, recipient_email):
         return return_value
     try:
         smtp_connection.ehlo()
+        if smtp_starttls:
+            smtp_connection.starttls()
         if smtp_user:
             assert smtp_password, "If smtp.user is configured then smtp.password must be configured as well."
             smtp_connection.login(smtp_user, smtp_password)
