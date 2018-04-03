@@ -15,6 +15,7 @@ from ckan.lib.search import SearchError
 import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.lib.base as base
 import cgi
+import moment
 import ckanext.googleanalytics.plugin as google_analytics
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
@@ -347,6 +348,14 @@ class GobArPackageController(PackageController):
         try:
             data_dict = clean_dict(dict_fns.unflatten(
                 tuplize_dict(parse_params(request.POST))))
+
+            # Guardamos como extras los campos issued y modified
+
+            time_now = moment.now().isoformat()
+
+            self._add_or_replace_extra(key='issued', value=time_now, extras=data_dict['extras'])
+            self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
+
             if ckan_phase:
                 # prevent clearing of groups etc
                 context['allow_partial_update'] = True
@@ -634,6 +643,18 @@ class GobArPackageController(PackageController):
             context['message'] = data_dict.get('log_message', '')
             data_dict['id'] = name_or_id
 
+            # Obtengo la lista de extras del dataset y agrego en el data_dict los extras que falten
+            # (no estaban en el request.POST)
+            extra_fields = get_action('package_show')(dict(context, for_view=True), {'id': name_or_id})['extras']
+            for extra_field in extra_fields:
+                found_extra_field = filter(lambda x: x['key'] == extra_field['key'], data_dict['extras'])
+                if len(found_extra_field) == 0:
+                    data_dict['extras'].append(extra_field)
+
+            time_now = moment.now().isoformat()
+
+            self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
+
             self.__generate_spatial_extra_field(data_dict)
 
             pkg = get_action('package_update')(context, data_dict)
@@ -678,3 +699,11 @@ class GobArPackageController(PackageController):
 
     def resource_view_embed(self, resource_id):
         google_analytics._post_analytics(c.user, 'CKAN Resource Embed', 'Resource ', resource_id, resource_id)
+
+    def _add_or_replace_extra(self, key, value, extras):
+        extra_field = filter(lambda x: x['key'] == key, extras)
+        if len(extra_field) > 0:
+            # Asumimos que hay un solo resultado
+            extra_field[0]['value'] = value
+        else:
+            extras.append({'key': key, 'value': value})
