@@ -336,3 +336,10 @@ def is_distribution_local(distribution_metadata):
     ckan_site_url = config.get('ckan.site_url')
     accessURL = distribution_metadata.get('accessURL', '')
     return accessURL.startswith(ckan_site_url)
+
+
+def get_extra_value(extras_list, field):
+    for extra_field in extras_list:
+        if extra_field['key'] == field:
+            return extra_field['value']
+    return None

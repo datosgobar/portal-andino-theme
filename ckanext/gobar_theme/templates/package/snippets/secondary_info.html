@@ -99,30 +99,27 @@
             </div>
         {% endif %}
 
+        {% set creation_date =  h.get_extra_value(pkg.extras, 'issued') %}
+        {% set modification_date =  h.get_extra_value(pkg.extras, 'modified') %}
+
         <div class="row">
-            {% if pkg.extras %}
-                {% for extra in pkg.extras %}
-                    {% if extra.key == 'issued' and extra.value|length > 0 %}
-                        <div class="row">
-                            <div class="col-xs-5 title">
-                                Fecha de publicación
-                            </div>
-                            <div class="col-xs-7 value">
-                                <p>{{ h.render_ar_datetime(extra.value) }}</p>
-                            </div>
-                        </div>
-                    {% elif extra.key == 'modified' and extra.value|length > 0 %}
-                        <div>
-                            <div class="col-xs-5 title">
-                                Fecha de actualización
-                            </div>
-                            <div class="col-xs-7 value">
-                                <p>{{ h.render_ar_datetime(extra.value) }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+            <div class="row">
+                <div class="col-xs-5 title">
+                    Fecha de publicación
+                </div>
+                <div class="col-xs-7 value">
+                    <p>{{ h.render_ar_datetime(creation_date) if creation_date|length > 0 else h.render_ar_datetime(pkg.metadata_created) }}</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="col-xs-5 title">
+                    Fecha de actualización
+                </div>
+                <div class="col-xs-7 value">
+                    <p>{{ h.render_ar_datetime(modification_date) if modification_date|length > 0 else h.render_ar_datetime(pkg.metadata_modified) }}</p>
+                </div>
+            </div>
         </div>
 
         {% if pkg.url %}
