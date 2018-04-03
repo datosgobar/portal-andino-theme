@@ -15,6 +15,7 @@ from ckan.lib.search import SearchError
 import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.lib.base as base
 import cgi
+import moment
 import ckanext.googleanalytics.plugin as google_analytics
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
@@ -347,6 +348,14 @@ class GobArPackageController(PackageController):
         try:
             data_dict = clean_dict(dict_fns.unflatten(
                 tuplize_dict(parse_params(request.POST))))
+
+            # Guardamos como extras los campos issued y modified
+
+            time_now = moment.now().isoformat()
+
+            self._add_or_replace_extra(key='issued', value=time_now, extras=data_dict['extras'])
+            self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
+
             if ckan_phase:
                 # prevent clearing of groups etc
                 context['allow_partial_update'] = True
@@ -439,6 +448,11 @@ class GobArPackageController(PackageController):
             del data['save']
             resource_id = data['id']
             del data['id']
+
+            # Guardo los campos issued y modified
+            time_now = moment.now().isoformat()
+            data['issued'] = time_now
+            data['modified'] = time_now
 
             self._validate_resource(data)
 
@@ -552,6 +566,78 @@ class GobArPackageController(PackageController):
             template = 'package/new_resource.html'
         return render(template, extra_vars=vars)
 
+    def resource_edit(self, id, resource_id, data=None, errors=None,
+                      error_summary=None):
+        context = {'model': model, 'session': model.Session,
+                   'api_version': 3, 'for_edit': True,
+                   'user': c.user, 'auth_user_obj': c.userobj}
+        data_dict = {'id': id}
+
+        try:
+            check_access('package_update', context, data_dict)
+        except NotAuthorized:
+            abort(403, _('User %r not authorized to edit %s') % (c.user, id))
+
+        if request.method == 'POST' and not data:
+            data = data or \
+                clean_dict(dict_fns.unflatten(tuplize_dict(parse_params(
+                                                           request.POST))))
+            # we don't want to include save as it is part of the form
+            del data['save']
+
+            # Guardo los campos issued y modified
+            data['issued'] = get_action('resource_show')(context, {'id': resource_id})['issued']
+            data['modified'] = moment.now().isoformat()
+
+            data['package_id'] = id
+            try:
+                if resource_id:
+                    data['id'] = resource_id
+                    get_action('resource_update')(context, data)
+                else:
+                    get_action('resource_create')(context, data)
+            except ValidationError, e:
+                errors = e.error_dict
+                error_summary = e.error_summary
+                return self.resource_edit(id, resource_id, data,
+                                          errors, error_summary)
+            except NotAuthorized:
+                abort(401, _('Unauthorized to edit this resource'))
+            redirect(h.url_for(controller='package', action='resource_read',
+                               id=id, resource_id=resource_id))
+
+        pkg_dict = get_action('package_show')(context, {'id': id})
+        if pkg_dict['state'].startswith('draft'):
+            # dataset has not yet been fully created
+            resource_dict = get_action('resource_show')(context,
+                                                        {'id': resource_id})
+            return self.new_resource(id, data=resource_dict)
+        # resource is fully created
+        try:
+            resource_dict = get_action('resource_show')(context,
+                                                        {'id': resource_id})
+        except NotFound:
+            abort(404, _('Resource not found'))
+        c.pkg_dict = pkg_dict
+        c.resource = resource_dict
+        # set the form action
+        c.form_action = h.url_for(controller='package',
+                                  action='resource_edit',
+                                  resource_id=resource_id,
+                                  id=id)
+        if not data:
+            data = resource_dict
+
+        package_type = pkg_dict['type'] or 'dataset'
+
+        errors = errors or {}
+        error_summary = error_summary or {}
+        vars = {'data': data, 'errors': errors,
+                'error_summary': error_summary, 'action': 'edit',
+                'resource_form_snippet': self._resource_form(package_type),
+                'dataset_type': package_type}
+        return render('package/resource_edit.html', extra_vars=vars)
+
     def edit(self, id, data=None, errors=None, error_summary=None):
         package_type = self._get_package_type(id)
         context = {'model': model, 'session': model.Session,
@@ -634,6 +720,18 @@ class GobArPackageController(PackageController):
             context['message'] = data_dict.get('log_message', '')
             data_dict['id'] = name_or_id
 
+            # Obtengo la lista de extras del dataset y agrego en el data_dict los extras que falten
+            # (no estaban en el request.POST)
+            extra_fields = get_action('package_show')(dict(context, for_view=True), {'id': name_or_id})['extras']
+            for extra_field in extra_fields:
+                found_extra_field = filter(lambda x: x['key'] == extra_field['key'], data_dict['extras'])
+                if len(found_extra_field) == 0:
+                    data_dict['extras'].append(extra_field)
+
+            time_now = moment.now().isoformat()
+
+            self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
+
             self.__generate_spatial_extra_field(data_dict)
 
             pkg = get_action('package_update')(context, data_dict)
@@ -678,3 +776,11 @@ class GobArPackageController(PackageController):
 
     def resource_view_embed(self, resource_id):
         google_analytics._post_analytics(c.user, 'CKAN Resource Embed', 'Resource ', resource_id, resource_id)
+
+    def _add_or_replace_extra(self, key, value, extras):
+        extra_field = filter(lambda x: x['key'] == key, extras)
+        if len(extra_field) > 0:
+            # Asumimos que hay un solo resultado
+            extra_field[0]['value'] = value
+        else:
+            extras.append({'key': key, 'value': value})

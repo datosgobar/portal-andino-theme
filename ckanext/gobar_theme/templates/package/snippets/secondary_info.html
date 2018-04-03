@@ -100,21 +100,29 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-xs-5 title">
-                Fecha de publicación
-            </div>
-            <div class="col-xs-7 value">
-                {{ h.render_ar_datetime(pkg.metadata_created) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-5 title">
-                Fecha de actualización
-            </div>
-            <div class="col-xs-7 value">
-                {{ h.render_ar_datetime(pkg.metadata_modified) }}
-            </div>
+            {% if pkg.extras %}
+                {% for extra in pkg.extras %}
+                    {% if extra.key == 'issued' and extra.value|length > 0 %}
+                        <div class="row">
+                            <div class="col-xs-5 title">
+                                Fecha de publicación
+                            </div>
+                            <div class="col-xs-7 value">
+                                <p>{{ h.render_ar_datetime(extra.value) }}</p>
+                            </div>
+                        </div>
+                    {% elif extra.key == 'modified' and extra.value|length > 0 %}
+                        <div>
+                            <div class="col-xs-5 title">
+                                Fecha de actualización
+                            </div>
+                            <div class="col-xs-7 value">
+                                <p>{{ h.render_ar_datetime(extra.value) }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
 
         {% if pkg.url %}
