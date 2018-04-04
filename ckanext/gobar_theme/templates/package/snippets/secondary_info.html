@@ -99,21 +99,26 @@
             </div>
         {% endif %}
 
-        <div class="row">
-            <div class="col-xs-5 title">
-                Fecha de publicación
-            </div>
-            <div class="col-xs-7 value">
-                {{ h.render_ar_datetime(pkg.metadata_created) }}
-            </div>
-        </div>
+        {% set creation_date =  h.get_extra_value(pkg.extras, 'issued') or pkg.metadata_created %}
+        {% set modification_date =  h.get_extra_value(pkg.extras, 'modified') or pkg.metadata_modified %}
 
         <div class="row">
-            <div class="col-xs-5 title">
-                Fecha de actualización
+            <div class="row">
+                <div class="col-xs-5 title">
+                    Fecha de publicación
+                </div>
+                <div class="col-xs-7 value">
+                    <p>{{ h.render_ar_datetime(creation_date) }}</p>
+                </div>
             </div>
-            <div class="col-xs-7 value">
-                {{ h.render_ar_datetime(pkg.metadata_modified) }}
+
+            <div>
+                <div class="col-xs-5 title">
+                    Fecha de actualización
+                </div>
+                <div class="col-xs-7 value">
+                    <p>{{ h.render_ar_datetime(modification_date) }}</p>
+                </div>
             </div>
         </div>
 
