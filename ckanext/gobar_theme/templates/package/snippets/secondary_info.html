@@ -99,8 +99,8 @@
             </div>
         {% endif %}
 
-        {% set creation_date =  h.get_extra_value(pkg.extras, 'issued') %}
-        {% set modification_date =  h.get_extra_value(pkg.extras, 'modified') %}
+        {% set creation_date =  h.get_extra_value(pkg.extras, 'issued') or pkg.metadata_created %}
+        {% set modification_date =  h.get_extra_value(pkg.extras, 'modified') or pkg.metadata_modified %}
 
         <div class="row">
             <div class="row">
@@ -108,7 +108,7 @@
                     Fecha de publicación
                 </div>
                 <div class="col-xs-7 value">
-                    <p>{{ h.render_ar_datetime(creation_date) if creation_date|length > 0 else h.render_ar_datetime(pkg.metadata_created) }}</p>
+                    <p>{{ h.render_ar_datetime(creation_date) }}</p>
                 </div>
             </div>
 
@@ -117,7 +117,7 @@
                     Fecha de actualización
                 </div>
                 <div class="col-xs-7 value">
-                    <p>{{ h.render_ar_datetime(modification_date) if modification_date|length > 0 else h.render_ar_datetime(pkg.metadata_modified) }}</p>
+                    <p>{{ h.render_ar_datetime(modification_date) }}</p>
                 </div>
             </div>
         </div>
