@@ -160,7 +160,7 @@
                             Fecha de creación
                         </div>
                         <div class="col-xs-8 value">
-                            {{ h.render_ar_datetime(res.created) or _('unknown') }}
+                            {{ h.render_ar_datetime(res.issued) or h.render_ar_datetime(res.created) or _('unknown') }}
                         </div>
                     </div>
 
@@ -169,7 +169,7 @@
                             Último cambio
                         </div>
                         <div class="col-xs-8 value">
-                            {{ h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {{ h.render_ar_datetime(res.modified) or h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
                         </div>
                     </div>
 
