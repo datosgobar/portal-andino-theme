@@ -100,9 +100,11 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-12 row hidden-xs hidden-sm">
-                    {% snippet "package/snippets/resource_attributes_table.html", res=res %}
-                </div>
+                {% if res.resource_type != 'api' %}
+                    <div class="col-xs-12 col-md-12 row hidden-xs hidden-sm">
+                        {% snippet "package/snippets/resource_attributes_table.html", res=res %}
+                    </div>
+                {% endif %}
 
                 <div class="resource-additional-info col-xs-12 col-md-12 row" style="width: 102% !important;">
                     <h2 class="title-h">Información adicional</h2>
