@@ -10288,3 +10288,7 @@ div.section-div{
   z-index: 1;
   opacity: 0;
 }
+
+div.attributes-table{
+  display: inline-block;
+}
