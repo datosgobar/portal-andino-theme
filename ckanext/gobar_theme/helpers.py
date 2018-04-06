@@ -7,6 +7,8 @@ from urlparse import urlparse
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
+import uuid
+import requests
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from pydatajson.core import DataJson
@@ -329,7 +331,10 @@ def portal_andino_version():
 
 def get_distribution_metadata(resource_id):
     ckan_site_url = config.get('ckan.site_url')
-    datajson = DataJson(ckan_site_url + '/data.json')
+    # Pasamos un parámetro random para evitar la caché del cliente http que se baja el datajson
+    res = requests.get(ckan_site_url + '/data.json?rnd=%s' % uuid.uuid4(), verify=False)
+    json_dict = json.loads(res.content, encoding='utf-8')
+    datajson = DataJson(json_dict)
     dist = datajson.get_distribution(identifier=resource_id)
     return dist
 
@@ -338,7 +343,6 @@ def is_distribution_local(distribution_metadata):
     ckan_site_url = config.get('ckan.site_url')
     accessURL = distribution_metadata.get('accessURL', '')
     return accessURL.startswith(ckan_site_url)
-
 
 def get_extra_value(extras_list, field):
     for extra_field in extras_list:

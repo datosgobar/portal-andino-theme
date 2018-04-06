@@ -47,7 +47,7 @@
                     {% endif %}
                 </div>
 
-                <div class="resource-previsualization" style="display: {{ block if res.datastore_active else none }}">
+                <div class="resource-previsualization hidden-xs hidden-sm" style="display: {{ block if res.datastore_active else none }}">
                     <div class="resource-additional-info col-xs-12 col-md-12 row"
                          style="border-bottom: 0; width: 103%; margin-bottom: 20px; margin-top: 30px;">
                         <h2 class="title-h" style="padding-bottom: 0 !important;">Previsualización</h2>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-12 row">
+                <div class="hidden-xs hidden-sm attributes-table">
                     {% snippet "package/snippets/resource_attributes_table.html", res=res %}
                 </div>
 
