@@ -10,6 +10,8 @@ import json
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from pydatajson.core import DataJson
+from datetime import time
+from dateutil import parser, tz
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -266,7 +268,7 @@ def type_is_numeric(field_type):
 
 
 def render_ar_datetime(datetime_):
-    datetime_ = ckan_helpers._datestamp_to_datetime(datetime_)
+    datetime_ = ckan_helpers._datestamp_to_datetime(convert_iso_string_to_utc(datetime_))
     if not datetime_:
         return ''
     details = {
@@ -343,3 +345,15 @@ def get_extra_value(extras_list, field):
         if extra_field['key'] == field:
             return extra_field['value']
     return None
+
+
+def convert_iso_string_to_utc(date_string):
+    date_time = parser.parse(date_string)
+    if date_time.time() == time(0):
+        return date_string
+    if date_time.tzinfo is not None:
+        utc_date_time = date_time.astimezone(tz.tzutc())
+    else:
+        utc_date_time = date_time
+    utc_date_time = utc_date_time.replace(tzinfo=None)
+    return utc_date_time.isoformat()
