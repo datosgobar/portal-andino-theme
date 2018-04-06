@@ -586,7 +586,10 @@ class GobArPackageController(PackageController):
             del data['save']
 
             # Guardo los campos issued y modified
-            data['issued'] = get_action('resource_show')(context, {'id': resource_id})['issued']
+            package_data = get_action('resource_show')(context, {'id': resource_id})
+            # Los packages creados sin el campo extra "issued" deben defaultear al campo "created"
+            issued = package_data.get('issued', None) or package_data.get('created')
+            data['issued'] = issued
             data['modified'] = moment.now().isoformat()
 
             data['package_id'] = id
