@@ -327,10 +327,10 @@ def portal_andino_version():
     return version['portal-andino']
 
 
-def get_distribution_metadata(ds_identifier, resource_title):
+def get_distribution_metadata(resource_id):
     ckan_site_url = config.get('ckan.site_url')
     datajson = DataJson(ckan_site_url + '/data.json')
-    dist = datajson.get_distribution(title=resource_title, dataset_identifier=ds_identifier)
+    dist = datajson.get_distribution(identifier=resource_id)
     return dist
 
 
