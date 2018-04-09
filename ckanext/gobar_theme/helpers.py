@@ -353,12 +353,10 @@ def get_extra_value(extras_list, field):
 
 
 def convert_iso_string_to_utc(date_string=''):
-    if date_string is None:
-        return ''
     try:
         date_time = parser.parse(date_string)
-    except ValueError:
-        # date_string es un string inválido
+    except (ValueError, TypeError):
+        # date_string es un string inválido o None
         return ''
     if date_time.time() == time(0):
         return date_string
