@@ -176,7 +176,7 @@
                             {% if res.modified is defined %}
                                 {{ h.render_ar_datetime(res.modified) }}
                             {% else %}
-                                {{ h.render_ar_datetime(res.last_modified or res.created) or _('unknown') }}
+                                {{ h.render_ar_datetime(res.last_modified) or _('unknown') }}
                             {% endif %}
                         </div>
                     </div>
