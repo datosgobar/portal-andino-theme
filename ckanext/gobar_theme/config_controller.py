@@ -177,6 +177,10 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_09_about.html')
 
+    def about_components(self):
+        self._authorize()
+        return base.render('config/config_09_about_components.html')
+
     def edit_metadata_google_fb(self):
         self._authorize()
         if request.method == 'POST':

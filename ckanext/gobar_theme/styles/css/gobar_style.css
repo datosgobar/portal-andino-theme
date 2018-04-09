@@ -9820,6 +9820,19 @@ ul.activity {
   ul.activity li.load-more {
     display: none !important; }
 
+div.button-pre{
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+div.about-components {
+  margin-bottom: 60px;
+}
+div.about-components > h2{
+  font-size: 32px !important;}
+div.about-components > pre{
+  overflow: inherit;
+}
 #template-config-container {
   padding-right: 0;
   padding-left: 0;
@@ -10291,4 +10304,12 @@ div.section-div{
 
 div.attributes-table{
   display: inline-block;
+}
+
+div.link-margin{
+  margin-bottom: 50px;
+}
+
+div.about-components > h2{
+  font-size: 18px;
 }

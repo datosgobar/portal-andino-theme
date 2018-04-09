@@ -205,6 +205,7 @@ class GobArRouter:
             m.connect('/configurar/datasets', action='edit_datasets')
             m.connect('/configurar/organizaciones', action='edit_organizations')
             m.connect('/configurar/acerca', action='edit_about')
+            m.connect('/configurar/acerca/componentes', action='about_components')
             m.connect('/configurar/apis', action='edit_apis')
             m.connect('/configurar/metadata/google_fb', action='edit_metadata_google_fb')
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')

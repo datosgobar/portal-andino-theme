@@ -1,0 +1,149 @@
+{% extends "config/config_base.html" %}
+
+{% block config %}
+
+    <h1>Componentes para páginas personalizadas</h1>
+    <label>Estos componentes aseguran una calidad y estándar gráfico para todas las comunicaciones de los
+        organismos de la APN. Es recomendable usar este tipo de componentes y no otros.</label>
+
+    <div class="about-components">
+        <h2>Botones</h2>
+        <div class="col-xs-12">
+            <button class="btn btn-blue btn-lg">Botón de color</button>
+            <button class="btn btn-outline-primary btn-lg">Botón de línea</button>
+        </div>
+        <div class="button-pre">
+            <pre id="color-button-pre"><code>
+    &lt;div class="row"&gt;
+        &lt;div class="col-xa-12 text-center"&gt;
+            &lt;a class="btn btn-primary btn-lg" href="#">Botón de color&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+            </code></pre>
+            <pre id="outline-button-pre"><code>
+    &lt;div class="row"&gt;
+        &lt;div class="col-xa-12 text-center"&gt;
+            &lt;a class="btn btn-primary btn-lg" href="#">Botón de línea&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="about-components">
+        <h2>Títulos y textos</h2>
+
+        <br>
+        <h2>Titular General</h2>
+        <h3 style="margin: 0;">Titular Secundario</h3>
+        <h4>Subtítulo</h4>
+        <p>Texto de párrafo</p>
+        <pre><code>
+    &lt;div class="row"&gt;
+        &lt;div class="col-xs-12 text-center"&gt;
+            &lt;h1&gt;Titular General&lt;/h1&gt;
+            &lt;h2&gt;Titular Secundario&lt;/h2&gt;
+            &lt;h3&gt;Subtítulo&lt;/h3&gt;
+            &lt;p&gt;Texto de párrafo&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+        </code></pre>
+    </div>
+
+    <div class="about-components">
+        <h2>Atajo destacado con imagen</h2>
+        <div class="row panels-row">
+{#            <div class="col-xs-12 col-sm-6 col-md-3">#}
+{#                <a class="panel panel-default" href="#">#}
+                    {#                    <div class="panel-heading">{% snippet 'img/placeholder.png' %}</div>#}
+{#                    <div class="panel-heading"><img src="/img/search.svg" class="search-icon"></div>#}
+{#                    <div class="panel-body>">#}
+{#                        <h3 style="color: black">Este es el título del link</h3>#}
+{#                        <p class="text-muted">Descripción</p>#}
+{#                    </div>#}
+{#                </a>#}
+{#            </div>#}
+            <div class="container-fluid radio-container">
+                <label class="img-radio col-xs-12 col-md-6">
+                    <div class="radio-box">
+                        <a href="http://www.google.com">
+                            <img src="/img/placeholder.png" class="logo-ministerio">
+                            <h3>Este es el título del link</h3>
+                            <label>Mostrar cantidad de datasets y alinear a la izquierda</label>
+                            <input type="radio" name="title-template">
+                        </a>
+                    </div>
+                </label>
+            </div>
+        <pre><code>
+    &lt;div class="row panels-row"&gt;
+        &lt;div class="col-xs-12 col-sm-6 col-md-3"&gt;
+            &lt;a class="panel panel-default" href="#"&gt;
+                &lt;div class="panel-heading"
+                    style="background-image:url('img/placeholder.png');"&gt;&lt;/div&gt;
+                &lt;div class="panel-body"&gt;
+                    &lt;h3 style="color: black"&gt;Este es el título del link&lt;/h3&gt;
+                    &lt;p class="text-muted">Descripción&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+        </code></pre>
+    </div>
+
+    <div class="about-components">
+        <h2>Contenido destacado con ícono</h2>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="icon-item">
+                    <i class="fa fa-users text-success"></i>
+                    <h3>Cercana</h3>
+                    <p>Conoce tus necesidades y adopta sus servicios a ellas.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="icon-item">
+                    <i class="fa fa-search text-primary"></i>
+                    <h3>Transparente</h3>
+                    <p>Brinda mayor información y certeza sobre sus actos de gobierno.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="icon-item">
+                    <i class="fa fa-users"></i>
+                    <h3>Participativa</h3>
+                    <p>Trabaja en equipo con los empleados públicos y la gente.</p>
+                </div>
+            </div>
+        </div>
+        <pre><code>
+    &lt;div class="row"&gt;
+        &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+            &lt;div class="icon-item"&gt;
+                &lt;i class="fa fa-users text-success"&gt;&lt;/i&gt;
+                &lt;h3&gt;Cercana&lt;/h3&gt;
+                &lt;p&gt;Conoce tus necesidades y adopta sus servicios a ellas.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+            &lt;div class="icon-item"&gt;
+                &lt;i class="fa fa-search text-primary"&gt;&lt;/i&gt;
+                &lt;h3&gt;Transparente&lt;/h3&gt;
+                &lt;p&gt;Brinda mayor información y certeza sobre sus actos de gobierno.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+            &lt;div class="icon-item"&gt;
+                &lt;i class="fa fa-users"&gt;&lt;/i&gt;
+                &lt;h3&gt;Participativa&lt;/h3&gt;
+                &lt;p&gt;Trabaja en equipo con los empleados públicos y la gente.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+        </code></pre>
+
+    </div>
+
+
+
+{% endblock %}

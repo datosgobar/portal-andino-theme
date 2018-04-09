@@ -50,6 +50,13 @@
                 </label>
                 <label>Para más información, te dejamos <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md#acerca">este link a la documentación</a>.
                 </label>
+                <br>
+                <div class="link-margin">
+                    <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='about_components') }}"
+                       class="section-link">
+                        Desde aquí podés elegir algunos componentes para crear tu página personalizada.
+                    </a>
+                </div>
             </div>
 
             {% set sections = h.get_theme_config('about.sections', []) %}
