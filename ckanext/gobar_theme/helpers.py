@@ -344,6 +344,7 @@ def is_distribution_local(distribution_metadata):
     accessURL = distribution_metadata.get('accessURL', '')
     return accessURL.startswith(ckan_site_url)
 
+
 def get_extra_value(extras_list, field):
     for extra_field in extras_list:
         if extra_field['key'] == field:
@@ -351,8 +352,14 @@ def get_extra_value(extras_list, field):
     return None
 
 
-def convert_iso_string_to_utc(date_string):
-    date_time = parser.parse(date_string)
+def convert_iso_string_to_utc(date_string=''):
+    if date_string is None:
+        return ''
+    try:
+        date_time = parser.parse(date_string)
+    except ValueError:
+        # date_string es un string inválido
+        return ''
     if date_time.time() == time(0):
         return date_string
     if date_time.tzinfo is not None:
