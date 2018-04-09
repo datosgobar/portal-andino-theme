@@ -174,9 +174,9 @@
                         </div>
                         <div class="col-xs-8 value">
                             {% if res.modified is defined %}
-                                {{ h.render_ar_datetime(res.modified) or h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                                {{ h.render_ar_datetime(res.modified) }}
                             {% else %}
-                                {{ h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                                {{ h.render_ar_datetime(res.last_modified or res.created) or _('unknown') }}
                             {% endif %}
                         </div>
                     </div>
