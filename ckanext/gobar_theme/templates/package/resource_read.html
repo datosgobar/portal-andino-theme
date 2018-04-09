@@ -40,7 +40,7 @@
                 <div class="col-md-2 col-xs-12 resource-actions">
                     <a class="btn btn-green btn-block" href="{{ res.url }}">{{ 'DESCARGAR' if res.resource_type != 'api' else 'VER DOCUMENTACION' }}</a>
 
-                    {% set distribution_metadata = h.get_distribution_metadata(ds_identifier=pkg.id, resource_title=res.name) %}
+                    {% set distribution_metadata = h.get_distribution_metadata(resource_id=res.id) %}
                     {% if not h.is_distribution_local(distribution_metadata) %}
                         {% set accessURL = distribution_metadata['accessURL'] %}
                         <a class="btn btn-block btn-outline-primary" href="{{ accessURL }}" target="_blank">CONSULTAR EN EL<br>PORTAL DE ORIGEN</a>
@@ -164,7 +164,11 @@
                             Fecha de creación
                         </div>
                         <div class="col-xs-8 value">
-                            {{ h.render_ar_datetime(res.issued) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% if res.issued is defined %}
+                                {{ h.render_ar_datetime(res.issued) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% else %}
+                                {{ h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% endif %}
                         </div>
                     </div>
 
@@ -173,7 +177,11 @@
                             Último cambio
                         </div>
                         <div class="col-xs-8 value">
-                            {{ h.render_ar_datetime(res.modified) or h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% if res.modified is defined %}
+                                {{ h.render_ar_datetime(res.modified) or h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% else %}
+                                {{ h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% endif %}
                         </div>
                     </div>
 
