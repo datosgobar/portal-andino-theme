@@ -11,8 +11,8 @@
 - [Elementos de tu portal](#elementos-de-tu-portal)
   - [Organizaciones](#organizaciones)
   - [Sección Organizaciones con datos](#secci%C3%B3n-organizaciones-con-datos)
-  - [Temas](#temas)
   - [Sección Acerca](#acerca)
+  - [Temas](#temas)
   - [Datasets](#datasets)
   - [Recursos](#recursos)
   - [Campos de un recurso](#campos-de-un-recurso)
@@ -161,6 +161,36 @@ De no existir la carpeta **/templates**, se deberá crearla utilizando dos coman
 (www-data es el usuario con el que se corre el proceso apache en el sistema operativo **Ubuntu**)
 
 Dentro de cada archivo deberá estar el contenido de su sección correspondiente. Por favor, **no te olvides** de que el nombre del archivo **debe coincidir** con lo escrito en el campo 'Nombre del archivo' de la sección.
+
+#### ¿Cómo y dónde puedo guardar imágenes para mostrarlas en mis secciones? ¿Cómo las muestro en mis templates?
+
+Dentro del container, las imágenes deben ser guardadas en una carpeta llamada "user_images".
+
+Para poder copiar y pegar una imagen en dicha carpeta existe un comando que podés usar, pero primero tenés que hacer tres cosas:
+
+* Dentro del contenedor, ejecutar este comando:
+```
+chown www-data:www-data /usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/
+```
+
+* En caso de que hayas cambiado manualmente el puerto del contenedor, saber cuál es (el default es 8080)
+
+* Tener preparado el nombre del contenedor (ya que queremos decirle al comando en qué lugar vamos a guardar la imagen)
+
+El nombre del contenedor se consigue escribiendo en una terminal dentro del host: 
+```
+sudo docker-compose -f latest.yml ps |grep <puerto del container>
+```
+
+Sólo nos queda guardar la imagen:
+```
+docker cp <nombre de la imagen> <nombre del contendor portal>:/usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/
+```
+
+Supongamos que guardaste una imagen llamada 'mi_imagen.png'; para poder utilizarla, podés escribir dentro de tu template esta línea (completa): 
+```
+<img src="/user_images/mi_imagen.png">
+```
 
 ***
 ### Temas
