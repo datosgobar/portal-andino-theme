@@ -10292,3 +10292,9 @@ div.section-div{
 div.attributes-table{
   display: inline-block;
 }
+
+div.dataset-container div.dataset-content{
+  line-height: 2.75ex;
+  height: 15ex;
+  overflow: hidden;
+}
