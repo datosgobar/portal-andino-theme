@@ -10313,3 +10313,13 @@ div.link-margin{
 div.about-components > h2{
   font-size: 18px;
 }
+
+div.about-components div.icon-item {
+  display: inline-block;
+  text-align: center;
+  font-size: 400%;
+}
+
+div.about-components div.row{
+  margin-top: 20px;
+}

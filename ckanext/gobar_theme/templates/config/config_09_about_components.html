@@ -2,6 +2,8 @@
 
 {% block config %}
 
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     <h1>Componentes para páginas personalizadas</h1>
     <label>Estos componentes aseguran una calidad y estándar gráfico para todas las comunicaciones de los
         organismos de la APN. Es recomendable usar este tipo de componentes y no otros.</label>
@@ -66,27 +68,40 @@
             <div class="container-fluid radio-container">
                 <label class="img-radio col-xs-12 col-md-6">
                     <div class="radio-box">
-                        <a href="http://www.google.com">
+                        <a href="http://datos.gob.ar">
                             <img src="/img/placeholder.png" class="logo-ministerio">
                             <h3>Este es el título del link</h3>
-                            <label>Mostrar cantidad de datasets y alinear a la izquierda</label>
+                            <label>Esta es la descripción</label>
                             <input type="radio" name="title-template">
                         </a>
                     </div>
                 </label>
             </div>
+        </div>
+{#    &lt;div class="row panels-row"&gt;#}
+{#        &lt;div class="col-xs-12 col-sm-6 col-md-3"&gt;#}
+{#            &lt;a class="panel panel-default" href="#"&gt;#}
+{#                &lt;div class="panel-heading"#}
+{#                    style="background-image:url('img/placeholder.png');"&gt;&lt;/div&gt;#}
+{#                &lt;div class="panel-body"&gt;#}
+{#                    &lt;h3 style="color: black"&gt;Este es el título del link&lt;/h3&gt;#}
+{#                    &lt;p class="text-muted">Descripción&lt;/p&gt;#}
+{#                &lt;/div&gt;#}
+{#            &lt;/a&gt;#}
+{#        &lt;/div&gt;#}
+{#    &lt;/div&gt;#}
         <pre><code>
-    &lt;div class="row panels-row"&gt;
-        &lt;div class="col-xs-12 col-sm-6 col-md-3"&gt;
-            &lt;a class="panel panel-default" href="#"&gt;
-                &lt;div class="panel-heading"
-                    style="background-image:url('img/placeholder.png');"&gt;&lt;/div&gt;
-                &lt;div class="panel-body"&gt;
-                    &lt;h3 style="color: black"&gt;Este es el título del link&lt;/h3&gt;
-                    &lt;p class="text-muted">Descripción&lt;/p&gt;
-                &lt;/div&gt;
-            &lt;/a&gt;
-        &lt;/div&gt;
+    &lt;div class="container-fluid radio-container"&gt;
+        &lt;label class="img-radio col-xs-12 col-md-6"&gt;
+            &lt;div class="radio-box"&gt;
+                &lt;a href="http://datos.gob.ar"&gt;
+                    &lt;img src="/img/placeholder.png" class="logo-ministerio"&gt;
+                    &lt;h3&gt;Este es el título del link&lt;/h3&gt;
+                    &lt;label&gt;Esta es la descripción&lt;/label&gt;
+                    &lt;input type="radio" name="title-template"&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/label&gt;
     &lt;/div&gt;
         </code></pre>
     </div>
@@ -141,7 +156,6 @@
         &lt;/div&gt;
     &lt;/div&gt;
         </code></pre>
-
     </div>
 
 
