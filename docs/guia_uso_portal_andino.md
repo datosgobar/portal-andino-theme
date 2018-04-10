@@ -162,7 +162,7 @@ De no existir la carpeta **/templates**, se deberá crearla utilizando dos coman
 
 Dentro de cada archivo deberá estar el contenido de su sección correspondiente. Por favor, **no te olvides** de que el nombre del archivo **debe coincidir** con lo escrito en el campo 'Nombre del archivo' de la sección.
 
-#### ¿Cómo y dónde puedo guardar imágenes para mostrarlas en mis secciones? ¿Cómo las muestro en mis templates?
+#### ¿Dónde y cómo puedo guardar imágenes para mostrarlas en mis secciones? ¿Cómo las muestro en mis templates?
 
 Dentro del container, las imágenes deben ser guardadas en una carpeta llamada "user_images".
 
