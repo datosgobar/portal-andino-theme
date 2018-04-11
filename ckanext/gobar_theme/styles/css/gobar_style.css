@@ -10299,8 +10299,16 @@ div.dataset-container div.dataset-content{
   overflow: hidden;
 }
 
+div.dataset-container div.dataset-notes {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 div.dataset-container h3.dataset-title{
   line-height: 0.5ex;
   height: 2.75ex;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 10px;
 }
