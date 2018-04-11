@@ -9923,6 +9923,8 @@ div.about-components > pre{
           top: -9999px; }
         #template-config-container #template-config .radio-container label.img-radio .radio-description {
           padding: 20px; }
+          #template-config-container #template-config .radio-container label.img-radio .radio-description .about-img-radio {
+            padding: 0;}
           #template-config-container #template-config .radio-container label.img-radio .radio-description h2 {
             color: #767676; }
     #template-config-container #template-config input[type="text"],
@@ -10322,4 +10324,12 @@ div.about-components div.icon-item {
 
 div.about-components div.row{
   margin-top: 20px;
+}
+
+div.about-template-buttons > button.btn-blue {
+  margin-left: 0;
+}
+
+div.about-template-icons {
+  font-family: inherit;
 }
