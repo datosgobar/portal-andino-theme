@@ -10295,6 +10295,12 @@ div.attributes-table{
 
 div.dataset-container div.dataset-content{
   line-height: 2.75ex;
-  height: 15ex;
+  height: 16ex;
+  overflow: hidden;
+}
+
+div.dataset-container h3.dataset-title{
+  line-height: 0.5ex;
+  height: 2.75ex;
   overflow: hidden;
 }
