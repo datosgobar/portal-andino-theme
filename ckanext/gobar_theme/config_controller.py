@@ -179,7 +179,7 @@ class GobArConfigController(base.BaseController):
 
     def about_components(self):
         self._authorize()
-        return base.render('config/config_09_about_components.html')
+        return base.render('about_template.html')
 
     def edit_metadata_google_fb(self):
         self._authorize()
