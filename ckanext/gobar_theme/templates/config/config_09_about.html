@@ -3,9 +3,9 @@
 
 {% block config %}
     <h1>Acerca (opcional)</h1>
-    <label>Desde aquí podés seleccionar qué tipo de información querés contar de tu portal. <br>
+    <p>Desde aquí podés seleccionar qué tipo de información querés contar de tu portal. <br>
         Podés elegir entre brindar una información básica, secciones personalizadas, o elegir no tener esta
-        sección.</label>
+        sección.</p>
 
     {% set current_type = h.get_theme_config('about.about-type') %}
     {% set types = [
@@ -25,8 +25,8 @@
         <div class="basic-about">
             <div class="explanation">
                 <h2>Información básica</h2>
-                <label>Contá qué son los datasets de tu portal. Aprovechá y explicá qué son los datos
-                    abiertos, e invitá a tus usuarios a que los usen, los modifiquen y los compartan.</label>
+                <p>Contá qué son los datasets de tu portal. Aprovechá y explicá qué son los datos
+                    abiertos, e invitá a tus usuarios a que los usen, los modifiquen y los compartan.</p>
             </div>
 
             <h2>Título</h2>
@@ -37,19 +37,18 @@
             {% set description = h.get_theme_config('about.description') %}
             <textarea title="Descripción del acerca" name="about-description"
             >{{- description if description else '' -}}</textarea>
-            <label class="explanation description">En este campo podés usar <a>formato Markdown</a>.</label>
+            <p class="explanation description">En este campo podés usar <a>formato Markdown</a>.</p>
         </div>
 
 
         <div class="advanced-about">
             <div class="explanation">
                 <h2>Secciones personalizadas</h2>
-                <label>Para agregar una nueva sección, podés crear archivos .html en el directorio /var/lib/ckan/theme_config/templates/.
+                <p>Para agregar una nueva sección, podés crear archivos .html en el directorio /var/lib/ckan/theme_config/templates/.<br>
                     Te sugerimos guiarte viendo el archivo "seccion-acerca.html". Lo único que tenés que
                     completar aquí es el nombre de ese archivo y qué título llevará la sección.
-                </label>
-                <label>Para más información, te dejamos <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md#acerca">este link a la documentación</a>.
-                </label>
+                </p>
+                <p>Para más información, te dejamos <a target="_blank" href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md#acerca">este link a la documentación</a>.</p>
             </div>
 
             {% set sections = h.get_theme_config('about.sections', []) %}
