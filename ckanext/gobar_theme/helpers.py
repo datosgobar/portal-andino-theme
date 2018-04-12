@@ -12,6 +12,8 @@ import requests
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from pydatajson.core import DataJson
+from datetime import time
+from dateutil import parser, tz
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -268,7 +270,7 @@ def type_is_numeric(field_type):
 
 
 def render_ar_datetime(datetime_):
-    datetime_ = ckan_helpers._datestamp_to_datetime(datetime_)
+    datetime_ = ckan_helpers._datestamp_to_datetime(convert_iso_string_to_utc(datetime_))
     if not datetime_:
         return ''
     details = {
@@ -327,15 +329,13 @@ def portal_andino_version():
     return version['portal-andino']
 
 
-def get_distribution_metadata(ds_identifier, resource_title):
+def get_distribution_metadata(resource_id):
     ckan_site_url = config.get('ckan.site_url')
-
     # Pasamos un parámetro random para evitar la caché del cliente http que se baja el datajson
     res = requests.get(ckan_site_url + '/data.json?rnd=%s' % uuid.uuid4(), verify=False)
     json_dict = json.loads(res.content, encoding='utf-8')
-
     datajson = DataJson(json_dict)
-    dist = datajson.get_distribution(title=resource_title, dataset_identifier=ds_identifier)
+    dist = datajson.get_distribution(identifier=resource_id)
     return dist
 
 
@@ -344,8 +344,27 @@ def is_distribution_local(distribution_metadata):
     accessURL = distribution_metadata.get('accessURL', '')
     return accessURL.startswith(ckan_site_url)
 
+
 def get_extra_value(extras_list, field):
     for extra_field in extras_list:
         if extra_field['key'] == field:
             return extra_field['value']
     return None
+
+
+def convert_iso_string_to_utc(date_string=''):
+    if date_string is None:
+        return ''
+    try:
+        date_time = parser.parse(date_string)
+    except ValueError:
+        # date_string es un string inválido o None
+        return ''
+    if date_time.time() == time(0):
+        return date_string
+    if date_time.tzinfo is not None:
+        utc_date_time = date_time.astimezone(tz.tzutc())
+    else:
+        utc_date_time = date_time
+    utc_date_time = utc_date_time.replace(tzinfo=None)
+    return utc_date_time.isoformat()

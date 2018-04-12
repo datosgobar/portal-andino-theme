@@ -70,6 +70,15 @@ $(function () {
     }
 
     $('select#distribution-type').on('change', function () {
+        modifyFormForCurrentDistributionType();
+    });
+
+    function hideAndEmpty(element){
+        element.hide();
+        element.val('');
+    }
+
+    function modifyFormForCurrentDistributionType(){
         var selected_type = $('#distribution-type').val();
         if(selected_type === 'api'){
             $('#resource-attributes-form').hide();
@@ -108,12 +117,9 @@ $(function () {
             $('input[type=file]#field-image-upload').val('');
             $('div#form-icon-url').hide();
         }
-    });
-
-    function hideAndEmpty(element){
-        element.hide();
-        element.val('');
     }
+
+    modifyFormForCurrentDistributionType();
 
     $('form#resource-edit').submit(function () {
         return formIsValid();

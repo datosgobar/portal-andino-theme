@@ -38,9 +38,9 @@
                     <p>{{ res.description }}</p>
                 </div>
                 <div class="col-md-2 col-xs-12 resource-actions">
-                    <a class="btn btn-green btn-block" href="{{ res.url }}">DESCARGAR</a>
+                    <a class="btn btn-green btn-block" href="{{ res.url }}">{{ 'DESCARGAR' if res.resource_type != 'api' else 'VER DOCUMENTACION' }}</a>
 
-                    {% set distribution_metadata = h.get_distribution_metadata(ds_identifier=pkg.id, resource_title=res.name) %}
+                    {% set distribution_metadata = h.get_distribution_metadata(resource_id=res.id) %}
                     {% if not h.is_distribution_local(distribution_metadata) %}
                         {% set accessURL = distribution_metadata['accessURL'] %}
                         <a class="btn btn-block btn-outline-primary" href="{{ accessURL }}" target="_blank">CONSULTAR EN EL<br>PORTAL DE ORIGEN</a>
@@ -100,9 +100,11 @@
                     </div>
                 </div>
 
-                <div class="hidden-xs hidden-sm attributes-table">
-                    {% snippet "package/snippets/resource_attributes_table.html", res=res %}
-                </div>
+                {% if res.resource_type != 'api' %}
+                    <div class="hidden-xs hidden-sm attributes-table">
+                       {% snippet "package/snippets/resource_attributes_table.html", res=res %}
+                    </div>
+                {% endif %}
 
                 <div class="resource-additional-info col-xs-12 col-md-12 row" style="width: 102% !important;">
                     <h2 class="title-h">Información adicional</h2>
@@ -118,15 +120,17 @@
                         </div>
                     {% endif %}
 
-                    <div class="resource-additional col-xs-12">
-                        <div class="col-xs-4 key">
-                            Formato
+                    {% if res.resource_type != 'api' %}
+                        <div class="resource-additional col-xs-12">
+                            <div class="col-xs-4 key">
+                                Formato
+                            </div>
+                            <div class="col-xs-8 value">
+                                {% set format = (res.mimetype_inner or res.mimetype or res.format or _('unknown')).lower() %}
+                                <span class="label" data-format="{{ format }}">{{ format }}</span>
+                            </div>
                         </div>
-                        <div class="col-xs-8 value">
-                            {% set format = (res.mimetype_inner or res.mimetype or res.format or _('unknown')).lower() %}
-                            <span class="label" data-format="{{ format }}">{{ format }}</span>
-                        </div>
-                    </div>
+                    {% endif %}
 
 
                     {% if pkg.groups|length > 0 %}
@@ -142,7 +146,7 @@
 
 
                     {% for extra in pkg.extras %}
-                        {% if extra.key == 'updateFrequency' and extra.value|length > 0 %}
+                        {% if extra.key in ('accrualPeriodicity', 'updateFrequency') and extra.value|length > 0 %}
                             <div class="resource-additional col-xs-12">
                                 <div class="col-xs-4 key">
                                     Frecuencia de actualización
@@ -160,7 +164,11 @@
                             Fecha de creación
                         </div>
                         <div class="col-xs-8 value">
-                            {{ h.render_ar_datetime(res.issued) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% if res.issued is defined %}
+                                {{ h.render_ar_datetime(res.issued) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% else %}
+                                {{ h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% endif %}
                         </div>
                     </div>
 
@@ -169,7 +177,11 @@
                             Último cambio
                         </div>
                         <div class="col-xs-8 value">
-                            {{ h.render_ar_datetime(res.modified) or h.render_ar_datetime(res.last_modified) or h.render_ar_datetime(res.revision_timestamp) or h.render_ar_datetime(res.created) or _('unknown') }}
+                            {% if res.modified is defined %}
+                                {{ h.render_ar_datetime(res.modified) }}
+                            {% else %}
+                                {{ h.render_ar_datetime(res.last_modified) or _('unknown') }}
+                            {% endif %}
                         </div>
                     </div>
 

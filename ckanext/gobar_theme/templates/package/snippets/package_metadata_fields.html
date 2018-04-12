@@ -3,11 +3,11 @@
 {% block package_metadata_fields %}
 
     {% set frequencies = h.update_frequencies() %}
-    {% set selected_freq = h.get_pkg_extra(data, 'updateFrequency') %}
+    {% set selected_freq = h.get_pkg_extra(data, 'accrualPeriodicity') or h.get_pkg_extra(data, 'updateFrequency') %}
     <div class="control-group hidden-extra-select">
         <label for="update-freq" class="control-label">* Frecuencia de actualización</label>
         <div class="controls">
-            <select id="update-freq" name="updateFrequency" type="select">
+            <select id="update-freq" name="accrualPeriodicity" type="select">
                 <option {{ 'selected=true' if not selected_freq or selected_freq|length == 0 }} disabled="disabled"></option>
                 {% for frequencie in frequencies %}
                     <option value="{{ frequencie[0] }}" {{ 'selected' if frequencie[0] == selected_freq }}>{{ frequencie[1] }}</option>
@@ -75,7 +75,7 @@
             <input type="checkbox" id="date_with_time" {{ 'checked' if date_has_time else '' }}>
             ¿Querés detallar la hora?
         </label>
-        <table class="date-picker" data-dates="{{ h.get_pkg_extra(data, 'dateRange') }}">
+        <table class="date-picker" data-dates="{{ h.get_pkg_extra(data, 'temporal') or h.get_pkg_extra(data, 'dateRange') }}">
             <tr>
                 <td>
                     <label class="picker-date-from">Desde <input type="text" id="date-from" name="date-from"></label>
