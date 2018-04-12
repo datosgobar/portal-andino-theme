@@ -1,0 +1,14 @@
+{% set datajson = h.generate_datajson() %}
+
+{% set datajson = h.generate_datajson(datajson, 'version', h.portal_andino_version() or 123456) %}
+
+{{ datajson }}
+
+
+
+{#{% set version = h.portal_andino_version() %}#}
+{#    {{ version or '' }}#}
+{#        {% set homepage = h.get_theme_config('portal-metadata.homepage') %}#}
+{#    {{ homepage or '' }}#}
+{#    {{ h.get_theme_config("portal-metadata.id", "") }}#}
+{#    {{ h.get_theme_config("portal-metadata.launch_date", "") }}#}

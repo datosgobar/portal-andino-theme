@@ -368,3 +368,11 @@ def convert_iso_string_to_utc(date_string=''):
         utc_date_time = date_time
     utc_date_time = utc_date_time.replace(tzinfo=None)
     return utc_date_time.isoformat()
+
+
+def generate_datajson(base={}, field=None, value=None):
+    if field is not None:
+        json_data = json.loads(base)
+        json_data[field] = value
+        return json.dumps(json_data)
+    return base

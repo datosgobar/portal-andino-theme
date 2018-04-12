@@ -2,6 +2,10 @@
 
 
 {% block content %}
+    <br><br>
+    <a class="btn btn-primary" href="{{ h.url('datajson') }}">LINK AL DATA.JSON2</a>
+sadasdsadasdasdas
+    <br><br>
     <div class="home">
         {% set title_template = h.get_theme_config('home.title-template') %}
         {% if title_template == 'portada1' %}
@@ -17,7 +21,6 @@
         {% snippet "home/groups.html" %}
         {% snippet "home/featured_content.html" %}
     </div>
-
     {% set show_greetings = h.get_theme_config('show-greetings', default=True) %}
     {% set package_create = h.check_access('package_create') %}
     {% if show_greetings and package_create %}

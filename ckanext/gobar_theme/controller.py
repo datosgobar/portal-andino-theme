@@ -91,6 +91,10 @@ class GobArHomeController(HomeController):
 
         return base.render('section_view.html', extra_vars={'section': section})
 
+    def datajson(self):
+        return base.render('datajson.html')
+
+
 class GobArApiController(GAApiController, ApiController):
 
     def _remove_extra_id_field(self, json_string):

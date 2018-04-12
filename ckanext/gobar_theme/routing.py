@@ -37,6 +37,7 @@ class GobArRouter:
         self.connect_template_config()
         self.connect_google_analytics()
         self.connect_spatial()
+        self.connect_datajson()
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')
@@ -214,4 +215,10 @@ class GobArRouter:
         self.redirect(
             ('/configurar', '/configurar/titulo'),
             ('/configurar', '/configurar/metadata')
+        )
+
+    def connect_datajson(self):
+        self.home_routes.connect('datajson', '/data.json2', action='datajson')
+        self.redirect(
+            ('/datajson2', '/datajson2'),
         )
