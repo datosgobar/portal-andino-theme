@@ -9820,6 +9820,19 @@ ul.activity {
   ul.activity li.load-more {
     display: none !important; }
 
+div.button-pre{
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+div.about-components {
+  margin-bottom: 60px;
+}
+div.about-components > h2{
+  font-size: 32px !important;}
+div.about-components > pre{
+  overflow: inherit;
+}
 #template-config-container {
   padding-right: 0;
   padding-left: 0;
@@ -9910,6 +9923,8 @@ ul.activity {
           top: -9999px; }
         #template-config-container #template-config .radio-container label.img-radio .radio-description {
           padding: 20px; }
+          #template-config-container #template-config .radio-container label.img-radio .radio-description .about-img-radio {
+            padding: 0;}
           #template-config-container #template-config .radio-container label.img-radio .radio-description h2 {
             color: #767676; }
     #template-config-container #template-config input[type="text"],
@@ -10291,4 +10306,30 @@ div.section-div{
 
 div.attributes-table{
   display: inline-block;
+}
+
+div.link-margin{
+  margin-bottom: 50px;
+}
+
+div.about-components > h2{
+  font-size: 18px;
+}
+
+div.about-components div.icon-item {
+  display: inline-block;
+  text-align: center;
+  font-size: 400%;
+}
+
+div.about-components div.row{
+  margin-top: 20px;
+}
+
+div.about-template-buttons > button {
+  margin-left: 0;
+}
+
+div.about-template-icons {
+  font-family: inherit;
 }

@@ -1,0 +1,150 @@
+{% extends "gobar_page.html" %}
+
+
+{% block page %}
+
+    <div class="container-fluid" id="template-config-container">
+        <div class="restricted-max-width ">
+            <div id="template-config" class="col-xs-12 col-md-10 col-md-offset-1 about-template-container" style="padding: 0 60px;">
+
+                <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+                <h1 class="about-template">Componentes para páginas personalizadas</h1>
+                <label class="about-template">Estos componentes aseguran una calidad y estándar gráfico para todas las comunicaciones de los
+                    organismos de la APN. Es recomendable usar este tipo de componentes y no otros.</label>
+
+                <div class="about-components">
+                    <h2>Botones</h2>
+                    <div class="about-template-buttons">
+                        <button class="btn btn-blue btn-lg">Botón de color</button>
+                        <button class="btn btn-outline-primary btn-lg">Botón de línea</button>
+                    </div>
+                    <div class="button-pre">
+                        <pre id="color-button-pre"><code>
+                &lt;div class="row"&gt;
+                    &lt;div class="col-xa-12 text-center"&gt;
+                        &lt;a class="btn btn-primary btn-lg" href="#">Botón de color&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                        </code></pre>
+                        <pre id="outline-button-pre"><code>
+                &lt;div class="row"&gt;
+                    &lt;div class="col-xa-12 text-center"&gt;
+                        &lt;a class="btn btn-primary btn-lg" href="#">Botón de línea&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="about-components">
+                    <h2>Títulos y textos</h2>
+
+                    <br>
+                    <h2>Titular General</h2>
+                    <h3 style="margin: 0;">Titular Secundario</h3>
+                    <h4>Subtítulo</h4>
+                    <p>Texto de párrafo</p>
+                    <pre><code>
+                &lt;div class="row"&gt;
+                    &lt;div class="col-xs-12 text-center"&gt;
+                        &lt;h1&gt;Titular General&lt;/h1&gt;
+                        &lt;h2&gt;Titular Secundario&lt;/h2&gt;
+                        &lt;h3&gt;Subtítulo&lt;/h3&gt;
+                        &lt;p&gt;Texto de párrafo&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                    </code></pre>
+                </div>
+
+                <div class="about-components">
+                    <h2>Atajo destacado con imagen</h2>
+                    <div class="row panels-row">
+                        <div class="container-fluid radio-container">
+                            <label class="img-radio about-img-radio">
+                                <div class="radio-box">
+                                    <a href="http://datos.gob.ar">
+                                        <img src="/img/placeholder.png" class="logo-ministerio">
+                                        <h3>Este es el título del link</h3>
+                                        <label>Esta es la descripción</label>
+                                        <input type="radio" name="title-template">
+                                    </a>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <pre><code>
+                &lt;div class="container-fluid radio-container"&gt;
+                    &lt;label class="img-radio col-xs-12 col-md-6"&gt;
+                        &lt;div class="radio-box"&gt;
+                            &lt;a href="http://datos.gob.ar"&gt;
+                                &lt;img src="/img/placeholder.png" class="logo-ministerio"&gt;
+                                &lt;h3&gt;Este es el título del link&lt;/h3&gt;
+                                &lt;label&gt;Esta es la descripción&lt;/label&gt;
+                                &lt;input type="radio" name="title-template"&gt;
+                            &lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/label&gt;
+                &lt;/div&gt;
+                    </code></pre>
+                </div>
+
+                <div class="about-components">
+                    <h2>Contenido destacado con ícono</h2>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="icon-item about-template-icons">
+                                <i class="fa fa-users text-success"></i>
+                                <h3>Cercana</h3>
+                                <p>Conoce tus necesidades y adopta sus servicios a ellas.</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="icon-item about-template-icons">
+                                <i class="fa fa-search text-primary"></i>
+                                <h3>Transparente</h3>
+                                <p>Brinda mayor información y certeza sobre sus actos de gobierno.</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="icon-item about-template-icons">
+                                <i class="fa fa-users"></i>
+                                <h3>Participativa</h3>
+                                <p>Trabaja en equipo con los empleados públicos y la gente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <pre><code>
+                &lt;div class="row"&gt;
+                    &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+                        &lt;div class="icon-item"&gt;
+                            &lt;i class="fa fa-users text-success"&gt;&lt;/i&gt;
+                            &lt;h3&gt;Cercana&lt;/h3&gt;
+                            &lt;p&gt;Conoce tus necesidades y adopta sus servicios a ellas.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+                        &lt;div class="icon-item"&gt;
+                            &lt;i class="fa fa-search text-primary"&gt;&lt;/i&gt;
+                            &lt;h3&gt;Transparente&lt;/h3&gt;
+                            &lt;p&gt;Brinda mayor información y certeza sobre sus actos de gobierno.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+                        &lt;div class="icon-item"&gt;
+                            &lt;i class="fa fa-users"&gt;&lt;/i&gt;
+                            &lt;h3&gt;Participativa&lt;/h3&gt;
+                            &lt;p&gt;Trabaja en equipo con los empleados públicos y la gente.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% resource 'gobar_js/config/file_upload.js' %}
+    {% resource 'gobar_js/config/radio_buttons.js' %}
+
+{% endblock %}
