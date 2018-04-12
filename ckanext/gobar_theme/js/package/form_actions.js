@@ -88,7 +88,7 @@ $(function () {
             if (dateTo) {
                 value += '/' + dateTo.toISOString();
             }
-            addExtra('dateRange', value);
+            addExtra('temporal', value);
         }
     }
 

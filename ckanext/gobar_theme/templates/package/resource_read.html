@@ -146,7 +146,7 @@
 
 
                     {% for extra in pkg.extras %}
-                        {% if extra.key == 'updateFrequency' and extra.value|length > 0 %}
+                        {% if extra.key in ('accrualPeriodicity', 'updateFrequency') and extra.value|length > 0 %}
                             <div class="resource-additional col-xs-12">
                                 <div class="col-xs-4 key">
                                     Frecuencia de actualización
