@@ -355,17 +355,11 @@ class GobArPackageController(PackageController):
 
             self._add_or_replace_extra(key='issued', value=time_now, extras=data_dict['extras'])
             self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
-            self._add_or_replace_extra(key='accrualPeriodicity', value=data_dict['updateFrequency'], extras=data_dict['extras'])
-            current_daterange = ''
             globalGroups = []
             for field in data_dict['extras']:
-                if field['key'] == 'dateRange':
-                    current_daterange = field['value']
-                elif field['key'] == 'globalGroups':
+                if field['key'] == 'globalGroups':
                     globalGroups = field['value']
-                if current_daterange != '' and globalGroups != []:
                     break
-            self._add_or_replace_extra(key='temporal', value=current_daterange, extras=data_dict['extras'])
             self._add_or_replace_extra(key='superTheme', value=globalGroups, extras=data_dict['extras'])
 
             if ckan_phase:
