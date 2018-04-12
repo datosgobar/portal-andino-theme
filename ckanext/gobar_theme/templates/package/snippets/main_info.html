@@ -17,6 +17,9 @@
                 </a>
             {% endif %}
         </p>
+        {% if h.check_access('package_update', {'id':pkg.id }) %}
+            {% link_for 'CREAR RECURSO', controller='package', action='new_resource', id=pkg.name, class_='btn btn-blue edit-button' %}
+        {% endif %}
 
         <p class="pkg-notes">{{ pkg.notes }}</p>
 
