@@ -10308,6 +10308,26 @@ div.attributes-table{
   display: inline-block;
 }
 
+div.dataset-container div.dataset-content{
+  line-height: 2.75ex;
+  height: 16ex;
+  overflow: hidden;
+}
+
+div.dataset-container div.dataset-notes {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.dataset-container h3.dataset-title{
+  line-height: 0.5ex;
+  height: 2.75ex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
 div.link-margin{
   margin-bottom: 50px;
 }
