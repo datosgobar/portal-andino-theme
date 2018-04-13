@@ -1,14 +1,61 @@
-{% set datajson = h.generate_datajson() %}
-
-{% set datajson = h.generate_datajson(datajson, 'version', h.portal_andino_version() or 123456) %}
-
-{{ datajson }}
-
-
-
-{#{% set version = h.portal_andino_version() %}#}
-{#    {{ version or '' }}#}
-{#        {% set homepage = h.get_theme_config('portal-metadata.homepage') %}#}
-{#    {{ homepage or '' }}#}
-{#    {{ h.get_theme_config("portal-metadata.id", "") }}#}
-{#    {{ h.get_theme_config("portal-metadata.launch_date", "") }}#}
+{
+    "version": "{{ datajson.version }}",
+    "identifier": "{{ datajson.identifier }}",
+    "title": "{{ datajson.title }}",
+    "description": "{{ datajson.description }}",
+    "superThemeTaxonomy": "{{ datajson.superThemeTaxonomy }}",
+    "publisher":{
+                    "mbox": "{{ datajson.publisher.mbox }}",
+                    "name": "{{ datajson.publisher.name }}"
+                },
+    "issued": "{{ datajson.issued }}",
+    "modified": "{{ datajson.modified }}",
+    "language": [ "{{ datajson.language[0] }}" ],
+    "license": "{{ datajson.license }}",
+    "homepage": "{{ datajson.homepage }}",
+    "rights": "{{ datajson.rights }}",
+    "spatial": [ "{{ datajson.spatial[0] }}",
+                 "{{ datajson.spatial[1] }}",
+                 "{{ datajson.spatial[2] }}" ],
+    "themeTaxonomy": [ {% for theme in datajson.themeTaxonomy %}
+                            {
+                                "label": "{{ theme.label }}",
+                                "id": "{{ theme.id }}",
+                                "description": "{{ theme.description }}"
+                            } {% if loop.index < datajson.themeTaxonomy|length %},{% endif %}
+                        {% endfor %} ],
+    "dataset": [ {% for dataset in datajson.dataset %}
+                    {
+                        "title":          "{{ dataset.title }}",
+                        "description":    "{{ dataset.description }}",
+                        "modified":       "{{ dataset.modified }}",
+                        "identifier":     "{{ dataset.identifier }}",
+                        "issued":         "{{ dataset.issued }}",
+                        "landingPage":    "{{ dataset.landingPage }}",
+                        "license":        "{{ dataset.license }}",
+                        "spatial":        "{{ dataset.spatial }}",
+                        "publisher":    { "mbox": "{{ dataset.publisher.mbox }}",
+                                          "name": "{{ dataset.publisher.name }}" },
+                        "contactPoint": { "fn": "{{ dataset.contactPoint.mbox }}",
+                                          "hasEmail": "{{ dataset.contactPoint.hasEmail }}" },
+                        "distribution":
+                            [
+                                {% for distrib in dataset.resources %}
+                                    {
+                                        "identifier": "{{ distrib.id }}",
+                                        "format": "{{ distrib.format }}",
+                                        "title": "{{ distrib.name }}",
+                                        "description": "{{ distrib.description }}",
+                                        "issued": "{{ distrib.issued }}",
+                                        "modified": "{{ distrib.modified }}",
+                                        "license": "{{ distrib.license_id }}",
+                                        "accessURL": "{{ distrib.accessURL }}",
+                                        "downloadURL": "{{ distrib.downloadURL }}"
+                                    } {% if loop.index < dataset.resources|length %},{% endif %}
+                                {% endfor %}
+                            ],
+{#                        "superTheme": [ "{{ dataset.superTheme }}" ], todo: arreglar, cae como lista #}
+                        "temporal": "{{ dataset.temporal }}"
+                    } {% if loop.index < datajson.dataset|length %},{% endif %}
+                {% endfor %} ]
+}

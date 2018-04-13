@@ -5,6 +5,8 @@ import ckan.logic as logic
 import ckan.lib.helpers as ckan_helpers
 from urlparse import urlparse
 from ckan.common import request, c, g, _
+import ckan.model as model
+import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.lib.formatters as formatters
 import json
 import uuid
@@ -14,6 +16,7 @@ from config_controller import GobArConfigController
 from pydatajson.core import DataJson
 from datetime import time
 from dateutil import parser, tz
+import moment
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -375,4 +378,20 @@ def generate_datajson(base={}, field=None, value=None):
         json_data = json.loads(base)
         json_data[field] = value
         return json.dumps(json_data)
-    return base
+    return json.dumps(base)
+
+
+def date_format_to_iso(date):
+    if date:
+        return moment.date(date, "%d/%m/%Y").isoformat()
+    return date
+
+
+def safely_map(self, function, list, *args):
+    array = []
+    for element in list:
+        try:
+            array.append(function(element, *args))
+        except:
+            pass
+    return [x for x in array if x is not None]
