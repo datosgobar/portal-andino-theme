@@ -160,9 +160,17 @@ class GobArHomeController(HomeController):
             district = self.get_field_from_list_and_delete(dataset['extras'], 'district')
             publisher = {'name': dataset['author']['name'],
                          'mbox': dataset['author_email']}
+            source = self.get_field_from_list_and_delete(dataset['extras'], 'source')
             contactPoint = {'fn': dataset['maintainer'], 'hasEmail': dataset['maintainer_email']}
-            superTheme = self.get_field_from_list_and_delete(dataset['extras'], 'superTheme')
+            keyword = dataset['tags']
+            superTheme = eval(self.get_field_from_list_and_delete(dataset['extras'], 'superTheme'))
+            language = self.get_field_from_list_and_delete(dataset['extras'], 'language')
+            theme = dataset['groups']
+            accrualPeriodicity = self.get_field_from_list_and_delete(dataset['extras'], 'accrualPeriodicity')
+            if accrualPeriodicity is None:
+                self.get_field_from_list_and_delete(dataset['extras'], 'updateFrequency')
             temporal = self.get_field_from_list_and_delete(dataset['extras'], 'temporal')
+            spatial = ["None"]
 
             # Voy guardando los datos a mostrar en el data.json
             current_dataset.update({'title': dataset['title']})
@@ -176,23 +184,77 @@ class GobArHomeController(HomeController):
                 current_dataset.update({"landingPage": dataset['url']})
             if dataset['license_title']:
                 current_dataset.update({"license": dataset['license_title']})
-            if country and province and district:
-                current_dataset.update({"country": country})
-                current_dataset.update({"province": province})
-                current_dataset.update({"district": district})
-            elif country and province:
-                current_dataset.update({"country": country})
-                current_dataset.update({"province": province})
-            elif country:
-                current_dataset.update({"country": country})
+            spatial[0] = country
+            if province != '' and district != '':
+                spatial.append(province)
+                spatial.append(district)
+            elif province != '':
+                spatial.append(province)
+            current_dataset.update({"spatial": spatial})
             current_dataset.update({"publisher": publisher})
             current_dataset.update({"contactPoint": contactPoint})
-            current_dataset.update({"distribution": dataset['resources']})
+            if source:
+                current_dataset.update({"source": source})
+            current_dataset.update({"distribution": self.clean_resources(dataset['resources'])})
+            if len(keyword):
+                current_dataset.update({"keyword": keyword})
             current_dataset.update({"superTheme": superTheme})
+            if len(language):
+                current_dataset.update({"language": language})
+            if theme is not None:
+                current_dataset.update({"theme": theme})
+            if accrualPeriodicity is not None:
+                current_dataset.update(({"accrualPeriodicity": accrualPeriodicity}))
             if temporal:
                 current_dataset.update({"temporal": temporal})
             final_list.append(current_dataset)
         return final_list
+
+    def clean_resources(self, resources):
+        final_resource_list = []
+        for resource in resources:
+            current_resource = {}
+            current_resource['identifier'] = resource['id']
+            if resource['format'] != '':
+                current_resource['format'] = resource['format']
+            current_resource['title'] = resource['name']
+            if resource['description'] != '':
+                current_resource['description'] = resource['description']
+            if resource['resource_type'] is not None:
+                current_resource['type'] = resource['resource_type']
+            if resource['issued'] != '':
+                current_resource['issued'] = resource['issued']
+            if resource['modified'] != '':
+                current_resource['modified'] = resource['modified']
+            if resource['license_id'] != '':
+                current_resource['license'] = resource['license_id']
+            current_resource['accessURL'] = \
+                os.path.join(config.get('ckan.site_url'), 'dataset', resource['package_id'], 'resource', resource['id'])
+            current_resource['downloadURL'] = self.generate_resource_downloadURL(resource)
+            current_resource['field'] = resource['attributesDescription']
+            attributes = {}
+            for field in resource['attributesDescription']:
+                attributes.update({field['id']: field})
+            current_resource['attributes'] = attributes.values()
+            final_resource_list.append(current_resource)
+        return final_resource_list
+
+    def generate_resource_downloadURL(self, resource):
+        downloadURL = resource.get('url').strip()
+        if '' == downloadURL:
+            downloadURL = None
+        if isinstance(downloadURL, (str, unicode)):
+            downloadURL = re.sub(r'\[\[/?REDACTED(-EX\sB\d)?\]\]', '', downloadURL)
+            downloadURL = downloadURL.strip()
+            if '' == downloadURL:
+                downloadURL = None
+            else:
+                downloadURL = downloadURL.replace('http://[[REDACTED', '[[REDACTED')
+                downloadURL = downloadURL.replace('http://http', 'http')
+        else:
+            # no se pudo conseguir downloadURL
+            pass
+        return downloadURL
 
     def get_ckan_datasets(self, org=None, with_private=True):
         n = 500
@@ -227,7 +289,6 @@ class GobArHomeController(HomeController):
             j = 0
             for extra in packages[i]['extras']:
                 if extra.get('key') == 'language':
-                    print 'Key: {}, Value: {}'.format(extra.get('key'), extra.get('value'))
                     if not isinstance(extra.get('value'), (unicode, str)):
                         # Solo puedo operar si value es una instancia de UNICODE o STR
                         # logger.warn('No fue posible renderizar el campo: \"Language\".') todo: logger?
@@ -279,8 +340,8 @@ class GobArHomeController(HomeController):
                     packages[i]['resources'][0]['url']).group(0)
             except Exception:
                 pass
-            themes = gobar_helpers.safely_map(dict.get, packages[i]['groups'], 'name')
-            packages[i]['groups'] = themes
+            # themes = gobar_helpers.safely_map(dict.get, packages[i]['groups'], 'name')
+            # packages[i]['groups'] = themes
             try:
                 packages[i]['author'] = {
                     'name': packages[i]['author'],
@@ -288,8 +349,8 @@ class GobArHomeController(HomeController):
                 }
             except KeyError:
                 pass
-            tags = gobar_helpers.safely_map(dict.get, packages[i]['tags'], 'display_name')
-            packages[i]['tags'] = tags
+            # tags = gobar_helpers.safely_map(dict.get, packages[i]['tags'], 'display_name')
+            # packages[i]['tags'] = tags
             try:
                 if len(packages[i]['url']) < 1:
                     packages[i]['url'] = '{host}/dataset/{dataset_id}'.format(

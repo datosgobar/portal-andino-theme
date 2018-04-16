@@ -14,9 +14,13 @@
     "license": "{{ datajson.license }}",
     "homepage": "{{ datajson.homepage }}",
     "rights": "{{ datajson.rights }}",
-    "spatial": [ "{{ datajson.spatial[0] }}",
-                 "{{ datajson.spatial[1] }}",
-                 "{{ datajson.spatial[2] }}" ],
+    "spatial": [ "{{ datajson.spatial[0] or None }}"
+                    {% if datajson.spatial[1] is defined %}
+                        ,"{{ datajson.spatial[1] }}"
+                        {% if datajson.spatial[2] is defined %}
+                            ,"{{ datajson.spatial[2] }}"
+                        {% endif %}
+                    {% endif %} ],
     "themeTaxonomy": [ {% for theme in datajson.themeTaxonomy %}
                             {
                                 "label": "{{ theme.label }}",
@@ -33,28 +37,120 @@
                         "issued":         "{{ dataset.issued }}",
                         "landingPage":    "{{ dataset.landingPage }}",
                         "license":        "{{ dataset.license }}",
-                        "spatial":        "{{ dataset.spatial }}",
+                        "spatial":      [ "{{ dataset.spatial[0] }}"
+                                          {% if dataset.spatial[1] is defined %}
+                                              ,"{{ dataset.spatial[1] }}"
+                                              {% if dataset.spatial[2] is defined %}
+                                                  ,"{{ dataset.spatial[2] }}"
+                                              {% endif %}
+                                          {% endif %} ],
                         "publisher":    { "mbox": "{{ dataset.publisher.mbox }}",
                                           "name": "{{ dataset.publisher.name }}" },
-                        "contactPoint": { "fn": "{{ dataset.contactPoint.mbox }}",
-                                          "hasEmail": "{{ dataset.contactPoint.hasEmail }}" },
+                        {% if dataset.source is defined %}
+                            "source":     "{{ dataset.source }}",
+                        {% endif %}
+                        "contactPoint": {
+                                            {% if dataset.contactPoint.fn != '' %}
+                                                "fn": "{{ dataset.contactPoint.fn }}"
+                                                {% if dataset.contactPoint.hasEmail != '' %}
+                                                    ,
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if dataset.contactPoint.hasEmail != '' %}
+                                                "hasEmail": "{{ dataset.contactPoint.hasEmail }}"
+                                            {% endif %}
+                                        },
                         "distribution":
                             [
-                                {% for distrib in dataset.resources %}
+                                {% for distrib in dataset.distribution %}
                                     {
-                                        "identifier": "{{ distrib.id }}",
+                                        "identifier": "{{ distrib.identifier }}",
                                         "format": "{{ distrib.format }}",
-                                        "title": "{{ distrib.name }}",
+                                        "title": "{{ distrib.title }}",
                                         "description": "{{ distrib.description }}",
+                                        "type": "{{ distrib.type }}",
                                         "issued": "{{ distrib.issued }}",
                                         "modified": "{{ distrib.modified }}",
-                                        "license": "{{ distrib.license_id }}",
+                                        "license": "{{ distrib.license }}",
+                                        {% if distrib.attributes|length > 0 %}
+                                            "field":
+                                                [
+{#                                                    {% for field in distrib.attributes %}#}
+{#                                                        {#}
+{#                                                            "nombre del campo": "{{ field }}"#}
+{#                                                        }#}
+{#                                                        {% if loop.index < distrib.field|length %}#}
+{#                                                            ,#}
+{#                                                        {% endif %}#}
+{#                                                    {% endfor %}#}
+
+                                                    {% for column in distrib.attributes %}
+                                                        {
+                                                            {% for item in column %}
+                                                                {% for field in item.iteritems() %}
+                                                                    "{{ field[0] }}": "{{ field[1] }}"
+                                                                    {% if loop.index < item.iteritems()|length %}
+                                                                        ,
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endfor %}
+                                                        }
+                                                        {% if loop.index < distrib.attributes|length %}
+                                                            ,
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                ],
+                                        {% endif %}
                                         "accessURL": "{{ distrib.accessURL }}",
                                         "downloadURL": "{{ distrib.downloadURL }}"
-                                    } {% if loop.index < dataset.resources|length %},{% endif %}
+                                    } {% if loop.index < dataset.distribution|length %},{% endif %}
                                 {% endfor %}
                             ],
-{#                        "superTheme": [ "{{ dataset.superTheme }}" ], todo: arreglar, cae como lista #}
+                        {% if dataset.keyword|length > 0 %}
+                            "keyword":
+                                [
+                                    {% for keyword in dataset.keyword %}
+                                        "{{ keyword.display_name }}"
+                                        {% if loop.index < dataset.keyword|length %}
+                                            ,
+                                        {% endif %}
+                                    {% endfor %}
+                                ],
+                        {% endif %}
+                        "superTheme":
+                            [
+                                {% for theme in dataset.superTheme %}
+                                    "{{ theme }}"
+                                    {% if loop.index < dataset.superTheme|length %}
+                                        ,
+                                    {% endif %}
+                                {% endfor %}
+                            ],
+                        {% if dataset.language|length > 0 %}
+                            "language":
+                                [
+                                    {% for language in dataset.language %}
+                                        "{{ language }}"
+                                        {% if loop.index < dataset.language|length %}
+                                            ,
+                                        {% endif %}
+                                    {% endfor %}
+                                ],
+                        {% endif %}
+                        {% if dataset.theme|length > 0 %}
+                            "theme":
+                                [
+                                    {% for theme in dataset.theme %}
+                                        "{{ theme.name }}"
+                                        {% if loop.index < dataset.theme|length %}
+                                            ,
+                                        {% endif %}
+                                    {% endfor %}
+                                ],
+                        {% endif %}
+                        {% if dataset.accrualPeriodicity is defined %}
+                            "accrualPeriodicity": "{{ dataset.accrualPeriodicity }}",
+                        {% endif %}
                         "temporal": "{{ dataset.temporal }}"
                     } {% if loop.index < datajson.dataset|length %},{% endif %}
                 {% endfor %} ]
