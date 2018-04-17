@@ -164,12 +164,16 @@ class GobArHomeController(HomeController):
             contactPoint = {'fn': dataset['maintainer'], 'hasEmail': dataset['maintainer_email']}
             keyword = dataset['tags']
             superTheme = eval(self.get_field_from_list_and_delete(dataset['extras'], 'superTheme'))
+            if superTheme is None or superTheme == []:
+                superTheme = eval(self.get_field_from_list_and_delete(dataset['extras'], 'globalGroups'))
             language = self.get_field_from_list_and_delete(dataset['extras'], 'language')
             theme = dataset['groups']
             accrualPeriodicity = self.get_field_from_list_and_delete(dataset['extras'], 'accrualPeriodicity')
             if accrualPeriodicity is None:
                 self.get_field_from_list_and_delete(dataset['extras'], 'updateFrequency')
             temporal = self.get_field_from_list_and_delete(dataset['extras'], 'temporal')
+            if temporal is None or temporal == '':
+                temporal = self.get_field_from_list_and_delete(dataset['extras'], 'dateRange')
             spatial = ["None"]
 
             # Voy guardando los datos a mostrar en el data.json
@@ -218,8 +222,9 @@ class GobArHomeController(HomeController):
             if resource['format'] != '':
                 current_resource['format'] = resource['format']
             current_resource['title'] = resource['name']
-            if resource['description'] != '':
-                current_resource['description'] = resource['description']
+            current_resource['description'] = resource['description']
+            if 'fileName' in resource and resource['fileName'] != '':
+                current_resource['fileName'] = resource['fileName']
             if resource['resource_type'] is not None:
                 current_resource['type'] = resource['resource_type']
             if resource['issued'] != '':
@@ -232,10 +237,7 @@ class GobArHomeController(HomeController):
                 os.path.join(config.get('ckan.site_url'), 'dataset', resource['package_id'], 'resource', resource['id'])
             current_resource['downloadURL'] = self.generate_resource_downloadURL(resource)
             current_resource['field'] = resource['attributesDescription']
-            attributes = {}
-            for field in resource['attributesDescription']:
-                attributes.update({field['id']: field})
-            current_resource['attributes'] = attributes.values()
+            current_resource['attributes'] = tuple(resource['attributesDescription'])
             final_resource_list.append(current_resource)
         return final_resource_list
 

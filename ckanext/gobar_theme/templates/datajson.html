@@ -64,35 +64,37 @@
                             [
                                 {% for distrib in dataset.distribution %}
                                     {
-                                        "identifier": "{{ distrib.identifier }}",
-                                        "format": "{{ distrib.format }}",
-                                        "title": "{{ distrib.title }}",
+                                        "identifier":  "{{ distrib.identifier }}",
+                                        {% if distrib.format is defined %}
+                                            "format":      "{{ distrib.format }}",
+                                        {% endif %}
+                                        "title":       "{{ distrib.title }}",
                                         "description": "{{ distrib.description }}",
-                                        "type": "{{ distrib.type }}",
-                                        "issued": "{{ distrib.issued }}",
-                                        "modified": "{{ distrib.modified }}",
-                                        "license": "{{ distrib.license }}",
+                                        {% if distrib.fileName is defined %}
+                                            "fileName": "{{ distrib.fileName }}",
+                                        {% endif %}
+                                        {% if distrib.type is defined %}
+                                            "type":        "{{ distrib.type }}",
+                                        {% endif %}
+                                        {% if distrib.issued is defined %}
+                                            "issued":      "{{ distrib.issued }}",
+                                        {% endif %}
+                                        {% if distrib.modified is defined %}
+                                            "modified":    "{{ distrib.modified }}",
+                                        {% endif %}
+                                        {% if distrib.license is defined %}
+                                            "license":     "{{ distrib.license }}",
+                                        {% endif %}
                                         {% if distrib.attributes|length > 0 %}
                                             "field":
                                                 [
-{#                                                    {% for field in distrib.attributes %}#}
-{#                                                        {#}
-{#                                                            "nombre del campo": "{{ field }}"#}
-{#                                                        }#}
-{#                                                        {% if loop.index < distrib.field|length %}#}
-{#                                                            ,#}
-{#                                                        {% endif %}#}
-{#                                                    {% endfor %}#}
-
                                                     {% for column in distrib.attributes %}
                                                         {
-                                                            {% for item in column %}
-                                                                {% for field in item.iteritems() %}
-                                                                    "{{ field[0] }}": "{{ field[1] }}"
-                                                                    {% if loop.index < item.iteritems()|length %}
-                                                                        ,
-                                                                    {% endif %}
-                                                                {% endfor %}
+                                                            {% for field in column %}
+                                                                "{{ field }}": "{{ column[field] }}"
+                                                                {% if loop.index < column|length %}
+                                                                    ,
+                                                                {% endif %}
                                                             {% endfor %}
                                                         }
                                                         {% if loop.index < distrib.attributes|length %}
@@ -149,9 +151,11 @@
                                 ],
                         {% endif %}
                         {% if dataset.accrualPeriodicity is defined %}
-                            "accrualPeriodicity": "{{ dataset.accrualPeriodicity }}",
+                            "accrualPeriodicity": "{{ dataset.accrualPeriodicity }}"
                         {% endif %}
-                        "temporal": "{{ dataset.temporal }}"
+                        {% if dataset.temporal is defined %}
+                            ,"temporal": "{{ dataset.temporal }}"
+                        {% endif %}
                     } {% if loop.index < datajson.dataset|length %},{% endif %}
                 {% endfor %} ]
 }
