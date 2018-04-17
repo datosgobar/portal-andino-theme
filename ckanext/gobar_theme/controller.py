@@ -162,12 +162,12 @@ class GobArHomeController(HomeController):
                          'mbox': dataset['author_email']}
             source = self.get_field_from_list_and_delete(dataset['extras'], 'source')
             contactPoint = {'fn': dataset['maintainer'], 'hasEmail': dataset['maintainer_email']}
-            keyword = dataset['tags']
+            keyword = map(lambda kw: kw['display_name'], dataset['tags'])
             superTheme = eval(self.get_field_from_list_and_delete(dataset['extras'], 'superTheme'))
             if superTheme is None or superTheme == []:
                 superTheme = eval(self.get_field_from_list_and_delete(dataset['extras'], 'globalGroups'))
             language = self.get_field_from_list_and_delete(dataset['extras'], 'language')
-            theme = dataset['groups']
+            theme = map(lambda th: th['name'], dataset['groups'])
             accrualPeriodicity = self.get_field_from_list_and_delete(dataset['extras'], 'accrualPeriodicity')
             if accrualPeriodicity is None:
                 self.get_field_from_list_and_delete(dataset['extras'], 'updateFrequency')
@@ -194,9 +194,11 @@ class GobArHomeController(HomeController):
                 spatial.append(district)
             elif province != '':
                 spatial.append(province)
-            current_dataset.update({"spatial": spatial})
+            if country != 'None':
+                current_dataset.update({"spatial": spatial})
             current_dataset.update({"publisher": publisher})
-            current_dataset.update({"contactPoint": contactPoint})
+            if contactPoint['fn'] != '' or contactPoint['hasEmail'] != '':
+                current_dataset.update({"contactPoint": contactPoint})
             if source:
                 current_dataset.update({"source": source})
             current_dataset.update({"distribution": self.clean_resources(dataset['resources'])})

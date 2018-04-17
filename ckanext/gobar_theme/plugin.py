@@ -75,4 +75,5 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_extra_value': gobar_helpers.get_extra_value,
             'generate_datajson': gobar_helpers.generate_datajson,
             'date_format_to_iso': gobar_helpers.date_format_to_iso,
+            'jsondump': gobar_helpers.jsondump,
         }

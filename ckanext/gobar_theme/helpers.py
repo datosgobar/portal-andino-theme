@@ -387,11 +387,14 @@ def date_format_to_iso(date):
     return date
 
 
-def safely_map(self, function, list, *args):
-    array = []
-    for element in list:
-        try:
-            array.append(function(element, *args))
-        except:
-            pass
-    return [x for x in array if x is not None]
+def dict_to_json_filter(dict):
+    import jinja2
+    loader = jinja2.FileSystemLoader('/tmp')
+    env = jinja2.Environment(autoescape=True, loader=loader)
+    env.filters['dict_to_json_filter'] = dict_to_json_filter
+    temp = "datajson.html"
+    return
+
+
+def jsondump(field):
+    return json.dumps(field)
