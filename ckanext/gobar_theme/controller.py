@@ -235,7 +235,10 @@ class GobArHomeController(HomeController):
                 current_resource['modified'] = resource['modified']
             if resource['license_id'] != '':
                 current_resource['license'] = resource['license_id']
-            current_resource['accessURL'] = \
+            if 'accessURL' in resource:
+                current_resource['accessURL'] = resource['accessURL']
+            else:
+                current_resource['accessURL'] = \
                 os.path.join(config.get('ckan.site_url'), 'dataset', resource['package_id'], 'resource', resource['id'])
             current_resource['downloadURL'] = self.generate_resource_downloadURL(resource)
             current_resource['field'] = resource['attributesDescription']
