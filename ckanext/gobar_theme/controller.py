@@ -230,10 +230,14 @@ class GobArHomeController(HomeController):
                 current_resource['fileName'] = resource['fileName']
             if resource['resource_type'] is not None:
                 current_resource['type'] = resource['resource_type']
-            if resource['issued'] != '':
+            if 'issued' in resource:
                 current_resource['issued'] = resource['issued']
-            if resource['modified'] != '':
+            else:
+                current_resource['issued'] = ''
+            if 'modified' in resource:
                 current_resource['modified'] = resource['modified']
+            else:
+                current_resource['modified'] = ''
             if resource['license_id'] != '':
                 current_resource['license'] = resource['license_id']
             if 'accessURL' in resource:

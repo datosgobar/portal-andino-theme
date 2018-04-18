@@ -5,18 +5,10 @@
     {% if datajson.identifier %}
         "identifier": "{{ datajson.identifier }}",
     {% endif %}
-    {% if datajson.title %}
-        "title": "{{ datajson.title }}",
-    {% endif %}
-    {% if datajson.title %}
-        "description": "{{ datajson.description }}",
-    {% endif %}
-    {% if datajson.superThemeTaxonomy %}
-        "superThemeTaxonomy": "{{ datajson.superThemeTaxonomy }}",
-    {% endif %}
-    {% if datajson.publisher.mbox or datajson.publisher.name %}
-        "publisher": {{ h.jsondump(datajson.publisher) }},
-    {% endif %}
+    "title": "{{ datajson.title }}",
+    "description": "{{ datajson.description }}",
+    "superThemeTaxonomy": "{{ datajson.superThemeTaxonomy }}",
+    "publisher": {{ h.jsondump(datajson.publisher) }},
     {% if datajson.issued %}
         "issued": "{{ datajson.issued }}",
     {% endif %}
@@ -41,90 +33,81 @@
     {% if datajson.themeTaxonomy %}
         "themeTaxonomy": {{ h.jsondump(datajson.themeTaxonomy) }},
     {% endif %}
-    {% if datajson.dataset %}
-        "dataset":
-            [
-                {% for dataset in datajson.dataset %}
-                    {
-                        "title":              "{{ dataset.title }}",
-                        "description":        "{{ dataset.description }}",
-                        "identifier":         "{{ dataset.identifier }}",
-                        {% if dataset.modified is defined %}
-                            "modified":       "{{ dataset.modified }}",
-                        {% endif %}
-                        {% if dataset.issued is defined %}
-                            "issued":         "{{ dataset.issued }}",
-                        {% endif %}
-                        {% if dataset.landingPage is defined %}
-                            "landingPage":    "{{ dataset.landingPage }}",
-                        {% endif %}
-                        {% if dataset.license is defined %}
-                            "license":        "{{ dataset.license }}",
-                        {% endif %}
-                        {% if dataset.spatial is defined %}
-                            "spatial": {{ h.jsondump(dataset.spatial) }},
-                        {% endif %}
-                        {% if dataset.publisher.mbox or dataset.publisher.name %}
-                            "publisher": {{ h.jsondump(dataset.publisher) }},
-                        {% endif %}
-                        {% if dataset.source is defined %}
-                            "source":     "{{ dataset.source }}",
-                        {% endif %}
-                        {% if dataset.contactPoint is defined %}
-                            "contactPoint": {{ h.jsondump(dataset.contactPoint) }},
-                        {% endif %}
-                        "distribution":
-                            [
-                                {% for distrib in dataset.distribution %}
-                                    {
-                                        "identifier":  "{{ distrib.identifier }}",
-                                        {% if distrib.format is defined %}
-                                            "format":      "{{ distrib.format }}",
-                                        {% endif %}
-                                        "title":       "{{ distrib.title }}",
-                                        "description": "{{ distrib.description }}",
-                                        {% if distrib.fileName is defined %}
-                                            "fileName": "{{ distrib.fileName }}",
-                                        {% endif %}
-                                        {% if distrib.type is defined %}
-                                            "type":        "{{ distrib.type }}",
-                                        {% endif %}
-                                        {% if distrib.issued is defined %}
-                                            "issued":      "{{ distrib.issued }}",
-                                        {% endif %}
-                                        {% if distrib.modified is defined %}
-                                            "modified":    "{{ distrib.modified }}",
-                                        {% endif %}
-                                        {% if distrib.license is defined %}
-                                            "license":     "{{ distrib.license }}",
-                                        {% endif %}
-                                        {% if distrib.attributes|length > 0 %}
-                                             "field": {{ h.jsondump(distrib.attributes) }},
-                                        {% endif %}
-                                        "accessURL": "{{ distrib.accessURL }}",
-                                        "downloadURL": "{{ distrib.downloadURL }}"
-                                    } {% if loop.index < dataset.distribution|length %},{% endif %}
-                                {% endfor %}
-                            ],
-                        {% if dataset.keyword|length > 0 %}
-                            "keyword": {{ h.jsondump(dataset.keyword) }},
-                        {% endif %}
-                        "superTheme":
-                            {{ h.jsondump(dataset.superTheme) }},
-                        {% if dataset.language|length > 0 %}
-                            "language": {{ h.jsondump(dataset.language) }},
-                        {% endif %}
-                        {% if dataset.theme|length > 0 %}
-                            "theme": {{ h.jsondump(dataset.theme) }},
-                        {% endif %}
-                        {% if dataset.accrualPeriodicity is defined %}
-                            "accrualPeriodicity": "{{ dataset.accrualPeriodicity }}"
-                        {% endif %}
-                        {% if dataset.temporal is defined %}
-                            ,"temporal": "{{ dataset.temporal }}"
-                        {% endif %}
-                    } {% if loop.index < datajson.dataset|length %},{% endif %}
-                {% endfor %}
-            ]
-    {% endif %}
+    "dataset":
+        [
+            {% for dataset in datajson.dataset %}
+                {
+                    "title":              "{{ dataset.title }}",
+                    "description":        "{{ dataset.description }}",
+                    "identifier":         "{{ dataset.identifier }}",
+                    {% if dataset.modified is defined %}
+                        "modified":       "{{ dataset.modified }}",
+                    {% endif %}
+                    "issued":         "{{ dataset.issued }}",
+                    {% if dataset.landingPage is defined %}
+                        "landingPage":    "{{ dataset.landingPage }}",
+                    {% endif %}
+                    {% if dataset.license is defined %}
+                        "license":        "{{ dataset.license }}",
+                    {% endif %}
+                    {% if dataset.spatial is defined %}
+                        "spatial": {{ h.jsondump(dataset.spatial) }},
+                    {% endif %}
+                    "publisher": {{ h.jsondump(dataset.publisher) }},
+                    {% if dataset.source is defined %}
+                        "source":     "{{ dataset.source }}",
+                    {% endif %}
+                    {% if dataset.contactPoint is defined %}
+                        "contactPoint": {{ h.jsondump(dataset.contactPoint) }},
+                    {% endif %}
+                    "distribution":
+                        [
+                            {% for distrib in dataset.distribution %}
+                                {
+                                    "identifier":  "{{ distrib.identifier }}",
+                                    {% if distrib.format is defined %}
+                                        "format":      "{{ distrib.format }}",
+                                    {% endif %}
+                                    "title":       "{{ distrib.title }}",
+                                    "description": "{{ distrib.description }}",
+                                    {% if distrib.fileName is defined %}
+                                        "fileName": "{{ distrib.fileName }}",
+                                    {% endif %}
+                                    {% if distrib.type is defined %}
+                                        "type":        "{{ distrib.type }}",
+                                    {% endif %}
+                                    {% if distrib.issued is defined %}
+                                        "issued":      "{{ distrib.issued }}",
+                                    {% endif %}
+                                    {% if distrib.modified is defined %}
+                                        "modified":    "{{ distrib.modified }}",
+                                    {% endif %}
+                                    {% if distrib.license is defined %}
+                                        "license":     "{{ distrib.license }}",
+                                    {% endif %}
+                                    {% if distrib.attributes|length > 0 %}
+                                         "field": {{ h.jsondump(distrib.attributes) }},
+                                    {% endif %}
+                                    "accessURL": "{{ distrib.accessURL }}",
+                                    "downloadURL": "{{ distrib.downloadURL }}"
+                                } {% if loop.index < dataset.distribution|length %},{% endif %}
+                            {% endfor %}
+                        ],
+                    {% if dataset.keyword|length > 0 %}
+                        "keyword": {{ h.jsondump(dataset.keyword) }},
+                    {% endif %}
+                    "superTheme": {{ h.jsondump(dataset.superTheme) }},
+                    {% if dataset.language|length > 0 %}
+                        "language": {{ h.jsondump(dataset.language) }},
+                    {% endif %}
+                    {% if dataset.theme|length > 0 %}
+                        "theme": {{ h.jsondump(dataset.theme) }},
+                    {% endif %}
+                    "accrualPeriodicity": "{{ dataset.accrualPeriodicity }}"
+                    {% if dataset.temporal is defined %}
+                        ,"temporal": "{{ dataset.temporal }}"
+                    {% endif %}
+                } {% if loop.index < datajson.dataset|length %},{% endif %}
+            {% endfor %}
+        ]
 }
