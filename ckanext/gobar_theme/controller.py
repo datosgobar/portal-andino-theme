@@ -96,6 +96,7 @@ class GobArHomeController(HomeController):
 
     def datajson(self):
         datajson = {}
+        version = "1.1"
         spatial = []
         spatial_config_fields = ['country', 'province', 'districts']
         for spatial_config_field in spatial_config_fields:
@@ -110,7 +111,7 @@ class GobArHomeController(HomeController):
         }
         groups = []
 
-        datajson['version'] = gobar_helpers.portal_andino_version() or ''
+        datajson['version'] = gobar_helpers.portal_andino_version() or version or ''
         datajson['identifier'] = gobar_helpers.get_theme_config("portal-metadata.id", "") or ''
         datajson['title'] = gobar_helpers.get_theme_config("title.site-title", "") or ''
         datajson['description'] = gobar_helpers.get_theme_config("title.site-description", "") or ''
