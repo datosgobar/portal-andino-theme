@@ -164,14 +164,14 @@ Examples:
     {% endcall %}
 {% endmacro %}
 
-{% macro markdown_custom(name, id='', label='', value='', placeholder='', error="", classes=[], attrs={}, is_required=false, after_desc=false, max_length="") %}
+{% macro markdown_custom(name, id='', label='', value='', placeholder='', error="", classes=[], attrs={}, is_required=false, after_desc=false, max_length="", rows="5") %}
     {% set classes = (classes|list) %}
     {% do classes.append('control-full') %}
     {% set markdown_tooltip = "<pre><p>__Bold text__ or _italic text_</p><p># title<br>## secondary title<br>### etc</p><p>* list<br>* of<br>* items</p><p>http://auto.link.ed/</p></pre><p><b><a href='http://daringfireball.net/projects/markdown/syntax' target='_blank'>Full markdown syntax</a></b></p><p class='muted'><b>Please note:</b> HTML tags are stripped out for security reasons</p>" %}
 
     {%- set extra_html = caller() if caller -%}
     {% call input_block(id or name, label or name, error, classes, control_classes=["editor"], extra_html=extra_html, is_required=is_required) %}
-        <textarea id="{{ id or name }}" name="{{ name }}" cols="20" rows="5"
+        <textarea id="{{ id or name }}" name="{{ name }}" cols="20" rows={{ rows }}
                   placeholder="{{ placeholder }}" maxlength="{{ max_length }}" {{ attributes(attrs) }}>{{ value | empty_and_escape }}</textarea>
         {% if after_desc %}
             <div class="after-desc" id="{{ id or name }}">
