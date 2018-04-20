@@ -94,14 +94,12 @@ $(function () {
     });
 
     function resetAndToggleIfNeeded(elements, shouldEnable) {
-        var i;
-        // alert(boolean + " " + elements.length);
         if (shouldEnable) {
-            for (i = 0; i < elements.length; i++) {
+            for (var i in elements) {
                 elements[i].removeAttr('disabled');
             }
         } else {
-            for (i = 0; i < elements.length; i++) {
+            for (var i in elements) {
                 elements[i].val('');
                 elements[i].attr('disabled', 'disabled');
             }
