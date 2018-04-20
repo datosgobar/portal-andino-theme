@@ -33,7 +33,7 @@
                         <select class="resource-attributes-input-col-type resource-col-type">
                             {% set selected_type = attribute_group['type'] %}
                             <option {{ 'selected=true' if not selected_type or selected_type|length == 0 }}
-                                    disabled="disabled">Ej.: date
+                                    disabled="disabled" value="">Ej.: date
                             </option>
                             {% for field_type in h.field_types() %}
                                 <option value="{{ field_type[0] }}" {{ 'selected=true' if field_type[0] == selected_type }}
@@ -85,7 +85,7 @@
                         {% set selected_special_type = attribute_group['specialType'] %}
                         <select class="resource-col-special-data">
                                 <option {{ 'selected=true' if not selected_special_type or selected_special_type|length == 0 }}
-                                    disabled="disabled">Ej.: Índice de tiempo
+                                    disabled="disabled" value="">Ej.: Índice de tiempo
                                 </option>
                             {% for special_type in special_types %}
                             <option value="{{ special_type[0] }}" {{ 'selected' if special_type[0] == selected_special_type }}>{{ special_type[1] }}</option>
