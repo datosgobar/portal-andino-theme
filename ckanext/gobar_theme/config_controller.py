@@ -58,6 +58,10 @@ class GobArConfigController(base.BaseController):
                 new_title_config['background-image'] = self.get_theme_config('title.background-image')
             config_dict['title'] = new_title_config
             self._set_config(config_dict)
+            # Actualizo el data.json
+            from ckanext.gobar_theme.lib.datajson_controller import GobArDatajsonController
+            datajson_controller = GobArDatajsonController()
+            datajson_controller.update_or_generate_datajson()
 
         return base.render('config/config_01_title.html')
 
@@ -240,6 +244,10 @@ class GobArConfigController(base.BaseController):
             }
             config_dict['portal-metadata'] = new_metadata_config
             self._set_config(config_dict)
+            # Actualizo el data.json
+            from ckanext.gobar_theme.lib.datajson_controller import GobArDatajsonController
+            datajson_controller = GobArDatajsonController()
+            datajson_controller.update_or_generate_datajson()
         return base.render(template_name='config/config_12_metadata_portal.html')
 
     def edit_apis(self):
