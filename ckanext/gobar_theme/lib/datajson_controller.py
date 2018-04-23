@@ -1,5 +1,7 @@
 #! coding: utf-8
 
+# Los recursos le pegan al data.json para buscar info como accessURL. Usar una funcion que lea el data.json aca
+
 import json
 import os
 import re
@@ -13,9 +15,13 @@ import ckan.plugins as p
 
 class GobArDatajsonController(BaseController):
 
+    FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
+
     def datajson(self):
-        FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
-        with open(FILENAME, 'a+') as file:
+        return base.render('datajson.html', extra_vars={'datajson': self.read_or_generate_datajson()})
+
+    def read_or_generate_datajson(self):
+        with open(GobArDatajsonController.FILENAME, 'a+') as file:
             try:
                 datajson = json.load(file)
             except ValueError:
@@ -25,7 +31,14 @@ class GobArDatajsonController(BaseController):
                 datajson['dataset'] = \
                     self.filter_dataset_fields(self.get_datasets_with_resources(self.get_ckan_datasets()) or [])
                 json.dump(datajson, file)
-        return base.render('datajson.html', extra_vars={'datajson': datajson})
+        return datajson
+
+    def update_or_generate_datajson(self):
+        with open(GobArDatajsonController.FILENAME, 'w+') as file:
+            datajson = self.get_catalog_data()
+            datajson['dataset'] = \
+                self.filter_dataset_fields(self.get_datasets_with_resources(self.get_ckan_datasets()) or [])
+            json.dump(datajson, file)
 
     def get_field_from_list_and_delete(self, list, wanted_field):
         for field in list:
