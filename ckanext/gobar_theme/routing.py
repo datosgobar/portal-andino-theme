@@ -220,7 +220,7 @@ class GobArRouter:
 
     def connect_datajson(self):
         with SubMapper(self.route_map, controller=self.datajson_controller) as m:
-            m.connect('datajson', '/data.json2', action='datajson')
+            m.connect('datajson', '/data.json', action='datajson')
         self.redirect(
-            ('/datajson2', '/datajson2'),
+            ('/datajson', '/datajson'),
         )
