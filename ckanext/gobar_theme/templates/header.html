@@ -29,7 +29,7 @@
                     {% if h.get_theme_config('organization.show-organizations') %}
                         <div class="navbar-link">
                             <a href="{{ h.url_for(controller='organization', action='index') }}">
-                                ORGANIZACIONES CON DATOS
+                                ORGANIZACIONES
                             </a>
                         </div>
                     {% endif %}
@@ -109,11 +109,10 @@
 
             <div class="col-xs-12 col-sm-7 no-padding header-links">
                 {%- if c.action != 'login' -%}
-                    <a class="header-link" href="{{ h.url_for(controller='package', action='search') }}">DATASETS</a>
+                    <a class="header-link" href="{{ h.url_for(controller='package', action='search') }}">Datasets</a>
 
                     {%- if h.get_theme_config('organization.show-organizations') -%}
-                        <a class="header-link" href="{{ h.url_for(controller='organization', action='index') }}">ORGANIZACIONES CON
-                            DATOS</a>
+                        <a class="header-link" href="{{ h.url_for(controller='organization', action='index') }}">Organizaciones</a>
                     {%- endif -%}
 
                     {%- if h.get_theme_config('apis.show-apis') -%}
@@ -128,7 +127,7 @@
                         {% if h.get_theme_config('about.about-type') == 'Quiero secciones personalizadas (avanzado)' %}
 
                             <span class="header-link dropdown">
-                                ACERCA <span class="caret"></span>
+                                Acerca <span class="caret"></span>
                                 <ul class="about-dropdown" style="bottom:-120px;">
 
                                     {% if header_sections|length > 0 %}
@@ -146,32 +145,32 @@
                                 </ul>
                             </span>
                         {% else %}
-                            <a class="header-link" href="{{ h.url('about') }}">ACERCA</a>
+                            <a class="header-link" href="{{ h.url('about') }}">Acerca</a>
                         {% endif %}
 
                     {%- endif -%}
 
                     {%- if c.userobj -%}
                         <span class="header-link dropdown"><span class="user-divisor"></span>
-                            <span class="username">{{ c.userobj.name }}</span> {% snippet "svg/user-logo.svg" %}
+                            <span>{{ c.userobj.name }}</span> {% snippet "svg/user-logo.svg" %}
 
                             <ul {{ 'style=bottom:-120px' if not c.userobj.sysadmin else '' }}>
                                 <a href="{{ h.url_for(controller='ckanext.gobar_theme.user_controller:GobArUserController', action='my_account') }}">
-                                    <li>MI CUENTA</li>
+                                    <li>Mi Cuenta</li>
                                 </a>
 
                                 {%- if c.userobj.sysadmin -%}
                                     <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_title') }}">
-                                        <li>CONFIGURACIÓN</li>
+                                        <li>Configuración</li>
                                     </a>
                                 {%- endif -%}
 
                                 <a href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md" target="_blank">
-                                    <li>AYUDA</li>
+                                    <li>Ayuda</li>
                                 </a>
 
                                 <a href="{{ h.url_for(controller='user', action='logout') }}">
-                                    <li>SALIR</li>
+                                    <li>Salir</li>
                                 </a>
                             </ul>
                         </span>

@@ -10317,6 +10317,10 @@ div.dataset-container div.dataset-content{
 div.dataset-container div.dataset-notes {
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
 }
 
 div.dataset-container h3.dataset-title{

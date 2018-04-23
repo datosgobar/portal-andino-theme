@@ -25,13 +25,8 @@ $(function () {
         resetColumnHeadersCounter();
     });
 
-    $(document).on('change', '.resource-col-special-data', function(e) {
-        var parent = $(e.currentTarget).parents('.resource-attributes-group');
-        var selectedSpecialType = $(e.currentTarget).val();
-        var specialTypeDetail = parent.find('.resource-col-special-data-detail');
-        
-        specialTypeDetail.prop('disabled', selectedSpecialType != TIME_INDEX_SPECIAL_TYPE);
-        specialTypeDetail.val('');
+    $(document).on('change', '.resource-col-name, .resource-col-type, .resource-col-special-data', function() {
+        configureMetadataFields();
     });
 
     $(document).on('click', '#delete-col-btn', function(e) {
@@ -97,6 +92,55 @@ $(function () {
         addAttributesHidden();
         return true
     });
+
+    function resetAndToggleIfNeeded(elements, shouldEnable) {
+        if (shouldEnable) {
+            for (var i in elements) {
+                elements[i].removeAttr('disabled');
+            }
+        } else {
+            for (var i in elements) {
+                elements[i].val('');
+                elements[i].attr('disabled', 'disabled');
+            }
+        }
+    }
+
+    function configureMetadataFields() {
+        $('div.resource-attributes-group').each(function() {
+            // Consigo los elementos de la sección de metadatos
+            var that = $(this);
+            var columnDataType = $(that.find('select.resource-col-type')[0]);
+            var columnDescription = $(that.find('textarea.resource-col-description')[0]);
+            var columnUnit = $(that.find('input.resource-col-units')[0]);
+            var columnId = $(that.find('input.resource-col-id')[0]);
+            var columnSpecialDataType = $(that.find('select.resource-col-special-data')[0]);
+            var columnSpecialData = $(that.find('select.resource-col-special-data-detail')[0]);
+
+            // Habilito o dejo deshabilitados ciertos elementos si éstos requieren que haya un valor en otro (y qué valor tiene)
+
+            // Si tiene name, habilito las columnas dataType, description e identifier
+            var columnHasName = that.find('input.resource-col-name').val() !== '';
+            resetAndToggleIfNeeded([columnDataType, columnDescription, columnId], columnHasName);
+
+            var selectedColumnDataType = columnDataType.find('option:selected').val();
+
+            // Si el tipo de dato seleccionado es date o datetime, habilito specialDataType
+            var selectedColumnDataTypeIsDate = selectedColumnDataType.includes('date') ||
+                selectedColumnDataType.includes('date-time');
+            resetAndToggleIfNeeded([columnSpecialDataType], selectedColumnDataTypeIsDate);
+
+            // Si el tipo de dato seleccionado es numérico, habilito unit
+            var selectedColumnDataTypeIsNumeric = selectedColumnDataType.includes('number') ||
+                selectedColumnDataType.includes('integer');
+            resetAndToggleIfNeeded([columnUnit], selectedColumnDataTypeIsNumeric);
+
+            // Si se seleccionó specialDataType, habilito el campo specialData
+            var columnHasSpecialDataType = columnSpecialDataType.find('option:selected').val() !== '';
+            console.log('columnHasSpecialDataType: ' + columnHasSpecialDataType);
+            resetAndToggleIfNeeded([columnSpecialData], columnHasSpecialDataType);
+        });
+    }
 
     var init = function() {
         // Inicializa el formulario (los medatatos de campo)
@@ -197,4 +241,5 @@ $(function () {
     }
 
     init();
+    configureMetadataFields();
 });

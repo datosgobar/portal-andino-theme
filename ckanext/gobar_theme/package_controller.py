@@ -358,6 +358,12 @@ class GobArPackageController(PackageController):
 
             self._add_or_replace_extra(key='issued', value=time_now, extras=data_dict['extras'])
             self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
+            globalGroups = []
+            for field in data_dict['extras']:
+                if field['key'] == 'globalGroups':
+                    globalGroups = field['value']
+                    break
+            self._add_or_replace_extra(key='superTheme', value=globalGroups, extras=data_dict['extras'])
 
             if ckan_phase:
                 # prevent clearing of groups etc
