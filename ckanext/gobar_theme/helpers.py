@@ -332,12 +332,12 @@ def portal_andino_version():
     return version['portal-andino']
 
 
-def get_distribution_metadata(resource_id):
+def get_distribution_metadata(resource_id, package_id):
     from ckanext.gobar_theme.lib.datajson_controller import GobArDatajsonController
     datajson_controller = GobArDatajsonController()
     json_dict = datajson_controller.read_or_generate_datajson()
     datajson = DataJson(json_dict)
-    dist = datajson.get_distribution(identifier=resource_id)
+    dist = get_distribution_from_json(resource_id, package_id, datajson)
     return dist
 
 
@@ -345,6 +345,15 @@ def is_distribution_local(distribution_metadata):
     ckan_site_url = config.get('ckan.site_url')
     accessURL = distribution_metadata.get('accessURL', '')
     return accessURL.startswith(ckan_site_url)
+
+
+def get_distribution_from_json(resource_id, package_id, datajson):
+    for dataset in datajson['dataset']:
+        if dataset['identifier'] == package_id:
+            for resource in dataset['distribution']:
+                if resource['identifier'] == resource_id:
+                    return resource
+    return None
 
 
 def get_extra_value(extras_list, field):

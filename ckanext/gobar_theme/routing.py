@@ -78,8 +78,10 @@ class GobArRouter:
             m.connect('search', '/dataset', action='search', highlight_actions='index search')
             m.connect('add dataset', '/dataset/new', action='new')
             m.connect('edit dataset', '/dataset/edit/{id}', action='edit')
+            m.connect('delete dataset', '/dataset/delete/{id}', action='delete')
             m.connect('new resource', '/dataset/new_resource/{id}', action='new_resource')
             m.connect('edit resource', '/dataset/{id}/resource_edit/{resource_id}', action='resource_edit')
+            m.connect('delete resource', '/dataset/{id}/resource_delete/{resource_id}', action='resource_delete')
         self.route_map.connect('/dataset/{id}/archivo/{resource_id}', action='resource_read', controller='package')
         self.redirect(
             ('/dataset/history/{id:.*?}', '/dataset/{id}'),

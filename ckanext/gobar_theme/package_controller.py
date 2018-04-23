@@ -12,6 +12,7 @@ import ckan.plugins as p
 from ckan.common import OrderedDict, _, request, c, g
 import ckan.logic as logic
 from ckan.lib.search import SearchError
+from ckanext.gobar_theme.lib.datajson_controller import GobArDatajsonController
 import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.lib.base as base
 import cgi
@@ -438,6 +439,29 @@ class GobArPackageController(PackageController):
             data_dict['state'] = 'none'
             return self.new(data_dict, errors, error_summary)
 
+    def delete(self, id):
+        if 'cancel' in request.params:
+            h.redirect_to(controller='package', action='edit', id=id)
+
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user or c.author, 'auth_user_obj': c.userobj}
+        try:
+            if request.method == 'POST':
+                get_action('package_delete')(context, {'id': id})
+                h.flash_notice(_('Dataset has been deleted.'))
+                # Actualizo el data.json
+                datajson_controller = GobArDatajsonController()
+                datajson_controller.update_or_generate_datajson()
+                h.redirect_to(controller='package', action='search')
+            c.pkg_dict = get_action('package_show')(context, {'id': id})
+            dataset_type = c.pkg_dict['type'] or 'dataset'
+        except NotAuthorized:
+            abort(401, _('Unauthorized to delete package %s') % '')
+        except NotFound:
+            abort(404, _('Dataset not found'))
+        return render('package/confirm_delete.html',
+                      extra_vars={'dataset_type': dataset_type})
+
     def new_resource(self, id, data=None, errors=None, error_summary=None):
         ''' FIXME: This is a temporary action to allow styling of the
         forms. '''
@@ -525,8 +549,14 @@ class GobArPackageController(PackageController):
                 get_action('package_update')(
                     dict(context, allow_state_change=True),
                     dict(data_dict, state='active'))
+                # Actualizo el data.json
+                datajson_controller = GobArDatajsonController()
+                datajson_controller.update_or_generate_datajson()
                 h.redirect_to(controller='package', action='read', id=id)
             elif save_action == 'go-dataset-complete':
+                # Actualizo el data.json
+                datajson_controller = GobArDatajsonController()
+                datajson_controller.update_or_generate_datajson()
                 # go to first stage of add dataset
                 h.redirect_to(controller='package', action='read', id=id)
             elif save_action == 'save-draft':
@@ -594,11 +624,16 @@ class GobArPackageController(PackageController):
 
             data['package_id'] = id
             try:
+                datajson_controller = GobArDatajsonController()
                 if resource_id:
                     data['id'] = resource_id
                     get_action('resource_update')(context, data)
+                    # Actualizo el data.json
+                    datajson_controller.update_or_generate_datajson()
                 else:
                     get_action('resource_create')(context, data)
+                    # Actualizo el data.json
+                    datajson_controller.update_or_generate_datajson()
             except ValidationError, e:
                 errors = e.error_dict
                 error_summary = e.error_summary
@@ -640,6 +675,34 @@ class GobArPackageController(PackageController):
                 'resource_form_snippet': self._resource_form(package_type),
                 'dataset_type': package_type}
         return render('package/resource_edit.html', extra_vars=vars)
+
+    def resource_delete(self, id, resource_id):
+        if 'cancel' in request.params:
+            h.redirect_to(controller='package', action='resource_edit',
+                          resource_id=resource_id, id=id)
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user or c.author, 'auth_user_obj': c.userobj}
+        try:
+            check_access('package_delete', context, {'id': id})
+        except NotAuthorized:
+            abort(401, _('Unauthorized to delete package %s') % '')
+        try:
+            if request.method == 'POST':
+                get_action('resource_delete')(context, {'id': resource_id})
+                h.flash_notice(_('Resource has been deleted.'))
+                # Actualizo el data.json
+                datajson_controller = GobArDatajsonController()
+                datajson_controller.update_or_generate_datajson()
+                h.redirect_to(controller='package', action='read', id=id)
+            c.resource_dict = get_action('resource_show')(
+                context, {'id': resource_id})
+            c.pkg_id = id
+        except NotAuthorized:
+            abort(401, _('Unauthorized to delete resource %s') % '')
+        except NotFound:
+            abort(404, _('Resource not found'))
+        return render('package/confirm_delete_resource.html',
+                      {'dataset_type': self._get_package_type(id)})
 
     def edit(self, id, data=None, errors=None, error_summary=None):
         package_type = self._get_package_type(id)
@@ -740,6 +803,10 @@ class GobArPackageController(PackageController):
             pkg = get_action('package_update')(context, data_dict)
             c.pkg = context['package']
             c.pkg_dict = pkg
+
+            # Actualizo el data.json
+            datajson_controller = GobArDatajsonController()
+            datajson_controller.update_or_generate_datajson()
 
             self._form_save_redirect(pkg['name'], 'edit',
                                      package_type=package_type)
