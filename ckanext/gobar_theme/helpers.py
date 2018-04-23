@@ -333,10 +333,9 @@ def portal_andino_version():
 
 
 def get_distribution_metadata(resource_id):
-    ckan_site_url = config.get('ckan.site_url')
-    # Pasamos un parámetro random para evitar la caché del cliente http que se baja el datajson
-    res = requests.get(ckan_site_url + '/data.json?rnd=%s' % uuid.uuid4(), verify=False)
-    json_dict = json.loads(res.content, encoding='utf-8')
+    from ckanext.gobar_theme.lib.datajson_controller import GobArDatajsonController
+    datajson_controller = GobArDatajsonController()
+    json_dict = datajson_controller.read_or_generate_datajson()
     datajson = DataJson(json_dict)
     dist = datajson.get_distribution(identifier=resource_id)
     return dist

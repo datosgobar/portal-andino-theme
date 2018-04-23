@@ -1,7 +1,5 @@
 #! coding: utf-8
 
-# Los recursos le pegan al data.json para buscar info como accessURL. Usar una funcion que lea el data.json aca
-
 import json
 import os
 import re
@@ -21,7 +19,7 @@ class GobArDatajsonController(BaseController):
         return base.render('datajson.html', extra_vars={'datajson': self.read_or_generate_datajson()})
 
     def read_or_generate_datajson(self):
-        with open(GobArDatajsonController.FILENAME, 'a+') as file:
+        with open(self.FILENAME, 'a+') as file:
             try:
                 datajson = json.load(file)
             except ValueError:
@@ -34,7 +32,7 @@ class GobArDatajsonController(BaseController):
         return datajson
 
     def update_or_generate_datajson(self):
-        with open(GobArDatajsonController.FILENAME, 'w+') as file:
+        with open(self.FILENAME, 'w+') as file:
             datajson = self.get_catalog_data()
             datajson['dataset'] = \
                 self.filter_dataset_fields(self.get_datasets_with_resources(self.get_ckan_datasets()) or [])
