@@ -50,7 +50,7 @@
             {% else %}
                 {% set after_desc_description = ["Por favor, para que la descripción sea más clara, <b>no superes los ", max_length_description, " caracteres.</b>"] %}
             {% endif %}
-            {{ form.markdown_custom('description', id='field-description', label='* Descripción del recurso', placeholder='Ej: Detalle de los pedidos de información hechos al Estado en 2015.', value=data.description, error=errors.description, attrs={'data-valid-desc-length': max_length_description}, after_desc=after_desc_description|join|safe, max_length=max_length_description) }}
+            {{ form.markdown_custom('description', id='field-description', label='* Descripción del recurso', placeholder='Ej: Detalle de los pedidos de información hechos al Estado en 2015.', value=data.description, error=errors.description, attrs={'data-valid-desc-length': max_length_description}, rows=3, after_desc=after_desc_description|join|safe, max_length=max_length_description) }}
         {% endblock %}
 
         {% block basic_fields_distribution_type %}
