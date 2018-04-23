@@ -1,23 +1,25 @@
 #! coding: utf-8
-from ckan.controllers.package \
-    import PackageController, _encode_params, search_url, render, NotAuthorized, check_access, abort, get_action, log
+import cgi
 from urllib import urlencode
-from pylons import config
-from paste.deploy.converters import asbool
-from ckan.lib.render import deprecated_lazy_render
-import ckan.lib.maintain as maintain
+
+import ckan.lib.base as base
 import ckan.lib.helpers as h
+import ckan.lib.maintain as maintain
+import ckan.lib.navl.dictization_functions as dict_fns
+import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
-from ckan.common import OrderedDict, _, request, c, g
-import ckan.logic as logic
-from ckan.lib.search import SearchError
-from ckanext.gobar_theme.lib.datajson_controller import GobArDatajsonController
-import ckan.lib.navl.dictization_functions as dict_fns
-import ckan.lib.base as base
-import cgi
-import moment
 import ckanext.googleanalytics.plugin as google_analytics
+import moment
+from ckan.common import OrderedDict, _, request, c, g
+from ckan.controllers.package \
+    import PackageController, _encode_params, search_url, render, NotAuthorized, check_access, abort, get_action, log
+from ckan.lib.render import deprecated_lazy_render
+from ckan.lib.search import SearchError
+from paste.deploy.converters import asbool
+from pylons import config
+
+from ckanext.gobar_theme.datajson_controller import GobArDatajsonController
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound

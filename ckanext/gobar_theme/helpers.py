@@ -1,22 +1,19 @@
 # coding=utf-8
+import json
+from datetime import time
+from urlparse import urljoin
+from urlparse import urlparse
+
+import ckan.lib.formatters as formatters
+import ckan.lib.helpers as ckan_helpers
+import ckan.logic as logic
+import moment
+from ckan.common import request, c, g, _
+from dateutil import parser, tz
+from pydatajson.core import DataJson
 from pylons.config import config
 
-import ckan.logic as logic
-import ckan.lib.helpers as ckan_helpers
-from urlparse import urlparse
-from ckan.common import request, c, g, _
-import ckan.model as model
-import ckan.lib.dictization.model_dictize as model_dictize
-import ckan.lib.formatters as formatters
-import json
-import uuid
-import requests
-from urlparse import urljoin
 from config_controller import GobArConfigController
-from pydatajson.core import DataJson
-from datetime import time
-from dateutil import parser, tz
-import moment
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -333,7 +330,7 @@ def portal_andino_version():
 
 
 def get_distribution_metadata(resource_id, package_id):
-    from ckanext.gobar_theme.lib.datajson_controller import GobArDatajsonController
+    from ckanext.gobar_theme.datajson_controller import GobArDatajsonController
     datajson_controller = GobArDatajsonController()
     json_dict = datajson_controller.read_or_generate_datajson()
     datajson = DataJson(json_dict)
