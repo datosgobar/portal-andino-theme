@@ -58,6 +58,7 @@ class GobArConfigController(base.BaseController):
             config_dict['title'] = new_title_config
             self._set_config(config_dict)
             # Actualizo el data.json
+            # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
             import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
             datajson_actions.update_or_generate_datajson()
 
@@ -243,6 +244,7 @@ class GobArConfigController(base.BaseController):
             config_dict['portal-metadata'] = new_metadata_config
             self._set_config(config_dict)
             # Actualizo el data.json
+            # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
             import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
             datajson_actions.update_or_generate_datajson()
         return base.render(template_name='config/config_12_metadata_portal.html')

@@ -330,6 +330,7 @@ def portal_andino_version():
 
 
 def get_distribution_metadata(resource_id, package_id):
+    # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
     import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
     json_dict = datajson_actions.read_or_generate_datajson()
     datajson = DataJson(json_dict)
