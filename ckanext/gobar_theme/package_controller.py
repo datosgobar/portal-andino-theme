@@ -19,7 +19,7 @@ from ckan.lib.search import SearchError
 from paste.deploy.converters import asbool
 from pylons import config
 
-from ckanext.gobar_theme.datajson_controller import GobArDatajsonController
+import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound
@@ -548,8 +548,7 @@ class GobArPackageController(PackageController):
             c.pkg_dict = pkg
 
             # Actualizo el data.json
-            datajson_controller = GobArDatajsonController()
-            datajson_controller.update_or_generate_datajson()
+            datajson_actions.update_or_generate_datajson()
 
             self._form_save_redirect(pkg['name'], 'edit',
                                      package_type=package_type)
@@ -582,8 +581,7 @@ class GobArPackageController(PackageController):
                 get_action('package_delete')(context, {'id': id})
                 h.flash_notice(_('Dataset has been deleted.'))
                 # Actualizo el data.json
-                datajson_controller = GobArDatajsonController()
-                datajson_controller.update_or_generate_datajson()
+                datajson_actions.update_or_generate_datajson()
                 h.redirect_to(controller='package', action='search')
             c.pkg_dict = get_action('package_show')(context, {'id': id})
             dataset_type = c.pkg_dict['type'] or 'dataset'
@@ -682,13 +680,11 @@ class GobArPackageController(PackageController):
                     dict(context, allow_state_change=True),
                     dict(data_dict, state='active'))
                 # Actualizo el data.json
-                datajson_controller = GobArDatajsonController()
-                datajson_controller.update_or_generate_datajson()
+                datajson_actions.update_or_generate_datajson()
                 h.redirect_to(controller='package', action='read', id=id)
             elif save_action == 'go-dataset-complete':
                 # Actualizo el data.json
-                datajson_controller = GobArDatajsonController()
-                datajson_controller.update_or_generate_datajson()
+                datajson_actions.update_or_generate_datajson()
                 # go to first stage of add dataset
                 h.redirect_to(controller='package', action='read', id=id)
             elif save_action == 'save-draft':
@@ -756,16 +752,14 @@ class GobArPackageController(PackageController):
 
             data['package_id'] = id
             try:
-                datajson_controller = GobArDatajsonController()
                 if resource_id:
                     data['id'] = resource_id
                     get_action('resource_update')(context, data)
                     # Actualizo el data.json
-                    datajson_controller.update_or_generate_datajson()
                 else:
                     get_action('resource_create')(context, data)
                     # Actualizo el data.json
-                    datajson_controller.update_or_generate_datajson()
+                datajson_actions.update_or_generate_datajson()
             except ValidationError, e:
                 errors = e.error_dict
                 error_summary = e.error_summary
@@ -823,8 +817,7 @@ class GobArPackageController(PackageController):
                 get_action('resource_delete')(context, {'id': resource_id})
                 h.flash_notice(_('Resource has been deleted.'))
                 # Actualizo el data.json
-                datajson_controller = GobArDatajsonController()
-                datajson_controller.update_or_generate_datajson()
+                datajson_actions.update_or_generate_datajson()
                 h.redirect_to(controller='package', action='read', id=id)
             c.resource_dict = get_action('resource_show')(
                 context, {'id': resource_id})

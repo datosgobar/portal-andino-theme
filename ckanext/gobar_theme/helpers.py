@@ -330,9 +330,8 @@ def portal_andino_version():
 
 
 def get_distribution_metadata(resource_id, package_id):
-    from ckanext.gobar_theme.datajson_controller import GobArDatajsonController
-    datajson_controller = GobArDatajsonController()
-    json_dict = datajson_controller.read_or_generate_datajson()
+    import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+    json_dict = datajson_actions.read_or_generate_datajson()
     datajson = DataJson(json_dict)
     dist = get_distribution_from_json(resource_id, package_id, datajson)
     return dist

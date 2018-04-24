@@ -15,7 +15,7 @@ class GobArRouter:
         self.user_controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
         self.google_analytics_controller = 'ckanext.gobar_theme.google_analytics_controller:GobArGAController'
         self.spatial_controller = 'ckanext.gobar_theme.spatial_controller:GobArSpatialController'
-        self.datajson_controller = 'ckanext.gobar_theme.lib.datajson_controller:GobArDatajsonController'
+        self.datajson_controller = 'ckanext.gobar_theme.datajson_controller:GobArDatajsonController'
 
     def redirect(self, *routes):
         for url_from, url_to in routes:
