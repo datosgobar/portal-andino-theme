@@ -1,7 +1,6 @@
 #coding: utf-8
 from ckan.controllers.home import HomeController
 from ckan.controllers.api import ApiController
-from ckan.config.environment import config
 from ckan.common import c
 import ckan.logic as logic
 import ckan.model as model
@@ -11,8 +10,6 @@ import json
 import ckan.plugins as p
 from ckanext.googleanalytics.controller import GAApiController
 import ckanext.gobar_theme.helpers as gobar_helpers
-import re
-import os
 
 
 class GobArHomeController(HomeController):
@@ -93,7 +90,6 @@ class GobArHomeController(HomeController):
             base.abort(404, u'Sección no encontrada')
 
         return base.render('section_view.html', extra_vars={'section': section})
-
 
 class GobArApiController(GAApiController, ApiController):
 
