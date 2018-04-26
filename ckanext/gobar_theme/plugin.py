@@ -81,8 +81,20 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'jsondump': gobar_helpers.jsondump,
         }
 
+    def before_update(self, mapper, connection, instance):
+        pass
+
+    def before_insert(self, mapper, connection, instance):
+        pass
+
+    def before_delete(self, mapper, connection, instance):
+        pass
+
     def after_update(self, mapper, connection, instance):
         datajson_actions.update_or_generate_datajson()
 
-    def before_update(self, mapper, connection, instance):
+    def after_insert(self, mapper, connection, instance):
+        pass
+
+    def after_delete(self, mapper, connection, instance):
         pass

@@ -55,10 +55,21 @@ def filter_dataset_fields(dataset_list):
         country = get_field_from_list_and_delete(dataset['extras'], 'country')
         province = get_field_from_list_and_delete(dataset['extras'], 'province')
         district = get_field_from_list_and_delete(dataset['extras'], 'district')
-        publisher = {'name': dataset['author']['name'],
-                     'mbox': dataset['author_email']}
+        publisher = {}
+        author_name = dataset['author']['name']
+        author_email = dataset['author_email']
+        if author_name is not None and author_name != '':
+            publisher['name'] = author_name
+        if author_email is not None and author_email != '':
+            publisher['mbox'] = author_email
         source = get_field_from_list_and_delete(dataset['extras'], 'source')
-        contactPoint = {'fn': dataset['maintainer'], 'hasEmail': dataset['maintainer_email']}
+        contactPoint = {}
+        maintainer = dataset['maintainer']
+        maintainer_email = dataset['maintainer_email']
+        if maintainer is not None and maintainer != '':
+            contactPoint['fn'] = maintainer
+        if maintainer_email is not None and maintainer_email != '':
+            contactPoint['hasEmail'] = maintainer_email
         keyword = map(lambda kw: kw['display_name'], dataset['tags'])
         superTheme = eval(get_field_from_list_and_delete(dataset['extras'], 'superTheme'))
         if superTheme is None or superTheme == []:
@@ -71,44 +82,50 @@ def filter_dataset_fields(dataset_list):
         temporal = get_field_from_list_and_delete(dataset['extras'], 'temporal')
         if temporal is None or temporal == '':
             temporal = get_field_from_list_and_delete(dataset['extras'], 'dateRange')
-        spatial = ["None"]
+        resources = clean_resources(dataset['resources'])
 
         # Voy guardando los datos a mostrar en el data.json
         current_dataset.update({'title': dataset['title']})
         current_dataset.update({'description': dataset['notes']})
         current_dataset.update({'identifier': dataset['id']})
-        if issued:
+        if issued is not None and issued != '':
             current_dataset.update({'issued': issued})
-        if modified:
+        if modified is not None and modified != '':
             current_dataset.update(({'modified': modified}))
-        if dataset['url']:
+        if dataset['url'] is not None and dataset['url'] != '':
             current_dataset.update({"landingPage": dataset['url']})
-        if dataset['license_title']:
+        if dataset['license_title'] is not None and dataset['license_title']:
             current_dataset.update({"license": dataset['license_title']})
-        spatial[0] = country
-        if province != '' and district != '':
-            spatial.append(province)
-            spatial.append(district)
-        elif province != '':
-            spatial.append(province)
-        if country != 'None':
+        if country is not None and country != '':
+            spatial = [country]
+            if province is not None and province != '':
+                spatial.append(province)
+                if district is not None and district != '':
+                    spatial.append(district)
             current_dataset.update({"spatial": spatial})
-        current_dataset.update({"publisher": publisher})
-        if contactPoint['fn'] != '' or contactPoint['hasEmail'] != '':
+        elif dataset.get('spatial', None) is not None:
+            spatial = dataset['spatial']
+            if isinstance(spatial, basestring) and len(spatial):
+                current_dataset.update({"spatial": spatial})
+        if publisher != {}:
+            current_dataset.update({"publisher": publisher})
+        if contactPoint != {}:
             current_dataset.update({"contactPoint": contactPoint})
-        if source:
+        if source is not None and source != '':
             current_dataset.update({"source": source})
-        current_dataset.update({"distribution": clean_resources(dataset['resources'])})
-        if len(keyword):
+        if resources is not None and resources != []:
+            current_dataset.update({"distribution": resources})
+        if keyword is not None and len(keyword):
             current_dataset.update({"keyword": keyword})
-        current_dataset.update({"superTheme": superTheme})
-        if len(language):
+        if superTheme is not None:
+            current_dataset.update({"superTheme": superTheme})
+        if language is not None:
             current_dataset.update({"language": language})
         if theme is not None:
             current_dataset.update({"theme": theme})
         if accrualPeriodicity is not None:
             current_dataset.update(({"accrualPeriodicity": accrualPeriodicity}))
-        if temporal:
+        if temporal is not None:
             current_dataset.update({"temporal": temporal})
         final_list.append(current_dataset)
     return final_list
@@ -286,7 +303,7 @@ def get_datasets_with_resources(packages):
 
 def get_catalog_data():
     datajson = {}
-    version = "1.1"
+    VERSION = "1.1"
     spatial = []
     spatial_config_fields = ['country', 'province', 'districts']
     for spatial_config_field in spatial_config_fields:
@@ -306,7 +323,7 @@ def get_catalog_data():
                        'description': theme['description'],
                        'label': theme['display_name']
                        })
-    datajson['version'] = gobar_helpers.portal_andino_version() or version or ''
+    datajson['version'] = gobar_helpers.portal_andino_version() or VERSION or ''
     datajson['identifier'] = gobar_helpers.get_theme_config("portal-metadata.id", "") or ''
     datajson['title'] = gobar_helpers.get_theme_config("title.site-title", "") or ''
     datajson['description'] = gobar_helpers.get_theme_config("title.site-description", "") or ''
