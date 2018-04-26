@@ -3,29 +3,29 @@
         "version": "{{ datajson.version }}",
     {% endif %}
     {% if datajson.identifier %}
-        "identifier": "{{ datajson.identifier }}",
+        "identifier": {{ h.jsondump(datajson.identifier) }},
     {% endif %}
-    "title": "{{ datajson.title }}",
-    "description": "{{ datajson.description }}",
-    "superThemeTaxonomy": "{{ datajson.superThemeTaxonomy }}",
+    "title": {{ h.jsondump(datajson.title) }},
+    "description": {{ h.jsondump(datajson.description) }},
+    "superThemeTaxonomy": {{ h.jsondump(datajson.superThemeTaxonomy) }},
     "publisher": {{ h.jsondump(datajson.publisher) }},
     {% if datajson.issued %}
-        "issued": "{{ datajson.issued }}",
+        "issued": {{ h.jsondump(datajson.issued) }},
     {% endif %}
     {% if datajson.modified %}
-        "modified": "{{ datajson.modified }}",
+        "modified": {{ h.jsondump(datajson.modified) }},
     {% endif %}
     {% if datajson.language %}
         "language": {{ h.jsondump(datajson.language) }},
     {% endif %}
     {% if datajson.license %}
-        "license": "{{ datajson.license }}",
+        "license": {{ h.jsondump(datajson.license) }},
     {% endif %}
     {% if datajson.homepage %}
-        "homepage": "{{ datajson.homepage }}",
+        "homepage": {{ h.jsondump(datajson.homepage) }},
     {% endif %}
     {% if datajson.rights %}
-        "rights": "{{ datajson.rights }}",
+        "rights": {{ h.jsondump(datajson.rights) }},
     {% endif %}
     {% if datajson.spatial %}
         "spatial": {{ h.jsondump(datajson.spatial) }},
@@ -37,25 +37,25 @@
         [
             {% for dataset in datajson.dataset %}
                 {
-                    "title":              "{{ dataset.title }}",
-                    "description":        "{{ dataset.description }}",
-                    "identifier":         "{{ dataset.identifier }}",
+                    "title":              {{ h.jsondump(dataset.title) }},
+                    "description":        {{ h.jsondump(dataset.description) }},
+                    "identifier":         {{ h.jsondump(dataset.identifier) }},
                     {% if dataset.modified is defined %}
-                        "modified":       "{{ dataset.modified }}",
+                        "modified":       {{ h.jsondump(dataset.modified) }},
                     {% endif %}
-                    "issued":         "{{ dataset.issued }}",
+                    "issued":             {{ h.jsondump(dataset.issued) }},
                     {% if dataset.landingPage is defined %}
-                        "landingPage":    "{{ dataset.landingPage }}",
+                        "landingPage":    {{ h.jsondump(dataset.landingPage) }},
                     {% endif %}
                     {% if dataset.license is defined %}
-                        "license":        "{{ dataset.license }}",
+                        "license":        {{ h.jsondump(dataset.license) }},
                     {% endif %}
                     {% if dataset.spatial is defined %}
                         "spatial": {{ h.jsondump(dataset.spatial) }},
                     {% endif %}
                     "publisher": {{ h.jsondump(dataset.publisher) }},
                     {% if dataset.source is defined %}
-                        "source":     "{{ dataset.source }}",
+                        "source":     {{ h.jsondump(dataset.source) }},
                     {% endif %}
                     {% if dataset.contactPoint is defined %}
                         "contactPoint": {{ h.jsondump(dataset.contactPoint) }},
@@ -66,30 +66,30 @@
                                 {
                                     "identifier":  "{{ distrib.identifier }}",
                                     {% if distrib.format is defined %}
-                                        "format":      "{{ distrib.format }}",
+                                        "format":  {{ h.jsondump(distrib.format) }},
                                     {% endif %}
-                                    "title":       "{{ distrib.title }}",
-                                    "description": "{{ distrib.description }}",
+                                    "title":       {{ h.jsondump(distrib.title) }},
+                                    "description": {{ h.jsondump(distrib.description) }},
                                     {% if distrib.fileName is defined %}
-                                        "fileName": "{{ distrib.fileName }}",
+                                        "fileName": {{ h.jsondump(distrib.fileName) }},
                                     {% endif %}
                                     {% if distrib.type is defined %}
-                                        "type":        "{{ distrib.type }}",
+                                        "type":        {{ h.jsondump(distrib.type) }},
                                     {% endif %}
                                     {% if distrib.issued is defined %}
-                                        "issued":      "{{ distrib.issued }}",
+                                        "issued":      {{ h.jsondump(distrib.issued) }},
                                     {% endif %}
                                     {% if distrib.modified is defined %}
-                                        "modified":    "{{ distrib.modified }}",
+                                        "modified":    {{ h.jsondump(distrib.modified) }},
                                     {% endif %}
                                     {% if distrib.license is defined %}
-                                        "license":     "{{ distrib.license }}",
+                                        "license":     {{ h.jsondump(distrib.license) }},
                                     {% endif %}
                                     {% if distrib.attributes|length > 0 %}
                                          "field": {{ h.jsondump(distrib.attributes) }},
                                     {% endif %}
-                                    "accessURL": "{{ distrib.accessURL }}",
-                                    "downloadURL": "{{ distrib.downloadURL }}"
+                                    "accessURL": {{ h.jsondump(distrib.accessURL) }},
+                                    "downloadURL": {{ h.jsondump(distrib.downloadURL) }}
                                 } {% if loop.index < dataset.distribution|length %},{% endif %}
                             {% endfor %}
                         ],
@@ -103,9 +103,9 @@
                     {% if dataset.theme|length > 0 %}
                         "theme": {{ h.jsondump(dataset.theme) }},
                     {% endif %}
-                    "accrualPeriodicity": "{{ dataset.accrualPeriodicity }}"
+                    "accrualPeriodicity": {{ h.jsondump(dataset.accrualPeriodicity) }}
                     {% if dataset.temporal is defined %}
-                        ,"temporal": "{{ dataset.temporal }}"
+                        ,"temporal": {{ h.jsondump(dataset.temporal) }}
                     {% endif %}
                 } {% if loop.index < datajson.dataset|length %},{% endif %}
             {% endfor %}

@@ -1,10 +1,12 @@
 from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckan.plugins.interfaces as interfaces
 from ckan.plugins import implements, IRoutes
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.routing as gobar_routes
 import ckanext.gobar_theme.actions as gobar_actions
+import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
@@ -13,6 +15,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.ITemplateHelpers)
     implements(plugins.IActions)
     implements(plugins.IUploader)
+    implements(interfaces.IMapper)
 
     def get_resource_uploader(self, data_dict):
         return GobArThemeResourceUploader(data_dict)
@@ -77,3 +80,9 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'date_format_to_iso': gobar_helpers.date_format_to_iso,
             'jsondump': gobar_helpers.jsondump,
         }
+
+    def after_update(self, mapper, connection, instance):
+        datajson_actions.update_or_generate_datajson()
+
+    def before_update(self, mapper, connection, instance):
+        pass

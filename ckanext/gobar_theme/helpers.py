@@ -334,7 +334,7 @@ def get_distribution_metadata(resource_id, package_id):
     import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
     json_dict = datajson_actions.read_or_generate_datajson()
     datajson = DataJson(json_dict)
-    dist = get_distribution_from_json(resource_id, package_id, datajson)
+    dist = datajson.get_distribution(resource_id)
     return dist
 
 
@@ -342,15 +342,6 @@ def is_distribution_local(distribution_metadata):
     ckan_site_url = config.get('ckan.site_url')
     accessURL = distribution_metadata.get('accessURL', '')
     return accessURL.startswith(ckan_site_url)
-
-
-def get_distribution_from_json(resource_id, package_id, datajson):
-    for dataset in datajson['dataset']:
-        if dataset['identifier'] == package_id:
-            for resource in dataset['distribution']:
-                if resource['identifier'] == resource_id:
-                    return resource
-    return None
 
 
 def get_extra_value(extras_list, field):

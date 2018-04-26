@@ -119,13 +119,13 @@ def clean_resources(resources):
     for resource in resources:
         current_resource = {}
         current_resource['identifier'] = resource['id']
-        if resource['format'] != '':
+        if resource.get('format', None):
             current_resource['format'] = resource['format']
         current_resource['title'] = resource['name']
         current_resource['description'] = resource['description']
         if 'fileName' in resource and resource['fileName'] != '':
             current_resource['fileName'] = resource['fileName']
-        if resource['resource_type'] is not None:
+        if resource.get('resource_type', None):
             current_resource['type'] = resource['resource_type']
         if 'issued' in resource:
             current_resource['issued'] = resource['issued']
@@ -135,7 +135,7 @@ def clean_resources(resources):
             current_resource['modified'] = resource['modified']
         else:
             current_resource['modified'] = ''
-        if resource['license_id'] != '':
+        if resource.get('license_id', None):
             current_resource['license'] = resource['license_id']
         if 'accessURL' in resource:
             current_resource['accessURL'] = resource['accessURL']
@@ -143,8 +143,9 @@ def clean_resources(resources):
             current_resource['accessURL'] = \
                 os.path.join(config.get('ckan.site_url'), 'dataset', resource['package_id'], 'resource', resource['id'])
         current_resource['downloadURL'] = generate_resource_downloadURL(resource)
-        current_resource['field'] = resource['attributesDescription']
-        current_resource['attributes'] = tuple(resource['attributesDescription'])
+        if resource.get('attributesDescription', []):
+            current_resource['field'] = resource['attributesDescription']
+            current_resource['attributes'] = tuple(resource['attributesDescription'])
         final_resource_list.append(current_resource)
     return final_resource_list
 
