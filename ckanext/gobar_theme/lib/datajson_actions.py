@@ -7,6 +7,7 @@ import ckanext.gobar_theme.helpers as gobar_helpers
 from ckan.config.environment import config
 import ckan.logic as logic
 import ckan.plugins as p
+import ckan.lib.base as base
 
 FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
 
@@ -14,6 +15,7 @@ FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
 def read_or_generate_datajson():
     with open(FILENAME, 'a+') as file:
         try:
+            renderization = None
             datajson = json.load(file)
         except ValueError:
             # Si se ejecuta esta función por primera vez, el archivo todavía no existía
@@ -21,11 +23,12 @@ def read_or_generate_datajson():
             datajson = get_catalog_data()
             datajson['dataset'] = \
                 filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
-            json.dump(datajson, file)
-
-            # acá quiero usar jinja para renderizar el template y guardar esa renderización en el archivo
-
-    return datajson
+            # Guardo la renderización con Jinja del data.json en la cache
+            renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
+            json.dump(renderization, file)
+    if renderization is None:
+        return datajson
+    return renderization
 
 
 def update_or_generate_datajson():
@@ -33,7 +36,9 @@ def update_or_generate_datajson():
         datajson = get_catalog_data()
         datajson['dataset'] = \
             filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
-        json.dump(datajson, file)
+        # Guardo la renderización con Jinja del data.json en la cache
+        renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
+        json.dump(renderization, file)
 
 
 def get_field_from_list_and_delete(list, wanted_field):
