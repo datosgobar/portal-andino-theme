@@ -1,5 +1,6 @@
 from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
+from ckan.model.package import Package
 import ckan.plugins.toolkit as toolkit
 import ckan.plugins.interfaces as interfaces
 from ckan.plugins import implements, IRoutes
@@ -15,7 +16,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.ITemplateHelpers)
     implements(plugins.IActions)
     implements(plugins.IUploader)
-    implements(interfaces.IMapper)
+    implements(interfaces.IDomainObjectModification)
 
     def get_resource_uploader(self, data_dict):
         return GobArThemeResourceUploader(data_dict)
@@ -81,20 +82,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'jsondump': gobar_helpers.jsondump,
         }
 
-    def before_update(self, mapper, connection, instance):
-        pass
-
-    def before_insert(self, mapper, connection, instance):
-        pass
-
-    def before_delete(self, mapper, connection, instance):
-        pass
-
-    def after_update(self, mapper, connection, instance):
-        datajson_actions.update_or_generate_datajson()
-
-    def after_insert(self, mapper, connection, instance):
-        pass
-
-    def after_delete(self, mapper, connection, instance):
-        pass
+    def notify(self, entity, operation):
+        if type(entity) is Package:
+            if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
+                datajson_actions.update_or_generate_datajson()

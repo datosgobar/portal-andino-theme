@@ -22,6 +22,9 @@ def read_or_generate_datajson():
             datajson['dataset'] = \
                 filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
             json.dump(datajson, file)
+
+            # acá quiero usar jinja para renderizar el template y guardar esa renderización en el archivo
+
     return datajson
 
 
