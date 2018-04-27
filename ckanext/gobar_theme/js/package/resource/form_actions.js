@@ -71,6 +71,8 @@ $(function () {
 
     $('select#distribution-type').on('change', function () {
         modifyFormForCurrentDistributionType();
+        $('input#resource-upload-url').attr('value', '');
+        $('input#icon-upload-url').attr('value', '');
     });
 
     function hideAndEmpty(element){
@@ -86,7 +88,6 @@ $(function () {
             hideAndEmpty($('#form-file-name'));
             $('#form-license').show();
             $('a.btn-remove-url').click();
-            $('input[type=file]#field-image-upload').val('');
             $('span#url-button').click();
             $('div#form-icon-url').show();
         }

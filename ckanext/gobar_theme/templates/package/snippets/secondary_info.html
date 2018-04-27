@@ -5,7 +5,7 @@
 
         {% set dataset_url = h.url_for(controller='package', action='search') %}
 
-        {% if pkg.groups|length > 0 %}
+        {% if pkg.groups and pkg.groups|length > 0 %}
             <div class="row group-row">
                 <div class="col-xs-5 title">
                     Temas
@@ -16,7 +16,7 @@
                         <div class="group-img-container">
                             <a href="{{ h.add_url_param(new_params={'groups': group.name}, alternative_url=dataset_url) }}">
                                 {%- if show_group_imgs -%}
-                                    {%- if group.image_display_url|length > 0 -%}
+                                    {%- if group.image_display_url and group.image_display_url|length > 0 -%}
                                         <img src="{{ h.cut_img_path(group.image_display_url) }}"
                                              data-title="{{ group.title }}"
                                              class="group-image" data-replace="svg">
@@ -31,7 +31,7 @@
             </div>
         {% endif %}
 
-        {% if pkg.tags|length > 0 %}
+        {% if pkg.tags and pkg.tags|length > 0 %}
             <div class="row">
                 <div class="col-xs-5 title">
                     Etiquetas
@@ -68,7 +68,7 @@
 
         {% if pkg.extras %}
             {% for extra in pkg.extras %}
-                {% if extra.key in ('accrualPeriodicity', 'updateFrequency') and extra.value|length > 0 %}
+                {% if extra.key in ('accrualPeriodicity', 'updateFrequency') and extra.value and extra.value|length > 0 %}
                     <div class="row">
                         <div class="col-xs-5 title">
                             Frecuencia de actualización
@@ -81,7 +81,7 @@
             {% endfor %}
         {% endif %}
 
-        {% if pkg.maintainer|length > 0 %}
+        {% if pkg.maintainer and pkg.maintainer|length > 0 %}
             <div class="row">
                 <div class="col-xs-5 title">
                     Responsable
