@@ -152,12 +152,19 @@ def clean_resources(resources):
             current_resource['fileName'] = resource['fileName']
         if resource.get('resource_type', None):
             current_resource['type'] = resource['resource_type']
+        issued = ''
         if 'issued' in resource:
+            issued = resource['issued']
             current_resource['issued'] = resource['issued']
+        elif 'created' in resource:
+            issued = resource['created']
+            current_resource['issued'] = resource['created']
         else:
             current_resource['issued'] = ''
         if 'modified' in resource:
             current_resource['modified'] = resource['modified']
+        elif 'last_modified' in resource:
+            current_resource['modified'] = resource['last_modified']
         else:
             current_resource['modified'] = ''
         if resource.get('license_id', None):
