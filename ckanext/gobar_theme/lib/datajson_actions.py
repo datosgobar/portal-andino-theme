@@ -8,6 +8,9 @@ from ckan.config.environment import config
 import ckan.logic as logic
 import ckan.plugins as p
 import ckan.lib.base as base
+import logging
+logger = logging.getLogger('datajson')
+logger.setLevel(20)
 
 FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
 
@@ -39,6 +42,7 @@ def update_or_generate_datajson():
         # Guardo la renderización con Jinja del data.json en la cache
         renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
         json.dump(renderization, file)
+        logger.info('Se actualizó la cache del data.json')
 
 
 def get_field_from_list_and_delete(list, wanted_field):
