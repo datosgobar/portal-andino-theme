@@ -85,4 +85,5 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     def notify(self, entity, operation):
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
-                datajson_actions.update_or_generate_datajson()
+                datajson_actions.update_datajson_cache()
+                # TODO: actualizar catalog

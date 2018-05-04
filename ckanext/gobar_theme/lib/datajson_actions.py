@@ -2,9 +2,11 @@
 
 import json
 import os
+import io
 import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 from ckan.config.environment import config
+from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
 import ckan.lib.base as base
@@ -12,37 +14,51 @@ import logging
 logger = logging.getLogger('datajson')
 logger.setLevel(20)
 
-FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
+CACHE_FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
+XLSX_FILENAME = "/var/lib/ckan/theme_config/catalog.xlsx"
 
 
-def read_or_generate_datajson():
-    with open(FILENAME, 'a+') as file:
+def get_catalog_xlsx():
+    with io.BytesIO() as stream:
         try:
-            renderization = None
-            datajson = json.load(file)
-        except ValueError:
-            # Si se ejecuta esta función por primera vez, el archivo todavía no existía
-            # Hay que conseguir la información necesaria y guardarla en la cache
-            datajson = get_catalog_data()
-            datajson['dataset'] = \
-                filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
-            # Guardo la renderización con Jinja del data.json en la cache
-            renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
-            json.dump(renderization, file)
-    if renderization is None:
-        return datajson
-    return renderization
+            # Trato de leer el catalog.xlsx si ya fue generado
+            return read_from_catalog(stream)
+        except IOError:
+            from pydatajson import writers, DataJson
+            # Chequeo que la cache del datajson exista antes de pasar su path como parámetro
+            if not os.path.isfile(CACHE_FILENAME):
+                # No existe, así que la genero
+                update_datajson_cache()
+            catalog = DataJson(CACHE_FILENAME)
+            writers.write_xlsx_catalog(catalog, XLSX_FILENAME)
+            return read_from_catalog(stream)
 
 
-def update_or_generate_datajson():
-    with open(FILENAME, 'w+') as file:
+def read_from_catalog(stream):
+    with open(XLSX_FILENAME, 'rb') as file_handle:
+        stream.write(file_handle.read())
+    response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    return stream.getvalue()
+
+
+def get_data_json_contents():
+    if os.path.getsize(CACHE_FILENAME) > 0:
+        with open(CACHE_FILENAME, 'a+') as file:
+            return file.read()
+    else:
+        return update_datajson_cache()
+
+
+def update_datajson_cache():
+    with open(CACHE_FILENAME, 'w+') as file:
         datajson = get_catalog_data()
         datajson['dataset'] = \
             filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
         # Guardo la renderización con Jinja del data.json en la cache
         renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
-        json.dump(renderization, file)
+        file.write(renderization)
         logger.info('Se actualizó la cache del data.json')
+        return renderization
 
 
 def get_field_from_list_and_delete(list, wanted_field):
@@ -68,7 +84,7 @@ def filter_dataset_fields(dataset_list):
         province = get_field_from_list_and_delete(dataset['extras'], 'province')
         district = get_field_from_list_and_delete(dataset['extras'], 'district')
         publisher = {}
-        author_name = dataset['author']['name']
+        author_name = dataset['author']
         author_email = dataset['author_email']
         if author_name is not None and author_name != '':
             publisher['name'] = author_name
@@ -87,6 +103,21 @@ def filter_dataset_fields(dataset_list):
         if superTheme is None or superTheme == []:
             superTheme = eval(get_field_from_list_and_delete(dataset['extras'], 'globalGroups'))
         language = get_field_from_list_and_delete(dataset['extras'], 'language')
+        if isinstance(language, (unicode, str)):
+            language_list = []
+            try:
+                language_list = json.loads(language)
+            except ValueError:
+                if "{" or "}" in language:
+                    lang = language.replace('{', '').replace('}', '').split(',')
+                else:
+                    lang = language
+                if ',' in lang:
+                    lang = lang.split(',')
+                else:
+                    lang = [lang]
+                    language_list = json.loads(lang)
+            language = language_list
         theme = map(lambda th: th['name'], dataset['groups'])
         accrualPeriodicity = get_field_from_list_and_delete(dataset['extras'], 'accrualPeriodicity')
         if accrualPeriodicity is None:

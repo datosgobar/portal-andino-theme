@@ -333,7 +333,7 @@ def portal_andino_version():
 def get_distribution_metadata(resource_id, package_id):
     # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
     import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
-    json_dict = datajson_actions.read_or_generate_datajson()
+    json_dict = datajson_actions.get_data_json_contents()
     parser = HTMLParser()
     json_dict = parser.unescape(json_dict)
     json_dict = json.loads(json_dict)
@@ -397,4 +397,5 @@ def dict_to_json_filter(dict):
 
 
 def jsondump(field):
-    return json.dumps(field)
+    from markupsafe import Markup
+    return Markup(json.dumps(field))
