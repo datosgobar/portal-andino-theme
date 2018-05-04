@@ -61,6 +61,7 @@ class GobArConfigController(base.BaseController):
             # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
             import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
             datajson_actions.update_datajson_cache()
+            datajson_actions.update_catalog()
 
         return base.render('config/config_01_title.html')
 
@@ -247,6 +248,7 @@ class GobArConfigController(base.BaseController):
             # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
             import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
             datajson_actions.update_datajson_cache()
+            datajson_actions.update_catalog()
         return base.render(template_name='config/config_12_metadata_portal.html')
 
     def edit_apis(self):
