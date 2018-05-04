@@ -217,18 +217,7 @@ def clean_resources(resources):
 def generate_resource_downloadURL(resource):
     downloadURL = resource.get('url').strip()
     if '' == downloadURL:
-        downloadURL = None
-    if isinstance(downloadURL, (str, unicode)):
-        downloadURL = re.sub(r'\[\[/?REDACTED(-EX\sB\d)?\]\]', '', downloadURL)
-        downloadURL = downloadURL.strip()
-        if '' == downloadURL:
-            downloadURL = None
-        else:
-            downloadURL = downloadURL.replace('http://[[REDACTED', '[[REDACTED')
-            downloadURL = downloadURL.replace('http://http', 'http')
-    else:
-        # no se pudo conseguir downloadURL
-        pass
+        return None
     return downloadURL
 
 
@@ -263,32 +252,6 @@ def get_ckan_datasets(org=None, with_private=True):
 
 def get_datasets_with_resources(packages):
     for i in range(0, len(packages)):
-        j = 0
-        for extra in packages[i]['extras']:
-            if extra.get('key') == 'language':
-                if not isinstance(extra.get('value'), (unicode, str)):
-                    # Solo puedo operar si value es una instancia de UNICODE o STR
-                    # logger.warn('No fue posible renderizar el campo: \"Language\".') todo: logger?
-                    pass
-                else:
-                    language = []
-                    try:
-                        # intento convertir directamente el valor de
-                        # Language a una lista.
-                        language = json.loads(extra['value'])
-                    except ValueError:
-                        # La traduccion no es posible, limpiar y reintentar
-                        if "{" or "}" in extra.get('value'):
-                            lang = extra['value'].replace('{', '').replace('}', '').split(',')
-                        else:
-                            lang = extra.get('value')
-                        if ',' in lang:
-                            lang = lang.split(',')
-                        else:
-                            lang = [lang]
-                        language = json.loads(lang)
-                    packages[i]['extras'][j]['value'] = language
-            j += 1
         try:
             for index, resource in enumerate(packages[i]['resources']):
                 try:
@@ -299,17 +262,6 @@ def get_datasets_with_resources(packages):
                     pass
         except KeyError:
             pass
-        # Obtengo el ckan.site_url para chequear la propiedad del recurso.
-        ckan_site_url = config.get('ckan.site_url')
-        try:
-            for index, resource in enumerate(packages[i]['resources']):
-                resource = packages[i]['resources'][index]
-                if not resource.get("accessURL", None):
-                    accessURL = os.path.join(ckan_site_url, 'dataset', packages[i]['id'], 'resource',
-                                             resource['id'])
-                    resource.update({'accessURL': accessURL})
-        except KeyError:
-            pass
         ckan_host = ''
         try:
             ckan_host = re.match(
@@ -317,17 +269,6 @@ def get_datasets_with_resources(packages):
                 packages[i]['resources'][0]['url']).group(0)
         except Exception:
             pass
-        # themes = gobar_helpers.safely_map(dict.get, packages[i]['groups'], 'name')
-        # packages[i]['groups'] = themes
-        try:
-            packages[i]['author'] = {
-                'name': packages[i]['author'],
-                'mbox': packages[i]['author_email']
-            }
-        except KeyError:
-            pass
-        # tags = gobar_helpers.safely_map(dict.get, packages[i]['tags'], 'display_name')
-        # packages[i]['tags'] = tags
         try:
             if len(packages[i]['url']) < 1:
                 packages[i]['url'] = '{host}/dataset/{dataset_id}'.format(
