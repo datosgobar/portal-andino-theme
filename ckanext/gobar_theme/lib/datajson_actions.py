@@ -51,10 +51,10 @@ def read_from_catalog(stream):
 
 
 def get_data_json_contents():
-    if os.path.getsize(CACHE_FILENAME) > 0:
-        with open(CACHE_FILENAME, 'a+') as file:
+    try:
+        with open(CACHE_FILENAME, 'r+') as file:
             return file.read()
-    else:
+    except IOError:
         return update_datajson_cache()
 
 
