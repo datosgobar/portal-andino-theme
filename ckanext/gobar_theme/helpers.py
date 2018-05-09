@@ -6,6 +6,7 @@ import ckan.lib.helpers as ckan_helpers
 from urlparse import urlparse
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
+import ckan.model as model
 import json
 import uuid
 import requests
@@ -14,6 +15,11 @@ from config_controller import GobArConfigController
 from pydatajson.core import DataJson
 from datetime import time
 from dateutil import parser, tz
+
+
+def get_activity(action, data_dict):
+    context = {'model': model, 'session': model.Session, 'user': c.user}
+    return logic.get_action(action)(context, {'id': data_dict['id']})
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -153,7 +159,11 @@ def organization_filters():
                                       organization['count'] > 0]
     sorted_organizations = sorted(top_organizations_with_results, key=lambda item: item['count'], reverse=True)
 
-    limit = int(request.params.get('_organization_limit', g.facets_default_number))
+    org_limit = request.params.get('_organization_limit', g.facets_default_number)
+    if org_limit != '':
+        limit = int(org_limit)
+    else:
+        limit = None
     c.search_facets_limits['organization'] = limit
     if limit is not None and limit > 0:
         return sorted_organizations[:limit]

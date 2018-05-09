@@ -28,7 +28,7 @@
                     <hr>
                     {% if h.get_theme_config('organization.show-organizations') %}
                         <div class="navbar-link">
-                            <a href="{{ h.url_for(controller='organization', action='index') }}">
+                            <a href="{{ h.url_for(controller='organization', action='index') }}"> {# todo: lleva a una página de grupos, no organizaciones #}
                                 ORGANIZACIONES
                             </a>
                         </div>
@@ -46,7 +46,7 @@
                           h.get_theme_config('about.about-type') != 'None'%}
 
                         {% if h.get_theme_config('about.about-type') == 'Quiero secciones personalizadas (avanzado)' %}
-                            <div class="navbar-link dropdown-navbar-link">
+                            <div class="navbar-link dropdown-navbar-link"> {# todo: se ven mal las secciones #}
                                 ACERCA
                             </div>
                             <div class="about-dropdown dropdown-navbar hidden">

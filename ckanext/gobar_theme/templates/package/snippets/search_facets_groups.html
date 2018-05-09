@@ -10,7 +10,7 @@
 
                 <div class="group-image-container {{ 'available' if available else '' }} {{ 'active' if item.facet_active else '' }}">
                     {%- if available -%}
-                        <a href="{{ href }}">
+                        <a href="{{ href }}"> {# todo: los iconos no se ven #}
                     {%- endif -%}
 
                         <img src="{{ item.image_display_url }}" data-title="{{ item.display_name }} {{ count }}" {{ 'data-replace=svg' if item.image_display_url|length > 0 else '' }}>

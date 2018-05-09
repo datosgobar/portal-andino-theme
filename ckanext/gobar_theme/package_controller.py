@@ -4,7 +4,7 @@ from ckan.controllers.package \
 from urllib import urlencode
 from pylons import config
 from paste.deploy.converters import asbool
-from ckan.lib.render import deprecated_lazy_render
+# from ckan.lib.render import deprecated_lazy_render
 import ckan.lib.maintain as maintain
 import ckan.lib.helpers as h
 import ckan.model as model
@@ -21,7 +21,7 @@ import ckanext.googleanalytics.plugin as google_analytics
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound
 ValidationError = logic.ValidationError
-redirect = base.redirect
+# redirect = base.redirect
 tuplize_dict = logic.tuplize_dict
 clean_dict = logic.clean_dict
 parse_params = logic.parse_params
@@ -90,7 +90,6 @@ class GobArPackageController(PackageController):
             
             spatial['value'] = ','.join(spatial['value'])
 
-
     def search(self):
         package_type = self._guess_package_type()
 
@@ -102,8 +101,24 @@ class GobArPackageController(PackageController):
 
         q = c.q = request.params.get('q', u'')
         c.query_error = False
-        page = self._get_page_number(request.params)
-        limit = g.datasets_per_page
+
+        def _get_page_number(params, key='page', default=1):
+            """
+            Returns the page number from the provided params after
+            verifies that it is an integer.
+            If it fails it will abort the request with a 400 error
+            """
+            p = params.get(key, default)
+            try:
+                p = int(p)
+                if p < 1:
+                    raise ValueError("Negative number not allowed")
+            except ValueError:
+                abort(400, '"page" parameter must be a positive integer')
+            return p
+
+        page = _get_page_number(request.params)  # self._get_page_number para la original
+        limit = g.pylons.app_globals.datasets_per_page
         params_nopage = [(k, v) for k, v in request.params.items() if k != 'page']
 
         def drill_down_url(alternative_url=None, **by):
@@ -237,7 +252,7 @@ class GobArPackageController(PackageController):
                 abort(400, error_description)
             c.search_facets_limits[facet] = limit
 
-        maintain.deprecate_context_item('facets', 'Use `c.search_facets` instead.')
+        # maintain.deprecate_context_item('facets', 'Use `c.search_facets` instead.')
 
         self._setup_template_variables(context, {}, package_type=package_type)
 
