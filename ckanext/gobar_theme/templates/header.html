@@ -46,7 +46,7 @@
                           h.get_theme_config('about.about-type') != 'None'%}
 
                         {% if h.get_theme_config('about.about-type') == 'Quiero secciones personalizadas (avanzado)' %}
-                            <div class="navbar-link dropdown-navbar-link"> {# todo: se ven mal las secciones #}
+                            <div class="navbar-link dropdown-navbar-link">
                                 ACERCA
                             </div>
                             <div class="about-dropdown dropdown-navbar hidden">
@@ -127,7 +127,7 @@
                         {% if h.get_theme_config('about.about-type') == 'Quiero secciones personalizadas (avanzado)' %}
 
                             <span class="header-link dropdown">
-                                Acerca <span class="caret"></span>
+                                Acerca <span class="caret"></span> {# todo: se ven mal las secciones #}
                                 <ul class="about-dropdown" style="bottom:-120px;">
 
                                     {% if header_sections|length > 0 %}
