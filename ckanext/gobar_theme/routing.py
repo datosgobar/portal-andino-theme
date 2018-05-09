@@ -97,7 +97,7 @@ class GobArRouter:
         )
 
     def connect_organizations(self):
-        self.route_map.connect('/organizaciones', action='index', controller='organization')
+        self.route_map.connect('/organization', action='index', controller='organization')
         self.route_map.connect('/organization/new', action='new', controller='organization')
         self.redirect(
             ('/organization', '/organizaciones'),
