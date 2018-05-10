@@ -161,7 +161,7 @@
     <div id="pkg-recent-activity">
         <h2 class="recent-activity-title">Actividad reciente</h2>
         {% set activity = h.get_activity('package_activity_list_html', {'id': pkg.id, 'limit': 500}) %}
-{#        {{ activity }}#}
+        {{ activity }}
         <p class="activity-read-more">
             {{ h.snippet('svg/flecha_abajo.svg') }}
             Mostrar más
