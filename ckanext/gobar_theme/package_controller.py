@@ -11,7 +11,6 @@ from ckan.common import OrderedDict, _, request, c, g
 import ckan.logic as logic
 from ckan.lib.search import SearchError
 import ckan.lib.navl.dictization_functions as dict_fns
-import ckan.lib.base as base
 import cgi
 import moment
 import ckanext.googleanalytics.plugin as google_analytics
