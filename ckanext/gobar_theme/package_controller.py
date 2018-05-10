@@ -4,8 +4,6 @@ from ckan.controllers.package \
 from urllib import urlencode
 from pylons import config
 from paste.deploy.converters import asbool
-# from ckan.lib.render import deprecated_lazy_render
-import ckan.lib.maintain as maintain
 import ckan.lib.helpers as h
 import ckan.model as model
 import ckan.plugins as p
@@ -17,11 +15,12 @@ import ckan.lib.base as base
 import cgi
 import moment
 import ckanext.googleanalytics.plugin as google_analytics
+from webob.exc import status_map
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound
 ValidationError = logic.ValidationError
-# redirect = base.redirect
+exc = status_map[302]
 tuplize_dict = logic.tuplize_dict
 clean_dict = logic.clean_dict
 parse_params = logic.parse_params
@@ -311,14 +310,6 @@ class GobArPackageController(PackageController):
                                        package_type=package_type)
 
         new_template = self._new_template(package_type)
-        c.form = deprecated_lazy_render(
-            new_template,
-            form_snippet,
-            lambda: render(form_snippet, extra_vars=form_vars),
-            'use of c.form is deprecated. please see '
-            'ckan/templates/package/base_form_page.html for an example '
-            'of the new way to include the form snippet'
-        )
         return render(new_template,
                       extra_vars={'form_vars': form_vars, 'form_snippet': form_snippet, 'dataset_type': package_type})
 
@@ -410,7 +401,7 @@ class GobArPackageController(PackageController):
                     else:
                         # redirect to add dataset resources
                         url = h.url_for(controller='package', action='new_resource', id=pkg_dict['name'])
-                    redirect(url)
+                    raise exc(location=url).exception
                 # Make sure we don't index this dataset
                 if request.params['save'] not in ['go-resource', 'go-metadata']:
                     data_dict['state'] = 'draft'
@@ -429,10 +420,10 @@ class GobArPackageController(PackageController):
 
             if ckan_phase and request.params['save'] != 'save-draft':
                 url = h.url_for(controller='package', action='new_resource', id=pkg_dict['name'])
-                redirect(url)
+                raise exc(location=url).exception
             elif request.params['save'] == 'save-draft':
                 url = h.url_for(controller='package', action='read', id=pkg_dict['name'])
-                redirect(url)
+                raise exc(location=url).exception
             self._form_save_redirect(pkg_dict['name'], 'new', package_type=package_type)
         except NotAuthorized:
             abort(401, _('Unauthorized to read package %s') % '')
@@ -627,8 +618,8 @@ class GobArPackageController(PackageController):
                                           errors, error_summary)
             except NotAuthorized:
                 abort(401, _('Unauthorized to edit this resource'))
-            redirect(h.url_for(controller='package', action='resource_read',
-                               id=id, resource_id=resource_id))
+            raise exc(location=h.url_for(
+                controller='package', action='resource_read', id=id, resource_id=resource_id)).exception
 
         pkg_dict = get_action('package_show')(context, {'id': id})
         if pkg_dict['state'].startswith('draft'):
