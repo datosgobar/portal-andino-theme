@@ -74,4 +74,5 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'is_distribution_local': gobar_helpers.is_distribution_local,
             'get_extra_value': gobar_helpers.get_extra_value,
             'get_activity': gobar_helpers.get_activity,
+            'remove_url_param': gobar_helpers.remove_url_param,
         }

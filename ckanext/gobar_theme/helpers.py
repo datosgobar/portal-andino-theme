@@ -59,7 +59,7 @@ def get_suborganizations():
     return suborganizations
 
 
-def get_faceted_groups():
+def get_faceted_groups(items_limit=None):
     data_dict_page_results = {
         'all_fields': True,
         'type': 'group',
@@ -67,7 +67,7 @@ def get_faceted_groups():
         'offset': 0,
     }
     groups = logic.get_action('group_list')({}, data_dict_page_results)
-    facets = ckan_helpers.get_facet_items_dict('groups')
+    facets = get_facet_items_dict(facet='groups', items_limit=items_limit)
     facets_by_name = {}
     for facet in facets:
         facets_by_name[facet['name']] = facet
@@ -80,6 +80,87 @@ def get_faceted_groups():
             group['facet_active'] = False
             group['facet_count'] = 0
     return groups
+
+
+def get_facet_items_dict(facet, items_limit=None, exclude_active=False):
+    if facet == 'organization':
+        return organization_filters()
+    context = {'model': model, 'session': model.Session,
+               'user': c.user or c.author, 'auth_user_obj': c.userobj}
+    data_dict = {
+        'q': '*:*',
+        'facet.field': g.pylons.g.facets,
+        'rows': 4,
+        'start': 0,
+        'sort': 'views_recent desc',
+        'fq': 'capacity:"public"'
+    }
+    query = logic.get_action('package_search')(  # todo: no cambia el count cuando hay combinaciones de filtros (todos los groups/orgs quedan como 'available')
+        context, data_dict)
+    c.search_facets = query['search_facets']
+    if not query['search_facets'] or \
+            not query['search_facets'].get(facet) or \
+            not query['search_facets'].get(facet).get('items'):
+        return []
+    facets = []
+    for facet_item in query['search_facets'].get(facet)['items']:
+        if not len(facet_item['name'].strip()):
+            continue
+        if not facet_item['name'] in dict(request.params.items()).values():
+            facets.append(dict(active=False, **facet_item))
+        elif not exclude_active:
+            facets.append(dict(active=True, **facet_item))
+    facets = sorted(facets, key=lambda item: item['count'], reverse=True)
+    if items_limit is not None and items_limit > 0:
+        return facets[:items_limit]
+    return facets
+
+
+def remove_url_param(key, value=None, replace=None, controller=None,
+                     action=None, extras=None, alternative_url=None):
+    if isinstance(key, basestring):
+        keys = [key]
+    else:
+        keys = key
+
+    params_nopage = [(k, v) for k, v in request.params.items() if k != 'page']
+    params = list(params_nopage)
+    if value:
+        params.remove((keys[0], value))
+    else:
+        for key in keys:
+            [params.remove((k, v)) for (k, v) in params[:] if k == key]
+    if replace is not None:
+        params.append((keys[0], replace))
+    if alternative_url:
+        return ckan_helpers._url_with_params(alternative_url, params)
+    return ckan_helpers._create_url_with_params(params=params, controller=controller,
+                                                action=action, extras=extras)
+
+    # if alternative_url:
+    #     return _url_with_params(alternative_url, value)
+    # url = ckan_helpers.url_for(controller=c.controller, action=c.action)
+    # return _url_with_params(url, value)
+
+
+def _url_with_params(url, params):
+    if not params:
+        return url
+    # params = [(k, v.encode('utf-8') if isinstance(v, basestring) else str(v))
+    #           for k, v in params]
+
+    if isinstance(params, basestring):
+        params = params.encode('utf-8')
+    else:
+        params = str(params)
+
+    return url + u'?' + ckan_helpers.urlencode(params)
+    from urllib import quote_plus
+    # return url + u'?' + urlencode(params)
+    # final = urlencode({'a': url, 'b': params})
+    # final = quote_plus(url + u'?' + params)
+    # final = urllib.parse.quote_plus(url + u'?' + params)
+    # return final
 
 
 def join_groups(selected_groups):
@@ -168,12 +249,6 @@ def organization_filters():
     if limit is not None and limit > 0:
         return sorted_organizations[:limit]
     return sorted_organizations
-
-
-def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    if facet == 'organization':
-        return organization_filters()
-    return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
 
 
 def get_theme_config(path=None, default=None):
