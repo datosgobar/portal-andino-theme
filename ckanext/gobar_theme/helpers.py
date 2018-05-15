@@ -137,31 +137,6 @@ def remove_url_param(key, value=None, replace=None, controller=None,
     return ckan_helpers._create_url_with_params(params=params, controller=controller,
                                                 action=action, extras=extras)
 
-    # if alternative_url:
-    #     return _url_with_params(alternative_url, value)
-    # url = ckan_helpers.url_for(controller=c.controller, action=c.action)
-    # return _url_with_params(url, value)
-
-
-def _url_with_params(url, params):
-    if not params:
-        return url
-    # params = [(k, v.encode('utf-8') if isinstance(v, basestring) else str(v))
-    #           for k, v in params]
-
-    if isinstance(params, basestring):
-        params = params.encode('utf-8')
-    else:
-        params = str(params)
-
-    return url + u'?' + ckan_helpers.urlencode(params)
-    from urllib import quote_plus
-    # return url + u'?' + urlencode(params)
-    # final = urlencode({'a': url, 'b': params})
-    # final = quote_plus(url + u'?' + params)
-    # final = urllib.parse.quote_plus(url + u'?' + params)
-    # return final
-
 
 def join_groups(selected_groups):
     data_dict_page_results = {
