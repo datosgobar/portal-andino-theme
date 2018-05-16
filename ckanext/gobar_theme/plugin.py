@@ -1,6 +1,7 @@
 from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckan.lib.helpers as ckan_helpers
 from ckan.plugins import implements, IRoutes
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.routing as gobar_routes
@@ -73,6 +74,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_distribution_metadata': gobar_helpers.get_distribution_metadata,
             'is_distribution_local': gobar_helpers.is_distribution_local,
             'get_extra_value': gobar_helpers.get_extra_value,
-            'get_activity': gobar_helpers.get_activity,
             'remove_url_param': gobar_helpers.remove_url_param,
+            'get_action': ckan_helpers.get_action,
         }

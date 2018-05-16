@@ -17,11 +17,6 @@ from datetime import time
 from dateutil import parser, tz
 
 
-def get_activity(action, data_dict):
-    context = {'model': model, 'session': model.Session, 'user': c.user}
-    return logic.get_action(action)(context, {'id': data_dict['id']})
-
-
 def _get_organizations_objs(organizations_branch, depth=0):
     organizations = []
     for tree_obj in organizations_branch:
@@ -67,7 +62,7 @@ def get_faceted_groups(items_limit=None):
         'offset': 0,
     }
     groups = logic.get_action('group_list')({}, data_dict_page_results)
-    facets = get_facet_items_dict(facet='groups', items_limit=items_limit)
+    facets = get_facet_items_dict(facet='groups', limit=items_limit)
     facets_by_name = {}
     for facet in facets:
         facets_by_name[facet['name']] = facet
@@ -82,38 +77,12 @@ def get_faceted_groups(items_limit=None):
     return groups
 
 
-def get_facet_items_dict(facet, items_limit=None, exclude_active=False):
+def get_facet_items_dict(facet, limit=None, exclude_active=False):
     if facet == 'organization':
         return organization_filters()
-    context = {'model': model, 'session': model.Session,
-               'user': c.user or c.author, 'auth_user_obj': c.userobj}
-    data_dict = {
-        'q': '*:*',
-        'facet.field': g.pylons.g.facets,
-        'rows': 4,
-        'start': 0,
-        'sort': 'views_recent desc',
-        'fq': 'capacity:"public"'
-    }
-    query = logic.get_action('package_search')(  # todo: no cambia el count cuando hay combinaciones de filtros (todos los groups/orgs quedan como 'available')
-        context, data_dict)
-    c.search_facets = query['search_facets']
-    if not query['search_facets'] or \
-            not query['search_facets'].get(facet) or \
-            not query['search_facets'].get(facet).get('items'):
-        return []
-    facets = []
-    for facet_item in query['search_facets'].get(facet)['items']:
-        if not len(facet_item['name'].strip()):
-            continue
-        if not facet_item['name'] in dict(request.params.items()).values():
-            facets.append(dict(active=False, **facet_item))
-        elif not exclude_active:
-            facets.append(dict(active=True, **facet_item))
-    facets = sorted(facets, key=lambda item: item['count'], reverse=True)
-    if items_limit is not None and items_limit > 0:
-        return facets[:items_limit]
-    return facets
+    # CKAN impone un límite de 10 para los temas. Puedo tener más de 10, por lo que no podría clickear el resto.
+    c.search_facets_limits['groups'] = None
+    return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
 
 
 def remove_url_param(key, value=None, replace=None, controller=None,
