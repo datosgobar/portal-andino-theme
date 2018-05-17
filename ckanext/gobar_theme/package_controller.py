@@ -234,62 +234,6 @@ class GobArPackageController(PackageController):
 
         return render(self._search_template(package_type), extra_vars={'dataset_type': package_type})
 
-    def new(self, data=None, errors=None, error_summary=None):
-        if data and 'type' in data:
-            package_type = data['type']
-        else:
-            package_type = self._guess_package_type(True)
-
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user or c.author, 'auth_user_obj': c.userobj,
-                   'save': 'save' in request.params}
-
-        # Package needs to have a organization group in the call to
-        # check_access and also to save it
-        try:
-            check_access('package_create', context)
-        except NotAuthorized:
-            abort(401, _('Unauthorized to create a package'))
-
-        if context['save'] and not data:
-            return self._save_new(context, package_type=package_type)
-
-        data = data or clean_dict(dict_fns.unflatten(tuplize_dict(parse_params(
-            request.params, ignore_keys=CACHE_PARAMETERS))))
-        c.resources_json = h.json.dumps(data.get('resources', []))
-        # convert tags if not supplied in data
-        if data and not data.get('tag_string'):
-            data['tag_string'] = ', '.join(
-                h.dict_list_reduce(data.get('tags', {}), 'name'))
-
-        errors = errors or {}
-        error_summary = error_summary or {}
-        # in the phased add dataset we need to know that
-        # we have already completed stage 1
-        stage = ['active']
-        if data.get('state', '').startswith('draft'):
-            stage = ['active', 'complete']
-
-        # if we are creating from a group then this allows the group to be
-        # set automatically
-        data['group_id'] = request.params.get('group') or \
-                           request.params.get('groups__0__id')
-
-        form_snippet = self._package_form(package_type=package_type)
-        form_vars = {'data': data, 'errors': errors,
-                     'error_summary': error_summary,
-                     'action': 'new', 'stage': stage,
-                     'dataset_type': package_type,
-                     }
-        c.errors_json = h.json.dumps(errors)
-
-        self._setup_template_variables(context, {},
-                                       package_type=package_type)
-
-        new_template = self._new_template(package_type)
-        return render(new_template,
-                      extra_vars={'form_vars': form_vars, 'form_snippet': form_snippet, 'dataset_type': package_type})
-
     def _save_new(self, context, package_type=None):
         # The staged add dataset used the new functionality when the dataset is
         # partially created so we need to know if we actually are updating or
