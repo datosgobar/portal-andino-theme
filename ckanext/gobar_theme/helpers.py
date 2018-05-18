@@ -371,5 +371,5 @@ def convert_iso_string_to_utc(date_string=''):
 
 
 def get_default_background_configuration():
-    background_opacity = config.get('background_opacity')
+    background_opacity = config.get('andino.background_opacity')
     return background_opacity
