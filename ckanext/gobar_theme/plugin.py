@@ -73,4 +73,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_distribution_metadata': gobar_helpers.get_distribution_metadata,
             'is_distribution_local': gobar_helpers.is_distribution_local,
             'get_extra_value': gobar_helpers.get_extra_value,
+            'get_groups_img_paths': gobar_helpers.get_groups_img_paths,
+            'fetch_groups': gobar_helpers.fetch_groups,
         }
