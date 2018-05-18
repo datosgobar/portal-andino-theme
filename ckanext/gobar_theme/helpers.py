@@ -368,3 +368,8 @@ def convert_iso_string_to_utc(date_string=''):
         utc_date_time = date_time
     utc_date_time = utc_date_time.replace(tzinfo=None)
     return utc_date_time.isoformat()
+
+
+def get_default_background_configuration():
+    background_opacity = config.get('andino.background_opacity')
+    return background_opacity
