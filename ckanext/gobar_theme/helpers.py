@@ -53,15 +53,19 @@ def get_suborganizations():
     return suborganizations
 
 
-def get_faceted_groups():
+def fetch_groups():
     data_dict_page_results = {
         'all_fields': True,
         'type': 'group',
         'limit': None,
         'offset': 0,
     }
-    groups = logic.get_action('group_list')({}, data_dict_page_results)
-    facets = ckan_helpers.get_facet_items_dict('groups')
+    return logic.get_action('group_list')({}, data_dict_page_results)
+
+
+def get_faceted_groups(items_limit=None):
+    groups = fetch_groups()
+    facets = get_facet_items_dict(facet='groups', limit=items_limit)
     facets_by_name = {}
     for facet in facets:
         facets_by_name[facet['name']] = facet
@@ -74,6 +78,22 @@ def get_faceted_groups():
             group['facet_active'] = False
             group['facet_count'] = 0
     return groups
+
+
+def get_facet_items_dict(facet, limit=None, exclude_active=False):
+    if facet == 'organization':
+        return organization_filters()
+    # CKAN impone un límite de 10 para los temas. Puedo tener más de 10, por lo que no podría clickear el resto.
+    c.search_facets_limits['groups'] = None
+    return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
+
+
+def get_groups_img_paths(groups):
+    available_groups = groups
+    groups_with_path = {}
+    for group in available_groups:
+        groups_with_path[group['id']] = group['image_display_url']
+    return groups_with_path
 
 
 def join_groups(selected_groups):
