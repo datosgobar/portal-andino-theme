@@ -17,8 +17,8 @@
                     {%- if show_group_imgs -%}
                         <div class="dataset-groups">
                             {%- for group in package.groups -%}
-                                {%- if group.image_display_url and group.image_display_url|length > 0 -%}
-                                    <img src="{{ h.cut_img_path(group.image_display_url) }}" title="{{ group.title }}" class="group-image">
+                                {%- if group.id in groups_with_img_path and groups_with_img_path[group.id]|length > 0 -%}
+                                    <img src="{{ h.cut_img_path(groups_with_img_path[group.id]) }}" title="{{ group.title }}" class="group-image">
                                 {%- endif -%}
                             {%- endfor -%}
                         </div>
