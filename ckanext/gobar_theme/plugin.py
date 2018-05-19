@@ -80,6 +80,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'generate_datajson': gobar_helpers.generate_datajson,
             'date_format_to_iso': gobar_helpers.date_format_to_iso,
             'jsondump': gobar_helpers.jsondump,
+            'get_default_background_configuration': gobar_helpers.get_default_background_configuration,
         }
 
     def notify(self, entity, operation):

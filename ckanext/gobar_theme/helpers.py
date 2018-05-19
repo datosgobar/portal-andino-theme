@@ -399,3 +399,8 @@ def dict_to_json_filter(dict):
 def jsondump(field):
     from markupsafe import Markup
     return Markup(json.dumps(field))
+
+
+def get_default_background_configuration():
+    background_opacity = config.get('andino.background_opacity')
+    return background_opacity
