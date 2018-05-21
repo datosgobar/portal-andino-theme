@@ -373,27 +373,10 @@ def convert_iso_string_to_utc(date_string=''):
     return utc_date_time.isoformat()
 
 
-def generate_datajson(base={}, field=None, value=None):
-    if field is not None:
-        json_data = json.loads(base)
-        json_data[field] = value
-        return json.dumps(json_data)
-    return json.dumps(base)
-
-
 def date_format_to_iso(date):
     if date:
         return moment.date(date, "%d/%m/%Y").isoformat()
     return date
-
-
-def dict_to_json_filter(dict):
-    import jinja2
-    loader = jinja2.FileSystemLoader('/tmp')
-    env = jinja2.Environment(autoescape=True, loader=loader)
-    env.filters['dict_to_json_filter'] = dict_to_json_filter
-    temp = "datajson.html"
-    return
 
 
 def jsondump(field):
