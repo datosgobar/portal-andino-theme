@@ -40,7 +40,7 @@
                 <div class="col-md-2 col-xs-12 resource-actions">
                     <a class="btn btn-green btn-block" href="{{ res.url }}">{{ 'DESCARGAR' if res.resource_type != 'api' else 'VER DOCUMENTACION' }}</a>
 
-                    {% set distribution_metadata = h.get_distribution_metadata(resource_id=res.id) %}
+                    {% set distribution_metadata = h.get_distribution_metadata(resource_id=res.id, package_id = res.package_id) %}
                     {% if not h.is_distribution_local(distribution_metadata) %}
                         {% set accessURL = distribution_metadata['accessURL'] %}
                         <a class="btn btn-block btn-outline-primary" href="{{ accessURL }}" target="_blank">CONSULTAR EN EL<br>PORTAL DE ORIGEN</a>
