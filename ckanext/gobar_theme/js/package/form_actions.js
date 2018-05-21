@@ -44,7 +44,7 @@ $(function () {
             values.push($checkbox.attr('id'));
         }
         values = JSON.stringify(values);
-        addExtra('globalGroups', values)
+        addExtra('superTheme', values)
     }
 
     var extraCounter = 0;
@@ -69,27 +69,25 @@ $(function () {
     function addDates() {
         var dateFrom = $('#date-from').datepicker('getDate');
         var dateTo = $('#date-to').datepicker('getDate');
-        if (dateFrom || dateTo) {
-            var withHours = $('#date_with_time').is(':checked');
-            if (withHours && dateFrom) {
-                var hoursFrom = $('#date-from-hour option:selected').val();
-                var minutesFrom = $('#date-from-minute option:selected').val();
-                dateFrom.setHours(hoursFrom, minutesFrom);
-            }
-            if (withHours && dateTo) {
-                var hoursTo = $('#date-to-hour option:selected').val();
-                var minutesTo = $('#date-to-minute option:selected').val();
-                dateTo.setHours(hoursTo, minutesTo);
-            }
-            var value = '';
-            if (dateFrom) {
-                value = dateFrom.toISOString();
-            }
-            if (dateTo) {
-                value += '/' + dateTo.toISOString();
-            }
-            addExtra('temporal', value);
+        var withHours = $('#date_with_time').is(':checked');
+        if (withHours && dateFrom) {
+            var hoursFrom = $('#date-from-hour option:selected').val();
+            var minutesFrom = $('#date-from-minute option:selected').val();
+            dateFrom.setHours(hoursFrom, minutesFrom);
         }
+        if (withHours && dateTo) {
+            var hoursTo = $('#date-to-hour option:selected').val();
+            var minutesTo = $('#date-to-minute option:selected').val();
+            dateTo.setHours(hoursTo, minutesTo);
+        }
+        var value = '';
+        if (dateFrom) {
+            value = dateFrom.toISOString();
+        }
+        if (dateTo) {
+            value += '/' + dateTo.toISOString();
+        }
+        addExtra('temporal', value);
     }
 
     function addHiddenExtras() {

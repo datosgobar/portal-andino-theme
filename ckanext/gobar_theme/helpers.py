@@ -1,19 +1,20 @@
 # coding=utf-8
+import json
+from datetime import time
+from urlparse import urljoin
+from urlparse import urlparse
+from HTMLParser import HTMLParser
+
+import ckan.lib.formatters as formatters
+import ckan.lib.helpers as ckan_helpers
+import ckan.logic as logic
+import moment
+from ckan.common import request, c, g, _
+from dateutil import parser, tz
+from pydatajson.core import DataJson
 from pylons.config import config
 
-import ckan.logic as logic
-import ckan.lib.helpers as ckan_helpers
-from urlparse import urlparse
-from ckan.common import request, c, g, _
-import ckan.lib.formatters as formatters
-import json
-import uuid
-import requests
-from urlparse import urljoin
 from config_controller import GobArConfigController
-from pydatajson.core import DataJson
-from datetime import time
-from dateutil import parser, tz
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -342,13 +343,15 @@ def portal_andino_version():
     return version['portal-andino']
 
 
-def get_distribution_metadata(resource_id):
-    ckan_site_url = config.get('ckan.site_url')
-    # Pasamos un parámetro random para evitar la caché del cliente http que se baja el datajson
-    res = requests.get(ckan_site_url + '/data.json?rnd=%s' % uuid.uuid4(), verify=False)
-    json_dict = json.loads(res.content, encoding='utf-8')
+def get_distribution_metadata(resource_id, package_id):
+    # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
+    import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+    json_dict = datajson_actions.get_data_json_contents()
+    parser = HTMLParser()
+    json_dict = parser.unescape(json_dict)
+    json_dict = json.loads(json_dict)
     datajson = DataJson(json_dict)
-    dist = datajson.get_distribution(identifier=resource_id)
+    dist = datajson.get_distribution(resource_id)
     return dist
 
 
@@ -381,3 +384,19 @@ def convert_iso_string_to_utc(date_string=''):
         utc_date_time = date_time
     utc_date_time = utc_date_time.replace(tzinfo=None)
     return utc_date_time.isoformat()
+
+
+def date_format_to_iso(date):
+    if date:
+        return moment.date(date, "%d/%m/%Y").isoformat()
+    return date
+
+
+def jsondump(field):
+    from markupsafe import Markup
+    return Markup(json.dumps(field))
+
+
+def get_default_background_configuration():
+    background_opacity = config.get('andino.background_opacity')
+    return background_opacity
