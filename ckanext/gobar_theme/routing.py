@@ -39,7 +39,6 @@ class GobArRouter:
         self.connect_google_analytics()
         self.connect_spatial()
         self.connect_datajson()
-        self.connect_xlsx()
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')
@@ -227,7 +226,3 @@ class GobArRouter:
         self.redirect(
             ('/datajson', '/datajson'),
         )
-
-    def connect_xlsx(self):
-        with SubMapper(self.route_map, controller=self.datajson_controller) as m:
-            m.connect('xlsx_export', '/catalog.xlsx', action='generate_xlsx')

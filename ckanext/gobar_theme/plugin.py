@@ -87,4 +87,3 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.update_datajson_cache()
-                datajson_actions.update_catalog()
