@@ -17,6 +17,7 @@
         {% snippet "home/groups.html" %}
         {% snippet "home/featured_content.html" %}
     </div>
+
     {% set show_greetings = h.get_theme_config('show-greetings', default=True) %}
     {% set package_create = h.check_access('package_create') %}
     {% if show_greetings and package_create %}
