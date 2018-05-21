@@ -1,11 +1,14 @@
 from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
+from ckan.model.package import Package
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as ckan_helpers
+import ckan.plugins.interfaces as interfaces
 from ckan.plugins import implements, IRoutes
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.routing as gobar_routes
 import ckanext.gobar_theme.actions as gobar_actions
+import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
@@ -14,6 +17,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.ITemplateHelpers)
     implements(plugins.IActions)
     implements(plugins.IUploader)
+    implements(interfaces.IDomainObjectModification)
 
     def get_resource_uploader(self, data_dict):
         return GobArThemeResourceUploader(data_dict)
@@ -76,4 +80,14 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_extra_value': gobar_helpers.get_extra_value,
             'remove_url_param': gobar_helpers.remove_url_param,
             'get_action': ckan_helpers.get_action,
+            'get_groups_img_paths': gobar_helpers.get_groups_img_paths,
+            'fetch_groups': gobar_helpers.fetch_groups,
+            'date_format_to_iso': gobar_helpers.date_format_to_iso,
+            'jsondump': gobar_helpers.jsondump,
+            'get_default_background_configuration': gobar_helpers.get_default_background_configuration,
         }
+
+    def notify(self, entity, operation):
+        if type(entity) is Package:
+            if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
+                datajson_actions.update_datajson_cache()

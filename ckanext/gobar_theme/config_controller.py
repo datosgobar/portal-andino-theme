@@ -1,18 +1,17 @@
 # coding=utf-8
-import ckan.lib.base as base
-from ckan.common import request, g, c
-from pylons import config as ckan_config
-import redis
-import ckan.lib.helpers as h
-import ckan.logic as logic
-import ckan.model as model
-import datetime
-from datetime import timedelta
-import urlparse
 import json
 import os
 import re
+import urlparse
+
+import ckan.lib.base as base
+import ckan.lib.helpers as h
+import ckan.logic as logic
+import ckan.model as model
 import moment
+import redis
+from ckan.common import request, c
+from pylons import config as ckan_config
 
 parse_params = logic.parse_params
 abort = base.abort
@@ -58,6 +57,10 @@ class GobArConfigController(base.BaseController):
                 new_title_config['background-image'] = self.get_theme_config('title.background-image')
             config_dict['title'] = new_title_config
             self._set_config(config_dict)
+            # Actualizo el data.json
+            # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
+            import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+            datajson_actions.update_datajson_cache()
 
         return base.render('config/config_01_title.html')
 
@@ -117,6 +120,9 @@ class GobArConfigController(base.BaseController):
                 'mail': params['mail'].strip()
             }
             self._set_config(config_dict)
+        import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+        datajson_actions.update_datajson_cache()
+
         return base.render('config/config_05_social.html')
 
     def edit_footer(self):
@@ -240,6 +246,10 @@ class GobArConfigController(base.BaseController):
             }
             config_dict['portal-metadata'] = new_metadata_config
             self._set_config(config_dict)
+            # Actualizo el data.json
+            # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
+            import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+            datajson_actions.update_datajson_cache()
         return base.render(template_name='config/config_12_metadata_portal.html')
 
     def edit_apis(self):

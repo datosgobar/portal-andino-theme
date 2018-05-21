@@ -1,20 +1,18 @@
 # coding=utf-8
-from pylons.config import config
-
-import ckan.logic as logic
-import ckan.lib.helpers as ckan_helpers
 from urlparse import urlparse
+from HTMLParser import HTMLParser
+import ckan.lib.helpers as ckan_helpers
+import ckan.logic as logic
+import moment
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
-import ckan.model as model
 import json
-import uuid
-import requests
 from urlparse import urljoin
 from config_controller import GobArConfigController
-from pydatajson.core import DataJson
 from datetime import time
 from dateutil import parser, tz
+from pydatajson.core import DataJson
+from pylons.config import config
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -54,14 +52,18 @@ def get_suborganizations():
     return suborganizations
 
 
-def get_faceted_groups(items_limit=None):
+def fetch_groups():
     data_dict_page_results = {
         'all_fields': True,
         'type': 'group',
         'limit': None,
         'offset': 0,
     }
-    groups = logic.get_action('group_list')({}, data_dict_page_results)
+    return logic.get_action('group_list')({}, data_dict_page_results)
+
+
+def get_faceted_groups(items_limit=None):
+    groups = fetch_groups()
     facets = get_facet_items_dict(facet='groups', limit=items_limit)
     facets_by_name = {}
     for facet in facets:
@@ -103,8 +105,14 @@ def remove_url_param(key, value=None, replace=None, controller=None,
         params.append((keys[0], replace))
     if alternative_url:
         return ckan_helpers._url_with_params(alternative_url, params)
-    return ckan_helpers._create_url_with_params(params=params, controller=controller,
-                                                action=action, extras=extras)
+    return ckan_helpers._create_url_with_params(params=params, controller=controller, action=action, extras=extras)
+
+
+def get_groups_img_paths(groups):
+    groups_with_path = {}
+    for group in groups:
+        groups_with_path[group['id']] = group['image_display_url']
+    return groups_with_path
 
 
 def join_groups(selected_groups):
@@ -358,13 +366,15 @@ def portal_andino_version():
     return version['portal-andino']
 
 
-def get_distribution_metadata(resource_id):
-    ckan_site_url = config.get('ckan.site_url')
-    # Pasamos un parámetro random para evitar la caché del cliente http que se baja el datajson
-    res = requests.get(ckan_site_url + '/data.json?rnd=%s' % uuid.uuid4(), verify=False)
-    json_dict = json.loads(res.content, encoding='utf-8')
+def get_distribution_metadata(resource_id, package_id):
+    # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
+    import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+    json_dict = datajson_actions.get_data_json_contents()
+    parser = HTMLParser()
+    json_dict = parser.unescape(json_dict)
+    json_dict = json.loads(json_dict)
     datajson = DataJson(json_dict)
-    dist = datajson.get_distribution(identifier=resource_id)
+    dist = datajson.get_distribution(resource_id)
     return dist
 
 
@@ -397,3 +407,19 @@ def convert_iso_string_to_utc(date_string=''):
         utc_date_time = date_time
     utc_date_time = utc_date_time.replace(tzinfo=None)
     return utc_date_time.isoformat()
+
+
+def date_format_to_iso(date):
+    if date:
+        return moment.date(date, "%d/%m/%Y").isoformat()
+    return date
+
+
+def jsondump(field):
+    from markupsafe import Markup
+    return Markup(json.dumps(field))
+
+
+def get_default_background_configuration():
+    background_opacity = config.get('andino.background_opacity')
+    return background_opacity

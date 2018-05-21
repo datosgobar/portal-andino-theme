@@ -15,6 +15,7 @@ class GobArRouter:
         self.user_controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
         self.google_analytics_controller = 'ckanext.gobar_theme.google_analytics_controller:GobArGAController'
         self.spatial_controller = 'ckanext.gobar_theme.spatial_controller:GobArSpatialController'
+        self.datajson_controller = 'ckanext.gobar_theme.datajson_controller:GobArDatajsonController'
 
     def redirect(self, *routes):
         for url_from, url_to in routes:
@@ -37,6 +38,7 @@ class GobArRouter:
         self.connect_template_config()
         self.connect_google_analytics()
         self.connect_spatial()
+        self.connect_datajson()
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')
@@ -76,8 +78,10 @@ class GobArRouter:
             m.connect('search', '/dataset', action='search', highlight_actions='index search')
             m.connect('add dataset', '/dataset/new', action='new')
             m.connect('edit dataset', '/dataset/edit/{id}', action='edit')
+            m.connect('delete dataset', '/dataset/delete/{id}', action='delete')
             m.connect('new resource', '/dataset/new_resource/{id}', action='new_resource')
             m.connect('edit resource', '/dataset/{id}/resource_edit/{resource_id}', action='resource_edit')
+            m.connect('delete resource', '/dataset/{id}/resource_delete/{resource_id}', action='resource_delete')
         self.route_map.connect('/dataset/{id}/archivo/{resource_id}', action='resource_read', controller='package')
         self.redirect(
             ('/dataset/history/{id:.*?}', '/dataset/{id}'),
@@ -214,4 +218,11 @@ class GobArRouter:
         self.redirect(
             ('/configurar', '/configurar/titulo'),
             ('/configurar', '/configurar/metadata')
+        )
+
+    def connect_datajson(self):
+        with SubMapper(self.route_map, controller=self.datajson_controller) as m:
+            m.connect('datajson', '/data.json', action='datajson')
+        self.redirect(
+            ('/datajson', '/datajson'),
         )

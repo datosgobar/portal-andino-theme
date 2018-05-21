@@ -4,6 +4,12 @@
 {% set messages = h.flash.pop_messages() %}
 
 {%- block page -%}
+
+    {% set background_config = h.get_default_background_configuration() %}
+    <style type="text/css">
+        {{ 'div.background-overlay{background-color:rgba(0,0,0,' + background_config + ')!important;}' if background_config is not none }}
+    </style>
+
     <div class="footer-down">
         {%- block header %}
             {% include "header.html" %}
