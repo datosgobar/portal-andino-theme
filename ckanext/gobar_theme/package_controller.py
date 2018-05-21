@@ -1,7 +1,5 @@
 #! coding: utf-8
-import cgi
 from urllib import urlencode
-import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
