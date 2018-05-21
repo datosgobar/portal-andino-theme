@@ -89,9 +89,8 @@ def get_facet_items_dict(facet, limit=None, exclude_active=False):
 
 
 def get_groups_img_paths(groups):
-    available_groups = groups
     groups_with_path = {}
-    for group in available_groups:
+    for group in groups:
         groups_with_path[group['id']] = group['image_display_url']
     return groups_with_path
 
@@ -178,12 +177,6 @@ def organization_filters():
     if limit is not None and limit > 0:
         return sorted_organizations[:limit]
     return sorted_organizations
-
-
-def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    if facet == 'organization':
-        return organization_filters()
-    return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
 
 
 def get_theme_config(path=None, default=None):
