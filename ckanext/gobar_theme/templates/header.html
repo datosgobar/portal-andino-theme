@@ -99,7 +99,7 @@
                         </div>
 
                         <div class="navbar-link">
-                            <a href="{{ h.url('logout') }}">
+                            <a href="{{ h.url_for(controller='user', action='logout') }}">
                                 SALIR
                             </a>
                         </div>
@@ -169,7 +169,7 @@
                                     <li>Ayuda</li>
                                 </a>
 
-                                <a href="{{ h.url('logout') }}">
+                                <a href="{{ h.url_for(controller='user', action='logout') }}">
                                     <li>Salir</li>
                                 </a>
                             </ul>
