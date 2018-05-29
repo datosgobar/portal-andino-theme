@@ -27,10 +27,10 @@
     {% if datajson.rights %}
         "rights": {{ h.jsondump(datajson.rights) }},
     {% endif %}
-    {% if datajson.spatial %}
+    {% if datajson.spatial is defined %}
         "spatial": {{ h.jsondump(datajson.spatial) }},
     {% endif %}
-    {% if datajson.themeTaxonomy %}
+    {% if datajson.themeTaxonomy is defined %}
         "themeTaxonomy": {{ h.jsondump(datajson.themeTaxonomy) }},
     {% endif %}
     "dataset":
