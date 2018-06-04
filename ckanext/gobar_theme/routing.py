@@ -1,5 +1,6 @@
 # coding=utf-8
 from routes.mapper import SubMapper
+from pylons.config import config
 
 
 class GobArRouter:
@@ -226,3 +227,9 @@ class GobArRouter:
         self.redirect(
             ('/datajson', '/datajson'),
         )
+
+        disable_catalog_xlsx_url = config.get('andino.disable_catalog_xlsx_url')
+        if disable_catalog_xlsx_url in ('True', 'true', '1', 'Yes', 'yes', ):
+            self.redirect(
+                ('/catalog.xlsx', '/'),  # Redirecciono a la home
+            )
