@@ -24,7 +24,13 @@ ANDINO_METADATA_VERSION = "1.1"
 def get_data_json_contents():
     try:
         with open(CACHE_FILENAME, 'r+') as file:
-            return file.read()
+            content = file.read()
+            if content:
+                logger.info('Accediendo a la caché del data.json.')
+                return content
+            else:
+                logger.info('La caché del data.json se encuentra vacía - la regeneramos.')
+                return update_datajson_cache()
     except IOError:
         logger.info('IOError, asumimos que hay que regenerar el data.json cacheado.')
         return update_datajson_cache()
@@ -80,9 +86,15 @@ def filter_dataset_fields(dataset_list):
         if maintainer_email is not None and maintainer_email != '':
             contactPoint['hasEmail'] = maintainer_email
         keyword = map(lambda kw: kw['display_name'], dataset['tags'])
-        superTheme = eval(get_field_from_list_and_delete(dataset['extras'], 'superTheme'))
+        superTheme = get_field_from_list_and_delete(dataset['extras'], 'superTheme')
         if superTheme is None or superTheme == []:
-            superTheme = eval(get_field_from_list_and_delete(dataset['extras'], 'globalGroups'))
+            superTheme = get_field_from_list_and_delete(dataset['extras'], 'globalGroups')
+            if superTheme is not None and superTheme != []:
+                superTheme = eval(superTheme)
+            else:
+                superTheme = {}
+        else:
+            superTheme = eval(superTheme)
         language = get_field_from_list_and_delete(dataset['extras'], 'language')
         if isinstance(language, (unicode, str)):
             language_list = []
@@ -311,3 +323,4 @@ def get_catalog_data():
     datajson['spatial'] = spatial or []
     datajson['themeTaxonomy'] = groups
     return datajson
+
