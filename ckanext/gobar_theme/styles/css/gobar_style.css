@@ -7191,7 +7191,7 @@ div#background-container {
           top: 50%;
           left: 10px;
           margin-top: -17.5px; }
-          .featured-groups .group-container .group .group-text svg path, .featured-groups .group-container .group .group-text img path {
+          .featured-groups .group-container .group .group-text svg circle, .featured-groups .group-container .group .group-text svg path, .featured-groups .group-container .group .group-text img path {
             fill: #0695d6; }
         .featured-groups .group-container .group .group-text .group-table {
           width: 100%;
@@ -8485,9 +8485,9 @@ div#background-container {
           max-height: 35px; }
           .filters-container .search-filter .group-images .group-image-container svg path {
             fill: #cccccc; }
-        .filters-container .search-filter .group-images .group-image-container.available svg path {
+            .filters-container .search-filter .group-images .group-image-container.available svg circle, .filters-container .search-filter .group-images .group-image-container.available svg path {
           fill: #767676; }
-        .filters-container .search-filter .group-images .group-image-container.available:hover svg path {
+          .filters-container .search-filter .group-images .group-image-container.available:hover svg circle, .filters-container .search-filter .group-images .group-image-container.available:hover svg path {
           fill: #0695d6; }
         .filters-container .search-filter .group-images .group-image-container.active svg path {
           fill: #0695d6; }
