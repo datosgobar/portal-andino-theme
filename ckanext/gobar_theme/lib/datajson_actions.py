@@ -39,8 +39,7 @@ def get_data_json_contents():
 def update_datajson_cache():
     with open(CACHE_FILENAME, 'w+') as file:
         datajson = get_catalog_data()
-        datasets = get_datasets_with_resources(get_ckan_datasets())
-        datajson['dataset'] = filter_dataset_fields(datasets or [])
+        datajson['dataset'] = filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
         # Guardo la renderización con Jinja del data.json en la cache
         renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
         file.write(renderization)
