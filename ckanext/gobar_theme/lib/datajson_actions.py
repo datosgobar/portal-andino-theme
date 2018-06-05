@@ -39,8 +39,8 @@ def get_data_json_contents():
 def update_datajson_cache():
     with open(CACHE_FILENAME, 'w+') as file:
         datajson = get_catalog_data()
-        datajson['dataset'] = \
-            filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
+        datasets = get_datasets_with_resources(get_ckan_datasets())
+        datajson['dataset'] = filter_dataset_fields(datasets or [])
         # Guardo la renderización con Jinja del data.json en la cache
         renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
         file.write(renderization)
@@ -59,43 +59,43 @@ def get_field_from_list_and_delete(list, wanted_field):
 
 def filter_dataset_fields(dataset_list):
     final_list = []
-    for dataset in dataset_list:
+    for ds in dataset_list:
         current_dataset = {}
 
         # Consigo los elementos existentes en listas que voy a necesitar
-        issued = get_field_from_list_and_delete(dataset['extras'], 'issued') or \
-                 get_field_from_list_and_delete(dataset['extras'], 'metadata_created')
-        modified = get_field_from_list_and_delete(dataset['extras'], 'modified') or \
-                   get_field_from_list_and_delete(dataset['extras'], 'metadata_modified')
-        country = get_field_from_list_and_delete(dataset['extras'], 'country')
-        province = get_field_from_list_and_delete(dataset['extras'], 'province')
-        district = get_field_from_list_and_delete(dataset['extras'], 'district')
+        issued = get_field_from_list_and_delete(ds['extras'], 'issued') or \
+                 get_field_from_list_and_delete(ds['extras'], 'metadata_created')
+        modified = get_field_from_list_and_delete(ds['extras'], 'modified') or \
+                   get_field_from_list_and_delete(ds['extras'], 'metadata_modified')
+        country = get_field_from_list_and_delete(ds['extras'], 'country')
+        province = get_field_from_list_and_delete(ds['extras'], 'province')
+        district = get_field_from_list_and_delete(ds['extras'], 'district')
         publisher = {}
-        author_name = dataset['author']
-        author_email = dataset['author_email']
+        author_name = ds['author']
+        author_email = ds['author_email']
         if author_name is not None and author_name != '':
             publisher['name'] = author_name
         if author_email is not None and author_email != '':
             publisher['mbox'] = author_email
-        source = get_field_from_list_and_delete(dataset['extras'], 'source')
+        source = get_field_from_list_and_delete(ds['extras'], 'source')
         contactPoint = {}
-        maintainer = dataset['maintainer']
-        maintainer_email = dataset['maintainer_email']
+        maintainer = ds['maintainer']
+        maintainer_email = ds['maintainer_email']
         if maintainer is not None and maintainer != '':
             contactPoint['fn'] = maintainer
         if maintainer_email is not None and maintainer_email != '':
             contactPoint['hasEmail'] = maintainer_email
-        keyword = map(lambda kw: kw['display_name'], dataset['tags'])
-        superTheme = get_field_from_list_and_delete(dataset['extras'], 'superTheme')
-        if superTheme is None or superTheme == []:
-            superTheme = get_field_from_list_and_delete(dataset['extras'], 'globalGroups')
-            if superTheme is not None and superTheme != []:
+        keyword = map(lambda kw: kw['display_name'], ds['tags'])
+        superTheme = get_field_from_list_and_delete(ds['extras'], 'superTheme')
+        if superTheme is None or superTheme == '':
+            superTheme = get_field_from_list_and_delete(ds['extras'], 'globalGroups')
+            if superTheme is not None and superTheme != '':
                 superTheme = eval(superTheme)
             else:
-                superTheme = {}
+                superTheme = []
         else:
             superTheme = eval(superTheme)
-        language = get_field_from_list_and_delete(dataset['extras'], 'language')
+        language = get_field_from_list_and_delete(ds['extras'], 'language')
         if isinstance(language, (unicode, str)):
             language_list = []
             try:
@@ -111,27 +111,27 @@ def filter_dataset_fields(dataset_list):
                     lang = [lang]
                     language_list = json.loads(lang)
             language = language_list
-        theme = map(lambda th: th['name'], dataset['groups'])
-        accrualPeriodicity = get_field_from_list_and_delete(dataset['extras'], 'accrualPeriodicity')
+        theme = map(lambda th: th['name'], ds['groups'])
+        accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'accrualPeriodicity')
         if accrualPeriodicity is None:
-            get_field_from_list_and_delete(dataset['extras'], 'updateFrequency')
-        temporal = get_field_from_list_and_delete(dataset['extras'], 'temporal')
+            get_field_from_list_and_delete(ds['extras'], 'updateFrequency')
+        temporal = get_field_from_list_and_delete(ds['extras'], 'temporal')
         if temporal is None or temporal == '':
-            temporal = get_field_from_list_and_delete(dataset['extras'], 'dateRange')
-        resources = clean_resources(dataset['resources'])
+            temporal = get_field_from_list_and_delete(ds['extras'], 'dateRange')
+        resources = clean_resources(ds['resources'])
 
         # Voy guardando los datos a mostrar en el data.json
-        current_dataset.update({'title': dataset['title']})
-        current_dataset.update({'description': dataset['notes']})
-        current_dataset.update({'identifier': dataset['id']})
+        current_dataset.update({'title': ds['title']})
+        current_dataset.update({'description': ds['notes']})
+        current_dataset.update({'identifier': ds['id']})
         if issued is not None and issued != '':
             current_dataset.update({'issued': issued})
         if modified is not None and modified != '':
             current_dataset.update(({'modified': modified}))
-        if dataset['url'] is not None and dataset['url'] != '':
-            current_dataset.update({"landingPage": dataset['url']})
-        if dataset['license_title'] is not None and dataset['license_title']:
-            current_dataset.update({"license": dataset['license_title']})
+        if ds['url'] is not None and ds['url'] != '':
+            current_dataset.update({"landingPage": ds['url']})
+        if ds['license_title'] is not None and ds['license_title']:
+            current_dataset.update({"license": ds['license_title']})
         if country is not None and country != '':
             spatial = [country]
             if province is not None and province != '':
@@ -139,8 +139,8 @@ def filter_dataset_fields(dataset_list):
                 if district is not None and district != '':
                     spatial.append(district)
             current_dataset.update({"spatial": spatial})
-        elif dataset.get('spatial', None) is not None:
-            spatial = dataset['spatial']
+        elif ds.get('spatial', None) is not None:
+            spatial = ds['spatial']
             if isinstance(spatial, basestring) and len(spatial):
                 current_dataset.update({"spatial": spatial})
         if publisher != {}:
@@ -323,4 +323,5 @@ def get_catalog_data():
     datajson['spatial'] = spatial or []
     datajson['themeTaxonomy'] = groups
     return datajson
+
 
