@@ -5,9 +5,9 @@
     {% if datajson.identifier %}
         "identifier": {{ h.jsondump(datajson.identifier) }},
     {% endif %}
-    "title": {{ h.jsondump(datajson.title) }},
-    "description": {{ h.jsondump(datajson.description) }},
-    "superThemeTaxonomy": {{ h.jsondump(datajson.superThemeTaxonomy) }},
+    "title": {{ h.jsondump(datajson.title or '')}},
+    "description": {{ h.jsondump(datajson.description or '')}},
+    "superThemeTaxonomy": {{ h.jsondump(datajson.superThemeTaxonomy or '')}},
     "publisher": {{ h.jsondump(datajson.publisher) }},
     {% if datajson.issued %}
         "issued": {{ h.jsondump(datajson.issued) }},
@@ -43,7 +43,7 @@
                     {% if dataset.modified is defined %}
                         "modified":       {{ h.jsondump(dataset.modified) }},
                     {% endif %}
-                    "issued":             {{ h.jsondump(dataset.issued) }},
+                    "issued":             {{ h.jsondump(dataset.issued or '') }},
                     {% if dataset.landingPage is defined %}
                         "landingPage":    {{ h.jsondump(dataset.landingPage) }},
                     {% endif %}
@@ -53,7 +53,7 @@
                     {% if dataset.spatial is defined %}
                         "spatial": {{ h.jsondump(dataset.spatial) }},
                     {% endif %}
-                    "publisher": {{ h.jsondump(dataset.publisher) }},
+                    "publisher": {{ h.jsondump(dataset.publisher or '') }},
                     {% if dataset.source is defined %}
                         "source":     {{ h.jsondump(dataset.source) }},
                     {% endif %}
@@ -103,7 +103,7 @@
                     {% if dataset.theme|length > 0 %}
                         "theme": {{ h.jsondump(dataset.theme) }},
                     {% endif %}
-                    "accrualPeriodicity": {{ h.jsondump(dataset.accrualPeriodicity) }}
+                    "accrualPeriodicity": {{ h.jsondump(dataset.accrualPeriodicity or '') }}
                     {% if dataset.temporal is defined %}
                         ,"temporal": {{ h.jsondump(dataset.temporal) }}
                     {% endif %}
