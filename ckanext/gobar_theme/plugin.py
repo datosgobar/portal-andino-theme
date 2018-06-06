@@ -1,3 +1,4 @@
+#! coding: utf-8
 from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
 from ckan.model.package import Package
@@ -17,6 +18,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IActions)
     implements(plugins.IUploader)
     implements(interfaces.IDomainObjectModification)
+    implements(interfaces.IGroupController)
 
     def get_resource_uploader(self, data_dict):
         return GobArThemeResourceUploader(data_dict)
@@ -88,3 +90,59 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.update_datajson_cache()
+
+
+    def create(self, _):
+        '''
+        Implementación de ckan.plugins.interfaces.IGroupController#create
+        Al llamarse esta acción, se regenera la caché del data.json
+        '''
+        datajson_actions.update_datajson_cache()
+
+
+    def edit(self, _):
+        '''
+        Implementación de ckan.plugins.interfaces.IGroupController#edit
+        Al llamarse esta acción, se regenera la caché del data.json
+        '''
+        datajson_actions.update_datajson_cache()
+
+
+    def delete(self, _):
+        '''
+        Implementación de ckan.plugins.interfaces.IGroupController#delete
+        Al llamarse esta acción, se regenera la caché del data.json
+        '''
+        datajson_actions.update_datajson_cache()
+
+
+    def read(self, _):
+        '''
+        Implementación de ckan.plugins.interfaces.IGroupController#read
+        Vacía intencionalmente, al no necesitar de proveer un hook.
+        '''
+        pass
+
+
+    def authz_add_role(self, _):
+        '''
+        Implementación de ckan.plugins.interfaces.IGroupController#authz_add_role
+        Vacía intencionalmente, al no necesitar de proveer un hook.
+        '''
+        pass
+
+
+    def authz_remove_role(self, _):
+        '''
+        Implementación de ckan.plugins.interfaces.IGroupController#authz_remove_role
+        Vacía intencionalmente, al no necesitar de proveer un hook.
+        '''
+        pass
+
+
+    def before_view(self, _):
+        '''
+        Implementación de ckan.plugins.interfaces.IGroupController#before_view
+        Vacía intencionalmente, al no necesitar de proveer un hook.
+        '''
+        pass
