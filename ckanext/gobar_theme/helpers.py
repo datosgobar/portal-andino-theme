@@ -397,7 +397,7 @@ def date_format_to_iso(date):
     return date
 
 
-def jsondump(field):
+def jsondump(field=''):
     from markupsafe import Markup
     return Markup(json.dumps(field))
 
