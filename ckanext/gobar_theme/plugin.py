@@ -118,31 +118,15 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def read(self, _):
         '''
-        Implementación de ckan.plugins.interfaces.IGroupController#read
-        Vacía intencionalmente, al no necesitar de proveer un hook.
+        Implementación de ckan.plugins.interfaces.IGroupController#delete
+        Al llamarse esta acción, se regenera la caché del data.json
         '''
         pass
 
 
-    def authz_add_role(self, _):
-        '''
-        Implementación de ckan.plugins.interfaces.IGroupController#authz_add_role
-        Vacía intencionalmente, al no necesitar de proveer un hook.
-        '''
-        pass
-
-
-    def authz_remove_role(self, _):
-        '''
-        Implementación de ckan.plugins.interfaces.IGroupController#authz_remove_role
-        Vacía intencionalmente, al no necesitar de proveer un hook.
-        '''
-        pass
-
-
-    def before_view(self, _):
+    def before_view(self, pkg_dict):
         '''
         Implementación de ckan.plugins.interfaces.IGroupController#before_view
         Vacía intencionalmente, al no necesitar de proveer un hook.
         '''
-        pass
+        return pkg_dict
