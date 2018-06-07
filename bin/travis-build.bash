@@ -10,14 +10,14 @@ sudo apt-get install solr-jetty libcommons-fileupload-java
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
 cd ckan
-export latest_ckan_release_branch='release-v2.5.3'
+export latest_ckan_release_branch='ckan-2.7.4'
 echo "CKAN branch: $latest_ckan_release_branch"
 git checkout $latest_ckan_release_branch
 # Temporarily replace psycopg2's version with 2.7.1 which fixes https://github.com/psycopg/psycopg2/issues/594
 sed -i.bak 's/psycopg2\=\=2\.4\.5/psycopg2\=\=2\.7\.1/' requirements.txt
 python setup.py develop
-pip install -r requirements.txt --allow-all-external
-pip install -r dev-requirements.txt --allow-all-external
+pip install -r requirements.txt
+pip install -r dev-requirements.txt
 # undo requirements.txt modification
 git checkout requirements.txt
 rm requirements.txt.bak

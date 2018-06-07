@@ -1,28 +1,25 @@
 #! coding: utf-8
-import cgi
 from urllib import urlencode
-
-import ckan.lib.base as base
 import ckan.lib.helpers as h
-import ckan.lib.maintain as maintain
-import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
 import ckanext.googleanalytics.plugin as google_analytics
-import moment
-from ckan.common import OrderedDict, _, request, c, g
+from ckan.common import OrderedDict, _, request, c
 from ckan.controllers.package \
-    import PackageController, _encode_params, search_url, render, NotAuthorized, check_access, abort, get_action, log
-from ckan.lib.render import deprecated_lazy_render
+import PackageController, _encode_params, search_url, render, NotAuthorized, check_access, abort, get_action, log
 from ckan.lib.search import SearchError
+import ckan.lib.navl.dictization_functions as dict_fns
+import cgi
+import moment
+from webob.exc import status_map
 from paste.deploy.converters import asbool
 from pylons import config
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound
 ValidationError = logic.ValidationError
-redirect = base.redirect
+exc = status_map[302]
 tuplize_dict = logic.tuplize_dict
 clean_dict = logic.clean_dict
 parse_params = logic.parse_params
@@ -91,20 +88,17 @@ class GobArPackageController(PackageController):
             
             spatial['value'] = ','.join(spatial['value'])
 
-
     def search(self):
         package_type = self._guess_package_type()
-
         try:
             context = {'model': model, 'user': c.user or c.author, 'auth_user_obj': c.userobj}
             check_access('site_read', context)
         except NotAuthorized:
             abort(401, _('Not authorized to see this page'))
-
         q = c.q = request.params.get('q', u'')
         c.query_error = False
-        page = self._get_page_number(request.params)
-        limit = g.datasets_per_page
+        page = h.get_page_number(request.params)
+        limit = int(config.get('ckan.datasets_per_page', 20))
         params_nopage = [(k, v) for k, v in request.params.items() if k != 'page']
 
         def drill_down_url(alternative_url=None, **by):
@@ -155,6 +149,7 @@ class GobArPackageController(PackageController):
                         and len(value) and not param.startswith('_'):
                     if not param.startswith('ext_'):
                         c.fields.append((param, value))
+                        # Modificación para andino: usamos una función para buscar dependencias entre organizaciones
                         if param != 'organization':
                             fq += ' %s:"%s"' % (param, value)
                         else:
@@ -185,7 +180,7 @@ class GobArPackageController(PackageController):
                 'license_id': _('Licenses'),
             }
 
-            for facet in g.facets:
+            for facet in h.facets():
                 if facet in default_facet_titles:
                     facets[facet] = default_facet_titles[facet]
                 else:
@@ -216,20 +211,19 @@ class GobArPackageController(PackageController):
                 item_count=query['count'],
                 items_per_page=limit
             )
-            c.facets = query['facets']
             c.search_facets = query['search_facets']
             c.page.items = query['results']
         except SearchError, se:
             log.error('Dataset search error: %r', se.args)
             c.query_error = True
-            c.facets = {}
             c.search_facets = {}
             c.page = h.Page(collection=[])
         c.search_facets_limits = {}
         for facet in c.search_facets.keys():
             try:
+                # Modificación para andino: chequeo si el facet es 'organization'
                 if facet != 'organization':
-                    limit = int(request.params.get('_%s_limit' % facet, g.facets_default_number))
+                    limit = int(request.params.get('_%s_limit' % facet, int(config.get('search.facets.default', 10))))
                 else:
                     limit = None
             except ValueError:
@@ -238,75 +232,9 @@ class GobArPackageController(PackageController):
                 abort(400, error_description)
             c.search_facets_limits[facet] = limit
 
-        maintain.deprecate_context_item('facets', 'Use `c.search_facets` instead.')
-
         self._setup_template_variables(context, {}, package_type=package_type)
 
         return render(self._search_template(package_type), extra_vars={'dataset_type': package_type})
-
-    def new(self, data=None, errors=None, error_summary=None):
-        if data and 'type' in data:
-            package_type = data['type']
-        else:
-            package_type = self._guess_package_type(True)
-
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user or c.author, 'auth_user_obj': c.userobj,
-                   'save': 'save' in request.params}
-
-        # Package needs to have a organization group in the call to
-        # check_access and also to save it
-        try:
-            check_access('package_create', context)
-        except NotAuthorized:
-            abort(401, _('Unauthorized to create a package'))
-
-        if context['save'] and not data:
-            return self._save_new(context, package_type=package_type)
-
-        data = data or clean_dict(dict_fns.unflatten(tuplize_dict(parse_params(
-            request.params, ignore_keys=CACHE_PARAMETERS))))
-        c.resources_json = h.json.dumps(data.get('resources', []))
-        # convert tags if not supplied in data
-        if data and not data.get('tag_string'):
-            data['tag_string'] = ', '.join(
-                h.dict_list_reduce(data.get('tags', {}), 'name'))
-
-        errors = errors or {}
-        error_summary = error_summary or {}
-        # in the phased add dataset we need to know that
-        # we have already completed stage 1
-        stage = ['active']
-        if data.get('state', '').startswith('draft'):
-            stage = ['active', 'complete']
-
-        # if we are creating from a group then this allows the group to be
-        # set automatically
-        data['group_id'] = request.params.get('group') or \
-                           request.params.get('groups__0__id')
-
-        form_snippet = self._package_form(package_type=package_type)
-        form_vars = {'data': data, 'errors': errors,
-                     'error_summary': error_summary,
-                     'action': 'new', 'stage': stage,
-                     'dataset_type': package_type,
-                     }
-        c.errors_json = h.json.dumps(errors)
-
-        self._setup_template_variables(context, {},
-                                       package_type=package_type)
-
-        new_template = self._new_template(package_type)
-        c.form = deprecated_lazy_render(
-            new_template,
-            form_snippet,
-            lambda: render(form_snippet, extra_vars=form_vars),
-            'use of c.form is deprecated. please see '
-            'ckan/templates/package/base_form_page.html for an example '
-            'of the new way to include the form snippet'
-        )
-        return render(new_template,
-                      extra_vars={'form_vars': form_vars, 'form_snippet': form_snippet, 'dataset_type': package_type})
 
     def _save_new(self, context, package_type=None):
         # The staged add dataset used the new functionality when the dataset is
@@ -396,7 +324,7 @@ class GobArPackageController(PackageController):
                     else:
                         # redirect to add dataset resources
                         url = h.url_for(controller='package', action='new_resource', id=pkg_dict['name'])
-                    redirect(url)
+                    raise exc(location=url).exception
                 # Make sure we don't index this dataset
                 if request.params['save'] not in ['go-resource', 'go-metadata']:
                     data_dict['state'] = 'draft'
@@ -415,10 +343,10 @@ class GobArPackageController(PackageController):
 
             if ckan_phase and request.params['save'] != 'save-draft':
                 url = h.url_for(controller='package', action='new_resource', id=pkg_dict['name'])
-                redirect(url)
+                raise exc(location=url).exception
             elif request.params['save'] == 'save-draft':
                 url = h.url_for(controller='package', action='read', id=pkg_dict['name'])
-                redirect(url)
+                raise exc(location=url).exception
             self._form_save_redirect(pkg_dict['name'], 'new', package_type=package_type)
         except NotAuthorized:
             abort(401, _('Unauthorized to read package %s') % '')
@@ -444,67 +372,6 @@ class GobArPackageController(PackageController):
                                  errors, error_summary)
             data_dict['state'] = 'none'
             return self.new(data_dict, errors, error_summary)
-
-    def edit(self, id, data=None, errors=None, error_summary=None):
-        package_type = self._get_package_type(id)
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'auth_user_obj': c.userobj,
-                   'save': 'save' in request.params}
-
-        if context['save'] and not data:
-            return self._save_edit(id, context, package_type=package_type)
-        try:
-            c.pkg_dict = get_action('package_show')(dict(context,
-                                                         for_view=True),
-                                                    {'id': id})
-            context['for_edit'] = True
-            old_data = get_action('package_show')(context, {'id': id})
-            # old data is from the database and data is passed from the
-            # user if there is a validation error. Use users data if there.
-            if data:
-                old_data.update(data)
-            data = old_data
-        except (NotFound, NotAuthorized):
-            abort(404, _('Dataset not found'))
-        # are we doing a multiphase add?
-        if data.get('state', '').startswith('draft'):
-            c.form_action = h.url_for(controller='package', action='new')
-            c.form_style = 'new'
-            return self.new(data=data, errors=errors,
-                            error_summary=error_summary)
-
-        c.pkg = context.get("package")
-        c.resources_json = h.json.dumps(data.get('resources', []))
-
-        try:
-            check_access('package_update', context)
-        except NotAuthorized:
-            abort(403, _('User %r not authorized to edit %s') % (c.user, id))
-        # convert tags if not supplied in data
-        if data and not data.get('tag_string'):
-            data['tag_string'] = ', '.join(h.dict_list_reduce(
-                c.pkg_dict.get('tags', {}), 'name'))
-        errors = errors or {}
-        form_snippet = self._package_form(package_type=package_type)
-        form_vars = {'data': data, 'errors': errors,
-                     'error_summary': error_summary, 'action': 'edit',
-                     'dataset_type': package_type,
-                     }
-        c.errors_json = h.json.dumps(errors)
-
-        self._setup_template_variables(context, {'id': id},
-                                       package_type=package_type)
-
-        # we have already completed stage 1
-        form_vars['stage'] = ['active']
-        if data.get('state', '').startswith('draft'):
-            form_vars['stage'] = ['active', 'complete']
-
-        edit_template = self._edit_template(package_type)
-        return render(edit_template,
-                      extra_vars={'form_vars': form_vars,
-                                  'form_snippet': form_snippet,
-                                  'dataset_type': package_type})
 
     def _save_edit(self, name_or_id, context, package_type=None):
         from ckan.lib.search import SearchIndexError
@@ -564,26 +431,6 @@ class GobArPackageController(PackageController):
             error_summary = e.error_summary
 
         return self.edit(name_or_id, data_dict, errors, error_summary)
-
-    def delete(self, id):
-        if 'cancel' in request.params:
-            h.redirect_to(controller='package', action='edit', id=id)
-
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user or c.author, 'auth_user_obj': c.userobj}
-        try:
-            if request.method == 'POST':
-                get_action('package_delete')(context, {'id': id})
-                h.flash_notice(_('Dataset has been deleted.'))
-                h.redirect_to(controller='package', action='search')
-            c.pkg_dict = get_action('package_show')(context, {'id': id})
-            dataset_type = c.pkg_dict['type'] or 'dataset'
-        except NotAuthorized:
-            abort(401, _('Unauthorized to delete package %s') % '')
-        except NotFound:
-            abort(404, _('Dataset not found'))
-        return render('package/confirm_delete.html',
-                      extra_vars={'dataset_type': dataset_type})
 
     def new_resource(self, id, data=None, errors=None, error_summary=None):
         ''' FIXME: This is a temporary action to allow styling of the
@@ -753,8 +600,8 @@ class GobArPackageController(PackageController):
                                           errors, error_summary)
             except NotAuthorized:
                 abort(401, _('Unauthorized to edit this resource'))
-            redirect(h.url_for(controller='package', action='resource_read',
-                               id=id, resource_id=resource_id))
+            raise exc(location=h.url_for(
+                controller='package', action='resource_read', id=id, resource_id=resource_id)).exception
 
         pkg_dict = get_action('package_show')(context, {'id': id})
         if pkg_dict['state'].startswith('draft'):
@@ -788,30 +635,64 @@ class GobArPackageController(PackageController):
                 'dataset_type': package_type}
         return render('package/resource_edit.html', extra_vars=vars)
 
-    def resource_delete(self, id, resource_id):
-        if 'cancel' in request.params:
-            h.redirect_to(controller='package', action='resource_edit',
-                          resource_id=resource_id, id=id)
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user or c.author, 'auth_user_obj': c.userobj}
+    def _save_edit(self, name_or_id, context, package_type=None):
+        from ckan.lib.search import SearchIndexError
+        log.debug('Package save request name: %s POST: %r',
+                  name_or_id, request.POST)
         try:
-            check_access('package_delete', context, {'id': id})
+            data_dict = clean_dict(dict_fns.unflatten(
+                tuplize_dict(parse_params(request.POST))))
+
+            self._validate_dataset(data_dict)
+
+            if '_ckan_phase' in data_dict:
+                # we allow partial updates to not destroy existing resources
+                context['allow_partial_update'] = True
+                if 'tag_string' in data_dict:
+                    data_dict['tags'] = self._tag_string_to_list(
+                        data_dict['tag_string'])
+                del data_dict['_ckan_phase']
+                del data_dict['save']
+            context['message'] = data_dict.get('log_message', '')
+            data_dict['id'] = name_or_id
+
+            # Obtengo la lista de extras del dataset y agrego en el data_dict los extras que falten
+            # (no estaban en el request.POST), y reemplazo valores desactualizados
+            extra_fields = get_action('package_show')(dict(context, for_view=True), {'id': name_or_id})['extras']
+            for extra_field in extra_fields:
+                found_extra_field = filter(lambda x: x['key'] == extra_field['key'], data_dict['extras'])
+                if len(found_extra_field) == 0:
+                    data_dict['extras'].append(extra_field)
+
+            time_now = moment.now().isoformat()
+
+            self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
+
+            self.__generate_spatial_extra_field(data_dict)
+
+            pkg = get_action('package_update')(context, data_dict)
+            c.pkg = context['package']
+            c.pkg_dict = pkg
+
+            self._form_save_redirect(pkg['name'], 'edit',
+                                     package_type=package_type)
         except NotAuthorized:
-            abort(401, _('Unauthorized to delete package %s') % '')
-        try:
-            if request.method == 'POST':
-                get_action('resource_delete')(context, {'id': resource_id})
-                h.flash_notice(_('Resource has been deleted.'))
-                h.redirect_to(controller='package', action='read', id=id)
-            c.resource_dict = get_action('resource_show')(
-                context, {'id': resource_id})
-            c.pkg_id = id
-        except NotAuthorized:
-            abort(401, _('Unauthorized to delete resource %s') % '')
-        except NotFound:
-            abort(404, _('Resource not found'))
-        return render('package/confirm_delete_resource.html',
-                      {'dataset_type': self._get_package_type(id)})
+            abort(403, _('Unauthorized to read package %s') % id)
+        except NotFound, e:
+            abort(404, _('Dataset not found'))
+        except dict_fns.DataError:
+            abort(400, _(u'Integrity Error'))
+        except SearchIndexError, e:
+            try:
+                exc_str = unicode(repr(e.args))
+            except Exception:  # We don't like bare excepts
+                exc_str = unicode(str(e))
+            abort(500, _(u'Unable to update search index.') + exc_str)
+        except ValidationError, e:
+            errors = e.error_dict
+            error_summary = e.error_summary
+
+        return self.edit(name_or_id, data_dict, errors, error_summary)
 
     def _validate_length(self, data, attribute, max_length):
         if len(data[attribute]) > max_length:

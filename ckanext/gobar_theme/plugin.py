@@ -3,6 +3,7 @@ from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
 from ckan.model.package import Package
 import ckan.plugins.toolkit as toolkit
+import ckan.lib.helpers as ckan_helpers
 import ckan.plugins.interfaces as interfaces
 from ckan.plugins import implements, IRoutes
 import ckanext.gobar_theme.helpers as gobar_helpers
@@ -79,6 +80,8 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_distribution_metadata': gobar_helpers.get_distribution_metadata,
             'is_distribution_local': gobar_helpers.is_distribution_local,
             'get_extra_value': gobar_helpers.get_extra_value,
+            'remove_url_param': gobar_helpers.remove_url_param,
+            'get_action': ckan_helpers.get_action,
             'get_groups_img_paths': gobar_helpers.get_groups_img_paths,
             'fetch_groups': gobar_helpers.fetch_groups,
             'date_format_to_iso': gobar_helpers.date_format_to_iso,

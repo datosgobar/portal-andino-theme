@@ -1,20 +1,18 @@
 # coding=utf-8
-import json
-from datetime import time
-from urlparse import urljoin
 from urlparse import urlparse
 from HTMLParser import HTMLParser
-
-import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.logic as logic
 import moment
 from ckan.common import request, c, g, _
+import ckan.lib.formatters as formatters
+import json
+from urlparse import urljoin
+from config_controller import GobArConfigController
+from datetime import time
 from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons.config import config
-
-from config_controller import GobArConfigController
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -87,6 +85,27 @@ def get_facet_items_dict(facet, limit=None, exclude_active=False):
     # CKAN impone un límite de 10 para los temas. Puedo tener más de 10, por lo que no podría clickear el resto.
     c.search_facets_limits['groups'] = None
     return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
+
+
+def remove_url_param(key, value=None, replace=None, controller=None,
+                     action=None, extras=None, alternative_url=None):
+    if isinstance(key, basestring):
+        keys = [key]
+    else:
+        keys = key
+
+    params_nopage = [(k, v) for k, v in request.params.items() if k != 'page']
+    params = list(params_nopage)
+    if value:
+        params.remove((keys[0], value))
+    else:
+        for key in keys:
+            [params.remove((k, v)) for (k, v) in params[:] if k == key]
+    if replace is not None:
+        params.append((keys[0], replace))
+    if alternative_url:
+        return ckan_helpers._url_with_params(alternative_url, params)
+    return ckan_helpers._create_url_with_params(params=params, controller=controller, action=action, extras=extras)
 
 
 def get_groups_img_paths(groups):
@@ -173,7 +192,11 @@ def organization_filters():
                                       organization['count'] > 0]
     sorted_organizations = sorted(top_organizations_with_results, key=lambda item: item['count'], reverse=True)
 
-    limit = int(request.params.get('_organization_limit', g.facets_default_number))
+    org_limit = request.params.get('_organization_limit', g.facets_default_number)
+    if org_limit != '':
+        limit = int(org_limit)
+    else:
+        limit = None
     c.search_facets_limits['organization'] = limit
     if limit is not None and limit > 0:
         return sorted_organizations[:limit]
