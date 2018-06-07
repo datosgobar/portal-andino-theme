@@ -363,7 +363,12 @@ def attributes_has_at_least_one(attr, resource_attributes):
 def portal_andino_version():
     from ckanext.gobar_theme.actions import _get_portal_andino_version
     version = _get_portal_andino_version()
-    return version['portal-andino']
+    version = version['portal-andino'] or 'Desarrollo'
+
+    version = version.replace('release-', '')  # Elimino el release-
+    version = version[:10]  # me quedo con los primeros 10 caracteres
+
+    return version
 
 
 def get_distribution_metadata(resource_id, package_id):
@@ -415,7 +420,7 @@ def date_format_to_iso(date):
     return date
 
 
-def jsondump(field):
+def jsondump(field=''):
     from markupsafe import Markup
     return Markup(json.dumps(field))
 
