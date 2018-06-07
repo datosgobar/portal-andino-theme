@@ -35,6 +35,7 @@ cd -
 git clone https://github.com/ckan/ckanext-googleanalytics
 cd ckanext-googleanalytics
 pip install -r requirements.txt
+pip install --upgrade oauth2client
 python setup.py develop
 cd -
 
