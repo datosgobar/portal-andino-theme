@@ -40,9 +40,13 @@ class GobArRouter:
         self.connect_google_analytics()
         self.connect_spatial()
         self.connect_datajson()
+        self.connect_super_theme_taxonomy()
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')
+
+    def connect_super_theme_taxonomy(self):
+        self.home_routes.connect('/superThemeTaxonomy.json', action='super_theme_taxonomy')
 
     def connect_static(self):
         self.home_routes.connect('gobar_about', '/acerca', action='about')
