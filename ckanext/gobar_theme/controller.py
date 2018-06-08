@@ -11,6 +11,8 @@ import ckan.plugins as p
 from ckanext.googleanalytics.controller import GAApiController
 import ckanext.gobar_theme.helpers as gobar_helpers
 
+from pylons import response
+
 
 class GobArHomeController(HomeController):
     def _list_groups(self):
@@ -90,6 +92,10 @@ class GobArHomeController(HomeController):
             base.abort(404, u'Sección no encontrada')
 
         return base.render('section_view.html', extra_vars={'section': section})
+
+    def super_theme_taxonomy(self):
+        response.content_type = 'application/json; charset=UTF-8'
+        return base.render('home/super_theme_taxonomy.html')
 
 class GobArApiController(GAApiController, ApiController):
 
