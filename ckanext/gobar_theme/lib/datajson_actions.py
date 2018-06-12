@@ -62,10 +62,8 @@ def filter_dataset_fields(dataset_list):
         current_dataset = {}
 
         # Consigo los elementos existentes en listas que voy a necesitar
-        issued = get_field_from_list_and_delete(ds['extras'], 'issued') or \
-                 get_field_from_list_and_delete(ds['extras'], 'metadata_created')
-        modified = get_field_from_list_and_delete(ds['extras'], 'modified') or \
-                   get_field_from_list_and_delete(ds['extras'], 'metadata_modified')
+        issued = get_field_from_list_and_delete(ds['extras'], 'issued') or ds['metadata_created']
+        modified = get_field_from_list_and_delete(ds['extras'], 'modified') or ds['metadata_modified']
         country = get_field_from_list_and_delete(ds['extras'], 'country')
         province = get_field_from_list_and_delete(ds['extras'], 'province')
         district = get_field_from_list_and_delete(ds['extras'], 'district')
@@ -112,7 +110,7 @@ def filter_dataset_fields(dataset_list):
             language = language_list
         theme = map(lambda th: th['name'], ds['groups'])
         accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'accrualPeriodicity')
-        if accrualPeriodicity is None:
+        if accrualPeriodicity is None or accrualPeriodicity == '':
             get_field_from_list_and_delete(ds['extras'], 'updateFrequency')
         temporal = get_field_from_list_and_delete(ds['extras'], 'temporal')
         if temporal is None or temporal == '':
