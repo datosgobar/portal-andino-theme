@@ -127,6 +127,7 @@ this.ckan.module('gobar-image-upload', function($, _) {
       this.field_url_input.prop('readonly', true);
       this.field_clear.val('');
       this._showOnlyFieldUrl();
+      $('#field-file-name').val(this.field_url_input.val());
     },
 
     /* Show only the buttons, hiding all others
