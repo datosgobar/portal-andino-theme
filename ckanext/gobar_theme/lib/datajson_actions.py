@@ -168,6 +168,9 @@ def clean_resources(resources):
     final_resource_list = []
     for resource in resources:
         current_resource = {}
+        url_type = resource.get('url_type', None)
+        url = resource.get('url', None)
+
         current_resource['identifier'] = resource['id']
         if resource.get('format', None):
             current_resource['format'] = resource['format']
@@ -175,7 +178,11 @@ def clean_resources(resources):
         current_resource['description'] = resource['description']
         if 'fileName' in resource and resource['fileName'] != '':
             current_resource['fileName'] = resource['fileName']
-        if resource.get('resource_type', None):
+        if url_type is not None:
+            if url_type == 'upload' and url and resource.get('resource_type', None) != 'api':
+                # Como se subió un archivo, queremos asegurarnos de que el fileName sea correcto; lo buscamos en la URL
+                last_slash_position = url.rfind('/')
+                current_resource['fileName'] = url[last_slash_position+1:]
             current_resource['type'] = resource['resource_type']
         if 'issued' in resource:
             current_resource['issued'] = resource['issued']
