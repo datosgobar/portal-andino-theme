@@ -111,7 +111,7 @@ def filter_dataset_fields(dataset_list):
         theme = map(lambda th: th['name'], ds['groups'])
         accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'accrualPeriodicity')
         if not accrualPeriodicity:
-            get_field_from_list_and_delete(ds['extras'], 'updateFrequency')
+            accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'updateFrequency')
         temporal = get_field_from_list_and_delete(ds['extras'], 'temporal')
         if temporal is None or temporal == '':
             temporal = get_field_from_list_and_delete(ds['extras'], 'dateRange')
