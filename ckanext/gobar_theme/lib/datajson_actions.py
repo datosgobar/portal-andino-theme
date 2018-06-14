@@ -180,7 +180,7 @@ def clean_resources(resources):
         if 'fileName' in resource and resource['fileName']:
             current_resource['fileName'] = resource['fileName']
         if url_type is not None:
-            if url_type == 'upload' and url and resource_type != 'api':
+            if url_type == 'upload' and url and resource_type != 'api' and '/' in url:
                 # Como se subió un archivo, queremos asegurarnos de que el fileName sea correcto; lo buscamos en la URL
                 last_slash_position = url.rfind('/')
                 current_resource['fileName'] = url[last_slash_position+1:]
