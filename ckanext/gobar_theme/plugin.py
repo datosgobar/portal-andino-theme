@@ -87,6 +87,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'date_format_to_iso': gobar_helpers.date_format_to_iso,
             'jsondump': gobar_helpers.jsondump,
             'get_default_background_configuration': gobar_helpers.get_default_background_configuration,
+            'get_gtm_code': gobar_helpers.get_gtm_code,
         }
 
     def notify(self, entity, operation):
