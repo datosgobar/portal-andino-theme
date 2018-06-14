@@ -428,3 +428,8 @@ def jsondump(field=''):
 def get_default_background_configuration():
     background_opacity = config.get('andino.background_opacity')
     return background_opacity
+
+
+def get_gtm_code():
+    gtm_code = config.get('ckan.google_tag_manager.gtm_container_id', False)
+    return str(gtm_code)
