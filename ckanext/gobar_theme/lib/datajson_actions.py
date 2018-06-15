@@ -2,15 +2,18 @@
 
 import json
 import os
+import io
 import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 from ckan.config.environment import config
+from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
 import logging
 logger = logging.getLogger(__name__)
 
 CACHE_FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
+XLSX_FILENAME = "/var/lib/ckan/theme_config/catalog.xlsx"
 SUPERTHEME_TAXONOMY_URL = "http://datos.gob.ar/superThemeTaxonomy.json"
 ANDINO_METADATA_VERSION = "1.1"
 
@@ -335,3 +338,31 @@ def get_catalog_data():
     return datajson
 
 
+# ============================ Catalog section ============================ #
+
+
+def get_catalog_xlsx():
+    with io.BytesIO() as stream:
+        try:
+            # Trato de leer el catalog.xlsx si ya fue generado
+            return read_from_catalog(stream)
+        except IOError:
+            update_catalog()
+            return read_from_catalog(stream)
+
+
+def update_catalog():
+    from pydatajson import writers, DataJson
+    # Chequeo que la cache del datajson exista antes de pasar su path como parámetro
+    if not os.path.isfile(CACHE_FILENAME):
+        # No existe, así que la genero
+        update_datajson_cache()
+    catalog = DataJson(CACHE_FILENAME)
+    writers.write_xlsx_catalog(catalog, XLSX_FILENAME)
+
+
+def read_from_catalog(stream):
+    with open(XLSX_FILENAME, 'rb') as file_handle:
+        stream.write(file_handle.read())
+    response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    return stream.getvalue()

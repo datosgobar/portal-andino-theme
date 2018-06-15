@@ -94,6 +94,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 jobs.enqueue(datajson_actions.update_datajson_cache)
+                jobs.enqueue(datajson_actions.update_catalog)
 
 
     def create(self, _):
@@ -102,6 +103,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Al llamarse esta acción, se regenera la caché del data.json
         '''
         jobs.enqueue(datajson_actions.update_datajson_cache)
+        jobs.enqueue(datajson_actions.update_catalog)
 
 
     def edit(self, _):
@@ -111,6 +113,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         '''
         # celer = celery
         jobs.enqueue(datajson_actions.update_datajson_cache)
+        jobs.enqueue(datajson_actions.update_catalog)
 
 
     def delete(self, _):
@@ -119,6 +122,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Al llamarse esta acción, se regenera la caché del data.json
         '''
         jobs.enqueue(datajson_actions.update_datajson_cache)
+        jobs.enqueue(datajson_actions.update_catalog)
 
 
     def read(self, _):
