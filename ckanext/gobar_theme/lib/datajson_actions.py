@@ -2,15 +2,11 @@
 
 import json
 import os
-import io
 import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 from ckan.config.environment import config
-from pylons import response
-import ckan.lib.jobs as jobs
 import ckan.logic as logic
 import ckan.plugins as p
-import ckan.lib.base as base
 import logging
 logger = logging.getLogger(__name__)
 
