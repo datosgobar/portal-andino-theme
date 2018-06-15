@@ -7,6 +7,7 @@ import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 from ckan.config.environment import config
 from pylons import response
+import ckan.lib.jobs as jobs
 import ckan.logic as logic
 import ckan.plugins as p
 import ckan.lib.base as base
@@ -38,10 +39,24 @@ def get_data_json_contents():
 
 def update_datajson_cache():
     with open(CACHE_FILENAME, 'w+') as file:
+        # Todo: sacar estas dos líneas a una función
         datajson = get_catalog_data()
         datajson['dataset'] = filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
+
+        # Creamos un TemplateLoader
+        import jinja2
+        loader = jinja2.PackageLoader('ckanext.gobar_theme', 'templates')
+        environment = jinja2.Environment(loader=loader)
+        template = environment.get_template('datajson.html')
+
         # Guardo la renderización con Jinja del data.json en la cache
-        renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
+        renderization = template.render({
+            'datajson': datajson,
+            'h': {
+                'jsondump': gobar_helpers.jsondump,
+            },
+        })
+
         file.write(renderization)
         logger.info('Se actualizó la cache del data.json')
         return renderization
