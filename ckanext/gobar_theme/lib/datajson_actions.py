@@ -38,9 +38,7 @@ def get_data_json_contents():
 
 def update_datajson_cache():
     with open(CACHE_FILENAME, 'w+') as file:
-        # Todo: sacar estas dos líneas a una función
-        datajson = get_catalog_data()
-        datajson['dataset'] = filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
+        datajson = generate_datajson_info()
 
         # Creamos un TemplateLoader
         import jinja2
@@ -59,6 +57,12 @@ def update_datajson_cache():
         file.write(renderization)
         logger.info('Se actualizó la cache del data.json')
         return renderization
+
+
+def generate_datajson_info():
+    datajson = get_catalog_data()
+    datajson['dataset'] = filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
+    return datajson
 
 
 def get_field_from_list_and_delete(list, wanted_field):
