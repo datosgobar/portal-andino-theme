@@ -5,7 +5,6 @@ from ckan.model.package import Package
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as ckan_helpers
 import ckan.plugins.interfaces as interfaces
-import ckan.lib.jobs as jobs
 from ckan.plugins import implements, IRoutes
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.routing as gobar_routes
@@ -93,8 +92,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     def notify(self, entity, operation):
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
-                jobs.enqueue(datajson_actions.update_datajson_cache)
-                jobs.enqueue(datajson_actions.update_catalog)
+                datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def create(self, _):
@@ -102,8 +100,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Implementación de ckan.plugins.interfaces.IGroupController#create
         Al llamarse esta acción, se regenera la caché del data.json
         '''
-        jobs.enqueue(datajson_actions.update_datajson_cache)
-        jobs.enqueue(datajson_actions.update_catalog)
+        datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def edit(self, _):
@@ -111,9 +108,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Implementación de ckan.plugins.interfaces.IGroupController#edit
         Al llamarse esta acción, se regenera la caché del data.json
         '''
-        # celer = celery
-        jobs.enqueue(datajson_actions.update_datajson_cache)
-        jobs.enqueue(datajson_actions.update_catalog)
+        datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def delete(self, _):
@@ -121,8 +116,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Implementación de ckan.plugins.interfaces.IGroupController#delete
         Al llamarse esta acción, se regenera la caché del data.json
         '''
-        jobs.enqueue(datajson_actions.update_datajson_cache)
-        jobs.enqueue(datajson_actions.update_catalog)
+        datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def read(self, _):

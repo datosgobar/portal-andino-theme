@@ -5,6 +5,7 @@ import os
 import io
 import re
 import ckanext.gobar_theme.helpers as gobar_helpers
+import ckan.lib.jobs as jobs
 from ckan.config.environment import config
 from pylons import response
 import ckan.logic as logic
@@ -34,6 +35,11 @@ def get_data_json_contents():
     except IOError:
         logger.info('IOError, asumimos que hay que regenerar el data.json cacheado.')
         return update_datajson_cache()
+
+
+def enqueue_update_datajson_cache_tasks():
+    jobs.enqueue(update_datajson_cache)
+    jobs.enqueue(update_catalog)
 
 
 def update_datajson_cache():
