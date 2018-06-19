@@ -7,6 +7,9 @@ import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckan.lib.jobs as jobs
 from ckan.config.environment import config
+import ckan.logic.action.delete as delete
+from ckan.common import c
+import ckan.model as model
 from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
@@ -17,6 +20,7 @@ CACHE_FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
 XLSX_FILENAME = "/var/lib/ckan/theme_config/catalog.xlsx"
 SUPERTHEME_TAXONOMY_URL = "http://datos.gob.ar/superThemeTaxonomy.json"
 ANDINO_METADATA_VERSION = "1.1"
+ANDINO_DATAJSON_QUEUE = 'andino-datajson-queue'
 
 
 # ============================ datajson section ============================ #
@@ -38,8 +42,11 @@ def get_data_json_contents():
 
 
 def enqueue_update_datajson_cache_tasks():
-    jobs.enqueue(update_datajson_cache)
-    jobs.enqueue(update_catalog)
+    # Las funciones que usamos de RQ requieren que se les envíe el context para evitar problemas de autorización
+    context = {'model': model, 'session': model.Session, 'user': c.user}
+    delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
+    jobs.enqueue(update_datajson_cache, queue=ANDINO_DATAJSON_QUEUE)
+    jobs.enqueue(update_catalog, queue=ANDINO_DATAJSON_QUEUE)
 
 
 def update_datajson_cache():
