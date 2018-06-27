@@ -93,7 +93,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     def notify(self, entity, operation):
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
-                datajson_actions.update_datajson_cache()
+                datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def create(self, _):
@@ -101,7 +101,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Implementación de ckan.plugins.interfaces.IGroupController#create
         Al llamarse esta acción, se regenera la caché del data.json
         '''
-        datajson_actions.update_datajson_cache()
+        datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def edit(self, _):
@@ -109,7 +109,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Implementación de ckan.plugins.interfaces.IGroupController#edit
         Al llamarse esta acción, se regenera la caché del data.json
         '''
-        datajson_actions.update_datajson_cache()
+        datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def delete(self, _):
@@ -117,7 +117,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Implementación de ckan.plugins.interfaces.IGroupController#delete
         Al llamarse esta acción, se regenera la caché del data.json
         '''
-        datajson_actions.update_datajson_cache()
+        datajson_actions.enqueue_update_datajson_cache_tasks()
 
 
     def read(self, _):

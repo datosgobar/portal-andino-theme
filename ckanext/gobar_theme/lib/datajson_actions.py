@@ -5,17 +5,22 @@ import os
 import io
 import re
 import ckanext.gobar_theme.helpers as gobar_helpers
+import ckan.lib.jobs as jobs
 from ckan.config.environment import config
+import ckan.logic.action.delete as delete
+from ckan.common import c
+import ckan.model as model
 from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
-import ckan.lib.base as base
 import logging
 logger = logging.getLogger(__name__)
 
 CACHE_FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
+XLSX_FILENAME = "/var/lib/ckan/theme_config/catalog.xlsx"
 SUPERTHEME_TAXONOMY_URL = "http://datos.gob.ar/superThemeTaxonomy.json"
 ANDINO_METADATA_VERSION = "1.1"
+ANDINO_DATAJSON_QUEUE = 'andino-datajson-queue'
 
 
 # ============================ datajson section ============================ #
@@ -36,15 +41,41 @@ def get_data_json_contents():
         return update_datajson_cache()
 
 
+def enqueue_update_datajson_cache_tasks():
+    # Las funciones que usamos de RQ requieren que se les envíe el context para evitar problemas de autorización
+    context = {'model': model, 'session': model.Session, 'user': c.user}
+    delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
+    jobs.enqueue(update_datajson_cache, queue=ANDINO_DATAJSON_QUEUE)
+    jobs.enqueue(update_catalog, queue=ANDINO_DATAJSON_QUEUE)
+
+
 def update_datajson_cache():
-    with open(CACHE_FILENAME, 'w+') as file:
-        datajson = get_catalog_data()
-        datajson['dataset'] = filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
+    with open(CACHE_FILENAME, 'w+') as datajson_cache:
+        datajson = generate_datajson_info()
+
+        # Creamos un TemplateLoader
+        import jinja2
+        loader = jinja2.PackageLoader('ckanext.gobar_theme', 'templates')
+        environment = jinja2.Environment(loader=loader)
+        template = environment.get_template('datajson.html')
+
         # Guardo la renderización con Jinja del data.json en la cache
-        renderization = base.render('datajson.html', extra_vars={'datajson': datajson})
-        file.write(renderization)
+        renderization = template.render({
+            'datajson': datajson,
+            'h': {
+                'jsondump': gobar_helpers.jsondump,
+            },
+        })
+
+        datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
         return renderization
+
+
+def generate_datajson_info():
+    datajson = get_catalog_data()
+    datajson['dataset'] = filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
+    return datajson
 
 
 def get_field_from_list_and_delete(list, wanted_field):
@@ -331,3 +362,31 @@ def get_catalog_data():
     return datajson
 
 
+# ============================ Catalog section ============================ #
+
+
+def get_catalog_xlsx():
+    with io.BytesIO() as stream:
+        try:
+            # Trato de leer el catalog.xlsx si ya fue generado
+            return read_from_catalog(stream)
+        except IOError:
+            update_catalog()
+            return read_from_catalog(stream)
+
+
+def update_catalog():
+    from pydatajson import writers, DataJson
+    # Chequeo que la cache del datajson exista antes de pasar su path como parámetro
+    if not os.path.isfile(CACHE_FILENAME):
+        # No existe, así que la genero
+        update_datajson_cache()
+    catalog = DataJson(CACHE_FILENAME)
+    writers.write_xlsx_catalog(catalog, XLSX_FILENAME)
+
+
+def read_from_catalog(stream):
+    with open(XLSX_FILENAME, 'rb') as file_handle:
+        stream.write(file_handle.read())
+    response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    return stream.getvalue()
