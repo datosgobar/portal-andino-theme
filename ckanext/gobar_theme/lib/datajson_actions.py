@@ -50,7 +50,7 @@ def enqueue_update_datajson_cache_tasks():
 
 
 def update_datajson_cache():
-    with open(CACHE_FILENAME, 'w+') as file:
+    with open(CACHE_FILENAME, 'w+') as datajson_cache:
         datajson = generate_datajson_info()
 
         # Creamos un TemplateLoader
@@ -67,7 +67,7 @@ def update_datajson_cache():
             },
         })
 
-        file.write(renderization)
+        datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
         return renderization
 
