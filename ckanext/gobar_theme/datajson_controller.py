@@ -8,3 +8,6 @@ class GobArDatajsonController(BaseController):
 
     def datajson(self):
         return datajson_actions.get_data_json_contents()
+
+    def catalog_xlsx(self):
+        return datajson_actions.get_catalog_xlsx()

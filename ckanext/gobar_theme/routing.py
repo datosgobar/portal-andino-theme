@@ -237,3 +237,6 @@ class GobArRouter:
             self.redirect(
                 ('/catalog.xlsx', '/'),  # Redirecciono a la home
             )
+        else:
+            with SubMapper(self.route_map, controller=self.datajson_controller) as m:
+                m.connect('catalog_xlsx', '/catalog.xlsx', action='catalog_xlsx')
