@@ -10,6 +10,9 @@ import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.routing as gobar_routes
 import ckanext.gobar_theme.actions as gobar_actions
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+import ckanext.gobar_theme.lib.cache_actions as cache_actions
+from pylons import config
+import requests
 
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
@@ -90,10 +93,16 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_gtm_code': gobar_helpers.get_gtm_code,
         }
 
-    def notify(self, entity, operation):
+    def notify(self, entity, operation)
+
+        # Este código debería correr en una tarea async en la cola default
+
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.enqueue_update_datajson_cache_tasks()
+                cache_clean_hook = config.get('andino.cache_clean_hook')
+                if cache_clean_hook is not None:
+                    cache_actions.clear_web_cache(cache_clean_hook)
 
 
     def create(self, _):
