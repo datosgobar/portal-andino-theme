@@ -92,9 +92,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         }
 
     def notify(self, entity, operation):
-
-        # Este código debería correr en una tarea async en la cola default
-
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.enqueue_update_datajson_cache_tasks()
