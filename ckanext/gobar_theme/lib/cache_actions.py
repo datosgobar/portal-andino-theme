@@ -1,6 +1,9 @@
-from pylons import config
+#! coding: utf-8
 import requests
 import logging
+
+from pylons import config
+
 
 logger = logging.getLogger(__name__)
 
@@ -10,5 +13,6 @@ def clear_web_cache():
         try:
             response_for_http_request = requests.get(cache_clean_hook, timeout=2)
             response_for_http_request.raise_for_status()
-        except requests.exceptions.HTTPError:
-            logger.info('Hubo un problema con el request a la url ' + cache_clean_hook)
+        except Exception as e:
+            logger.info(u'Hubo un problema limpiando la caché del servicio web con el request a la url %s: %s ', \
+                        cache_clean_hook, e)
