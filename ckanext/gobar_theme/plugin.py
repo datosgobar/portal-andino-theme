@@ -93,7 +93,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_gtm_code': gobar_helpers.get_gtm_code,
         }
 
-    def notify(self, entity, operation)
+    def notify(self, entity, operation):
 
         # Este código debería correr en una tarea async en la cola default
 
