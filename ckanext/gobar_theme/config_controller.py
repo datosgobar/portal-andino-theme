@@ -12,7 +12,7 @@ import moment
 import redis
 from ckan.common import request, c
 from pylons import config as ckan_config
-import ckanext.gobar_theme.lib.cache_actions as cache_actions
+from ckanext.gobar_theme.lib import cache_actions
 
 parse_params = logic.parse_params
 abort = base.abort
