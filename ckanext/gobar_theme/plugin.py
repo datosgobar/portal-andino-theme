@@ -65,6 +65,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_theme_config': gobar_helpers.get_theme_config,
             'url_join': gobar_helpers.url_join,
             'json_loads': gobar_helpers.json_loads,
+            'licenses_list': gobar_helpers.licenses_list,
             'update_frequencies': gobar_helpers.update_frequencies,
             'field_types': gobar_helpers.field_types,
             'distribution_types': gobar_helpers.distribution_types,

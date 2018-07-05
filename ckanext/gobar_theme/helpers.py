@@ -215,6 +215,26 @@ def json_loads(json_string):
     return json.loads(json_string)
 
 
+def licenses_list():
+    return [
+        {"name": u"Creative Commons Attribution 4.0", "code": u"CC-BY-4.0"},
+        {"name": u"Creative Commons CCZero", "code": u"cc-zero"},
+        {"name": u"Creative Commons Attribution", "code": "cc-by"},
+        {"name": u"Creative Commons Attribution Share-Alike", "code": u"cc-by-sa"},
+        {"name": u"Creative Commons Non-Commercial (Cualquiera)", "code": u"cc-nc"},
+        {"name": u"Open Data Commons Public Domain Dedication and Licence (PDDL)", "code": u"odc-pddl"},
+        {"name": u"Open Data Commons Open Database License (ODbL)", "code": u"odc-odbl"},
+        {"name": u"Open Data Commons Attribution License", "code": u"odc-by"},
+        {"name": u"GNU Free Documentation License", "code": u"gfdl"},
+        {"name": u"UK Open Government Licence (OGL)", "code": u"uk-ogl"},
+        {"name": u"Otra (Abierta)", "code": u"other-open"},
+        {"name": u"Otra (Public Domain)", "code": u"other-pd"},
+        {"name": u"Otra (Atribución)", "code": u"other-at"},
+        {"name": u"Otra (No comercial)", "code": u"other-nc"},
+        {"name": u"Otra (No abierta)", "code": u"other-closed"},
+    ]
+
+
 def update_frequencies(freq_id=None):
     frequencies = [
         ("R/PT1S", u"Continuamente actualizado"),
