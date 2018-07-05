@@ -71,16 +71,7 @@ def update_datajson_cache():
         datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
 
-    try:
-        # Cambiamos la caché que se estaba usando por la auxiliar
-        os.rename(CACHE_FILENAME, CACHE_DIRECTORY + 'cache_to_delete.json')
-        os.rename(CACHE_FILENAME + '_aux', CACHE_FILENAME)
-        # Borramos la primera, que ya no necesitamos
-        os.remove(CACHE_DIRECTORY + 'cache_to_delete.json')
-    except OSError:
-        # No existía una caché, por lo que solamente vamos a tratar de renombrar la caché auxiliar
-        if os.path.isfile(CACHE_FILENAME + '_aux'):
-            os.rename(CACHE_FILENAME + '_aux', CACHE_FILENAME)
+    replace_current_file_if_it_exists(CACHE_FILENAME, CACHE_FILENAME + '_aux', CACHE_DIRECTORY + 'cache_to_delete.json')
     return renderization
 
 
@@ -395,18 +386,7 @@ def update_catalog():
         update_datajson_cache()
     catalog = DataJson(CACHE_FILENAME)
     writers.write_xlsx_catalog(catalog, XLSX_FILENAME + '_aux.xlsx')
-    try:
-        logger.warning("Arranco con el buen catalog")
-        # Cambiamos el catalog.xlsx que se estaba usando por el auxiliar
-        os.rename(XLSX_FILENAME, CACHE_DIRECTORY + 'xlsx_to_delete.xlsx')
-        os.rename(XLSX_FILENAME + '_aux.xlsx', XLSX_FILENAME)
-        # Borramos el primero, que ya no necesitamos
-        os.remove(CACHE_DIRECTORY + 'xlsx_to_delete.xlsx')
-    except OSError:
-        logger.warning("Error tocando el catalog")
-        # No existía el catálogo, por lo que solamente vamos a renombrar el catalog.xlsx auxiliar
-        if os.path.isfile(XLSX_FILENAME + '_aux.xlsx'):
-            os.rename(XLSX_FILENAME + '_aux.xlsx', XLSX_FILENAME)
+    replace_current_file_if_it_exists(XLSX_FILENAME, XLSX_FILENAME + '_aux', CACHE_DIRECTORY + 'xlsx_to_delete.xlsx')
 
 
 def read_from_catalog(stream):
@@ -414,3 +394,19 @@ def read_from_catalog(stream):
         stream.write(file_handle.read())
     response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     return stream.getvalue()
+
+
+# ============================ Shared functions ============================ #
+
+
+def replace_current_file_if_it_exists(current_file_name, aux_file_name, new_name_for_current_file):
+    try:
+        # Cambiamos la caché que se estaba usando por la auxiliar
+        os.rename(current_file_name, new_name_for_current_file)
+        os.rename(aux_file_name, current_file_name)
+        # Borramos la primera, que ya no necesitamos
+        os.remove(new_name_for_current_file)
+    except OSError:
+        # No existía una caché, por lo que solamente vamos a tratar de renombrar la caché auxiliar
+        if os.path.isfile(aux_file_name):
+            os.rename(aux_file_name, current_file_name)
