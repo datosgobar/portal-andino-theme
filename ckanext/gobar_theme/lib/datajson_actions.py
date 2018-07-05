@@ -16,6 +16,7 @@ import ckan.plugins as p
 import logging
 logger = logging.getLogger(__name__)
 
+CACHE_DIRECTORY = "/var/lib/ckan/theme_config/"
 CACHE_FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
 XLSX_FILENAME = "/var/lib/ckan/theme_config/catalog.xlsx"
 SUPERTHEME_TAXONOMY_URL = "http://datos.gob.ar/superThemeTaxonomy.json"
@@ -50,7 +51,7 @@ def enqueue_update_datajson_cache_tasks():
 
 
 def update_datajson_cache():
-    with open(CACHE_FILENAME, 'w+') as datajson_cache:
+    with open(CACHE_FILENAME + '_aux', 'w+') as datajson_cache:
         datajson = generate_datajson_info()
 
         # Creamos un TemplateLoader
@@ -59,7 +60,7 @@ def update_datajson_cache():
         environment = jinja2.Environment(loader=loader)
         template = environment.get_template('datajson.html')
 
-        # Guardo la renderización con Jinja del data.json en la cache
+        # Guardo la renderización con Jinja del data.json en la caché auxiliar
         renderization = template.render({
             'datajson': datajson,
             'h': {
@@ -69,7 +70,18 @@ def update_datajson_cache():
 
         datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
-        return renderization
+
+    try:
+        # Cambiamos la caché que se estaba usando por la auxiliar
+        os.rename(CACHE_FILENAME, CACHE_DIRECTORY + 'cache_to_delete.json')
+        os.rename(CACHE_FILENAME + '_aux', CACHE_FILENAME)
+        # Borramos la primera, que ya no necesitamos
+        os.remove(CACHE_DIRECTORY + 'cache_to_delete.json')
+    except OSError:
+        # No existía una caché, por lo que solamente vamos a tratar de renombrar la caché auxiliar
+        if os.path.isfile(CACHE_FILENAME + '_aux'):
+            os.rename(CACHE_FILENAME + '_aux', CACHE_FILENAME)
+    return renderization
 
 
 def generate_datajson_info():
@@ -377,12 +389,24 @@ def get_catalog_xlsx():
 
 def update_catalog():
     from pydatajson import writers, DataJson
-    # Chequeo que la cache del datajson exista antes de pasar su path como parámetro
+    # Chequeo que la caché del datajson exista antes de pasar su path como parámetro
     if not os.path.isfile(CACHE_FILENAME):
         # No existe, así que la genero
         update_datajson_cache()
     catalog = DataJson(CACHE_FILENAME)
-    writers.write_xlsx_catalog(catalog, XLSX_FILENAME)
+    writers.write_xlsx_catalog(catalog, XLSX_FILENAME + '_aux.xlsx')
+    try:
+        logger.warning("Arranco con el buen catalog")
+        # Cambiamos el catalog.xlsx que se estaba usando por el auxiliar
+        os.rename(XLSX_FILENAME, CACHE_DIRECTORY + 'xlsx_to_delete.xlsx')
+        os.rename(XLSX_FILENAME + '_aux.xlsx', XLSX_FILENAME)
+        # Borramos el primero, que ya no necesitamos
+        os.remove(CACHE_DIRECTORY + 'xlsx_to_delete.xlsx')
+    except OSError:
+        logger.warning("Error tocando el catalog")
+        # No existía el catálogo, por lo que solamente vamos a renombrar el catalog.xlsx auxiliar
+        if os.path.isfile(XLSX_FILENAME + '_aux.xlsx'):
+            os.rename(XLSX_FILENAME + '_aux.xlsx', XLSX_FILENAME)
 
 
 def read_from_catalog(stream):
