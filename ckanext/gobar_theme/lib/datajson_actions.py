@@ -14,10 +14,12 @@ from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
 import logging
+import tempfile
 logger = logging.getLogger(__name__)
 
-CACHE_FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
-XLSX_FILENAME = "/var/lib/ckan/theme_config/catalog.xlsx"
+CACHE_DIRECTORY = "/var/lib/ckan/theme_config/"
+CACHE_FILENAME = CACHE_DIRECTORY + "datajson_cache.json"
+XLSX_FILENAME = CACHE_DIRECTORY + "catalog.xlsx"
 SUPERTHEME_TAXONOMY_URL = "http://datos.gob.ar/superThemeTaxonomy.json"
 ANDINO_METADATA_VERSION = "1.1"
 ANDINO_DATAJSON_QUEUE = 'andino-datajson-queue'
@@ -50,7 +52,8 @@ def enqueue_update_datajson_cache_tasks():
 
 
 def update_datajson_cache():
-    with open(CACHE_FILENAME, 'w+') as datajson_cache:
+    file_descriptor, file_path = tempfile.mkstemp(suffix='.json', dir=CACHE_DIRECTORY)
+    with os.fdopen(file_descriptor, 'w+') as datajson_cache:
         datajson = generate_datajson_info()
 
         # Creamos un TemplateLoader
@@ -59,7 +62,7 @@ def update_datajson_cache():
         environment = jinja2.Environment(loader=loader)
         template = environment.get_template('datajson.html')
 
-        # Guardo la renderización con Jinja del data.json en la cache
+        # Guardo la renderización con Jinja del data.json en la caché auxiliar
         renderization = template.render({
             'datajson': datajson,
             'h': {
@@ -69,7 +72,9 @@ def update_datajson_cache():
 
         datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
-        return renderization
+
+    os.rename(file_path, CACHE_FILENAME)
+    return renderization
 
 
 def generate_datajson_info():
@@ -377,12 +382,14 @@ def get_catalog_xlsx():
 
 def update_catalog():
     from pydatajson import writers, DataJson
-    # Chequeo que la cache del datajson exista antes de pasar su path como parámetro
+    # Chequeo que la caché del datajson exista antes de pasar su path como parámetro
     if not os.path.isfile(CACHE_FILENAME):
         # No existe, así que la genero
         update_datajson_cache()
     catalog = DataJson(CACHE_FILENAME)
-    writers.write_xlsx_catalog(catalog, XLSX_FILENAME)
+    new_catalog_filename = '%s/catalog.xlsx' % tempfile.mkdtemp(dir=CACHE_DIRECTORY)
+    writers.write_xlsx_catalog(catalog, new_catalog_filename)
+    os.rename(new_catalog_filename, XLSX_FILENAME)
 
 
 def read_from_catalog(stream):

@@ -46,3 +46,4 @@ docs/_build/
 mockups
 
 ckanext/gobar_theme/public/user_images
+.venv
