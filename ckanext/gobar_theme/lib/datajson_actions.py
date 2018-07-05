@@ -17,8 +17,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 CACHE_DIRECTORY = "/var/lib/ckan/theme_config/"
-CACHE_FILENAME = "/var/lib/ckan/theme_config/datajson_cache.json"
-XLSX_FILENAME = "/var/lib/ckan/theme_config/catalog.xlsx"
+CACHE_FILENAME = CACHE_DIRECTORY + "datajson_cache.json"
+XLSX_FILENAME = CACHE_DIRECTORY + "catalog.xlsx"
 SUPERTHEME_TAXONOMY_URL = "http://datos.gob.ar/superThemeTaxonomy.json"
 ANDINO_METADATA_VERSION = "1.1"
 ANDINO_DATAJSON_QUEUE = 'andino-datajson-queue'
