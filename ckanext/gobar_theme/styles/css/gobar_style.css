@@ -10318,16 +10318,18 @@ div.dataset-container div.dataset-notes {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
-  word-break: break-all;
   -webkit-box-orient: vertical;
+  word-break: break-word;
 }
 
 div.dataset-container h3.dataset-title{
-  line-height: 0.5ex;
-  height: 2.75ex;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  margin-top: 0;
   padding-right: 10px;
 }
 
