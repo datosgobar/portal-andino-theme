@@ -51,7 +51,7 @@ def enqueue_update_datajson_cache_tasks():
 
 
 def update_datajson_cache():
-    with open(CACHE_FILENAME + '_aux', 'w+') as datajson_cache:
+    with open(CACHE_FILENAME + '_la_aux', 'w+') as datajson_cache:
         datajson = generate_datajson_info()
 
         # Creamos un TemplateLoader
@@ -71,7 +71,7 @@ def update_datajson_cache():
         datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
 
-    replace_current_file_if_it_exists(CACHE_FILENAME, CACHE_FILENAME + '_aux', CACHE_DIRECTORY + 'cache_to_delete.json')
+    os.rename(CACHE_FILENAME + '_la_aux', CACHE_FILENAME)
     return renderization
 
 
@@ -386,7 +386,7 @@ def update_catalog():
         update_datajson_cache()
     catalog = DataJson(CACHE_FILENAME)
     writers.write_xlsx_catalog(catalog, XLSX_FILENAME + '_aux.xlsx')
-    replace_current_file_if_it_exists(XLSX_FILENAME, XLSX_FILENAME + '_aux', CACHE_DIRECTORY + 'xlsx_to_delete.xlsx')
+    os.rename(XLSX_FILENAME + '_aux.xlsx', XLSX_FILENAME)
 
 
 def read_from_catalog(stream):
@@ -394,19 +394,3 @@ def read_from_catalog(stream):
         stream.write(file_handle.read())
     response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     return stream.getvalue()
-
-
-# ============================ Shared functions ============================ #
-
-
-def replace_current_file_if_it_exists(current_file_name, aux_file_name, new_name_for_current_file):
-    try:
-        # Cambiamos la caché que se estaba usando por la auxiliar
-        os.rename(current_file_name, new_name_for_current_file)
-        os.rename(aux_file_name, current_file_name)
-        # Borramos la primera, que ya no necesitamos
-        os.remove(new_name_for_current_file)
-    except OSError:
-        # No existía una caché, por lo que solamente vamos a tratar de renombrar la caché auxiliar
-        if os.path.isfile(aux_file_name):
-            os.rename(aux_file_name, current_file_name)
