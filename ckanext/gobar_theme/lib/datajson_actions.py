@@ -14,6 +14,7 @@ from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
 import logging
+import tempfile
 logger = logging.getLogger(__name__)
 
 CACHE_DIRECTORY = "/var/lib/ckan/theme_config/"
@@ -51,7 +52,8 @@ def enqueue_update_datajson_cache_tasks():
 
 
 def update_datajson_cache():
-    with open(CACHE_FILENAME + '_la_aux', 'w+') as datajson_cache:
+    file_descriptor, file_path = tempfile.mkstemp(suffix='.json', dir=CACHE_DIRECTORY)
+    with os.fdopen(file_descriptor, 'w+') as datajson_cache:
         datajson = generate_datajson_info()
 
         # Creamos un TemplateLoader
@@ -71,7 +73,7 @@ def update_datajson_cache():
         datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
 
-    os.rename(CACHE_FILENAME + '_la_aux', CACHE_FILENAME)
+    os.rename(file_path, CACHE_FILENAME)
     return renderization
 
 
@@ -385,8 +387,9 @@ def update_catalog():
         # No existe, así que la genero
         update_datajson_cache()
     catalog = DataJson(CACHE_FILENAME)
-    writers.write_xlsx_catalog(catalog, XLSX_FILENAME + '_aux.xlsx')
-    os.rename(XLSX_FILENAME + '_aux.xlsx', XLSX_FILENAME)
+    new_catalog_filename = '%s/catalog.xlsx' % tempfile.mkdtemp(dir=CACHE_DIRECTORY)
+    writers.write_xlsx_catalog(catalog, new_catalog_filename)
+    os.rename(new_catalog_filename, XLSX_FILENAME)
 
 
 def read_from_catalog(stream):
