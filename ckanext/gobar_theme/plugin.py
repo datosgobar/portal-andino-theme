@@ -10,6 +10,7 @@ import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.routing as gobar_routes
 import ckanext.gobar_theme.actions as gobar_actions
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+from ckanext.gobar_theme.lib import cache_actions
 
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
@@ -94,6 +95,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         if type(entity) is Package:
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.enqueue_update_datajson_cache_tasks()
+                cache_actions.clear_web_cache()
 
 
     def create(self, _):
@@ -102,6 +104,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Al llamarse esta acción, se regenera la caché del data.json
         '''
         datajson_actions.enqueue_update_datajson_cache_tasks()
+        cache_actions.clear_web_cache()
 
 
     def edit(self, _):
@@ -110,6 +113,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Al llamarse esta acción, se regenera la caché del data.json
         '''
         datajson_actions.enqueue_update_datajson_cache_tasks()
+        cache_actions.clear_web_cache()
 
 
     def delete(self, _):
@@ -118,6 +122,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         Al llamarse esta acción, se regenera la caché del data.json
         '''
         datajson_actions.enqueue_update_datajson_cache_tasks()
+        cache_actions.clear_web_cache()
 
 
     def read(self, _):

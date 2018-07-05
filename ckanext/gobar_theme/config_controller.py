@@ -12,6 +12,7 @@ import moment
 import redis
 from ckan.common import request, c
 from pylons import config as ckan_config
+from ckanext.gobar_theme.lib import cache_actions
 
 parse_params = logic.parse_params
 abort = base.abort
@@ -61,6 +62,7 @@ class GobArConfigController(base.BaseController):
             # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
             import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
             datajson_actions.enqueue_update_datajson_cache_tasks()
+            cache_actions.clear_web_cache()
 
         return base.render('config/config_01_title.html')
 
@@ -122,6 +124,7 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
         datajson_actions.enqueue_update_datajson_cache_tasks()
+        cache_actions.clear_web_cache()
 
         return base.render('config/config_05_social.html')
 
@@ -250,6 +253,7 @@ class GobArConfigController(base.BaseController):
             # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
             import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
             datajson_actions.enqueue_update_datajson_cache_tasks()
+            cache_actions.clear_web_cache()
         return base.render(template_name='config/config_12_metadata_portal.html')
 
     def edit_apis(self):
