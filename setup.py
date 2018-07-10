@@ -76,6 +76,9 @@ setup(
         gobar_theme=ckanext.gobar_theme.plugin:Gobar_ThemePlugin
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
+        [paste.paster_command]
+        generate-data-json = ckanext.gobar_theme.lib.cli:GenerateDataJsonCommand
+        generate-catalog-xlsx= ckanext.gobar_theme.lib.cli:GenerateCatalogXlsxCommand
     ''',
 
     # If you are changing from the default layout of your extension, you may
