@@ -9,8 +9,8 @@
     <div class="controls">
         <select id="field-license" name="license_id" data-module="autocomplete">
             {% set existing_license_id = data.get('license_id') %}
-            {% for license in h.licenses_list() %}
-                <option value="{{ license.code }}" {{ 'selected' if license.code == existing_license_id }}>{{ license.name }}</option>
+            {% for license in h.license_options(existing_license_id) %}
+                <option value="{{ license.code }}" {{ 'selected' if license.code == existing_license_id or ("CC-BY-4.0" == license.code and not existing_license_id) }}>{{ license.name }}</option>
             {% endfor %}
         </select>
         {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
