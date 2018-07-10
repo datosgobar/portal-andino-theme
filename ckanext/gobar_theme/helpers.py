@@ -7,6 +7,7 @@ import moment
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
+import os
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from datetime import time
@@ -433,3 +434,7 @@ def get_default_background_configuration():
 def get_gtm_code():
     gtm_code = config.get('ckan.google_tag_manager.gtm_container_id', False)
     return str(gtm_code)
+
+
+def get_current_url_for_resource(package_id, resource_id):
+    return os.path.join(config.get('ckan.site_url'), 'dataset', package_id, 'resource', resource_id)

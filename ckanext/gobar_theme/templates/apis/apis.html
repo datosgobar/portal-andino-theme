@@ -27,7 +27,7 @@
             <div class="dataset-list">
 
                 {% for api in c.apis %}
-                <a href="{{ api.accessURL or '/dataset/%(package_id)s/resource/%(id)s' % api }}" class="dataset-item">
+                <a href="{{ h.get_current_url_for_resource(api.package_id, api.id) }}" class="dataset-item">
                     <div class=" col-xs-12 col-md-4">
                         <div class="dataset-container">
                             <div class="dataset-border">

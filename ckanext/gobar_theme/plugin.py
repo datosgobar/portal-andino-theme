@@ -89,6 +89,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'jsondump': gobar_helpers.jsondump,
             'get_default_background_configuration': gobar_helpers.get_default_background_configuration,
             'get_gtm_code': gobar_helpers.get_gtm_code,
+            'get_current_url_for_resource': gobar_helpers.get_current_url_for_resource,
         }
 
     def notify(self, entity, operation):

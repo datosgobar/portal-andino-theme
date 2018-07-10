@@ -239,7 +239,7 @@ def clean_resources(resources):
             current_resource['accessURL'] = resource['accessURL']
         else:
             current_resource['accessURL'] = \
-                os.path.join(config.get('ckan.site_url'), 'dataset', resource['package_id'], 'resource', resource['id'])
+                gobar_helpers.get_current_url_for_resource(resource['package_id'], resource['id'])
         current_resource['downloadURL'] = generate_resource_downloadURL(resource)
         if resource.get('attributesDescription', []):
             current_resource['field'] = resource['attributesDescription']
