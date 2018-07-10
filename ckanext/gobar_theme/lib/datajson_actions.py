@@ -10,7 +10,6 @@ from ckan.config.environment import config
 import ckan.logic.action.delete as delete
 from ckan.common import c
 import ckan.model as model
-from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
 import logging
@@ -395,5 +394,4 @@ def update_catalog():
 def read_from_catalog(stream):
     with open(XLSX_FILENAME, 'rb') as file_handle:
         stream.write(file_handle.read())
-    response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     return stream.getvalue()
