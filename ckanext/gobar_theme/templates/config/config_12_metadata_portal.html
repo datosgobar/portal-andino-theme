@@ -39,27 +39,10 @@
         </select>
 
         <h2>Licencia (recomendado)</h2>
-        {% set licenses = [
-            {"name":"No se especificó la licencia","code":"notspecified"},
-            {"name": "Open Data Commons Public Domain Dedication and Licence (PDDL)", "code": "odc-pddl"},
-            {"name": "Open Data Commons Open Database License (ODbL)", "code": "odc-odbl"},
-            {"name": "Open Data Commons Attribution License", "code": "odc-by"},
-            {"name": "Creative Commons CCZero", "code": "cc-zero"},
-            {"name": "Creative Commons Attribution", "code": "cc-by"},
-            {"name": "Creative Commons Attribution Share-Alike", "code": "cc-by-sa"},
-            {"name": "GNU Free Documentation License", "code": "gfdl"},
-            {"name": "Otra (Abierta)", "code": "other-open"},
-            {"name": "Otra (Public Domain)", "code": "other-pd"},
-            {"name": "Otra (Atribución)", "code": "other-at"},
-            {"name": "UK Open Government Licence (OGL)", "code": "uk-ogl"},
-            {"name": "Creative Commons Non-Commercial (Cualquiera)", "code": "cc-nc"},
-            {"name": "Otra (No comercial)", "code": "other-nc"},
-            {"name": "Otra (No abierta)", "code": "other-closed"},
-        ] %}
-        {% set lic = h.get_theme_config('portal-metadata.license') %}
         <select class="form-control" id="portal-license" name="metadata-license" style="margin-bottom: 30px;">
-            {% for license in licenses %}
-                <option value="{{ license.code }}" {{ 'selected' if license.code == lic }}>{{ license.name }}</option>
+            {% set existing_license_id = h.get_theme_config('portal-metadata.license') %}
+            {% for license in h.license_options(existing_license_id) %}
+                <option value="{{ license.code }}" {{ 'selected' if license.code == existing_license_id or ("CC-BY-4.0" == license.code and not existing_license_id) }}>{{ license.name }}</option>
             {% endfor %}
         </select>
 
