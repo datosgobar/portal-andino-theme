@@ -1,8 +1,6 @@
 from ckan.lib import cli
-from ckanext.gobar_theme.lib.datajson_actions import update_datajson_cache, update_catalog
+from ckanext.gobar_theme.lib.datajson_actions import update_catalog, update_datajson_cache
 import logging
-import ckan.logic.schema.job_clear_schema
-import ckan.logic.action.delete
 
 
 class GenerateDataJsonCommand(cli.CkanCommand):
@@ -11,10 +9,11 @@ class GenerateDataJsonCommand(cli.CkanCommand):
 
     def command(self):
         logging.info("Generando el data.json")
+        self._load_config()
         try:
             update_datajson_cache()
-        except Exception:
-            logging.error("Error generando el data.json")
+        except Exception as e:
+            logging.exception("Error generando el data.json: %s", e)
 
 
 class GenerateCatalogXlsxCommand(cli.CkanCommand):
@@ -23,7 +22,8 @@ class GenerateCatalogXlsxCommand(cli.CkanCommand):
 
     def command(self):
         logging.info("Generando el catalog.xlsx")
+        self._load_config()
         try:
             update_catalog()
-        except Exception:
-            logging.error("Error generando el catalog.xlsx")
+        except Exception as e:
+            logging.exception("Error generando el catalog.xlsx: %s", e)

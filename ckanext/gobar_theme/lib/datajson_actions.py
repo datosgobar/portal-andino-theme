@@ -7,7 +7,10 @@ import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckan.lib.jobs as jobs
 from ckan.config.environment import config
-import ckan.logic.action.delete as delete
+try:
+    import ckan.logic.action.delete as delete
+except AttributeError:
+    pass
 from ckan.common import c
 import ckan.model as model
 from pylons import response
