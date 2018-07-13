@@ -7,6 +7,7 @@ import moment
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
+import os
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from datetime import time
@@ -213,6 +214,14 @@ def url_join(*args):
 
 def json_loads(json_string):
     return json.loads(json_string)
+
+
+def license_options(existing_license_id=None):
+    ckan_licenses_list = ckan_helpers.license_options(existing_license_id)
+    custom_licenses_list = [(u"CC-BY-4.0", u"Creative Commons Attribution 4.0")]  # Orden: 1) código - 2) título/nombre
+    final_license_list = list(set.union(set(ckan_licenses_list), custom_licenses_list))
+    final_license_list = map(lambda element: {"name": element[1], "code": element[0]}, final_license_list)
+    return sorted(final_license_list, key=lambda x: x["name"])
 
 
 def update_frequencies(freq_id=None):
@@ -433,3 +442,7 @@ def get_default_background_configuration():
 def get_gtm_code():
     gtm_code = config.get('ckan.google_tag_manager.gtm_container_id', False)
     return str(gtm_code)
+
+
+def get_current_url_for_resource(package_id, resource_id):
+    return os.path.join(config.get('ckan.site_url'), 'dataset', package_id, 'resource', resource_id)

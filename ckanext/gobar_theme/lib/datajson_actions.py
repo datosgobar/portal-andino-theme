@@ -13,7 +13,6 @@ except AttributeError:
     pass
 from ckan.common import c
 import ckan.model as model
-from pylons import response
 import ckan.logic as logic
 import ckan.plugins as p
 import logging
@@ -243,7 +242,7 @@ def clean_resources(resources):
             current_resource['accessURL'] = resource['accessURL']
         else:
             current_resource['accessURL'] = \
-                os.path.join(config.get('ckan.site_url'), 'dataset', resource['package_id'], 'resource', resource['id'])
+                gobar_helpers.get_current_url_for_resource(resource['package_id'], resource['id'])
         current_resource['downloadURL'] = generate_resource_downloadURL(resource)
         if resource.get('attributesDescription', []):
             current_resource['field'] = resource['attributesDescription']
@@ -398,5 +397,4 @@ def update_catalog():
 def read_from_catalog(stream):
     with open(XLSX_FILENAME, 'rb') as file_handle:
         stream.write(file_handle.read())
-    response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     return stream.getvalue()
