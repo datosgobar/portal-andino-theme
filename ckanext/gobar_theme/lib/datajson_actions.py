@@ -358,7 +358,7 @@ def get_catalog_data():
         gobar_helpers.date_format_to_iso(
             gobar_helpers.get_theme_config("portal-metadata.last_updated", "")) or ''
     datajson['language'] = gobar_helpers.get_theme_config("portal-metadata.languages", "") or []
-    datajson['license'] = gobar_helpers.get_theme_config("portal-metadata.license", "") or ''
+    datajson['license'] = gobar_helpers.get_theme_config("portal-metadata.license", u"CC-BY-4.0") or ''
     datajson['homepage'] = gobar_helpers.get_theme_config('portal-metadata.homepage') or ''
     datajson['rights'] = gobar_helpers.get_theme_config("portal-metadata.licence_conditions", "") or ''
     datajson['spatial'] = spatial or []
