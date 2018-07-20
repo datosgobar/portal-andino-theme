@@ -62,7 +62,7 @@
                 Licencia
             </div>
             <div class="col-xs-7 value">
-                {{ pkg.license_title }}
+                {{ h.get_license_title(pkg.license_id) }}
             </div>
         </div>
 

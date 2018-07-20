@@ -217,11 +217,18 @@ def json_loads(json_string):
 
 
 def license_options(existing_license_id=None):
-    ckan_licenses_list = ckan_helpers.license_options(existing_license_id)
+    ckan_licenses_list = ckan_helpers.license_options()
     custom_licenses_list = [(u"CC-BY-4.0", u"Creative Commons Attribution 4.0")]  # Orden: 1) código - 2) título/nombre
     final_license_list = list(set.union(set(ckan_licenses_list), custom_licenses_list))
     final_license_list = map(lambda element: {"name": element[1], "code": element[0]}, final_license_list)
     return sorted(final_license_list, key=lambda x: x["name"])
+
+
+def get_license_title(license_id):
+    for license in license_options():
+        if license['code'] == license_id:
+            return license['name']
+    return None
 
 
 def update_frequencies(freq_id=None):
