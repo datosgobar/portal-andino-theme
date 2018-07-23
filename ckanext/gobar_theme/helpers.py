@@ -8,6 +8,7 @@ from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
 import os
+import logging
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from datetime import time
@@ -446,3 +447,40 @@ def get_gtm_code():
 
 def get_current_url_for_resource(package_id, resource_id):
     return os.path.join(config.get('ckan.site_url'), 'dataset', package_id, 'resource', resource_id)
+
+
+def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
+    '''
+    :param object_dict_name: string con el nombre del diccionario que contiene los objetos de este tipo
+        (ej. groups, resources, etc)
+    :param data_dict: diccionario que contiene el id del objeto a guardar y la información que necesitamos almacenar
+        pero que no corresponde tener en el data.json (dict); debería poder utilizarse siempre de la misma manera,
+        sin importar el tipo del objeto que se desee guardar
+    :return: None
+    '''
+    CONFIG_PATH = '/var/lib/ckan/theme_config/settings.json'
+    logger = logging.getLogger()
+    try:
+        data_dict_id = data_dict.pop('id')
+    except Exception:
+        logger.error('El objeto que se está intentando guardar no tiene id')
+        return None
+    try:
+        with open(CONFIG_PATH, 'a+') as file:
+            full_stored_data = json.load(file)
+            stored_objects = full_stored_data[object_dict_name]
+            for object in stored_objects:   # todo: el id del recurso dentro del filename del ícono puede aparecer como None
+                if object == data_dict_id:
+                    # El objeto ya existía, así que se reemplaza la información que éste ya tenía y se guarda la nueva
+                    for key in data_dict.keys():
+                        stored_objects[object] = data_dict[key]
+                        # todo: escribir en el archivo como abajo, o usar el código de abajo sin la primera línea (que reemplazaría algo que no debe... y si tenía 4 cosas ya hora le pasé 3? desaparecería una)
+                    break
+            # El objeto no fue encontrado, por lo que sabemos que es nuevo y no uno existente siendo editado
+            stored_objects[data_dict_id] = data_dict
+            full_stored_data[object_dict_name] = stored_objects
+            file.seek(0)
+            file.truncate()
+            json.dump(full_stored_data, file)
+    except Exception as e:
+        logger.error('Ocurrió un problema guardando información fuera del data.json: %s', e)

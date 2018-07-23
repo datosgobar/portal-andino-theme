@@ -2,6 +2,7 @@
 from uploader import GobArThemeResourceUploader
 import ckan.plugins as plugins
 from ckan.model.package import Package
+from ckan.model.resource import Resource
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as ckan_helpers
 import ckan.plugins.interfaces as interfaces
@@ -91,6 +92,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_default_background_configuration': gobar_helpers.get_default_background_configuration,
             'get_gtm_code': gobar_helpers.get_gtm_code,
             'get_current_url_for_resource': gobar_helpers.get_current_url_for_resource,
+            'store_object_data_excluded_from_datajson': gobar_helpers.store_object_data_excluded_from_datajson,
         }
 
     def notify(self, entity, operation):
@@ -98,6 +100,12 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.enqueue_update_datajson_cache_tasks()
                 cache_actions.clear_web_cache()
+        elif type(entity) is Resource:
+            entity_dict = entity.as_dict()
+            gobar_helpers.store_object_data_excluded_from_datajson(
+                'resources', {'id': entity_dict['id'],
+                              'icon_url': entity_dict['icon_url']
+                              })
 
 
     def create(self, _):
