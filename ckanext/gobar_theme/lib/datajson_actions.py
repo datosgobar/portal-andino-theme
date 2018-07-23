@@ -389,7 +389,7 @@ def update_catalog():
     new_catalog_filename = '%s/catalog.xlsx' % tempfile.mkdtemp(dir=CACHE_DIRECTORY)
     writers.write_xlsx_catalog(catalog, new_catalog_filename)
     os.rename(new_catalog_filename, XLSX_FILENAME)
-    os.rmdir(new_catalog_filename)
+    os.rmdir(new_catalog_filename.replace('/catalog.xlsx', ''))
 
 
 def read_from_catalog(stream):
