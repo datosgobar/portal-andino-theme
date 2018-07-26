@@ -92,8 +92,26 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_default_background_configuration': gobar_helpers.get_default_background_configuration,
             'get_gtm_code': gobar_helpers.get_gtm_code,
             'get_current_url_for_resource': gobar_helpers.get_current_url_for_resource,
+            'get_package_organization': gobar_helpers.get_package_organization,
             'store_object_data_excluded_from_datajson': gobar_helpers.store_object_data_excluded_from_datajson,
+            'get_resource_icon': gobar_helpers.get_resource_icon,
         }
+
+    def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
+        '''
+        Guardamos en un archivo los datos pertenecientes a ciertas entidades que se pueden perder como consecuencia de
+        ciertas operanciones (ej. federar un recurso ya existente implica perder su ícono, en caso de tener uno) 
+        :param arguments_list_to_store: lista que contiene el nombre de todos los campos que se desean guardar
+        :param entity_dict: diccionario correspondiente a la entidad que se está manejando
+        :param object_type: string con el tipo de la entidad que se está manejando (ej. groups, resources, etc)
+        :return: 
+        '''
+        parameters_to_send = {'id': entity_dict.get('id')}
+        for attribute in arguments_list_to_store:
+            attribute_value = entity_dict.get(attribute, None)
+            if attribute_value is not None:
+                parameters_to_send[attribute] = attribute_value
+        return gobar_helpers.store_object_data_excluded_from_datajson(object_type, parameters_to_send)
 
     def notify(self, entity, operation):
         if type(entity) is Package:
@@ -101,12 +119,15 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
                 datajson_actions.enqueue_update_datajson_cache_tasks()
                 cache_actions.clear_web_cache()
         elif type(entity) is Resource:
+            arguments_list_to_store = ['icon_url']
             entity_dict = entity.as_dict()
-            gobar_helpers.store_object_data_excluded_from_datajson(
-                'resources', {'id': entity_dict['id'],
-                              'icon_url': entity_dict['icon_url']
-                              })
-
+            # Modificamos el id dentro de entity_dict para usarlo en el guardado de información en el archivo
+            entity_dict['id'] = '%s_%s_%s' % (
+                gobar_helpers.get_package_organization(entity_dict.get('package_id')).get('id', ''),
+                entity_dict['package_id'],
+                entity_dict['id']
+            )
+            self._prepare_data_for_storage_outside_datajson(arguments_list_to_store, entity_dict, 'resources')
 
     def create(self, _):
         '''

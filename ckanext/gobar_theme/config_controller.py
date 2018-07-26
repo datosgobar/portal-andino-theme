@@ -21,8 +21,7 @@ NotAuthorized = logic.NotAuthorized
 
 
 class GobArConfigController(base.BaseController):
-    # IMG_DIR = '/usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/'
-    IMG_DIR = '/theme/ckanext/gobar_theme/public/user_images/'
+    IMG_DIR = '/usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/'
     CONFIG_PATH = '/var/lib/ckan/theme_config/settings.json'
 
     def edit_title(self):
@@ -314,6 +313,10 @@ class GobArConfigController(base.BaseController):
         cls._redis_cli().set('andino-config', json_string)
         with open(GobArConfigController.CONFIG_PATH, 'w') as json_data:
             json_data.write(json_string)
+
+    @classmethod
+    def set_theme_config(cls, config_dict):
+        cls._set_config(config_dict)
 
     @classmethod
     def get_theme_config(cls, path=None, default=None):
