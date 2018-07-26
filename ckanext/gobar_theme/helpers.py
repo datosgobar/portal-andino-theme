@@ -8,6 +8,7 @@ from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
 import os
+import logging
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from datetime import time
@@ -453,3 +454,46 @@ def get_gtm_code():
 
 def get_current_url_for_resource(package_id, resource_id):
     return os.path.join(config.get('ckan.site_url'), 'dataset', package_id, 'resource', resource_id)
+
+
+def get_package_organization(package_id):
+    return logic.get_action('package_show')({}, {'id': package_id}).get('organization', {})
+
+
+def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
+    '''
+    :param object_dict_name: string con el tipo de la entidad que se está manejando (ej. groups, resources, etc)
+    :param data_dict: diccionario que contiene el id del objeto a guardar y la información que necesitamos almacenar
+        pero que no corresponde tener en el data.json (dict); debería poder utilizarse siempre de la misma manera,
+        sin importar el tipo del objeto que se desee guardar
+    :return: None
+    '''
+    config = get_theme_config()
+    data_dict_id = data_dict.get('id')
+    if len(data_dict) > 1:
+        data_dict.pop('id')
+
+        config_item = config.get(object_dict_name, {})
+        config_item.update({data_dict_id: data_dict})
+        config[object_dict_name] = config_item
+
+        GobArConfigController.set_theme_config(config)
+    return config[object_dict_name][data_dict.get('id', data_dict_id)]
+
+
+def get_resource_icon(resource, config):
+    icon_url = resource.get('icon_url', None)
+    if icon_url:
+        return icon_url
+    package_id = resource['package_id']
+    id_to_search_with = '%s_%s_%s' % (
+        get_package_organization(package_id).get('id', ''),
+        resource['package_id'],
+        resource['id']
+    )
+    if not config:
+        config = get_theme_config()
+    resource_in_config = config.get('resources', {}).get(id_to_search_with, None)
+    if resource_in_config is not None:
+        return resource_in_config.get('icon_url', None)
+    return None

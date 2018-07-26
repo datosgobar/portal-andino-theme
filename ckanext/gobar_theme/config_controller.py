@@ -315,6 +315,10 @@ class GobArConfigController(base.BaseController):
             json_data.write(json_string)
 
     @classmethod
+    def set_theme_config(cls, config_dict):
+        cls._set_config(config_dict)
+
+    @classmethod
     def get_theme_config(cls, path=None, default=None):
         gobar_config = cls._read_config()
         if path is not None:
