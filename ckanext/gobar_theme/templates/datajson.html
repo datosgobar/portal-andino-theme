@@ -85,8 +85,8 @@
                         {%- if distrib.license is defined %}
                             "license":      {{ h.jsondump(distrib.license) }},
                         {%- endif %}
-                        {%- if distrib.attributes|length > 0 %}
-                             "field":       {{ h.jsondump(distrib.attributes) }},
+                        {%- if distrib.field|length > 0 %}
+                             "field":       {{ h.jsondump(distrib.field) }},
                         {%- endif %}
                             "accessURL":    {{ h.jsondump(distrib.accessURL) }},
                             "downloadURL":  {{ h.jsondump(distrib.downloadURL) }}

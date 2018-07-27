@@ -243,7 +243,6 @@ def clean_resources(resources):
         current_resource['downloadURL'] = generate_resource_downloadURL(resource)
         if resource.get('attributesDescription', []):
             current_resource['field'] = resource['attributesDescription']
-            current_resource['attributes'] = tuple(resource['attributesDescription'])
         final_resource_list.append(current_resource)
     return final_resource_list
 
@@ -292,8 +291,7 @@ def get_datasets_with_resources(packages):
                     fixed_attrDesc = json.loads(resource['attributesDescription'])
                     packages[i]['resources'][index]['attributesDescription'] = fixed_attrDesc
                 except ValueError:
-                    # logger.error('Fallo render de \'attributesDescription\'.') todo: logger?
-                    pass
+                    logger.error('Fallo render de \'attributesDescription\'.')
         except KeyError:
             pass
         ckan_host = ''
@@ -308,17 +306,16 @@ def get_datasets_with_resources(packages):
                 packages[i]['url'] = '{host}/dataset/{dataset_id}'.format(
                     host=ckan_host[:-1],
                     dataset_id=packages[i]['name'])
-                # logger.info("landingPage generado para el dataset_id: %s.", packages[i]['name']) todo: logger?
+                logger.info("landingPage generado para el dataset_id: %s.", packages[i]['name'])
         except TypeError:
             prepare_url = 'unknow'
             try:
                 prepare_url = packages[i]['resources'][0]['url']
                 prepare_url = prepare_url.split('resource')[0]
-                # logger.info("landingPage generado para el dataset_id: %s, Tipo de datos: \" harvest\".",
-                #             packages[i]['name'])                                              todo: logger?
+                logger.info("landingPage generado para el dataset_id: %s, Tipo de datos: \" harvest\".",
+                            packages[i]['name'])
             except IndexError:
-                # logger.error("autogen \"landingpage\" fails.") todo: logger?
-                pass
+                logger.error("autogen \"landingpage\" fails.")
             packages[i].update({'url': prepare_url})
     return packages
 
