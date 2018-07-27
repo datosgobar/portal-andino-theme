@@ -496,3 +496,6 @@ def get_resource_icon(resource, config):
     if resource_in_config is not None:
         return resource_in_config.get('icon_url', None)
     return None
+
+def get_andino_base_page():
+    return config.get('andino.base_page', 'gobar_page.html')
