@@ -448,8 +448,7 @@ def get_default_background_configuration():
 
 
 def get_gtm_code():
-    gtm_code = config.get('ckan.google_tag_manager.gtm_container_id', False)
-    return str(gtm_code)
+    return config.get('ckan.google_tag_manager.gtm_container_id', None)
 
 
 def get_current_url_for_resource(package_id, resource_id):
