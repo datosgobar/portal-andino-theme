@@ -1,4 +1,4 @@
-{% extends "gobar_page.html" %}
+{% extends h.get_andino_base_page() %}
 
 {% set pkg = c.pkg_dict or pkg_dict %}
 {% set logged_in = true if c.userobj else false %}
