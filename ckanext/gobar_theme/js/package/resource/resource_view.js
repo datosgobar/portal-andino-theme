@@ -104,7 +104,7 @@ $(function () {
             }
         }
 
-        if (tableBody.get(0).scrollHeight > tableBody.height()) {
+        if (tableBody.get(0) && tableBody.get(0).scrollHeight > tableBody.height()) {
             // Hay un scroll, ajusto las últimas dos columnas
             $("#metadata-table th:nth-last-child(-n+2)").css('padding-right', '4%');
         }
