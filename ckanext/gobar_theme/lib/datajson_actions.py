@@ -288,12 +288,16 @@ def get_datasets_with_resources(packages):
         try:
             for index, resource in enumerate(packages[i]['resources']):
                 try:
-                    fixed_attrDesc = json.loads(resource['attributesDescription'])
-                    packages[i]['resources'][index]['attributesDescription'] = fixed_attrDesc
+                    attributes_description_as_dict = json.loads(resource.get('attributesDescription', '[]'))
+                    packages[i]['resources'][index]['attributesDescription'] = attributes_description_as_dict
                 except ValueError:
+                    attributes_description_as_dict = []
                     logger.error('Fallo render de \'attributesDescription\'.')
+                except KeyError as e:
+                    logger.error(u'Error transformando attributesDescription de %s', resource)
+                    raise e
         except KeyError:
-            pass
+            logger.error(u"Fallo durante la transformación de 'attributesDescription' del package %s.", packages[i].get('id'))
         ckan_host = ''
         try:
             ckan_host = re.match(
