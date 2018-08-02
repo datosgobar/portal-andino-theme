@@ -56,7 +56,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {
             'organization_tree': gobar_helpers.organization_tree,
-            'get_suborganizations': gobar_helpers.get_suborganizations,
+            'get_suborganizations_names': gobar_helpers.get_suborganizations_names,
             'get_faceted_groups': gobar_helpers.get_faceted_groups,
             'join_groups': gobar_helpers.join_groups,
             'cut_text': gobar_helpers.cut_text,
