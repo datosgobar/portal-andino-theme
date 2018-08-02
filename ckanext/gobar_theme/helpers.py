@@ -55,7 +55,9 @@ def get_suborganizations_names(org_name=None):
     organizations = organization_tree()
     for organization in organizations:
         if organization.get('name') == org_name:
-            return list(map(lambda x: x['name'], organization['children']))
+            if 'children' in organization:
+                return list(map(lambda x: x['name'], organization['children']))
+            break
     return []
 
 
