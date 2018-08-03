@@ -44,14 +44,21 @@ def organization_tree():
     return organizations
 
 
-def get_suborganizations():
+def get_suborganizations_names(org_name=None):
+    '''
+    Consigue el 'name' de todas las suborganizaciones de una organización
+    :param org_name: 'name' de la organización cuyas suborganizaciones necesitamos
+    :return: una lista vacía o que contiene los 'name' de las suborganizaciones correspondientes
+    '''
+    if org_name is None:
+        return []
     organizations = organization_tree()
-    suborganizations = []
     for organization in organizations:
-        if 'children' in organization:
-            for child in organization['children']:
-                suborganizations.append(child['name'])
-    return suborganizations
+        if organization.get('name') == org_name:
+            if 'children' in organization:
+                return list(map(lambda x: x['name'], organization['children']))
+            break
+    return []
 
 
 def fetch_groups():

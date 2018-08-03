@@ -139,7 +139,7 @@ def dataset_delete_and_purge(context, data_dict):
 
 
 def organization_delete_and_purge(context, data_dict):
-    for suborganization in h.get_suborganizations():
+    for suborganization in h.get_suborganizations_names(data_dict.get('id', None)):  # En realidad es el name, no el id
         logic.action.delete._group_or_org_delete(context, {'id': suborganization}, is_org=True)
         logic.action.delete.group_purge(context, {'id': suborganization})
     logic.action.delete._group_or_org_delete(context, data_dict, is_org=True)
