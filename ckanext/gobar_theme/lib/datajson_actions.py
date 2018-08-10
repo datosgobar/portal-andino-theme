@@ -43,8 +43,6 @@ def get_data_json_contents():
 
 
 def enqueue_update_datajson_cache_tasks():
-    update_datajson_cache()
-    return None
     # Las funciones que usamos de RQ requieren que se les envíe el context para evitar problemas de autorización
     context = {'model': model, 'session': model.Session, 'user': c.user}
     delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
@@ -331,12 +329,28 @@ def get_datasets_with_resources(packages):
 
 def get_catalog_data():
     datajson = {}
+    identifier = gobar_helpers.get_theme_config("portal-metadata.id", "")
+    title = gobar_helpers.get_theme_config("title.site-title", "")
+    description = gobar_helpers.get_theme_config("title.site-description", "")
+    publisher = {}
+    publisher_mbox = gobar_helpers.get_theme_config("social.mail", "")
+    publisher_name = gobar_helpers.get_theme_config("title.site-organization", "")
+    if publisher_mbox:
+        publisher['mbox'] = publisher_mbox
+    if publisher_name:
+        publisher['name'] = publisher_name
+    issued = gobar_helpers.date_format_to_iso(gobar_helpers.get_theme_config("portal-metadata.launch_date", ""))
+    modified = gobar_helpers.date_format_to_iso(gobar_helpers.get_theme_config("portal-metadata.last_updated", ""))
+    language = gobar_helpers.get_theme_config("portal-metadata.languages", "")
+    license = gobar_helpers.get_theme_config("portal-metadata.license", u"CC-BY-4.0")
+    homepage = gobar_helpers.get_theme_config('portal-metadata.homepage')
+    rights = gobar_helpers.get_theme_config("portal-metadata.licence_conditions", "")
     spatial = []
     spatial_config_fields = ['country', 'province', 'districts']
     for spatial_config_field in spatial_config_fields:
         spatial_config_field_value = gobar_helpers.get_theme_config(
             "portal-metadata.%s" % spatial_config_field, "")
-        if spatial_config_field_value:
+        if spatial_config_field_value and spatial_config_field_value != "None":
             spatial.extend(spatial_config_field_value.split(','))
     data_dict_page_results = {
         'all_fields': True,
@@ -346,29 +360,45 @@ def get_catalog_data():
     }
     groups = []
     for theme in logic.get_action('group_list')({}, data_dict_page_results):
-        groups.append({'id': theme['name'],
-                       'description': theme['description'],
-                       'label': theme['display_name']
-                       })
+        theme_attributes = {}
+        theme_name = theme['name']
+        if theme_name:
+            theme_attributes['id'] = theme_name
+        theme_description = theme['display_name']
+        if theme_description:
+            theme_attributes['description'] = theme_description
+        theme_label = theme['display_name']
+        if theme_label:
+            theme_attributes['label'] = theme['display_name']
+        if theme_attributes:
+            groups.append(theme_attributes)
+
     datajson['version'] = ANDINO_METADATA_VERSION
-    datajson['identifier'] = gobar_helpers.get_theme_config("portal-metadata.id", "") or ''
-    datajson['title'] = gobar_helpers.get_theme_config("title.site-title", "") or ''
-    datajson['description'] = gobar_helpers.get_theme_config("title.site-description", "") or ''
     datajson['superThemeTaxonomy'] = SUPERTHEME_TAXONOMY_URL
-    datajson['publisher'] = {'mbox': gobar_helpers.get_theme_config("social.mail", ""),
-                             'name': gobar_helpers.get_theme_config("title.site-organization", "") or ''}
-    datajson['issued'] = \
-        gobar_helpers.date_format_to_iso(
-            gobar_helpers.get_theme_config("portal-metadata.launch_date", "")) or ''
-    datajson['modified'] = \
-        gobar_helpers.date_format_to_iso(
-            gobar_helpers.get_theme_config("portal-metadata.last_updated", "")) or ''
-    datajson['language'] = gobar_helpers.get_theme_config("portal-metadata.languages", "") or []
-    datajson['license'] = gobar_helpers.get_theme_config("portal-metadata.license", u"CC-BY-4.0") or ''
-    datajson['homepage'] = gobar_helpers.get_theme_config('portal-metadata.homepage') or ''
-    datajson['rights'] = gobar_helpers.get_theme_config("portal-metadata.licence_conditions", "") or ''
-    datajson['spatial'] = spatial or []
-    datajson['themeTaxonomy'] = groups
+    if identifier:
+        datajson['identifier'] = identifier
+    if title:
+        datajson['title'] = title
+    if description:
+        datajson['description'] = description
+    if publisher:
+        datajson['publisher'] = publisher
+    if issued:
+        datajson['issued'] = issued
+    if modified:
+        datajson['modified'] = modified
+    if language:
+        datajson['language'] = language
+    if license:
+        datajson['license'] = license
+    if homepage:
+        datajson['homepage'] = homepage
+    if rights:
+        datajson['rights'] = rights
+    if spatial:
+        datajson['spatial'] = spatial
+    if groups:
+        datajson['themeTaxonomy'] = groups
     return datajson
 
 
