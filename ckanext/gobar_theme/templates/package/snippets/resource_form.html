@@ -56,10 +56,9 @@
         {% block basic_fields_distribution_type %}
             <div class="control-group">
                 {% set distribution_types = h.distribution_types() %}
-                {% set resource_type = data.get('resource_type') %}
                 <label class="control-label" for="distribution-type">Tipo de recurso</label>
                 <select id="distribution-type" name="resource_type" class="resource-select">
-                    <option selected disabled hidden>Ej.: Archivo de datos, Código, API, etc.</option>
+                    {% set resource_type = data.get('resource_type') %}
                     {% for type in distribution_types %}
                         <option class="distribution-type-option" value="{{ resource_type if resource_type and resource_type.startswith(type[0]) else type[0] }}" {{ 'selected' if resource_type and resource_type.startswith(type[0]) }} >{{ type[1] }}</option>
                     {% endfor %}
