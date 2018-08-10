@@ -268,6 +268,19 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_13_apis.html')
 
+    def edit_series(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            config_dict['series_tiempo_ar_explorer'] = {
+                'catalog_id': params['catalog_id'].strip(),
+                "featured": params['featured'].strip(),
+                'enable': 'enable' in params
+            }
+            self._set_config(config_dict)
+        return base.render('config/config_14_series.html')
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':
