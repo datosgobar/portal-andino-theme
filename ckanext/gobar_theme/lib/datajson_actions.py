@@ -43,6 +43,8 @@ def get_data_json_contents():
 
 
 def enqueue_update_datajson_cache_tasks():
+    update_datajson_cache()
+    return None
     # Las funciones que usamos de RQ requieren que se les envíe el context para evitar problemas de autorización
     context = {'model': model, 'session': model.Session, 'user': c.user}
     delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
@@ -105,23 +107,23 @@ def filter_dataset_fields(dataset_list):
         publisher = {}
         author_name = ds['author']
         author_email = ds['author_email']
-        if author_name is not None and author_name != '':
+        if author_name:
             publisher['name'] = author_name
-        if author_email is not None and author_email != '':
+        if author_email:
             publisher['mbox'] = author_email
         source = get_field_from_list_and_delete(ds['extras'], 'source')
-        contactPoint = {}
         maintainer = ds['maintainer']
         maintainer_email = ds['maintainer_email']
-        if maintainer is not None and maintainer != '':
+        contactPoint = {}
+        if maintainer:
             contactPoint['fn'] = maintainer
-        if maintainer_email is not None and maintainer_email != '':
+        if maintainer_email:
             contactPoint['hasEmail'] = maintainer_email
         keyword = map(lambda kw: kw['display_name'], ds['tags'])
         superTheme = get_field_from_list_and_delete(ds['extras'], 'superTheme')
-        if superTheme is None or superTheme == '':
+        if not superTheme:
             superTheme = get_field_from_list_and_delete(ds['extras'], 'globalGroups')
-            if superTheme is not None and superTheme != '':
+            if superTheme:
                 superTheme = eval(superTheme)
             else:
                 superTheme = []
@@ -144,56 +146,54 @@ def filter_dataset_fields(dataset_list):
                     language_list = json.loads(lang)
             language = language_list
         theme = map(lambda th: th['name'], ds['groups'])
-        accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'accrualPeriodicity')
-        if not accrualPeriodicity:
-            accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'updateFrequency')
-        temporal = get_field_from_list_and_delete(ds['extras'], 'temporal')
-        if temporal is None or temporal == '':
-            temporal = get_field_from_list_and_delete(ds['extras'], 'dateRange')
+        accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'accrualPeriodicity') or \
+                             get_field_from_list_and_delete(ds['extras'], 'updateFrequency')
+        temporal = get_field_from_list_and_delete(ds['extras'], 'temporal') or \
+                   get_field_from_list_and_delete(ds['extras'], 'dateRange')
         resources = clean_resources(ds['resources'])
 
         # Voy guardando los datos a mostrar en el data.json
-        current_dataset.update({'title': ds['title']})
-        current_dataset.update({'description': ds['notes']})
-        current_dataset.update({'identifier': ds['id']})
-        if issued is not None and issued != '':
-            current_dataset.update({'issued': issued})
-        if modified is not None and modified != '':
-            current_dataset.update(({'modified': modified}))
-        if ds['url'] is not None and ds['url'] != '':
-            current_dataset.update({"landingPage": ds['url']})
-        if ds['license_title'] is not None and ds['license_title']:
-            current_dataset.update({"license": ds['license_title']})
-        if country is not None and country != '':
+        current_dataset.update({'title': ds['title']})                                                           # title
+        current_dataset.update({'description': ds['notes']})                                               # description
+        current_dataset.update({'identifier': ds['id']})                                                            # id
+        if issued:
+            current_dataset.update({'issued': issued})                                                          # issued
+        if modified:
+            current_dataset.update(({'modified': modified}))                                                  # modified
+        if ds['url']:
+            current_dataset.update({"landingPage": ds['url']})                                                     # url
+        if ds['license_title']:
+            current_dataset.update({"license": ds['license_title']})                                           # license
+        if country and country != "None":
             spatial = [country]
-            if province is not None and province != '':
+            if province:
                 spatial.append(province)
-                if district is not None and district != '':
+                if district:
                     spatial.append(district)
             current_dataset.update({"spatial": spatial})
-        elif ds.get('spatial', None) is not None:
+        elif ds.get('spatial', None):
             spatial = ds['spatial']
             if isinstance(spatial, basestring) and len(spatial):
                 current_dataset.update({"spatial": spatial})
-        if publisher != {}:
+        if publisher:
             current_dataset.update({"publisher": publisher})
-        if contactPoint != {}:
+        if contactPoint:
             current_dataset.update({"contactPoint": contactPoint})
-        if source is not None and source != '':
+        if source:
             current_dataset.update({"source": source})
-        if resources is not None and resources != []:
+        if resources:
             current_dataset.update({"distribution": resources})
-        if keyword is not None and len(keyword):
+        if keyword:
             current_dataset.update({"keyword": keyword})
-        if superTheme is not None:
+        if superTheme:
             current_dataset.update({"superTheme": superTheme})
-        if language is not None:
+        if language:
             current_dataset.update({"language": language})
-        if theme is not None:
+        if theme:
             current_dataset.update({"theme": theme})
-        if accrualPeriodicity is not None:
+        if accrualPeriodicity:
             current_dataset.update(({"accrualPeriodicity": accrualPeriodicity}))
-        if temporal is not None:
+        if temporal:
             current_dataset.update({"temporal": temporal})
         final_list.append(current_dataset)
     return final_list
@@ -203,46 +203,51 @@ def clean_resources(resources):
     final_resource_list = []
     for resource in resources:
         current_resource = {}
-        url_type = resource.get('url_type', None)
-        url = resource.get('url', None)
-        resource_type = resource.get('resource_type', None)
 
-        current_resource['identifier'] = resource['id']
-        if resource.get('format', None):
-            current_resource['format'] = resource['format']
-        current_resource['title'] = resource['name']
-        current_resource['description'] = resource['description']
-        if 'fileName' in resource and resource['fileName']:
-            current_resource['fileName'] = resource['fileName']
-        if url_type is not None:
-            if url_type == 'upload' and url and resource_type != 'api' and '/' in url:
-                # Como se subió un archivo, queremos asegurarnos de que el fileName sea correcto; lo buscamos en la URL
+        # Recolecto datos del recurso
+        format = resource.get('format', None)
+        fileName = resource.get('fileName', None)
+        url = resource.get('url', None)
+        url_type = resource.get('url_type', None)
+        type = resource.get('resource_type', None)
+        issued = resource.get('issued', None) or resource.get('created', None)
+        modified = resource.get('modified', None) or resource.get('last_modified', None)
+        license = resource.get('license_id', None)
+        accessURL = resource.get('accessURL', None) or \
+                    gobar_helpers.get_current_url_for_resource(resource['package_id'], resource['id'])
+        field = resource.get('attributesDescription', [])
+        for element in field:
+            for key in element.keys():
+                if not element[key]:
+                    element.pop(key)
+
+        # Guardo todos los elementos que no estén vacíos ni sean None
+        current_resource['identifier'] = resource['id']                                                     # identifier
+        if format:
+            current_resource['format'] = resource['format']                                                     # format
+        current_resource['title'] = resource['name']                                                             # title
+        current_resource['description'] = resource['description']                                          # description
+        if fileName:
+            current_resource['fileName'] = resource['fileName']                                               # fileName
+        if url_type:
+            if url_type == 'upload' and url and type != 'api' and '/' in url:
+                # Como se subió un archivo, queremos asegurarnos de que el fileName
+                # sea correcto; lo buscamos en la URL
                 last_slash_position = url.rfind('/')
-                current_resource['fileName'] = url[last_slash_position+1:]
-            if resource_type:
-                current_resource['type'] = resource_type
-        if 'issued' in resource:
-            current_resource['issued'] = resource['issued']
-        elif 'created' in resource:
-            current_resource['issued'] = resource['created']
-        else:
-            current_resource['issued'] = ''
-        if 'modified' in resource:
-            current_resource['modified'] = resource['modified']
-        elif 'last_modified' in resource:
-            current_resource['modified'] = resource['last_modified']
-        else:
-            current_resource['modified'] = ''
-        if resource.get('license_id', None):
-            current_resource['license'] = resource['license_id']
-        if 'accessURL' in resource:
-            current_resource['accessURL'] = resource['accessURL']
-        else:
-            current_resource['accessURL'] = \
-                gobar_helpers.get_current_url_for_resource(resource['package_id'], resource['id'])
-        current_resource['downloadURL'] = generate_resource_downloadURL(resource)
-        if resource.get('attributesDescription', []):
-            current_resource['field'] = resource['attributesDescription']
+                current_resource['fileName'] = url[last_slash_position+1:]                           # fileName (upload)
+            if type:
+                current_resource['type'] = type                                                                   # type
+        if issued:
+            current_resource['issued'] = issued                                                                 # issued
+        if modified:
+            current_resource['modified'] = modified                                                           # modified
+        if license:
+            current_resource['license'] = license                                                              # license
+        if accessURL:
+            current_resource['accessURL'] = accessURL                                                        # accessURL
+        current_resource['downloadURL'] = generate_resource_downloadURL(resource)                          # downloadURL
+        if field:
+            current_resource['field'] = field                                                                    # field
         final_resource_list.append(current_resource)
     return final_resource_list
 
