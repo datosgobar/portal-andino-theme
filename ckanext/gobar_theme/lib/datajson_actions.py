@@ -170,31 +170,31 @@ def filter_dataset_fields(dataset_list):
                 spatial.append(province)
                 if district:
                     spatial.append(district)
-            current_dataset.update({"spatial": spatial})
+            current_dataset.update({"spatial": spatial})                                                       # spatial
         elif ds.get('spatial', None):
             spatial = ds['spatial']
             if isinstance(spatial, basestring) and len(spatial):
                 current_dataset.update({"spatial": spatial})
         if publisher:
-            current_dataset.update({"publisher": publisher})
+            current_dataset.update({"publisher": publisher})                                                 # publisher
         if contactPoint:
-            current_dataset.update({"contactPoint": contactPoint})
+            current_dataset.update({"contactPoint": contactPoint})                                        # contactPoint
         if source:
-            current_dataset.update({"source": source})
+            current_dataset.update({"source": source})                                                          # source
         if resources:
-            current_dataset.update({"distribution": resources})
+            current_dataset.update({"distribution": resources})                                              # resources
         if keyword:
-            current_dataset.update({"keyword": keyword})
+            current_dataset.update({"keyword": keyword})                                                       # keyword
         if superTheme:
-            current_dataset.update({"superTheme": superTheme})
+            current_dataset.update({"superTheme": superTheme})                                              # superTheme
         if language:
-            current_dataset.update({"language": language})
+            current_dataset.update({"language": language})                                                    # language
         if theme:
-            current_dataset.update({"theme": theme})
+            current_dataset.update({"theme": theme})                                                             # theme
         if accrualPeriodicity:
-            current_dataset.update(({"accrualPeriodicity": accrualPeriodicity}))
+            current_dataset.update(({"accrualPeriodicity": accrualPeriodicity}))                    # accrualPeriodicity
         if temporal:
-            current_dataset.update({"temporal": temporal})
+            current_dataset.update({"temporal": temporal})                                                    # temporal
         final_list.append(current_dataset)
     return final_list
 
