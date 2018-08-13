@@ -97,31 +97,19 @@ def filter_dataset_fields(dataset_list):
         current_dataset = {}
 
         # Consigo los elementos existentes en listas que voy a necesitar
-        issued = get_field_from_list_and_delete(ds['extras'], 'issued') or ds['metadata_created']
-        modified = get_field_from_list_and_delete(ds['extras'], 'modified') or ds['metadata_modified']
         country = get_field_from_list_and_delete(ds['extras'], 'country')
         province = get_field_from_list_and_delete(ds['extras'], 'province')
         district = get_field_from_list_and_delete(ds['extras'], 'district')
         publisher = {}
-        author_name = ds['author']
-        author_email = ds['author_email']
-        if author_name is not None and author_name != '':
-            publisher['name'] = author_name
-        if author_email is not None and author_email != '':
-            publisher['mbox'] = author_email
-        source = get_field_from_list_and_delete(ds['extras'], 'source')
+        set_nonempty_value(publisher, 'name', ds['author'])
+        set_nonempty_value(publisher, 'mbox', ds['author_email'])
         contactPoint = {}
-        maintainer = ds['maintainer']
-        maintainer_email = ds['maintainer_email']
-        if maintainer is not None and maintainer != '':
-            contactPoint['fn'] = maintainer
-        if maintainer_email is not None and maintainer_email != '':
-            contactPoint['hasEmail'] = maintainer_email
-        keyword = map(lambda kw: kw['display_name'], ds['tags'])
+        set_nonempty_value(contactPoint, 'fn', ds['maintainer'])
+        set_nonempty_value(contactPoint, 'hasEmail', ds['maintainer_email'])
         superTheme = get_field_from_list_and_delete(ds['extras'], 'superTheme')
-        if superTheme is None or superTheme == '':
+        if not superTheme:
             superTheme = get_field_from_list_and_delete(ds['extras'], 'globalGroups')
-            if superTheme is not None and superTheme != '':
+            if superTheme:
                 superTheme = eval(superTheme)
             else:
                 superTheme = []
@@ -143,58 +131,41 @@ def filter_dataset_fields(dataset_list):
                     lang = [lang]
                     language_list = json.loads(lang)
             language = language_list
-        theme = map(lambda th: th['name'], ds['groups'])
-        accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'accrualPeriodicity')
-        if not accrualPeriodicity:
-            accrualPeriodicity = get_field_from_list_and_delete(ds['extras'], 'updateFrequency')
-        temporal = get_field_from_list_and_delete(ds['extras'], 'temporal')
-        if temporal is None or temporal == '':
-            temporal = get_field_from_list_and_delete(ds['extras'], 'dateRange')
-        resources = clean_resources(ds['resources'])
 
         # Voy guardando los datos a mostrar en el data.json
-        current_dataset.update({'title': ds['title']})
-        current_dataset.update({'description': ds['notes']})
-        current_dataset.update({'identifier': ds['id']})
-        if issued is not None and issued != '':
-            current_dataset.update({'issued': issued})
-        if modified is not None and modified != '':
-            current_dataset.update(({'modified': modified}))
-        if ds['url'] is not None and ds['url'] != '':
-            current_dataset.update({"landingPage": ds['url']})
-        if ds['license_title'] is not None and ds['license_title']:
-            current_dataset.update({"license": ds['license_title']})
-        if country is not None and country != '':
+        set_nonempty_value(current_dataset, 'title', ds['title'])
+        set_nonempty_value(current_dataset, 'description', ds['notes'])
+        set_nonempty_value(current_dataset, 'identifier', ds['id'])
+        set_nonempty_value(current_dataset, 'issued',
+                           get_field_from_list_and_delete(ds['extras'], 'issued') or ds['metadata_created'])
+        set_nonempty_value(current_dataset, 'modified',
+                           get_field_from_list_and_delete(ds['extras'], 'modified') or ds['metadata_modified'])
+        set_nonempty_value(current_dataset, 'landingPage', ds['url'])
+        set_nonempty_value(current_dataset, 'license', ds['license_title'])
+        if country and country != "None":
             spatial = [country]
-            if province is not None and province != '':
+            if province:
                 spatial.append(province)
-                if district is not None and district != '':
+                if district:
                     spatial.append(district)
             current_dataset.update({"spatial": spatial})
-        elif ds.get('spatial', None) is not None:
+        elif ds.get('spatial', None):
             spatial = ds['spatial']
             if isinstance(spatial, basestring) and len(spatial):
                 current_dataset.update({"spatial": spatial})
-        if publisher != {}:
-            current_dataset.update({"publisher": publisher})
-        if contactPoint != {}:
-            current_dataset.update({"contactPoint": contactPoint})
-        if source is not None and source != '':
-            current_dataset.update({"source": source})
-        if resources is not None and resources != []:
-            current_dataset.update({"distribution": resources})
-        if keyword is not None and len(keyword):
-            current_dataset.update({"keyword": keyword})
-        if superTheme is not None:
-            current_dataset.update({"superTheme": superTheme})
-        if language is not None:
-            current_dataset.update({"language": language})
-        if theme is not None:
-            current_dataset.update({"theme": theme})
-        if accrualPeriodicity is not None:
-            current_dataset.update(({"accrualPeriodicity": accrualPeriodicity}))
-        if temporal is not None:
-            current_dataset.update({"temporal": temporal})
+        set_nonempty_value(current_dataset, 'publisher', publisher)
+        set_nonempty_value(current_dataset, 'contactPoint', contactPoint)
+        set_nonempty_value(current_dataset, 'source', get_field_from_list_and_delete(ds['extras'], 'source'))
+        set_nonempty_value(current_dataset, 'distribution', clean_resources(ds['resources']))
+        set_nonempty_value(current_dataset, 'keyword', map(lambda kw: kw['display_name'], ds['tags']))
+        set_nonempty_value(current_dataset, 'superTheme', superTheme)
+        set_nonempty_value(current_dataset, 'language', language)
+        set_nonempty_value(current_dataset, 'theme', map(lambda th: th['name'], ds['groups']))
+        set_nonempty_value(current_dataset, 'accrualPeriodicity',
+                           get_field_from_list_and_delete(ds['extras'], 'accrualPeriodicity')
+                           or get_field_from_list_and_delete(ds['extras'], 'updateFrequency'))
+        set_nonempty_value(current_dataset, 'temporal', get_field_from_list_and_delete(ds['extras'], 'temporal') or
+                           get_field_from_list_and_delete(ds['extras'], 'dateRange'))
         final_list.append(current_dataset)
     return final_list
 
@@ -203,46 +174,37 @@ def clean_resources(resources):
     final_resource_list = []
     for resource in resources:
         current_resource = {}
-        url_type = resource.get('url_type', None)
-        url = resource.get('url', None)
-        resource_type = resource.get('resource_type', None)
 
-        current_resource['identifier'] = resource['id']
-        if resource.get('format', None):
-            current_resource['format'] = resource['format']
-        current_resource['title'] = resource['name']
-        current_resource['description'] = resource['description']
-        if 'fileName' in resource and resource['fileName']:
-            current_resource['fileName'] = resource['fileName']
-        if url_type is not None:
-            if url_type == 'upload' and url and resource_type != 'api' and '/' in url:
+        # Recolecto cierta información del recurso
+        url = resource.get('url', None)
+        url_type = resource.get('url_type', None)
+        type = resource.get('resource_type', None)
+        field = resource.get('attributesDescription', [])
+        for element in field:
+            for key in element.keys():
+                if not element[key]:
+                    element.pop(key)
+
+        # Guardo todos los datos que no estén vacíos ni sean None
+        set_nonempty_value(current_resource, 'identifier', resource['id'])
+        set_nonempty_value(current_resource, 'format', resource.get('format', None))
+        set_nonempty_value(current_resource, 'title', resource['name'])
+        set_nonempty_value(current_resource, 'description', resource['description'])
+        set_nonempty_value(current_resource, 'fileName', resource.get('fileName', None))
+        if url_type:
+            if url_type == 'upload' and url and type != 'api' and '/' in url:
                 # Como se subió un archivo, queremos asegurarnos de que el fileName sea correcto; lo buscamos en la URL
                 last_slash_position = url.rfind('/')
                 current_resource['fileName'] = url[last_slash_position+1:]
-            if resource_type:
-                current_resource['type'] = resource_type
-        if 'issued' in resource:
-            current_resource['issued'] = resource['issued']
-        elif 'created' in resource:
-            current_resource['issued'] = resource['created']
-        else:
-            current_resource['issued'] = ''
-        if 'modified' in resource:
-            current_resource['modified'] = resource['modified']
-        elif 'last_modified' in resource:
-            current_resource['modified'] = resource['last_modified']
-        else:
-            current_resource['modified'] = ''
-        if resource.get('license_id', None):
-            current_resource['license'] = resource['license_id']
-        if 'accessURL' in resource:
-            current_resource['accessURL'] = resource['accessURL']
-        else:
-            current_resource['accessURL'] = \
-                gobar_helpers.get_current_url_for_resource(resource['package_id'], resource['id'])
-        current_resource['downloadURL'] = generate_resource_downloadURL(resource)
-        if resource.get('attributesDescription', []):
-            current_resource['field'] = resource['attributesDescription']
+            set_nonempty_value(current_resource, 'type', type)
+        set_nonempty_value(current_resource, 'issued', resource.get('issued', None) or resource.get('created', None))
+        set_nonempty_value(current_resource, 'modified',
+                           resource.get('modified', None) or resource.get('last_modified', None))
+        set_nonempty_value(current_resource, 'license', resource.get('license_id', None))
+        set_nonempty_value(current_resource, 'accessURL', resource.get('accessURL', None) or
+                           gobar_helpers.get_current_url_for_resource(resource['package_id'], resource['id']))
+        set_nonempty_value(current_resource, 'downloadURL', generate_resource_downloadURL(resource))
+        set_nonempty_value(current_resource, 'field', field)
         final_resource_list.append(current_resource)
     return final_resource_list
 
@@ -326,12 +288,15 @@ def get_datasets_with_resources(packages):
 
 def get_catalog_data():
     datajson = {}
+    publisher = {}
+    set_nonempty_value(publisher, 'mbox', gobar_helpers.get_theme_config("social.mail", ""))
+    set_nonempty_value(publisher, 'name', gobar_helpers.get_theme_config("title.site-organization", ""))
     spatial = []
     spatial_config_fields = ['country', 'province', 'districts']
     for spatial_config_field in spatial_config_fields:
         spatial_config_field_value = gobar_helpers.get_theme_config(
             "portal-metadata.%s" % spatial_config_field, "")
-        if spatial_config_field_value:
+        if spatial_config_field_value and spatial_config_field_value != "None":
             spatial.extend(spatial_config_field_value.split(','))
     data_dict_page_results = {
         'all_fields': True,
@@ -341,30 +306,41 @@ def get_catalog_data():
     }
     groups = []
     for theme in logic.get_action('group_list')({}, data_dict_page_results):
-        groups.append({'id': theme['name'],
-                       'description': theme['description'],
-                       'label': theme['display_name']
-                       })
-    datajson['version'] = ANDINO_METADATA_VERSION
-    datajson['identifier'] = gobar_helpers.get_theme_config("portal-metadata.id", "") or ''
-    datajson['title'] = gobar_helpers.get_theme_config("title.site-title", "") or ''
-    datajson['description'] = gobar_helpers.get_theme_config("title.site-description", "") or ''
-    datajson['superThemeTaxonomy'] = SUPERTHEME_TAXONOMY_URL
-    datajson['publisher'] = {'mbox': gobar_helpers.get_theme_config("social.mail", ""),
-                             'name': gobar_helpers.get_theme_config("title.site-organization", "") or ''}
-    datajson['issued'] = \
-        gobar_helpers.date_format_to_iso(
-            gobar_helpers.get_theme_config("portal-metadata.launch_date", "")) or ''
-    datajson['modified'] = \
-        gobar_helpers.date_format_to_iso(
-            gobar_helpers.get_theme_config("portal-metadata.last_updated", "")) or ''
-    datajson['language'] = gobar_helpers.get_theme_config("portal-metadata.languages", "") or []
-    datajson['license'] = gobar_helpers.get_theme_config("portal-metadata.license", u"CC-BY-4.0") or ''
-    datajson['homepage'] = gobar_helpers.get_theme_config('portal-metadata.homepage') or ''
-    datajson['rights'] = gobar_helpers.get_theme_config("portal-metadata.licence_conditions", "") or ''
-    datajson['spatial'] = spatial or []
-    datajson['themeTaxonomy'] = groups
+        theme_attributes = {}
+        theme_name = theme['name']
+        if theme_name:
+            theme_attributes['id'] = theme_name
+        theme_description = theme['display_name']
+        if theme_description:
+            theme_attributes['description'] = theme_description
+        theme_label = theme['display_name']
+        if theme_label:
+            theme_attributes['label'] = theme['display_name']
+        if theme_attributes:
+            groups.append(theme_attributes)
+
+    set_nonempty_value(datajson, 'version', ANDINO_METADATA_VERSION)
+    set_nonempty_value(datajson, 'superThemeTaxonomy', SUPERTHEME_TAXONOMY_URL)
+    set_nonempty_value(datajson, 'identifier', gobar_helpers.get_theme_config("portal-metadata.id", ""))
+    set_nonempty_value(datajson, 'title', gobar_helpers.get_theme_config("title.site-title", ""))
+    set_nonempty_value(datajson, 'description', gobar_helpers.get_theme_config("title.site-description", ""))
+    set_nonempty_value(datajson, 'publisher', publisher)
+    set_nonempty_value(datajson, 'issued', gobar_helpers.date_format_to_iso(
+        gobar_helpers.get_theme_config("portal-metadata.launch_date", "")))
+    set_nonempty_value(datajson, 'modified', gobar_helpers.date_format_to_iso(
+        gobar_helpers.get_theme_config("portal-metadata.last_updated", "")))
+    set_nonempty_value(datajson, 'language', gobar_helpers.get_theme_config("portal-metadata.languages", ""))
+    set_nonempty_value(datajson, 'license', gobar_helpers.get_theme_config("portal-metadata.license", u"CC-BY-4.0"))
+    set_nonempty_value(datajson, 'homepage', gobar_helpers.get_theme_config('portal-metadata.homepage'))
+    set_nonempty_value(datajson, 'rights', gobar_helpers.get_theme_config("portal-metadata.licence_conditions", ""))
+    set_nonempty_value(datajson, 'spatial', spatial)
+    set_nonempty_value(datajson, 'themeTaxonomy', groups)
     return datajson
+
+
+def set_nonempty_value(dict, key, value):
+    if value is not None and value != '':
+        dict[key] = value
 
 
 # ============================ Catalog section ============================ #
