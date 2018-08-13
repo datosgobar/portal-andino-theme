@@ -13,6 +13,7 @@ import ckanext.gobar_theme.actions as gobar_actions
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 from ckanext.gobar_theme.lib import cache_actions
 
+from .utils.ckan_utils import is_plugin_present
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IConfigurer)
@@ -97,6 +98,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'store_object_data_excluded_from_datajson': gobar_helpers.store_object_data_excluded_from_datajson,
             'get_resource_icon': gobar_helpers.get_resource_icon,
             'get_andino_base_page': gobar_helpers.get_andino_base_page,
+            'is_plugin_present': is_plugin_present,
         }
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):

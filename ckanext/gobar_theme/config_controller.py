@@ -14,6 +14,8 @@ from ckan.common import request, c
 from pylons import config as ckan_config
 from ckanext.gobar_theme.lib import cache_actions
 
+from .utils.ckan_utils import plugin_or_404, TS_EXPLORER_PLUGIN
+
 parse_params = logic.parse_params
 abort = base.abort
 check_access = logic.check_access
@@ -269,6 +271,7 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_13_apis.html')
 
     def edit_series(self):
+        plugin_or_404(TS_EXPLORER_PLUGIN)
         self._authorize()
         if request.method == 'POST':
             params = parse_params(request.POST)

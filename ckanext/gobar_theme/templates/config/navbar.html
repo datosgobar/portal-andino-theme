@@ -46,10 +46,12 @@
            class="section-link {{ 'active' if c.action == 'edit_apis' else '' }}">
             APIs
         </a>
+        {% if h.is_plugin_present('seriestiempoarexplorer') %}
         <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_series') }}"
            class="section-link {{ 'active' if c.action == 'edit_series' else '' }}">
             Series
         </a>
+        {% endif %}
     </div>
 
     <h2>Metadatos</h2>

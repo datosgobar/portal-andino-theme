@@ -26,7 +26,7 @@
                         </a>
                     </div>
                     <hr>
-                    {% if h.get_theme_config('series_tiempo_ar_explorer.enable') %}
+                    {% if h.get_theme_config('series_tiempo_ar_explorer.enable') and h.is_plugin_present('seriestiempoarexplorer') %}
                         <div class="navbar-link">
                             <a href="{{ h.url_for(controller='ckanext.seriestiempoarlanding.controller:TSArController', action='series_tiempo') }}">
                                 Series
@@ -118,7 +118,7 @@
                 {%- if c.action != 'login' -%}
                     <a class="header-link" href="{{ h.url_for(controller='package', action='search') }}">Datasets</a>
 
-                    {%- if h.get_theme_config('series_tiempo_ar_explorer.enable') -%}
+                    {%- if h.get_theme_config('series_tiempo_ar_explorer.enable') and h.is_plugin_present('seriestiempoarexplorer') -%}
                         <a class="header-link" href="{{ h.url_for(controller='ckanext.seriestiempoarexplorer.controller:TSArController', action='series_tiempo') }}">Series</a>
                     {%- endif -%}
                     {%- if h.get_theme_config('organization.show-organizations') -%}
