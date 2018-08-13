@@ -484,7 +484,8 @@ def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
         config[object_dict_name] = config_item
 
         GobArConfigController.set_theme_config(config)
-    return config[object_dict_name][data_dict.get('id', data_dict_id)]
+        return config[object_dict_name][data_dict.get('id', data_dict_id)]
+    return None
 
 
 def get_resource_icon(resource, config):
