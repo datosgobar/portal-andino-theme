@@ -339,7 +339,7 @@ def get_catalog_data():
 
 
 def set_nonempty_value(dict, key, value):
-    if value:
+    if value is not None and value != '':
         dict[key] = value
 
 
