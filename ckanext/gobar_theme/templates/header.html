@@ -26,6 +26,13 @@
                         </a>
                     </div>
                     <hr>
+                    {% if h.get_theme_config('series_tiempo_ar_explorer.enable') %}
+                        <div class="navbar-link">
+                            <a href="{{ h.url_for(controller='ckanext.seriestiempoarlanding.controller:TSArController', action='series_tiempo') }}">
+                                Series
+                            </a>
+                        </div>
+                    {% endif %}
                     {% if h.get_theme_config('organization.show-organizations') %}
                         <div class="navbar-link">
                             <a href="{{ h.url_for(controller='organization', action='index') }}">
@@ -111,6 +118,9 @@
                 {%- if c.action != 'login' -%}
                     <a class="header-link" href="{{ h.url_for(controller='package', action='search') }}">Datasets</a>
 
+                    {%- if h.get_theme_config('series_tiempo_ar_explorer.enable') -%}
+                        <a class="header-link" href="{{ h.url_for(controller='ckanext.seriestiempoarexplorer.controller:TSArController', action='series_tiempo') }}">Series</a>
+                    {%- endif -%}
                     {%- if h.get_theme_config('organization.show-organizations') -%}
                         <a class="header-link" href="{{ h.url_for(controller='organization', action='index') }}">Organizaciones</a>
                     {%- endif -%}

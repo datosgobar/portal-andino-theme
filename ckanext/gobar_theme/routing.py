@@ -219,6 +219,7 @@ class GobArRouter:
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')
             m.connect('/configurar/metadata/portal', action='edit_metadata_portal')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
+            m.connect('/configurar/series', action='edit_series')
 
         self.redirect(
             ('/configurar', '/configurar/titulo'),
