@@ -23,12 +23,14 @@ class GobArUserController(UserController):
     json_content_type = 'application/json;charset=utf-8'
 
     def read(self, id=None):
+        controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
         if id == 'logged_in':
             try:
                 return super(GobArUserController, self).read(id)
             except HTTPNotFound:
-                controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
-                return h.redirect_to(controller=controller, action='login', login_error=True)
+                return h.redirect_to(controller=controller, action='login')
+        elif id == 'login':
+            return h.redirect_to(controller=controller, action='login', login_error=True)
         return h.redirect_to('home')
 
     def login(self, error=None):
