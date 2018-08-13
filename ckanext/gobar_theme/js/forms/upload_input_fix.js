@@ -65,7 +65,7 @@ this.ckan.module('gobar-image-upload', function($, _) {
         .insertAfter(this.input);
 
       // Button for resetting the form when there is a URL set
-      $('<a href="javascript:;" class="btn-remove-url"><span class="icon-remove" aria-hidden="true">&times;</span></a>') // todo: cambiar los usos en scripts
+      $('<a href="javascript:;" class="btn-remove-url"><span class="icon-remove" aria-hidden="true">&times;</span></a>')
         .prop('title', this.i18n('remove'))
         .on('click', this._onRemove)
         .insertBefore(this.field_url_input);
