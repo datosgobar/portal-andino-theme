@@ -85,7 +85,8 @@ $(function () {
         if(selected_type === 'api'){
             $('#resource-attributes-form').hide();
             hideAndEmpty($('#form-format'));
-            hideAndEmpty($('#field-file-name'));
+            $('#field-file-name').val('');
+            hideAndEmpty($('#form-file-name'));
             $('#form-license').show();
             $('a.btn-remove-url').click();
             $('span#url-button').click();
@@ -95,7 +96,8 @@ $(function () {
             $('#resource-attributes-form').hide();
             hideAndEmpty($('#form-format'));
             hideAndEmpty($('#form-license'));
-            hideAndEmpty($('#field-file-name'));
+            $('#field-file-name').val('');
+            hideAndEmpty($('#form-file-name'));
             $('span.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
             $('div#form-icon-url').hide();
@@ -104,7 +106,8 @@ $(function () {
             $('#resource-attributes-form').hide();
             $('#form-format').show();
             hideAndEmpty($('#form-license'));
-            hideAndEmpty($('#field-file-name'));
+            $('#field-file-name').val('');
+            hideAndEmpty($('#form-file-name'));
             $('span.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
             $('div#form-icon-url').hide();
@@ -113,7 +116,8 @@ $(function () {
             $('#resource-attributes-form').show();
             $('#form-format').show();
             $('#form-license').show();
-            hideAndEmpty($('#field-file-name'));
+            $('#field-file-name').val('');
+            hideAndEmpty($('#form-file-name'));
             $('span.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
             $('div#form-icon-url').hide();
