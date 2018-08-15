@@ -176,6 +176,9 @@ def clean_resources(resources):
         current_resource = {}
 
         # Recolecto cierta información del recurso
+        format = resource.get('format', None)
+        if format:
+            format.upper()
         url = resource.get('url', None)
         url_type = resource.get('url_type', None)
         type = resource.get('resource_type', None)
@@ -187,7 +190,7 @@ def clean_resources(resources):
 
         # Guardo todos los datos que no estén vacíos ni sean None
         set_nonempty_value(current_resource, 'identifier', resource.get('id', None))
-        set_nonempty_value(current_resource, 'format', resource.get('format', None))
+        set_nonempty_value(current_resource, 'format', format)
         set_nonempty_value(current_resource, 'title', resource.get('name', None))
         set_nonempty_value(current_resource, 'description', resource.get('description', None))
         set_nonempty_value(current_resource, 'fileName', resource.get('fileName', None))
