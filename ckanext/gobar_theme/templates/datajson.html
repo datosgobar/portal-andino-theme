@@ -37,9 +37,15 @@
         [
         {%- for dataset in datajson.dataset %}
             {
-                "title":              {{ h.jsondump(dataset.title) }},
-                "description":        {{ h.jsondump(dataset.description) }},
-                "identifier":         {{ h.jsondump(dataset.identifier) }},
+            {%- if dataset.title is defined %}
+                "title":           {{ h.jsondump(dataset.title) }},
+            {%- endif %}
+            {%- if dataset.description is defined %}
+                "description":           {{ h.jsondump(dataset.description) }},
+            {%- endif %}
+            {%- if dataset.identifier is defined %}
+                "identifier":           {{ h.jsondump(dataset.identifier) }},
+            {%- endif %}
             {%- if dataset.modified is defined %}
                 "modified":           {{ h.jsondump(dataset.modified) }},
             {%- endif %}
@@ -64,12 +70,18 @@
                     [
                     {%- for distrib in dataset.distribution %}
                         {
-                            "identifier":   "{{ distrib.identifier }}",
+                        {%- if distrib.identifier is defined %}
+                            "identifier":       "{{ distrib.identifier }}",
+                        {%- endif %}
                         {%- if distrib.format is defined %}
                             "format":       {{ h.jsondump(distrib.format) }},
                         {%- endif %}
-                            "title":        {{ h.jsondump(distrib.title) }},
-                            "description":  {{ h.jsondump(distrib.description) }},
+                        {%- if distrib.title is defined %}
+                            "title":       {{ h.jsondump(distrib.title) }},
+                        {%- endif %}
+                        {%- if distrib.description is defined %}
+                            "description":       {{ h.jsondump(distrib.description) }},
+                        {%- endif %}
                         {%- if distrib.fileName is defined %}
                             "fileName":     {{ h.jsondump(distrib.fileName) }},
                         {%- endif %}
