@@ -189,10 +189,10 @@ def clean_resources(resources):
                     element.pop(key)
 
         # Guardo todos los datos que no estén vacíos ni sean None
-        set_nonempty_value(current_resource, 'identifier', resource['id'])
+        set_nonempty_value(current_resource, 'identifier', resource.get('id', None))
         set_nonempty_value(current_resource, 'format', format)
-        set_nonempty_value(current_resource, 'title', resource['name'])
-        set_nonempty_value(current_resource, 'description', resource['description'])
+        set_nonempty_value(current_resource, 'title', resource.get('name', None))
+        set_nonempty_value(current_resource, 'description', resource.get('description', None))
         set_nonempty_value(current_resource, 'fileName', resource.get('fileName', None))
         if url_type:
             if url_type == 'upload' and url and type != 'api' and '/' in url:
