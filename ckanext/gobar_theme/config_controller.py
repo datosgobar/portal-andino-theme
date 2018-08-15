@@ -277,7 +277,6 @@ class GobArConfigController(base.BaseController):
             params = parse_params(request.POST)
             config_dict = self._read_config()
             config_dict['series_tiempo_ar_explorer'] = {
-                'catalog_id': params['catalog_id'].strip(),
                 "featured": params['featured'].strip(),
                 'enable': 'enable' in params
             }

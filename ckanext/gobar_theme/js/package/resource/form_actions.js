@@ -98,7 +98,7 @@ $(function () {
             hideAndEmpty($('#form-license'));
             $('#field-file-name').val('');
             hideAndEmpty($('#form-file-name'));
-            $('i.icon-remove').click();
+            $('span.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
             $('div#form-icon-url').hide();
         }
@@ -108,7 +108,7 @@ $(function () {
             hideAndEmpty($('#form-license'));
             $('#field-file-name').val('');
             hideAndEmpty($('#form-file-name'));
-            $('i.icon-remove').click();
+            $('span.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
             $('div#form-icon-url').hide();
         }
@@ -118,7 +118,7 @@ $(function () {
             $('#form-license').show();
             $('#field-file-name').val('');
             hideAndEmpty($('#form-file-name'));
-            $('i.icon-remove').click();
+            $('span.icon-remove').click();
             $('input[type=file]#field-image-upload').val('');
             $('div#form-icon-url').hide();
         }

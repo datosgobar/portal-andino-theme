@@ -9218,9 +9218,12 @@ div#background-container {
   color: white;
   background-color: #767676;
   cursor: pointer; }
-#resource-edit a.btn-remove-url {
+#resource-edit a.btn-remove-url, #group-edit a.btn-remove-url {
   top: 8px;
   right: 8px; }
+  #resource-edit a.btn-remove-url span.icon-remove, #group-edit a.btn-remove-url span.icon-remove {
+    font-size: 26px;
+    color: #999999; }
 #resource-edit .icon-cloud-upload,
 #resource-edit .icon-globe {
   display: none; }
