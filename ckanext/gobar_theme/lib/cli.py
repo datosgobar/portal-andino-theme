@@ -2,11 +2,11 @@
 from ckan.lib import cli
 
 import logging
-LOGGER = logging.getLogger(__name__)
+
+LOGGER = logging.getLogger("ckan")
 
 
 class GenerateDataJsonCommand(cli.CkanCommand):
-
     summary = "Generar el data.json al instalar o actualizar andino"
 
     def command(self):
@@ -23,7 +23,6 @@ class GenerateDataJsonCommand(cli.CkanCommand):
 
 
 class GenerateCatalogXlsxCommand(cli.CkanCommand):
-
     summary = "Generar el catalog.xlsx al instalar o actualizar andino"
 
     def command(self):
