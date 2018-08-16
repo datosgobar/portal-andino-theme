@@ -100,8 +100,12 @@
                         {%- if distrib.field|length > 0 %}
                              "field":       {{ h.jsondump(distrib.field) }},
                         {%- endif %}
-                            "accessURL":    {{ h.jsondump(distrib.accessURL) }},
-                            "downloadURL":  {{ h.jsondump(distrib.downloadURL) }}
+                        {%- if distrib.field|length > 0 %}
+                             "accessURL":       {{ h.jsondump(distrib.accessURL) }},
+                        {%- endif %}
+                            {%- if distrib.field|length > 0 %}
+                             "downloadURL":       {{ h.jsondump(distrib.downloadURL) }},
+                        {%- endif %}
                         } {% if loop.index < dataset.distribution|length %},{% endif %}
                     {% endfor %}
                     ],
