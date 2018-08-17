@@ -70,9 +70,6 @@
                     [
                     {%- for distrib in dataset.distribution %}
                         {
-                        {%- if distrib.identifier is defined %}
-                            "identifier":       "{{ distrib.identifier }}",
-                        {%- endif %}
                         {%- if distrib.format is defined %}
                             "format":       {{ h.jsondump(distrib.format) }},
                         {%- endif %}
@@ -106,6 +103,7 @@
                             {%- if distrib.field|length > 0 %}
                              "downloadURL":       {{ h.jsondump(distrib.downloadURL) }},
                         {%- endif %}
+                            "identifier":       "{{ distrib.identifier }}"
                         } {% if loop.index < dataset.distribution|length %},{% endif %}
                     {% endfor %}
                     ],
