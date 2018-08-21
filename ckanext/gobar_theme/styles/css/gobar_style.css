@@ -10361,3 +10361,9 @@ div.about-template-buttons > button {
 div.about-template-icons {
   font-family: inherit;
 }
+
+a > i.fa {
+  color: #0695d6;
+  font-family: FontAwesome;
+  font-weight: normal;
+}
