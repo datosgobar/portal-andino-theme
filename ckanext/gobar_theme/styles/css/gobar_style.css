@@ -10406,3 +10406,7 @@ a#btn-config {
   padding-top: 20px !important;
   font-size: 20px;
 }
+
+div#detalle-panel > div.dp-header > h3.title-xsm {
+  font-size: 18px;
+}
