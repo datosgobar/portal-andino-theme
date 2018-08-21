@@ -10367,3 +10367,7 @@ a > i.fa {
   font-family: FontAwesome;
   font-weight: normal;
 }
+
+div.footer-section > p > a > i.fa:hover {
+  color: white !important;
+}
