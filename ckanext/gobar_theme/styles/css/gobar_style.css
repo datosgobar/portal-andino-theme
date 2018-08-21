@@ -10371,3 +10371,32 @@ a > i.fa {
 div.footer-section > p > a > i.fa:hover {
   color: white !important;
 }
+
+section#home #hero {
+  height: 270px !important;
+}
+div#hero > div.hero-caption {
+  font-size: 14px;
+  height: 60%;
+  top: 30% !important;
+}
+div#hero > div.hero-caption > div.container > .row > div > h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+div#hero > div.hero-caption > div.container > .row > div > p {
+  font-size: 16px;
+}
+div#hero > div.hero-caption > div.container > .row:nth-child(2) {
+  height: 50px;
+}
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form > div,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form > div > div,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form > div > div > input {
+  height: inherit;
+}
+#form-hero-search {
+  margin-bottom: 0;
+}
