@@ -6408,6 +6408,7 @@ div.svg-tooltip {
             #header #header-spacing .header-links .header-link.dropdown ul a li:hover {
               background: #17b2f8; }
         #header #header-spacing .header-links .header-link.dropdown.active ul {
+          padding: 0;
           display: block; }
     #header #header-spacing .logo-header.showing-nav {
       height: auto; }
