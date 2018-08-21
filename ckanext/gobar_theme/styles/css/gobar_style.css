@@ -10401,3 +10401,8 @@ div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form > d
 #form-hero-search {
   margin-bottom: 0;
 }
+
+a#btn-config {
+  padding-top: 20px !important;
+  font-size: 20px;
+}
