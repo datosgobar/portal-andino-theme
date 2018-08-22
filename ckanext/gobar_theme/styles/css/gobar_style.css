@@ -10410,3 +10410,15 @@ a#btn-config {
 div#detalle-panel > div.dp-header > h3.title-xsm {
   font-size: 18px;
 }
+
+div#root > div.wrapper {
+  background-image: inherit;
+}
+section#home > div#series-destacadas {
+  padding: 0 150px;
+}
+section#home > div#series-destacadas > div.container {
+  -webkit-box-shadow: 0 -2px 4px 0 rgba(150, 150, 150, 0.5);
+  padding: 30px 80px;
+  width: fit-content;
+}
