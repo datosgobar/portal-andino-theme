@@ -6408,6 +6408,7 @@ div.svg-tooltip {
             #header #header-spacing .header-links .header-link.dropdown ul a li:hover {
               background: #17b2f8; }
         #header #header-spacing .header-links .header-link.dropdown.active ul {
+          padding: 0;
           display: block; }
     #header #header-spacing .logo-header.showing-nav {
       height: auto; }
@@ -10360,4 +10361,86 @@ div.about-template-buttons > button {
 
 div.about-template-icons {
   font-family: inherit;
+}
+
+a > i.fa {
+  color: #0695d6;
+  font-family: FontAwesome;
+  font-weight: normal;
+}
+
+div.footer-section > p > a > i.fa:hover {
+  color: white !important;
+}
+
+section#home #hero {
+  height: 270px !important;
+}
+div#hero > div.hero-caption {
+  font-size: 14px;
+  height: 60%;
+  top: 30% !important;
+}
+div#hero > div.hero-caption > div.container > .row > div > h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+div#hero > div.hero-caption > div.container > .row > div > p {
+  font-size: 16px;
+}
+div#hero > div.hero-caption > div.container > .row:nth-child(2) {
+  height: 50px;
+}
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form > div,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form > div > div,
+div#hero > div.hero-caption > div.container > .row:nth-child(2) > div > form > div > div > input {
+  height: inherit;
+}
+#form-hero-search {
+  margin-bottom: 0;
+}
+
+a#btn-config {
+  padding-top: 20px !important;
+  font-size: 20px;
+}
+
+div#detalle-panel > div.dp-header > h3.title-xsm {
+  font-size: 18px;
+}
+
+div#root > div.wrapper {
+  background-image: inherit;
+}
+section#home > div#series-destacadas {
+  padding: 0 150px;
+}
+section#home > div#series-destacadas > div.container {
+  -webkit-box-shadow: 0 -2px 4px 0 rgba(150, 150, 150, 0.5);
+  padding: 30px 80px;
+  width: fit-content;
+}
+
+div.share > span > ul.social {
+  padding: 0;
+}
+div.form-horizontal > div.form-group {
+  display: block;
+}
+div.form-horizontal > div.form-group > label.col-sm-3.control-label {
+  width: 25%;
+}
+div.form-horizontal > div.form-group > label.col-sm-3.control-label:after{
+  content: normal;
+}
+div.form-horizontal > div.form-group > label.col-sm-6.control-label {
+  padding-right: 0;
+}
+div.form-horizontal > div.form-group > label.col-sm-6.control-label:after {
+  content: normal;
+}
+div.col-xs-6.inline > div.form-horizontal > div.form-group {
+  margin-bottom: 0;
 }
