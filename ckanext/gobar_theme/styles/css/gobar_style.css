@@ -10422,3 +10422,25 @@ section#home > div#series-destacadas > div.container {
   padding: 30px 80px;
   width: fit-content;
 }
+
+div.share > span > ul.social {
+  padding: 0;
+}
+div.form-horizontal > div.form-group {
+  display: block;
+}
+div.form-horizontal > div.form-group > label.col-sm-3.control-label {
+  width: 25%;
+}
+div.form-horizontal > div.form-group > label.col-sm-3.control-label:after{
+  content: normal;
+}
+div.form-horizontal > div.form-group > label.col-sm-6.control-label {
+  padding-right: 0;
+}
+div.form-horizontal > div.form-group > label.col-sm-6.control-label:after {
+  content: normal;
+}
+div.col-xs-6.inline > div.form-horizontal > div.form-group {
+  margin-bottom: 0;
+}
