@@ -97,11 +97,11 @@
                         {%- if distrib.field|length > 0 %}
                              "field":       {{ h.jsondump(distrib.field) }},
                         {%- endif %}
-                        {%- if distrib.field|length > 0 %}
-                             "accessURL":       {{ h.jsondump(distrib.accessURL) }},
+                        {%- if distrib.accessURL|length > 0 %}
+                             "accessURL": {{ h.jsondump(distrib.accessURL) }},
                         {%- endif %}
-                            {%- if distrib.field|length > 0 %}
-                             "downloadURL":       {{ h.jsondump(distrib.downloadURL) }},
+                        {%- if distrib.downloadURL|length > 0 %}
+                             "downloadURL": {{ h.jsondump(distrib.downloadURL) }},
                         {%- endif %}
                             "identifier":       "{{ distrib.identifier }}"
                         } {% if loop.index < dataset.distribution|length %},{% endif %}
