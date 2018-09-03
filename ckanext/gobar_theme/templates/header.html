@@ -28,8 +28,8 @@
                     <hr>
                     {% if h.get_theme_config('series_tiempo_ar_explorer.enable') and h.is_plugin_present('seriestiempoarexplorer') %}
                         <div class="navbar-link">
-                            <a href="{{ h.url_for(controller='ckanext.seriestiempoarlanding.controller:TSArController', action='series_tiempo') }}">
-                                Series
+                            <a href="{{ h.url_for(controller='ckanext.seriestiempoarexplorer.controller:TSArController', action='series_tiempo') }}">
+                                SERIES
                             </a>
                         </div>
                     {% endif %}
