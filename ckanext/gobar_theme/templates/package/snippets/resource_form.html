@@ -108,7 +108,7 @@
 
     <div id="form-accessURL">
         {{ form.image_upload(data, errors, field_url='accessURL', field_upload='accessURL_field', field_clear='clear_accessURL',
-         is_upload_enabled=h.uploads_enabled(), is_url=data.url, is_upload=is_upload,
+         is_upload_enabled=h.uploads_enabled(), is_url=data.accessURL, is_upload=False,
          upload_label="URL de acceso", url_label="URL de acceso", id_prefix='accessURL', placeholder='http://datos.gob.ar/ejemplo.ext') }}
         <p class="empty-accessURL-description">En el caso de que no quieras especificar una URL de acceso, se utilizará una default.</p>
     </div>
