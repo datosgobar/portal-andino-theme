@@ -10328,12 +10328,8 @@ div.dataset-container div.dataset-notes {
 div.dataset-container h3.dataset-title{
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
   word-break: break-word;
-  margin-top: 0;
-  padding-right: 10px;
+  white-space: nowrap;
 }
 
 div.link-margin{
