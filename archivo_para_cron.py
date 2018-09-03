@@ -27,12 +27,14 @@ if not site_url.startswith('http'):
 demo = RemoteCKAN(site_url)
 current_offset = 0
 r = demo.action.datastore_search(resource_id='_table_metadata')
-while r.get('total') > 0:
+while r.get('total') > current_offset:
     for datastore_resource in r.get('records'):
         datastore_resource_id = datastore_resource.get('name')
         if datastore_resource_id != "_table_metadata" and datastore_resource_id not in datajson_resource_ids:
             pass
-            # kill
+            # borrar recurso del datastore
+    current_offset += 100
+    r = demo.action.datastore_search(resource_id='_table_metadata', offset=current_offset)
 
 
 
