@@ -10312,24 +10312,16 @@ div.attributes-table{
 
 div.dataset-container div.dataset-content{
   line-height: 2.75ex;
-  height: 16ex;
+  height: 17ex;
   overflow: hidden;
 }
 
 div.dataset-container div.dataset-notes {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
   word-break: break-word;
 }
 
 div.dataset-container h3.dataset-title{
-  overflow: hidden;
-  text-overflow: ellipsis;
   word-break: break-word;
-  white-space: nowrap;
 }
 
 div.link-margin{

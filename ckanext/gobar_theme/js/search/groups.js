@@ -6,4 +6,14 @@ $(function () {
         }, 200)
     };
     $.when(calls).done(callback).fail(callback);
+
+    $('.dataset-title').each(function(index) {
+        $clamp(this, {clamp: 2, useNativeClamp: false})
+    });
+    $('.dataset-author').each(function(index) {
+        $clamp(this, {clamp: 1, useNativeClamp: false})
+    });
+    $('.dataset-notes').each(function(index) {
+        $clamp(this, {clamp: 2, useNativeClamp: false})
+    });
 });
