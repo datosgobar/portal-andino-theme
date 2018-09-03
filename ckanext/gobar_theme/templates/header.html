@@ -61,7 +61,7 @@
                                 {% if header_sections|length > 0 %}
                                     {% for header_section in header_sections %}
                                         <div class="navbar-link">
-                                            <a href="{{ h.url('gobar_our_site') }}">
+                                            <a href="{{ h.url('section', title=header_section.title) }}">
                                                 {{ header_section.title }}
                                             </a>
                                         </div>
