@@ -1,15 +1,22 @@
 # coding=utf-8
-from ckanext.gobar_theme.lib.datajson_actions import get_data_json_contents
-from ckanapi import RemoteCKAN
+from ckanext.gobar_theme.lib.datajson_actions import get_data_json_contents, CACHE_FILENAME
+from ckanapi import RemoteCKAN, LocalCKAN
+from ckan import model
 from pylons.config import config
+from pydatajson import DataJson
+import subprocess
+import ckanext
 
 # Busco los ids de los recursos que existen en el datajson
 # TODO: usar la api de pydatajson
-datajson_contents = get_data_json_contents()
 datajson_resource_ids = []
-for dataset in datajson_contents.get('dataset', None):
-    for resource in datajson_contents.get('distribution', None):
-        datajson_resource_ids.append(resource.get('identifier'))
+# datajson_contents = get_data_json_contents()
+# for dataset in datajson_contents.get('dataset', None):
+#     for resource in datajson_contents.get('distribution', None):
+#         datajson_resource_ids.append(resource.get('identifier'))
+catalog = DataJson(CACHE_FILENAME)
+for resource in catalog.distributions:
+    datajson_resource_ids.append(resource.get('identifier'))
 
 # Busco los recursos que actualmente se encuentran en el DataStore
 # TODO: Preguntar a Lucas R si se puede hacer usando algún cliente python de CKAN
@@ -18,20 +25,31 @@ site_url = config.get('ckan.site_url')
 if not site_url.startswith('http'):
     site_url = 'http://' + site_url
 
-# import urllib
-# import ast
-# datastore_search_link = site_url + "/api/action/datastore_search?resource_id=_table_metadata"
-# datastore_resources = urllib.urlopen(datastore_search_link)
-# result = ast.literal_eval(datastore_resources.read())  # todo: fix error
-
-demo = RemoteCKAN(site_url)
+lc = LocalCKAN(username='default')
+apikey = lc._get_action('get_site_user')({'ignore_auth': True}, ()).get('apikey')
+demo = RemoteCKAN(site_url, apikey)
+context = {'model': model, 'session': model.Session, 'user': lc._get_action('get_site_user')({'ignore_auth': True}, ())}
 current_offset = 0
 r = demo.action.datastore_search(resource_id='_table_metadata')
 while r.get('total') > current_offset:
     for datastore_resource in r.get('records'):
         datastore_resource_id = datastore_resource.get('name')
         if datastore_resource_id != "_table_metadata" and datastore_resource_id not in datajson_resource_ids:
-            pass
+            # ckanext.datastore.logic.action.datastore_delete(context, {'resource_id': datastore_resource_id, 'force': True})
+            # subprocess.check_call([
+            #     "curl",
+            #     "-X",
+            #     "POST",
+            #     site_url + "/api/3/action/datastore_delete",
+            #     "-H",
+            #     "\"Authorization:",
+            #     apikey + "\"",
+            #     "-d",
+            #     "'{\"force\":\"True\",",
+            #     "\"resource_id\":",
+            #     datastore_resource_id + "\"}'"
+            # ])
+            demo.action.datastore_delete(resource_id=datastore_resource_id, force=True)
             # borrar recurso del datastore
     current_offset += 100
     r = demo.action.datastore_search(resource_id='_table_metadata', offset=current_offset)

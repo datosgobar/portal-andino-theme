@@ -79,6 +79,7 @@ setup(
         [paste.paster_command]
         generate-data-json = ckanext.gobar_theme.lib.cli:GenerateDataJsonCommand
         generate-catalog-xlsx= ckanext.gobar_theme.lib.cli:GenerateCatalogXlsxCommand
+        clean-datastore= ckanext.gobar_theme.lib.cli:CleanDatastoreCommand
     ''',
 
     # If you are changing from the default layout of your extension, you may
