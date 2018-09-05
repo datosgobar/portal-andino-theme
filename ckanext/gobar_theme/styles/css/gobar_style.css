@@ -10349,3 +10349,15 @@ div.about-template-buttons > button {
 div.about-template-icons {
   font-family: inherit;
 }
+
+div#form-accessURL > div > div.control-group.control-full {
+  margin-bottom: 5px !important;
+}
+
+div#form-accessURL {
+  margin-bottom: 25px;
+}
+
+label[for="accessURL-upload-url"] {
+  display: none !important;
+}

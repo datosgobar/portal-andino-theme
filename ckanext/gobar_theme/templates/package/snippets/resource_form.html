@@ -101,9 +101,17 @@
                 {{ form.input('format', id='field-format', label=_('Format'), placeholder='Ej.: CSV, XML o JSON.', value=data.format, error=errors.format, classes=['control-medium'], attrs=format_attrs) }}
             </div>
         {% endblock %}
+
     {% endblock basic_fields %}
 
     {% snippet 'package/snippets/resource_form_license.html', data=data %}
+
+    <div id="form-accessURL">
+        {{ form.image_upload(data, errors, field_url='accessURL', field_upload='accessURL_field', field_clear='clear_accessURL',
+         is_upload_enabled=h.uploads_enabled(), is_url=data.accessURL, is_upload=False,
+         upload_label="URL de acceso", url_label="URL de acceso", id_prefix='accessURL', placeholder='http://datos.gob.ar/ejemplo.ext') }}
+        <p class="empty-accessURL-description">En el caso de que no quieras especificar una URL de acceso, se utilizará una default.</p>
+    </div>
 
     {% snippet 'package/snippets/resource_form_attributes.html', data=data %}
 
