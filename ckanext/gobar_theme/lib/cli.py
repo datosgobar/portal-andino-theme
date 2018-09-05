@@ -1,6 +1,6 @@
 #! coding: utf-8
+from ckan import model, logic
 from ckan.lib import cli
-from ckanext.gobar_theme.lib.datajson_actions import CACHE_FILENAME
 from ckanapi import RemoteCKAN, LocalCKAN
 from pylons.config import config
 from pydatajson import DataJson
@@ -50,20 +50,23 @@ class UpdateDatastoreCommand(cli.CkanCommand):
 
         LOGGER.info("Updating datastore")
 
-        # Acumulo todos los ids de los recursos del nodo
-        datajson_resource_ids = []
-        catalog = DataJson(CACHE_FILENAME)
-        for resource in catalog.distributions:
-            datajson_resource_ids.append(resource.get('identifier'))
-
         # Usando un LocalCKAN obtendo el apikey del usuario default
         lc = LocalCKAN()
-        apikey = lc._get_action('get_site_user')({'ignore_auth': True}, ()).get('apikey')
+        site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
+        apikey = site_user.get('apikey')
 
         # La búsqueda de recursos en Datastore falla si la url no comienza con 'http'
         site_url = config.get('ckan.site_url')
         if not site_url.startswith('http'):
             site_url = 'http://' + site_url
+
+        # Acumulo todos los ids de los recursos del nodo
+        datajson_resource_ids = []
+        context = {'model': model, 'session': model.Session, 'user': site_user}
+        data_dict = {'query': 'name:id', 'limit': None, 'offset': 0}
+        resultado = logic.get_action('resource_search')(context, data_dict).get('results', [])
+        for resource in resultado:
+            datajson_resource_ids.append(resource.get('identifier'))
 
         # Obtengo informacion de los elementos del datastore
         rc = RemoteCKAN(site_url, apikey)
