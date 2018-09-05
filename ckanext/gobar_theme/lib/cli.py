@@ -2,8 +2,8 @@
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
+from ckanapi.errors import CKANAPIError
 from pylons.config import config
-from pydatajson import DataJson
 
 import logging
 
@@ -80,7 +80,11 @@ class UpdateDatastoreCommand(cli.CkanCommand):
                 # En Datastore, el id del recurso se busca como `name` (y buscamos los que no sean "_table_metadata")
                 datastore_resource_id = datastore_resource.get('name')
                 if datastore_resource_id != "_table_metadata" and datastore_resource_id not in datajson_resource_ids:
-                      rc.action.datastore_delete(resource_id=datastore_resource_id, force=True)
+                    try:
+                        rc.action.datastore_delete(resource_id=datastore_resource_id, force=True)
+                    except CKANAPIError:
+                        # Por inconsistencias entre la base de datos y el Datastore, la API tira error (esperable)
+                        pass
             current_offset += 100
             datastore_resources = rc.action.datastore_search(resource_id='_table_metadata', offset=current_offset)
 
