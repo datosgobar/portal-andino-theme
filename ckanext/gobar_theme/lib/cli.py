@@ -82,8 +82,9 @@ class UpdateDatastoreCommand(cli.CkanCommand):
                 if datastore_resource_id != "_table_metadata" and datastore_resource_id not in datajson_resource_ids:
                     try:
                         rc.action.datastore_delete(resource_id=datastore_resource_id, force=True)
-                    except CKANAPIError:
-                        # Por inconsistencias entre la base de datos y el Datastore, la API tira error (esperable)
+                    except Exception as e:
+                        LOGGER.warn('Intentando eliminar del Datastore el recurso %s surgió un error: %s',
+                                    datastore_resource_id, e)
                         pass
             current_offset += 100
             datastore_resources = rc.action.datastore_search(resource_id='_table_metadata', offset=current_offset)
