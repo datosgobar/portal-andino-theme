@@ -2,7 +2,6 @@
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
-from ckanapi.errors import CKANAPIError
 from pylons.config import config
 
 import logging
@@ -85,7 +84,6 @@ class UpdateDatastoreCommand(cli.CkanCommand):
                     except Exception as e:
                         LOGGER.warn('Intentando eliminar del Datastore el recurso %s surgió un error: %s',
                                     datastore_resource_id, e)
-                        pass
             current_offset += 100
             datastore_resources = rc.action.datastore_search(resource_id='_table_metadata', offset=current_offset)
 
