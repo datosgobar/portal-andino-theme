@@ -29,7 +29,7 @@
                         {% set top_organization = organization.depth == 0 %}
 
                         {% if top_organization and organization.total_package_count > 0 %}
-                            <a class="repio" href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">
+                            <a href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">
                         {% endif %}
 
                         <div class="organization-branch">
