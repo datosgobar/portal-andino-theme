@@ -2,6 +2,7 @@
 from urlparse import urlparse
 from HTMLParser import HTMLParser
 import ckan.lib.helpers as ckan_helpers
+import ckan.lib.search as search
 import ckan.logic as logic
 import moment
 from ckan.common import request, c, g, _
@@ -34,6 +35,46 @@ def _count_total(organization):
         for child_organization in organization['children']:
             children_count += _count_total(child_organization)
     return organization['package_count'] + children_count
+
+
+def organizations_basic_info():
+
+    def convert_organization_to_dict(organization, depth):
+        current_organization = {}
+        organization_id = organization.pop('id')
+        current_organization['id'] = organization_id
+        current_organization['name'] = organization.pop('name')
+        current_organization['depth'] = depth  # si depth == 0, la organización no es hija de otra
+        current_organization['own_package_count'] = organizations_that_have_packages.pop(organization_id, 0)
+        total_package_count = 0
+        group_tree_children = organization.pop('children')
+        dict_children = []
+        for child in group_tree_children:
+            converted_child = convert_organization_to_dict(child, depth+1)
+            dict_children.append(converted_child)
+            total_package_count += converted_child.get('total_package_count', 0)
+        current_organization['children'] = dict_children
+        current_organization['total_package_count'] = total_package_count + current_organization['own_package_count']
+        return current_organization
+
+    # Traemos las organizaciones
+    organizations = logic.get_action('group_tree')({}, {'type': 'organization'})
+
+    # Realizamos una query para conseguir las organizaciones que tienen datasets, y la cantidad de éstos
+    query = search.PackageSearchQuery()
+    q = {'q': '+capacity:public',
+         'fl': 'groups', 'facet.field': ['groups', 'owner_org'],
+         'facet.limit': -1, 'rows': 1}
+    query.run(q)
+    organizations_that_have_packages = query.facets.get('owner_org')
+
+    # Transformamos cada organización en un dict para facilitar su uso, y agregamos información requerida
+    organizations_data = []
+    for organization in organizations:
+        current_organization = convert_organization_to_dict(organization, 0)
+        organizations_data.append(current_organization)
+
+    return organizations_data
 
 
 def organization_tree():

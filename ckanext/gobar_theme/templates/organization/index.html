@@ -21,14 +21,14 @@
                         <span class="count-title">Datasets totales</span>
                     </div>
 
-                    {% set organizations_tree = h.organization_tree() %}
+                    {% set organizations_tree = h.organizations_basic_info() %}
                     {% set dataset_url = h.url_for(controller='package', action='search') %}
 
                     {% for organization in organizations_tree recursive %}
 
                         {% set top_organization = organization.depth == 0 %}
 
-                        {% if top_organization and organization.display_count > 0 %}
+                        {% if top_organization and organization.total_package_count > 0 %}
                             <a href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">
                         {% endif %}
 
@@ -40,10 +40,10 @@
                                     {%- snippet "svg/chevron_right.svg" -%}
                                 {%- endif -%}
 
-                                {%- if organization.package_count > 0 -%}
-                                        {{ organization.display_name }} ({{ organization.package_count }})
+                                {%- if organization.own_package_count > 0 -%}
+                                        {{ organization.name }} ({{ organization.own_package_count }})
                                 {%- else -%}
-                                    {{ organization.display_name }}
+                                    {{ organization.name }}
                                 {%- endif -%}
 
                                 {%- if c.userobj and c.userobj.sysadmin -%}
@@ -56,7 +56,7 @@
 
                                 {%- if top_organization -%}
                                     <span class="organization-count">
-                                        {{ organization.display_count }}
+                                        {{ organization.total_package_count }}
                                     </span>
                                 {%- endif -%}
 
@@ -67,7 +67,7 @@
                             {% endif %}
                         </div>
 
-                        {% if top_organization and organization.display_count > 0 %}
+                        {% if top_organization and organization.total_package_count > 0 %}
                             </a>
                         {% endif %}
 

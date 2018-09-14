@@ -99,6 +99,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_resource_icon': gobar_helpers.get_resource_icon,
             'get_andino_base_page': gobar_helpers.get_andino_base_page,
             'is_plugin_present': is_plugin_present,
+            'organizations_basic_info': gobar_helpers.organizations_basic_info,
         }
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
