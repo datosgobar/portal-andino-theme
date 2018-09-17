@@ -164,7 +164,6 @@
                             Fecha de creación
                         </div>
                         <div class="col-xs-8 value">
-                            <div>{{res}}</div>
                             {% if res.issued is defined %}
                                 {{ h.render_ar_datetime(res.issued) }}
                             {% elif res.created is defined %}
