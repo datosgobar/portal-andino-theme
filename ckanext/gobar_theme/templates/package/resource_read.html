@@ -164,10 +164,13 @@
                             Fecha de creación
                         </div>
                         <div class="col-xs-8 value">
+                            <div>{{res}}</div>
                             {% if res.issued is defined %}
-                                {{ h.render_ar_datetime(res.issued) or h.render_ar_datetime(res.created) or _('unknown') }}
+                                {{ h.render_ar_datetime(res.issued) }}
+                            {% elif res.created is defined %}
+                                {{ h.render_ar_datetime(res.created) }}
                             {% else %}
-                                {{ h.render_ar_datetime(res.created) or _('unknown') }}
+                                {{ _('unknown') }}
                             {% endif %}
                         </div>
                     </div>

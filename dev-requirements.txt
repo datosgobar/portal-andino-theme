@@ -1,3 +1,0 @@
-moment==0.8.2
-pydatajson==0.4.16
-redis==2.10.1
