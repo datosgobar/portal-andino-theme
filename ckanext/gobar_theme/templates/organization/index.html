@@ -41,9 +41,9 @@
                                 {%- endif -%}
 
                                 {%- if organization.own_package_count > 0 -%}
-                                        {{ organization.name }} ({{ organization.own_package_count }})
+                                        {{ organization.title }} ({{ organization.own_package_count }})
                                 {%- else -%}
-                                    {{ organization.name }}
+                                    {{ organization.title }}
                                 {%- endif -%}
 
                                 {%- if c.userobj and c.userobj.sysadmin -%}

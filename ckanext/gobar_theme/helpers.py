@@ -44,6 +44,7 @@ def organizations_basic_info():
         organization_id = organization.pop('id')
         current_organization['id'] = organization_id
         current_organization['name'] = organization.pop('name')
+        current_organization['title'] = organization.pop('title')
         current_organization['depth'] = depth  # si depth == 0, la organización no es hija de otra
         current_organization['own_package_count'] = organizations_that_have_packages.pop(organization_id, 0)
         total_package_count = 0
