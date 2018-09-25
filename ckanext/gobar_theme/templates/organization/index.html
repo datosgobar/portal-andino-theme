@@ -40,8 +40,9 @@
                                     <a href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">
                                         {{ organization.name }} {{ ('(%d)' % organization.own_package_count) if organization.own_package_count }}
                                     </a>
+
                                 {%- else -%}
-                                    {{ organization.name }}
+                                    {{ organization.title }}
                                 {%- endif -%}
 
                                 {%- if c.userobj and c.userobj.sysadmin -%}
