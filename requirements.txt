@@ -1,4 +1,6 @@
 moment==0.8.2
 pydatajson==0.4.16
 redis==2.10.1
+mock==2.0.0
+mockredispy==2.9.3
 -e git+https://github.com/ckan/ckanext-dcat.git@9709ab5771856303e5ac80bd0f7759ab47d99678#egg=ckanext-dcat

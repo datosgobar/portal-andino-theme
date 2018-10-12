@@ -6,8 +6,7 @@ import io
 import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckan.lib.jobs as jobs
-from ckan.config.environment import config
-import ckan.logic.action.delete as delete
+# import ckan.logic.action.delete as delete
 from ckan.common import c
 import ckan.model as model
 import ckan.logic as logic
@@ -44,17 +43,24 @@ def get_data_json_contents():
 
 def enqueue_update_datajson_cache_tasks():
     # Las funciones que usamos de RQ requieren que se les envíe el context para evitar problemas de autorización
-    try:
-        context = {'model': model, 'session': model.Session, 'user': c.user}
-        delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
-    except logic.NotAuthorized:
-        logger.info(u'Usuario %s no tiene permisos para administrar colas de trabajo. No es posible limpiar las colas previo actualización de data.json', c.user)
+    # try:
+    #     context = {'model': model, 'session': model.Session, 'user': c.user}
+    #     delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
+    # except logic.NotAuthorized:
+    #     logger.info(u'Usuario %s no tiene permisos para administrar colas de trabajo. '
+    #                 u'No es posible limpiar las colas previo actualización de data.json', c.user)
     jobs.enqueue(update_datajson_cache, queue=ANDINO_DATAJSON_QUEUE)
     jobs.enqueue(update_catalog, queue=ANDINO_DATAJSON_QUEUE)
 
 
 def update_datajson_cache():
     file_descriptor, file_path = tempfile.mkstemp(suffix='.json', dir=CACHE_DIRECTORY)
+    renderization = generate_new_cache_file(file_descriptor)
+    os.rename(file_path, CACHE_FILENAME)
+    return renderization
+
+
+def generate_new_cache_file(file_descriptor):
     with os.fdopen(file_descriptor, 'w+') as datajson_cache:
         datajson = generate_datajson_info()
 
@@ -74,9 +80,8 @@ def update_datajson_cache():
 
         datajson_cache.write(renderization)
         logger.info('Se actualizó la cache del data.json')
+        return renderization
 
-    os.rename(file_path, CACHE_FILENAME)
-    return renderization
 
 
 def generate_datajson_info():
@@ -345,7 +350,7 @@ def get_catalog_data():
 
 
 def set_nonempty_value(dict, key, value):
-    if value is not None and value != '':
+    if value:
         dict[key] = value
 
 

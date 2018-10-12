@@ -1,5 +1,9 @@
 #! coding: utf-8
 from uploader import GobArThemeResourceUploader
+from ckan.common import c
+import ckan.model as model
+import ckan.logic as logic
+import ckan.logic.action.delete as delete
 import ckan.plugins as plugins
 from ckan.model.package import Package
 from ckan.model.resource import Resource
@@ -12,8 +16,13 @@ import ckanext.gobar_theme.routing as gobar_routes
 import ckanext.gobar_theme.actions as gobar_actions
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 from ckanext.gobar_theme.lib import cache_actions
+import logging
+logger = logging.getLogger(__name__)
 
 from .utils.ckan_utils import is_plugin_present
+
+ANDINO_DATAJSON_QUEUE = 'andino-datajson-queue'
+
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IConfigurer)
@@ -120,6 +129,13 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def notify(self, entity, operation):
         if type(entity) is Package:
+            try:
+                context = {'model': model, 'session': model.Session, 'user': c.user}
+                delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
+            except logic.NotAuthorized:
+                logger.info(
+                    u'Usuario %s no tiene permisos para administrar colas de trabajo. '
+                    u'No es posible limpiar las colas previo actualización de data.json', c.user)
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.enqueue_update_datajson_cache_tasks()
                 cache_actions.clear_web_cache()
