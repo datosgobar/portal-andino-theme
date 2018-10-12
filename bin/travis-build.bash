@@ -17,7 +17,6 @@ git checkout $latest_ckan_release_branch
 sed -i.bak 's/psycopg2\=\=2\.4\.5/psycopg2\=\=2\.7\.1/' requirements.txt
 python setup.py develop
 pip install -r requirements.txt
-pip install -r dev-requirements.txt
 # undo requirements.txt modification
 git checkout requirements.txt
 rm requirements.txt.bak
