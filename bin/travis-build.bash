@@ -16,7 +16,7 @@ sudo mv /opt/solr/solr/collection1 /opt/solr/solr/ckan
 echo "name=ckan" | sudo tee /opt/solr/solr/ckan/core.properties
 sudo wget https://raw.githubusercontent.com/ckan/ckan/ckan-2.7.4/ckan/config/solr/schema.xml -O /opt/solr/solr/ckan/conf/schema.xml
 sudo wget https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty-logging.xml -O /opt/solr/etc/jetty-logging.xml
-sudo wget https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty.defaults -O /etc/defaults/jetty/jetty.defaults
+sudo wget https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty.defaults -O /etc/default/jetty
 sudo java -jar /opt/solr/start.jar --daemon
 cd -
 
