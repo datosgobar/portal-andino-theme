@@ -5,7 +5,20 @@ echo "This is travis-build.bash..."
 
 echo "Installing the packages that CKAN requires..."
 sudo apt-get update -qq
-sudo apt-get install solr-jetty libcommons-fileupload-java
+sudo apt-get install libcommons-fileupload-java
+
+echo "Installing solt 4.7.2"
+cd /opt
+sudo wget http://archive.apache.org/dist/lucene/solr/4.7.2/solr-4.7.2.tgz
+sudo tar -xvf solr-4.7.2.tgz
+sudo cp -R solr-4.7.2/example /opt/solr
+sudo mv /opt/solr/solr/collection1 /opt/solr/solr/ckan
+echo "name=ckan" | sudo tee /opt/solr/solr/ckan/core.properties
+sudo wget https://raw.githubusercontent.com/ckan/ckan/ckan-2.7.4/ckan/config/solr/schema.xml -O /opt/solr/solr/ckan/conf/schema.xml
+sudo wget https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty-logging.xml -O /opt/solr/etc/jetty-logging.xml
+sudo wget https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty.defaults -O /etc/defaults/jetty/jetty.defaults
+sudo java -jar /opt/solr/start.jar --daemon
+cd -
 
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
