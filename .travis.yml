@@ -3,7 +3,7 @@ sudo: required
 python:
     - "2.7"
 services:
-    -postgresql
+    - postgresql
 postgresql: "9.1"
 install:
     - bash bin/travis-build.bash
