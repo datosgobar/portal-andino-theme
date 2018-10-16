@@ -28,22 +28,21 @@
 
                         {% set top_organization = organization.depth == 0 %}
 
-                        {% if top_organization and organization.total_package_count > 0 %}
-                            <a href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">
-                        {% endif %}
 
                         <div class="organization-branch">
-
 
                             <div class="organization-name {{ 'top-organization' if top_organization else '' }}">
                                 {%- if top_organization -%}
                                     {%- snippet "svg/chevron_right.svg" -%}
                                 {%- endif -%}
 
-                                {%- if organization.own_package_count > 0 -%}
-                                        {{ organization.name }} ({{ organization.own_package_count }})
+                                {%- if organization.total_package_count > 0 -%}
+                                    <a href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">
+                                        {{ organization.name }} {{ ('(%d)' % organization.own_package_count) if organization.own_package_count }}
+                                    </a>
+
                                 {%- else -%}
-                                    {{ organization.name }}
+                                    {{ organization.title }}
                                 {%- endif -%}
 
                                 {%- if c.userobj and c.userobj.sysadmin -%}
@@ -65,11 +64,9 @@
                             {% if organization.children %}
                                 {{ loop(organization.children) }}
                             {% endif %}
+
                         </div>
 
-                        {% if top_organization and organization.total_package_count > 0 %}
-                            </a>
-                        {% endif %}
 
                         {% if top_organization %}
                             <hr>
