@@ -40,6 +40,6 @@ cd -
 
 echo "Installing ckanext-gobar_theme and its requirements..."
 python setup.py develop
-pip install -r requirements.txt
+pip install -r test-requirements.txt
 
 echo "travis-build.bash is done."
