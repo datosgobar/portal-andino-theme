@@ -18,7 +18,7 @@ sudo wget https://raw.githubusercontent.com/ckan/ckan/ckan-2.7.4/ckan/config/sol
 sudo wget https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty-logging.xml -O /opt/solr/etc/jetty-logging.xml
 sudo ls -lsa /etc
 sudo ls -lsa /etc/default*
-curl https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty.defaults | sudo tee /etc/default/jetty
+curl https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty.defaults | sudo tee /etc/default/jetty > /dev/null
 sudo java -jar /opt/solr/start.jar --daemon
 cd -
 
