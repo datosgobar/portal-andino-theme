@@ -142,7 +142,6 @@ class TestAndino(helpers.FunctionalTestBase):
             response = submit_and_follow(self.app, form, env, 'delete')
         except sqlalchemy.exc.ProgrammingError:
             # Error subiendo al datastore
-            # TODO: Consultar
             pass
         return response
 
@@ -162,10 +161,17 @@ class TestAndino(helpers.FunctionalTestBase):
         _, response = self.get_page_response(url_for(url), admin_required=True)
         self.edit_form_value(response, form_name, field_name, value)
 
-    def edit_form_value(self, response, form_name, field_name, value=u'Campo modificado'):
+    def edit_form_value(self, response, form_id=None, field_name=None, field_type='text', value=u'Campo modificado'):
         admin = factories.Sysadmin()
-        form = response.forms[form_name]
-        form[field_name].value = value
+        if form_id:
+            form = response.forms[form_id]
+        else:
+            # El form a buscar no tiene un id bajo el cual buscarlo
+            form = response.forms[0]
+        if field_type == 'text':
+            form[field_name].value = value
+        elif field_type == 'checkbox':
+            form[field_name].checked = value
         env = {'REMOTE_USER': admin['name'].encode('ascii')}
         try:
             response = submit_and_follow(self.app, form, env, 'save', value="config-form")
