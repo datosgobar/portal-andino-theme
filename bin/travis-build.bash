@@ -42,4 +42,5 @@ echo "Installing ckanext-gobar_theme and its requirements..."
 python setup.py develop
 pip install -r requirements.txt
 
+find / -name test-core.ini
 echo "travis-build.bash is done."
