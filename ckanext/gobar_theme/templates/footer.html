@@ -43,7 +43,15 @@
                         </a>
                     {% endif %}
 
-                    {% if c.userobj and c.userobj.sysadmin and (has_tw or has_github or has_fb or has_inst or has_yt) and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
+                    {% set linkedin = h.get_theme_config('social.linkedin') %}
+                    {% set has_linkedin = linkedin and linkedin|length > 0 %}
+                    {% if has_linkedin %}
+                        <a href="{{ linkedin }}" target="_blank" class="social-link">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if c.userobj and c.userobj.sysadmin and (has_tw or has_github or has_fb or has_inst or has_yt or has_linkedin) and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
                         <a class="edit-social-link"
                            href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_social') }}">
                             {% snippet "svg/edit.svg" %}
