@@ -21,7 +21,8 @@ echo "Installing the packages that CKAN requires..."
 sudo apt-get update -qq
 sudo apt-get install libcommons-fileupload-java
 
-echo "Installing solt 4.7.2"
+echo "Installing solr 4.7.2"
+sed -i -e 's/solr:8983/127.0.0.1:8983' ckan/test-core.ini
 cd /opt
 sudo wget http://archive.apache.org/dist/lucene/solr/4.7.2/solr-4.7.2.tgz
 sudo tar -xvf solr-4.7.2.tgz
