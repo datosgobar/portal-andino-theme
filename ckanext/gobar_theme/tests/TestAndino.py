@@ -59,7 +59,7 @@ class TestAndino(helpers.FunctionalTestBase):
         settings_path = os.path.relpath(os.path.dirname('/tests_config/test_settings.json'))
         data = requests.get('https://raw.githubusercontent.com/datosgobar/portal-base/master/'
                             'base_portal/roles/portal/templates/ckan/default.json.j2')
-        with open(settings_path, "w") as file:
+        with open(settings_path, "w+") as file:
             file.write(data.text)
 
     @classmethod
