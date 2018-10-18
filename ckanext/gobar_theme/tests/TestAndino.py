@@ -40,6 +40,13 @@ class TestAndino(helpers.FunctionalTestBase):
 
     @classmethod
     def setup_class(cls):
+
+        def search_for_file(filename):
+            for root, dirs, files in os.walk("/"):
+                for name in files:
+                    if filename == name:
+                        return os.path.join(root, name)
+
         super(TestAndino, cls).setup_class()
         # Si existe, cambiamos el nombre de la caché con los datos del nodo, para poder usar una caché de testeo
         try:
@@ -49,7 +56,8 @@ class TestAndino(helpers.FunctionalTestBase):
             pass
         # Creo un nuevo settings.json para ser usado durante el testeo
         settings_path = os.path.relpath(os.path.dirname('/tests_config/test_settings.json'))
-        shutil.copyfile('/app/roles/portal/templates/ckan/default.json.j2', settings_path)
+        original_file_path = search_for_file('default.json.j2')
+        shutil.copyfile(original_file_path, settings_path)
 
     @classmethod
     def teardown_class(cls):
