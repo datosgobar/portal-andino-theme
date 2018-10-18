@@ -16,10 +16,12 @@ class TestCatalog(TestAndino.TestAndino):
     def __init__(self):
         super(TestCatalog, self).__init__()
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def setup(self):
         super(TestCatalog, self).setup()
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def teardown(self):
         _, response = self.get_page_response(url_for('/configurar/titulo'), admin_required=True)
         self.edit_form_value(

@@ -15,6 +15,7 @@ class TestSeriesTiempoAr(TestAndino.TestAndino):
     def __init__(self):
         super(TestSeriesTiempoAr, self).__init__()
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def setup(self):
         super(TestSeriesTiempoAr, self).setup()

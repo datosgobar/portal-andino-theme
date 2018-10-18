@@ -21,10 +21,12 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
     def __init__(self):
         super(TestDatajsonGeneration, self).__init__()
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def setup(self):
         super(TestDatajsonGeneration, self).setup()
         self.dataset = helpers.call_action('package_create', name='test_package', title='this is my custom title')
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def teardown(self):
         model.repo.rebuild_db()
         ckan.lib.search.clear_all()

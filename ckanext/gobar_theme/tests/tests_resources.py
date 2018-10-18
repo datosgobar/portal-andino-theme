@@ -19,6 +19,7 @@ class TestResources(TestAndino.TestAndino):
     def __init__(self):
         super(TestResources, self).__init__()
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def setup(self):
         super(TestResources, self).setup()
         self.dataset = self.create_package_with_n_resources(

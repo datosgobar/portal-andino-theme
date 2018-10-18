@@ -18,6 +18,7 @@ import ckan.tests.factories as factories
 from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY, CACHE_FILENAME
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file
 from ckanext.gobar_theme.config_controller import GobArConfigController
+from mock import patch
 
 logger = logging.getLogger(__name__)
 submit_and_follow = helpers.submit_and_follow
@@ -35,10 +36,12 @@ class TestAndino(helpers.FunctionalTestBase):
         self.app = self._get_test_app()
         self.org = None
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def setup(self):
         super(TestAndino, self).setup()
         self.org = factories.Organization()
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @classmethod
     def setup_class(cls):
         super(TestAndino, cls).setup_class()
@@ -57,6 +60,7 @@ class TestAndino(helpers.FunctionalTestBase):
         with open(CACHE_DIRECTORY + "test_settings.json", "w+") as file:
             file.write(data.text)
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @classmethod
     def teardown_class(cls):
         super(TestAndino, cls).teardown_class()
@@ -69,6 +73,7 @@ class TestAndino(helpers.FunctionalTestBase):
             pass
         os.rename(CACHE_DIRECTORY + "datajson_cache_backup.json", CACHE_FILENAME)
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def create_package_with_n_resources(self, n=0, data_dict={}):
         '''
         :param n: cantidad de recursos a crear (ninguno por default)
@@ -86,6 +91,7 @@ class TestAndino(helpers.FunctionalTestBase):
 
     # ------ Methods with factories ------ #
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def get_page_response(self, url, admin_required=False):
         '''
         :param url: url a la cual se deberá acceder
@@ -109,6 +115,7 @@ class TestAndino(helpers.FunctionalTestBase):
 
     # --- Datasets --- #
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def create_package_with_one_resource_using_forms(self, dataset_name=u'package-with-one-resource',
                                                      resource_url=u'http://example.com/resource'):
         env, response = self.get_page_response('/dataset/new')
@@ -121,6 +128,7 @@ class TestAndino(helpers.FunctionalTestBase):
         submit_and_follow(self.app, form, env, 'save', 'go-metadata')
         return model.Package.by_name(dataset_name)
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def update_package_using_forms(self, dataset_name, data_dict={}):
         env, response = self.get_page_response('/dataset/edit/{0}'.format(dataset_name))
         form = response.forms['dataset-edit']
@@ -133,6 +141,7 @@ class TestAndino(helpers.FunctionalTestBase):
         submit_and_follow(self.app, form, env, 'save', 'continue')
         return model.Package.by_name(dataset_name)
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def delete_package_using_forms(self, dataset_name):
         env, response = self.get_page_response(url_for('/dataset/delete/{0}'.format(dataset_name)), admin_required=True)
         form = response.forms['confirm-dataset-delete-form']
@@ -141,6 +150,7 @@ class TestAndino(helpers.FunctionalTestBase):
 
     # --- Resources --- #
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def create_resource_using_forms(self, dataset_name, resource_name=u'resource'):
         env, response = self.get_page_response(str('/dataset/new_resource/%s' % dataset_name))
         form = response.forms['resource-edit']
@@ -149,6 +159,7 @@ class TestAndino(helpers.FunctionalTestBase):
         submit_and_follow(self.app, form, env, 'save', 'go-dataset-complete')
         return model.Resource.by_name(resource_name)
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def delete_resource_using_forms(self, dataset_name, resource_id):
         url = url_for('/dataset/{0}/resource_delete/{1}'.format(dataset_name, resource_id))
         env, response = self.get_page_response(url)
@@ -162,6 +173,7 @@ class TestAndino(helpers.FunctionalTestBase):
 
     # --- Datajson --- #
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def generate_datajson(self, cache_directory='/tmp/', cache_filename='/tmp/datajson_cache_test.json'):
         file_descriptor, file_path = tempfile.mkstemp(suffix='.json', dir=cache_directory)
         generate_new_cache_file(file_descriptor)
@@ -171,11 +183,13 @@ class TestAndino(helpers.FunctionalTestBase):
 
     # --- Portal --- #
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def return_value_to_default(self, url, form_name, field_name, value):
         # Restauro la información default, tal y como estaba antes de testear
         _, response = self.get_page_response(url_for(url), admin_required=True)
         self.edit_form_value(response, form_name, field_name, value)
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def edit_form_value(self, response, form_id=None, field_name=None, field_type='text', value=u'Campo modificado'):
         admin = factories.Sysadmin()
         if form_id:
