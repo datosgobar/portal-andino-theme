@@ -5,6 +5,7 @@ import json
 import logging
 import tempfile
 import sqlalchemy
+import shutil
 from abc import ABCMeta, abstractmethod
 from routes import url_for
 from pylons.config import config
@@ -15,9 +16,14 @@ import ckan.tests.helpers as helpers
 import ckan.tests.factories as factories
 from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY, CACHE_FILENAME
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file
+from ckanext.gobar_theme.config_controller import GobArConfigController
 
 logger = logging.getLogger(__name__)
 submit_and_follow = helpers.submit_and_follow
+
+
+class GobArConfigControllerForTest(GobArConfigController):
+    CONFIG_PATH = CACHE_DIRECTORY + "test_settings.json"
 
 
 class TestAndino(helpers.FunctionalTestBase):
@@ -41,6 +47,9 @@ class TestAndino(helpers.FunctionalTestBase):
         except OSError:
             # No existe, por lo que no hay nada qué renombrar
             pass
+        # Creo un nuevo settings.json para ser usado durante el testeo
+        settings_path = os.path.relpath(os.path.dirname('/tests_config/test_settings.json'))
+        shutil.copyfile('/app/roles/portal/templates/ckan/default.json.j2', settings_path)
 
     @classmethod
     def teardown_class(cls):

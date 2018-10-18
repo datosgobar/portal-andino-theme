@@ -7,6 +7,7 @@ from ckan.tests import helpers as helpers
 import ckan.tests.factories as factories
 import nose.tools as nt
 from ckanext.gobar_theme.tests import TestAndino
+from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 
 submit_and_follow = helpers.submit_and_follow
 
@@ -20,6 +21,7 @@ class TestDatasets(TestAndino.TestAndino):
         super(TestDatasets, self).setup()
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_check_created_dataset_note(self):
         self.create_package_with_n_resources(
             data_dict={'name': 'test', 'title': 'test_package', 'notes': 'this is my custom note'})
@@ -27,6 +29,7 @@ class TestDatasets(TestAndino.TestAndino):
         nt.assert_equals('this is my custom note', pkg['notes'])
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_check_dataset_url_exists(self):
         dataset = self.create_package_with_n_resources(
             data_dict={'name': 'test', 'title': 'test_package', 'notes': 'this is my custom note'})
@@ -36,11 +39,13 @@ class TestDatasets(TestAndino.TestAndino):
         nt.assert_true(result.status.endswith("200 OK"))
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_create_dataset_with_2_packages(self):
         pkg = self.create_package_with_n_resources(n=2, data_dict={'name': "test_package_with_resources"})
         nt.assert_equal(len(pkg['resources']), 2)
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_update_dataset_note(self):
         self.create_package_with_n_resources(
             data_dict={'name': 'test', 'title': 'test_package', 'notes': 'this is my custom note'})
@@ -49,12 +54,14 @@ class TestDatasets(TestAndino.TestAndino):
         nt.assert_equals('this is my updated text', pkg['notes'])
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_create_package_with_one_resource_using_forms(self):
         pkg = self.create_package_with_one_resource_using_forms()
         nt.assert_equal(pkg.resources[0].url, u'http://example.com/resource')
         nt.assert_equal(pkg.state, 'active')
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_create_two_packages_with_one_resource_each_using_forms(self):
         pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1", resource_url="http://1.com")
         nt.assert_equal(pkg.resources[0].url, u'http://1.com')
@@ -62,26 +69,9 @@ class TestDatasets(TestAndino.TestAndino):
         nt.assert_equal(pkg2.resources[0].url, u'http://2.com')
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_update_package_notes_using_forms(self):
         pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1", resource_url="http://1.com")
         nt.assert_equal(pkg.resources[0].url, u'http://1.com')
         pkg = self.update_package_using_forms(pkg.name)
         nt.assert_equal(pkg.notes, u'New description')
-
-    # @patch('redis.StrictRedis', mock_strict_redis_client)
-    # def test_delete_dataset_using_forms_and_check_url_throws_404(self):
-    #     error_thrown = False
-    #     # pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1")
-    #     self.org = factories.Organization()
-    #     pkg = factories.Dataset(name="ds_1", owner_org=self.org['id'])
-    #     response = self.delete_package_using_forms("ds_1")
-    #     # TODO: para colaboradores, está tirando error de permisos al submittear el form
-    #     # TODO: para admins, está tirando error por un tema de organizaciones
-    #     nt.assert_equal(200, response.status_int)
-    #     url = url_for(controller='package', action='read', id=pkg.name)
-    #     try:
-    #         _, response = self.get_page_response(url, admin_required=True)
-    #     except Exception:
-    #         # Surge un AppError 404 tratando de conseguir el response; el dataset fue borrado y no funciona su URL
-    #         error_thrown = True
-    #     nt.assert_true(error_thrown)

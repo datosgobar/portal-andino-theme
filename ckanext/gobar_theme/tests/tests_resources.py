@@ -9,6 +9,7 @@ import nose.tools as nt
 from mock import patch
 from mockredis import mock_strict_redis_client
 from ckanext.gobar_theme.tests import TestAndino
+from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 
 submit_and_follow = helpers.submit_and_follow
 
@@ -26,27 +27,32 @@ class TestResources(TestAndino.TestAndino):
             'resource_create', package_id=self.dataset['id'], name='test-resource', url='http://resource.create/')
         self.resource_id = self.resource.get('id')
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_check_created_resource_has_url(self):
         res = helpers.call_action('resource_show', id=self.resource_id)
         nt.assert_equals('http://resource.create/', res['url'])
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_update_resource_url(self):
         helpers.call_action('resource_update', id=self.resource_id, url='http://resource.update/')
         res = helpers.call_action('resource_show', id=self.resource_id)
         nt.assert_equals('http://resource.update/', res['url'])
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_check_resource_url_exists(self):
         _, response = self.get_page_response(
             url_for(controller='package', action='resource_read', id=self.dataset['id'], resource_id=self.resource_id))
         nt.assert_true(response.status.endswith("200 OK"))
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_create_resource_using_forms(self):
         dataset = factories.Dataset()
         res = self.create_resource_using_forms(dataset['id'], "resource")
         nt.assert_equal(res.url, u'http://example.com/resource')
 
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_delete_resource_using_forms(self):
         error_thrown = False
