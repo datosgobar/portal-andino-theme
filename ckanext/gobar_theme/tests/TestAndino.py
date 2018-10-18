@@ -41,13 +41,6 @@ class TestAndino(helpers.FunctionalTestBase):
 
     @classmethod
     def setup_class(cls):
-
-        def search_for_file(filename):
-            for root, dirs, files in os.walk("/"):
-                for name in files:
-                    if filename == name:
-                        return os.path.join(root, name)
-
         super(TestAndino, cls).setup_class()
         # Si existe, cambiamos el nombre de la caché con los datos del nodo, para poder usar una caché de testeo
         try:
@@ -56,7 +49,7 @@ class TestAndino(helpers.FunctionalTestBase):
             # No existe, por lo que no hay nada qué renombrar
             pass
         # Creo un nuevo settings.json para ser usado durante el testeo
-        settings_path = os.path.relpath(os.path.dirname('/tests_config/test_settings.json'))
+        settings_path = os.path.relpath(os.path.dirname('/tests_config/')) + 'test_settings.json'
         data = requests.get('https://raw.githubusercontent.com/datosgobar/portal-base/master/'
                             'base_portal/roles/portal/templates/ckan/default.json.j2')
         with open(settings_path, "w+") as file:
