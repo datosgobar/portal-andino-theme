@@ -41,7 +41,6 @@ class TestAndino(helpers.FunctionalTestBase):
         super(TestAndino, self).setup()
         self.org = factories.Organization()
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @classmethod
     def setup_class(cls):
         super(TestAndino, cls).setup_class()
@@ -60,7 +59,6 @@ class TestAndino(helpers.FunctionalTestBase):
         with open(CACHE_DIRECTORY + "test_settings.json", "w+") as file:
             file.write(data.text)
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @classmethod
     def teardown_class(cls):
         super(TestAndino, cls).teardown_class()
