@@ -49,10 +49,12 @@ class TestAndino(helpers.FunctionalTestBase):
             # No existe, por lo que no hay nada qué renombrar
             pass
         # Creo un nuevo settings.json para ser usado durante el testeo
-        settings_path = os.path.relpath(os.path.dirname('/tests_config/')) + 'test_settings.json'
+        # cosas = [f for f in os.listdir(os.path.relpath(os.path.dirname('/tests_config/')))]
+        # import pdb; pdb.set_trace()
+        # settings_path = os.path.relpath(os.path.dirname('/tests_config/')) + '/test_settings.json'
         data = requests.get('https://raw.githubusercontent.com/datosgobar/portal-base/master/'
                             'base_portal/roles/portal/templates/ckan/default.json.j2')
-        with open(settings_path, "w+") as file:
+        with open(CACHE_DIRECTORY + "test_settings.json", "w+") as file:
             file.write(data.text)
 
     @classmethod
