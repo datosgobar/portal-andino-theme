@@ -12,6 +12,7 @@ if [ -d /var/lib/ ] ; then     echo "Se creó bien el directorio /var/lib/"; els
 sudo mkdir /var/lib/ckan/
 if [ -d /var/lib/ckan/ ] ; then     echo "Se creó bien el directorio /var/lib/ckan/"; else     echo "No se pudo crear el directorio /var/lib/ckan/"; fi
 sudo mkdir /var/lib/ckan/theme_config/
-if [ -d /var/lib/ckan/theme_config/ ] ; then     echo "Se creó bien el directorio"; else     echo "No se pudo crear el directorio"; fi
+if [ -d /var/lib/ckan/theme_config/ ] ; then     echo "Se creó bien el directorio /var/lib/ckan/theme_config/"; else     echo "No se pudo crear el directorio /var/lib/ckan/theme_config/"; fi
+echo "" > /var/lib/ckan/theme_config/test_settings.json
 nosetests --nocapture --nologcapture --ckan --reset-db --with-pylons=/home/travis/build/datosgobar/portal-andino-theme/ckanext/gobar_theme/tests/tests_config/test-core.ini
 cd -
