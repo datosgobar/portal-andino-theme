@@ -4,6 +4,7 @@ import os
 import json
 import logging
 import tempfile
+import requests
 import sqlalchemy
 import shutil
 from abc import ABCMeta, abstractmethod
@@ -56,8 +57,10 @@ class TestAndino(helpers.FunctionalTestBase):
             pass
         # Creo un nuevo settings.json para ser usado durante el testeo
         settings_path = os.path.relpath(os.path.dirname('/tests_config/test_settings.json'))
-        original_file_path = search_for_file('default.json.j2')
-        shutil.copyfile(original_file_path, settings_path)
+        data = requests.get('https://raw.githubusercontent.com/datosgobar/portal-base/master/'
+                            'base_portal/roles/portal/templates/ckan/default.json.j2')
+        with open(settings_path, "w") as file:
+            file.write(data.text)
 
     @classmethod
     def teardown_class(cls):
