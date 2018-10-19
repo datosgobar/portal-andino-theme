@@ -6,7 +6,7 @@ import io
 import re
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckan.lib.jobs as jobs
-# import ckan.logic.action.delete as delete
+import ckan.logic.action.delete as delete
 from ckan.common import c
 import ckan.model as model
 import ckan.logic as logic
@@ -43,12 +43,12 @@ def get_data_json_contents():
 
 def enqueue_update_datajson_cache_tasks():
     # Las funciones que usamos de RQ requieren que se les envíe el context para evitar problemas de autorización
-    # try:
-    #     context = {'model': model, 'session': model.Session, 'user': c.user}
-    #     delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
-    # except logic.NotAuthorized:
-    #     logger.info(u'Usuario %s no tiene permisos para administrar colas de trabajo. '
-    #                 u'No es posible limpiar las colas previo actualización de data.json', c.user)
+    try:
+        context = {'model': model, 'session': model.Session, 'user': c.user}
+        delete.job_clear(context, {'queues': [ANDINO_DATAJSON_QUEUE]})
+    except logic.NotAuthorized:
+        logger.info(u'Usuario %s no tiene permisos para administrar colas de trabajo. '
+                    u'No es posible limpiar las colas previo actualización de data.json', c.user)
     jobs.enqueue(update_datajson_cache, queue=ANDINO_DATAJSON_QUEUE)
     jobs.enqueue(update_catalog, queue=ANDINO_DATAJSON_QUEUE)
 
