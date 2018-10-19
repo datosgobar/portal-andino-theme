@@ -87,3 +87,6 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
     def test_catalog_data_is_in_datajson_and_title_is_correct(self):
         datajson = self.generate_datajson(CACHE_DIRECTORY, self.TEST_CACHE_PATH)
         nt.assert_equal(datajson['title'], u'Título del portal')
+
+    def test_fail(self):
+        nt.assert_true(False)
