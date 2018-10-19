@@ -1,13 +1,13 @@
 #! coding: utf-8
 
 from routes import url_for
-
 from ckan.tests import helpers as helpers
 import ckan.tests.factories as factories
 import sqlalchemy
 import nose.tools as nt
 from mock import patch
 from mockredis import mock_strict_redis_client
+from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
 from ckanext.gobar_theme.tests import TestAndino
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 
@@ -40,6 +40,7 @@ class TestResources(TestAndino.TestAndino):
         nt.assert_equals('http://resource.update/', res['url'])
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.lib.datajson_actions.CACHE_FILENAME', CACHE_DIRECTORY + "datajson_cache_backup.json")
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_check_resource_url_exists(self):
         _, response = self.get_page_response(

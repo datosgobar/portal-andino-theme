@@ -35,6 +35,7 @@ class TestAndino(helpers.FunctionalTestBase):
     def __init__(self):
         self.app = self._get_test_app()
         self.org = None
+        self.TEST_CACHE_PATH = CACHE_DIRECTORY + "datajson_cache_backup.json"
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def setup(self):
@@ -45,15 +46,12 @@ class TestAndino(helpers.FunctionalTestBase):
     def setup_class(cls):
         super(TestAndino, cls).setup_class()
         # Si existe, cambiamos el nombre de la caché con los datos del nodo, para poder usar una caché de testeo
-        try:
-            os.rename(CACHE_FILENAME, CACHE_DIRECTORY + "datajson_cache_backup.json")
-        except OSError:
-            # No existe, por lo que no hay nada qué renombrar
-            pass
+        # try:
+        #     shutil.copyfile(CACHE_FILENAME, CACHE_DIRECTORY + "datajson_cache_backup.json")
+        # except IOError:
+        #     # No existe, por lo que no hay nada que copiar
+        #     pass
         # Creo un nuevo settings.json para ser usado durante el testeo
-        # cosas = [f for f in os.listdir(os.path.relpath(os.path.dirname('/tests_config/')))]
-        # import pdb; pdb.set_trace()
-        # settings_path = os.path.relpath(os.path.dirname('/tests_config/')) + '/test_settings.json'
         data = requests.get('https://raw.githubusercontent.com/datosgobar/portal-base/master/'
                             'base_portal/roles/portal/templates/ckan/default.json.j2')
         with open(CACHE_DIRECTORY + "test_settings.json", "w+") as file:
@@ -65,11 +63,10 @@ class TestAndino(helpers.FunctionalTestBase):
         model.repo.rebuild_db()
         ckan.lib.search.clear_all()
         try:
-            os.remove(CACHE_FILENAME)
+            os.remove(CACHE_DIRECTORY + "datajson_cache_backup.json")
         except OSError:
             # No se creó una caché de testeo
             pass
-        os.rename(CACHE_DIRECTORY + "datajson_cache_backup.json", CACHE_FILENAME)
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)

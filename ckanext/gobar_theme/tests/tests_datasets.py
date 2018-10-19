@@ -35,7 +35,6 @@ class TestDatasets(TestAndino.TestAndino):
         dataset = self.create_package_with_n_resources(
             data_dict={'name': 'test', 'title': 'test_package', 'notes': 'this is my custom note'})
         bulk_process_url = url_for(controller='package', action='read', id=dataset.get("id"))
-        self.generate_datajson()  # Al pedo, porque siempre se va a buscar la caché en el lugar normal, no /tmp
         result = self.app.get(url=bulk_process_url, status=200)
         nt.assert_true(result.status.endswith("200 OK"))
 
