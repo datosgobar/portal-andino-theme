@@ -9,5 +9,3 @@ install:
     - bash bin/travis-build.bash
     - pip install coveralls
 script: sh bin/travis-run.sh
-after_success:
-    - coveralls
