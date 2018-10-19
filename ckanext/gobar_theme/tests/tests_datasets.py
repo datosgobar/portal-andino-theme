@@ -4,7 +4,6 @@ from routes import url_for
 from mock import patch
 from mockredis import mock_strict_redis_client
 from ckan.tests import helpers as helpers
-import ckan.tests.factories as factories
 import nose.tools as nt
 from ckanext.gobar_theme.tests import TestAndino
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest

@@ -6,7 +6,6 @@ import logging
 import tempfile
 import requests
 import sqlalchemy
-import shutil
 from abc import ABCMeta, abstractmethod
 from routes import url_for
 from pylons.config import config
@@ -15,7 +14,7 @@ import ckan.lib.search
 import ckan.model as model
 import ckan.tests.helpers as helpers
 import ckan.tests.factories as factories
-from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY, CACHE_FILENAME
+from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file
 from ckanext.gobar_theme.config_controller import GobArConfigController
 from mock import patch
@@ -45,12 +44,6 @@ class TestAndino(helpers.FunctionalTestBase):
     @classmethod
     def setup_class(cls):
         super(TestAndino, cls).setup_class()
-        # Si existe, cambiamos el nombre de la caché con los datos del nodo, para poder usar una caché de testeo
-        # try:
-        #     shutil.copyfile(CACHE_FILENAME, CACHE_DIRECTORY + "datajson_cache_backup.json")
-        # except IOError:
-        #     # No existe, por lo que no hay nada que copiar
-        #     pass
         # Creo un nuevo settings.json para ser usado durante el testeo
         data = requests.get('https://raw.githubusercontent.com/datosgobar/portal-base/master/'
                             'base_portal/roles/portal/templates/ckan/default.json.j2')
@@ -100,7 +93,6 @@ class TestAndino(helpers.FunctionalTestBase):
         else:
             user = factories.User()
             # Los usuarios colaboradores requieren una organización para manipular datasets
-            # org = factories.Organization()
             self.org['users'].append(user)
         env = {'REMOTE_USER': user['name'].encode('ascii')}
         page_url = url_for(url)
