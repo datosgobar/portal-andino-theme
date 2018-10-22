@@ -70,17 +70,17 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_optional_dataset_fields_are_not_included_if_empty(self):
         optional_dataset_fields_names = ['source', 'language', 'spatial', 'quality', 'publisher', 'contactPoint',
-                                         'theme', 'modified', 'landingPage', 'keyword', 'temporal', 'license']
-        optional_resource_fields_names = ['mediaType', 'rights', 'description', 'field', 'modified', 'format',
+                                         'theme', 'keyword', 'temporal', 'license']
+        optional_resource_fields_names = ['mediaType', 'rights', 'description', 'field', 'format',
                                           'fileName', 'license', 'type']
         self.create_package_with_n_resources(n=1, data_dict={'title': 'Un titulo', 'name': 'ds1'})
         datajson = self.generate_datajson(CACHE_DIRECTORY, self.TEST_CACHE_PATH)
         dataset = datajson['dataset'][0]
         resource = dataset['distribution'][0]
         for name in optional_dataset_fields_names:
-            nt.assert_true(name not in dataset.keys() or dataset[name])
+            nt.assert_true(name not in dataset.keys())
         for name in optional_resource_fields_names:
-            nt.assert_true(name not in resource.keys() or resource[name])
+            nt.assert_true(name not in resource.keys())
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
