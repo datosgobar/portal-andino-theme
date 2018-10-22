@@ -45,10 +45,7 @@ class TestAndino(helpers.FunctionalTestBase):
     def setup_class(cls):
         super(TestAndino, cls).setup_class()
         # Creo un nuevo settings.json para ser usado durante el testeo
-        data = requests.get('https://raw.githubusercontent.com/datosgobar/portal-base/master/'
-                            'base_portal/roles/portal/templates/ckan/default.json.j2')
-        with open(CACHE_DIRECTORY + "test_settings.json", "w+") as file:
-            file.write(data.text)
+        cls.create_or_update_settings_json_file()
 
     @classmethod
     def teardown_class(cls):
@@ -60,6 +57,17 @@ class TestAndino(helpers.FunctionalTestBase):
         except OSError:
             # No se creó una caché de testeo
             pass
+
+    @staticmethod
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
+    def create_or_update_settings_json_file():
+        # Creo un nuevo settings.json, o lo actualizo en caso de que ya exista, para ser usado durante el testeo
+        script_dir = os.path.dirname(__file__)
+        relative_path = 'tests_config/default.json.j2'
+        complete_path = os.path.join(script_dir, relative_path)
+        with open(CACHE_DIRECTORY + "test_settings.json", "w+") as test_settings, open(complete_path, 'r+') as original:
+            test_settings.write(original.read())
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
