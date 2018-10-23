@@ -280,7 +280,7 @@ class GobArConfigController(base.BaseController):
             config_dict['series_tiempo_ar_explorer'] = {
                 'featured': params['featured'].strip(),
                 'enable': 'enable' in params,
-                'uri-api': params['uri-api'] or ckan_config.get('seriesapi.site_uri')
+                'series-api-uri': params['series-api-uri'] or ckan_config.get('seriestiempoarexplorer.default_series_api_uri')
             }
             self._set_config(config_dict)
         return base.render('config/config_14_series.html')
