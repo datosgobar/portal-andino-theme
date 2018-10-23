@@ -29,6 +29,10 @@
         {% set yt = h.get_theme_config('social.yt') %}
         <input type="text" title="Youtube" id="yt" name="yt" value="{{- yt if yt else '' -}}">
 
+        <h2>LinkedIn</h2>
+        {% set linkedin = h.get_theme_config('social.linkedin') %}
+        <input type="text" title="LinkedIn" id="linkedin" name="linkedin" value="{{- linkedin if linkedin else '' -}}">
+
         <h2>* Mail de contacto</h2>
         {% set mail = h.get_theme_config('social.mail') %}
         <input type="text" title="Mail de contacto" id="mail" name="mail" value="{{- mail if mail else '' -}}">
