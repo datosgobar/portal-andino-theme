@@ -1,6 +1,16 @@
-#!/bin/sh -e
+#!/bin/sh
 
-echo "NO_START=0\nJETTY_HOST=127.0.0.1\nJETTY_PORT=8983\nJAVA_HOME=$JAVA_HOME" | sudo tee /etc/default/jetty
-sudo cp ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
-sudo service jetty restart
-nosetests --nologcapture --with-pylons=subdir/test.ini --with-coverage --cover-package=ckanext.gobar_theme --cover-inclusive --cover-erase --cover-tests
+set -e
+
+sudo -u postgres psql -c "CREATE DATABASE datastore_test WITH OWNER ckan_default;"
+sudo -u postgres psql -c "CREATE USER datastore_default WITH PASSWORD 'pass';"
+sed -i 's/@db/@localhost/g' /home/travis/build/datosgobar/portal-andino-theme/ckanext/gobar_theme/tests/tests_config/test-core.ini
+
+cd ${TRAVIS_BUILD_DIR}/ckanext/gobar_theme/tests/
+export CKAN_LIB=/var/lib/ckan
+sudo mkdir -p ${CKAN_LIB}/theme_config/
+sudo chmod -R 777 ${CKAN_LIB}
+sudo echo "" > ${CKAN_LIB}/theme_config/test_settings.json
+sudo echo "" > ${CKAN_LIB}/theme_config/datajson_cache_backup.json
+nosetests --nocapture --nologcapture --ckan --reset-db --with-pylons=/home/travis/build/datosgobar/portal-andino-theme/ckanext/gobar_theme/tests/tests_config/test-core.ini
+cd -

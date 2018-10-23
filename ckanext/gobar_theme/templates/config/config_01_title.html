@@ -4,7 +4,7 @@
 
     <h1>Título, descripción e imagen del portal</h1>
 
-    <form id="title-config" method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
+    <form id="title-config" method="post" action="/configurar/titulo" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
         <h2>* Título</h2>
         <p>Podés usar, por ejemplo, Datos + el nombre o las siglas de tu organización.</p>
         {% set title = h.get_theme_config('title.site-title') %}
@@ -58,7 +58,7 @@
         </div>
 
         <div class="submit-container">
-            <button class="submit-button site-config" onclick="validateSiteFields()" type="submit" name="save">GUARDAR</button>
+            <button class="submit-button site-config" onclick="validateSiteFields()" type="submit" name="save" value="config-form">GUARDAR</button>
         </div>
     </form>
 

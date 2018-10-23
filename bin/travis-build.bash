@@ -1,11 +1,42 @@
 #!/bin/bash
 set -e
 
+SOLR_PORT=${SOLR_PORT:-8983}
+
+is_solr_up(){
+    echo "Checking if solr is up on http://localhost:$SOLR_PORT/solr/admin/cores"
+    http_code=`echo $(curl -s -o /dev/null -w "%{http_code}" "http://localhost:$SOLR_PORT/solr/admin/cores")`
+    return `test $http_code = "200"`
+}
+
+wait_for_solr(){
+    while ! is_solr_up; do
+        sleep 3
+    done
+}
+
 echo "This is travis-build.bash..."
 
 echo "Installing the packages that CKAN requires..."
 sudo apt-get update -qq
-sudo apt-get install solr-jetty libcommons-fileupload-java
+sudo apt-get install libcommons-fileupload-java
+
+echo "Installing solr 4.7.2"
+sed -i -e 's/solr:8983\/solr\/ckan/127.0.0.1:'${SOLR_PORT}'\/solr\/ckan/g' /home/travis/build/datosgobar/portal-andino-theme/ckanext/gobar_theme/tests/tests_config/test-core.ini
+cd /opt
+sudo wget http://archive.apache.org/dist/lucene/solr/4.7.2/solr-4.7.2.tgz
+sudo tar -xvf solr-4.7.2.tgz
+sudo cp -R solr-4.7.2/example /opt/solr
+sudo mv /opt/solr/solr/collection1 /opt/solr/solr/ckan
+echo "name=ckan" | sudo tee /opt/solr/solr/ckan/core.properties
+sudo wget https://raw.githubusercontent.com/ckan/ckan/ckan-2.7.4/ckan/config/solr/schema.xml -O /opt/solr/solr/ckan/conf/schema.xml
+sudo wget https://raw.githubusercontent.com/datosgobar/portal-base/master/solr/jetty-logging.xml -O /opt/solr/etc/jetty-logging.xml
+echo "NO_START=0\nJETTY_HOST=127.0.0.1\nJETTY_PORT=${SOLR_PORT}\nJAVA_HOME=$JAVA_HOME" | sudo tee /etc/default/jetty
+sudo java -Djetty.home=/opt/solr/ -Dsolr.solr.home=/opt/solr/solr/ -jar /opt/solr/start.jar &
+wait_for_solr
+echo "Started solr"
+
+cd -
 
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
@@ -17,7 +48,6 @@ git checkout $latest_ckan_release_branch
 sed -i.bak 's/psycopg2\=\=2\.4\.5/psycopg2\=\=2\.7\.1/' requirements.txt
 python setup.py develop
 pip install -r requirements.txt
-pip install -r dev-requirements.txt
 # undo requirements.txt modification
 git checkout requirements.txt
 rm requirements.txt.bak
@@ -41,10 +71,6 @@ cd -
 
 echo "Installing ckanext-gobar_theme and its requirements..."
 python setup.py develop
-pip install -r requirements.txt
-
-echo "Moving test.ini into a subdir..."
-mkdir subdir
-mv test.ini subdir
+pip install -r test-requirements.txt
 
 echo "travis-build.bash is done."

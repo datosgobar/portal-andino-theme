@@ -47,3 +47,4 @@ mockups
 
 ckanext/gobar_theme/public/user_images
 .venv
+ckanext/gobar_theme/tests/tests_config/data

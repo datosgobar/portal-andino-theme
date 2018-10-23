@@ -282,6 +282,8 @@ class GobArPackageController(PackageController):
 
             time_now = moment.now().isoformat()
 
+            if 'extras' not in data_dict.keys():
+                data_dict['extras'] = []
             self._add_or_replace_extra(key='issued', value=time_now, extras=data_dict['extras'])
             self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
             superTheme = []
@@ -659,6 +661,8 @@ class GobArPackageController(PackageController):
             # Obtengo la lista de extras del dataset y agrego en el data_dict los extras que falten
             # (no estaban en el request.POST), y reemplazo valores desactualizados
             extra_fields = get_action('package_show')(dict(context, for_view=True), {'id': name_or_id})['extras']
+            if 'extras' not in data_dict.keys():
+                data_dict['extras'] = []
             for extra_field in extra_fields:
                 found_extra_field = filter(lambda x: x['key'] == extra_field['key'], data_dict['extras'])
                 if len(found_extra_field) == 0:

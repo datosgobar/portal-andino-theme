@@ -15,6 +15,7 @@ from ckanext.gobar_theme.lib import cache_actions
 
 from .utils.ckan_utils import is_plugin_present
 
+
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IConfigurer)
     implements(IRoutes, inherit=True)
