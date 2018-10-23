@@ -7,7 +7,7 @@ sudo -u postgres psql -c "CREATE USER datastore_default WITH PASSWORD 'pass';"
 sed -i 's/@db/@localhost/g' /home/travis/build/datosgobar/portal-andino-theme/ckanext/gobar_theme/tests/tests_config/test-core.ini
 
 export TRAVIS_BUILD_DIR
-cd ${TRAVIS_BUILD_DIR}/datosgobar/portal-andino-theme/ckanext/gobar_theme/tests/
+cd ${TRAVIS_BUILD_DIR}/ckanext/gobar_theme/tests/
 export CKAN_LIB=/var/lib/ckan
 sudo mkdir -p ${CKAN_LIB}/theme_config/
 sudo chmod -R 777 ${CKAN_LIB}
