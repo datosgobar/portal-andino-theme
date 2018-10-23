@@ -37,13 +37,9 @@
                                 {%- endif -%}
 
                                 {%- if organization.total_package_count > 0 -%}
-                                    <a href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">
-                                        {{ organization.name }} {{ ('(%d)' % organization.own_package_count) if organization.own_package_count }}
-                                    </a>
+                                    <a href="{{ h.add_url_param(new_params={'organization': organization.name}, alternative_url=dataset_url) }}">{{ organization.name }} {{ ('(%d)' % organization.own_package_count) if organization.own_package_count }}</a>
 
-                                {%- else -%}
-                                    {{ organization.title }}
-                                {%- endif -%}
+                                {%- else -%}{{ organization.title }}{%- endif -%}
 
                                 {%- if c.userobj and c.userobj.sysadmin -%}
                                     <a href="{{ h.url_for(controller='organization', action='edit', id=organization.name) }}">
