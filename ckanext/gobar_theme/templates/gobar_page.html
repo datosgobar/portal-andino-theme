@@ -21,6 +21,12 @@
 
         {%- block footer %}
             {% include "footer.html" %}
+
+            {% if pkg and h.helper_available('structured_data') %}
+            <script type="application/ld+json">
+            {{ h.structured_data(pkg.id)|safe }}
+            </script>
+            {% endif %}
         {% endblock -%}
     </div>
 {%- endblock -%}
