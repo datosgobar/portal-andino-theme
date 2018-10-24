@@ -272,6 +272,7 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_13_apis.html')
 
     def edit_series(self):
+        from ckanext.gobar_theme.helpers import get_default_series_api_url
         plugin_or_404(TS_EXPLORER_PLUGIN)
         self._authorize()
         if request.method == 'POST':
@@ -280,7 +281,7 @@ class GobArConfigController(base.BaseController):
             config_dict['series_tiempo_ar_explorer'] = {
                 'featured': params['featured'].strip(),
                 'enable': 'enable' in params,
-                'series-api-uri': params['series-api-uri'] or ckan_config.get('seriestiempoarexplorer.default_series_api_uri')
+                'series-api-uri': params['series-api-uri'] or get_default_series_api_url()
             }
             self._set_config(config_dict)
         return base.render('config/config_14_series.html')

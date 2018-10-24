@@ -547,5 +547,10 @@ def get_resource_icon(resource, config):
         return resource_in_config.get('icon_url', None)
     return None
 
+
 def get_andino_base_page():
     return config.get('andino.base_page', 'gobar_page.html')
+
+
+def get_default_series_api_url():
+    return config.get('seriestiempoarexplorer.default_series_api_uri', '')
