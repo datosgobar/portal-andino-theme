@@ -83,7 +83,6 @@ def generate_new_cache_file(file_descriptor):
         return renderization
 
 
-
 def generate_datajson_info():
     datajson = get_catalog_data()
     datajson['dataset'] = filter_dataset_fields(get_datasets_with_resources(get_ckan_datasets()) or [])
@@ -374,6 +373,7 @@ def update_catalog():
         # No existe, así que la genero
         update_datajson_cache()
     catalog = DataJson(CACHE_FILENAME)
+    catalog['themeTaxonomy'] = catalog.get('themeTaxonomy', [])
     new_catalog_filename = '%s/catalog.xlsx' % tempfile.mkdtemp(dir=CACHE_DIRECTORY)
     writers.write_xlsx_catalog(catalog, new_catalog_filename)
     os.rename(new_catalog_filename, XLSX_FILENAME)
