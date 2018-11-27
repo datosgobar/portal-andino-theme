@@ -285,6 +285,17 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_14_series.html')
 
+    def edit_google_dataset_search(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            config_dict['google_dataset_search'] = {
+                'disable_structured_data': 'disable_structured_data' in params
+            }
+            self._set_config(config_dict)
+        return base.render('config/config_15_google_dataset_search.html')
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':
