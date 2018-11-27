@@ -3,7 +3,7 @@
 
     <h1>Google Dataset Search</h1>
 
-    <form method="post" action="" data-module="basic-form">
+    <form id="google-dataset-search" method="post" action="" data-module="basic-form">
         <label class="with-bottom-margin checkbox-label">
             <input type="checkbox"
                    name="disable_structured_data" {{ 'checked="checked"' if h.get_theme_config('google_dataset_search.disable_structured_data') else ''
