@@ -70,6 +70,14 @@
         </a>
     </div>
 
+    <h2>Configuración avanzada</h2>
+    <div class="links-section">
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_google_dataset_search') }}"
+           class="section-link {{ 'active' if c.action == 'edit_google_dataset_search' else '' }}">
+            Google Dataset Search
+        </a>
+    </div>
+
     <div class="links-section guide-link">
         <a class="inline"
            href="https://github.com/datosgobar/portal-andino-theme/blob/master/docs/guia_uso_portal_andino.md"

@@ -10,16 +10,19 @@ from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 submit_and_follow = helpers.submit_and_follow
 
 
-class TestSeriesTiempoAr(TestAndino.TestAndino):
+class TestConfiguration(TestAndino.TestAndino):
 
     def __init__(self):
-        super(TestSeriesTiempoAr, self).__init__()
+        super(TestConfiguration, self).__init__()
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def setup(self):
-        super(TestSeriesTiempoAr, self).setup()
+        super(TestConfiguration, self).setup()
         self.admin = factories.Sysadmin()
+
+
+class TestSeriesTiempoAr(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
@@ -33,3 +36,16 @@ class TestSeriesTiempoAr(TestAndino.TestAndino):
     def test_url_exists(self):
         _, response = self.get_page_response(url_for('/series/api'), admin_required=True)
         nt.assert_equals(response.status_int, 200)
+
+
+class TestGoogleDatasetSearch(TestConfiguration):
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_can_be_disabled(self):
+        env, response = self.get_page_response('/configurar/google_dataset_search', admin_required=True)
+        response = \
+            self.edit_form_value(response, field_name='disable_structured_data', field_type='checkbox', value=True)
+
+        form = response.forms['google-dataset-search']
+        nt.assert_equals(form['disable_structured_data'].checked, True)
