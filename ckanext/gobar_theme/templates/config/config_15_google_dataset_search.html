@@ -3,16 +3,16 @@
 
     <h1>Google Dataset Search</h1>
 
-    <h2>Deshabilitar integración con Google Dataset Search</h2>
+    <h2>Habilitar integración con Google Dataset Search</h2>
 
     <form id="google-dataset-search" method="post" action="" data-module="basic-form">
         <label class="with-bottom-margin checkbox-label">
             <input type="checkbox"
-                   name="disable_structured_data" {{ 'checked="checked"' if h.get_theme_config('google_dataset_search.disable_structured_data') else ''
+                   name="enable_structured_data" {{ 'checked="checked"' if h.get_theme_config('google_dataset_search.enable_structured_data') else ''
             }}>
-            ¿Querés deshabilitar la indexación por Google Dataset Search?
+            ¿Querés habilitar la indexación por Google Dataset Search?
         </label>
-        <p>Al deshabilitar la integración con Google Dataset Search, los datasets ya no serán indexados por la herramienta.</p>
+        <p>Al habilitar la integración, los datasets podrán ser indexados por la herramienta Google Dataset Search.</p>
 
         <div class="submit-container">
             <button class="submit-button" type="submit" name="save">GUARDAR</button>

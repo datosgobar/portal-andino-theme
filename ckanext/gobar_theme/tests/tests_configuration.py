@@ -42,10 +42,10 @@ class TestGoogleDatasetSearch(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
-    def test_can_be_disabled(self):
+    def test_can_be_enabled(self):
         env, response = self.get_page_response('/configurar/google_dataset_search', admin_required=True)
         response = \
-            self.edit_form_value(response, field_name='disable_structured_data', field_type='checkbox', value=True)
+            self.edit_form_value(response, field_name='enable_structured_data', field_type='checkbox', value=True)
 
         form = response.forms['google-dataset-search']
-        nt.assert_equals(form['disable_structured_data'].checked, True)
+        nt.assert_equals(form['enable_structured_data'].checked, True)
