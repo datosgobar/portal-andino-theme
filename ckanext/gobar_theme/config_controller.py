@@ -292,7 +292,7 @@ class GobArConfigController(base.BaseController):
             params = parse_params(request.POST)
             config_dict = self._read_config()
             config_dict['google_dataset_search'] = {
-                'disable_structured_data': 'disable_structured_data' in params
+                'enable_structured_data': 'enable_structured_data' in params
             }
             self._set_config(config_dict)
         return base.render('config/config_15_google_dataset_search.html')
