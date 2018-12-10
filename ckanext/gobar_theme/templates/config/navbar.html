@@ -76,6 +76,10 @@
            class="section-link {{ 'active' if c.action == 'edit_google_dataset_search' else '' }}">
             Google Dataset Search
         </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_google_tag_manager') }}"
+           class="section-link {{ 'active' if c.action == 'edit_google_tag_manager' else '' }}">
+            Google Tag Manager
+        </a>
     </div>
 
     <div class="links-section guide-link">
