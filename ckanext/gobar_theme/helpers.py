@@ -555,3 +555,8 @@ def get_andino_base_page():
 
 def get_default_series_api_url():
     return config.get('seriestiempoarexplorer.default_series_api_uri', '')
+
+
+def get_google_analytics_id():
+    return get_theme_config('google_analytics.id') or \
+           config.get('googleanalytics.id', '')
