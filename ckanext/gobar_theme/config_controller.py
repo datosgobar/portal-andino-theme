@@ -4,13 +4,15 @@ import os
 import re
 import urlparse
 
+from ckan import plugins as p
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
+from ckan.logic import get_action
 import ckan.model as model
 import moment
 import redis
-from ckan.common import request, c
+from ckan.common import request, c, config
 from pylons import config as ckan_config
 from ckanext.gobar_theme.lib import cache_actions
 
@@ -312,11 +314,22 @@ class GobArConfigController(base.BaseController):
         self._authorize()
         if request.method == 'POST':
             params = parse_params(request.POST)
+            google_analytics_id = params['id'].strip()
             config_dict = self._read_config()
             config_dict['google_analytics'] = {
-                'id': params['id'].strip()
+                'id': google_analytics_id
             }
             self._set_config(config_dict)
+            # Utilizamos la funcion config_option_update que nos provee CKAN para actualizar en runtime el id de Google
+            # Analytics en la configuración
+            get_action('config_option_update')({}, {
+               'googleanalytics.id': google_analytics_id
+            })
+
+            # Notificamos a todos los plugins de la nueva configuración
+            for plugin in p.PluginImplementations(p.IConfigurable):
+                plugin.configure(config)
+
         return base.render('config/config_17_google_analytics.html')
 
     def edit_greetings(self):
