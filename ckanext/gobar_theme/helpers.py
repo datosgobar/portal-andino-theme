@@ -5,6 +5,7 @@ import ckan.lib.helpers as ckan_helpers
 import ckan.lib.search as search
 import ckan.logic as logic
 import moment
+import subprocess
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
@@ -560,3 +561,10 @@ def get_default_series_api_url():
 def get_google_analytics_id():
     return get_theme_config('google_analytics.id') or \
            config.get('googleanalytics.id', '')
+
+
+def search_for_value_in_config_file(field):
+    value = subprocess.check_output(
+        'grep -E "^{}[[:space:]]*=[[:space:]]*" '
+        '/etc/ckan/default/production.ini | tr -d [[:space:]]'.format(field), shell=True).strip()
+    return value.replace(field, '')[1:]
