@@ -8,6 +8,7 @@ from ckan import plugins as p
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
+from ckan.lib.redis import is_redis_available
 from ckan.logic import get_action
 import ckan.model as model
 import moment
@@ -362,13 +363,16 @@ class GobArConfigController(base.BaseController):
             andino_config = cls._redis_cli().get('andino-config')
             gobar_config = json.loads(andino_config)
         except Exception:
-            with open(GobArConfigController.CONFIG_PATH) as json_data:
-                try:
+            try:
+                with open(GobArConfigController.CONFIG_PATH) as json_data:
                     gobar_config = json.load(json_data)
-                except Exception:
-                    gobar_config = {}
+            except Exception:
+                gobar_config = {}
+            try:
+                is_redis_available()
                 cls._redis_cli().set('andino-config', json.dumps(gobar_config))
-
+            except Exception:
+                print("Redis no se encuentra disponible!")
         return gobar_config
 
     @classmethod
