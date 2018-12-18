@@ -2,6 +2,7 @@
 import json
 import os
 import re
+import logging
 import urlparse
 
 from ckan import plugins as p
@@ -23,6 +24,7 @@ parse_params = logic.parse_params
 abort = base.abort
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
+logger = logging.getLogger(__name__)
 
 
 class GobArConfigController(base.BaseController):
@@ -372,7 +374,7 @@ class GobArConfigController(base.BaseController):
                 is_redis_available()
                 cls._redis_cli().set('andino-config', json.dumps(gobar_config))
             except Exception:
-                print("Redis no se encuentra disponible!")
+                logger.error("Redis no se encuentra disponible!")
         return gobar_config
 
     @classmethod
