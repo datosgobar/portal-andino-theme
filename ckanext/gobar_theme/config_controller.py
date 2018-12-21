@@ -312,8 +312,8 @@ class GobArConfigController(base.BaseController):
             }
             self._set_config(config_dict)
 
-            job = "{0} {1} * * * /usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c " \
-                  "/etc/ckan/default/production.ini".format(schedule_minute, schedule_hour)
+            job = "'{0} {1} * * * /usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c " \
+                  "/etc/ckan/default/production.ini'".format(schedule_minute, schedule_hour)
             search_for_cron_job_and_remove("datapusher submit_all")
             create_new_cron_job(job)
 
