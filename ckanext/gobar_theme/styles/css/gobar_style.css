@@ -10367,3 +10367,12 @@ div#form-accessURL {
 label[for="accessURL-upload-url"] {
   display: none !important;
 }
+
+form#datapusher > table.date-picker.datapusher {
+  width: 20%;
+}
+
+#template-config-container #template-config select.datapusher {
+  width: 40%;
+  margin: 0;
+}

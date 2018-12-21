@@ -3,6 +3,7 @@ import json
 import os
 import re
 import urlparse
+import subprocess
 
 import ckan.lib.base as base
 import ckan.lib.helpers as h
@@ -296,6 +297,27 @@ class GobArConfigController(base.BaseController):
             }
             self._set_config(config_dict)
         return base.render('config/config_15_google_dataset_search.html')
+
+    def edit_datapusher_commands(self):
+        self._authorize()
+        if request.method == 'POST':
+            from ckanext.gobar_theme.helpers import create_new_cron_job, search_for_cron_job_and_remove
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            schedule_hour = params.get('schedule-hour').strip()
+            schedule_minute = params.get('schedule-minute').strip()
+            config_dict['datapusher'] = {
+                'schedule-hour': schedule_hour,
+                'schedule-minute': schedule_minute
+            }
+            self._set_config(config_dict)
+
+            job = "0 1 * * * /usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c " \
+                  "/etc/ckan/default/production.ini"
+            search_for_cron_job_and_remove("datapusher submit_all")
+            create_new_cron_job(job)
+
+        return base.render('config/config_18_datapusher_commands.html')
 
     def edit_greetings(self):
         self._authorize()

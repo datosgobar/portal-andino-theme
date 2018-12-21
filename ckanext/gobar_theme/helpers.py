@@ -10,6 +10,7 @@ import ckan.lib.formatters as formatters
 import json
 import os
 import logging
+import subprocess
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from datetime import time
@@ -554,3 +555,11 @@ def get_andino_base_page():
 
 def get_default_series_api_url():
     return config.get('seriestiempoarexplorer.default_series_api_uri', '')
+
+
+def search_for_cron_job_and_remove(keywords_to_search_for):
+    subprocess.check_call('crontab -l | grep -v "{}" | crontab -'.format(keywords_to_search_for), shell=True)
+
+
+def create_new_cron_job(job):
+    subprocess.check_call('(crontab -l ; echo {} ; ) | crontab -'.format(job), shell=True)
