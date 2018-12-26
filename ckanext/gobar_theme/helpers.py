@@ -561,7 +561,15 @@ def search_for_cron_job_and_remove(keywords_to_search_for):
     subprocess.check_call('crontab -l | grep -v "{}" | crontab -'.format(keywords_to_search_for), shell=True)
 
 
-def create_new_cron_job(job):
+def create_new_cron_job(job, keywords=None):
+    if keywords is not None:
+        search_for_cron_job_and_remove(keywords)
     if 1 == subprocess.call("crontab -u www-data -l", shell=True):
         subprocess.check_call("SELECTED_EDITOR=/usr/bin/vim && service cron reload")
     subprocess.check_call('(crontab -l ; echo {0} ; ) | crontab -'.format(job), shell=True)
+
+
+def submit_all_resources_to_datastore():
+    # subprocess.check_call('/usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c '
+    #                       '/etc/ckan/default/production.ini')
+    subprocess.check_call('echo "hola" >> /tmp/miarchivo.txt')
