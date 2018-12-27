@@ -324,11 +324,7 @@ class GobArConfigController(base.BaseController):
             job_keywords = 'datapusher submit_all'
             # scheduler.cron('{0} {1} * * *'.format(schedule_minute, schedule_hour),
             #                func=submit_all_resources_to_datastore)
-            import datetime
-            scheduler.schedule(scheduled_time=datetime.datetime.now(), func=submit_all_resources_to_datastore, interval=1, repeat=None)
-            print("Lista de jobs")
-            for job in scheduler.get_jobs():
-                print(job)
+            create_new_cron_job('*/1 * * * * echo "HOLA" >> /tmp/test', 'echo')
 
 
         return base.render('config/config_18_datapusher_commands.html')
