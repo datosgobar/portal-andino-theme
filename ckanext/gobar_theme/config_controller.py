@@ -301,7 +301,7 @@ class GobArConfigController(base.BaseController):
     def edit_datapusher_commands(self):
         self._authorize()
         if request.method == 'POST':
-            from ckanext.gobar_theme.helpers import create_new_cron_job, search_for_cron_job_and_remove, submit_all_resources_to_datastore
+            from ckanext.gobar_theme.helpers import create_new_cron_job
             params = parse_params(request.POST)
             config_dict = self._read_config()
             schedule_hour = params.get('schedule-hour').strip()
@@ -314,18 +314,7 @@ class GobArConfigController(base.BaseController):
 
             job = "'{0} {1} * * * /usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c " \
                   "/etc/ckan/default/production.ini'".format(schedule_minute, schedule_hour)
-            # search_for_cron_job_and_remove("datapusher submit_all")
-            # create_new_cron_job(job)
-
-            from rq_scheduler import Scheduler
-            from redis import Redis
-            from ckan.lib.redis import connect_to_redis
-            scheduler = Scheduler(connection=connect_to_redis())
-            job_keywords = 'datapusher submit_all'
-            # scheduler.cron('{0} {1} * * *'.format(schedule_minute, schedule_hour),
-            #                func=submit_all_resources_to_datastore)
             create_new_cron_job('*/1 * * * * echo "HOLA" >> /tmp/test', 'echo')
-
 
         return base.render('config/config_18_datapusher_commands.html')
 
