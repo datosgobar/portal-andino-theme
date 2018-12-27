@@ -573,3 +573,4 @@ def submit_all_resources_to_datastore():
     # subprocess.check_call('/usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c '
     #                       '/etc/ckan/default/production.ini')
     subprocess.check_call('echo "hola" >> /tmp/miarchivo.txt')
+    subprocess.check_call('echo "hola"')
