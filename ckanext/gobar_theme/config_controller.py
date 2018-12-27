@@ -347,9 +347,7 @@ class GobArConfigController(base.BaseController):
         try:
             andino_config = cls._redis_cli().get('andino-config')
             gobar_config = json.loads(andino_config)
-            # raise ValueError("Funciona, aparentemente - " + gobar_config)
         except Exception:
-            # raise ArithmeticError("No funca un carajo...")
             with open(GobArConfigController.CONFIG_PATH) as json_data:
                 try:
                     gobar_config = json.load(json_data)
