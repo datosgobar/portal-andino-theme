@@ -3,7 +3,6 @@ import json
 import os
 import re
 import urlparse
-import subprocess
 
 import ckan.lib.base as base
 import ckan.lib.helpers as h
@@ -301,7 +300,7 @@ class GobArConfigController(base.BaseController):
     def edit_datapusher_commands(self):
         self._authorize()
         if request.method == 'POST':
-            from ckanext.gobar_theme.helpers import create_new_cron_job
+            from ckanext.gobar_theme.helpers import create_or_update_cron_job
             params = parse_params(request.POST)
             config_dict = self._read_config()
             schedule_hour = params.get('schedule-hour').strip()
@@ -315,7 +314,7 @@ class GobArConfigController(base.BaseController):
             # Creamos el cron job, reemplazando el anterior si ya existía
             job = "'{0} {1} * * * /usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c " \
                   "/etc/ckan/default/production.ini'".format(schedule_minute, schedule_hour)
-            create_new_cron_job(job, 'datapusher submit_all')
+            create_or_update_cron_job(job, 'datapusher submit_all')
 
         return base.render('config/config_18_datapusher_commands.html')
 
