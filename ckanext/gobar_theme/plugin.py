@@ -102,6 +102,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'is_plugin_present': is_plugin_present,
             'organizations_basic_info': gobar_helpers.organizations_basic_info,
             'get_default_series_api_url': gobar_helpers.get_default_series_api_url,
+            'create_or_update_cron_job': gobar_helpers.create_or_update_cron_job,
         }
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
