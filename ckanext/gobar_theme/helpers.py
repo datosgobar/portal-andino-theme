@@ -17,6 +17,7 @@ from datetime import time
 from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons.config import config
+from crontab import CronTab
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -557,19 +558,36 @@ def get_default_series_api_url():
     return config.get('seriestiempoarexplorer.default_series_api_uri', '')
 
 
-def search_for_cron_job_and_remove(keywords_to_search_for):
-    # Buscamos cada cron job y nos fijamos si alguno contiene el string equivalente al valor de la variable
-    # 'keywords_to_search_for'; en caso de encontrar alguno, lo eliminamos para evitar que se acumulen jobs que sirvan
-    # para lo mismo, aún si se cambió la configuración (debe ser lo más detallado posible para evitar borrar crons no
-    # relacionados pero que justo contengan ese string)
-    if keywords_to_search_for:
-        subprocess.check_call(
-            'crontab -u www-data -l | grep -v "{}" | crontab -u www-data -'.format(keywords_to_search_for), shell=True)
+# def search_for_cron_job_and_remove(keywords_to_search_for):
+#     # Buscamos cada cron job y nos fijamos si alguno contiene el string equivalente al valor de la variable
+#     # 'keywords_to_search_for'; en caso de encontrar alguno, lo eliminamos para evitar que se acumulen jobs que sirvan
+#     # para lo mismo, aún si se cambió la configuración (debe ser lo más detallado posible para evitar borrar crons no
+#     # relacionados pero que justo contengan ese string)
+#     if keywords_to_search_for:
+#         subprocess.check_call(
+#             'crontab -u www-data -l | grep -v "{}" | crontab -u www-data -'.format(keywords_to_search_for), shell=True)
 
 
-def create_or_update_cron_job(job, keywords=None):
-    if keywords is not None:
-        search_for_cron_job_and_remove(keywords)
-    if 1 == subprocess.call("crontab -u www-data -l", shell=True):
-        subprocess.check_call("SELECTED_EDITOR=/usr/bin/vim && service cron reload")
-    subprocess.check_call('(crontab -u www-data -l ; echo "{0}" ; ) | crontab -u www-data -'.format(job), shell=True)
+# def create_or_update_cron_job(job, keywords=None):
+#     if keywords is not None:
+#         search_for_cron_job_and_remove(keywords)
+#     subprocess.check_call('(crontab -u www-data -l ; echo "{0}" ; ) | crontab -u www-data -'.format(job), shell=True)
+
+
+def search_for_cron_jobs_and_remove(comment_to_search_for):
+    # Buscamos y eliminamos los cron jobs que contengan el comment especificado por parámetro
+    if comment_to_search_for:
+        cron = CronTab(user='www-data')
+        jobs_with_specified_comment = cron.find_comment(comment_to_search_for)
+        cron.remove(jobs_with_specified_comment)
+        cron.write()
+
+
+def create_or_update_cron_job(command, hour, minute, comment=''):
+    if comment is not None:
+        search_for_cron_jobs_and_remove(comment)
+    cron = CronTab(user='www-data')
+    job = cron.new(command=command, comment=comment)
+    job.hour.on("10")
+    job.minute.on("50")
+    cron.write()

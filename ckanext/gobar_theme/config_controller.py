@@ -317,6 +317,10 @@ class GobArConfigController(base.BaseController):
                   "/etc/ckan/default/production.ini".format(schedule_minute, schedule_hour)
             create_or_update_cron_job(job, 'datapusher submit_all')
 
+            command = 'echo "HOLA" >> /tmp/miarchivo'
+            comment = 'prueba echo'
+            create_or_update_cron_job(command, "*/1", "*", comment)
+
         return base.render('config/config_18_datapusher_commands.html')
 
     def edit_greetings(self):
