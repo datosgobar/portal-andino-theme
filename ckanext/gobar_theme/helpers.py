@@ -588,6 +588,6 @@ def create_or_update_cron_job(command, hour, minute, comment=''):
         search_for_cron_jobs_and_remove(comment)
     cron = CronTab(user='www-data')
     job = cron.new(command=command, comment=comment)
-    job.hour.on("10")
-    job.minute.on("50")
+    job.hour.on(hour)
+    job.minute.on(minute)
     cron.write()
