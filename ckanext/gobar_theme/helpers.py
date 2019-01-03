@@ -570,6 +570,4 @@ def search_for_cron_job_and_remove(keywords_to_search_for):
 def create_or_update_cron_job(job, keywords=None):
     if keywords is not None:
         search_for_cron_job_and_remove(keywords)
-    if 1 == subprocess.call("crontab -u www-data -l", shell=True):
-        subprocess.check_call("SELECTED_EDITOR=/usr/bin/vim && service cron reload")
     subprocess.check_call('(crontab -u www-data -l ; echo "{0}" ; ) | crontab -u www-data -'.format(job), shell=True)
