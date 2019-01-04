@@ -68,7 +68,7 @@ class TestDatapusherCommands(TestConfiguration):
         import logging
         logger = logging.getLogger(__name__)
         logger.info("Contenido de crontab: {}".format(subprocess.check_output(
-            'crontab -u www-data -l', shell=True).strip()))
+            'grep datapusher /var/spool/cron/crontabs/www-data | wc -l', shell=True).strip()))
         amount_of_datapusher_jobs = subprocess.check_output(
-            'crontab -u www-data -l | grep "datapusher - submit_all" | wc -l', shell=True).strip()
+            'grep datapusher /var/spool/cron/crontabs/www-data | wc -l', shell=True).strip()
         nt.assert_equals(amount_of_datapusher_jobs, "1")
