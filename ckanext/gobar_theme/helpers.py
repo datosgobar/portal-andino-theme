@@ -9,8 +9,6 @@ from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import json
 import os
-import logging
-import subprocess
 from urlparse import urljoin
 from config_controller import GobArConfigController
 from datetime import time
