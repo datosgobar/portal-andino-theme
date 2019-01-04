@@ -4,6 +4,7 @@ from routes import url_for
 from ckan.tests import helpers as helpers
 import ckan.tests.factories as factories
 import nose.tools as nt
+import subprocess
 from crontab import CronTab
 from ckanext.gobar_theme.tests import TestAndino
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
@@ -64,9 +65,6 @@ class TestDatapusherCommands(TestConfiguration):
         env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
         self.edit_form_value(response, field_name=None, field_type=None, value=True)
 
-        cron = CronTab(user='www-data')
-        job_was_found_and_is_not_repeated = 0
-        for line in cron.lines:
-            if line and line.comment == 'datapusher - submit_all':
-                job_was_found_and_is_not_repeated += 1
-        nt.assert_equals(job_was_found_and_is_not_repeated, 1)
+        amount_of_datapusher_jobs = subprocess.check_output(
+            'crontab -u www-data -l | grep "datapusher - submit_all" | wc -l', shell=True).strip()
+        nt.assert_equals(amount_of_datapusher_jobs, "1")
