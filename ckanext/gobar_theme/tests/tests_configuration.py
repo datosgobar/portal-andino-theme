@@ -4,6 +4,7 @@ from routes import url_for
 from ckan.tests import helpers as helpers
 import ckan.tests.factories as factories
 import nose.tools as nt
+from crontab import CronTab
 from ckanext.gobar_theme.tests import TestAndino
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 
@@ -49,3 +50,26 @@ class TestGoogleDatasetSearch(TestConfiguration):
 
         form = response.forms['google-dataset-search']
         nt.assert_equals(form['enable_structured_data'].checked, True)
+
+
+class TestDatapusherCommands(TestConfiguration):
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_cron_job_is_created(self):
+        # Creo el cron job
+        env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
+        self.edit_form_value(response, field_name=None, field_type=None, value=True)
+        # Vuelvo a crear el cron job, reemplazando el anterior
+        env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
+        self.edit_form_value(response, field_name=None, field_type=None, value=True)
+
+        form = response.forms['datapusher']
+        nt.assert_equals(form['enable_structured_data'].checked, True)
+
+        cron = CronTab(user='www-data')
+        job_was_found_and_is_not_repeated = 0
+        for line in cron.lines:
+            if line and line.comment == 'datapusher - submit_all':
+                job_was_found_and_is_not_repeated += 1
+        nt.assert_equals(job_was_found_and_is_not_repeated, 1)
