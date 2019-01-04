@@ -65,6 +65,10 @@ class TestDatapusherCommands(TestConfiguration):
         env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
         self.edit_form_value(response, field_name=None, field_type=None, value=True)
 
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info("Contenido de crontab: {}".format(subprocess.check_output(
+            'crontab -u www-data -l', shell=True).strip()))
         amount_of_datapusher_jobs = subprocess.check_output(
             'crontab -u www-data -l | grep "datapusher - submit_all" | wc -l', shell=True).strip()
         nt.assert_equals(amount_of_datapusher_jobs, "1")
