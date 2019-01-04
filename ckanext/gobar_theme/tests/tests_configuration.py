@@ -7,6 +7,7 @@ import nose.tools as nt
 import subprocess
 from crontab import CronTab
 from ckanext.gobar_theme.tests import TestAndino
+import ckanext.gobar_theme.helpers as gobar_helpers
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 
 submit_and_follow = helpers.submit_and_follow
@@ -65,8 +66,7 @@ class TestDatapusherCommands(TestConfiguration):
         env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
         self.edit_form_value(response, field_name=None, field_type=None, value=True)
 
-        print ("Contenido de crontab: {}".format(subprocess.check_output(
-            'cat /var/spool/cron/crontabs/www-data', shell=True).strip()))
+        username = gobar_helpers.get_current_terminal_username()
         amount_of_datapusher_jobs = subprocess.check_output(
-            'grep datapusher /var/spool/cron/crontabs/www-data | wc -l', shell=True).strip()
+            'sudo grep datapusher /var/spool/cron/crontabs/{} | wc -l'.format(username), shell=True).strip()
         nt.assert_equals(amount_of_datapusher_jobs, "1")

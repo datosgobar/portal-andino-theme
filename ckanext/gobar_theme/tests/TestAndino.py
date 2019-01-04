@@ -9,9 +9,12 @@ import sqlalchemy
 from abc import ABCMeta, abstractmethod
 from routes import url_for
 from pylons.config import config
+from ckan.common import request
 import ckan
 import ckan.lib.search
 import ckan.model as model
+import ckan.logic as logic
+import ckan.lib.base as base
 import ckan.tests.helpers as helpers
 import ckan.tests.factories as factories
 from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
@@ -21,10 +24,38 @@ from mock import patch
 
 logger = logging.getLogger(__name__)
 submit_and_follow = helpers.submit_and_follow
+parse_params = logic.parse_params
 
 
 class GobArConfigControllerForTest(GobArConfigController):
     CONFIG_PATH = CACHE_DIRECTORY + "test_settings.json"
+
+    def edit_datapusher_commands(self):
+        self._authorize()
+        if request.method == 'POST':
+            from ckanext.gobar_theme.helpers import create_or_update_cron_job
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            schedule_hour = params.get('schedule-hour').strip()
+            schedule_minute = params.get('schedule-minute').strip()
+            config_dict['datapusher'] = {
+                'schedule-hour': schedule_hour,
+                'schedule-minute': schedule_minute
+            }
+            self._set_config(config_dict)
+
+            # # Creamos el cron job, reemplazando el anterior si ya existía
+            # command = '/usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c  ' \
+            #           '/etc/ckan/default/production.ini'
+            # comment = 'datapusher - submit_all'
+            # create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
+
+            # Creamos el cron job, reemplazando el anterior si ya existía
+            job = "{0} {1} * * * /usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c " \
+                  "/etc/ckan/default/production.ini".format(schedule_minute, schedule_hour)
+            create_or_update_cron_job(job, 'datapusher submit_all')
+
+        return base.render('config/config_18_datapusher_commands.html')
 
 
 class TestAndino(helpers.FunctionalTestBase):
