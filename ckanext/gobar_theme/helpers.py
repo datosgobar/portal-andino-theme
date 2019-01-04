@@ -7,6 +7,7 @@ import ckan.logic as logic
 import moment
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
+import subprocess
 import json
 import os
 from urlparse import urljoin
@@ -556,40 +557,40 @@ def get_default_series_api_url():
     return config.get('seriestiempoarexplorer.default_series_api_uri', '')
 
 
-# def search_for_cron_jobs_and_remove(comment_to_search_for):
-#     # Buscamos y eliminamos los cron jobs que contengan el comment especificado por parámetro
-#     if comment_to_search_for:
-#         cron = CronTab(user='www-data')
-#         jobs_with_specified_comment = cron.find_comment(comment_to_search_for)
-#         cron.remove(jobs_with_specified_comment)
-#         cron.write()
+def search_for_cron_jobs_and_remove(comment_to_search_for):
+    # Buscamos y eliminamos los cron jobs que contengan el comment especificado por parámetro
+    if comment_to_search_for:
+        cron = CronTab(get_current_terminal_username())
+        jobs_with_specified_comment = cron.find_comment(comment_to_search_for)
+        cron.remove(jobs_with_specified_comment)
+        cron.write()
+
+
+def create_or_update_cron_job(command, hour, minute, comment=''):
+    if comment:
+        search_for_cron_jobs_and_remove(comment)
+    cron = CronTab(get_current_terminal_username())
+    job = cron.new(command=command, comment=comment)
+    job.hour.on(hour)
+    job.minute.on(minute)
+    cron.write()
+
+
+# def search_for_cron_job_and_remove(keywords_to_search_for, username='www-data'):
+#     # Buscamos cada cron job y nos fijamos si alguno contiene el string equivalente al valor de la variable
+#     # 'keywords_to_search_for'; en caso de encontrar alguno, lo eliminamos para evitar que se acumulen jobs que sirvan
+#     # para lo mismo, aún si se cambió la configuración (debe ser lo más detallado posible para evitar borrar crons no
+#     # relacionados pero que justo contengan ese string)
+#     if keywords_to_search_for:
+#         subprocess.check_call(
+#             'crontab -u {0} -l | grep -v "{1}" | crontab -u {0} -'.format(username, keywords_to_search_for), shell=True)
 #
 #
-# def create_or_update_cron_job(command, hour, minute, comment=''):
-#     if comment:
-#         search_for_cron_jobs_and_remove(comment)
-#     cron = CronTab(user='www-data')
-#     job = cron.new(command=command, comment=comment)
-#     job.hour.on(hour)
-#     job.minute.on(minute)
-#     cron.write()
-
-import subprocess
-def search_for_cron_job_and_remove(keywords_to_search_for, username='www-data'):
-    # Buscamos cada cron job y nos fijamos si alguno contiene el string equivalente al valor de la variable
-    # 'keywords_to_search_for'; en caso de encontrar alguno, lo eliminamos para evitar que se acumulen jobs que sirvan
-    # para lo mismo, aún si se cambió la configuración (debe ser lo más detallado posible para evitar borrar crons no
-    # relacionados pero que justo contengan ese string)
-    if keywords_to_search_for:
-        subprocess.check_call(
-            'crontab -u {0} -l | grep -v "{1}" | crontab -u {0} -'.format(username, keywords_to_search_for), shell=True)
-
-
-def create_or_update_cron_job(job, keywords=None):
-    username = get_current_terminal_username()
-    if keywords is not None:
-        search_for_cron_job_and_remove(keywords, username)
-    subprocess.check_call('(crontab -u {0} -l ; echo "{1}" ; ) | crontab -u {0} -'.format(username, job), shell=True)
+# def create_or_update_cron_job(job, keywords=None):
+#     username = get_current_terminal_username()
+#     if keywords is not None:
+#         search_for_cron_job_and_remove(keywords, username)
+#     subprocess.check_call('(crontab -u {0} -l ; echo "{1}" ; ) | crontab -u {0} -'.format(username, job), shell=True)
 
 
 def get_current_terminal_username():
