@@ -64,9 +64,6 @@ class TestDatapusherCommands(TestConfiguration):
         env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
         self.edit_form_value(response, field_name=None, field_type=None, value=True)
 
-        form = response.forms['datapusher']
-        nt.assert_equals(form['enable_structured_data'].checked, True)
-
         cron = CronTab(user='www-data')
         job_was_found_and_is_not_repeated = 0
         for line in cron.lines:
