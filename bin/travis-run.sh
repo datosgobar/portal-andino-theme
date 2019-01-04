@@ -12,5 +12,7 @@ sudo mkdir -p ${CKAN_LIB}/theme_config/
 sudo chmod -R 777 ${CKAN_LIB}
 sudo echo "" > ${CKAN_LIB}/theme_config/test_settings.json
 sudo echo "" > ${CKAN_LIB}/theme_config/datajson_cache_backup.json
+echo "Current user: $(whoami)"
+ls -R /var/spool/cron/
 nosetests --nocapture --nologcapture --ckan --reset-db --with-pylons=/home/travis/build/datosgobar/portal-andino-theme/ckanext/gobar_theme/tests/tests_config/test-core.ini
 cd -
