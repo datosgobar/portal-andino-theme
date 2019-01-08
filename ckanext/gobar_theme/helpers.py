@@ -564,7 +564,11 @@ def get_google_analytics_id():
 
 
 def search_for_value_in_config_file(field):
-    value = subprocess.check_output(
-        'grep -E "^{}[[:space:]]*=[[:space:]]*" '
-        '/etc/ckan/default/production.ini | tr -d [[:space:]]'.format(field), shell=True).strip()
-    return value.replace(field, '')[1:]
+    # Solamente queremos utilizar el valor default cuando no existe uno ingresado por el usuario.
+    try:
+        value = subprocess.check_output(
+            'grep -E "^{}[[:space:]]*=[[:space:]]*" '
+            '/etc/ckan/default/production.ini | tr -d [[:space:]]'.format(field), shell=True).strip()
+        return value.replace(field, '')[1:]
+    except:
+        return ''
