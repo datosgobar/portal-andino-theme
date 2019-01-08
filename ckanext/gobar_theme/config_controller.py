@@ -312,7 +312,7 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
 
             # Creamos el cron job, reemplazando el anterior si ya existía
-            command = '/usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -c  ' \
+            command = '/usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -y -c  ' \
                       '/etc/ckan/default/production.ini'
             comment = 'datapusher - submit_all'
             create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
