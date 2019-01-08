@@ -2,15 +2,19 @@
 import json
 import os
 import re
+import logging
 import urlparse
 
+from ckan import plugins as p
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
+from ckan.lib.redis import is_redis_available
+from ckan.logic import get_action
 import ckan.model as model
 import moment
 import redis
-from ckan.common import request, c
+from ckan.common import request, c, config
 from pylons import config as ckan_config
 from ckanext.gobar_theme.lib import cache_actions
 
@@ -20,6 +24,7 @@ parse_params = logic.parse_params
 abort = base.abort
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
+logger = logging.getLogger(__name__)
 
 
 class GobArConfigController(base.BaseController):
@@ -309,14 +314,26 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_16_google_tag_manager.html')
 
     def edit_google_analytics(self):
+        from ckanext.gobar_theme.helpers import search_for_value_in_config_file
         self._authorize()
         if request.method == 'POST':
             params = parse_params(request.POST)
+            google_analytics_id = params['id'].strip()
             config_dict = self._read_config()
             config_dict['google_analytics'] = {
-                'id': params['id'].strip()
+                'id': google_analytics_id
             }
             self._set_config(config_dict)
+            # Utilizamos la funcion config_option_update que nos provee CKAN para actualizar en runtime el id de Google
+            # Analytics en la configuración
+            get_action('config_option_update')({}, {
+               'googleanalytics.id': google_analytics_id or search_for_value_in_config_file('googleanalytics.id')
+            })
+
+            # Notificamos a todos los plugins de la nueva configuración
+            for plugin in p.PluginImplementations(p.IConfigurable):
+                plugin.configure(config)
+
         return base.render('config/config_17_google_analytics.html')
 
     def edit_greetings(self):
@@ -349,13 +366,16 @@ class GobArConfigController(base.BaseController):
             andino_config = cls._redis_cli().get('andino-config')
             gobar_config = json.loads(andino_config)
         except Exception:
-            with open(GobArConfigController.CONFIG_PATH) as json_data:
-                try:
+            try:
+                with open(GobArConfigController.CONFIG_PATH) as json_data:
                     gobar_config = json.load(json_data)
-                except Exception:
-                    gobar_config = {}
+            except Exception:
+                gobar_config = {}
+            try:
+                is_redis_available()
                 cls._redis_cli().set('andino-config', json.dumps(gobar_config))
-
+            except Exception:
+                logger.error("Redis no se encuentra disponible!")
         return gobar_config
 
     @classmethod
