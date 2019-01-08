@@ -56,12 +56,15 @@ $(function() {
             var entered_filenames = [];
             var filename_error = false;
             var entered_titles = [];
+            var entered_slugs = [];
             var title_error = false;
+            var slug_error = false;
             var current_div;
             $('div.section-div').each(function () {
                 var all_inputs = $(this).find('input');
                 var title_input = "";
                 var filename_input = "";
+                var slug_input = "";
                 var text = '';
                 var label_class = '';
                 var result = false;
@@ -78,13 +81,31 @@ $(function() {
                         else if(title_input.length === 0){
                             text = "El título está vacío.";
                             insertErrorForInput(current_div, $(this), text, label_class)
-                            title_error = true;
+                            slug_error = true;
                         }
                         else {
                             entered_titles.push(title_input);
                             if($(this).next('label.title-error-message').length){
                                 $(this).next('label.title-error-message').remove();
                             }
+                        }
+                    }
+                    if ($(this).hasClass('about-section-slug')) {
+                        slug_input = this.value;
+                        label_class = 'slug-error-message';
+                        if(slug_input.length === 0){
+                            // Le doy un valor al slug en base al título y lo escribo en el input por si ya está en uso
+                            // para que el usuario lo pueda ver cuando se muestre el error
+                            slug_input = string_to_slug(title_input);
+                            this.value = slug_input;
+                        }
+                        if(entered_slugs.indexOf(slug_input) >= 0){ // chequeo si este título ya fue ingresado
+                            text = "Ya se ingresó un nombre de enlace idéntico a este.";
+                            insertErrorForInput(current_div, $(this), text, label_class);
+                            title_error = true;
+                        }
+                        else {
+                            entered_slugs.push(slug_input);
                         }
                     }
                     if ($(this).hasClass('about-section-filename')) {
@@ -105,12 +126,12 @@ $(function() {
                 });
 
                 if (title_input !== '' || filename_input !== '') {
-                    var section = {title: title_input, filename: filename_input};
+                    var section = {title: title_input, filename: filename_input, slug: slug_input};
                     sections.push(section);
                 }
 
             });
-            if(filename_error || title_error){
+            if(filename_error || title_error || slug_error){
                 e.preventDefault();
             }
             else{
@@ -148,5 +169,21 @@ $(function() {
         div.find('input').val('');
         return div;
     }
+
+    function string_to_slug (str) {
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
+    str = str.toLowerCase();
+    // remove accents, swap ñ for n, etc
+    var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    var to   = "aaaaeeeeiiiioooouuuunc------";
+    for (var i=0, l=from.length ; i<l ; i++) {
+        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+        .replace(/\s+/g, '-') // collapse whitespace and replace by -
+        .replace(/-+/g, '-'); // collapse dashes
+
+    return str;
+}
 
 });

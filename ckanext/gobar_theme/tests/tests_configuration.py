@@ -49,3 +49,35 @@ class TestGoogleDatasetSearch(TestConfiguration):
 
         form = response.forms['google-dataset-search']
         nt.assert_equals(form['enable_structured_data'].checked, True)
+
+
+class TestGoogleTagManager(TestConfiguration):
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_id_can_be_configured(self):
+        env, response = self.get_page_response('/configurar/google_tag_manager', admin_required=True)
+        form = response.forms['google-tag-manager']
+        # Chequeamos que el valor default sea utilizado
+        nt.assert_equals(form['container-id'].value, "id-default")
+        response = \
+            self.edit_form_value(response, field_name='container-id', field_type='text', value="id-custom")
+
+        form = response.forms['google-tag-manager']
+        nt.assert_equals(form['container-id'].value, "id-custom")
+
+
+class TestGoogleAnalytics(TestConfiguration):
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_id_can_be_configured(self):
+        env, response = self.get_page_response('/configurar/google_analytics', admin_required=True)
+        form = response.forms['google-analytics']
+        # Chequeamos que el valor default sea utilizado
+        nt.assert_equals(form['id'].value, "UA-101681828-1")
+        response = \
+            self.edit_form_value(response, field_name='id', field_type='text', value="id-custom")
+
+        form = response.forms['google-analytics']
+        nt.assert_equals(form['id'].value, "id-custom")

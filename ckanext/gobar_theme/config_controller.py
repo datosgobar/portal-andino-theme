@@ -297,6 +297,28 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_15_google_dataset_search.html')
 
+    def edit_google_tag_manager(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            config_dict['google_tag_manager'] = {
+                'container-id': params['container-id'].strip()
+            }
+            self._set_config(config_dict)
+        return base.render('config/config_16_google_tag_manager.html')
+
+    def edit_google_analytics(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            config_dict['google_analytics'] = {
+                'id': params['id'].strip()
+            }
+            self._set_config(config_dict)
+        return base.render('config/config_17_google_analytics.html')
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':

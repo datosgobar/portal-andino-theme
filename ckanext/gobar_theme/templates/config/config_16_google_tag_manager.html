@@ -1,0 +1,16 @@
+{% extends "config/config_base.html" %}
+{% block config %}
+
+    <h1>Google Tag Manager</h1>
+
+    <form id="google-tag-manager" method="post" action="" data-module="basic-form">
+
+        <h2>Id del container de Google Tag Manager</h2>
+        <input type="text" name="container-id" value="{{ h.get_gtm_code() }}">
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">GUARDAR</button>
+        </div>
+    </form>
+
+{% endblock -%}
