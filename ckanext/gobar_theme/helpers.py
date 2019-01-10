@@ -17,6 +17,9 @@ from datetime import time
 from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons.config import config
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -452,8 +455,12 @@ def get_distribution_metadata(resource_id, package_id):
 
 def is_distribution_local(distribution_metadata):
     ckan_site_url = config.get('ckan.site_url')
-    accessURL = distribution_metadata.get('accessURL', '')
-    return accessURL.startswith(ckan_site_url)
+    try:
+        accessURL = distribution_metadata.get('accessURL', '')
+        return accessURL.startswith(ckan_site_url)
+    except AttributeError:
+        logger.error("Se intentó buscar información de un recurso que no figura en el data.json")
+    return False
 
 
 def get_extra_value(extras_list, field):
