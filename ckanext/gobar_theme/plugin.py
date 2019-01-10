@@ -24,8 +24,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IUploader)
     implements(interfaces.IDomainObjectModification)
     implements(interfaces.IGroupController)
-    implements(interfaces.IGroupController)
-    implements(interfaces.IConfigurable)
 
     def get_resource_uploader(self, data_dict):
         return GobArThemeResourceUploader(data_dict)
@@ -44,10 +42,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'organization_delete': gobar_actions.organization_delete_and_purge,
             'gobar_status_show': gobar_actions.gobar_status_show}
 
-    def configure(self, config):
-        config['googleanalytics.id'] = gobar_helpers.get_google_analytics_id()
-
-
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_template_directory(config_, '/var/lib/ckan/theme_config/templates')
@@ -55,15 +49,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         toolkit.add_resource('styles/css', 'gobar_css')
         toolkit.add_resource('js', 'gobar_js')
         toolkit.add_resource('recline', 'gobar_data_preview')
-
-
-    def update_config_schema(self, schema):
-
-        schema.update({
-            'googleanalytics.id': [unicode, ],
-        })
-
-        return schema
 
     def before_map(self, routing_map):
         gobar_router = gobar_routes.GobArRouter(routing_map)
@@ -117,7 +102,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'is_plugin_present': is_plugin_present,
             'organizations_basic_info': gobar_helpers.organizations_basic_info,
             'get_default_series_api_url': gobar_helpers.get_default_series_api_url,
-            'get_google_analytics_id': gobar_helpers.get_google_analytics_id,
         }
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
