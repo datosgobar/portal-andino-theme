@@ -2,11 +2,13 @@
 import json
 import os
 import re
+import logging
 import urlparse
 
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
+from ckan.lib.redis import is_redis_available
 import ckan.model as model
 import moment
 import redis
@@ -20,6 +22,7 @@ parse_params = logic.parse_params
 abort = base.abort
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
+logger = logging.getLogger(__name__)
 
 
 class GobArConfigController(base.BaseController):
@@ -319,6 +322,17 @@ class GobArConfigController(base.BaseController):
 
         return base.render('config/config_18_datapusher_commands.html')
 
+    def edit_google_tag_manager(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            config_dict['google_tag_manager'] = {
+                'container-id': params['container-id'].strip()
+            }
+            self._set_config(config_dict)
+        return base.render('config/config_16_google_tag_manager.html')
+
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':
@@ -349,13 +363,16 @@ class GobArConfigController(base.BaseController):
             andino_config = cls._redis_cli().get('andino-config')
             gobar_config = json.loads(andino_config)
         except Exception:
-            with open(GobArConfigController.CONFIG_PATH) as json_data:
-                try:
+            try:
+                with open(GobArConfigController.CONFIG_PATH) as json_data:
                     gobar_config = json.load(json_data)
-                except Exception:
-                    gobar_config = {}
+            except Exception:
+                gobar_config = {}
+            try:
+                is_redis_available()
                 cls._redis_cli().set('andino-config', json.dumps(gobar_config))
-
+            except Exception:
+                logger.error("Redis no se encuentra disponible!")
         return gobar_config
 
     @classmethod

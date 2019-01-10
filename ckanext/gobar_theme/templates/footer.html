@@ -75,7 +75,7 @@
             <div class="footer-section links-internos hidden-xs hidden-sm col-md-3">
                 {% set footer_sections = h.get_theme_config('about.sections', []) %}
                 {% for section in footer_sections %}
-                    <p><a href="{{ h.url('section', title=section.title) }}">{{ section.title }}</a></p>
+                    <p><a href="{{ h.url('section', title_or_slug=section.title) }}">{{ section.title }}</a></p>
                {% endfor %}
             </div>
             <div class="footer-section links-externos col-xs-12 col-sm-6 col-md-3">

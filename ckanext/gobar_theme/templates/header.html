@@ -61,7 +61,7 @@
                                 {% if header_sections|length > 0 %}
                                     {% for header_section in header_sections %}
                                         <div class="navbar-link">
-                                            <a href="{{ h.url('section', title=header_section.title) }}">
+                                            <a href="{{ h.url('section', title_or_slug=header_section.slug or header_section.title) }}">
                                                 {{ header_section.title }}
                                             </a>
                                         </div>
@@ -142,7 +142,7 @@
 
                                     {% if header_sections|length > 0 %}
                                         {% for header_section in header_sections %}
-                                            <a href="{{ h.url('section', title=header_section.title) }}">
+                                            <a href="{{ h.url('section', title_or_slug=header_section.slug or header_section.title) }}">
                                                 <li>{{ header_section.title }}</li>
                                             </a>
                                         {% endfor %}

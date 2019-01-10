@@ -70,3 +70,19 @@ class TestDatapusherCommands(TestConfiguration):
         amount_of_datapusher_jobs = subprocess.check_output(
             'sudo grep datapusher /var/spool/cron/crontabs/{} | wc -l'.format(username), shell=True).strip()
         nt.assert_equals(amount_of_datapusher_jobs, "1")
+        
+
+class TestGoogleTagManager(TestConfiguration):
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_id_can_be_configured(self):
+        env, response = self.get_page_response('/configurar/google_tag_manager', admin_required=True)
+        form = response.forms['google-tag-manager']
+        # Chequeamos que el valor default sea utilizado
+        nt.assert_equals(form['container-id'].value, "id-default")
+        response = \
+            self.edit_form_value(response, field_name='container-id', field_type='text', value="id-custom")
+
+        form = response.forms['google-tag-manager']
+        nt.assert_equals(form['container-id'].value, "id-custom")

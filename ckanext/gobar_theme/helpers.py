@@ -5,6 +5,7 @@ import ckan.lib.helpers as ckan_helpers
 import ckan.lib.search as search
 import ckan.logic as logic
 import moment
+import subprocess
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import subprocess
@@ -17,6 +18,9 @@ from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons.config import config
 from crontab import CronTab
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -452,8 +456,12 @@ def get_distribution_metadata(resource_id, package_id):
 
 def is_distribution_local(distribution_metadata):
     ckan_site_url = config.get('ckan.site_url')
-    accessURL = distribution_metadata.get('accessURL', '')
-    return accessURL.startswith(ckan_site_url)
+    try:
+        accessURL = distribution_metadata.get('accessURL', '')
+        return accessURL.startswith(ckan_site_url)
+    except AttributeError:
+        logger.error("Se intentó buscar información de un recurso que no figura en el data.json")
+    return False
 
 
 def get_extra_value(extras_list, field):
@@ -498,7 +506,8 @@ def get_default_background_configuration():
 
 
 def get_gtm_code():
-    return config.get('ckan.google_tag_manager.gtm_container_id', None)
+    return get_theme_config('google_tag_manager.container-id') or \
+           config.get('ckan.google_tag_manager.gtm_container_id', '')
 
 
 def get_current_url_for_resource(package_id, resource_id):
@@ -578,3 +587,14 @@ def create_or_update_cron_job(command, hour, minute, comment=''):
 
 def get_current_terminal_username():
     return subprocess.check_output("whoami").strip()
+
+  
+def search_for_value_in_config_file(field):
+    # Solamente queremos utilizar el valor default cuando no existe uno ingresado por el usuario.
+    try:
+        value = subprocess.check_output(
+            'grep -E "^{}[[:space:]]*=[[:space:]]*" '
+            '/etc/ckan/default/production.ini | tr -d [[:space:]]'.format(field), shell=True).strip()
+        return value.replace(field, '')[1:]
+    except:
+        return ''

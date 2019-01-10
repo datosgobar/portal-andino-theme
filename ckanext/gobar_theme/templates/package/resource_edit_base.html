@@ -12,7 +12,7 @@
             <div id="edit-package" class="col-xs-12 col-md-10 col-md-offset-1">
                 <div class="col-xs-12 col-md-10 col-md-offset-1">
                     <div class="back-btn">
-                        <a id='back-button' href="#">
+                        <a href="{{ h.url_for(controller='package', action='resource_read', id=res.package_id, resource_id=res.id) }}">
                             <i class="icon-chevron-left"></i>
                             VOLVER
                         </a>
@@ -38,5 +38,4 @@
             </div>
         </div>
     </div>
-{% resource 'gobar_js/package/resource.js' %}
 {% endblock %}

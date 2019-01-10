@@ -56,7 +56,7 @@ class GobArRouter:
         )
 
     def connect_section(self):
-        self.home_routes.connect('section', '/acerca/seccion/{title}', action='view_about_section')
+        self.home_routes.connect('section', '/acerca/seccion/{title_or_slug}', action='view_about_section')
 
     def connect_google_analytics(self):
         with SubMapper(self.route_map, controller=self.google_analytics_controller) as m:
@@ -220,6 +220,7 @@ class GobArRouter:
             m.connect('/configurar/metadata/portal', action='edit_metadata_portal')
             m.connect('/configurar/google_dataset_search', action='edit_google_dataset_search')
             m.connect('/configurar/datapusher', action='edit_datapusher_commands')
+            m.connect('/configurar/google_tag_manager', action='edit_google_tag_manager')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
             m.connect('/configurar/series', action='edit_series')
 

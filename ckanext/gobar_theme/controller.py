@@ -81,11 +81,11 @@ class GobArHomeController(HomeController):
         c.apis = self._packages_with_resource_type_equal_to_api()
         return base.render('apis/apis.html')
 
-    def view_about_section(self, title):
+    def view_about_section(self, title_or_slug):
         sections = gobar_helpers.get_theme_config('about.sections', [])
 
         for section in sections:
-            if section['title'] == title:
+            if section.get('slug', '') == title_or_slug or section['title'] == title_or_slug:
                 # la variable `section` contiene la sección buscada
                 break
         else:
