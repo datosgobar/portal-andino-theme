@@ -313,7 +313,6 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_16_google_tag_manager.html')
 
-
     def edit_greetings(self):
         self._authorize()
         if request.method == 'POST':
