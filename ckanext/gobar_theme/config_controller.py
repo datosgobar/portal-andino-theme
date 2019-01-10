@@ -5,16 +5,14 @@ import re
 import logging
 import urlparse
 
-from ckan import plugins as p
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 from ckan.lib.redis import is_redis_available
-from ckan.logic import get_action
 import ckan.model as model
 import moment
 import redis
-from ckan.common import request, c, config
+from ckan.common import request, c
 from pylons import config as ckan_config
 from ckanext.gobar_theme.lib import cache_actions
 

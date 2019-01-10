@@ -58,6 +58,7 @@ class TestGoogleTagManager(TestConfiguration):
     def test_id_can_be_configured(self):
         env, response = self.get_page_response('/configurar/google_tag_manager', admin_required=True)
         form = response.forms['google-tag-manager']
+        # Chequeamos que el valor default sea utilizado
         nt.assert_equals(form['container-id'].value, "id-default")
         response = \
             self.edit_form_value(response, field_name='container-id', field_type='text', value="id-custom")
