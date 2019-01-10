@@ -313,28 +313,6 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_16_google_tag_manager.html')
 
-    def edit_google_analytics(self):
-        from ckanext.gobar_theme.helpers import search_for_value_in_config_file
-        self._authorize()
-        if request.method == 'POST':
-            params = parse_params(request.POST)
-            google_analytics_id = params['id'].strip()
-            config_dict = self._read_config()
-            config_dict['google_analytics'] = {
-                'id': google_analytics_id
-            }
-            self._set_config(config_dict)
-            # Utilizamos la funcion config_option_update que nos provee CKAN para actualizar en runtime el id de Google
-            # Analytics en la configuración
-            get_action('config_option_update')({}, {
-               'googleanalytics.id': google_analytics_id or search_for_value_in_config_file('googleanalytics.id')
-            })
-
-            # Notificamos a todos los plugins de la nueva configuración
-            for plugin in p.PluginImplementations(p.IConfigurable):
-                plugin.configure(config)
-
-        return base.render('config/config_17_google_analytics.html')
 
     def edit_greetings(self):
         self._authorize()

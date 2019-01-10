@@ -505,8 +505,7 @@ def get_default_background_configuration():
 
 
 def get_gtm_code():
-    return get_theme_config('google_tag_manager.container-id') or \
-           config.get('ckan.google_tag_manager.gtm_container_id', '')
+    return config.get('ckan.google_tag_manager.gtm_container_id', None)
 
 
 def get_current_url_for_resource(package_id, resource_id):
