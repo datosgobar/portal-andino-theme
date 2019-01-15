@@ -300,6 +300,28 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_15_google_dataset_search.html')
 
+    def edit_datapusher_commands(self):
+        self._authorize()
+        if request.method == 'POST':
+            from ckanext.gobar_theme.helpers import create_or_update_cron_job
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            schedule_hour = params.get('schedule-hour').strip()
+            schedule_minute = params.get('schedule-minute').strip()
+            config_dict['datapusher'] = {
+                'schedule-hour': schedule_hour,
+                'schedule-minute': schedule_minute
+            }
+            self._set_config(config_dict)
+
+            # Creamos el cron job, reemplazando el anterior si ya existía
+            command = '/usr/lib/ckan/default/bin/paster --plugin=ckan datapusher submit_all -y -c  ' \
+                      '/etc/ckan/default/production.ini'
+            comment = 'datapusher - submit_all'
+            create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
+
+        return base.render('config/config_18_datapusher_commands.html')
+
     def edit_google_tag_manager(self):
         self._authorize()
         if request.method == 'POST':

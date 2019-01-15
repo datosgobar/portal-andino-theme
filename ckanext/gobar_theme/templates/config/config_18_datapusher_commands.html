@@ -1,0 +1,42 @@
+{% extends "config/config_base.html" %}
+{% block config %}
+
+    <h1>Comandos de DataPusher</h1>
+
+    <h2>Subida de recursos automática al Datastore</h2>
+
+    <form id="datapusher" method="post" action="" data-module="basic-form">
+
+        <h2>Horario de ejecución</h2>
+        <table class="date-picker datapusher"
+               data-dates="{{ h.get_pkg_extra(data, 'temporal') or h.get_pkg_extra(data, 'dateRange') }}">
+            {% set hours = range(24) %}
+            {% set minutes = range(60) %}
+            <td>
+                {% set established_hour = h.get_theme_config('datapusher.schedule-hour', '') %}
+                {% set established_minute = h.get_theme_config('datapusher.schedule-minute', '') %}
+                <div class="hour-picker-to">
+                    <select id="date-to-hour" class="datapusher" name="schedule-hour">
+                        {% for hour in hours %}
+                            {% set hour = "%02d" | format(hour) %}
+                            <option value="{{ hour }}" {{ 'selected=true' if hour == established_hour }}>{{ hour }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="date-to-minute" class="datapusher" name="schedule-minute">
+                        {% for minute in minutes %}
+                            {% set minute = "%02d" | format(minute) %}
+                            <option value="{{ minute }}" {{ 'selected=true' if minute == established_minute }}>{{ minute }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </td>
+        </table>
+        <p>La subida de recursos se ejecutará todos los días en el horario establecido, según el <a href="http://manpages.ubuntu.com/manpages/bionic/man3/DateTime::TimeZone::Catalog.3pm.html">timezone</a> especificado en la instalación (Buenos Aires por default).</p>
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">GUARDAR</button>
+        </div>
+
+    </form>
+
+{% endblock -%}

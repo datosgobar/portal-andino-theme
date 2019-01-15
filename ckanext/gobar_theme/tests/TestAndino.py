@@ -4,14 +4,13 @@ import os
 import json
 import logging
 import tempfile
-import requests
 import sqlalchemy
 from abc import ABCMeta, abstractmethod
 from routes import url_for
-from pylons.config import config
 import ckan
 import ckan.lib.search
 import ckan.model as model
+import ckan.logic as logic
 import ckan.tests.helpers as helpers
 import ckan.tests.factories as factories
 from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
@@ -21,6 +20,7 @@ from mock import patch
 
 logger = logging.getLogger(__name__)
 submit_and_follow = helpers.submit_and_follow
+parse_params = logic.parse_params
 
 
 class GobArConfigControllerForTest(GobArConfigController):
