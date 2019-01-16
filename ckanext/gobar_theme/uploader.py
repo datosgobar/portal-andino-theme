@@ -18,6 +18,11 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
     def __init__(self, data_dict):
         super(GobArThemeResourceUploader, self).__init__(data_dict)
 
+        # Cuando se edita un recurso, queremos asegurarnos de que el campo 'url_type' tenga el valor correcto
+
+        if data_dict.get('has-uploaded-file', '') == 'upload':
+            data_dict['url_type'] = 'upload'
+
         # Hacer el init para el ícono `icon_upload`
 
         resource_id = data_dict.get('id')

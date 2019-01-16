@@ -75,6 +75,8 @@
                  upload_label=_('File'), url_label=_('URL'), id_prefix='resource', placeholder='http://datos.gob.ar/ejemplo.ext') }}
             </div>
 
+            <input type="hidden" id="has-uploaded-file" name="has-uploaded-file" value="">
+
             {% set resource_type = data.get('resource_type') %}
             <div id="form-icon-url" style="{{ 'display: none;' if resource_type != 'api'}}">
                 {% set icon_is_upload = false %}

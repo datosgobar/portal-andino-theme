@@ -22,4 +22,10 @@ $(function () {
         }
     });
 
+    $('form#resource-edit').on('submit', function () {
+        if ($('#resource-upload-url').attr('readonly') === 'readonly'){
+            $('input#has-uploaded-file').val('upload');
+        }
+    });
+
 });
