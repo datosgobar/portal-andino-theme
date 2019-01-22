@@ -1,12 +1,12 @@
 #! coding: utf-8
 import os
 import urllib2
-import tempfile
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
 from pylons.config import config
 import ckanext.gobar_theme.helpers as gobar_helpers
+from ckanext.gobar_theme.lib.datajson_actions import get_data_json_contents
 
 import logging
 
@@ -103,7 +103,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
 
     def command(self):
         self._load_config()
-        datajson = {}
+        datajson = get_data_json_contents()
         total_resources_to_patch = 0
         ids_of_unsuccessfully_patched_resources = []
 
@@ -125,7 +125,8 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                         total_resources_to_patch += 1
                         resource_file_path = '/tmp/{}'.format(filename)
                         try:
-                            file_content = urllib2.urlopen('{0}/datastore/dump/{1}'.format(site_url, filename)).read()
+                            file_content = \
+                                urllib2.urlopen('{0}/datastore/dump/{1}'.format(site_url, resource_id)).read()
                             with open(resource_file_path, 'w+') as resource_file:
                                 resource_file.write(file_content)
                                 data = {'id': resource_id, 'upload': resource_file}
