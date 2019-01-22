@@ -1,5 +1,6 @@
 #! coding: utf-8
 import os
+import json
 import urllib2
 from ckan import model, logic
 from ckan.lib import cli
@@ -104,7 +105,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         self._load_config()
         try:
             with open('/var/lib/ckan/theme_config/datajson_cache.json', 'r+') as file:
-                datajson = file.read()
+                datajson = json.loads(file.read())
         except IOError:
             LOGGER.info('No existe una caché del data.json.')
             # TODO: buscar los recursos de otra forma
