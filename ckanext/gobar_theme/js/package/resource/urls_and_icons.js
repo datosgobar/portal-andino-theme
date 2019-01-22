@@ -1,5 +1,7 @@
 $(function () {
 
+    var file_or_url_was_removed = false;
+
     $(document).on('click', '.url-button', function () {
         if($(this).siblings("#resource-upload-url").length > 0) {  // Aseguro que se esté clickeando el botón de URL
             if ($('#distribution-type').val() !== 'api'){
@@ -19,6 +21,13 @@ $(function () {
         if ($(this).siblings("input#resource-upload-url").length > 0) {  // Aseguro que se esté cerrando el input de URL
             $('#form-file-name').hide();
             $('input#field-file-name').val('');
+            file_or_url_was_removed = true;
+        }
+    });
+
+    $('form#resource-edit').on('submit', function () {
+        if (file_or_url_was_removed === false){
+            $('input[name=clear_upload]').remove()
         }
     });
 
