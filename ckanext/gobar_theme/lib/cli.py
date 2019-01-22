@@ -6,7 +6,6 @@ from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
 from pylons.config import config
 import ckanext.gobar_theme.helpers as gobar_helpers
-from ckanext.gobar_theme.lib.datajson_actions import get_data_json_contents
 
 import logging
 
