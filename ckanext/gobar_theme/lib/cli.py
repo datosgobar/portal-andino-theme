@@ -1,5 +1,6 @@
 #! coding: utf-8
 import os
+import sys
 import json
 import urllib2
 from ckan import model, logic
@@ -113,6 +114,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
 
         total_resources_to_patch = 0
         ids_of_unsuccessfully_patched_resources = []
+        errors_while_patching = {}
 
         # Usando un LocalCKAN obtengo el apikey del usuario default
         lc = LocalCKAN()
@@ -141,11 +143,16 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                             os.remove(resource_file_path)
                         except Exception:
                             ids_of_unsuccessfully_patched_resources.append(resource_id)
+                            error_type, error_text, function_line = sys.exc_info()
+                            errors_while_patching[resource_id] = {'error_type': error_type, 'error_text': error_text,
+                                                                  'function_line': function_line}
                             if os.path.isfile(resource_file_path):
                                 os.remove(resource_file_path)
         LOGGER.info('Se actualizaron {0} de {1} recursos locales.'
                     .format(total_resources_to_patch - len(ids_of_unsuccessfully_patched_resources),
                             total_resources_to_patch))
         if ids_of_unsuccessfully_patched_resources:
-            LOGGER.error('IDs de los recursos que no fueron actualizados: {}'
+            LOGGER.error('Mostrando los recursos no actualizados y sus errores correspondientes: {}'
+                         .format(errors_while_patching))
+            LOGGER.error('Resumen: IDs de los recursos que no fueron actualizados: {}'
                          .format(ids_of_unsuccessfully_patched_resources))
