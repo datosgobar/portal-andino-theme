@@ -1,8 +1,12 @@
 #! coding: utf-8
+import os
+import urllib2
+import tempfile
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
 from pylons.config import config
+import ckanext.gobar_theme.helpers as gobar_helpers
 
 import logging
 
@@ -49,7 +53,7 @@ class UpdateDatastoreCommand(cli.CkanCommand):
 
         LOGGER.info("Comenzando limpieza del Datastore")
 
-        # Usando un LocalCKAN obtendo el apikey del usuario default
+        # Usando un LocalCKAN obtengo el apikey del usuario default
         lc = LocalCKAN()
         site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
         apikey = site_user.get('apikey')
@@ -69,7 +73,7 @@ class UpdateDatastoreCommand(cli.CkanCommand):
             # La búsqueda de recursos en Datastore falla si la url no comienza con 'http'
             site_url = config.get('ckan.site_url')
             if not site_url.startswith('http'):
-                site_url = 'http://' + site_url
+                site_url = 'http://{}'.format(site_url)
 
             # Obtengo informacion de los elementos del datastore
             rc = RemoteCKAN(site_url, apikey)
@@ -92,3 +96,48 @@ class UpdateDatastoreCommand(cli.CkanCommand):
                 datastore_resources = rc.action.datastore_search(resource_id='_table_metadata', offset=current_offset)
 
             LOGGER.info("Limpieza del Datastore terminada")
+
+
+class ReuploadResourcesFiles(cli.CkanCommand):
+    summary = "Conseguir y resubir archivos de los recursos locales del portal"
+
+    def command(self):
+        self._load_config()
+        datajson = {}
+        total_resources_to_patch = 0
+        ids_of_unsuccessfully_patched_resources = []
+
+        # Usando un LocalCKAN obtengo el apikey del usuario default
+        lc = LocalCKAN()
+        site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
+        apikey = site_user.get('apikey')
+        site_url = config.get('ckan.site_url')
+        if not site_url.startswith('http'):
+            site_url = 'http://{}'.format(site_url)
+
+        rc = RemoteCKAN(site_url, apikey)
+        for dataset in datajson.get('dataset', []):
+            for resource in dataset.get('distribution', []):
+                if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
+                    filename = resource.get('downloadURL', '').rsplit('/', 1)[1]
+                    if filename:
+                        resource_id = resource.get('identifier')
+                        total_resources_to_patch += 1
+                        resource_file_path = '/tmp/{}'.format(filename)
+                        try:
+                            file_content = urllib2.urlopen('{0}/datastore/dump/{1}'.format(site_url, filename)).read()
+                            with open(resource_file_path, 'w+') as resource_file:
+                                resource_file.write(file_content)
+                                data = {'id': resource_id, 'upload': resource_file}
+                                rc.resource_patch(**data)
+                            os.remove(resource_file_path)
+                        except Exception:
+                            ids_of_unsuccessfully_patched_resources.append(resource_id)
+                            if os.path.isfile(resource_file_path):
+                                os.remove(resource_file_path)
+        LOGGER.info('Se actualizaron {0} de {1} recursos locales.'
+                    .format(total_resources_to_patch - len(ids_of_unsuccessfully_patched_resources),
+                            total_resources_to_patch))
+        if ids_of_unsuccessfully_patched_resources:
+            LOGGER.error('IDs de los recursos que no fueron actualizados: {}'
+                         .format(ids_of_unsuccessfully_patched_resources))
