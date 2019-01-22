@@ -103,7 +103,14 @@ class ReuploadResourcesFiles(cli.CkanCommand):
 
     def command(self):
         self._load_config()
-        datajson = get_data_json_contents()
+        try:
+            with open('/var/lib/ckan/theme_config/datajson_cache.json', 'r+') as file:
+                datajson = file.read()
+        except IOError:
+            LOGGER.info('No existe una caché del data.json.')
+            # TODO: buscar los recursos de otra forma
+            return None
+
         total_resources_to_patch = 0
         ids_of_unsuccessfully_patched_resources = []
 
