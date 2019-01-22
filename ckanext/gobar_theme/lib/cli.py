@@ -137,7 +137,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                             with open(resource_file_path, 'w+') as resource_file:
                                 resource_file.write(file_content)
                                 data = {'id': resource_id, 'upload': resource_file}
-                                rc.resource_patch(**data)
+                                rc.action.resource_patch(**data)
                             os.remove(resource_file_path)
                         except Exception:
                             ids_of_unsuccessfully_patched_resources.append(resource_id)
