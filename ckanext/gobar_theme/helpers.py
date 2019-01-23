@@ -600,9 +600,8 @@ def search_for_value_in_config_file(field):
         return ''
 
 
-def get_domain_name():
-    site_url = config.get('ckan.site_url')
-    parsed_url = urlparse(site_url)
-    if parsed_url.hostname:
-        return "{0}{1}".format("{}://".format(parsed_url.scheme if parsed_url.scheme else ""), parsed_url.hostname)
-    return parsed_url.path
+def remove_port_from_url(url):
+    parsed_url = urlparse(url)
+    return "{0}{1}/{2}".format("{}://".format(parsed_url.scheme if parsed_url.scheme else ""),
+                               parsed_url.hostname,
+                               parsed_url.path)
