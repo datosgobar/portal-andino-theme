@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
+    {% set domain = h.get_domain_name() %}
     {% set url_value = data.url if data.url else domain %}
 
     {{ form.textarea('author', label='* Responsable', id='field-author', value=data.author, error=errors.author, classes=['control-full'], rows=2, placeholder="Ej. Ministerio de Modernización. Secretaría de Gestión e Innovación Pública. Subsecretaría de Innovación Pública y Gobierno Abierto.") }}

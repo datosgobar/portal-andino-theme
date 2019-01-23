@@ -104,6 +104,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_default_series_api_url': gobar_helpers.get_default_series_api_url,
             'create_or_update_cron_job': gobar_helpers.create_or_update_cron_job,
             'get_current_terminal_username': gobar_helpers.get_current_terminal_username,
+            'get_domain_name': gobar_helpers.get_domain_name,
         }
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
