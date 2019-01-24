@@ -18,6 +18,7 @@ from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons.config import config
 import logging
+import csv
 
 logger = logging.getLogger(__name__)
 
@@ -579,3 +580,29 @@ def search_for_value_in_config_file(field):
         return value.replace(field, '')[1:]
     except:
         return ''
+
+
+def delete_column_from_csv_file(csv_path, final_file_path, column_name):
+    '''
+    :param csv_path: path del archivo csv a leer
+    :param final_file_path: path a utilizar para el archivo csv final (debe ser diferente al path del csv original)
+    :param column_name: nombre de la columna a eliminar
+    :return: path del csv final (si la columna no existe, simplemente se usa el original)
+    '''
+    with open(csv_path, 'rb') as source:
+        rdr = csv.reader(source)
+        first_row = next(rdr)
+        pos = None
+        try:
+            pos = first_row.index(column_name)
+        except ValueError:
+            # No existe una columna con el nombre que llegó por parámetro -> se usará el csv original
+            return csv_path
+        source.seek(0)
+        with open(final_file_path, 'wb') as result:
+            wtr = csv.writer(result)
+            for r in rdr:
+                wtr.writerow(tuple(x for x in r if pos != r.index(x)))
+    # Ya que tenemos el csv sin la columna indeseada preparado, borramos el original
+    os.remove(csv_path)
+    return final_file_path

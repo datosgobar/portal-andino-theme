@@ -132,7 +132,8 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                     if filename:
                         resource_id = resource.get('identifier')
                         total_resources_to_patch += 1
-                        resource_file_path = '/tmp/{}'.format(filename)
+                        resource_file_path = '/tmp/datastore_file'
+                        resource_final_file_path = '/tmp/{}'.format(filename)
                         try:
                             response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
                             if 'text/html' in response.headers.get('Content-Type'):
@@ -142,17 +143,22 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                                 raise ValueError('Archivo proveniente de Datastore sin contenido')
                             with open(resource_file_path, 'wb') as resource_file:
                                 resource_file.write(file_content)
-                            with open(resource_file_path, 'rb') as resource_file:
+                            # Buscamos la columna '_id' generada como campo en el Datastore; si existe, se la borra
+                            gobar_helpers.delete_column_from_csv_file(
+                                resource_file_path, resource_final_file_path, '_id')
+                            with open(resource_final_file_path, 'rb') as resource_file:
                                 data = {'id': resource_id, 'upload': resource_file}
                                 rc.action.resource_patch(**data)
-                            os.remove(resource_file_path)
                         except Exception:
                             ids_of_unsuccessfully_patched_resources.append(resource_id)
                             error_type, error_text, function_line = sys.exc_info()
                             errors_while_patching[resource_id] = {'error_type': error_type, 'error_text': error_text,
                                                                   'function_line': function_line}
-                            if os.path.isfile(resource_file_path):
-                                os.remove(resource_file_path)
+                        # Borramos cualquier archivo que pueda haber quedado realizando la operación
+                        if os.path.isfile(resource_file_path):
+                            os.remove(resource_file_path)
+                        if os.path.isfile(resource_final_file_path):
+                            os.remove(resource_file_path)
         LOGGER.info('Se actualizaron {0} de {1} recursos locales.'
                     .format(total_resources_to_patch - len(ids_of_unsuccessfully_patched_resources),
                             total_resources_to_patch))
