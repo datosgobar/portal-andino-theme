@@ -2,7 +2,7 @@
 import os
 import sys
 import json
-import urllib2
+import requests
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
@@ -134,8 +134,9 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                         total_resources_to_patch += 1
                         resource_file_path = '/tmp/{}'.format(filename)
                         try:
-                            file_content = \
-                                urllib2.urlopen('{0}/datastore/dump/{1}'.format(site_url, resource_id)).read()
+                            file_content = requests.get('{0}/datastore/dump/{1}').content
+                            if not file_content:
+                                raise ValueError('Archivo proveniente de Datastore sin contenido')
                             with open(resource_file_path, 'w+') as resource_file:
                                 resource_file.write(file_content)
                                 data = {'id': resource_id, 'upload': resource_file}
