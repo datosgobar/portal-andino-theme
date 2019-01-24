@@ -137,9 +137,9 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                             file_content = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id)).content
                             if not file_content:
                                 raise ValueError('Archivo proveniente de Datastore sin contenido')
-                            with open(resource_file_path, 'w+') as resource_file:
+                            with open(resource_file_path, 'wb') as resource_file:
                                 resource_file.write(file_content)
-                            with open(resource_file_path, 'r+') as resource_file:
+                            with open(resource_file_path, 'rb') as resource_file:
                                 data = {'id': resource_id, 'upload': resource_file}
                                 rc.action.resource_patch(**data)
                             os.remove(resource_file_path)
