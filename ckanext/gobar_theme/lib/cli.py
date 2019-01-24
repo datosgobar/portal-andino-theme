@@ -134,7 +134,10 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                         total_resources_to_patch += 1
                         resource_file_path = '/tmp/{}'.format(filename)
                         try:
-                            file_content = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id)).content
+                            response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
+                            if 'text/csv' in response.headers.get('Content-Type'):
+                                raise TypeError("El archivo no se encuentra en el Datastore")
+                            file_content = response.content
                             if not file_content:
                                 raise ValueError('Archivo proveniente de Datastore sin contenido')
                             with open(resource_file_path, 'wb') as resource_file:
