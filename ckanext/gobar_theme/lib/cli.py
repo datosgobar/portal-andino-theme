@@ -135,7 +135,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                         resource_file_path = '/tmp/{}'.format(filename)
                         try:
                             response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
-                            if 'text/csv' in response.headers.get('Content-Type'):
+                            if 'text/html' in response.headers.get('Content-Type'):
                                 raise TypeError("El archivo no se encuentra en el Datastore")
                             file_content = response.content
                             if not file_content:
