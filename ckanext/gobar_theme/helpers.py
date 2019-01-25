@@ -595,7 +595,7 @@ def delete_column_from_csv_file(csv_path, column_name):
         source.seek(0)
         list_with_rows = []
         for r in rdr:
-            list_with_rows.append(tuple(x for x in r if column_position != r.index(x)))
+            list_with_rows.append(tuple((r[x] for x in range(len(r)) if x != column_position)))
     with open(csv_path, 'wb') as result:
         wtr = csv.writer(result)
         for r in list_with_rows:
