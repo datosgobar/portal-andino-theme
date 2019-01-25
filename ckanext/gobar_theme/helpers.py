@@ -592,7 +592,11 @@ def delete_column_from_csv_file(csv_path, column_name):
         except ValueError:
             # No existe una columna con el nombre que llegó por parámetro -> se usará el csv tal y como está
             return
+        source.seek(0)
+        list_with_rows = []
+        for r in rdr:
+            list_with_rows.append(tuple(x for x in r if column_position != r.index(x)))
     with open(csv_path, 'wb') as result:
         wtr = csv.writer(result)
-        for r in rdr:
-            wtr.writerow(tuple(x for x in r if column_position != r.index(x)))
+        for r in list_with_rows:
+            wtr.writerow(tuple(x for x in r))
