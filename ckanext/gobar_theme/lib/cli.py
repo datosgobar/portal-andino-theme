@@ -102,6 +102,12 @@ class UpdateDatastoreCommand(cli.CkanCommand):
 class ReuploadResourcesFiles(cli.CkanCommand):
     summary = "Conseguir y resubir archivos de los recursos locales del portal"
 
+    def __init__(self):
+        super(ReuploadResourcesFiles, self).__init__()
+        self.total_resources_to_patch = 0
+        self.ids_of_unsuccessfully_patched_resources = []
+        self.errors_while_patching = {}
+
     def command(self):
         self._load_config()
         try:
@@ -110,10 +116,6 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         except IOError:
             LOGGER.info('No existe una caché del data.json.')
             return None
-
-        total_resources_to_patch = 0
-        ids_of_unsuccessfully_patched_resources = []
-        errors_while_patching = {}
 
         # Usando un LocalCKAN obtengo el apikey del usuario default
         site_user = LocalCKAN()._get_action('get_site_user')({'ignore_auth': True}, ())
@@ -129,19 +131,20 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                     filename = resource.get('downloadURL', '').rsplit('/', 1)[1]
                     if filename:
                         resource_id = resource.get('identifier')
-                        total_resources_to_patch += 1
+                        self.total_resources_to_patch += 1
                         resource_file_path = '/tmp/{}'.format(filename)
                         try:
                             self.try_reuploading_current_resource(rc, site_url, resource_id, resource_file_path)
                         except Exception:
-                            ids_of_unsuccessfully_patched_resources.append(resource_id)
+                            self.ids_of_unsuccessfully_patched_resources.append(resource_id)
                             error_type, error_text, function_line = sys.exc_info()
-                            errors_while_patching[resource_id] = {'error_type': error_type, 'error_text': error_text,
-                                                                  'function_line': function_line.tb_lineno}
+                            self.errors_while_patching[resource_id] = {
+                                'error_type': error_type, 'error_text': error_text,
+                                'function_line': function_line.tb_lineno}
                         # Borramos cualquier archivo que pueda haber quedado realizando la operación
                         if os.path.isfile(resource_file_path):
                             os.remove(resource_file_path)
-        self.log_results(total_resources_to_patch, ids_of_unsuccessfully_patched_resources, errors_while_patching)
+        self.log_results()
 
     def try_reuploading_current_resource(self, rc, site_url, resource_id, resource_file_path):
         response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
@@ -162,12 +165,12 @@ class ReuploadResourcesFiles(cli.CkanCommand):
             raise ValueError('Archivo proveniente del Datastore sin contenido')
         return file_content
 
-    def log_results(self, total_resources_to_patch, ids_of_unsuccessfully_patched_resources, errors_while_patching):
+    def log_results(self):
         LOGGER.info('Se actualizaron {0} de {1} recursos locales.'
-                    .format(total_resources_to_patch - len(ids_of_unsuccessfully_patched_resources),
-                            total_resources_to_patch))
-        if ids_of_unsuccessfully_patched_resources:
+                    .format(self.total_resources_to_patch - len(self.ids_of_unsuccessfully_patched_resources),
+                            self.total_resources_to_patch))
+        if self.ids_of_unsuccessfully_patched_resources:
             LOGGER.error('Mostrando los recursos no actualizados y sus errores correspondientes: {}'
-                         .format(errors_while_patching))
+                         .format(self.errors_while_patching))
             LOGGER.error('Resumen: IDs de los recursos que no fueron actualizados: {}'
-                         .format(ids_of_unsuccessfully_patched_resources))
+                         .format(self.ids_of_unsuccessfully_patched_resources))
