@@ -133,7 +133,6 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                         resource_id = resource.get('identifier')
                         total_resources_to_patch += 1
                         resource_file_path = '/tmp/datastore_file'
-                        resource_final_file_path = '/tmp/{}'.format(filename)
                         try:
                             response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
                             if 'text/html' in response.headers.get('Content-Type'):
@@ -144,9 +143,8 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                             with open(resource_file_path, 'wb') as resource_file:
                                 resource_file.write(file_content)
                             # Buscamos la columna '_id' generada como campo en el Datastore; si existe, se la borra
-                            gobar_helpers.delete_column_from_csv_file(
-                                resource_file_path, resource_final_file_path, '_id')
-                            with open(resource_final_file_path, 'rb') as resource_file:
+                            gobar_helpers.delete_column_from_csv_file(resource_file_path, '_id')
+                            with open(resource_file_path, 'rb') as resource_file:
                                 data = {'id': resource_id, 'upload': resource_file}
                                 rc.action.resource_patch(**data)
                         except Exception:
@@ -156,8 +154,6 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                                                                   'function_line': function_line}
                         # Borramos cualquier archivo que pueda haber quedado realizando la operación
                         if os.path.isfile(resource_file_path):
-                            os.remove(resource_file_path)
-                        if os.path.isfile(resource_final_file_path):
                             os.remove(resource_file_path)
         LOGGER.info('Se actualizaron {0} de {1} recursos locales.'
                     .format(total_resources_to_patch - len(ids_of_unsuccessfully_patched_resources),

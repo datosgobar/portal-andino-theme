@@ -582,7 +582,7 @@ def search_for_value_in_config_file(field):
         return ''
 
 
-def delete_column_from_csv_file(csv_path, final_file_path, column_name):
+def delete_column_from_csv_file(csv_path, column_name):
     '''
     :param csv_path: path del archivo csv a leer
     :param final_file_path: path a utilizar para el archivo csv final (debe ser diferente al path del csv original)
@@ -592,17 +592,13 @@ def delete_column_from_csv_file(csv_path, final_file_path, column_name):
     with open(csv_path, 'rb') as source:
         rdr = csv.reader(source)
         first_row = next(rdr)
-        pos = None
+        column_position = None
         try:
-            pos = first_row.index(column_name)
+            column_position = first_row.index(column_name)
         except ValueError:
-            # No existe una columna con el nombre que llegó por parámetro -> se usará el csv original
-            return csv_path
-        source.seek(0)
-        with open(final_file_path, 'wb') as result:
-            wtr = csv.writer(result)
-            for r in rdr:
-                wtr.writerow(tuple(x for x in r if pos != r.index(x)))
-    # Ya que tenemos el csv sin la columna indeseada preparado, borramos el original
-    os.remove(csv_path)
-    return final_file_path
+            # No existe una columna con el nombre que llegó por parámetro -> se usará el csv tal y como está
+            return
+    with open(csv_path, 'wb') as result:
+        wtr = csv.writer(result)
+        for r in rdr:
+            wtr.writerow(tuple(x for x in r if column_position != r.index(x)))
