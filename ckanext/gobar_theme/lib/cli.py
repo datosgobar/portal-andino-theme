@@ -109,7 +109,6 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                 datajson = json.loads(file.read())
         except IOError:
             LOGGER.info('No existe una caché del data.json.')
-            # TODO: buscar los recursos de otra forma
             return None
 
         total_resources_to_patch = 0
@@ -117,8 +116,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         errors_while_patching = {}
 
         # Usando un LocalCKAN obtengo el apikey del usuario default
-        lc = LocalCKAN()
-        site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
+        site_user = LocalCKAN()._get_action('get_site_user')({'ignore_auth': True}, ())
         apikey = site_user.get('apikey')
         site_url = config.get('ckan.site_url')
         if not site_url.startswith('http'):
@@ -134,19 +132,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                         total_resources_to_patch += 1
                         resource_file_path = '/tmp/{}'.format(filename)
                         try:
-                            response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
-                            if 'text/html' in response.headers.get('Content-Type'):
-                                raise TypeError("El archivo no se encuentra en el Datastore")
-                            file_content = response.content
-                            if not file_content:
-                                raise ValueError('Archivo proveniente de Datastore sin contenido')
-                            with open(resource_file_path, 'wb') as resource_file:
-                                resource_file.write(file_content)
-                            # Buscamos la columna '_id' generada como campo en el Datastore; si existe, se la borra
-                            gobar_helpers.delete_column_from_csv_file(resource_file_path, '_id')
-                            with open(resource_file_path, 'rb') as resource_file:
-                                data = {'id': resource_id, 'upload': resource_file}
-                                rc.action.resource_patch(**data)
+                            self.try_reuploading_current_resource(rc, site_url, resource_id, resource_file_path)
                         except Exception:
                             ids_of_unsuccessfully_patched_resources.append(resource_id)
                             error_type, error_text, function_line = sys.exc_info()
@@ -155,6 +141,28 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                         # Borramos cualquier archivo que pueda haber quedado realizando la operación
                         if os.path.isfile(resource_file_path):
                             os.remove(resource_file_path)
+        self.log_results(total_resources_to_patch, ids_of_unsuccessfully_patched_resources, errors_while_patching)
+
+    def try_reuploading_current_resource(self, rc, site_url, resource_id, resource_file_path):
+        response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
+        file_content = self.read_and_validate_dumped_data(response)
+        with open(resource_file_path, 'wb') as resource_file:
+            resource_file.write(file_content)
+        # Buscamos la columna '_id' generada como campo en el Datastore; si existe, se la borra
+        gobar_helpers.delete_column_from_csv_file(resource_file_path, '_id')
+        with open(resource_file_path, 'rb') as resource_file:
+            data = {'id': resource_id, 'upload': resource_file}
+            rc.action.resource_patch(**data)
+
+    def read_and_validate_dumped_data(self, response):
+        if 'text/html' in response.headers.get('Content-Type'):
+            raise TypeError("No se encontró un archivo para el recurso en el Datastore")
+        file_content = response.content
+        if not file_content:
+            raise ValueError('Archivo proveniente del Datastore sin contenido')
+        return file_content
+
+    def log_results(self, total_resources_to_patch, ids_of_unsuccessfully_patched_resources, errors_while_patching):
         LOGGER.info('Se actualizaron {0} de {1} recursos locales.'
                     .format(total_resources_to_patch - len(ids_of_unsuccessfully_patched_resources),
                             total_resources_to_patch))
