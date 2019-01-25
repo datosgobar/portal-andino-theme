@@ -151,7 +151,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                             ids_of_unsuccessfully_patched_resources.append(resource_id)
                             error_type, error_text, function_line = sys.exc_info()
                             errors_while_patching[resource_id] = {'error_type': error_type, 'error_text': error_text,
-                                                                  'function_line': function_line}
+                                                                  'function_line': function_line.tb_lineno}
                         # Borramos cualquier archivo que pueda haber quedado realizando la operación
                         if os.path.isfile(resource_file_path):
                             os.remove(resource_file_path)

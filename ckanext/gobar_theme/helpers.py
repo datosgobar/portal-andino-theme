@@ -583,12 +583,6 @@ def search_for_value_in_config_file(field):
 
 
 def delete_column_from_csv_file(csv_path, column_name):
-    '''
-    :param csv_path: path del archivo csv a leer
-    :param final_file_path: path a utilizar para el archivo csv final (debe ser diferente al path del csv original)
-    :param column_name: nombre de la columna a eliminar
-    :return: path del csv final (si la columna no existe, simplemente se usa el original)
-    '''
     with open(csv_path, 'rb') as source:
         rdr = csv.reader(source)
         first_row = next(rdr)
