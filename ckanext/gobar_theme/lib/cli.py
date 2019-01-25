@@ -102,13 +102,11 @@ class UpdateDatastoreCommand(cli.CkanCommand):
 class ReuploadResourcesFiles(cli.CkanCommand):
     summary = "Conseguir y resubir archivos de los recursos locales del portal"
 
-    def __init__(self):
+    def command(self):
+        self._load_config()
         self.total_resources_to_patch = 0
         self.ids_of_unsuccessfully_patched_resources = []
         self.errors_while_patching = {}
-
-    def command(self):
-        self._load_config()
         try:
             with open('/var/lib/ckan/theme_config/datajson_cache.json', 'r+') as file:
                 datajson = json.loads(file.read())
