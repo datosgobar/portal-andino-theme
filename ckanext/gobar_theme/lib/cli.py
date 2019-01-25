@@ -132,7 +132,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                     if filename:
                         resource_id = resource.get('identifier')
                         total_resources_to_patch += 1
-                        resource_file_path = '/tmp/datastore_file'
+                        resource_file_path = '/tmp/{}'.format(filename)
                         try:
                             response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
                             if 'text/html' in response.headers.get('Content-Type'):
