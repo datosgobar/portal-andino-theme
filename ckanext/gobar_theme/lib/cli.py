@@ -103,7 +103,6 @@ class ReuploadResourcesFiles(cli.CkanCommand):
     summary = "Conseguir y resubir archivos de los recursos locales del portal"
 
     def __init__(self):
-        super(ReuploadResourcesFiles, self).__init__()
         self.total_resources_to_patch = 0
         self.ids_of_unsuccessfully_patched_resources = []
         self.errors_while_patching = {}
