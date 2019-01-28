@@ -438,7 +438,7 @@ def portal_andino_version():
     version = version['portal-andino'] or 'Desarrollo'
 
     version = version.replace('release-', '')  # Elimino el release-
-    version = version[:10]  # me quedo con los primeros 10 caracteres
+    version = version[:15]  # me quedo con los primeros 15 caracteres
 
     return version
 
