@@ -19,6 +19,7 @@ from pydatajson.core import DataJson
 from pylons.config import config
 from crontab import CronTab
 import logging
+import csv
 
 logger = logging.getLogger(__name__)
 
@@ -598,3 +599,23 @@ def search_for_value_in_config_file(field):
         return value.replace(field, '')[1:]
     except:
         return ''
+
+
+def delete_column_from_csv_file(csv_path, column_name):
+    with open(csv_path, 'rb') as source:
+        rdr = csv.reader(source)
+        first_row = next(rdr)
+        column_position = None
+        try:
+            column_position = first_row.index(column_name)
+        except ValueError:
+            # No existe una columna con el nombre que llegó por parámetro -> se usará el csv tal y como está
+            return
+        source.seek(0)
+        list_with_rows = []
+        for r in rdr:
+            list_with_rows.append(tuple((r[x] for x in range(len(r)) if x != column_position)))
+    with open(csv_path, 'wb') as result:
+        wtr = csv.writer(result)
+        for r in list_with_rows:
+            wtr.writerow(tuple(x for x in r))
