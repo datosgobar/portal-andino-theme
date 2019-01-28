@@ -74,3 +74,10 @@ class TestDatasets(TestAndino.TestAndino):
         nt.assert_equal(pkg.resources[0].url, u'http://1.com')
         pkg = self.update_package_using_forms(pkg.name)
         nt.assert_equal(pkg.notes, u'New description')
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_package_form_correctly_autogenerates_landing_page(self):
+        env, response = self.get_page_response('/dataset/new')
+        form = response.forms['dataset-edit']
+        nt.assert_equals(form['url'].value, 'http://example.com/dataset/')
