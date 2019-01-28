@@ -125,8 +125,9 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         for dataset in datajson.get('dataset', []):
             for resource in dataset.get('distribution', []):
                 if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
-                    filename = resource.get('downloadURL', '').rsplit('/', 1)[1]
+                    filename = resource.get('downloadURL', '')
                     if filename:
+                        filename = filename.rsplit('/', 1)[1]
                         resource_id = resource.get('identifier')
                         self.total_resources_to_patch += 1
                         resource_file_path = '/tmp/{}'.format(filename)
@@ -144,8 +145,8 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         self.log_results()
 
     def try_reuploading_current_resource(self, rc, site_url, resource_id, resource_file_path):
-        response = requests.get('{0}/datastore/dump/{1}'.format(site_url, resource_id))
-        file_content = self.read_and_validate_dumped_data(response)
+        url = '{0}/datastore/dump/{1}'.format(site_url, resource_id)
+        file_content = self.read_and_validate_dumped_data(url)
         with open(resource_file_path, 'wb') as resource_file:
             resource_file.write(file_content)
         # Buscamos la columna '_id' generada como campo en el Datastore; si existe, se la borra
@@ -154,13 +155,16 @@ class ReuploadResourcesFiles(cli.CkanCommand):
             data = {'id': resource_id, 'upload': resource_file}
             rc.action.resource_patch(**data)
 
-    def read_and_validate_dumped_data(self, response):
-        if 'text/html' in response.headers.get('Content-Type'):
-            raise TypeError("No se encontró un archivo para el recurso en el Datastore")
-        file_content = response.content
-        if not file_content:
-            raise ValueError('Archivo proveniente del Datastore sin contenido')
-        return file_content
+    def read_and_validate_dumped_data(self, url):
+        response = requests.get(url)
+        if response.status_code == 200:
+            file_content = response.content
+            if not file_content:
+                raise ValueError('Archivo proveniente del Datastore sin contenido')
+            return file_content
+        elif response.status_code == 302:
+            return self.read_and_validate_dumped_data(response.url)
+        raise TypeError("No se encontró un archivo para el recurso en el Datastore")
 
     def log_results(self):
         LOGGER.info('Se actualizaron {0} de {1} recursos locales.'
