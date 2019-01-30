@@ -130,14 +130,14 @@ class ReuploadResourcesFiles(cli.CkanCommand):
             site_url = 'http://{}'.format(site_url)
 
         rc = RemoteCKAN(site_url, apikey)
+        force_resource_upload = hasattr(self.options, 'force') and self.options.force == 'true'
         for dataset in datajson.get('dataset', []):
             for resource in dataset.get('distribution', []):
                 if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
                     downloadURL = resource.get('downloadURL', '')
                     response = requests.get(downloadURL)
                     content_is_file = response.status_code == 200 and 'html' not in response.headers.get('Content-Type')
-                    if downloadURL and \
-                            ((hasattr(self.options, 'force') and self.options.force == 'true') or content_is_file):
+                    if downloadURL and (force_resource_upload or content_is_file):
                         filename = downloadURL.rsplit('/', 1)[1]
                         resource_id = resource.get('identifier')
                         self.total_resources_to_patch += 1
