@@ -105,7 +105,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
     parser = paste.script.command.Command.standard_parser(verbose=True)
     parser.add_option('-c', '--config', dest='config',
                       help='Config file to use.')
-    parser.add_option('f', '--force',
+    parser.add_option('-f', '--force',
                       help="No verificar si se puede o no descargar el archivo usando el downloadURL del recurso")
     default_verbosity = 1
     group_name = 'ckan'
@@ -133,11 +133,12 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         for dataset in datajson.get('dataset', []):
             for resource in dataset.get('distribution', []):
                 if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
-                    filename = resource.get('downloadURL', '')
-                    response = requests.get(filename)
-                    import pdb; pdb.set_trace()
-                    if filename:
-                        filename = filename.rsplit('/', 1)[1]
+                    downloadURL = resource.get('downloadURL', '')
+                    response = requests.get(downloadURL)
+                    content_is_csv_file = response.status_code == 200 and 'csv' in response.headers.get('Content-Type')
+                    if downloadURL and \
+                            ((hasattr(self.options, 'force') and self.options.force == 'true') or content_is_csv_file):
+                        filename = downloadURL.rsplit('/', 1)[1]
                         resource_id = resource.get('identifier')
                         self.total_resources_to_patch += 1
                         resource_file_path = '/tmp/{}'.format(filename)
