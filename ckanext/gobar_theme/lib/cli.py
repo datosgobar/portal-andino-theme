@@ -135,9 +135,9 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                 if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
                     downloadURL = resource.get('downloadURL', '')
                     response = requests.get(downloadURL)
-                    content_is_csv_file = response.status_code == 200 and 'csv' in response.headers.get('Content-Type')
+                    content_is_file = response.status_code == 200 and 'html' not in response.headers.get('Content-Type')
                     if downloadURL and \
-                            ((hasattr(self.options, 'force') and self.options.force == 'true') or content_is_csv_file):
+                            ((hasattr(self.options, 'force') and self.options.force == 'true') or content_is_file):
                         filename = downloadURL.rsplit('/', 1)[1]
                         resource_id = resource.get('identifier')
                         self.total_resources_to_patch += 1
