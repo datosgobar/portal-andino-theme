@@ -133,26 +133,28 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         force_resource_upload = hasattr(self.options, 'force') and self.options.force == 'true'
         for dataset in datajson.get('dataset', []):
             for resource in dataset.get('distribution', []):
-                if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
-                    downloadURL = resource.get('downloadURL', '')
-                    response = requests.get(downloadURL)
-                    content_is_file = response.status_code == 200 and 'html' not in response.headers.get('Content-Type')
-                    if downloadURL and (force_resource_upload or content_is_file):
-                        filename = downloadURL.rsplit('/', 1)[1]
-                        resource_id = resource.get('identifier')
-                        self.total_resources_to_patch += 1
-                        resource_file_path = '/tmp/{}'.format(filename)
-                        try:
-                            self.try_reuploading_current_resource(rc, site_url, resource_id, resource_file_path)
-                        except Exception:
-                            self.ids_of_unsuccessfully_patched_resources.append(resource_id)
-                            error_type, error_text, function_line = sys.exc_info()
-                            self.errors_while_patching[resource_id] = {
-                                'error_type': error_type, 'error_text': error_text,
-                                'function_line': function_line.tb_lineno}
-                        # Borramos cualquier archivo que pueda haber quedado realizando la operación
-                        if os.path.isfile(resource_file_path):
-                            os.remove(resource_file_path)
+                resource_id = resource.get('identifier')
+                if not self.args or resource_id in self.args:
+                    if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
+                        downloadURL = resource.get('downloadURL', '')
+                        response = requests.get(downloadURL)
+                        content_is_file = \
+                            response.status_code == 200 and 'html' not in response.headers.get('Content-Type')
+                        if downloadURL and (force_resource_upload or content_is_file):
+                            filename = downloadURL.rsplit('/', 1)[1]
+                            self.total_resources_to_patch += 1
+                            resource_file_path = '/tmp/{}'.format(filename)
+                            try:
+                                self.try_reuploading_current_resource(rc, site_url, resource_id, resource_file_path)
+                            except Exception:
+                                self.ids_of_unsuccessfully_patched_resources.append(resource_id)
+                                error_type, error_text, function_line = sys.exc_info()
+                                self.errors_while_patching[resource_id] = {
+                                    'error_type': error_type, 'error_text': error_text,
+                                    'function_line': function_line.tb_lineno}
+                            # Borramos cualquier archivo que pueda haber quedado realizando la operación
+                            if os.path.isfile(resource_file_path):
+                                os.remove(resource_file_path)
         self.log_results()
 
     def try_reuploading_current_resource(self, rc, site_url, resource_id, resource_file_path):
