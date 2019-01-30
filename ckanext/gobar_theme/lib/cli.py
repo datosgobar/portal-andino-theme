@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import requests
+import paste.script
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
@@ -101,6 +102,13 @@ class UpdateDatastoreCommand(cli.CkanCommand):
 
 class ReuploadResourcesFiles(cli.CkanCommand):
     summary = "Conseguir y resubir archivos de los recursos locales del portal"
+    parser = paste.script.command.Command.standard_parser(verbose=True)
+    parser.add_option('-c', '--config', dest='config',
+                      help='Config file to use.')
+    parser.add_option('f', '--force',
+                      help="No verificar si se puede o no descargar el archivo usando el downloadURL del recurso")
+    default_verbosity = 1
+    group_name = 'ckan'
 
     def command(self):
         self._load_config()
@@ -126,6 +134,8 @@ class ReuploadResourcesFiles(cli.CkanCommand):
             for resource in dataset.get('distribution', []):
                 if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
                     filename = resource.get('downloadURL', '')
+                    response = requests.get(filename)
+                    import pdb; pdb.set_trace()
                     if filename:
                         filename = filename.rsplit('/', 1)[1]
                         resource_id = resource.get('identifier')
