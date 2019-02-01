@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import requests
+import paste.script
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
@@ -101,6 +102,13 @@ class UpdateDatastoreCommand(cli.CkanCommand):
 
 class ReuploadResourcesFiles(cli.CkanCommand):
     summary = "Conseguir y resubir archivos de los recursos locales del portal"
+    parser = paste.script.command.Command.standard_parser(verbose=True)
+    parser.add_option('-c', '--config', dest='config',
+                      help='Config file to use.')
+    parser.add_option('-f', '--force',
+                      help="No verificar si se puede o no descargar el archivo usando el downloadURL del recurso")
+    default_verbosity = 1
+    group_name = 'ckan'
 
     def command(self):
         self._load_config()
@@ -122,26 +130,31 @@ class ReuploadResourcesFiles(cli.CkanCommand):
             site_url = 'http://{}'.format(site_url)
 
         rc = RemoteCKAN(site_url, apikey)
+        force_resource_upload = hasattr(self.options, 'force') and self.options.force == 'true'
         for dataset in datajson.get('dataset', []):
             for resource in dataset.get('distribution', []):
-                if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
-                    filename = resource.get('downloadURL', '')
-                    if filename:
-                        filename = filename.rsplit('/', 1)[1]
-                        resource_id = resource.get('identifier')
-                        self.total_resources_to_patch += 1
-                        resource_file_path = '/tmp/{}'.format(filename)
-                        try:
-                            self.try_reuploading_current_resource(rc, site_url, resource_id, resource_file_path)
-                        except Exception:
-                            self.ids_of_unsuccessfully_patched_resources.append(resource_id)
-                            error_type, error_text, function_line = sys.exc_info()
-                            self.errors_while_patching[resource_id] = {
-                                'error_type': error_type, 'error_text': error_text,
-                                'function_line': function_line.tb_lineno}
-                        # Borramos cualquier archivo que pueda haber quedado realizando la operación
-                        if os.path.isfile(resource_file_path):
-                            os.remove(resource_file_path)
+                resource_id = resource.get('identifier')
+                if not self.args or resource_id in self.args:
+                    if resource.get('type', '') != 'api' and gobar_helpers.is_distribution_local(resource):
+                        downloadURL = resource.get('downloadURL', '')
+                        response = requests.get(downloadURL)
+                        content_is_file = \
+                            response.status_code == 200 and 'html' not in response.headers.get('Content-Type')
+                        if downloadURL and (force_resource_upload or content_is_file):
+                            filename = downloadURL.rsplit('/', 1)[1]
+                            self.total_resources_to_patch += 1
+                            resource_file_path = '/tmp/{}'.format(filename)
+                            try:
+                                self.try_reuploading_current_resource(rc, site_url, resource_id, resource_file_path)
+                            except Exception:
+                                self.ids_of_unsuccessfully_patched_resources.append(resource_id)
+                                error_type, error_text, function_line = sys.exc_info()
+                                self.errors_while_patching[resource_id] = {
+                                    'error_type': error_type, 'error_text': error_text,
+                                    'function_line': function_line.tb_lineno}
+                            # Borramos cualquier archivo que pueda haber quedado realizando la operación
+                            if os.path.isfile(resource_file_path):
+                                os.remove(resource_file_path)
         self.log_results()
 
     def try_reuploading_current_resource(self, rc, site_url, resource_id, resource_file_path):
