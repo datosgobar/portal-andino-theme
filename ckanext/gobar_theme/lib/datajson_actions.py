@@ -190,6 +190,7 @@ def clean_resources(resources):
         url_type = resource.get('url_type', None)
         type = resource.get('resource_type', None)
         field = resource.get('attributesDescription', [])
+        filename = resource.get('fileName', None)
         for element in field:
             for key in element.keys():
                 if not element[key]:
@@ -200,13 +201,12 @@ def clean_resources(resources):
         set_nonempty_value(current_resource, 'format', format)
         set_nonempty_value(current_resource, 'title', resource.get('name', None))
         set_nonempty_value(current_resource, 'description', resource.get('description', None))
-        set_nonempty_value(current_resource, 'fileName', resource.get('fileName', None))
+        set_nonempty_value(current_resource, 'fileName', filename)
+        set_nonempty_value(current_resource, 'type', type)
         if url_type:
             if url_type == 'upload' and url and type != 'api' and '/' in url:
                 # Como se subió un archivo, queremos asegurarnos de que el fileName sea correcto; lo buscamos en la URL
-                last_slash_position = url.rfind('/')
-                current_resource['fileName'] = url[last_slash_position+1:]
-            set_nonempty_value(current_resource, 'type', type)
+                current_resource['fileName'] = filename or url.rsplit('/', 1)[-1]
         set_nonempty_value(current_resource, 'issued', resource.get('issued', None) or resource.get('created', None))
         set_nonempty_value(current_resource, 'modified',
                            resource.get('modified', None) or resource.get('last_modified', None))
