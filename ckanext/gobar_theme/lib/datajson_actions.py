@@ -183,35 +183,34 @@ def clean_resources(resources):
         current_resource = {}
 
         # Recolecto cierta información del recurso
-        format = resource.get('format', None)
-        if format:
-            format.upper()
-        url = resource.get('url', None)
-        url_type = resource.get('url_type', None)
-        type = resource.get('resource_type', None)
+        resource_format = resource.get('format')
+        if resource_format:
+            resource_format.upper()
+        url = resource.get('url')
+        url_type = resource.get('url_type')
+        resource_type = resource.get('resource_type')
         field = resource.get('attributesDescription', [])
+        filename = resource.get('fileName')
         for element in field:
             for key in element.keys():
                 if not element[key]:
                     element.pop(key)
 
         # Guardo todos los datos que no estén vacíos ni sean None
-        set_nonempty_value(current_resource, 'identifier', resource.get('id', None))
-        set_nonempty_value(current_resource, 'format', format)
-        set_nonempty_value(current_resource, 'title', resource.get('name', None))
-        set_nonempty_value(current_resource, 'description', resource.get('description', None))
-        set_nonempty_value(current_resource, 'fileName', resource.get('fileName', None))
-        if url_type:
-            if url_type == 'upload' and url and type != 'api' and '/' in url:
-                # Como se subió un archivo, queremos asegurarnos de que el fileName sea correcto; lo buscamos en la URL
-                last_slash_position = url.rfind('/')
-                current_resource['fileName'] = url[last_slash_position+1:]
-            set_nonempty_value(current_resource, 'type', type)
-        set_nonempty_value(current_resource, 'issued', resource.get('issued', None) or resource.get('created', None))
+        set_nonempty_value(current_resource, 'identifier', resource.get('id'))
+        set_nonempty_value(current_resource, 'format', resource_format)
+        set_nonempty_value(current_resource, 'title', resource.get('name'))
+        set_nonempty_value(current_resource, 'description', resource.get('description'))
+        set_nonempty_value(current_resource, 'fileName', filename)
+        set_nonempty_value(current_resource, 'type', resource_type)
+        if url_type == 'upload' and url and resource_type != 'api' and '/' in url:
+            # Como se subió un archivo, queremos asegurarnos de que el fileName sea correcto; lo buscamos en la URL
+            current_resource['fileName'] = filename or url.rsplit('/', 1)[-1]
+        set_nonempty_value(current_resource, 'issued', resource.get('issued') or resource.get('created'))
         set_nonempty_value(current_resource, 'modified',
-                           resource.get('modified', None) or resource.get('last_modified', None))
-        set_nonempty_value(current_resource, 'license', resource.get('license_id', None))
-        set_nonempty_value(current_resource, 'accessURL', resource.get('accessURL', None) or
+                           resource.get('modified') or resource.get('last_modified'))
+        set_nonempty_value(current_resource, 'license', resource.get('license_id'))
+        set_nonempty_value(current_resource, 'accessURL', resource.get('accessURL') or
                            gobar_helpers.get_current_url_for_resource(resource['package_id'], resource['id']))
         set_nonempty_value(current_resource, 'downloadURL', generate_resource_downloadURL(resource))
         set_nonempty_value(current_resource, 'field', field)
