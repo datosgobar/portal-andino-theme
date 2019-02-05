@@ -95,8 +95,9 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
                       'title': 'resource:_title',
                       'resource_type': 'file',
                       'url': 'http://example.com/resource'}]
-        self.create_package_with_n_resources(data_dict={
-            'title': 'Un titulo', 'name': 'ds1', 'resources': resources})
+        data_dict = {
+            'title': 'Un titulo', 'name': 'ds1', 'resources': resources}
+        helpers.call_action('package_create', **data_dict)
         datajson = self.generate_datajson(CACHE_DIRECTORY, self.TEST_CACHE_PATH)
         distribution = datajson['dataset'][0]['distribution'][0]
         nt.assert_equal(distribution['type'], 'file')
