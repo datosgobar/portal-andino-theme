@@ -87,3 +87,16 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
     def test_catalog_data_is_in_datajson_and_title_is_correct(self):
         datajson = self.generate_datajson(CACHE_DIRECTORY, self.TEST_CACHE_PATH)
         nt.assert_equal(datajson['title'], u'Título del portal')
+
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController',GobArConfigControllerForTest)
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    def test_datajson_displays_resource_type(self):
+        resources = [{'id': 'res1',
+                      'title': 'resource:_title',
+                      'resource_type': 'file',
+                      'url': 'http://example.com/resource'}]
+        self.create_package_with_n_resources(data_dict={
+            'title': 'Un titulo', 'name': 'ds1', 'resources': resources})
+        datajson = self.generate_datajson(CACHE_DIRECTORY, self.TEST_CACHE_PATH)
+        distribution = datajson['dataset'][0]['distribution'][0]
+        nt.assert_equal(distribution['type'], 'file')
