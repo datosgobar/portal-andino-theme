@@ -148,7 +148,7 @@ def organization_delete_and_purge(context, data_dict):
 
 def gobar_status_show(context, data_dict):
     artifacts = []
-    plugins = ['ckanext-harvest', 'ckanext-gobar-theme', 'ckanext-hierarchy']
+    plugins = ['ckanext-gobar-theme', 'ckanext-hierarchy']
     for plugin in plugins:
         version = _get_plugin_version(plugin)
         artifact = {plugin: version}
