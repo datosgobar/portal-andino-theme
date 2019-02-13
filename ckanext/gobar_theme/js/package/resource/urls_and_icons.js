@@ -13,7 +13,7 @@ $(function () {
     });
 
     $(document).on('click', '.file-upload-label', function (e) {
-        $('input#' + $(event.target).parent().attr('for')).click();  // Disparo el click en el input[type=file]
+        $('input#' + $(e.target).parent().attr('for')).click();  // Disparo el click en el input[type=file]
         $('option.distribution-type-option[value="file"]').val('file.upload');
     });
 
