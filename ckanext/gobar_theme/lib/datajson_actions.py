@@ -281,14 +281,11 @@ def get_datasets_with_resources(packages):
                 packages[i]['url'] = '{host}/dataset/{dataset_id}'.format(
                     host=ckan_host[:-1],
                     dataset_id=packages[i]['name'])
-                logger.info("landingPage generado para el dataset_id: %s.", packages[i]['name'])
         except TypeError:
             prepare_url = 'unknow'
             try:
                 prepare_url = packages[i]['resources'][0]['url']
                 prepare_url = prepare_url.split('resource')[0]
-                logger.info("landingPage generado para el dataset_id: %s, Tipo de datos: \" harvest\".",
-                            packages[i]['name'])
             except IndexError:
                 logger.error("autogen \"landingpage\" fails.")
             packages[i].update({'url': prepare_url})
