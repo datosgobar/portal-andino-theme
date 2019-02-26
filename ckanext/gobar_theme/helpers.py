@@ -283,8 +283,8 @@ def license_options(existing_license_id=None):
 
 def get_license_title(license_id):
     for license in license_options():
-        if license.get('id') == license_id:
-            return license.get('title')
+        if license.id == license_id:
+            return license.title
     return None
 
 
