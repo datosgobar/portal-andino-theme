@@ -71,6 +71,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'json_loads': gobar_helpers.json_loads,
             'license_options': gobar_helpers.license_options,
             'get_license_title': gobar_helpers.get_license_title,
+            'id_belongs_to_license': gobar_helpers.id_belongs_to_license,
             'update_frequencies': gobar_helpers.update_frequencies,
             'field_types': gobar_helpers.field_types,
             'distribution_types': gobar_helpers.distribution_types,
