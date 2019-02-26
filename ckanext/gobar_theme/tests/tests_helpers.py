@@ -38,8 +38,7 @@ class TestLicenseHelpers(TestHelpers):
                 "url": "https://opendefinition.org/licenses/odc-odbl"
             }
         ]
-        licenses = [license.License(entity) for entity in licenses_json]
-        self.licenses = gobar_helpers.license_options(licenses)
+        self.licenses = [license.License(entity) for entity in licenses_json]
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
