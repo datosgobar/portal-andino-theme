@@ -30,8 +30,7 @@ class TestLicenseHelpers(TestHelpers):
         response = urllib2.urlopen(license_url)
         response_body = response.read()
         license_data = json.loads(response_body)
-        license_register = license.LicenseRegister()
-        license_register._create_license_list(license_data, '')
+        self.licenses = [license.License(entity) for entity in license_data.values()]
 
     @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
     def __init__(self):
@@ -40,7 +39,7 @@ class TestLicenseHelpers(TestHelpers):
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
-    def test_license_options_returns_1_licenses(self):
+    def test_license_options_returns_14_licenses(self):
         nt.assert_equals(len(self.licenses), 14)
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
