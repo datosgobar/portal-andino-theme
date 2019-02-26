@@ -38,13 +38,13 @@ class TestLicenseHelpers(TestHelpers):
                 "url": "https://opendefinition.org/licenses/odc-odbl"
             }
         ]
-        licenses_register = license.LicenseRegister()
-        self.licenses = gobar_helpers.license_options(licenses_register._create_license_list(licenses_json))
+        licenses = [license.License(entity) for entity in licenses_json]
+        self.licenses = gobar_helpers.license_options(licenses)
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
-    def test_license_options_returns_14_licenses(self):
-        nt.assert_equals(len(self.licenses), 14)
+    def test_license_options_returns_2_licenses(self):
+        nt.assert_equals(len(self.licenses), 2)
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
@@ -59,10 +59,10 @@ class TestLicenseHelpers(TestHelpers):
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_legacy_id_search_returns_correct_license(self):
         license = gobar_helpers.get_license('odc-pddl')
-        nt.assert_equals(license.title, 'Open Data Commons Public Domain Dedication and Licence 1.0 (PDDL)')
+        nt.assert_equals(license.title, u'Open Data Commons Public Domain Dedication and Licence 1.0 (PDDL)')
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_license_title_search_returns_correct_title(self):
         nt.assert_equals(gobar_helpers.get_license_title('odc-pddl'),
-                         'Open Data Commons Public Domain Dedication and Licence 1.0 (PDDL)')
+                         u'Open Data Commons Public Domain Dedication and Licence 1.0 (PDDL)')
