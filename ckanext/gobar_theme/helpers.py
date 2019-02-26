@@ -281,15 +281,22 @@ def license_options(existing_license_id=None):
     return sorted_licenses
 
 
+def id_belongs_to_license(id, license):
+    return id == license.id or (hasattr(license, 'legacy_ids') and id in license.legacy_ids)
+
+
+def get_license(id):
+    for license in license_options():
+        if id_belongs_to_license(id, license):
+            return license
+    return None
+
+
 def get_license_title(license_id):
     for license in license_options():
         if license.id == license_id:
             return license.title
     return None
-
-
-def id_belongs_to_license(id, license):
-    return id == license.id or (hasattr(license, 'legacy_ids') and id in license.legacy_ids)
 
 
 def update_frequencies(freq_id=None):
