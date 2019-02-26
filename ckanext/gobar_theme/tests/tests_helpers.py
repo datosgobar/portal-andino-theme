@@ -5,6 +5,7 @@ import nose.tools as nt
 from ckanext.gobar_theme.tests import TestAndino
 import ckanext.gobar_theme.helpers as gobar_helpers
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from ckan.model import license
 
 
 class TestHelpers(TestAndino.TestAndino):
@@ -23,7 +24,22 @@ class TestLicenseHelpers(TestHelpers):
 
     def __init__(self):
         super(TestLicenseHelpers, self).__init__()
-        self.licenses = gobar_helpers.license_options()
+        licenses_json = [
+            {
+                "id": "PDDL-1.0",
+                "legacy_ids": ["ODC-PDDL-1.0", "odc-pddl"],
+                "title": "Open Data Commons Public Domain Dedication and Licence 1.0 (PDDL)",
+                "url": "https://opendefinition.org/licenses/odc-pddl"
+            },
+            {
+                "id": "ODbL-1.0",
+                "legacy_ids": ["odc-odbl"],
+                "title": "Open Data Commons Open Database License 1.0 (ODbL)",
+                "url": "https://opendefinition.org/licenses/odc-odbl"
+            }
+        ]
+        licenses_register = license.LicenseRegister()
+        self.licenses = gobar_helpers.license_options(licenses_register._create_license_list(licenses_json))
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
