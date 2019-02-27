@@ -32,9 +32,9 @@ class TestLicenseHelpers(TestHelpers):
         license_data = json.loads(response_body)
         self.licenses = [license.License(entity) for entity in license_data]
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
-    def setup(self):
-        super(TestLicenseHelpers, self).setup()
+    @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
+    def __init__(self):
+        super(TestLicenseHelpers, self).__init__()
         self.licenses = gobar_helpers.license_options()
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
