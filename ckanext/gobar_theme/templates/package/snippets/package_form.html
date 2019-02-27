@@ -22,6 +22,14 @@
 
     {% snippet 'package/snippets/package_metadata_fields.html', data=data, errors=errors %}
 
+    {% if data.state %}
+        {% if data.state == 'draft' %}
+           {% set show_publish_button = true %}
+        {% else %}
+            {% set show_publish_button = false %}
+        {% endif %}
+    {% endif %}
+
     <div class="form-actions">
         {% block delete_button %}
             {% if h.check_access('package_delete', {'id': data.id}) and not data.state == 'deleted' %}
@@ -35,6 +43,11 @@
                 GUARDAR BORRADOR
             </button>
         {% endblock %}
+            {% if show_publish_button %}
+                <button id="publish-button" class="btn btn-green" name="save" value="go-metadata" type="submit">
+                    PUBLICAR
+                </button>
+            {% endif %}
         {% block save_button %}
             <button class="btn btn-blue" type="submit" name="save" value="continue">
                 {% block save_button_text -%}
