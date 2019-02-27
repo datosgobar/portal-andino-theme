@@ -30,7 +30,7 @@ class TestLicenseHelpers(TestHelpers):
         response = urllib2.urlopen(license_url)
         response_body = response.read()
         license_data = json.loads(response_body)
-        self.licenses = [license.License(entity) for entity in license_data.values()]
+        self.licenses = [license.License(entity) for entity in license_data]
 
     @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
     def __init__(self):
