@@ -42,7 +42,7 @@
         <select class="form-control" id="portal-license" name="metadata-license" style="margin-bottom: 30px;">
             {% set existing_license_id = h.get_theme_config('portal-metadata.license') %}
             {% for license in h.license_options(existing_license_id) %}
-                <option value="{{ license.code }}" {{ 'selected' if license.code == existing_license_id or ("CC-BY-4.0" == license.code and not existing_license_id) }}>{{ license.name }}</option>
+                <option value="{{ license.id }}" {{ 'selected' if h.id_belongs_to_license(existing_license_id, license) or ("CC-BY-4.0" == license.id and not existing_license_id) }}>{{ license.title }}</option>
             {% endfor %}
         </select>
 
