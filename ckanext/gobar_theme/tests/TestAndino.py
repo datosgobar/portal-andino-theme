@@ -115,7 +115,8 @@ class TestAndino(helpers.FunctionalTestBase):
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
     def create_package_with_one_resource_using_forms(self, dataset_name=u'package-with-one-resource',
-                                                     resource_url=u'http://example.com/resource'):
+                                                     resource_url=u'http://example.com/resource',
+                                                     draft=False):
         env, response = self.get_page_response('/dataset/new')
         form = response.forms['dataset-edit']
         form['name'] = dataset_name
@@ -123,12 +124,15 @@ class TestAndino(helpers.FunctionalTestBase):
 
         form = response.forms['resource-edit']
         form['url'] = resource_url
-        submit_and_follow(self.app, form, env, 'save', 'go-metadata')
+        button_value = 'save-draft' if draft else 'go-metadata'
+        submit_and_follow(self.app, form, env, 'save', button_value)
         return model.Package.by_name(dataset_name)
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
-    def update_package_using_forms(self, dataset_name, data_dict={}):
+    def update_package_using_forms(self, pkg, data_dict={}):
+        dataset_name = pkg.name
+        dataset_is_draft = pkg.state == 'draft'
         env, response = self.get_page_response('/dataset/edit/{0}'.format(dataset_name))
         form = response.forms['dataset-edit']
         form['notes'] = u'New description'
@@ -137,7 +141,8 @@ class TestAndino(helpers.FunctionalTestBase):
                 form[key] = value
             except KeyError:
                 logger.warning("Se está pasando un parámetro incorrecto en un test de edición de datasets.")
-        submit_and_follow(self.app, form, env, 'save', 'continue')
+        button_value = 'go-metadata' if dataset_is_draft else 'continue'
+        submit_and_follow(self.app, form, env, 'save', button_value)
         return model.Package.by_name(dataset_name)
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
