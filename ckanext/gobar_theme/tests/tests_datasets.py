@@ -72,5 +72,18 @@ class TestDatasets(TestAndino.TestAndino):
     def test_update_package_notes_using_forms(self):
         pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1", resource_url="http://1.com")
         nt.assert_equal(pkg.resources[0].url, u'http://1.com')
-        pkg = self.update_package_using_forms(pkg.name)
+        pkg = self.update_package_using_forms(pkg)
         nt.assert_equal(pkg.notes, u'New description')
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_create_draft_dataset_using_forms(self):
+        pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1", resource_url="http://1.com")
+        nt.assert_equal(pkg.state, 'draft')
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    def test_publish_draft_dataset_using_forms(self):
+        pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1", resource_url="http://1.com")
+        pkg = self.update_package_using_forms(pkg)
+        nt.assert_equals(pkg.state, 'active')
