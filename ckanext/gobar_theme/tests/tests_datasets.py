@@ -78,7 +78,8 @@ class TestDatasets(TestAndino.TestAndino):
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def test_create_draft_dataset_using_forms(self):
-        pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1", resource_url="http://1.com")
+        pkg = self.create_package_with_one_resource_using_forms(dataset_name="ds_1", resource_url="http://1.com",
+                                                                draft=True)
         nt.assert_equal(pkg.state, 'draft')
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
