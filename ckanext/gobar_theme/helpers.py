@@ -294,7 +294,7 @@ def get_license(id):
 
 def get_license_title(license_id):
     for license in license_options():
-        if license.id == license_id:
+        if id_belongs_to_license(license_id, license):
             return license.title
     return None
 
