@@ -25,6 +25,14 @@ import csv
 logger = logging.getLogger(__name__)
 
 
+def get_config_file_path():
+    return "{}/production.ini".format(subprocess.check_output("echo $CONFIG_FILE").strip())
+
+
+def get_paster_path():
+    return "{}/bin/paster".format(subprocess.check_output("echo $CKAN_HOME").strip())
+
+
 def _get_organizations_objs(organizations_branch, depth=0):
     organizations = []
     for tree_obj in organizations_branch:

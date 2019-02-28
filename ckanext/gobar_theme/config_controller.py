@@ -301,6 +301,7 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_15_google_dataset_search.html')
 
     def edit_datapusher_commands(self):
+        from ckanext.gobar_theme.helpers import get_config_file_path, get_paster_path
         self._authorize()
         if request.method == 'POST':
             from ckanext.gobar_theme.helpers import create_or_update_cron_job
@@ -317,7 +318,8 @@ class GobArConfigController(base.BaseController):
             # Creamos el cron job, reemplazando el anterior si ya existía
             command = '{0} datapusher submit_all {1} && ' \
                       '{0} views create {1}'\
-                .format('/usr/lib/ckan/default/bin/paster --plugin=ckan', '-y -c /etc/ckan/default/production.ini')
+                .format('{} --plugin=ckan'.format(get_paster_path()),
+                        '-y -c {}'.format(get_config_file_path()))
             comment = 'datapusher - submit_all'
             create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
 
