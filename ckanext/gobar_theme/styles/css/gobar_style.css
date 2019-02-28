@@ -10378,6 +10378,7 @@ form#datapusher > table.date-picker.datapusher {
   margin: 0;
 }
 
-p.datapusher-text {
-  margin: 0;
+#template-config-container #template-config p.datapusher-text {
+  margin-bottom: 5px;
 }
+
