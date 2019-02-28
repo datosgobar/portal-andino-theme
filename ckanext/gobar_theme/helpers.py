@@ -6,7 +6,6 @@ import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 import moment
-import subprocess
 from ckan.common import request, c, g, _
 import ckan.lib.formatters as formatters
 import subprocess
@@ -23,6 +22,14 @@ import logging
 import csv
 
 logger = logging.getLogger(__name__)
+
+
+def get_config_file_path():
+    return "{}/production.ini".format(subprocess.check_output("echo $CKAN_DEFAULT", shell=True).strip())
+
+
+def get_paster_path():
+    return "{}/bin/paster".format(subprocess.check_output("echo $CKAN_HOME", shell=True).strip())
 
 
 def _get_organizations_objs(organizations_branch, depth=0):

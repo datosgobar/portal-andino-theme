@@ -10370,9 +10370,15 @@ label[for="accessURL-upload-url"] {
 
 form#datapusher > table.date-picker.datapusher {
   width: 20%;
+  margin: 10px 0;
 }
 
 #template-config-container #template-config select.datapusher {
   width: 40%;
   margin: 0;
 }
+
+#template-config-container #template-config p.datapusher-text {
+  margin-bottom: 5px;
+}
+
