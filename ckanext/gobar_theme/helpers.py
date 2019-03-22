@@ -92,6 +92,19 @@ def organizations_basic_info():
     return organizations_data
 
 
+def update_organizations_package_count(organizations):
+    updated_organizations_list = []
+    ckan_organizations_info = ckan_helpers.get_facet_items_dict('organization')
+    ckan_organizations_info = {item['name']: item for item in ckan_organizations_info}
+    for organization in organizations:
+        equivalent_organization = ckan_organizations_info.pop(organization['name'], None)
+        if equivalent_organization:
+            organization['total_package_count'] = equivalent_organization['count']
+            organization['active'] = equivalent_organization['active']
+            updated_organizations_list.append(organization)
+    return updated_organizations_list
+
+
 def organization_tree():
     organizations_tree = logic.get_action('group_tree')({}, {'type': 'organization'})
     organizations = _get_organizations_objs(organizations_tree)
