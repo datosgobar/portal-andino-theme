@@ -1,17 +1,19 @@
-{% set items = h.update_organizations_package_count(h.organizations_basic_info()) %}
+{% set items = h.organizations_basic_info() %}
 <div class="search-filter invisible">
     <h2 class="filter-title">{{ title }}</h2>
     {% if items %}
         <ul class="filter-values">
             {% for item in items %}
-                {% set href = h.remove_url_param(name, item.name, extras=extras, alternative_url=alternative_url) if item.active else h.add_url_param(new_params={name: item.name}, extras=extras, alternative_url=alternative_url) %}
-                {% set count = item.total_package_count %}
-                <a href="{{ href }}">
-                    <li class="filter-value {% if item.active %} active{% endif %}">
-                        <span>{{ item.title }} {{ '(%d)' % count }}</span>
-                        <img class="close-filter" src="/img/close-filter.svg">
-                    </li>
-                </a>
+                {% if item.display and item.available_package_count %}
+                    {% set href = h.remove_url_param(name, item.name, extras=extras, alternative_url=alternative_url) if item.active else h.add_url_param(new_params={name: item.name}, extras=extras, alternative_url=alternative_url) %}
+                    {% set count = item.available_package_count %}
+                    <a href="{{ href }}">
+                        <li class="filter-value {% if item.active %} active{% endif %}">
+                            <span>{{ item.title }} {{ '(%d)' % count }}</span>
+                            <img class="close-filter" src="/img/close-filter.svg">
+                        </li>
+                    </a>
+                {% endif %}
             {% endfor %}
         </ul>
 
