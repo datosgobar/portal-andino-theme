@@ -12,6 +12,7 @@ from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 from ckan.model import license
 from pylons.config import config
 from ckanapi import RemoteCKAN, LocalCKAN
+from ckan.logic.action.create import organization_create
 
 
 class TestHelpers(TestAndino.TestAndino):
@@ -36,7 +37,7 @@ class TestOrganizationHelpers(TestHelpers):
         #     self.edit_form_values(response, field_name='title', field_type='text', value="id-custom")
         # form = response.forms['google-tag-manager']
         # nt.assert_equals(form['container-id'].value, "id-custom")
-
+        return factories.Organization()
         lc = LocalCKAN()
         site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
         apikey = site_user.get('apikey')
