@@ -10,6 +10,7 @@ from ckanext.gobar_theme.tests import TestAndino
 import ckanext.gobar_theme.helpers as gobar_helpers
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 from ckan.model import license
+from pylons.config import config
 from ckanapi import RemoteCKAN, LocalCKAN
 
 
@@ -39,7 +40,8 @@ class TestOrganizationHelpers(TestHelpers):
         lc = LocalCKAN()
         site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
         apikey = site_user.get('apikey')
-        portal = RemoteCKAN(gobar_helpers.search_for_value_in_config_file('ckan.site_url'), apikey=apikey)
+        site_url = gobar_helpers.search_for_value_in_config_file('ckan.site_url') or config.get('ckan.site_url')
+        portal = RemoteCKAN(site_url, apikey=apikey)
         organization = {'name': name}
         if parent:
             organization['groups'] = [{'name': parent}]
