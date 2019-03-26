@@ -37,7 +37,7 @@ class TestOrganizationHelpers(TestHelpers):
         #     self.edit_form_values(response, field_name='title', field_type='text', value="id-custom")
         # form = response.forms['google-tag-manager']
         # nt.assert_equals(form['container-id'].value, "id-custom")
-        return factories.Organization()
+        return factories.Organization({'name': name})
         lc = LocalCKAN()
         site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
         apikey = site_user.get('apikey')
@@ -49,11 +49,11 @@ class TestOrganizationHelpers(TestHelpers):
         return portal.call_action('organization_create', data_dict=organization)
 
     def test_organization_can_be_created(self):
-        nt.assert_equals(self.create_organization('nombre'), 'nombre')
+        nt.assert_equals(self.create_organization('nombre').get('name'), 'nombre')
 
     def test_organization_shows_1_dataset(self):
         organization = self.create_organization('org')
-        self.create_package_with_n_resources(1, {'owner_org': organization})
+        self.create_package_with_n_resources(1, {'owner_org': organization['id']})
         organizations_info = gobar_helpers.organizations_basic_info()
         nt.assert_equals(organizations_info[0].get('available_package_count'), 1)
 
