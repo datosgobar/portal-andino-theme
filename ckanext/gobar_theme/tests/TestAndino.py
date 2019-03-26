@@ -116,10 +116,12 @@ class TestAndino(helpers.FunctionalTestBase):
     @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
     def create_package_with_one_resource_using_forms(self, dataset_name=u'package-with-one-resource',
                                                      resource_url=u'http://example.com/resource',
+                                                     data_dict={},
                                                      draft=False):
         env, response = self.get_page_response('/dataset/new')
         form = response.forms['dataset-edit']
         form['name'] = dataset_name
+        self.fill_form_using_data_dict(form, data_dict)
         response = submit_and_follow(self.app, form, env, 'save', 'continue')
 
         form = response.forms['resource-edit']
@@ -136,11 +138,7 @@ class TestAndino(helpers.FunctionalTestBase):
         env, response = self.get_page_response('/dataset/edit/{0}'.format(dataset_name))
         form = response.forms['dataset-edit']
         form['notes'] = u'New description'
-        for key, value in data_dict:
-            try:
-                form[key] = value
-            except KeyError:
-                logger.warning("Se está pasando un parámetro incorrecto en un test de edición de datasets.")
+        self.fill_form_using_data_dict(form, data_dict)
         button_value = 'go-metadata' if dataset_is_draft else 'continue'
         submit_and_follow(self.app, form, env, 'save', button_value)
         return model.Package.by_name(dataset_name)
@@ -152,6 +150,13 @@ class TestAndino(helpers.FunctionalTestBase):
         form = response.forms['confirm-dataset-delete-form']
         response = submit_and_follow(self.app, form, env, 'delete')
         return response
+
+    def fill_form_using_data_dict(self, form, data_dict):
+        for key, value in data_dict:
+            try:
+                form[key] = value
+            except KeyError:
+                logger.warning("Se está pasando un parámetro incorrecto en un test de edición de datasets.")
 
     # --- Resources --- #
 
@@ -200,7 +205,7 @@ class TestAndino(helpers.FunctionalTestBase):
 
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
-    def edit_form_value(self, response, form_id=None, field_name=None, field_type='text', value=u'Campo modificado'):
+    def edit_form_value(self, response, form_id=None, field_name=None, field_type='text', value=u'Campo modificado'):  # TODO: borrar y usar la nueva función en su lugar
         admin = factories.Sysadmin()
         if form_id:
             form = response.forms[form_id]
@@ -211,6 +216,28 @@ class TestAndino(helpers.FunctionalTestBase):
             form[field_name].value = value
         elif field_type == 'checkbox':
             form[field_name].checked = value
+        env = {'REMOTE_USER': admin['name'].encode('ascii')}
+        try:
+            response = submit_and_follow(self.app, form, env, 'save', value="config-form")
+        except Exception:
+            # Trató de encolar una tarea
+            pass
+        return response
+
+    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
+    def edit_form_values(self, response, form_id=None, data_dict={}):
+        admin = factories.Sysadmin()
+        if form_id:
+            form = response.forms[form_id]
+        else:
+            # El form a buscar no tiene un id bajo el cual buscarlo
+            form = response.forms[0]
+        for element in data_dict:
+            if element.get('field_type') == 'text':
+                form[element.get('field_name')].value = element.get('value')  # TODO: mejorar sección antes de mergear
+            elif element.get('field_type') == 'checkbox':
+                form[element.get('field_name')].checked = element.get('value')
         env = {'REMOTE_USER': admin['name'].encode('ascii')}
         try:
             response = submit_and_follow(self.app, form, env, 'save', value="config-form")

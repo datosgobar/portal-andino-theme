@@ -10,6 +10,7 @@ from ckanext.gobar_theme.tests import TestAndino
 import ckanext.gobar_theme.helpers as gobar_helpers
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
 from ckan.model import license
+from ckanapi import RemoteCKAN, LocalCKAN
 
 
 class TestHelpers(TestAndino.TestAndino):
@@ -18,6 +19,40 @@ class TestHelpers(TestAndino.TestAndino):
     def setup(self):
         super(TestHelpers, self).setup()
         self.admin = factories.Sysadmin()
+
+
+class TestOrganizationHelpers(TestHelpers):
+
+    def __init__(self):
+        super(TestOrganizationHelpers, self).__init__()
+
+    def create_organization(self, name, parent=''):
+        # env, response = self.get_page_response('/organization/new', admin_required=True)
+        # form = response.forms['organization-edit-form']
+        # data_dict = {{'field_name': 'title', 'field_type': 'text', 'value': name},
+        #              {'field_name': 'hierarchy', 'field_type': 'text', 'value': parent}}
+        # response = \
+        #     self.edit_form_values(response, field_name='title', field_type='text', value="id-custom")
+        # form = response.forms['google-tag-manager']
+        # nt.assert_equals(form['container-id'].value, "id-custom")
+
+        lc = LocalCKAN()
+        site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
+        apikey = site_user.get('apikey')
+        portal = RemoteCKAN(gobar_helpers.search_for_value_in_config_file('ckan.site_url'), apikey=apikey)
+        organization = {'name': name}
+        if parent:
+            organization['groups'] = [{'name': parent}]
+        return portal.call_action('organization_create', data_dict=organization)
+
+    def test_organization_can_be_created(self):
+        nt.assert_equals(self.create_organization('nombre'), 'nombre')
+
+    def test_organization_shows_1_dataset(self):
+        organization = self.create_organization('org')
+        self.create_package_with_n_resources(1, {'owner_org': organization})
+        organizations_info = gobar_helpers.organizations_basic_info()
+        nt.assert_equals(organizations_info[0].get('available_package_count'), 1)
 
 
 class TestLicenseHelpers(TestHelpers):
