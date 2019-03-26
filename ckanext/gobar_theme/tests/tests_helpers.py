@@ -40,7 +40,7 @@ class TestOrganizationHelpers(TestHelpers):
         lc = LocalCKAN()
         site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
         apikey = site_user.get('apikey')
-        site_url = gobar_helpers.search_for_value_in_config_file('ckan.site_url') or config.get('ckan.site_url')
+        site_url = gobar_helpers.search_for_value_in_config_file('ckan.site_url') or 'http://localhost'
         portal = RemoteCKAN(site_url, apikey=apikey)
         organization = {'name': name}
         if parent:
