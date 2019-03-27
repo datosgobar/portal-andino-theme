@@ -107,4 +107,4 @@ class AndinoOrganization(factories.Organization):
 
     @classmethod
     def create(cls, target_class, *args, **kwargs):
-        return super(AndinoOrganization, cls)._create(target_class, *args, **kwargs)
+        return super(AndinoOrganization, cls)._create(cls, target_class, *args, **kwargs)
