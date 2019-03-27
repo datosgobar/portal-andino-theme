@@ -37,7 +37,7 @@ class TestOrganizationHelpers(TestHelpers):
         #     self.edit_form_values(response, field_name='title', field_type='text', value="id-custom")
         # form = response.forms['google-tag-manager']
         # nt.assert_equals(form['container-id'].value, "id-custom")
-        return factories.Organization({'name': name})
+        return AndinoOrganization.create(None, None, {'name': 'nombre'})
         lc = LocalCKAN()
         site_user = lc._get_action('get_site_user')({'ignore_auth': True}, ())
         apikey = site_user.get('apikey')
@@ -100,3 +100,11 @@ class TestLicenseHelpers(TestHelpers):
     def test_license_title_search_returns_correct_title(self):
         nt.assert_equals(gobar_helpers.get_license_title('odc-pddl'),
                          u'Open Data Commons Public Domain Dedication and Licence 1.0 (PDDL)')
+
+
+class AndinoOrganization(factories.Organization):
+    # TODO: cuando se vaya a refactorear la suit de tests, pasar esto a un archivo separado
+
+    @classmethod
+    def create(cls, target_class, *args, **kwargs):
+        return super(AndinoOrganization, cls)._create(target_class, *args, **kwargs)
