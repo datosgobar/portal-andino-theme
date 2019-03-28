@@ -39,7 +39,7 @@ class TestAndino(helpers.FunctionalTestBase):
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def setup(self):
         super(TestAndino, self).setup()
-        self.org = factories.Organization()
+        # self.org = factories.Organization()
 
     @classmethod
     def setup_class(cls):
