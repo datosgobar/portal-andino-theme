@@ -22,7 +22,7 @@ class TestHelpers(TestAndino.TestAndino):
         self.admin = factories.Sysadmin()
 
 
-@patch("ckan.controllers.package.get_action", get_action)
+@patch("ckan.logic.get_action", get_action)
 @patch("ckan.logic.action.get.package_search", package_search)
 @patch("ckan.lib.helpers.get_request_param", get_request_param)
 @patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
