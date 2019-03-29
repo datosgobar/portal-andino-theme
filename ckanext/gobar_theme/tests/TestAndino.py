@@ -16,7 +16,8 @@ from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file
 from ckanext.gobar_theme.config_controller import GobArConfigController
 from mock import patch
-from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize, create_organization
+from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize, create_organization, \
+    get_action
 
 logger = logging.getLogger(__name__)
 submit_and_follow = helpers.submit_and_follow
@@ -27,6 +28,7 @@ class GobArConfigControllerForTest(GobArConfigController):
     CONFIG_PATH = CACHE_DIRECTORY + "test_settings.json"
 
 
+@patch("ckan.logic.get_action", get_action)
 @patch("ckan.logic.action.get.package_search", package_search)
 @patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
 class TestAndino(helpers.FunctionalTestBase):
