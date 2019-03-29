@@ -17,8 +17,8 @@ from mock import patch
 from mockredis import mock_strict_redis_client
 
 
-@patch("ckan.controllers.package.get_action", get_action)
-@patch("ckan.controllers.package.get_action", package_search)
+@patch("ckan.logic.get_action", get_action)
+@patch("ckan.logic.action.get.package_search", package_search)
 @patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
 class TestDatajsonGeneration(TestAndino.TestAndino):
 
