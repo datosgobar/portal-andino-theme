@@ -17,6 +17,7 @@ from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file
 from ckanext.gobar_theme.config_controller import GobArConfigController
 from mock import patch
+from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize, create_organization
 
 logger = logging.getLogger(__name__)
 submit_and_follow = helpers.submit_and_follow
@@ -27,19 +28,22 @@ class GobArConfigControllerForTest(GobArConfigController):
     CONFIG_PATH = CACHE_DIRECTORY + "test_settings.json"
 
 
+@patch("ckan.logic.action.get.package_search", package_search)
+@patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
 class TestAndino(helpers.FunctionalTestBase):
     __metaclass__ = ABCMeta
 
-    @abstractmethod
     def __init__(self):
         self.app = self._get_test_app()
         self.org = None
         self.TEST_CACHE_PATH = CACHE_DIRECTORY + "datajson_cache_backup.json"
 
+    @patch("ckan.logic.action.get.package_search", package_search)
+    @patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     def setup(self):
         super(TestAndino, self).setup()
-        # self.org = factories.Organization()
+        self.org = create_organization(name='organizacion')
 
     @classmethod
     def setup_class(cls):

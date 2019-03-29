@@ -85,8 +85,9 @@ def organizations_basic_info():
                 'current_total_package_count': current_total_package_count}
 
     # Traemos las organizaciones
-    organizations = logic.get_action('group_tree')({}, {'type': 'organization'})
-    ckan_organizations_info = {item['name']: item for item in ckan_helpers.get_facet_items_dict('organization')}
+    organizations = get_organizations_tree()
+    import pdb; pdb.set_trace()
+    ckan_organizations_info = {item['name']: item for item in get_facet_items_dict('organization')}
 
     # Realizamos una query para conseguir las organizaciones que tienen datasets, y la cantidad de éstos
     query = search.PackageSearchQuery()
@@ -102,6 +103,10 @@ def organizations_basic_info():
         organizations_data.append(current_organization)
 
     return organizations_data
+
+
+def get_organizations_tree():
+    return logic.get_action('group_tree')({}, {'type': 'organization'})
 
 
 def organization_tree():
@@ -157,8 +162,6 @@ def get_faceted_groups(items_limit=None):
 
 
 def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    if facet == 'organization':
-        return organization_filters()
     # CKAN impone un límite de 10 para los temas. Puedo tener más de 10, por lo que no podría clickear el resto.
     c.search_facets_limits['groups'] = None
     return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
