@@ -290,7 +290,7 @@ def group_dictize(group, context, include_groups=True, include_tags=True, includ
 
 
 def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    from ckanext.gobar_theme.tests.TestAndino import TestAndino
+    from ckanext.gobar_theme.tests.TestAndino import TestAndino  # Importo acá para evitar errores por dependencias
     _, response = TestAndino.get_page_response(TestAndino(), '/dataset', admin_required=True)
     return response.c.search_facets.get('organization')['items']
 

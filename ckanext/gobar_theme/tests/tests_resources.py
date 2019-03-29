@@ -10,10 +10,13 @@ from mockredis import mock_strict_redis_client
 from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
 from ckanext.gobar_theme.tests import TestAndino
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize
 
 submit_and_follow = helpers.submit_and_follow
 
 
+@patch("ckan.logic.action.get.package_search", package_search)
+@patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
 class TestResources(TestAndino.TestAndino):
 
     def __init__(self):

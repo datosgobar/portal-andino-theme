@@ -22,9 +22,9 @@ class TestHelpers(TestAndino.TestAndino):
         self.admin = factories.Sysadmin()
 
 
-@patch("ckan.lib.helpers.get_request_param", get_request_param)
 @patch("ckan.controllers.package.get_action", get_action)
 @patch("ckan.logic.action.get.package_search", package_search)
+@patch("ckan.lib.helpers.get_request_param", get_request_param)
 @patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
 @patch("ckanext.gobar_theme.helpers.get_facet_items_dict", get_facet_items_dict)
 class TestOrganizationHelpers(TestHelpers):

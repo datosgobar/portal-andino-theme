@@ -5,7 +5,6 @@ import json
 import logging
 import tempfile
 import sqlalchemy
-from abc import ABCMeta, abstractmethod
 from routes import url_for
 import ckan
 import ckan.lib.search
@@ -31,7 +30,6 @@ class GobArConfigControllerForTest(GobArConfigController):
 @patch("ckan.logic.action.get.package_search", package_search)
 @patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
 class TestAndino(helpers.FunctionalTestBase):
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         self.app = self._get_test_app()
