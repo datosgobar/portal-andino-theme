@@ -1,19 +1,19 @@
 # encoding: utf-8
 import json
 import functools
-import ckan.tests.helpers as helpers
 import ckan.common
 import ckan.plugins as p
-import ckan.lib.dictization as d
-import ckan.authz as authz
-import ckan.lib.munge as munge
-import ckan.plugins as plugins
 import ckan.logic as logic
+import ckan.authz as authz
+import ckan.plugins as plugins
+import ckan.lib.munge as munge
+import ckan.lib.dictization as d
 import ckan.lib.search as search
+import ckan.tests.helpers as helpers
 import ckan.tests.factories as factories
-from ckan.logic import _actions, _is_chained_action, _prepopulate_context
 from collections import defaultdict
 from paste.deploy.converters import asbool
+from ckan.logic import _actions, _is_chained_action, _prepopulate_context
 
 
 def create_organization(name, parent=''):
@@ -398,4 +398,8 @@ def group_dictize(group, context, include_groups=True, include_tags=True, includ
 def get_facet_items_dict(facet, limit=None, exclude_active=False):
     from ckanext.gobar_theme.tests.TestAndino import TestAndino
     _, response = TestAndino.get_page_response(TestAndino(), '/dataset', admin_required=True)
-    return response.c.search_facets
+    return response.c.search_facets.get('organization')['items']
+
+
+def get_request_param(parameter_name, default=None):
+    return None

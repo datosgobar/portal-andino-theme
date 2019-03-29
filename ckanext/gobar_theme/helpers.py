@@ -86,7 +86,6 @@ def organizations_basic_info():
 
     # Traemos las organizaciones
     organizations = get_organizations_tree()
-    import pdb; pdb.set_trace()
     ckan_organizations_info = {item['name']: item for item in get_facet_items_dict('organization')}
 
     # Realizamos una query para conseguir las organizaciones que tienen datasets, y la cantidad de éstos
