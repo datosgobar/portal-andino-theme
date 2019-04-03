@@ -104,10 +104,6 @@ def get_action(action):
     return _actions.get(action)
 
 
-def get_package_search(object):
-    return package_search
-
-
 def package_search(context, data_dict):
     schema = (context.get('schema') or logic.schema.default_package_search_schema())
     data_dict.update(data_dict.get('__extras', {}))
@@ -298,12 +294,6 @@ def group_dictize(group, context, include_groups=True, include_tags=True, includ
 
 
 def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    # from ckanext.gobar_theme.tests.TestAndino import TestAndino  # Importo acá para evitar errores por dependencias
-    # _, response = TestAndino.get_page_response(TestAndino(), '/dataset', admin_required=True)
-    # from ckanext.gobar_theme.helpers import organizations_basic_info
-    # # info = organizations_basic_info()
-    # import pdb; pdb.set_trace()
-    # return response.c.search_facets.get('organization')['items']
     return [{'active': False, 'count': 1, 'display_name': u'org', 'name': u'org'}]
 
 

@@ -12,15 +12,12 @@ import ckan.model as model
 import ckan.logic as logic
 import ckan.tests.helpers as helpers
 import ckan.tests.factories as factories
-import pylons
-from pylons.util import ContextObj, PylonsContext
-
 from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file
 from ckanext.gobar_theme.config_controller import GobArConfigController
 from mock import patch
 from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize, create_organization, \
-    get_action, get_package_search
+    get_action
 
 logger = logging.getLogger(__name__)
 submit_and_follow = helpers.submit_and_follow
@@ -40,12 +37,6 @@ class TestAndino(helpers.FunctionalTestBase):
         self.app = self._get_test_app()
         self.org = None
         self.TEST_CACHE_PATH = CACHE_DIRECTORY + "datajson_cache_backup.json"
-        # c = ContextObj()
-        # py_obj = PylonsContext()
-        # py_obj.tmpl_context = c
-        # pylons.tmpl_context._push_object(c)
-        # from ckan import common
-        # common.c = c
 
     @patch("ckan.logic.action.get.package_search", package_search)
     @patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
@@ -101,14 +92,6 @@ class TestAndino(helpers.FunctionalTestBase):
 
     # ------ Methods with factories ------ #
 
-    # @patch("ckan.logic.get_action", get_action)
-    # @patch("ckan.logic.action.get.package_search", package_search)
-    # @patch("ckanext.gobar_theme.package_controller.GobArPackageController.get_package_search", get_package_search)
-    from ckan.controllers.package import PackageController
-    class Prueba(PackageController):
-        def search(self):
-            return None
-    @patch("ckanext.gobar_theme.package_controller.GobArPackageController", Prueba)
     @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
     @patch('ckanext.gobar_theme.config_controller.GobArConfigController', GobArConfigControllerForTest)
     def get_page_response(self, url, admin_required=False):
