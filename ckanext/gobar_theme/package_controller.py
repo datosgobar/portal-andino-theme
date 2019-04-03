@@ -59,7 +59,10 @@ def custom_organization_filter(organization_name):
 
 
 class GobArPackageController(PackageController):
-    
+
+    def get_package_search(self):
+        return get_action('package_search')
+
     def __generate_spatial_extra_field(self, data_dict):
         extras = data_dict['extras']
 
@@ -201,7 +204,10 @@ class GobArPackageController(PackageController):
                 'extras': search_extras
             }
 
-            query = get_action('package_search')(context, data_dict)
+            # package_search = self.get_package_search()
+            # query = package_search(context, data_dict)
+            query = logic.action.get.package_search(context, data_dict)
+            # query = get_action('package_search')(context, data_dict)
             c.sort_by_selected = query['sort']
 
             c.page = h.Page(

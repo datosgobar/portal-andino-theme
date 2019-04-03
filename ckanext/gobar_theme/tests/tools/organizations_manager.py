@@ -11,6 +11,7 @@ import ckan.lib.dictization as d
 import ckan.lib.search as search
 import ckan.tests.helpers as helpers
 import ckan.tests.factories as factories
+from ckan import model
 from collections import defaultdict
 from paste.deploy.converters import asbool
 from ckan.logic import _actions, _is_chained_action, _prepopulate_context
@@ -103,12 +104,16 @@ def get_action(action):
     return _actions.get(action)
 
 
+def get_package_search(object):
+    return package_search
+
+
 def package_search(context, data_dict):
     schema = (context.get('schema') or logic.schema.default_package_search_schema())
     data_dict.update(data_dict.get('__extras', {}))
     data_dict.pop('__extras', None)
-    model = context['model']
-    session = context['session']
+    session = model.Session
+    # session = context['session']
     user = context.get('user')
     data_dict['extras'] = data_dict.get('extras', {})
     for key in [key for key in data_dict.keys() if key.startswith('ext_')]:
@@ -202,6 +207,7 @@ def package_search(context, data_dict):
         search_results['search_facets'][facet]['items'] = sorted(
             search_results['search_facets'][facet]['items'],
             key=lambda facet: facet['display_name'], reverse=True)
+
     return search_results
 
 
@@ -218,6 +224,7 @@ def group_dictize(group, context, include_groups=True, include_tags=True, includ
             group._extras, context)
     context['with_capacity'] = True
     if packages_field:
+
         def get_packages_for_this_group(group_, just_the_count=False):
             q = {
                 'facet': 'false',
@@ -244,6 +251,7 @@ def group_dictize(group, context, include_groups=True, include_tags=True, includ
                                   if k != 'schema')
             search_results = package_search(search_context, q)
             return search_results['count'], search_results['results']
+
         if packages_field == 'datasets':
             package_count, packages = get_packages_for_this_group(group)
             result_dict['packages'] = packages
@@ -290,9 +298,13 @@ def group_dictize(group, context, include_groups=True, include_tags=True, includ
 
 
 def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    from ckanext.gobar_theme.tests.TestAndino import TestAndino  # Importo acá para evitar errores por dependencias
-    _, response = TestAndino.get_page_response(TestAndino(), '/dataset', admin_required=True)
-    return response.c.search_facets.get('organization')['items']
+    # from ckanext.gobar_theme.tests.TestAndino import TestAndino  # Importo acá para evitar errores por dependencias
+    # _, response = TestAndino.get_page_response(TestAndino(), '/dataset', admin_required=True)
+    # from ckanext.gobar_theme.helpers import organizations_basic_info
+    # # info = organizations_basic_info()
+    # import pdb; pdb.set_trace()
+    # return response.c.search_facets.get('organization')['items']
+    return [{'active': False, 'count': 1, 'display_name': u'org', 'name': u'org'}]
 
 
 def get_request_param(parameter_name, default=None):
