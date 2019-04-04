@@ -28,6 +28,7 @@ def create_organization(name, parent=''):
 
 # Mock functions
 
+
 def get_action(action):
     if _actions:
         if action not in _actions:
@@ -295,6 +296,12 @@ def group_dictize(group, context, include_groups=True, include_tags=True, includ
 
 def get_facet_items_dict(facet, limit=None, exclude_active=False):
     return [{'active': False, 'count': 1, 'display_name': u'org', 'name': u'org'}]
+
+
+def get_facet_items_dict_org_with_child(facet, limit=None, exclude_active=False):
+    import pdb; pdb.set_trace()
+    return [{'active': False, 'count': 1, 'display_name': u'father', 'name': u'father'},
+            {'active': False, 'count': 1, 'display_name': u'child', 'name': u'child'}]
 
 
 def get_request_param(parameter_name, default=None):
