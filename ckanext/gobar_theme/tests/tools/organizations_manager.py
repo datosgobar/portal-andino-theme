@@ -299,7 +299,6 @@ def get_facet_items_dict(facet, limit=None, exclude_active=False):
 
 
 def get_facet_items_dict_org_with_child(facet, limit=None, exclude_active=False):
-    import pdb; pdb.set_trace()
     return [{'active': False, 'count': 1, 'display_name': u'father', 'name': u'father'},
             {'active': False, 'count': 1, 'display_name': u'child', 'name': u'child'}]
 
