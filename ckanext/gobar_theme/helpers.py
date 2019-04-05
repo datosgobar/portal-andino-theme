@@ -247,41 +247,6 @@ def all_descendants(organization_list):
     return descendants
 
 
-def organization_filters():
-    top_organizations = {}
-    ancestors_relations = {}
-    tree = organization_tree()
-    for top_organization in tree:
-        top_organization['count'] = 0
-        top_organizations[top_organization['name']] = top_organization
-        ancestors_relations[top_organization['name']] = top_organization['name']
-        if 'children' in top_organization and len(top_organization['children']) > 0:
-            children = all_descendants(top_organization['children'])
-            for child_name in children:
-                ancestors_relations[child_name] = top_organization['name']
-
-    for organization in ckan_helpers.get_facet_items_dict('organization'):
-        top_parent_name = ancestors_relations[organization['name']]
-        if top_parent_name in top_organizations:
-            top_organizations[top_parent_name]['count'] += organization['count']
-    if ckan_helpers.get_request_param('organization') in top_organizations:
-        top_organizations[ckan_helpers.get_request_param('organization')]['active'] = True
-
-    top_organizations_with_results = [organization for organization in top_organizations.values() if
-                                      organization['count'] > 0]
-    sorted_organizations = sorted(top_organizations_with_results, key=lambda item: item['count'], reverse=True)
-
-    org_limit = request.params.get('_organization_limit', g.facets_default_number)
-    if org_limit != '':
-        limit = int(org_limit)
-    else:
-        limit = None
-    c.search_facets_limits['organization'] = limit
-    if limit is not None and limit > 0:
-        return sorted_organizations[:limit]
-    return sorted_organizations
-
-
 def get_theme_config(path=None, default=None):
     return GobArConfigController.get_theme_config(path, default)
 
