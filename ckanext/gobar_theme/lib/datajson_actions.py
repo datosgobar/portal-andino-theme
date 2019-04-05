@@ -245,7 +245,7 @@ def get_ckan_datasets(org=None, with_private=True):
             'start': n * (page - 1),
         }
 
-        query = p.toolkit.get_action('package_search')({}, search_data_dict)
+        query = logic.action.get.package_search({}, search_data_dict)
         if len(query['results']):
             dataset_list.extend(query['results'])
             page += 1

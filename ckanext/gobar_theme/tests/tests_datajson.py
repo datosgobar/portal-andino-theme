@@ -7,6 +7,7 @@ from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file, fi
     get_datasets_with_resources, get_ckan_datasets, CACHE_DIRECTORY
 from ckanext.gobar_theme.tests import TestAndino as TestAndino
 from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize, get_action
 import ckan.model as model
 import tempfile
 from ckan.tests import helpers as helpers
@@ -16,6 +17,9 @@ from mock import patch
 from mockredis import mock_strict_redis_client
 
 
+@patch("ckan.logic.get_action", get_action)
+@patch("ckan.logic.action.get.package_search", package_search)
+@patch("ckan.lib.dictization.model_dictize.group_dictize", group_dictize)
 class TestDatajsonGeneration(TestAndino.TestAndino):
 
     def __init__(self):

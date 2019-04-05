@@ -61,30 +61,42 @@ def organizations_basic_info():
         current_organization['title'] = organization.pop('title')
         current_organization['depth'] = depth  # si depth == 0, la organización no es hija de otra
         current_organization['own_package_count'] = organizations_that_have_packages.pop(organization_id, 0)
-        total_package_count = 0
-        group_tree_children = organization.pop('children')
+        own_available_package_count = ckan_organizations_info.pop(current_organization['name'], {}).get('count', 0)
+        children_data_dict = generate_children_data(organization.pop('children'), depth)
+        current_organization['children'] = children_data_dict['dict_children']
+        current_organization['total_package_count'] = children_data_dict['current_total_package_count'] \
+                                                      + current_organization['own_package_count']
+        current_organization['available_package_count'] = children_data_dict['current_available_package_count'] + \
+                                                          own_available_package_count
+        current_organization['active'] = current_organization['name'] == organization_in_request
+        current_organization['display'] = not organization_in_request or current_organization['active']
+        return current_organization
+
+    def generate_children_data(group_tree_children, depth):
         dict_children = []
+        current_available_package_count = 0
+        current_total_package_count = 0
         for child in group_tree_children:
             converted_child = convert_organization_to_dict(child, depth+1)
             dict_children.append(converted_child)
-            total_package_count += converted_child.get('total_package_count', 0)
-        current_organization['children'] = dict_children
-        current_organization['total_package_count'] = total_package_count + current_organization['own_package_count']
-        return current_organization
+            current_available_package_count += converted_child.get('available_package_count', 0)
+            current_total_package_count += converted_child.get('total_package_count', 0)
+        return {'dict_children': dict_children, 'current_available_package_count': current_available_package_count,
+                'current_total_package_count': current_total_package_count}
 
     # Traemos las organizaciones
-    organizations = logic.get_action('group_tree')({}, {'type': 'organization'})
+    organizations = get_organizations_tree()
+    ckan_organizations_info = {item['name']: item for item in ckan_helpers.get_facet_items_dict('organization')}
 
     # Realizamos una query para conseguir las organizaciones que tienen datasets, y la cantidad de éstos
     query = search.PackageSearchQuery()
-    q = {'q': '+capacity:public',
-         'fl': 'groups', 'facet.field': ['groups', 'owner_org'],
-         'facet.limit': -1, 'rows': 1}
+    q = {'q': '+capacity:public', 'fl': 'groups', 'facet.field': ['groups', 'owner_org'], 'facet.limit': -1, 'rows': 1}
     query.run(q)
     organizations_that_have_packages = query.facets.get('owner_org')
 
     # Transformamos cada organización en un dict para facilitar su uso, y agregamos información requerida
     organizations_data = []
+    organization_in_request = ckan_helpers.get_request_param('organization')
     for organization in organizations:
         current_organization = convert_organization_to_dict(organization, 0)
         organizations_data.append(current_organization)
@@ -92,17 +104,8 @@ def organizations_basic_info():
     return organizations_data
 
 
-def update_organizations_package_count(organizations):
-    updated_organizations_list = []
-    ckan_organizations_info = ckan_helpers.get_facet_items_dict('organization')
-    ckan_organizations_info = {item['name']: item for item in ckan_organizations_info}
-    for organization in organizations:
-        equivalent_organization = ckan_organizations_info.pop(organization['name'], None)
-        if equivalent_organization:
-            organization['total_package_count'] = equivalent_organization['count']
-            organization['active'] = equivalent_organization['active']
-            updated_organizations_list.append(organization)
-    return updated_organizations_list
+def get_organizations_tree():
+    return logic.get_action('group_tree')({}, {'type': 'organization'})
 
 
 def organization_tree():
@@ -142,7 +145,7 @@ def fetch_groups():
 
 def get_faceted_groups(items_limit=None):
     groups = fetch_groups()
-    facets = get_facet_items_dict(facet='groups', limit=items_limit)
+    facets = ckan_helpers.get_facet_items_dict(facet='groups', limit=items_limit)
     facets_by_name = {}
     for facet in facets:
         facets_by_name[facet['name']] = facet
@@ -155,14 +158,6 @@ def get_faceted_groups(items_limit=None):
             group['facet_active'] = False
             group['facet_count'] = 0
     return groups
-
-
-def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    if facet == 'organization':
-        return organization_filters()
-    # CKAN impone un límite de 10 para los temas. Puedo tener más de 10, por lo que no podría clickear el resto.
-    c.search_facets_limits['groups'] = None
-    return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
 
 
 def remove_url_param(key, value=None, replace=None, controller=None,
@@ -244,41 +239,6 @@ def all_descendants(organization_list):
         if 'children' in organization and len(organization['children']) > 0:
             descendants += all_descendants(organization['children'])
     return descendants
-
-
-def organization_filters():
-    top_organizations = {}
-    ancestors_relations = {}
-    tree = organization_tree()
-    for top_organization in tree:
-        top_organization['count'] = 0
-        top_organizations[top_organization['name']] = top_organization
-        ancestors_relations[top_organization['name']] = top_organization['name']
-        if 'children' in top_organization and len(top_organization['children']) > 0:
-            children = all_descendants(top_organization['children'])
-            for child_name in children:
-                ancestors_relations[child_name] = top_organization['name']
-
-    for organization in ckan_helpers.get_facet_items_dict('organization'):
-        top_parent_name = ancestors_relations[organization['name']]
-        if top_parent_name in top_organizations:
-            top_organizations[top_parent_name]['count'] += organization['count']
-    if ckan_helpers.get_request_param('organization') in top_organizations:
-        top_organizations[ckan_helpers.get_request_param('organization')]['active'] = True
-
-    top_organizations_with_results = [organization for organization in top_organizations.values() if
-                                      organization['count'] > 0]
-    sorted_organizations = sorted(top_organizations_with_results, key=lambda item: item['count'], reverse=True)
-
-    org_limit = request.params.get('_organization_limit', g.facets_default_number)
-    if org_limit != '':
-        limit = int(org_limit)
-    else:
-        limit = None
-    c.search_facets_limits['organization'] = limit
-    if limit is not None and limit > 0:
-        return sorted_organizations[:limit]
-    return sorted_organizations
 
 
 def get_theme_config(path=None, default=None):

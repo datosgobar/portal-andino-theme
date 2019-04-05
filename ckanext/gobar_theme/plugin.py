@@ -65,7 +65,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'cut_img_path': gobar_helpers.cut_img_path,
             'organizations_with_packages': gobar_helpers.organizations_with_packages,
             'get_pkg_extra': gobar_helpers.get_pkg_extra,
-            'get_facet_items_dict': gobar_helpers.get_facet_items_dict,
             'get_theme_config': gobar_helpers.get_theme_config,
             'url_join': gobar_helpers.url_join,
             'json_loads': gobar_helpers.json_loads,
@@ -105,7 +104,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_default_series_api_url': gobar_helpers.get_default_series_api_url,
             'create_or_update_cron_job': gobar_helpers.create_or_update_cron_job,
             'get_current_terminal_username': gobar_helpers.get_current_terminal_username,
-            'update_organizations_package_count': gobar_helpers.update_organizations_package_count,
+            'get_organizations_tree': gobar_helpers.get_organizations_tree,
         }
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):

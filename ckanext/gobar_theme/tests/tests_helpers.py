@@ -3,13 +3,14 @@
 import os
 import json
 import urllib2
-from mock import patch
-import ckan.tests.factories as factories
 import nose.tools as nt
-from ckanext.gobar_theme.tests import TestAndino
+import ckan.tests.factories as factories
 import ckanext.gobar_theme.helpers as gobar_helpers
-from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from mock import patch
 from ckan.model import license
+from ckanext.gobar_theme.tests import TestAndino
+from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+import ckanext.gobar_theme.tests.tools.organizations_manager as orgs_manager
 
 
 class TestHelpers(TestAndino.TestAndino):
@@ -18,6 +19,35 @@ class TestHelpers(TestAndino.TestAndino):
     def setup(self):
         super(TestHelpers, self).setup()
         self.admin = factories.Sysadmin()
+
+
+@patch("ckan.logic.get_action", orgs_manager.get_action)
+@patch("ckan.logic.action.get.package_search", orgs_manager.package_search)
+@patch("ckan.lib.helpers.get_request_param", orgs_manager.get_request_param)
+@patch("ckan.lib.dictization.model_dictize.group_dictize", orgs_manager.group_dictize)
+class TestOrganizationHelpers(TestHelpers):
+
+    def __init__(self):
+        super(TestOrganizationHelpers, self).__init__()
+
+    def test_organization_can_be_created(self):
+        nt.assert_equals(orgs_manager.create_organization(name='nombre').get('name'), 'nombre')
+
+    @patch("ckan.lib.helpers.get_facet_items_dict", orgs_manager.get_facet_items_dict)
+    def test_organization_shows_1_dataset(self):
+        organization = orgs_manager.create_organization(name='org')
+        self.create_package_with_n_resources(1, {'owner_org': organization['id']})
+        organizations_info = {item['name']: item for item in gobar_helpers.organizations_basic_info()}
+        nt.assert_equals(organizations_info['org'].get('available_package_count'), 1)
+
+    @patch("ckan.lib.helpers.get_facet_items_dict", orgs_manager.get_facet_items_dict_org_with_child)
+    def test_organization_shows_2_datasets(self):
+        father_organization = orgs_manager.create_organization(name='father')
+        child_organization = orgs_manager.create_organization(name='child', parent='father')
+        self.create_package_with_n_resources(1, {'name': 'one', 'owner_org': father_organization['id']})
+        self.create_package_with_n_resources(1, {'name': 'two', 'owner_org': child_organization['id']})
+        organizations_info = {item['name']: item for item in gobar_helpers.organizations_basic_info()}
+        nt.assert_equals(organizations_info['father'].get('available_package_count'), 2)
 
 
 class TestLicenseHelpers(TestHelpers):
