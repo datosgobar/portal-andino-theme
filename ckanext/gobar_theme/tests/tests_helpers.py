@@ -33,14 +33,14 @@ class TestOrganizationHelpers(TestHelpers):
     def test_organization_can_be_created(self):
         nt.assert_equals(orgs_manager.create_organization(name='nombre').get('name'), 'nombre')
 
-    @patch("ckanext.gobar_theme.helpers.get_facet_items_dict", orgs_manager.get_facet_items_dict)
+    @patch("ckan.lib.helpers.get_facet_items_dict", orgs_manager.get_facet_items_dict)
     def test_organization_shows_1_dataset(self):
         organization = orgs_manager.create_organization(name='org')
         self.create_package_with_n_resources(1, {'owner_org': organization['id']})
         organizations_info = {item['name']: item for item in gobar_helpers.organizations_basic_info()}
         nt.assert_equals(organizations_info['org'].get('available_package_count'), 1)
 
-    @patch("ckanext.gobar_theme.helpers.get_facet_items_dict", orgs_manager.get_facet_items_dict_org_with_child)
+    @patch("ckan.lib.helpers.get_facet_items_dict", orgs_manager.get_facet_items_dict_org_with_child)
     def test_organization_shows_2_datasets(self):
         father_organization = orgs_manager.create_organization(name='father')
         child_organization = orgs_manager.create_organization(name='child', parent='father')

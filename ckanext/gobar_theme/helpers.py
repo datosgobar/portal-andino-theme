@@ -86,7 +86,7 @@ def organizations_basic_info():
 
     # Traemos las organizaciones
     organizations = get_organizations_tree()
-    ckan_organizations_info = {item['name']: item for item in get_facet_items_dict('organization')}
+    ckan_organizations_info = {item['name']: item for item in ckan_helpers.get_facet_items_dict('organization')}
 
     # Realizamos una query para conseguir las organizaciones que tienen datasets, y la cantidad de éstos
     query = search.PackageSearchQuery()
@@ -145,7 +145,7 @@ def fetch_groups():
 
 def get_faceted_groups(items_limit=None):
     groups = fetch_groups()
-    facets = get_facet_items_dict(facet='groups', limit=items_limit)
+    facets = ckan_helpers.get_facet_items_dict(facet='groups', limit=items_limit)
     facets_by_name = {}
     for facet in facets:
         facets_by_name[facet['name']] = facet
@@ -158,12 +158,6 @@ def get_faceted_groups(items_limit=None):
             group['facet_active'] = False
             group['facet_count'] = 0
     return groups
-
-
-def get_facet_items_dict(facet, limit=None, exclude_active=False):
-    # CKAN impone un límite de 10 para los temas. Puedo tener más de 10, por lo que no podría clickear el resto.
-    c.search_facets_limits['groups'] = None
-    return ckan_helpers.get_facet_items_dict(facet, limit, exclude_active)
 
 
 def remove_url_param(key, value=None, replace=None, controller=None,
