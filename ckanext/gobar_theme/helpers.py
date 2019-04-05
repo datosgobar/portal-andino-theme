@@ -611,3 +611,9 @@ def delete_column_from_csv_file(csv_path, column_name):
         wtr = csv.writer(result)
         for r in list_with_rows:
             wtr.writerow(tuple(x for x in r))
+
+
+def prepare_context_variable():
+    return {'model': model, 'session': model.Session,
+            'user': c.user or c.author, 'for_view': True,
+            'auth_user_obj': c.userobj}
