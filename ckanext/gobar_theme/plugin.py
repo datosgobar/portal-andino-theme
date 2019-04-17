@@ -84,6 +84,8 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one,
             'portal_andino_version': gobar_helpers.portal_andino_version,
             'get_distribution_metadata': gobar_helpers.get_distribution_metadata,
+            'get_data_json_contents': gobar_helpers.get_data_json_contents,
+            'get_data_json_field': gobar_helpers.get_data_json_field,
             'is_distribution_local': gobar_helpers.is_distribution_local,
             'get_extra_value': gobar_helpers.get_extra_value,
             'remove_url_param': gobar_helpers.remove_url_param,

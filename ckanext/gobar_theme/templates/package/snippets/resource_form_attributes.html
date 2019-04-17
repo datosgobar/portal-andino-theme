@@ -8,6 +8,9 @@
 
     {% set attributes = h.json_loads(data['attributesDescription'] or '[]') %}
     {% set attributes = attributes|length == 0 and attributes + [{}] or attributes %}
+    {% set identifier = h.get_data_json_field('identifier') %}
+
+    {{ identifier }}
 
     <div class="resource-attributes-group-container">
     {% for attribute_group in attributes %}
