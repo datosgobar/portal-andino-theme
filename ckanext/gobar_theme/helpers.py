@@ -437,7 +437,7 @@ def portal_andino_version():
 
 def get_data_json_contents():
     import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
-    return datajson_actions.get_data_json_contents()
+    return json.loads(datajson_actions.get_data_json_contents())
 
 
 def get_data_json_field(field):
