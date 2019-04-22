@@ -91,6 +91,7 @@ $(function () {
             }
 
             updateAttributesIfValueExist(attributeGroup, 'units', '.resource-col-units');
+            updateAttributesIfValueExist(attributeGroup, 'id', '.resource-col-id');
             updateAttributesIfValueExist(attributeGroup, 'specialType', '.resource-col-special-data');
             updateAttributesIfValueExist(attributeGroup, 'specialTypeDetail', '.resource-col-special-data-detail');
 
