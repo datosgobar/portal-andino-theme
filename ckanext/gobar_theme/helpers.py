@@ -446,7 +446,7 @@ def get_random_distribution():
 
     chars = string.ascii_letters + string.digits
     random_id = "".join(choice(chars) for _x in range(randint(8, 8)))
-    distribution = get_data_json_contents().get('distribution')
+    distribution = get_data_json_contents().get('identifier')
     result = random_id
 
     if distribution:
