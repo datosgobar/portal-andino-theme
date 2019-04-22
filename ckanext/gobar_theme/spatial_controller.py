@@ -2,7 +2,8 @@
 import json
 import os
 
-from ckan.lib.base import BaseController, response, request, c
+from ckan.lib.base import BaseController, response, request
+
 
 class GobArSpatialController(BaseController):
     

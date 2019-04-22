@@ -1,18 +1,18 @@
 #! coding: utf-8
-from uploader import GobArThemeResourceUploader
+import ckan.lib.helpers as ckan_helpers
 import ckan.plugins as plugins
+import ckan.plugins.interfaces as interfaces
+import ckan.plugins.toolkit as toolkit
 from ckan.model.package import Package
 from ckan.model.resource import Resource
-import ckan.plugins.toolkit as toolkit
-import ckan.lib.helpers as ckan_helpers
-import ckan.plugins.interfaces as interfaces
 from ckan.plugins import implements, IRoutes
-import ckanext.gobar_theme.helpers as gobar_helpers
-import ckanext.gobar_theme.routing as gobar_routes
-import ckanext.gobar_theme.actions as gobar_actions
-import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
-from ckanext.gobar_theme.lib import cache_actions
 
+import ckanext.gobar_theme.actions as gobar_actions
+import ckanext.gobar_theme.helpers as gobar_helpers
+import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
+import ckanext.gobar_theme.routing as gobar_routes
+from ckanext.gobar_theme.lib import cache_actions
+from uploader import GobArThemeResourceUploader
 from .utils.ckan_utils import is_plugin_present
 
 

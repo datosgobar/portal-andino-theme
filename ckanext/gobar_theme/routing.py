@@ -1,6 +1,6 @@
 # coding=utf-8
-from routes.mapper import SubMapper
 from pylons.config import config
+from routes.mapper import SubMapper
 
 
 class GobArRouter:

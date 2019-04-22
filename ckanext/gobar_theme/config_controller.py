@@ -1,21 +1,21 @@
 # coding=utf-8
 import json
+import logging
 import os
 import re
-import logging
 import urlparse
 
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
-from ckan.lib.redis import is_redis_available
 import ckan.model as model
 import moment
 import redis
 from ckan.common import request, c
+from ckan.lib.redis import is_redis_available
 from pylons import config as ckan_config
-from ckanext.gobar_theme.lib import cache_actions
 
+from ckanext.gobar_theme.lib import cache_actions
 from .utils.ckan_utils import plugin_or_404, TS_EXPLORER_PLUGIN
 
 parse_params = logic.parse_params

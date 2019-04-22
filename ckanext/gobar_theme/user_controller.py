@@ -1,19 +1,22 @@
-import ckan.lib.base as base
-from ckan.common import request, c, _, response
-import ckan.logic as logic
-import ckan.model as model
-from ckan.controllers.user import UserController
-import ckan.lib.helpers as h
-import ckan.plugins as p
-import ckan.lib.search as search
-import ckan.lib.dictization.model_dictize as model_dictize
-import ckan.lib.activity_streams as activity_streams
+import json
 import random
 import string
-import ckanext.gobar_theme.mailer as mailer
+
+import ckan.lib.activity_streams as activity_streams
+import ckan.lib.base as base
+import ckan.lib.dictization.model_dictize as model_dictize
+import ckan.lib.helpers as h
 import ckan.lib.mailer as ckan_mailer
-import json
+import ckan.lib.search as search
+import ckan.logic as logic
+import ckan.model as model
+import ckan.plugins as p
+from ckan.common import request, c, _, response
+from ckan.controllers.user import UserController
 from webob.exc import HTTPNotFound
+
+import ckanext.gobar_theme.mailer as mailer
+
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized

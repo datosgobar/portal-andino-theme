@@ -1,25 +1,27 @@
 # coding=utf-8
-from urlparse import urlparse
+import csv
+import json
+import logging
+import os
+import subprocess
 from HTMLParser import HTMLParser
+from datetime import time
+from urlparse import urljoin
+from urlparse import urlparse
+
+import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 import moment
-from ckan.common import request, c, g, _
-import ckan.lib.formatters as formatters
-import subprocess
-import json
-import os
-from urlparse import urljoin
-from config_controller import GobArConfigController
-from datetime import time
+from ckan.common import request, c, _
+from crontab import CronTab
 from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons.config import config
-from crontab import CronTab
-import logging
-import csv
+
+from config_controller import GobArConfigController
 
 logger = logging.getLogger(__name__)
 

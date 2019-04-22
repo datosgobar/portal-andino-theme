@@ -1,9 +1,9 @@
 #! coding: utf-8
-from ckan.lib import uploader
-import os
 import cgi
+import os
+
 import pylons
-import ckan.lib.munge as munge
+from ckan.lib import uploader
 
 from config_controller import GobArConfigController
 

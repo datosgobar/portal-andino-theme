@@ -1,20 +1,21 @@
 #! coding: utf-8
+import cgi
 from urllib import urlencode
+
 import ckan.lib.helpers as h
+import ckan.lib.navl.dictization_functions as dict_fns
 import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
 import ckanext.googleanalytics.plugin as google_analytics
+import moment
 from ckan.common import OrderedDict, _, request, c
 from ckan.controllers.package \
-import PackageController, _encode_params, search_url, render, NotAuthorized, check_access, abort, get_action, log
+    import PackageController, _encode_params, search_url, render, NotAuthorized, check_access, abort, get_action, log
 from ckan.lib.search import SearchError
-import ckan.lib.navl.dictization_functions as dict_fns
-import cgi
-import moment
-from webob.exc import status_map
 from paste.deploy.converters import asbool
 from pylons import config
+from webob.exc import status_map
 
 CACHE_PARAMETERS = ['__cache', '__no_cache__']
 NotFound = logic.NotFound

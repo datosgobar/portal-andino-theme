@@ -1,17 +1,16 @@
 #coding: utf-8
-from ckan.controllers.home import HomeController
-from ckan.controllers.api import ApiController
-from ckan.common import c
+import json
+
+import ckan.lib.base as base
 import ckan.logic as logic
 import ckan.model as model
-import ckan.lib.base as base
-from ckan.lib.base import request
-import json
-import ckan.plugins as p
+from ckan.common import c
+from ckan.controllers.api import ApiController
+from ckan.controllers.home import HomeController
 from ckanext.googleanalytics.controller import GAApiController
-import ckanext.gobar_theme.helpers as gobar_helpers
-
 from pylons import response
+
+import ckanext.gobar_theme.helpers as gobar_helpers
 
 
 class GobArHomeController(HomeController):

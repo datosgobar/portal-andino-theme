@@ -1,18 +1,20 @@
 # coding=utf-8
-import ckan
-import ckan.logic as logic
-import ckan.lib.activity_streams as activity_streams
-import ckan.lib.base as base
-import ckanext
+import logging
+import os
 import re
 import sys
-import pkg_resources
-import os
-from webhelpers.html import literal
 from codecs import open
 from os import path
+
+import ckan
+import ckan.lib.activity_streams as activity_streams
+import ckan.lib.base as base
+import ckan.logic as logic
+import pkg_resources
+from webhelpers.html import literal
+
+import ckanext
 import helpers as h
-import logging
 
 _get_action = ckan.logic.get_action
 logger = logging.getLogger(__name__)

@@ -1,16 +1,17 @@
 #! coding: utf-8
+import json
+import logging
 import os
 import sys
-import json
-import requests
+
 import paste.script
+import requests
 from ckan import model, logic
 from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
 from pylons.config import config
-import ckanext.gobar_theme.helpers as gobar_helpers
 
-import logging
+import ckanext.gobar_theme.helpers as gobar_helpers
 
 LOGGER = logging.getLogger("ckan")
 
