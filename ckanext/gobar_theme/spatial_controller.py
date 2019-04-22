@@ -31,7 +31,7 @@ class GobArSpatialController(BaseController):
         with open(os.path.join(GobArSpatialController.SITE_ROOT, 'resources/%s' % file_name)) as file_handle:
             districts = json.loads(file_handle.read())
 
-            if len(province_ids) > 0:
+            if province_ids:
                 output_dict = [district for district in districts[administrative_unit_name] if district['provincia_id'] in province_ids]
                 districts[administrative_unit_name] = output_dict
 

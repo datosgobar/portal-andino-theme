@@ -248,7 +248,7 @@ def get_ckan_datasets(org=None, with_private=True):
 
         context = gobar_helpers.prepare_context_variable()
         query = logic.action.get.package_search(context, search_data_dict)
-        if len(query['results']):
+        if query['results']:
             dataset_list.extend(query['results'])
             page += 1
         else:
@@ -279,7 +279,7 @@ def get_datasets_with_resources(packages):
         except Exception:
             pass
         try:
-            if len(packages[i]['url']) < 1:
+            if not packages[i]['url']:
                 packages[i]['url'] = '{host}/dataset/{dataset_id}'.format(
                     host=ckan_host[:-1],
                     dataset_id=packages[i]['name'])

@@ -30,7 +30,7 @@ def collect_descendants(organization_list):
     partial = []
     for organization in organization_list:
         partial.append(organization['name'])
-        if 'children' in organization and len(organization['children']) > 0:
+        if 'children' in organization and organization['children']:
             partial += collect_descendants(organization['children'])
     return partial
 
@@ -40,18 +40,18 @@ def search_organization(organization_name, organizations_branch=None):
         organizations_branch = logic.get_action('group_tree')({}, {'type': 'organization'})
     for organization in organizations_branch:
         if organization['name'] == organization_name:
-            if 'children' in organization and len(organization['children']) > 0:
+            if 'children' in organization and organization['children']:
                 return collect_descendants(organization['children'])
-        elif 'children' in organization and len(organization['children']) > 0:
+        elif 'children' in organization and organization['children']:
             inner_search = search_organization(organization_name, organization['children'])
-            if len(inner_search) > 0:
+            if inner_search:
                 return inner_search
     return []
 
 
 def custom_organization_filter(organization_name):
     descendant_organizations = search_organization(organization_name)
-    if descendant_organizations and len(descendant_organizations) > 0:
+    if descendant_organizations and descendant_organizations:
         descendant_organizations_filter = ' OR '.join(descendant_organizations)
         organization_filter = '(%s OR %s)' % (organization_name, descendant_organizations_filter)
     else:
@@ -147,7 +147,7 @@ class GobArPackageController(PackageController):
             fq = ''
             for (param, value) in request.params.items():
                 if param not in ['q', 'page', 'sort'] \
-                        and len(value) and not param.startswith('_'):
+                        and value and not param.startswith('_'):
                     if not param.startswith('ext_'):
                         c.fields.append((param, value))
                         # Modificación para andino: usamos una función para buscar dependencias entre organizaciones
@@ -404,8 +404,8 @@ class GobArPackageController(PackageController):
             # (no estaban en el request.POST), y reemplazo valores desactualizados
             extra_fields = get_action('package_show')(dict(context, for_view=True), {'id': name_or_id})['extras']
             for extra_field in extra_fields:
-                found_extra_field = filter(lambda x: x['key'] == extra_field['key'], data_dict['extras'])
-                if len(found_extra_field) == 0:
+                found_extra_field = list(filter(lambda x: x['key'] == extra_field['key'], data_dict['extras']))
+                if found_extra_field:
                     data_dict['extras'].append(extra_field)
 
             time_now = moment.now().isoformat()
@@ -668,8 +668,8 @@ class GobArPackageController(PackageController):
             if 'extras' not in data_dict.keys():
                 data_dict['extras'] = []
             for extra_field in extra_fields:
-                found_extra_field = filter(lambda x: x['key'] == extra_field['key'], data_dict['extras'])
-                if len(found_extra_field) == 0:
+                found_extra_field = list(filter(lambda x: x['key'] == extra_field['key'], data_dict['extras']))
+                if found_extra_field:
                     data_dict['extras'].append(extra_field)
 
             time_now = moment.now().isoformat()
@@ -722,8 +722,8 @@ class GobArPackageController(PackageController):
         google_analytics._post_analytics(c.user, 'CKAN Resource Embed', 'Resource ', resource_id, resource_id)
 
     def _add_or_replace_extra(self, key, value, extras):
-        extra_field = filter(lambda x: x['key'] == key, extras)
-        if len(extra_field) > 0:
+        extra_field = list(filter(lambda x: x['key'] == key, extras))
+        if extra_field:
             # Asumimos que hay un solo resultado
             extra_field[0]['value'] = value
         else:
