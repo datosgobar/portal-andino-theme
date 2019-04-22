@@ -5,7 +5,7 @@ import os
 import pylons
 from ckan.lib import uploader
 
-from config_controller import GobArConfigController
+from ckanext.gobar_theme.config_controller import GobArConfigController
 
 config = pylons.config
 
@@ -40,6 +40,7 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
         elif self.icon_clear:
             data_dict['icon_url_type'] = ''
 
+    # pylint: disable=W0622
     def upload(self, id, max_size=10):
         super(GobArThemeResourceUploader, self).upload(id, max_size)
 
