@@ -440,19 +440,8 @@ def get_data_json_contents():
     return json.loads(datajson_actions.get_data_json_contents())
 
 
-def get_random_distribution():
-    import string
-    from random import choice, randint
-
-    chars = string.ascii_letters + string.digits
-    random_id = "".join(choice(chars) for _x in range(randint(8, 8)))
-    distribution = get_data_json_contents().get('identifier')
-    result = random_id
-
-    if distribution:
-        result = "{distribution}_{id}".format(distribution=distribution, id=random_id)
-
-    return result
+def get_distribution_id():
+    return get_data_json_contents().get('identifier') or ''
 
 
 def get_distribution_metadata(resource_id, package_id):

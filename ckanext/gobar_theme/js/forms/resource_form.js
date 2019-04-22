@@ -23,14 +23,21 @@ $(function () {
 
         $('.resource-attributes-actions').before(newCol);
 
-        const isTimeIndex = $(oldCol).find('.resource-col-special-data option:selected').text().includes('ndice de tiempo');
-        const newColDataType = $(oldCol).find('.resource-attributes-input-col-type option:selected').text();
-        if (isTimeIndex && (newColDataType.includes('integer') || newColDataType.includes('number'))) {
-            newCol.find('.add-extra-fields')[0].click();
-        }
+        $(newCol).find('.resource-attributes-input-col-type').on('change', () => generateDistributionId(oldCol, newCol));
 
         resetColumnHeadersCounter();
     });
+
+    function generateDistributionId(oldCol, newCol) {
+        const isTimeIndex = $(oldCol).find('.resource-col-special-data option:selected').val() === 'time_index';
+        const newColDataType = $(newCol).find('.resource-attributes-input-col-type option:selected').text();
+        if (isTimeIndex && (newColDataType.includes('integer') || newColDataType.includes('number'))) {
+            const distributionId = $(oldCol).parents('#resource-attributes-form').attr('data-distribution_id');
+            const randomId = Math.random().toString(36).substr(2,8);
+            newCol.find('.resource-col-id').val(`${distributionId}_${randomId}`);
+            newCol.find('.add-extra-fields')[0].click();
+        }
+    }
 
     $(document).on('change', '.resource-col-name, .resource-col-type, .resource-col-special-data', function() {
         configureMetadataFields();

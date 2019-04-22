@@ -1,4 +1,4 @@
-<div id="resource-attributes-form">
+<div id="resource-attributes-form" data-distribution_id="{{ h.get_distribution_id() }}">
     <div class="control-group control-full">
         <h2 class="blue">Documentación de los campos del recurso</h2>
         <p>
@@ -8,7 +8,6 @@
 
     {% set attributes = h.json_loads(data['attributesDescription'] or '[]') %}
     {% set attributes = attributes|length == 0 and attributes + [{}] or attributes %}
-    {% set distribution = h.get_random_distribution() %}
 
     <div class="resource-attributes-group-container">
     {% for attribute_group in attributes %}
@@ -69,7 +68,8 @@
                 <div class="col-xs-6 resource-attributes-input-container resource-col-advanced-container">
                     <label class="control-label">Identificador</label>
                     <div class="controls">
-                        <input class="resource-col-id" type="text" title="Identificador" value="{{ distribution }}">
+                        <input class="resource-col-id" type="text" title="Identificador"
+                                placeholder="Ej: PBI_1" value="{{ attribute_group['id'] }}">
                     </div>
                 </div>
 
