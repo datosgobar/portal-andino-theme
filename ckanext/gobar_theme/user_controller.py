@@ -2,6 +2,7 @@ import json
 import random
 import string
 
+from webob.exc import HTTPNotFound
 import ckan.lib.activity_streams as activity_streams
 import ckan.lib.base as base
 import ckan.lib.dictization.model_dictize as model_dictize
@@ -13,7 +14,6 @@ import ckan.model as model
 import ckan.plugins as p
 from ckan.common import request, c, _, response
 from ckan.controllers.user import UserController
-from webob.exc import HTTPNotFound
 
 import ckanext.gobar_theme.mailer as mailer
 

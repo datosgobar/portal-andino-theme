@@ -7,13 +7,13 @@ import urlparse
 
 import moment
 import redis
+from pylons import config as ckan_config
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import request, c
 from ckan.lib.redis import is_redis_available
-from pylons import config as ckan_config
 
 from ckanext.gobar_theme.lib import cache_actions
 from .utils.ckan_utils import plugin_or_404, TS_EXPLORER_PLUGIN

@@ -5,12 +5,12 @@ import re
 import sys
 import codecs
 
+import pkg_resources
+from webhelpers.html import literal
 import ckan
 import ckan.lib.activity_streams as activity_streams
 import ckan.lib.base as base
 import ckan.logic as logic
-import pkg_resources
-from webhelpers.html import literal
 
 import ckanext
 from . import helpers as h
