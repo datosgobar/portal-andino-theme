@@ -1,4 +1,5 @@
-#coding: utf-8
+#!coding: utf-8
+# pylint: disable-all
 import json
 
 import ckan.lib.base as base

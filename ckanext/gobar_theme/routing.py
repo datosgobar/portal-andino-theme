@@ -1,4 +1,5 @@
 # coding=utf-8
+# pylint: disable-all
 from pylons.config import config
 from routes.mapper import SubMapper
 

@@ -1,4 +1,5 @@
 # coding=utf-8
+# pylint: disable-all
 import smtplib
 from email import Utils
 from email.header import Header

@@ -1,4 +1,5 @@
 #! coding: utf-8
+# pylint: disable-all
 import ckan.lib.helpers as ckan_helpers
 import ckan.plugins as plugins
 import ckan.plugins.interfaces as interfaces
