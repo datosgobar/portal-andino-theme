@@ -51,11 +51,14 @@ class GobArThemeResourceUploader(uploader.ResourceUpload):
         output_path = os.path.join(GobArConfigController.IMG_DIR, self.icon_filename)
         output_file = open(output_path, 'wb')
         upload_file = self.icon_upload_file
-        upload_file.seek(0)
-        while True:
-            data = upload_file.read(2 ** 20)
-            if not data:
-                break
-            output_file.write(data)
-        output_file.close()
-        return
+        write_file_to_output_buffer(upload_file, output_file)
+
+
+def write_file_to_output_buffer(input_file, output_file):
+    input_file.seek(0)
+    while True:
+        data = input_file.read(2 ** 20)
+        if not data:
+            break
+        output_file.write(data)
+    output_file.close()
