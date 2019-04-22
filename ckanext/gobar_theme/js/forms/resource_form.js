@@ -99,7 +99,6 @@ $(function () {
             }
         } else {
             for (var i in elements) {
-                elements[i].val('');
                 elements[i].attr('disabled', 'disabled');
             }
         }
