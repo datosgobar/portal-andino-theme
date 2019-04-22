@@ -17,7 +17,7 @@ $(function () {
 
     $('#add-col').on('click', function () {
         var newCol = $($('.resource-attributes-group')[0]).clone();
-        newCol.find('input, select, textarea').val('');
+        newCol.find('input:not(.resource-col-id), select, textarea').val('');
         resetAdvancedAndSpecialButtonsAndInputs(newCol);
 
         $('.resource-attributes-actions').before(newCol);
