@@ -460,7 +460,6 @@ def get_distribution_metadata(resource_id, package_id):
     json_dict = get_data_json_contents()
     parser = HTMLParser()
     json_dict = parser.unescape(json_dict)
-    json_dict = json.loads(json_dict)
     datajson = DataJson(json_dict)
     dist = datajson.get_distribution(resource_id)
     return dist
