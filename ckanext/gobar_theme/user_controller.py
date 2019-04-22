@@ -25,6 +25,7 @@ NotAuthorized = logic.NotAuthorized
 class GobArUserController(UserController):
     json_content_type = 'application/json;charset=utf-8'
 
+    # pylint: disable=W0622
     def read(self, id=None):
         controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
         if id == 'logged_in':
@@ -153,8 +154,8 @@ class GobArUserController(UserController):
             user_updated = self._edit_user(user_data)
             response.headers['Content-Type'] = self.json_content_type
             return h.json.dumps({'success': user_updated}, for_json=True)
-        else:
-            return h.redirect_to('/configurar/mi_cuenta')
+
+        return h.redirect_to('/configurar/mi_cuenta')
 
     def my_account_edit_password(self):
         self._authorize()
@@ -184,10 +185,10 @@ class GobArUserController(UserController):
             response.headers['Content-Type'] = self.json_content_type
             return h.json.dumps(json_response, for_json=True)
         all_users = model.Session.query(model.User).filter_by(state='active')
-        extra_vars['admin_users'] = list(filter(lambda u: u.sysadmin, all_users))
+        extra_vars['admin_users'] = [u for u in all_users if u.sysadmin]
         extra_vars['normal_users'] = []
         extra_vars['orphan_users'] = []
-        not_admin_users = list(filter(lambda u: not u.sysadmin, all_users))
+        not_admin_users = [u for u in all_users if not u.sysadmin]
         extra_vars['organizations_and_users'] = self._roles_by_organization()
         for user in not_admin_users:
             has_any_permit = any([
@@ -318,17 +319,24 @@ class GobArUserController(UserController):
         organizations_and_users = {}
         for organization in model.Session.query(model.Group).filter_by(state='active'):
             organizations_and_users[organization.name] = {}
-            users_in_organization = filter(
-                lambda m: m.table_name == 'user' and m.state == 'active' and m.capacity == 'editor',
-                organization.member_all
-            )
-            users_id_in_organization = map(lambda u: u.table_id, users_in_organization)
+            users_id_in_organization = GobArUserController.get_organization_users_ids(organization)
             for user in all_users:
                 if user.id in users_id_in_organization:
                     organizations_and_users[organization.name][user.name] = True
                 else:
                     organizations_and_users[organization.name][user.name] = None
         return organizations_and_users
+
+    @staticmethod
+    def get_organization_users_ids(organization):
+        return [
+            m.table_id for m in organization.member_all if
+            GobArUserController.organization_member_is_editor(m)
+        ]
+
+    @staticmethod
+    def organization_member_is_editor(member):
+        return member.table_name == 'user' and member.state == 'active' and member.capacity == 'editor'
 
     def _authorize(self, sysadmin_required=False):
         if sysadmin_required and not self._current_user_is_sysadmin():
@@ -366,7 +374,7 @@ class GobArUserController(UserController):
 
     def _activities(self, page):
         limit = 100
-        offset = (page-1) * limit
+        offset = (page - 1) * limit
         if c.userobj.sysadmin:
             users = model.Session.query(model.User)
             activity_queries = []
@@ -377,7 +385,7 @@ class GobArUserController(UserController):
 
         sql_activities = model.activity._activities_union_all(*activity_queries)
         total_count = sql_activities.count()
-        has_more = total_count > offset+limit
+        has_more = total_count > offset + limit
         raw_activities = model.activity._activities_at_offset(sql_activities, limit, offset)
         context = {'model': model, 'session': model.Session, 'user': c.user or c.author, 'auth_user_obj': c.userobj,
                    'for_view': True}
@@ -417,7 +425,8 @@ class GobArUserController(UserController):
             roles = self._roles_by_organization()
             draft_packages = [
                 package for package in results
-                if (package['private'] or package['state'] == 'draft') and roles[package['organization']['name']][c.user]
+                if
+                (package['private'] or package['state'] == 'draft') and roles[package['organization']['name']][c.user]
             ]
         extra_vars = {'draft_packages': draft_packages}
         return base.render('package/drafts.html', extra_vars=extra_vars)
