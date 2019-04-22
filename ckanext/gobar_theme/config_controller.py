@@ -5,12 +5,12 @@ import os
 import re
 import urlparse
 
+import moment
+import redis
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
-import moment
-import redis
 from ckan.common import request, c
 from ckan.lib.redis import is_redis_available
 from pylons import config as ckan_config
@@ -113,7 +113,7 @@ class GobArConfigController(base.BaseController):
         self._authorize()
         if request.method == 'POST':
             params = parse_params(request.POST)
-            if not re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", params['mail'], re.IGNORECASE):
+            if not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", params['mail'], re.IGNORECASE):
                 c.errors = {}
                 c.errors['mail_error'] = "El mail es inválido o está incompleto"
                 return base.render('config/config_05_social.html')
@@ -347,7 +347,7 @@ class GobArConfigController(base.BaseController):
     @staticmethod
     def _url_with_protocol(url):
         url = url.strip()
-        if len(url) > 0 and not urlparse.urlparse(url).scheme:
+        if url and not urlparse.urlparse(url).scheme:
             url = "http://" + url
         return url
 
