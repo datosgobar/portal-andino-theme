@@ -50,3 +50,6 @@ ckanext/gobar_theme/public/user_images
 ckanext/gobar_theme/tests/tests_config/data
 
 .DS_Store
+
+# pyenv virtualenv
+.python-version
