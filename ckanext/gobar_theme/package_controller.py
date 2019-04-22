@@ -1,4 +1,5 @@
 #! coding: utf-8
+# pylint: disable-all
 import cgi
 from urllib import urlencode
 

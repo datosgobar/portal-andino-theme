@@ -1,4 +1,6 @@
 # coding=utf-8
+# pylint: disable-all
+
 import csv
 import json
 import logging
