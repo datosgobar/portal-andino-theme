@@ -77,7 +77,6 @@ $(function () {
             }
 
             updateAttributesIfValueExist(attributeGroup, 'units', '.resource-col-units');
-            updateAttributesIfValueExist(attributeGroup, 'id', '.resource-col-id');
             updateAttributesIfValueExist(attributeGroup, 'specialType', '.resource-col-special-data');
             updateAttributesIfValueExist(attributeGroup, 'specialTypeDetail', '.resource-col-special-data-detail');
 
@@ -157,9 +156,8 @@ $(function () {
 
             // Avanzados
             var units = attributeGroupEl.find('.resource-col-units').val();
-            var id = (attributeGroupEl.find('.resource-col-id').val() || '');
 
-            if (hasValue(units) || hasValue(id)) {
+            if (hasValue(units)) {
                 // Muestro el form y oculto el botón
                 attributeGroupEl.find('.add-extra-fields-advanced').hide();
                 attributeGroupEl.find('.resource-col-advanced-container').show();
