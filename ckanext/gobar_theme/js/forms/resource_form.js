@@ -16,11 +16,18 @@ $(function () {
     }
 
     $('#add-col').on('click', function () {
-        var newCol = $($('.resource-attributes-group')[0]).clone();
+        const oldCol = $('.resource-attributes-group')[0];
+        var newCol = $(oldCol).clone();
         newCol.find('input:not(.resource-col-id), select, textarea').val('');
         resetAdvancedAndSpecialButtonsAndInputs(newCol);
 
         $('.resource-attributes-actions').before(newCol);
+
+        const isTimeIndex = $(oldCol).find('.resource-col-special-data option:selected').text().includes('ndice de tiempo');
+        const newColDataType = $(oldCol).find('.resource-attributes-input-col-type option:selected').text();
+        if (isTimeIndex && (newColDataType.includes('integer') || newColDataType.includes('number'))) {
+            newCol.find('.add-extra-fields')[0].click();
+        }
 
         resetColumnHeadersCounter();
     });
