@@ -1,25 +1,29 @@
 # coding=utf-8
-from urlparse import urlparse
+# pylint: disable-all
+
+import csv
+import json
+import logging
+import os
+import subprocess
 from HTMLParser import HTMLParser
+from datetime import time
+from urlparse import urljoin
+from urlparse import urlparse
+
+import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 import moment
-from ckan.common import request, c, g, _
-import ckan.lib.formatters as formatters
-import subprocess
-import json
-import os
-from urlparse import urljoin
-from config_controller import GobArConfigController
-from datetime import time
+from ckan.common import request, c, _
+from crontab import CronTab
 from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons.config import config
-from crontab import CronTab
-import logging
-import csv
+
+from config_controller import GobArConfigController
 
 from ckanext.gobar_theme.utils.data_json_utils import *
 
@@ -306,7 +310,7 @@ def update_frequencies(freq_id=None):
     ]
     if freq_id is not None:
         filtered_freq = filter(lambda freq: freq[0] == freq_id, frequencies)
-        if len(filtered_freq) > 0:
+        if list(filtered_freq):
             return filtered_freq[0]
         return None
     return frequencies
@@ -330,8 +334,8 @@ def field_types(field_type_id=None):
     ]
 
     if field_type_id:
-        filtered_field_type = filter(lambda field_type: field_type[0] == field_type_id, field_types)
-        if len(filtered_field_type) > 0:
+        filtered_field_type = list(filter(lambda field_type: field_type[0] == field_type_id, field_types))
+        if filtered_field_type:
             return filtered_field_type[0]
         return None
 
@@ -347,9 +351,9 @@ def distribution_types(distribution_type_id=None):
     ]
 
     if distribution_type_id:
-        filtered_distribution_type = \
-            filter(lambda distribution_type: distribution_type[0] == distribution_type_id, distribution_types)
-        if len(filtered_distribution_type) > 0:
+        filtered_distribution_type = list(
+            filter(lambda distribution_type: distribution_type[0] == distribution_type_id, distribution_types))
+        if filtered_distribution_type:
             return filtered_distribution_type[0]
         return None
 
@@ -361,8 +365,9 @@ def special_field_types(special_field_type_id=None):
         ("time_index", u"Índice de tiempo"),
     ]
     if special_field_type_id is not None:
-        filtered_special_field_type = filter(lambda special_field_type: special_field_type[0] == special_field_type_id, special_field_types)
-        if len(filtered_special_field_type) > 0:
+        filtered_special_field_type = list(
+            filter(lambda _id: _id[0] == special_field_type_id, special_field_types))
+        if filtered_special_field_type:
             return filtered_special_field_type[0]
         return None
     return special_field_types
@@ -421,7 +426,7 @@ def capfirst(s):
 
 def attributes_has_at_least_one(attr, resource_attributes):
     for attributes in resource_attributes:
-        if len(attributes.get(attr, '')) > 0:
+        if attributes.get(attr, ''):
             return True
     return False
 
@@ -520,8 +525,8 @@ def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
     :return: None
     '''
     config = get_theme_config()
-    data_dict_id = data_dict.get('id')
-    if len(data_dict) > 1:
+    data_dict_id = data_dict.get('id', {})
+    if data_dict:
         data_dict.pop('id')
 
         config_item = config.get(object_dict_name, {})

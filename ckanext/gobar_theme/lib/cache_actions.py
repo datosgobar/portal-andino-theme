@@ -1,9 +1,8 @@
 #! coding: utf-8
-import requests
 import logging
 
+import requests
 from pylons import config
-
 
 logger = logging.getLogger(__name__)
 

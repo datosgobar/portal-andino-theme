@@ -1,16 +1,20 @@
 # coding=utf-8
-import ckan.lib.mailer as ckan_mailer
-import ckanext.gobar_theme.helpers as gobar_helpers
+# pylint: disable-all
 import smtplib
-import paste.deploy.converters
-import ckan
-from pylons import config
-from email.header import Header
-from time import time
 from email import Utils
-from email.MIMEText import MIMEText
-from email.MIMEMultipart import MIMEMultipart
+from email.header import Header
 from socket import error as socket_error
+from time import time
+
+import ckan
+import ckan.lib.mailer as ckan_mailer
+import paste.deploy.converters
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+from pylons import config
+
+import ckanext.gobar_theme.helpers as gobar_helpers
+
 try:
     from socket import sslerror
 except ImportError:

@@ -1,7 +1,7 @@
 #! coding: utf-8
 
-from ckan.lib.base import BaseController
 from pylons import response
+from ckan.lib.base import BaseController
 
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 

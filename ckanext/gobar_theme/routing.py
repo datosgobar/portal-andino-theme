@@ -1,6 +1,7 @@
 # coding=utf-8
-from routes.mapper import SubMapper
+# pylint: disable-all
 from pylons.config import config
+from routes.mapper import SubMapper
 
 
 class GobArRouter:

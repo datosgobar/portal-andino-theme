@@ -2,6 +2,7 @@
 mock==2.0.0
 mockredispy==2.9.3
 factory-boy==2.4.1
+pylint==1.9.4
 -e git+https://github.com/datosgobar/ckanext-seriestiempoarexplorer.git@0.1.7#egg=ckanext-seriestiempoarexplorer
 - "--editable=git+https://github.com/ckan/ckanext-googleanalytics.git@v2.0.2#egg=ckanext-googleanalytics"
 - "--editable=git+https://github.com/datagovuk/ckanext-hierarchy.git@3f2a258a46d5577c449678bf83f0ec1c6b6e7795#egg=ckanext-hierarchy"
