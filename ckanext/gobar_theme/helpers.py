@@ -21,7 +21,7 @@ from crontab import CronTab
 import logging
 import csv
 
-from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
+from ckanext.gobar_theme.utils.data_json_utils import *
 
 logger = logging.getLogger(__name__)
 
