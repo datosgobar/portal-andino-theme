@@ -21,6 +21,8 @@ from crontab import CronTab
 import logging
 import csv
 
+from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
+
 logger = logging.getLogger(__name__)
 
 
@@ -433,15 +435,6 @@ def portal_andino_version():
     version = version[:15]  # me quedo con los primeros 15 caracteres
 
     return version
-
-
-def get_data_json_contents():
-    import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
-    return json.loads(datajson_actions.get_data_json_contents())
-
-
-def get_distribution_id():
-    return get_data_json_contents().get('identifier') or ''
 
 
 def get_distribution_metadata(resource_id, package_id):
