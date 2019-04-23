@@ -23,7 +23,7 @@ $(function () {
 
         $('.resource-attributes-actions').before(newCol);
 
-        $(newCol).find('.resource-attributes-input-col-type').on('change', () => generateDistributionId(oldCol, newCol));
+        $(newCol).find('.resource-attributes-input-col-type').on('change', function() { generateDistributionId(oldCol, newCol) });
 
         resetColumnHeadersCounter();
     });
