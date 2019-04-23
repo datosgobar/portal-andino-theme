@@ -16,14 +16,28 @@ $(function () {
     }
 
     $('#add-col').on('click', function () {
-        var newCol = $($('.resource-attributes-group')[0]).clone();
-        newCol.find('input, select, textarea').val('');
+        const oldCol = $('.resource-attributes-group')[0];
+        var newCol = $(oldCol).clone();
+        newCol.find('input:not(.resource-col-id), select, textarea').val('');
         resetAdvancedAndSpecialButtonsAndInputs(newCol);
 
         $('.resource-attributes-actions').before(newCol);
 
+        $(newCol).find('.resource-attributes-input-col-type').on('change', function() { generateDistributionId(oldCol, newCol) });
+
         resetColumnHeadersCounter();
     });
+
+    function generateDistributionId(oldCol, newCol) {
+        const isTimeIndex = $(oldCol).find('.resource-col-special-data option:selected').val() === 'time_index';
+        const newColDataType = $(newCol).find('.resource-attributes-input-col-type option:selected').text();
+        if (isTimeIndex && (newColDataType.includes('integer') || newColDataType.includes('number'))) {
+            const distributionId = $(oldCol).parents('#resource-attributes-form').attr('data-distribution_id');
+            const randomId = Math.random().toString(36).substr(2,8);
+            newCol.find('.resource-col-id').val(`${distributionId}_${randomId}`);
+            newCol.find('.add-extra-fields')[0].click();
+        }
+    }
 
     $(document).on('change', '.resource-col-name, .resource-col-type, .resource-col-special-data', function() {
         configureMetadataFields();
@@ -100,7 +114,6 @@ $(function () {
             }
         } else {
             for (var i in elements) {
-                elements[i].val('');
                 elements[i].attr('disabled', 'disabled');
             }
         }
@@ -157,9 +170,8 @@ $(function () {
 
             // Avanzados
             var units = attributeGroupEl.find('.resource-col-units').val();
-            var id = (attributeGroupEl.find('.resource-col-id').val() || '');
 
-            if (hasValue(units) || hasValue(id)) {
+            if (hasValue(units)) {
                 // Muestro el form y oculto el botón
                 attributeGroupEl.find('.add-extra-fields-advanced').hide();
                 attributeGroupEl.find('.resource-col-advanced-container').show();

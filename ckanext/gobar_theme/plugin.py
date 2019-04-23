@@ -13,6 +13,7 @@ import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 import ckanext.gobar_theme.routing as gobar_routes
 from ckanext.gobar_theme.lib import cache_actions
+from ckanext.gobar_theme.utils.data_json_utils import get_distribution_id
 from uploader import GobArThemeResourceUploader
 from .utils.ckan_utils import is_plugin_present
 
@@ -85,6 +86,8 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one,
             'portal_andino_version': gobar_helpers.portal_andino_version,
             'get_distribution_metadata': gobar_helpers.get_distribution_metadata,
+            'get_data_json_contents': gobar_helpers.get_data_json_contents,
+            'get_distribution_id': get_distribution_id,
             'is_distribution_local': gobar_helpers.is_distribution_local,
             'get_extra_value': gobar_helpers.get_extra_value,
             'remove_url_param': gobar_helpers.remove_url_param,
