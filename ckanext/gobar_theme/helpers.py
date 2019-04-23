@@ -438,7 +438,7 @@ def portal_andino_version():
     return version
 
 
-def get_distribution_metadata(resource_id, _package_id):
+def get_distribution_metadata(resource_id):
     # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
     json_dict = get_data_json_contents()
     html_parser = HTMLParser()
