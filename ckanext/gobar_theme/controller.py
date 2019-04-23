@@ -1,6 +1,6 @@
 #!coding: utf-8
-# pylint: disable-all
 import json
+from pylons import response
 
 import ckan.lib.base as base
 import ckan.logic as logic
@@ -9,7 +9,6 @@ from ckan.common import c
 from ckan.controllers.api import ApiController
 from ckan.controllers.home import HomeController
 from ckanext.googleanalytics.controller import GAApiController
-from pylons import response
 
 import ckanext.gobar_theme.helpers as gobar_helpers
 
@@ -87,11 +86,10 @@ class GobArHomeController(HomeController):
         for section in sections:
             if section.get('slug', '') == title_or_slug or section['title'] == title_or_slug:
                 # la variable `section` contiene la sección buscada
-                break
-        else:
-            base.abort(404, u'Sección no encontrada')
+                return base.render('section_view.html', extra_vars={'section': section})
 
-        return base.render('section_view.html', extra_vars={'section': section})
+        return base.abort(404, u'Sección no encontrada')
+
 
     def super_theme_taxonomy(self):
         response.content_type = 'application/json; charset=UTF-8'
