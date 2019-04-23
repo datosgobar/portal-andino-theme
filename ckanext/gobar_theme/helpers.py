@@ -1,8 +1,7 @@
-# coding=utf-8
-# pylint: disable-all
+#!coding=utf-8
+# pylint: disable=wildcard-import, unused-wildcard-import
 
 import csv
-import json
 import logging
 import os
 import subprocess
@@ -11,20 +10,19 @@ from datetime import time
 from urlparse import urljoin
 from urlparse import urlparse
 
+import moment
+from crontab import CronTab
+from dateutil import parser, tz
+from pydatajson.core import DataJson
+from pylons.config import config
 import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
-import moment
 from ckan.common import request, c, _
-from crontab import CronTab
-from dateutil import parser, tz
-from pydatajson.core import DataJson
-from pylons.config import config
 
-from config_controller import GobArConfigController
-
+from ckanext.gobar_theme.config_controller import GobArConfigController
 from ckanext.gobar_theme.utils.data_json_utils import *
 
 logger = logging.getLogger(__name__)
@@ -43,7 +41,7 @@ def _get_organizations_objs(organizations_branch, depth=0):
     for tree_obj in organizations_branch:
         organization = ckan_helpers.get_organization(org=tree_obj['name'])
         organization['depth'] = depth
-        if 'children' in tree_obj and len(tree_obj['children']) > 0:
+        if 'children' in tree_obj and tree_obj['children']:
             organization['children'] = _get_organizations_objs(tree_obj['children'], depth=depth + 1)
         organizations.append(organization)
     return organizations
@@ -51,7 +49,7 @@ def _get_organizations_objs(organizations_branch, depth=0):
 
 def _count_total(organization):
     children_count = 0
-    if 'children' in organization and len(organization['children']):
+    if 'children' in organization and organization['children']:
         for child_organization in organization['children']:
             children_count += _count_total(child_organization)
     return organization['package_count'] + children_count
@@ -134,7 +132,7 @@ def get_suborganizations_names(org_name=None):
     for organization in organizations:
         if organization.get('name') == org_name:
             if 'children' in organization:
-                return list(map(lambda x: x['name'], organization['children']))
+                return [x['name'] for x in organization['children']]
             break
     return []
 
@@ -166,12 +164,12 @@ def get_faceted_groups(items_limit=None):
     return groups
 
 
-def remove_url_param(key, value=None, replace=None, controller=None,
+def remove_url_param(keys, value=None, replace=None, controller=None,
                      action=None, extras=None, alternative_url=None):
-    if isinstance(key, basestring):
-        keys = [key]
+    if isinstance(keys, basestring):
+        keys = [keys]
     else:
-        keys = key
+        keys = keys
 
     params_nopage = [(k, v) for k, v in request.params.items() if k != 'page']
     params = list(params_nopage)
@@ -179,7 +177,7 @@ def remove_url_param(key, value=None, replace=None, controller=None,
         params.remove((keys[0], value))
     else:
         for key in keys:
-            [params.remove((k, v)) for (k, v) in params[:] if k == key]
+            _ = [params.remove((k, v)) for (k, v) in params[:] if k == key]
     if replace is not None:
         params.append((keys[0], replace))
     if alternative_url:
@@ -242,7 +240,7 @@ def all_descendants(organization_list):
     descendants = []
     for organization in organization_list:
         descendants.append(organization['name'])
-        if 'children' in organization and len(organization['children']) > 0:
+        if 'children' in organization and organization['children']:
             descendants += all_descendants(organization['children'])
     return descendants
 
@@ -251,15 +249,15 @@ def get_theme_config(path=None, default=None):
     return GobArConfigController.get_theme_config(path, default)
 
 
-def url_join(*args):
-    return urljoin(*args)
+def url_join(base, url, *args):
+    return urljoin(base, url, *args)
 
 
 def json_loads(json_string):
     return json.loads(json_string)
 
 
-def license_options(existing_license_id=None):
+def license_options(_existing_license_id=None):
     # En lugar de retornar una lista de tuplas, como hace el código original de CKAN, retorno una lista de licencias
     # para soportar el uso del campo 'license_ids'
     register = model.Package.get_license_register()
@@ -267,21 +265,21 @@ def license_options(existing_license_id=None):
     return sorted_licenses
 
 
-def id_belongs_to_license(id, license):
-    return id == license.id or (hasattr(license, 'legacy_ids') and id in license.legacy_ids)
+def id_belongs_to_license(_id, _license):
+    return _id == _license.id or (hasattr(_license, 'legacy_ids') and _id in _license.legacy_ids)
 
 
-def get_license(id):
-    for license in license_options():
-        if id_belongs_to_license(id, license):
-            return license
+def get_license(_id):
+    for _license in license_options():
+        if id_belongs_to_license(_id, _license):
+            return _license
     return None
 
 
 def get_license_title(license_id):
-    for license in license_options():
-        if id_belongs_to_license(license_id, license):
-            return license.title
+    for _license in license_options():
+        if id_belongs_to_license(license_id, _license):
+            return _license.title
     return None
 
 
@@ -309,15 +307,15 @@ def update_frequencies(freq_id=None):
         ('eventual', u'Eventual')
     ]
     if freq_id is not None:
-        filtered_freq = filter(lambda freq: freq[0] == freq_id, frequencies)
-        if list(filtered_freq):
+        filtered_freq = [freq for freq in frequencies if freq[0] == freq_id]
+        if filtered_freq:
             return filtered_freq[0]
         return None
     return frequencies
 
 
 def field_types(field_type_id=None):
-    field_types = [
+    types = [
         ("string", u"Texto (string)"),
         ("integer", u"Número entero (integer)"),
         ("number", u"Número decimal (number)"),
@@ -334,16 +332,16 @@ def field_types(field_type_id=None):
     ]
 
     if field_type_id:
-        filtered_field_type = list(filter(lambda field_type: field_type[0] == field_type_id, field_types))
+        filtered_field_type = [t for t in types if t[0] == field_type_id]
         if filtered_field_type:
             return filtered_field_type[0]
         return None
 
-    return field_types
+    return types
 
 
 def distribution_types(distribution_type_id=None):
-    distribution_types = [
+    types = [
         ("file", u"Archivo de datos"),
         ("api", u"API"),
         ("code", u"Código"),
@@ -351,26 +349,24 @@ def distribution_types(distribution_type_id=None):
     ]
 
     if distribution_type_id:
-        filtered_distribution_type = list(
-            filter(lambda distribution_type: distribution_type[0] == distribution_type_id, distribution_types))
+        filtered_distribution_type = [t for t in types if t[0] == distribution_type_id]
         if filtered_distribution_type:
             return filtered_distribution_type[0]
         return None
 
-    return distribution_types
+    return types
 
 
 def special_field_types(special_field_type_id=None):
-    special_field_types = [
+    types = [
         ("time_index", u"Índice de tiempo"),
     ]
     if special_field_type_id is not None:
-        filtered_special_field_type = list(
-            filter(lambda _id: _id[0] == special_field_type_id, special_field_types))
+        filtered_special_field_type = [_id for _id in types if _id[0] == special_field_type_id]
         if filtered_special_field_type:
             return filtered_special_field_type[0]
         return None
-    return special_field_types
+    return types
 
 
 def type_is_numeric(field_type):
@@ -442,11 +438,11 @@ def portal_andino_version():
     return version
 
 
-def get_distribution_metadata(resource_id, package_id):
+def get_distribution_metadata(resource_id, _package_id):
     # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
     json_dict = get_data_json_contents()
-    parser = HTMLParser()
-    json_dict = parser.unescape(json_dict)
+    html_parser = HTMLParser()
+    json_dict = html_parser.unescape(json_dict)
     datajson = DataJson(json_dict)
     dist = datajson.get_distribution(resource_id)
     return dist
@@ -524,21 +520,21 @@ def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
         sin importar el tipo del objeto que se desee guardar
     :return: None
     '''
-    config = get_theme_config()
+    theme_config = get_theme_config()
     data_dict_id = data_dict.get('id', {})
     if data_dict:
         data_dict.pop('id')
 
-        config_item = config.get(object_dict_name, {})
+        config_item = theme_config.get(object_dict_name, {})
         config_item.update({data_dict_id: data_dict})
-        config[object_dict_name] = config_item
+        theme_config[object_dict_name] = config_item
 
-        GobArConfigController.set_theme_config(config)
-        return config[object_dict_name][data_dict.get('id', data_dict_id)]
+        GobArConfigController.set_theme_config(theme_config)
+        return theme_config[object_dict_name][data_dict.get('id', data_dict_id)]
     return None
 
 
-def get_resource_icon(resource, config):
+def get_resource_icon(resource, theme_config):
     icon_url = resource.get('icon_url', None)
     if icon_url:
         return icon_url
@@ -548,9 +544,9 @@ def get_resource_icon(resource, config):
         resource['package_id'],
         resource['id']
     )
-    if not config:
-        config = get_theme_config()
-    resource_in_config = config.get('resources', {}).get(id_to_search_with, None)
+    if not theme_config:
+        theme_config = get_theme_config()
+    resource_in_config = theme_config.get('resources', {}).get(id_to_search_with, None)
     if resource_in_config is not None:
         return resource_in_config.get('icon_url', None)
     return None
@@ -586,7 +582,7 @@ def create_or_update_cron_job(command, hour, minute, comment=''):
 def get_current_terminal_username():
     return subprocess.check_output("whoami").strip()
 
-  
+
 def search_for_value_in_config_file(field):
     # Solamente queremos utilizar el valor default cuando no existe uno ingresado por el usuario.
     try:
@@ -594,7 +590,7 @@ def search_for_value_in_config_file(field):
             'grep -E "^{}[[:space:]]*=[[:space:]]*" '
             '/etc/ckan/default/production.ini | tr -d [[:space:]]'.format(field), shell=True).strip()
         return value.replace(field, '')[1:]
-    except:
+    except Exception:
         return ''
 
 
