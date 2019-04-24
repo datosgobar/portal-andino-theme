@@ -6,10 +6,10 @@ import sys
 
 import paste.script
 import requests
-from ckan import model, logic
-from ckan.lib import cli
 from ckanapi import RemoteCKAN, LocalCKAN
 from pylons.config import config
+from ckan import model, logic
+from ckan.lib import cli
 
 import ckanext.gobar_theme.helpers as gobar_helpers
 

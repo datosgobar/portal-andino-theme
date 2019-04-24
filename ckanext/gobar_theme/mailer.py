@@ -7,10 +7,10 @@ from email.mime.text import MIMEText
 from socket import error as socket_error
 from time import time
 
-import ckan
-import ckan.lib.mailer as ckan_mailer
 import paste.deploy.converters
 from pylons import config
+import ckan
+import ckan.lib.mailer as ckan_mailer
 
 import ckanext.gobar_theme.helpers as gobar_helpers
 MailerException = ckan_mailer.MailerException
