@@ -34,7 +34,8 @@ $(function () {
         if (isTimeIndex && (newColDataType.includes('integer') || newColDataType.includes('number'))) {
             const distributionId = $(oldCol).parents('#resource-attributes-form').attr('data-distribution_id');
             const randomId = Math.random().toString(36).substr(2,8);
-            newCol.find('.resource-col-id').val(`${distributionId}_${randomId}`);
+            const randomValue = distributionId ? `${distributionId}_${randomId}` : randomId;
+            newCol.find('.resource-col-id').val(randomValue);
             newCol.find('.resource-col-id')[0].disabled = true;
             newCol.find('.add-extra-fields')[0].click();
         }
