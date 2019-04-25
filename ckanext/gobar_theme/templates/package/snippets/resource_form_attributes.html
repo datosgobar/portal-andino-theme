@@ -8,6 +8,8 @@
 
     {% set attributes = h.json_loads(data['attributesDescription'] or '[]') %}
     {% set attributes = attributes|length == 0 and attributes + [{}] or attributes %}
+    {% import 'macros/form.html' as form %}
+    {% set units_values = {'data-module': 'autocomplete', 'data-module-tags': '', 'data-module-source': h.get_units()} %}
 
     <div class="resource-attributes-group-container">
     {% for attribute_group in attributes %}
@@ -58,10 +60,8 @@
                 </div>
 
                 <div class="col-xs-6 resource-attributes-input-container resource-col-advanced-container">
-                    <label class="control-label">Unidad</label>
                     <div class="controls">
-                        <input class="resource-col-units" type="text" title="Unidad"
-                                placeholder="Ej: Pesos de 1995" value="{{ attribute_group['units'] }}">
+                        {{ form.input('Unidad', placeholder='Ej: Pesos de 1995', value=attribute_group['units'], classes=['control-full', 'resource-col-units'], attrs=units_values) }}
                     </div>
                 </div>
 

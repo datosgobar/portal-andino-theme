@@ -109,6 +109,7 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             'get_current_terminal_username': gobar_helpers.get_current_terminal_username,
             'get_organizations_tree': gobar_helpers.get_organizations_tree,
             'prepare_context_variable': gobar_helpers.prepare_context_variable,
+            'get_units': gobar_helpers.get_units,
         }
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):

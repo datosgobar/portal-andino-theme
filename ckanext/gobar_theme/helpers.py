@@ -448,6 +448,10 @@ def get_distribution_metadata(resource_id):
     return dist
 
 
+def get_units():
+    return config.get('units_url')
+
+
 def is_distribution_local(distribution_metadata):
     ckan_site_url = config.get('ckan.site_url')
     try:
