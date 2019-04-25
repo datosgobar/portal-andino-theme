@@ -14,9 +14,7 @@ import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 import ckanext.gobar_theme.routing as gobar_routes
 from ckanext.gobar_theme.lib import cache_actions
-from ckanext.gobar_theme.utils.data_json_utils import get_distribution_id
 from ckanext.gobar_theme.uploader import GobArThemeResourceUploader
-from .utils.ckan_utils import is_plugin_present
 
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):

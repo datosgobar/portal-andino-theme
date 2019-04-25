@@ -14,6 +14,7 @@ import moment
 from crontab import CronTab
 from dateutil import parser, tz
 from pydatajson.core import DataJson
+from pylons import config as config
 from pylons.config import config
 import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
@@ -24,6 +25,7 @@ from ckan.common import request, c, _
 
 from ckanext.gobar_theme.config_controller import GobArConfigController
 from ckanext.gobar_theme.utils.data_json_utils import *
+from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
 
 logger = logging.getLogger(__name__)
 
@@ -618,3 +620,12 @@ def prepare_context_variable():
     return {'model': model, 'session': model.Session,
             'user': c.user or c.author, 'for_view': True,
             'auth_user_obj': c.userobj}
+
+
+def is_plugin_present(plugin_name):
+    plugins = config.get('ckan.plugins')
+    return plugin_name in plugins
+
+
+def get_distribution_id():
+    return get_data_json_contents().get('identifier') or ''
