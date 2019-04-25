@@ -1,11 +1,11 @@
 # coding=utf-8
-# pylint: disable-all
 from pylons.config import config
 from routes.mapper import SubMapper
 
 
 class GobArRouter:
 
+    # pylint: disable=R0902
     def __init__(self, route_map):
         self.route_map = route_map
 
@@ -66,12 +66,12 @@ class GobArRouter:
 
     def connect_spatial(self):
         with SubMapper(self.route_map, controller=self.spatial_controller) as m:
-            m.connect('countries', '/spatial/paises', action='paises'),
-            m.connect('provinces', '/spatial/provincias', action='provincias'),
-            m.connect('districts', '/spatial/localidades', action='localidades'),
-            m.connect('districts', '/spatial/localidades/{province_id}', action='localidades'),
-            m.connect('districts', '/spatial/municipios', action='municipios'),
-            m.connect('districts', '/spatial/municipios/{province_id}', action='municipios'),
+            m.connect('countries', '/spatial/paises', action='paises')
+            m.connect('provinces', '/spatial/provincias', action='provincias')
+            m.connect('districts', '/spatial/localidades', action='localidades')
+            m.connect('districts', '/spatial/localidades/{province_id}', action='localidades')
+            m.connect('districts', '/spatial/municipios', action='municipios')
+            m.connect('districts', '/spatial/municipios/{province_id}', action='municipios')
 
     def connect_apis(self):
         self.home_routes.connect('gobar_apis', '/apis', action='apis')

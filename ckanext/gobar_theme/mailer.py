@@ -1,24 +1,18 @@
 # coding=utf-8
-# pylint: disable-all
 import smtplib
-from email import Utils
+from email import utils
 from email.header import Header
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from socket import error as socket_error
 from time import time
 
+import paste.deploy.converters
+from pylons import config
 import ckan
 import ckan.lib.mailer as ckan_mailer
-import paste.deploy.converters
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
-from pylons import config
 
 import ckanext.gobar_theme.helpers as gobar_helpers
-
-try:
-    from socket import sslerror
-except ImportError:
-    sslerror = None
 MailerException = ckan_mailer.MailerException
 
 andino_address = config.get('smtp.mail_from')
@@ -50,7 +44,7 @@ El equipo de {site_title}. <br>
 
 
 def reset_mail_content(user):
-    if user.fullname and len(user.fullname) > 0:
+    if user.fullname:
         username = user.fullname
     else:
         username = user.name
@@ -63,7 +57,7 @@ def reset_mail_content(user):
 
 
 def send_reset_link(user):
-    if (user.email is None) or not len(user.email):
+    if not user.email:
         raise MailerException("No recipient email address available!")
     ckan_mailer.create_reset_key(user)
     subject, plain_body, html_body = reset_mail_content(user)
@@ -111,19 +105,27 @@ El equipo de {site_title}.<br>
 
 
 def new_user_content(admin_user, new_user):
-    if new_user.fullname and len(new_user.fullname) > 0:
+    if new_user.fullname:
         username = new_user.fullname
     else:
         username = new_user.name
-    if admin_user.fullname and len(admin_user.fullname) > 0:
+    if admin_user.fullname:
         admin_username = admin_user.fullname
     else:
         admin_username = admin_user.name
     login_username = new_user.name
     reset_link = ckan_mailer.get_reset_link(new_user)
     site_title = gobar_helpers.get_theme_config('title.site-title', 'Portal Andino')
-    plain_body = new_user_plain_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title, login_username=login_username)
-    html_body = new_user_html_body.format(admin_username=admin_username, username=username, reset_link=reset_link, site_title=site_title, login_username=login_username)
+    plain_body = new_user_plain_body.format(admin_username=admin_username,
+                                            username=username,
+                                            reset_link=reset_link,
+                                            site_title=site_title,
+                                            login_username=login_username)
+    html_body = new_user_html_body.format(admin_username=admin_username,
+                                          username=username,
+                                          reset_link=reset_link,
+                                          site_title=site_title,
+                                          login_username=login_username)
     subject = new_user_subject.format(admin_username=admin_username)
     return subject, plain_body, html_body
 
@@ -147,7 +149,7 @@ def assemble_email(msg_plain_body, msg_html_body, msg_subject, recipient_name, r
     msg['From'] = andino_address
     recipient = u"%s <%s>" % (recipient_name, recipient_email)
     msg['To'] = Header(recipient, 'utf-8')
-    msg['Date'] = Utils.formatdate(time())
+    msg['Date'] = utils.formatdate(time())
     msg['X-Mailer'] = "CKAN %s" % ckan.__version__
     return msg
 

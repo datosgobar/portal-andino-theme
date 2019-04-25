@@ -1,9 +1,8 @@
 #! coding: utf-8
-# pylint: disable-all
 import ckan.lib.helpers as ckan_helpers
 import ckan.plugins as plugins
 import ckan.plugins.interfaces as interfaces
-import ckan.plugins.toolkit as toolkit
+from ckan.plugins import toolkit
 from ckan.model.package import Package
 from ckan.model.resource import Resource
 from ckan.plugins import implements, IRoutes
@@ -14,7 +13,7 @@ import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 import ckanext.gobar_theme.routing as gobar_routes
 from ckanext.gobar_theme.lib import cache_actions
 from ckanext.gobar_theme.utils.data_json_utils import get_distribution_id
-from uploader import GobArThemeResourceUploader
+from ckanext.gobar_theme.uploader import GobArThemeResourceUploader
 from .utils.ckan_utils import is_plugin_present
 
 
@@ -38,11 +37,11 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
 
     def get_actions(self):
         return {'package_activity_list_html': gobar_actions.package_activity_list_html,
-            'group_delete': gobar_actions.group_delete_and_purge,
-            'package_delete': gobar_actions.dataset_delete_and_purge,
-            'resource_delete': gobar_actions.resource_delete_and_purge,
-            'organization_delete': gobar_actions.organization_delete_and_purge,
-            'gobar_status_show': gobar_actions.gobar_status_show}
+                'group_delete': gobar_actions.group_delete_and_purge,
+                'package_delete': gobar_actions.dataset_delete_and_purge,
+                'resource_delete': gobar_actions.resource_delete_and_purge,
+                'organization_delete': gobar_actions.organization_delete_and_purge,
+                'gobar_status_show': gobar_actions.gobar_status_show}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
@@ -115,11 +114,11 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
         '''
         Guardamos en un archivo los datos pertenecientes a ciertas entidades que se pueden perder como consecuencia de
-        ciertas operanciones (ej. federar un recurso ya existente implica perder su ícono, en caso de tener uno) 
+        ciertas operanciones (ej. federar un recurso ya existente implica perder su ícono, en caso de tener uno)
         :param arguments_list_to_store: lista que contiene el nombre de todos los campos que se desean guardar
         :param entity_dict: diccionario correspondiente a la entidad que se está manejando
         :param object_type: string con el tipo de la entidad que se está manejando (ej. groups, resources, etc)
-        :return: 
+        :return:
         '''
         parameters_to_send = {'id': entity_dict.get('id')}
         for attribute in arguments_list_to_store:
@@ -129,11 +128,11 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         return gobar_helpers.store_object_data_excluded_from_datajson(object_type, parameters_to_send)
 
     def notify(self, entity, operation):
-        if type(entity) is Package:
+        if isinstance(entity, Package):
             if not (operation == 'changed' and entity.state == 'deleted') and entity.state != 'draft':
                 datajson_actions.enqueue_update_datajson_cache_tasks()
                 cache_actions.clear_web_cache()
-        elif type(entity) is Resource:
+        elif isinstance(entity, Resource):
             arguments_list_to_store = ['icon_url']
             entity_dict = entity.as_dict()
             # Modificamos el id dentro de entity_dict para usarlo en el guardado de información en el archivo
@@ -152,7 +151,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         datajson_actions.enqueue_update_datajson_cache_tasks()
         cache_actions.clear_web_cache()
 
-
     def edit(self, _):
         '''
         Implementación de ckan.plugins.interfaces.IGroupController#edit
@@ -160,7 +158,6 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         '''
         datajson_actions.enqueue_update_datajson_cache_tasks()
         cache_actions.clear_web_cache()
-
 
     def delete(self, _):
         '''
@@ -170,14 +167,12 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         datajson_actions.enqueue_update_datajson_cache_tasks()
         cache_actions.clear_web_cache()
 
-
     def read(self, _):
         '''
         Implementación de ckan.plugins.interfaces.IGroupController#delete
         Al llamarse esta acción, se regenera la caché del data.json
         '''
         pass
-
 
     def before_view(self, pkg_dict):
         '''
