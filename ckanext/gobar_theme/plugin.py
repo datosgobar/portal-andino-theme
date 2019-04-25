@@ -1,4 +1,6 @@
 #! coding: utf-8
+import inspect
+
 import ckan.lib.helpers as ckan_helpers
 import ckan.plugins as plugins
 import ckan.plugins.interfaces as interfaces
@@ -57,7 +59,18 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         return routing_map
 
     def get_helpers(self):
-        return gobar_helpers.__dict__
+        helpers = self.ckan_helpers()
+        helpers.update(self.gobar_helpers())
+        return helpers
+
+    def ckan_helpers(self):
+        return {'get_action': ckan_helpers.get_action}
+
+    def gobar_helpers(self):
+        return inspect.getmembers(gobar_helpers, self._is_helper)
+
+    def _is_helper(self, x):
+        return callable(x) and getattr(x, '__name__', None) and x.__name__[0] != '_'
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
         '''
