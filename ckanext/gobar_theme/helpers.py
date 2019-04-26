@@ -15,16 +15,15 @@ from crontab import CronTab
 from dateutil import parser, tz
 from pydatajson.core import DataJson
 from pylons import config as config
-from pylons.config import config
 import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import request, c, _
-
-from ckanext.gobar_theme.config_controller import GobArConfigController
 from ckanext.gobar_theme.utils.data_json_utils import *
+from ckanext import constants
+from ckanext.gobar_theme.theme_config import ThemeConfig
 from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
 
 logger = logging.getLogger(__name__)
@@ -248,7 +247,7 @@ def all_descendants(organization_list):
 
 
 def get_theme_config(path=None, default=None):
-    return GobArConfigController.get_theme_config(path, default)
+    return ThemeConfig(constants.CONFIG_PATH).get(path, default)
 
 
 def url_join(base, url, *args):
@@ -531,7 +530,7 @@ def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
         config_item.update({data_dict_id: data_dict})
         theme_config[object_dict_name] = config_item
 
-        GobArConfigController.set_theme_config(theme_config)
+        ThemeConfig(constants.CONFIG_PATH).set_new_config(theme_config)
         return theme_config[object_dict_name][data_dict.get('id', data_dict_id)]
     return None
 

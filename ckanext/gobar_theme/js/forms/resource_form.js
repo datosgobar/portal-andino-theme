@@ -18,7 +18,7 @@ $(function () {
     $('#add-col').on('click', function () {
         const oldCol = $('.resource-attributes-group')[0];
         var newCol = $(oldCol).clone();
-        newCol.find('input:not(.resource-col-id), select, textarea').val('');
+        newCol.find('input, select, textarea').val('');
         resetAdvancedAndSpecialButtonsAndInputs(newCol);
 
         $('.resource-attributes-actions').before(newCol);
@@ -34,7 +34,9 @@ $(function () {
         if (isTimeIndex && (newColDataType.includes('integer') || newColDataType.includes('number'))) {
             const distributionId = $(oldCol).parents('#resource-attributes-form').attr('data-distribution_id');
             const randomId = Math.random().toString(36).substr(2,8);
-            newCol.find('.resource-col-id').val(`${distributionId}_${randomId}`);
+            const randomValue = distributionId ? `${distributionId}_${randomId}` : randomId;
+            newCol.find('.resource-col-id').val(randomValue);
+            newCol.find('.resource-col-id')[0].disabled = true;
             newCol.find('.add-extra-fields')[0].click();
         }
     }
@@ -132,9 +134,13 @@ $(function () {
 
             // Habilito o dejo deshabilitados ciertos elementos si éstos requieren que haya un valor en otro (y qué valor tiene)
 
-            // Si tiene name, habilito las columnas dataType, description e identifier
+            // Si tiene name, habilito las columnas dataType y description
             var columnHasName = that.find('input.resource-col-name').val() !== '';
-            resetAndToggleIfNeeded([columnDataType, columnDescription, columnId], columnHasName);
+            resetAndToggleIfNeeded([columnDataType, columnDescription], columnHasName);
+
+            // Si tiene name y no está seteado el id, habilito la columna
+            var idIsNotFilled = columnId.val() === '';
+            resetAndToggleIfNeeded([columnId], columnHasName && idIsNotFilled);
 
             var selectedColumnDataType = columnDataType.find('option:selected').val();
 
