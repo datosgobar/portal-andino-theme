@@ -8,7 +8,7 @@ import subprocess
 from crontab import CronTab
 from ckanext.gobar_theme.tests import TestAndino
 import ckanext.gobar_theme.helpers as gobar_helpers
-from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from ckanext.gobar_theme.tests.TestAndino import ThemeConfigForTest
 
 submit_and_follow = helpers.submit_and_follow
 
@@ -18,7 +18,7 @@ class TestConfiguration(TestAndino.TestAndino):
     def __init__(self):
         super(TestConfiguration, self).__init__()
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', ThemeConfigForTest)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def setup(self):
         super(TestConfiguration, self).setup()
@@ -28,14 +28,14 @@ class TestConfiguration(TestAndino.TestAndino):
 class TestSeriesTiempoAr(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', ThemeConfigForTest)
     def test_series_plugin_can_be_configured(self):
         _, response = self.get_page_response(url_for('/configurar/series'), admin_required=True)
         forms = response.forms
         nt.assert_true(isinstance(forms[0]['featured'].value, basestring))
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', ThemeConfigForTest)
     def test_url_exists(self):
         _, response = self.get_page_response(url_for('/series/api'), admin_required=True)
         nt.assert_equals(response.status_int, 200)
@@ -44,7 +44,7 @@ class TestSeriesTiempoAr(TestConfiguration):
 class TestGoogleDatasetSearch(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', ThemeConfigForTest)
     def test_can_be_enabled(self):
         env, response = self.get_page_response('/configurar/google_dataset_search', admin_required=True)
         response = \
@@ -57,7 +57,7 @@ class TestGoogleDatasetSearch(TestConfiguration):
 class TestDatapusherCommands(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', ThemeConfigForTest)
     def test_cron_job_is_created(self):
         # Creo el cron job
         env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
@@ -75,7 +75,7 @@ class TestDatapusherCommands(TestConfiguration):
 class TestGoogleTagManager(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', ThemeConfigForTest)
     def test_id_can_be_configured(self):
         env, response = self.get_page_response('/configurar/google_tag_manager', admin_required=True)
         form = response.forms['google-tag-manager']
