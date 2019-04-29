@@ -1,6 +1,5 @@
 #!coding=utf-8
-# pylint: disable=wildcard-import, unused-wildcard-import
-
+import json
 import csv
 import logging
 import os
@@ -21,7 +20,6 @@ import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import request, c, _
-from ckanext.gobar_theme.utils.data_json_utils import *
 from ckanext import constants
 from ckanext.gobar_theme.theme_config import ThemeConfig
 from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
