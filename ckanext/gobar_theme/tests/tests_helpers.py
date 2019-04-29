@@ -9,13 +9,13 @@ import ckanext.gobar_theme.helpers as gobar_helpers
 from mock import patch
 from ckan.model import license
 from ckanext.gobar_theme.tests import TestAndino
-from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from ckanext.gobar_theme.tests.TestAndino import get_test_theme_config
 import ckanext.gobar_theme.tests.tools.organizations_manager as orgs_manager
 
 
 class TestHelpers(TestAndino.TestAndino):
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def setup(self):
         super(TestHelpers, self).setup()
         self.admin = factories.Sysadmin()
@@ -67,12 +67,12 @@ class TestLicenseHelpers(TestHelpers):
         super(TestLicenseHelpers, self).__init__()
         self.licenses = gobar_helpers.license_options()
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
     def test_license_options_returns_14_licenses(self):
         nt.assert_equals(len(self.licenses), 14)
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
     def test_legacy_license_ids_are_detected(self):
         pddl_license = None
@@ -81,13 +81,13 @@ class TestLicenseHelpers(TestHelpers):
                 pddl_license = license
         nt.assert_true(gobar_helpers.id_belongs_to_license('odc-pddl', pddl_license))
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
     def test_legacy_id_search_returns_correct_license(self):
         license = gobar_helpers.get_license('odc-pddl')
         nt.assert_equals(license.title, u'Open Data Commons Public Domain Dedication and Licence 1.0 (PDDL)')
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('ckan.model.license.LicenseRegister.load_licenses', load_licenses)
     def test_license_title_search_returns_correct_title(self):
         nt.assert_equals(gobar_helpers.get_license_title('odc-pddl'),

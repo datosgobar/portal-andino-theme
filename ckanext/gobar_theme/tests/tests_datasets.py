@@ -6,13 +6,13 @@ from mockredis import mock_strict_redis_client
 from ckan.tests import helpers as helpers
 import nose.tools as nt
 from ckanext.gobar_theme.tests import TestAndino
-from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from ckanext.gobar_theme.tests.TestAndino import get_test_theme_config
 
 submit_and_follow = helpers.submit_and_follow
 
 
 @patch('redis.StrictRedis', mock_strict_redis_client)
-@patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+@patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
 class TestDatasets(TestAndino.TestAndino):
 
     def __init__(self):
