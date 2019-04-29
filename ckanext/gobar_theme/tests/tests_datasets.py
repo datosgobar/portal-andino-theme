@@ -12,7 +12,7 @@ submit_and_follow = helpers.submit_and_follow
 
 
 @patch('redis.StrictRedis', mock_strict_redis_client)
-@patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config())
+@patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
 class TestDatasets(TestAndino.TestAndino):
 
     def __init__(self):

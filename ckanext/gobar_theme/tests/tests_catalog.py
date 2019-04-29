@@ -28,7 +28,7 @@ class TestCatalog(TestAndino.TestAndino):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('redis.Redis', mock_redis_client)
-    @patch('datajson_actions.jobs', autospec=True)
+    @patch('ckanext.gobar_theme.lib.datajson_actions.jobs', autospec=True)
     @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def test_edit_title_then_config_file_has_correct_values(self, mock_job):
         _, response = self.get_page_response(url_for('/configurar/titulo'), admin_required=True)

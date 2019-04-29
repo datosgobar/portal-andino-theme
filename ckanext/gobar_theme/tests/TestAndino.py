@@ -24,7 +24,7 @@ submit_and_follow = helpers.submit_and_follow
 parse_params = logic.parse_params
 
 
-def get_test_theme_config():
+def get_test_theme_config(_=None):
     return ThemeConfig(CACHE_DIRECTORY + "test_settings.json")
 
 
