@@ -245,7 +245,8 @@ def all_descendants(organization_list):
 
 
 def get_theme_config(path=None, default=None):
-    return ThemeConfig(constants.CONFIG_PATH).get(path, default)
+    theme_config = ThemeConfig(constants.CONFIG_PATH)
+    return theme_config.get(path, default)
 
 
 def url_join(base, url, *args):
@@ -519,21 +520,19 @@ def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
         sin importar el tipo del objeto que se desee guardar
     :return: None
     '''
-    theme_config = get_theme_config()
+    theme_config = ThemeConfig(constants.CONFIG_PATH)
     data_dict_id = data_dict.get('id', {})
     if data_dict:
         data_dict.pop('id')
 
         config_item = theme_config.get(object_dict_name, {})
         config_item.update({data_dict_id: data_dict})
-        theme_config[object_dict_name] = config_item
-
-        ThemeConfig(constants.CONFIG_PATH).set_new_config(theme_config)
-        return theme_config[object_dict_name][data_dict.get('id', data_dict_id)]
+        ThemeConfig(constants.CONFIG_PATH).set(object_dict_name, config_item)
+        return config_item[data_dict.get('id', data_dict_id)]
     return None
 
 
-def get_resource_icon(resource, theme_config):
+def get_resource_icon(resource):
     icon_url = resource.get('icon_url', None)
     if icon_url:
         return icon_url
@@ -543,9 +542,7 @@ def get_resource_icon(resource, theme_config):
         resource['package_id'],
         resource['id']
     )
-    if not theme_config:
-        theme_config = get_theme_config()
-    resource_in_config = theme_config.get('resources', {}).get(id_to_search_with, None)
+    resource_in_config = get_theme_config('resources', {}).get(id_to_search_with, None)
     if resource_in_config is not None:
         return resource_in_config.get('icon_url', None)
     return None
