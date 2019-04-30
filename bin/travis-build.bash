@@ -73,6 +73,8 @@ echo "Installing ckanext-gobar_theme and its requirements..."
 python setup.py develop
 pip install -r test-requirements.txt
 
+echo "Where are the requirements.txt files?"
+find / -name requirements.txt
 # Install dcat plugin dependencies
 pip install -r ~/virtualenv/python2.7.14/src/ckanext-dcat/requirements.txt
 
