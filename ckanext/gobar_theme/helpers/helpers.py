@@ -60,31 +60,6 @@ def cut_img_path(url):
     return urlparse(url).path
 
 
-def organizations_with_packages():
-    organizations = logic.get_action('organization_list')({}, {'all_fields': True})
-    organizations_with_at_least_one_package = [
-        organization for organization in organizations if organization['package_count'] > 0
-    ]
-    return len(organizations_with_at_least_one_package)
-
-
-def get_pkg_extra(pkg, keyname):
-    if 'extras' in pkg and pkg['extras']:
-        for extra in pkg['extras']:
-            if extra['key'] == keyname:
-                return extra['value']
-    return None
-
-
-def all_descendants(organization_list):
-    descendants = []
-    for organization in organization_list:
-        descendants.append(organization['name'])
-        if 'children' in organization and organization['children']:
-            descendants += all_descendants(organization['children'])
-    return descendants
-
-
 def get_theme_config(path=None, default=None):
     theme_config = ThemeConfig(constants.CONFIG_PATH)
     return theme_config.get(path, default)
