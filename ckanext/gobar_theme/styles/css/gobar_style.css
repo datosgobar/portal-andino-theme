@@ -9298,10 +9298,6 @@ div#background-container {
   color: #0695d6;
   margin: 0 0 10px 0; }
 
-#resource-attributes-form .resource-col-units input {
-  height: 30px !important;
-}
-
 #edit-package #delete-modal .modal-content {
   -o-box-shadow: none;
   -moz-box-shadow: none;

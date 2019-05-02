@@ -5,6 +5,8 @@ import csv
 import logging
 import os
 import subprocess
+import io
+
 from HTMLParser import HTMLParser
 from datetime import time
 from urlparse import urljoin
@@ -449,7 +451,11 @@ def get_distribution_metadata(resource_id):
 
 
 def get_units():
-    return config.get('units_url')
+    result = []
+    with io.open('/var/lib/ckan/theme_config/units.json', encoding='utf-8') as content:
+        result = json.load(content)
+
+    return result
 
 
 def is_distribution_local(distribution_metadata):
