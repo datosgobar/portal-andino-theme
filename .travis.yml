@@ -8,6 +8,6 @@ services:
 postgresql: "9.1"
 install:
     - pip install coveralls
-script:
     - bash bin/travis-build.bash
-    - pylint ckanext/
+script:
+    - bash bin/travis-run.sh
