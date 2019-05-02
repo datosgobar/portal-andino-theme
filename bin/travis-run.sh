@@ -2,5 +2,5 @@
 
 set -e;
 
-docker exec andino /opt/theme/bin/local_tests.sh
+docker exec andino /opt/theme/bin/tests.sh
 docker exec andino /opt/theme/bin/pylint.sh
