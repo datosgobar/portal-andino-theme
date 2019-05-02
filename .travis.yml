@@ -4,11 +4,10 @@ sudo: required
 python:
     - "2.7"
 services:
-    - postgresql
+    - docker
 postgresql: "9.1"
 install:
-    - bash bin/travis-build.bash
     - pip install coveralls
 script:
-    - sh bin/travis-run.sh
+    - bash bin/travis-build.bash
     - pylint ckanext/

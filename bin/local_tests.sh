@@ -2,6 +2,10 @@
 
 set -e;
 
+. /usr/lib/ckan/default/bin/activate
+
+cd /opt/theme
+pip install -r test-requirements.txt
 
 PGPASSWORD=my_database_pass psql -U my_database_user ckan -h db <<EOM
 DROP DATABASE IF EXISTS datastore_test;
