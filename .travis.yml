@@ -7,7 +7,6 @@ services:
     - docker
 postgresql: "9.1"
 install:
-    - pip install coveralls
     - bash bin/travis-build.bash
 script:
     - bash bin/travis-run.sh
