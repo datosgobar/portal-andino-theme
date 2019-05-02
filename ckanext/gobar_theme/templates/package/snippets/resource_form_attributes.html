@@ -59,8 +59,8 @@
 
                 <div class="col-xs-6 resource-attributes-input-container resource-col-advanced-container">
                     <label class="control-label">Unidad</label>
-                    <div class="controls resource-col-units">
-                        <input type="text" list="unit-values">
+                    <div class="controls">
+                        <input type="text" list="unit-values" class="resource-col-units" value={{ attribute_group['units'] }}>
                         <datalist id="unit-values">
                             {% for unit_value in h.get_units() %}
                                 <option value="{{ unit_value }}">{{ unit_value }}</option>
