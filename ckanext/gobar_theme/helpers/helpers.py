@@ -26,33 +26,6 @@ from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
 logger = logging.getLogger(__name__)
 
 
-def fetch_groups():
-    data_dict_page_results = {
-        'all_fields': True,
-        'type': 'group',
-        'limit': None,
-        'offset': 0,
-    }
-    return logic.get_action('group_list')({}, data_dict_page_results)
-
-
-def get_faceted_groups(items_limit=None):
-    groups = fetch_groups()
-    facets = ckan_helpers.get_facet_items_dict(facet='groups', limit=items_limit)
-    facets_by_name = {}
-    for facet in facets:
-        facets_by_name[facet['name']] = facet
-    for group in groups:
-        group_name = group['name']
-        if group_name in facets_by_name:
-            group['facet_active'] = facets_by_name[group['name']]['active']
-            group['facet_count'] = facets_by_name[group['name']]['count']
-        else:
-            group['facet_active'] = False
-            group['facet_count'] = 0
-    return groups
-
-
 def remove_url_param(keys, value=None, replace=None, controller=None,
                      action=None, extras=None, alternative_url=None):
     if isinstance(keys, basestring):
@@ -74,28 +47,6 @@ def remove_url_param(keys, value=None, replace=None, controller=None,
     return ckan_helpers._create_url_with_params(params=params, controller=controller, action=action, extras=extras)
 
 
-def get_groups_img_paths(groups):
-    groups_with_path = {}
-    for group in groups:
-        groups_with_path[group['id']] = group['image_display_url']
-    return groups_with_path
-
-
-def join_groups(selected_groups):
-    data_dict_page_results = {
-        'all_fields': True,
-        'type': 'group',
-        'limit': None,
-        'offset': 0,
-    }
-    groups = logic.get_action('group_list')({}, data_dict_page_results)
-    for selected_group in selected_groups:
-        for group in groups:
-            if selected_group['name'] == group['name']:
-                group['selected'] = True
-    return sorted(groups, key=lambda k: k['display_name'].lower())
-
-
 def cut_text(text, limit):
     if len(text) > limit:
         text, remaining = text[:limit], text[limit:]
@@ -113,7 +64,7 @@ def organizations_with_packages():
     organizations = logic.get_action('organization_list')({}, {'all_fields': True})
     organizations_with_at_least_one_package = [
         organization for organization in organizations if organization['package_count'] > 0
-        ]
+    ]
     return len(organizations_with_at_least_one_package)
 
 
