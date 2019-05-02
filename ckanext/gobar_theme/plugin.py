@@ -1,4 +1,6 @@
 #! coding: utf-8
+import inspect
+
 import ckan.lib.helpers as ckan_helpers
 import ckan.plugins as plugins
 import ckan.plugins.interfaces as interfaces
@@ -12,9 +14,7 @@ import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 import ckanext.gobar_theme.routing as gobar_routes
 from ckanext.gobar_theme.lib import cache_actions
-from ckanext.gobar_theme.utils.data_json_utils import get_distribution_id
 from ckanext.gobar_theme.uploader import GobArThemeResourceUploader
-from .utils.ckan_utils import is_plugin_present
 
 
 class Gobar_ThemePlugin(plugins.SingletonPlugin):
@@ -57,60 +57,18 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
         return routing_map
 
     def get_helpers(self):
-        return {
-            'organization_tree': gobar_helpers.organization_tree,
-            'get_suborganizations_names': gobar_helpers.get_suborganizations_names,
-            'get_faceted_groups': gobar_helpers.get_faceted_groups,
-            'join_groups': gobar_helpers.join_groups,
-            'cut_text': gobar_helpers.cut_text,
-            'cut_img_path': gobar_helpers.cut_img_path,
-            'organizations_with_packages': gobar_helpers.organizations_with_packages,
-            'get_pkg_extra': gobar_helpers.get_pkg_extra,
-            'get_theme_config': gobar_helpers.get_theme_config,
-            'url_join': gobar_helpers.url_join,
-            'json_loads': gobar_helpers.json_loads,
-            'license_options': gobar_helpers.license_options,
-            'get_license_title': gobar_helpers.get_license_title,
-            'id_belongs_to_license': gobar_helpers.id_belongs_to_license,
-            'update_frequencies': gobar_helpers.update_frequencies,
-            'field_types': gobar_helpers.field_types,
-            'distribution_types': gobar_helpers.distribution_types,
-            'special_field_types': gobar_helpers.special_field_types,
-            'render_ar_datetime': gobar_helpers.render_ar_datetime,
-            'accepted_mime_types': gobar_helpers.accepted_mime_types,
-            'package_resources': gobar_helpers.package_resources,
-            'valid_length': gobar_helpers.valid_length,
-            'capfirst': gobar_helpers.capfirst,
-            'type_is_numeric': gobar_helpers.type_is_numeric,
-            'attributes_has_at_least_one': gobar_helpers.attributes_has_at_least_one,
-            'portal_andino_version': gobar_helpers.portal_andino_version,
-            'get_distribution_metadata': gobar_helpers.get_distribution_metadata,
-            'get_data_json_contents': gobar_helpers.get_data_json_contents,
-            'get_distribution_id': get_distribution_id,
-            'is_distribution_local': gobar_helpers.is_distribution_local,
-            'get_extra_value': gobar_helpers.get_extra_value,
-            'remove_url_param': gobar_helpers.remove_url_param,
-            'get_action': ckan_helpers.get_action,
-            'get_groups_img_paths': gobar_helpers.get_groups_img_paths,
-            'fetch_groups': gobar_helpers.fetch_groups,
-            'date_format_to_iso': gobar_helpers.date_format_to_iso,
-            'jsondump': gobar_helpers.jsondump,
-            'get_default_background_configuration': gobar_helpers.get_default_background_configuration,
-            'get_gtm_code': gobar_helpers.get_gtm_code,
-            'get_current_url_for_resource': gobar_helpers.get_current_url_for_resource,
-            'get_package_organization': gobar_helpers.get_package_organization,
-            'store_object_data_excluded_from_datajson': gobar_helpers.store_object_data_excluded_from_datajson,
-            'get_resource_icon': gobar_helpers.get_resource_icon,
-            'get_andino_base_page': gobar_helpers.get_andino_base_page,
-            'is_plugin_present': is_plugin_present,
-            'organizations_basic_info': gobar_helpers.organizations_basic_info,
-            'get_default_series_api_url': gobar_helpers.get_default_series_api_url,
-            'create_or_update_cron_job': gobar_helpers.create_or_update_cron_job,
-            'get_current_terminal_username': gobar_helpers.get_current_terminal_username,
-            'get_organizations_tree': gobar_helpers.get_organizations_tree,
-            'prepare_context_variable': gobar_helpers.prepare_context_variable,
-            'get_units': gobar_helpers.get_units,
-        }
+        helpers = self.ckan_helpers()
+        helpers.update(self.gobar_helpers())
+        return helpers
+
+    def ckan_helpers(self):
+        return {'get_action': ckan_helpers.get_action}
+
+    def gobar_helpers(self):
+        return inspect.getmembers(gobar_helpers, self._is_helper)
+
+    def _is_helper(self, x):
+        return callable(x) and getattr(x, '__name__', None) and x.__name__[0] != '_'
 
     def _prepare_data_for_storage_outside_datajson(self, arguments_list_to_store, entity_dict, object_type):
         '''

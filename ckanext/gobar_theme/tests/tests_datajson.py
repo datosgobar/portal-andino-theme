@@ -6,7 +6,7 @@ import ckan.lib.search
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file, filter_dataset_fields, \
     get_datasets_with_resources, get_ckan_datasets, CACHE_DIRECTORY
 from ckanext.gobar_theme.tests import TestAndino as TestAndino
-from ckanext.gobar_theme.tests.TestAndino import GobArConfigControllerForTest
+from ckanext.gobar_theme.tests.TestAndino import get_test_theme_config
 from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize, get_action
 from ckanext.gobar_theme.tests.tools.datajson_manager import prepare_context_variable
 import ckan.model as model
@@ -27,12 +27,12 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
     def __init__(self):
         super(TestDatajsonGeneration, self).__init__()
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def setup(self):
         super(TestDatajsonGeneration, self).setup()
         self.dataset = helpers.call_action('package_create', name='test_package', title='this is my custom title')
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def teardown(self):
         model.repo.rebuild_db()
         ckan.lib.search.clear_all()
@@ -42,7 +42,7 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
             # Se ejecutó un test que no requería crear el archivo
             pass
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def test_correct_search_results_for_dataset(self):
         self.create_package_with_n_resources(n=4, data_dict={'title': 'Un titulo 1', 'name': 'ds1'})
         self.create_package_with_n_resources(n=1, data_dict={'title': 'Un titulo 2', 'name': 'ds2'})
@@ -56,7 +56,7 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
         nt.assert_equal(len(datasets_dict.get('Un titulo 2').get('distribution')), 1)
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def test_datajson_cache_exists(self):
         file_descriptor, file_path = tempfile.mkstemp(suffix='.json', dir=CACHE_DIRECTORY)
         generate_new_cache_file(file_descriptor)
@@ -64,7 +64,7 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
         nt.assert_true(os.path.isfile(self.TEST_CACHE_PATH))
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def test_datajson_contains_three_datasets(self):
         # Creo dos datasets aparte del creado en la función setup()
         self.create_package_with_n_resources(n=4, data_dict={'title': 'Un titulo 1', 'name': 'ds1'})
@@ -72,7 +72,7 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
         datajson = self.generate_datajson(CACHE_DIRECTORY, self.TEST_CACHE_PATH)
         nt.assert_equal(len(datajson['dataset']), 3)
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_optional_dataset_fields_are_not_included_if_empty(self):
         optional_dataset_fields_names = ['source', 'language', 'spatial', 'quality', 'publisher', 'contactPoint',
@@ -88,13 +88,13 @@ class TestDatajsonGeneration(TestAndino.TestAndino):
         for name in optional_resource_fields_names:
             nt.assert_true(name not in resource.keys())
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController', GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_catalog_data_is_in_datajson_and_title_is_correct(self):
         datajson = self.generate_datajson(CACHE_DIRECTORY, self.TEST_CACHE_PATH)
         nt.assert_equal(datajson['title'], u'Título del portal')
 
-    @patch('ckanext.gobar_theme.helpers.GobArConfigController',GobArConfigControllerForTest)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('redis.StrictRedis', mock_strict_redis_client)
     def test_datajson_displays_resource_type(self):
         resources = [{'id': 'res1',

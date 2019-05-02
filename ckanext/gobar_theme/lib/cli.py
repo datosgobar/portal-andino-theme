@@ -7,7 +7,7 @@ import sys
 import paste.script
 import requests
 from ckanapi import RemoteCKAN, LocalCKAN
-from pylons.config import config
+from pylons import config
 from ckan import model, logic
 from ckan.lib import cli
 

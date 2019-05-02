@@ -1,6 +1,5 @@
 #!coding=utf-8
-# pylint: disable=wildcard-import, unused-wildcard-import
-
+import json
 import csv
 import logging
 import os
@@ -16,26 +15,20 @@ import moment
 from crontab import CronTab
 from dateutil import parser, tz
 from pydatajson.core import DataJson
-from pylons.config import config
+from pylons import config as config
 import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import request, c, _
-
-from ckanext.gobar_theme.config_controller import GobArConfigController
-from ckanext.gobar_theme.utils.data_json_utils import *
+from ckanext import constants
+from ckanext.gobar_theme.theme_config import ThemeConfig
+from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
 
 logger = logging.getLogger(__name__)
 
 
-def get_config_file_path():
-    return "{}/production.ini".format(subprocess.check_output("echo $CKAN_DEFAULT", shell=True).strip())
-
-
-def get_paster_path():
-    return "{}/bin/paster".format(subprocess.check_output("echo $CKAN_HOME", shell=True).strip())
 
 
 def _get_organizations_objs(organizations_branch, depth=0):
@@ -248,7 +241,8 @@ def all_descendants(organization_list):
 
 
 def get_theme_config(path=None, default=None):
-    return GobArConfigController.get_theme_config(path, default)
+    theme_config = ThemeConfig(constants.CONFIG_PATH)
+    return theme_config.get(path, default)
 
 
 def url_join(base, url, *args):
@@ -530,21 +524,19 @@ def store_object_data_excluded_from_datajson(object_dict_name, data_dict):
         sin importar el tipo del objeto que se desee guardar
     :return: None
     '''
-    theme_config = get_theme_config()
+    theme_config = ThemeConfig(constants.CONFIG_PATH)
     data_dict_id = data_dict.get('id', {})
     if data_dict:
         data_dict.pop('id')
 
         config_item = theme_config.get(object_dict_name, {})
         config_item.update({data_dict_id: data_dict})
-        theme_config[object_dict_name] = config_item
-
-        GobArConfigController.set_theme_config(theme_config)
-        return theme_config[object_dict_name][data_dict.get('id', data_dict_id)]
+        ThemeConfig(constants.CONFIG_PATH).set(object_dict_name, config_item)
+        return config_item[data_dict.get('id', data_dict_id)]
     return None
 
 
-def get_resource_icon(resource, theme_config):
+def get_resource_icon(resource):
     icon_url = resource.get('icon_url', None)
     if icon_url:
         return icon_url
@@ -554,9 +546,7 @@ def get_resource_icon(resource, theme_config):
         resource['package_id'],
         resource['id']
     )
-    if not theme_config:
-        theme_config = get_theme_config()
-    resource_in_config = theme_config.get('resources', {}).get(id_to_search_with, None)
+    resource_in_config = get_theme_config('resources', {}).get(id_to_search_with, None)
     if resource_in_config is not None:
         return resource_in_config.get('icon_url', None)
     return None
@@ -628,3 +618,12 @@ def prepare_context_variable():
     return {'model': model, 'session': model.Session,
             'user': c.user or c.author, 'for_view': True,
             'auth_user_obj': c.userobj}
+
+
+def is_plugin_present(plugin_name):
+    plugins = config.get('ckan.plugins')
+    return plugin_name in plugins
+
+
+def get_distribution_id():
+    return get_data_json_contents().get('identifier') or ''

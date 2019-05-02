@@ -1,5 +1,5 @@
 # coding=utf-8
-from pylons.config import config
+from pylons import config
 from routes.mapper import SubMapper
 
 

@@ -6,16 +6,14 @@ import re
 import urlparse
 
 import moment
-import redis
-from pylons import config as ckan_config
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import request, c
-from ckan.lib.redis import is_redis_available
 
 from ckanext.gobar_theme.lib import cache_actions
+from ckanext.gobar_theme.theme_config import ThemeConfig
 from .utils.ckan_utils import plugin_or_404, TS_EXPLORER_PLUGIN
 
 parse_params = logic.parse_params
@@ -28,6 +26,10 @@ logger = logging.getLogger(__name__)
 class GobArConfigController(base.BaseController):
     IMG_DIR = '/usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/'
     CONFIG_PATH = '/var/lib/ckan/theme_config/settings.json'
+
+    def __init__(self):
+        super(GobArConfigController, self).__init__()
+        self.config = ThemeConfig(self.CONFIG_PATH)
 
     def edit_title(self):
         self._authorize()
@@ -301,7 +303,6 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_15_google_dataset_search.html')
 
     def edit_datapusher_commands(self):
-        from ckanext.gobar_theme.helpers import get_config_file_path, get_paster_path
         self._authorize()
         if request.method == 'POST':
             from ckanext.gobar_theme.helpers import create_or_update_cron_job
@@ -318,8 +319,8 @@ class GobArConfigController(base.BaseController):
             # Creamos el cron job, reemplazando el anterior si ya existía
             command = '{0} datapusher submit_all {1} && ' \
                       '{0} views create {1}'\
-                .format('{} --plugin=ckan'.format(get_paster_path()),
-                        '-y -c {}'.format(get_config_file_path()))
+                .format('{} --plugin=ckan'.format(self.get_paster_path()),
+                        '-y -c {}'.format(self.get_config_file_path()))
             comment = 'datapusher - submit_all'
             create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
 
@@ -360,46 +361,14 @@ class GobArConfigController(base.BaseController):
         except logic.NotAuthorized:
             return h.redirect_to('home')
 
-    @classmethod
-    def _read_config(cls):
-        try:
-            andino_config = cls._redis_cli().get('andino-config')
-            gobar_config = json.loads(andino_config)
-        except Exception:
-            try:
-                with open(GobArConfigController.CONFIG_PATH) as json_data:
-                    gobar_config = json.load(json_data)
-            except Exception:
-                gobar_config = {}
-            try:
-                is_redis_available()
-                cls._redis_cli().set('andino-config', json.dumps(gobar_config))
-            except Exception:
-                logger.error("Redis no se encuentra disponible!")
-        return gobar_config
+    def _read_config(self):
+        return self.config.get_all()
 
-    @classmethod
-    def _set_config(cls, config_dict):
-        json_string = json.dumps(config_dict, sort_keys=True, indent=2)
-        cls._redis_cli().set('andino-config', json_string)
-        with open(GobArConfigController.CONFIG_PATH, 'w') as json_data:
-            json_data.write(json_string)
+    def _set_config(self, config_dict):
+        return self.config.set_new_config(config_dict)
 
-    @classmethod
-    def set_theme_config(cls, config_dict):
-        cls._set_config(config_dict)
-
-    @classmethod
-    def get_theme_config(cls, path=None, default=None):
-        gobar_config = cls._read_config()
-        if path is not None:
-            keys = path.split('.')
-            for key in keys:
-                if gobar_config is not None and key in gobar_config:
-                    gobar_config = gobar_config[key]
-                else:
-                    gobar_config = default
-        return gobar_config
+    def get_theme_config(self, path=None, default=None):
+        return self.config.get(path, default)
 
     @classmethod
     def _save_img(cls, field_storage):
@@ -415,13 +384,8 @@ class GobArConfigController(base.BaseController):
         output_file.close()
         return os.path.join('/user_images/', field_storage.filename)
 
-    @classmethod
-    def _redis_cli(cls):
-        if not getattr(cls, '_redis', None):
-            redis_url = ckan_config.get('ckan.redis.url')
-            pr = urlparse.urlparse(redis_url)
-            db = os.path.basename(pr.path)
+    def get_config_file_path(self):
+        return "{}/production.ini".format(os.getenv('CKAN_DEFAULT').strip())
 
-            cls._redis = redis.StrictRedis(host=pr.hostname, port=pr.port, db=db)
-
-        return cls._redis
+    def get_paster_path(self):
+        return "{}/bin/paster".format(os.getenv('CKAN_HOME').strip())
