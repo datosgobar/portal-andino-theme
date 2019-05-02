@@ -4,23 +4,19 @@ import csv
 import logging
 import os
 import subprocess
-from HTMLParser import HTMLParser
 from datetime import time
 from urlparse import urljoin
 from urlparse import urlparse
 
 import moment
 from dateutil import parser, tz
-from pydatajson.core import DataJson
 from pylons import config as config
 import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.logic as logic
-import ckan.model as model
-from ckan.common import request, c, _
+from ckan.common import request, _
 from ckanext import constants
 from ckanext.gobar_theme.theme_config import ThemeConfig
-from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
 
 logger = logging.getLogger(__name__)
 
@@ -135,33 +131,6 @@ def portal_andino_version():
     version = version[:15]  # me quedo con los primeros 15 caracteres
 
     return version
-
-
-def get_distribution_metadata(resource_id):
-    # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'
-    json_dict = get_data_json_contents()
-    html_parser = HTMLParser()
-    json_dict = html_parser.unescape(json_dict)
-    datajson = DataJson(json_dict)
-    dist = datajson.get_distribution(resource_id)
-    return dist
-
-
-def is_distribution_local(distribution_metadata):
-    ckan_site_url = config.get('ckan.site_url')
-    try:
-        accessURL = distribution_metadata.get('accessURL', '')
-        return accessURL.startswith(ckan_site_url)
-    except AttributeError:
-        logger.error("Se intentó buscar información de un recurso que no figura en el data.json")
-    return False
-
-
-def get_extra_value(extras_list, field):
-    for extra_field in extras_list:
-        if extra_field['key'] == field:
-            return extra_field['value']
-    return None
 
 
 def convert_iso_string_to_utc(date_string=''):
@@ -293,7 +262,3 @@ def delete_column_from_csv_file(csv_path, column_name):
 def is_plugin_present(plugin_name):
     plugins = config.get('ckan.plugins')
     return plugin_name in plugins
-
-
-def get_distribution_id():
-    return get_data_json_contents().get('identifier') or ''
