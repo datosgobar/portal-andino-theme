@@ -36,7 +36,9 @@ class GobArHomeController(HomeController):
             'for_view': True
         }
         data_dict = {
-            'q': ''
+            'q': '',
+            'fq': 'home_featured:true',
+            'rows': 500
         }
         search = logic.get_action('package_search')(context, data_dict)
         if 'results' in search:
