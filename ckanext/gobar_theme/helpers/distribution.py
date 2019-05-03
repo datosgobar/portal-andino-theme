@@ -1,13 +1,13 @@
 #!coding=utf-8
-
+import logging
 from HTMLParser import HTMLParser
 
 from pydatajson import DataJson
 from pylons import config as config
 
-from ckanext.gobar_theme.helpers import logger
 from ckanext.gobar_theme.utils.data_json_utils import get_data_json_contents
 
+logger = logging.getLogger(__name__)
 
 def get_distribution_metadata(resource_id):
     # Se importa 'datajson_actions' en la función para evitar dependencias circulares con 'config_controller'

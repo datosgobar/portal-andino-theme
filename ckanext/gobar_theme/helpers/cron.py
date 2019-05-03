@@ -1,8 +1,7 @@
 #!coding=utf-8
+import getpass
 
 from crontab import CronTab
-
-from ckanext.gobar_theme.helpers import get_current_terminal_username
 
 
 def search_for_cron_jobs_and_remove(comment_to_search_for):
@@ -22,3 +21,7 @@ def create_or_update_cron_job(command, hour, minute, comment=''):
     job.hour.on(hour)
     job.minute.on(minute)
     cron.write()
+
+
+def get_current_terminal_username():
+    return getpass.getuser()

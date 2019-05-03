@@ -1,11 +1,8 @@
 #!coding=utf-8
 import csv
 import json
-import logging
-import subprocess
 import ckan.logic as logic
-
-logger = logging.getLogger(__name__)
+from markupsafe import Markup
 
 
 def accepted_mime_types():
@@ -51,12 +48,7 @@ def portal_andino_version():
 
 
 def jsondump(field=''):
-    from markupsafe import Markup
     return Markup(json.dumps(field))
-
-
-def get_current_terminal_username():
-    return subprocess.check_output("whoami").strip()
 
 
 def delete_column_from_csv_file(csv_path, column_name):
