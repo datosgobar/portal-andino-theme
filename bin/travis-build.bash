@@ -4,4 +4,4 @@ THEME_PATH=$(pwd)
 git clone "https://github.com/datosgobar/portal-andino"
 
 cd portal-andino/
-sudo ./dev.sh complete_up --theme_volume_src $THEME_PATH
+sudo ./dev.sh install --theme_volume_src $THEME_PATH
