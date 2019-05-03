@@ -445,12 +445,9 @@ def get_distribution_metadata(resource_id):
 
 
 def get_units():
-    result = []
     units_url = config.get('units_url').replace('file://', '')
     with io.open(units_url, encoding='utf-8') as content:
-        result = json.load(content)
-
-    return result
+        return json.load(content)
 
 
 def is_distribution_local(distribution_metadata):
