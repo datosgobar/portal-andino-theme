@@ -4,14 +4,10 @@ import csv
 import logging
 import os
 import subprocess
-from datetime import time
 from urlparse import urljoin
 from urlparse import urlparse
 
-import moment
-from dateutil import parser, tz
 from pylons import config as config
-import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 import ckan.logic as logic
 from ckan.common import request, _
@@ -68,21 +64,6 @@ def json_loads(json_string):
     return json.loads(json_string)
 
 
-def render_ar_datetime(datetime_):
-    datetime_ = ckan_helpers._datestamp_to_datetime(convert_iso_string_to_utc(datetime_))
-    if not datetime_:
-        return ''
-    details = {
-        'min': datetime_.minute,
-        'hour': datetime_.hour,
-        'day': datetime_.day,
-        'year': datetime_.year,
-        'month': formatters._MONTH_FUNCTIONS[datetime_.month - 1]().lower(),
-        'timezone': datetime_.tzinfo.zone,
-    }
-    return _('{day} de {month} de {year}').format(**details)
-
-
 def accepted_mime_types():
     return [
         'html',
@@ -131,30 +112,6 @@ def portal_andino_version():
     version = version[:15]  # me quedo con los primeros 15 caracteres
 
     return version
-
-
-def convert_iso_string_to_utc(date_string=''):
-    if date_string is None:
-        return ''
-    try:
-        date_time = parser.parse(date_string)
-    except ValueError:
-        # date_string es un string inválido o None
-        return ''
-    if date_time.time() == time(0):
-        return date_string
-    if date_time.tzinfo is not None:
-        utc_date_time = date_time.astimezone(tz.tzutc())
-    else:
-        utc_date_time = date_time
-    utc_date_time = utc_date_time.replace(tzinfo=None)
-    return utc_date_time.isoformat()
-
-
-def date_format_to_iso(date):
-    if date:
-        return moment.date(date, "%d/%m/%Y").isoformat()
-    return date
 
 
 def jsondump(field=''):
