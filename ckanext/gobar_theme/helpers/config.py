@@ -1,3 +1,5 @@
+import io
+import json
 import os
 import subprocess
 
@@ -69,3 +71,9 @@ def search_for_value_in_config_file(field):
 def is_plugin_present(plugin_name):
     plugins = config.get('ckan.plugins')
     return plugin_name in plugins
+
+
+def get_units():
+    units_url = config.get('units_url').replace('file://', '')
+    with io.open(units_url, encoding='utf-8') as content:
+        return json.load(content)

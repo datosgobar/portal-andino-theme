@@ -60,8 +60,12 @@
                 <div class="col-xs-6 resource-attributes-input-container resource-col-advanced-container">
                     <label class="control-label">Unidad</label>
                     <div class="controls">
-                        <input class="resource-col-units" type="text" title="Unidad"
-                                placeholder="Ej: Pesos de 1995" value="{{ attribute_group['units'] }}">
+                        <input type="text" list="unit-values" class="resource-col-units" value={{ attribute_group['units'] }}>
+                        <datalist id="unit-values">
+                            {% for unit_value in h.get_units() %}
+                                <option value="{{ unit_value }}">{{ unit_value }}</option>
+                            {% endfor %}
+                        </datalist>
                     </div>
                 </div>
 
