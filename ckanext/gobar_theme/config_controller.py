@@ -305,7 +305,7 @@ class GobArConfigController(base.BaseController):
     def edit_datapusher_commands(self):
         self._authorize()
         if request.method == 'POST':
-            from ckanext.gobar_theme.helpers import create_or_update_cron_job
+            from ckanext.gobar_theme.helpers.cron import create_or_update_cron_job
             params = parse_params(request.POST)
             config_dict = self._read_config()
             schedule_hour = params.get('schedule-hour').strip()

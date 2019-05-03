@@ -1,4 +1,5 @@
 #! coding: utf-8
+import csv
 import json
 import logging
 import os
@@ -200,7 +201,7 @@ class ReuploadResourcesFiles(cli.CkanCommand):
         with open(resource_file_path, 'wb') as resource_file:
             resource_file.write(file_content)
         # Buscamos la columna '_id' generada como campo en el Datastore; si existe, se la borra
-        gobar_helpers.delete_column_from_csv_file(resource_file_path, '_id')
+        self.delete_column_from_csv_file(resource_file_path, '_id')
         with open(resource_file_path, 'rb') as resource_file:
             data = {'id': resource_id, 'upload': resource_file}
             rc.action.resource_patch(**data)
@@ -225,3 +226,22 @@ class ReuploadResourcesFiles(cli.CkanCommand):
                          self.errors_while_patching)
             LOGGER.error('Resumen: IDs de los recursos que no fueron actualizados: %s',
                          self.ids_of_unsuccessfully_patched_resources)
+
+    def delete_column_from_csv_file(self, csv_path, column_name):
+        with open(csv_path, 'rb') as source:
+            rdr = csv.reader(source)
+            first_row = next(rdr)
+            column_position = None
+            try:
+                column_position = first_row.index(column_name)
+            except ValueError:
+                # No existe una columna con el nombre que llegó por parámetro -> se usará el csv tal y como está
+                return
+            source.seek(0)
+            list_with_rows = []
+            for r in rdr:
+                list_with_rows.append(tuple((r[x] for x in range(len(r)) if x != column_position)))
+        with open(csv_path, 'wb') as result:
+            wtr = csv.writer(result)
+            for r in list_with_rows:
+                wtr.writerow(tuple(x for x in r))

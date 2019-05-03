@@ -14,6 +14,7 @@ import ckan.logic as logic
 import ckan.plugins as p
 import logging
 import tempfile
+
 logger = logging.getLogger(__name__)
 
 CACHE_DIRECTORY = "/var/lib/ckan/theme_config/"
@@ -246,7 +247,7 @@ def get_ckan_datasets(org=None, with_private=True):
             'start': n * (page - 1),
         }
 
-        context = gobar_helpers.prepare_context_variable()
+        context = prepare_context_variable()
         query = logic.action.get.package_search(context, search_data_dict)
         if query['results']:
             dataset_list.extend(query['results'])
@@ -254,6 +255,12 @@ def get_ckan_datasets(org=None, with_private=True):
         else:
             break
     return dataset_list
+
+
+def prepare_context_variable():
+    return {'model': model, 'session': model.Session,
+            'user': c.user or c.author, 'for_view': True,
+            'auth_user_obj': c.userobj}
 
 
 def get_datasets_with_resources(packages):
@@ -270,7 +277,8 @@ def get_datasets_with_resources(packages):
                     logger.error(u'Error transformando attributesDescription de %s', resource)
                     raise e
         except KeyError:
-            logger.error(u"Fallo durante la transformación de 'attributesDescription' del package %s.", packages[i].get('id'))
+            logger.error(u"Fallo durante la transformación de 'attributesDescription' del package %s.",
+                         packages[i].get('id'))
         ckan_host = ''
         try:
             ckan_host = re.match(

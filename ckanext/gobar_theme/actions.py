@@ -1,9 +1,7 @@
 # coding=utf-8
 import logging
-import os
 import re
 import sys
-import codecs
 
 import pkg_resources
 from webhelpers.html import literal
@@ -13,6 +11,7 @@ import ckan.lib.base as base
 import ckan.logic as logic
 
 import ckanext
+from ckanext.gobar_theme.utils.andino_version import get_portal_andino_version
 from . import helpers as h
 
 _get_action = ckan.logic.get_action
@@ -154,8 +153,8 @@ def gobar_status_show(_context, _data_dict):
         version = _get_plugin_version(plugin)
         artifact = {plugin: version}
         artifacts.append(artifact)
-    portal_andino_version = _get_portal_andino_version()
-    artifacts.append(portal_andino_version)
+    portal_andino_version = get_portal_andino_version()
+    artifacts.append({'portal-andino': portal_andino_version})
     return artifacts
 
 
@@ -165,14 +164,3 @@ def _get_plugin_version(plugin):
     except Exception:
         version = None
     return version
-
-
-def _get_portal_andino_version():
-    os.chdir('/')
-    portal_dir = os.path.abspath(os.path.join(os.getcwd(), 'portal/'))
-    try:
-        with codecs.open(os.path.join(portal_dir, 'version')) as f:
-            version = f.read().strip()
-    except IOError:
-        version = None
-    return {'portal-andino': version}
