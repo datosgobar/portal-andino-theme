@@ -53,4 +53,3 @@ def valid_length(data, max_length):
 
 def capfirst(s):
     return s[0].upper() + s[1:]
-
