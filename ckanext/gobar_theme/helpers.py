@@ -446,7 +446,8 @@ def get_distribution_metadata(resource_id):
 
 def get_units():
     result = []
-    with io.open('/var/lib/ckan/theme_config/units.json', encoding='utf-8') as content:
+    units_url = config.get('units_url').replace('file://', '')
+    with io.open(units_url, encoding='utf-8') as content:
         result = json.load(content)
 
     return result
