@@ -13,7 +13,9 @@ import ckanext.gobar_theme.actions as gobar_actions
 import ckanext.gobar_theme.helpers as gobar_helpers
 import ckanext.gobar_theme.lib.datajson_actions as datajson_actions
 import ckanext.gobar_theme.routing as gobar_routes
+from ckanext import constants
 from ckanext.gobar_theme.lib import cache_actions
+from ckanext.gobar_theme.theme_config import ThemeConfig
 from ckanext.gobar_theme.uploader import GobArThemeResourceUploader
 
 
@@ -84,7 +86,26 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
             attribute_value = entity_dict.get(attribute, None)
             if attribute_value is not None:
                 parameters_to_send[attribute] = attribute_value
-        return gobar_helpers.store_object_data_excluded_from_datajson(object_type, parameters_to_send)
+        return self.store_object_data_excluded_from_datajson(object_type, parameters_to_send)
+
+    def store_object_data_excluded_from_datajson(self, object_dict_name, data_dict):
+        '''
+        :param object_dict_name: string con el tipo de la entidad que se está manejando (ej. groups, resources, etc)
+        :param data_dict: diccionario que contiene el id del objeto a guardar y la información que necesitamos almacenar
+            pero que no corresponde tener en el data.json (dict); debería poder utilizarse siempre de la misma manera,
+            sin importar el tipo del objeto que se desee guardar
+        :return: None
+        '''
+        theme_config = ThemeConfig(constants.CONFIG_PATH)
+        data_dict_id = data_dict.get('id', {})
+        if data_dict:
+            data_dict.pop('id')
+
+            config_item = theme_config.get(object_dict_name, {})
+            config_item.update({data_dict_id: data_dict})
+            ThemeConfig(constants.CONFIG_PATH).set(object_dict_name, config_item)
+            return config_item[data_dict.get('id', data_dict_id)]
+        return None
 
     def notify(self, entity, operation):
         if isinstance(entity, Package):
