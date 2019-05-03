@@ -88,3 +88,22 @@ def special_field_types(special_field_type_id=None):
 
 def type_is_numeric(field_type):
     return field_type in ['integer', 'number']
+
+
+def accepted_mime_types():
+    return [
+        'html',
+        'json',
+        'xml',
+        'text',
+        'csv',
+        'xls',
+        'api',
+        'pdf',
+        'zip',
+        'rdf',
+        'nquad',
+        'ntriples',
+        'turtle',
+        'shp'
+    ]
