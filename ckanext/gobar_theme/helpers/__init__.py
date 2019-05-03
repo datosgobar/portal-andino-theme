@@ -9,3 +9,4 @@ from .distribution import *
 from .dates import *
 from .config import *
 from .strings import *
+from .version import *
