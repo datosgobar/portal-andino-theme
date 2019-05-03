@@ -1,8 +1,5 @@
 #!coding=utf-8
-import csv
-import json
 import ckan.logic as logic
-from markupsafe import Markup
 
 
 def package_resources(pkg_id):
@@ -26,9 +23,3 @@ def portal_andino_version():
     version = version[:15]  # me quedo con los primeros 15 caracteres
 
     return version
-
-
-def jsondump(field=''):
-    return Markup(json.dumps(field))
-
-

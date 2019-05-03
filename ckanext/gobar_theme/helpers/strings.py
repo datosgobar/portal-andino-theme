@@ -4,6 +4,8 @@ from urlparse import urlparse
 
 import ckan.lib.helpers as ckan_helpers
 from ckan.common import request
+from markupsafe import Markup
+
 
 def remove_url_param(keys, value=None, replace=None, controller=None,
                      action=None, extras=None, alternative_url=None):
@@ -53,3 +55,7 @@ def valid_length(data, max_length):
 
 def capfirst(s):
     return s[0].upper() + s[1:]
+
+
+def jsondump(field=''):
+    return Markup(json.dumps(field))
