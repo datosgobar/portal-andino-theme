@@ -4,6 +4,8 @@ import csv
 import logging
 import os
 import subprocess
+import io
+
 from HTMLParser import HTMLParser
 from datetime import time
 from urlparse import urljoin
@@ -440,6 +442,12 @@ def get_distribution_metadata(resource_id):
     datajson = DataJson(json_dict)
     dist = datajson.get_distribution(resource_id)
     return dist
+
+
+def get_units():
+    units_url = config.get('units_url').replace('file://', '')
+    with io.open(units_url, encoding='utf-8') as content:
+        return json.load(content)
 
 
 def is_distribution_local(distribution_metadata):
