@@ -10171,7 +10171,7 @@ div.about-components > pre{
   float: left;
 }
 
-.icon-ellipsis-vertical.col-options {
+.fa.fa-ellipsis-v.col-options {
   font-size: 20px;
   position: absolute;
   right: 0;
