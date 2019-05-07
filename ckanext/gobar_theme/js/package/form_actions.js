@@ -283,7 +283,7 @@ $(document).ready( function(){
 $(document).ready( function(){
     $('#dataset-edit').on("submit", function(e) {
         var regex = new RegExp(
-            /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-.]{1}[a-z0-9]+)*(\.[a-z0-9]{2,5}|(:[0-9]{1,5}))(\/.*)?$/
+            /^(localhost|http:\/\/localhost|https:\/\/localhost)|(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-.]{1}[a-z0-9]+)*(\.[a-z0-9]{2,5}|(:[0-9]{1,5}))(\/.*)?$/
         );
         if (!$('#field-url').val().match(regex)) {
             e.preventDefault();
