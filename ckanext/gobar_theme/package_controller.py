@@ -401,13 +401,15 @@ class GobArPackageController(PackageController):
             context['message'] = data_dict.get('log_message', '')
             data_dict['id'] = name_or_id
 
-            # Obtengo la lista de extras del dataset y agrego en el data_dict los extras que falten
-            # (no estaban en el request.POST), y reemplazo valores desactualizados
+            # Obtengo la lista de extras del dataset y agrego sus extras faltantes en el formulario
             extra_fields = get_action('package_show')(dict(context, for_view=True), {'id': name_or_id})['extras']
+            if 'extras' not in data_dict.keys():
+                data_dict['extras'] = []
+            form_extras_keys = [x['key'] for x in data_dict['extras']]
             for extra_field in extra_fields:
-                found_extra_field = list(filter(lambda x: x['key'] == extra_field['key'], data_dict['extras']))
-                if found_extra_field:
+                if extra_field.get('key') not in form_extras_keys:
                     data_dict['extras'].append(extra_field)
+                    form_extras_keys.append(extra_field.get('key'))
 
             time_now = moment.now().isoformat()
 
@@ -641,67 +643,6 @@ class GobArPackageController(PackageController):
                 'resource_form_snippet': self._resource_form(package_type),
                 'dataset_type': package_type}
         return render('package/resource_edit.html', extra_vars=vars)
-
-    def _save_edit(self, name_or_id, context, package_type=None):
-        from ckan.lib.search import SearchIndexError
-        log.debug('Package save request name: %s POST: %r',
-                  name_or_id, request.POST)
-        try:
-            data_dict = clean_dict(dict_fns.unflatten(
-                tuplize_dict(parse_params(request.POST))))
-
-            self._validate_dataset(data_dict)
-
-            if '_ckan_phase' in data_dict:
-                # we allow partial updates to not destroy existing resources
-                context['allow_partial_update'] = True
-                if 'tag_string' in data_dict:
-                    data_dict['tags'] = self._tag_string_to_list(
-                        data_dict['tag_string'])
-                del data_dict['_ckan_phase']
-                del data_dict['save']
-            context['message'] = data_dict.get('log_message', '')
-            data_dict['id'] = name_or_id
-
-            # Obtengo la lista de extras del dataset y agrego en el data_dict los extras que falten
-            # (no estaban en el request.POST), y reemplazo valores desactualizados
-            extra_fields = get_action('package_show')(dict(context, for_view=True), {'id': name_or_id})['extras']
-            if 'extras' not in data_dict.keys():
-                data_dict['extras'] = []
-            for extra_field in extra_fields:
-                found_extra_field = list(filter(lambda x: x['key'] == extra_field['key'], data_dict['extras']))
-                if found_extra_field:
-                    data_dict['extras'].append(extra_field)
-
-            time_now = moment.now().isoformat()
-
-            self._add_or_replace_extra(key='modified', value=time_now, extras=data_dict['extras'])
-
-            self.__generate_spatial_extra_field(data_dict)
-
-            pkg = get_action('package_update')(context, data_dict)
-            c.pkg = context['package']
-            c.pkg_dict = pkg
-
-            self._form_save_redirect(pkg['name'], 'edit',
-                                     package_type=package_type)
-        except NotAuthorized:
-            abort(403, _('Unauthorized to read package %s') % id)
-        except NotFound, e:
-            abort(404, _('Dataset not found'))
-        except dict_fns.DataError:
-            abort(400, _(u'Integrity Error'))
-        except SearchIndexError, e:
-            try:
-                exc_str = unicode(repr(e.args))
-            except Exception:  # We don't like bare excepts
-                exc_str = unicode(str(e))
-            abort(500, _(u'Unable to update search index.') + exc_str)
-        except ValidationError, e:
-            errors = e.error_dict
-            error_summary = e.error_summary
-
-        return self.edit(name_or_id, data_dict, errors, error_summary)
 
     def _validate_length(self, data, attribute, max_length):
         if len(data[attribute]) > max_length:
