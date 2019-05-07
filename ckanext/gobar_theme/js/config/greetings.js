@@ -1,5 +1,5 @@
 $(function () {
-    if (!window.location.hostname === 'localhost') { return }
+    if (window.location.hostname === 'localhost') { return }
 
     $('#greetings-modal').modal('show');
     $('#greetings-modal .dismiss-greetings').on('click', function() {
