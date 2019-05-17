@@ -142,7 +142,8 @@ class GobArRouter:
         )
 
     def connect_users(self):
-        self.route_map.connect('/logout', action='logout', controller='user')
+        from ckanext.gobar_theme.user_controller import GobArUserController
+        self.route_map.connect('/logout', action='logout', controller=self.user_controller)
         with SubMapper(self.route_map, controller=self.user_controller) as m:
             m.connect('/borradores', action="drafts")
             m.connect('/user/reset/{user_id}', action="password_reset")
@@ -160,6 +161,7 @@ class GobArRouter:
 
         self.redirect(
             ('/user/login', '/'),
+            ('/user/logged_in', '/'),
             ('/user/generate_key/{id}', '/'),
             ('/user/activity/{id}/{offset}', '/'),
             ('/user/activity/{id}', '/'),

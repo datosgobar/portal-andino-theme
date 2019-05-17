@@ -4,6 +4,7 @@
 {% set password_error = true if error_summary %}
 
 <form action="{{ action }}" method="post" class="form-horizontal">
+<p>hola hola {{ action }}</p>
   {{ form.errors(errors=error_summary) }}
 
   {{ form.input('login', label='Usuario', id='field-login', value="", error=username_error) }}

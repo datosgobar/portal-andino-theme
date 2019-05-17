@@ -12,32 +12,84 @@ import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
+import ckan.authz as authz
 from ckan.common import request, c, _, response
 from ckan.controllers.user import UserController
+from flask import redirect
+from urlparse import urlparse
+from ckan.common import config
+from paste.deploy.converters import asbool
 
 import ckanext.gobar_theme.mailer as mailer
+import ckanext.gobar_theme.helpers.fuck_you_ckan as fuck_you_ckan
 
+abort = base.abort
 parse_params = logic.parse_params
 check_access = logic.check_access
 NotAuthorized = logic.NotAuthorized
+NotFound = logic.NotFound
+get_action = logic.get_action
+render = base.render
 
 
 class GobArUserController(UserController):
     json_content_type = 'application/json;charset=utf-8'
+
+    def logout(self):
+        # Do any plugin logout stuff
+        for item in p.PluginImplementations(p.IAuthenticator):
+            item.logout()
+        # redirect(urlparse(c.pylons.request.url).netloc)
+        url = h.url_for(controller='user', action='logged_out_page')
+        coso = self._get_repoze_handler('logout_handler_path') + '?came_from=' + url
+        fuck_you_ckan.redirect_to(coso, parse_url=True, controller='user', action='login')
 
     # pylint: disable=W0622
     def read(self, id=None):
         controller = 'ckanext.gobar_theme.user_controller:GobArUserController'
         if id == 'logged_in':
             try:
-                return super(GobArUserController, self).read(id)
+                return self.read_robado(id)
+                # return super(GobArUserController, self).read(id)
             except HTTPNotFound:
+                raise ValueError("Llegando al except!!!")
                 return h.redirect_to(controller=controller, action='login')
         elif id == 'login':
+            # raise ValueError("Hay errorrrrrrrrrrrr")
             return h.redirect_to(controller=controller, action='login', login_error=True)
         return h.redirect_to('home')
 
+    def read_robado(self, id=None):
+        context = {'model': model, 'session': model.Session, 'user': c.user, 'auth_user_obj': c.userobj,
+                   'for_view': True}
+        data_dict = {'id': c.userobj.id if c.userobj else '', 'include_datasets': True, 'include_num_followers': True}
+
+        c.is_sysadmin = authz.is_sysadmin(c.user)
+        # import pdb; pdb.set_trace()
+        try:
+            user_dict = get_action('user_show')({}, data_dict)
+        except NotFound:
+            h.flash_error(_('Not authorized to see this page'))
+            extra_vars = {'login_error': True}
+            return base.render('user/login.html', extra_vars=extra_vars)
+            # fuck_you_ckan.redirect_to(parse_url=False, controller='user', action='login')
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        c.user_dict = user_dict
+        c.is_myself = user_dict['name'] == c.user
+        c.about_formatted = h.render_markdown(user_dict['about'])
+
+        # The legacy templates have the user's activity stream on the user
+        # profile page, new templates do not.
+        if asbool(config.get('ckan.legacy_templates', False)):
+            c.user_activity_stream = get_action('user_activity_list_html')(context, {'id': c.user_dict['id']})
+
+        return render('home/index.html')
+
     def login(self, error=None):
+        # import pdb; pdb.set_trace()
+        c.environ['repoze.who.api'].forget()
         # Do any plugin login stuff
         for item in p.PluginImplementations(p.IAuthenticator):
             item.login()
@@ -45,15 +97,39 @@ class GobArUserController(UserController):
         if not c.user:
             came_from = request.params.get('came_from')
             if not came_from:
-                came_from = h.url_for(controller='user', action='logged_in',
-                                      __ckan_no_root=True)
-            c.login_handler = h.url_for(
-                self._get_repoze_handler('login_handler_path'),
-                came_from=came_from)
+                came_from = h.url_for(controller='user', action='logged_in', __ckan_no_root=True)
+            c.login_handler = h.url_for(self._get_repoze_handler('login_handler_path'), came_from=came_from)
             extra_vars = {'login_error': parse_params(request.GET).get('login_error')}
+            # if extra_vars['login_error']:
+            #     raise ValueError(parse_params(request.GET))
             return base.render('user/login.html', extra_vars=extra_vars)
         else:
             return h.redirect_to('home')
+
+    def logged_in(self):
+        # redirect if needed
+        # import pdb; pdb.set_trace()
+        get_action = logic.get_action
+        came_from = request.params.get('came_from', '')
+        if h.url_is_local(came_from):
+            return h.redirect_to(str(came_from))
+
+        if c.user:
+            context = None
+            data_dict = {'id': c.user}
+
+            user_dict = get_action('user_show')(context, data_dict)
+
+            # return self.me()
+            return h.redirect_to('home')
+        else:
+            err = _('Login failed. Bad username or password.')
+            if asbool(config.get('ckan.legacy_templates', 'false')):
+                h.flash_error(err)
+                h.redirect_to(controller='user',
+                              action='login', came_from=came_from)
+            else:
+                return self.login(error=err)
 
     def password_forgot(self):
         json_response = {'success': False}
