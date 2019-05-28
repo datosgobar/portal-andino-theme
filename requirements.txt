@@ -4,3 +4,4 @@ redis==2.10.1
 python-crontab==2.3.6
 regex==2019.02.07
 -e git+https://github.com/ckan/ckanext-dcat.git@9709ab5771856303e5ac80bd0f7759ab47d99678#egg=ckanext-dcat
+-e git+https://github.com/data-govt-nz/ckanext-security.git#egg=ckanext-security==1.0.1
