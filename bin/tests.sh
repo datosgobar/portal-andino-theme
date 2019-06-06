@@ -29,4 +29,4 @@ sudo echo "" > ${CKAN_LIB}/theme_config/test_settings.json
 sudo echo "" > ${CKAN_LIB}/theme_config/datajson_cache_backup.json
 echo "Current user: $(whoami)"
 
-/usr/lib/ckan/default/bin/nosetests --nocapture --nologcapture --ckan --reset-db --with-pylons=/opt/theme/ckanext/gobar_theme/tests/tests_config/test-core.ini
+/usr/lib/ckan/default/bin/nosetests --nocapture --nologcapture --ckan --reset-db --with-pylons=/opt/theme/ckanext/gobar_theme/tests/tests_config/test-core.ini $1
