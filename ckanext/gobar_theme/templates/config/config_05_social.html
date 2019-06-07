@@ -33,6 +33,10 @@
         {% set linkedin = h.get_theme_config('social.linkedin') %}
         <input type="text" title="LinkedIn" id="linkedin" name="linkedin" value="{{- linkedin if linkedin else '' -}}">
 
+        <h2>Blog</h2>
+        {% set blog = h.get_theme_config('social.blog') %}
+        <input type="text" title="Blog" id="blog" name="blog" value="{{- blog if blog else '' -}}">
+
         <h2>* Mail de contacto</h2>
         {% set mail = h.get_theme_config('social.mail') %}
         <input type="text" title="Mail de contacto" id="mail" name="mail" value="{{- mail if mail else '' -}}">

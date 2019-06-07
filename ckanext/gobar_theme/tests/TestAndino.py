@@ -1,21 +1,24 @@
 #! coding: utf-8
 
-import os
 import json
 import logging
+import os
 import tempfile
-import sqlalchemy
-from routes import url_for
+
 import ckan
 import ckan.lib.search
-import ckan.model as model
 import ckan.logic as logic
-import ckan.tests.helpers as helpers
+import ckan.model as model
 import ckan.tests.factories as factories
+import ckan.tests.helpers as helpers
+import sqlalchemy
+from mock import patch
+from routes import url_for
+
+from ckanext.gobar_theme.config_controller import ThemeConfig
 from ckanext.gobar_theme.lib.datajson_actions import CACHE_DIRECTORY
 from ckanext.gobar_theme.lib.datajson_actions import generate_new_cache_file
-from ckanext.gobar_theme.config_controller import ThemeConfig
-from mock import patch
+from ckanext.gobar_theme.tests.tools.datajson_manager import enqueue_update_datajson_cache_tasks
 from ckanext.gobar_theme.tests.tools.organizations_manager import package_search, group_dictize, create_organization, \
     get_action
 
@@ -94,6 +97,8 @@ class TestAndino(helpers.FunctionalTestBase):
 
     @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     @patch('ckanext.gobar_theme.config_controller.ThemeConfig', get_test_theme_config)
+    @patch('ckanext.gobar_theme.lib.datajson_actions.enqueue_update_datajson_cache_tasks',
+           enqueue_update_datajson_cache_tasks)
     def get_page_response(self, url, admin_required=False):
         '''
         :param url: url a la cual se deberá acceder

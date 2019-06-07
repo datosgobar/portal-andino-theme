@@ -86,3 +86,16 @@ class TestGoogleTagManager(TestConfiguration):
 
         form = response.forms['google-tag-manager']
         nt.assert_equals(form['container-id'].value, "id-custom")
+
+
+class TestSocialNetworks(TestConfiguration):
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
+    def test_social_networks_can_be_configured(self):
+        env, response = self.get_page_response('/configurar/redes', admin_required=True)
+        response = self.edit_form_value(
+            response, form_id='social-config', field_name='blog', field_type='text', value="www.blog.com")
+
+        form = response.forms['social-config']
+        nt.assert_equals(form['blog'].value, "www.blog.com")
