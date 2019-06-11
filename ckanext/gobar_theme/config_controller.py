@@ -306,6 +306,7 @@ class GobArConfigController(base.BaseController):
     def edit_datapusher_commands(self):
         if 'datapusher' not in config.get('ckan.plugins', ''):
             return h.redirect_to('home')
+        self._authorize()
         if request.method == 'POST':
             from ckanext.gobar_theme.helpers.cron import create_or_update_cron_job
             params = parse_params(request.POST)
