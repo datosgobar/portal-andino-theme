@@ -327,7 +327,6 @@ class GobArConfigController(base.BaseController):
             create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
         return base.render('config/config_18_datapusher_commands.html')
 
-
     def edit_google_tag_manager(self):
         self._authorize()
         if request.method == 'POST':
