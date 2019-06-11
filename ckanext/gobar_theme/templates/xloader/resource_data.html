@@ -67,7 +67,7 @@
                     {% set icon = 'ok' if item.level == 'INFO' else 'exclamation' %}
                     {% set class = ' failure' if icon == 'exclamation' else ' success' %}
                     {% set popover_content = 'test' %}
-                    <li class="item no-avatar{{ class }}">
+                    <li class="item no-avatar{{ class }} xloader-log">
                         <i class="fa icon fa-{{ icon }}"></i>
                         <p>
                             {% for line in item.message.strip().split('\n') %}

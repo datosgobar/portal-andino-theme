@@ -9827,6 +9827,8 @@ ul.activity {
       margin: 5px; }
   ul.activity li.load-more {
     display: none !important; }
+  ul.activity li.xloader-log {
+    display: list-item !important; }
 
 div.button-pre{
   margin-top: 20px;
