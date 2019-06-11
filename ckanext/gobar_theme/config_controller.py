@@ -5,12 +5,13 @@ import os
 import re
 import urlparse
 
-import moment
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
+import moment
 from ckan.common import request, c
+from pylons import config
 
 from ckanext.gobar_theme.lib import cache_actions
 from ckanext.gobar_theme.theme_config import ThemeConfig
@@ -303,28 +304,30 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_15_google_dataset_search.html')
 
     def edit_datapusher_commands(self):
-        self._authorize()
-        if request.method == 'POST':
-            from ckanext.gobar_theme.helpers.cron import create_or_update_cron_job
-            params = parse_params(request.POST)
-            config_dict = self._read_config()
-            schedule_hour = params.get('schedule-hour').strip()
-            schedule_minute = params.get('schedule-minute').strip()
-            config_dict['datapusher'] = {
-                'schedule-hour': schedule_hour,
-                'schedule-minute': schedule_minute
-            }
-            self._set_config(config_dict)
+        if 'datapusher' in config.get('ckan.plugins', ''):
+            self._authorize()
+            if request.method == 'POST':
+                from ckanext.gobar_theme.helpers.cron import create_or_update_cron_job
+                params = parse_params(request.POST)
+                config_dict = self._read_config()
+                schedule_hour = params.get('schedule-hour').strip()
+                schedule_minute = params.get('schedule-minute').strip()
+                config_dict['datapusher'] = {
+                    'schedule-hour': schedule_hour,
+                    'schedule-minute': schedule_minute
+                }
+                self._set_config(config_dict)
 
-            # Creamos el cron job, reemplazando el anterior si ya existía
-            command = '{0} datapusher submit_all {1} && ' \
-                      '{0} views create {1}'\
-                .format('{} --plugin=ckan'.format(self.get_paster_path()),
-                        '-y -c {}'.format(self.get_config_file_path()))
-            comment = 'datapusher - submit_all'
-            create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
-
-        return base.render('config/config_18_datapusher_commands.html')
+                # Creamos el cron job, reemplazando el anterior si ya existía
+                command = '{0} datapusher submit_all {1} && ' \
+                          '{0} views create {1}'\
+                    .format('{} --plugin=ckan'.format(self.get_paster_path()),
+                            '-y -c {}'.format(self.get_config_file_path()))
+                comment = 'datapusher - submit_all'
+                create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
+            return base.render('config/config_18_datapusher_commands.html')
+        else:
+            return h.redirect_to('home')
 
     def edit_google_tag_manager(self):
         self._authorize()
