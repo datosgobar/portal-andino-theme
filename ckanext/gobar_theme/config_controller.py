@@ -5,11 +5,11 @@ import os
 import re
 import urlparse
 
+import moment
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
-import moment
 from ckan.common import request, c
 from pylons import config
 
