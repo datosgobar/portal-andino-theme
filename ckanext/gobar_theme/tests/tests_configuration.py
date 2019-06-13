@@ -67,9 +67,9 @@ class TestDatastoreCommands(TestConfiguration):
         self.edit_form_value(response, field_name=None, field_type=None, value=True)
 
         username = gobar_helpers.get_current_terminal_username()
-        amount_of_datapusher_jobs = subprocess.check_output(
-            'sudo grep datapusher /var/spool/cron/crontabs/{} | wc -l'.format(username), shell=True).strip()
-        nt.assert_equals(amount_of_datapusher_jobs, "1")
+        amount_of_datastore_jobs = subprocess.check_output(
+            'sudo grep datastore /var/spool/cron/crontabs/{} | wc -l'.format(username), shell=True).strip()
+        nt.assert_equals(amount_of_datastore_jobs, "1")
         
 
 class TestGoogleTagManager(TestConfiguration):
