@@ -128,6 +128,7 @@ class GobArConfigController(base.BaseController):
                 'inst': self._url_with_protocol(params['inst'].strip()),
                 'yt': self._url_with_protocol(params['yt'].strip()),
                 'linkedin': self._url_with_protocol(params['linkedin'].strip()),
+                'blog': self._url_with_protocol(params['blog'].strip()),
                 'mail': params['mail'].strip()
             }
             self._set_config(config_dict)

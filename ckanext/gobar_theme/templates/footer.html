@@ -51,7 +51,15 @@
                         </a>
                     {% endif %}
 
-                    {% if c.userobj and c.userobj.sysadmin and (has_tw or has_github or has_fb or has_inst or has_yt or has_linkedin) and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
+                    {% set blog = h.get_theme_config('social.blog') %}
+                    {% set has_blog = blog and blog|length > 0 %}
+                    {% if has_blog %}
+                        <a href="{{ blog }}" target="_blank" class="social-link">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if c.userobj and c.userobj.sysadmin and (has_tw or has_github or has_fb or has_inst or has_yt or has_linkedin or has_blog) and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
                         <a class="edit-social-link"
                            href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_social') }}">
                             {% snippet "svg/edit.svg" %}
