@@ -1,7 +1,7 @@
 {% extends "config/config_base.html" %}
 {% block config %}
 
-    <h1>Comandos de DataPusher</h1>
+    <h1>Comandos de Datastore</h1>
 
     <h2>Subida de recursos automática al Datastore</h2>
 
@@ -13,8 +13,8 @@
             {% set hours = range(24) %}
             {% set minutes = range(60) %}
             <td>
-                {% set established_hour = h.get_theme_config('datapusher.schedule-hour', '') %}
-                {% set established_minute = h.get_theme_config('datapusher.schedule-minute', '') %}
+                {% set established_hour = h.get_theme_config('datastore.schedule-hour', '') %}
+                {% set established_minute = h.get_theme_config('datastore.schedule-minute', '') %}
                 <div class="hour-picker-to">
                     <select id="date-to-hour" class="datapusher" name="schedule-hour">
                         {% for hour in hours %}

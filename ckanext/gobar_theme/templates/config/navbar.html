@@ -76,12 +76,10 @@
            class="section-link {{ 'active' if c.action == 'edit_google_dataset_search' else '' }}">
             Google Dataset Search
         </a>
-        {% if 'datapusher' in g.plugins %}
-            <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_datapusher_commands') }}"
-               class="section-link {{ 'active' if c.action == 'edit_datapusher_commands' else '' }}">
-                Datapusher
-            </a>
-        {% endif %}
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_datastore_commands') }}"
+           class="section-link {{ 'active' if c.action == 'edit_datastore_commands' else '' }}">
+            Datastore
+        </a>
         <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_google_tag_manager') }}"
            class="section-link {{ 'active' if c.action == 'edit_google_tag_manager' else '' }}">
             Google Tag Manager

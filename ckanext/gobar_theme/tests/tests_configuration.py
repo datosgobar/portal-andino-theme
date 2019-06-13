@@ -54,16 +54,16 @@ class TestGoogleDatasetSearch(TestConfiguration):
         nt.assert_equals(form['enable_structured_data'].checked, True)
 
 
-class TestDatapusherCommands(TestConfiguration):
+class TestDatastoreCommands(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def test_cron_job_is_created(self):
         # Creo el cron job
-        env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
+        env, response = self.get_page_response('/configurar/datastore', admin_required=True)
         self.edit_form_value(response, field_name=None, field_type=None, value=True)
         # Vuelvo a crear el cron job, reemplazando el anterior
-        env, response = self.get_page_response('/configurar/datapusher', admin_required=True)
+        env, response = self.get_page_response('/configurar/datastore', admin_required=True)
         self.edit_form_value(response, field_name=None, field_type=None, value=True)
 
         username = gobar_helpers.get_current_terminal_username()

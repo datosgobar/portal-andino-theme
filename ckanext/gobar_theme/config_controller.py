@@ -303,8 +303,12 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return base.render('config/config_15_google_dataset_search.html')
 
-    def edit_datapusher_commands(self):
-        if 'datapusher' not in config.get('ckan.plugins', ''):
+    def edit_datastore_commands(self):
+        if 'datapusher' in config.get('ckan.plugins', ''):
+            plugin_command = '--plugin=ckan datapusher submit_all'
+        elif 'xloader' in config.get('ckan.plugins', ''):
+            plugin_command = '--plugin=ckanext-xloader xloader submit all'
+        else:
             return h.redirect_to('home')
         self._authorize()
         if request.method == 'POST':
@@ -313,20 +317,24 @@ class GobArConfigController(base.BaseController):
             config_dict = self._read_config()
             schedule_hour = params.get('schedule-hour').strip()
             schedule_minute = params.get('schedule-minute').strip()
-            config_dict['datapusher'] = {
+            config_dict['datastore'] = {
                 'schedule-hour': schedule_hour,
                 'schedule-minute': schedule_minute
             }
             self._set_config(config_dict)
 
             # Creamos el cron job, reemplazando el anterior si ya existía
-            command = '{0} datapusher submit_all {1} && ' \
-                      '{0} views create {1}' \
-                .format('{} --plugin=ckan'.format(self.get_paster_path()),
-                        '-y -c {}'.format(self.get_config_file_path()))
-            comment = 'datapusher - submit_all'
+            paster_path = self.get_paster_path()
+            paster_config = '-y -c {}'.format(self.get_config_file_path())
+            submit_command = '{0} {1} {2}'.format(paster_path, plugin_command, paster_config)
+
+            plugin_command = "--plugin=ckan views create"
+            create_views_command = '{0} {1} {2}'.format(paster_path, plugin_command, paster_config)
+
+            command = '{0} && {1}'.format(submit_command, create_views_command)
+            comment = 'datastore - submit_all'
             create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
-        return base.render('config/config_18_datapusher_commands.html')
+        return base.render('config/config_18_datastore_commands.html')
 
     def edit_google_tag_manager(self):
         self._authorize()
