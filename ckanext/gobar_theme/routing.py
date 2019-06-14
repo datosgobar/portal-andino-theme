@@ -220,7 +220,7 @@ class GobArRouter:
             m.connect('/configurar/metadata/tw', action='edit_metadata_tw')
             m.connect('/configurar/metadata/portal', action='edit_metadata_portal')
             m.connect('/configurar/google_dataset_search', action='edit_google_dataset_search')
-            m.connect('/configurar/datapusher', action='edit_datapusher_commands')
+            m.connect('/configurar/datastore', action='edit_datastore_commands')
             m.connect('/configurar/google_tag_manager', action='edit_google_tag_manager')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
             m.connect('/configurar/series', action='edit_series')
