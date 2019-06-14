@@ -305,14 +305,6 @@ class GobArConfigController(base.BaseController):
         return base.render('config/config_15_google_dataset_search.html')
 
     def edit_datastore_commands(self):
-
-        def generate_datastore_command():
-            paster_path = self.get_paster_path()
-            paster_config = '-y -c {}'.format(self.get_config_file_path())
-            submit_command = '{0} {1} {2}'.format(paster_path, plugin_command, paster_config)
-            create_views_command = '{0} --plugin=ckan views create {1}'.format(paster_path, paster_config)
-            return '{0} && {1}'.format(submit_command, create_views_command)
-
         if 'datapusher' in config.get('ckan.plugins', ''):
             plugin_command = '--plugin=ckan datapusher submit_all'
         elif 'xloader' in config.get('ckan.plugins', ''):
@@ -332,7 +324,7 @@ class GobArConfigController(base.BaseController):
             }
             self._set_config(config_dict)
             # Creamos el cron job, reemplazando el anterior si ya existía
-            command = generate_datastore_command()
+            command = self._generate_datastore_command(plugin_command)
             comment = 'datastore - submit_all'
             create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
         return base.render('config/config_18_datastore_commands.html')
@@ -355,6 +347,13 @@ class GobArConfigController(base.BaseController):
             config_dict['show-greetings'] = False
             self._set_config(config_dict)
         return h.json.dumps({'success': True}, for_json=True)
+
+    def _generate_datastore_command(self, plugin_command):
+        paster_path = self.get_paster_path()
+        paster_config = '-y -c {}'.format(self.get_config_file_path())
+        submit_command = '{0} {1} {2}'.format(paster_path, plugin_command, paster_config)
+        create_views_command = '{0} --plugin=ckan views create {1}'.format(paster_path, paster_config)
+        return '{0} && {1}'.format(submit_command, create_views_command)
 
     @staticmethod
     def _url_with_protocol(url):
