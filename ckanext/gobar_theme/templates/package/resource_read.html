@@ -167,6 +167,8 @@
                         <div class="col-xs-8 value">
                             {% if res.issued is defined %}
                                 {{ h.render_ar_datetime(res.issued) }}
+                            {% elif res.Creado is defined %}
+                                {{ h.render_ar_datetime(res.Creado) }}
                             {% elif res.created is defined %}
                                 {{ h.render_ar_datetime(res.created) }}
                             {% else %}
