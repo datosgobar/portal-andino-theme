@@ -1,6 +1,6 @@
 # portal-andino-theme
 
-Repositorio de la extensión del Portal Andino de la República Argentina para [CKAN](http://ckan.org/). Este proyecto se encarga de modificaciones al ruteo de la aplicación web, cambios visuales a la interfaz, customización del portal, analytics y gestión de usuarios, permisos y roles, entre otros. Este repositorio *no* constituye el proyecto entero. El repositorio central del proyecto del Portal Andino es [portal-andino](https://github.com/datosgobar/portal-andino)
+Repositorio de la extensión del Portal Andino de la República Argentina para [CKAN](https://ckan.org/). Este proyecto se encarga de modificaciones al ruteo de la aplicación web, cambios visuales a la interfaz, customización del portal, analíticas y gestión de usuarios, permisos y roles, entre otros. Este repositorio *no* constituye el proyecto en su totalidad. El repositorio central del proyecto del Portal Andino es [Portal-Andino](https://github.com/datosgobar/portal-andino)
 
 - [Instalación](#instalaci%C3%B3n)
 - [Desarrollo](#desarrollo)
@@ -15,9 +15,9 @@ La instalación del paquete completo está disponible como un contenedor de Dock
 
 ## Desarrollo
 
-Como alternativa a la instalación dockerizada existe la posibilidad de tener una instalación contenida en un `virtualenv` del sistema. Esto se puede obtener siguiendo las instrucciones de [esta guia](http://docs.ckan.org/en/ckan-2.5.2/maintaining/installing/install-from-source.html). Una vez instalado el paquete a nivel sistema, es posible linkear el proceso principal a un debbuger de python (por ej pycharm). Este metodo no es recomendado para hacer modificaciones que impacten en el manejo del servidor por parte del wsgi de apache o nginx. Para dicho caso, es necesario tener una instalación de la aplicación dockerizada y acceder al contenedor del theme para realizar el desarrollo necesario.
+Como alternativa a la instalación dockerizada existe la posibilidad de tener una instalación contenida en un `virtualenv` del sistema. Esto se puede obtener siguiendo las instrucciones de [esta guia](http://docs.ckan.org/en/ckan-2.5.2/maintaining/installing/install-from-source.html). Una vez instalado el paquete a nivel sistema, es posible vincular el proceso principal a un debbuger de python (por ej.: pycharm). Este método no es recomendado para hacer modificaciones que impacten en el manejo del servidor por parte del wsgi de apache o nginx. Para dicho caso, es necesario tener una instalación de la aplicación dockerizada y acceder al contenedor del `theme` para realizar el desarrollo necesario.
 
-Esta extensión de ckan fue desarrollada siguiendo la [guia de creación de extensiones](http://docs.ckan.org/en/ckan-2.5.2/extensions/tutorial.html).
+Esta extensión de ckan fue desarrollada siguiendo la [guía de creación de extensiones](http://docs.ckan.org/en/ckan-2.5.2/extensions/tutorial.html).
 
 ### Estructura de archivos
 
