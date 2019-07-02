@@ -93,7 +93,7 @@ class TestLoginTitle(TestConfiguration):
     @patch('redis.StrictRedis', mock_strict_redis_client)
     @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def test_login_title_can_be_configured(self):
-        env, response = self.get_page_response('/configurar/titulo_catalogo', admin_required=True)
+        env, response = self.get_page_response('/configurar/titulo_login', admin_required=True)
         response = \
             self.edit_form_value(response, field_name='login-title', field_type='text', value="title-custom")
 
