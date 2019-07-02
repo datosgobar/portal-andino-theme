@@ -88,6 +88,22 @@ class TestGoogleTagManager(TestConfiguration):
         nt.assert_equals(form['container-id'].value, "id-custom")
 
 
+class TestLoginTitle(TestConfiguration):
+
+    @patch('redis.StrictRedis', mock_strict_redis_client)
+    @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
+    def test_login_title_can_be_configured(self):
+        env, response = self.get_page_response('/configurar/titulo_catalogo', admin_required=True)
+        form = response.forms['login-title-form']
+        # Chequeamos que el valor default sea utilizado
+        nt.assert_equals(form['login-title'].value, "title-default")
+        response = \
+            self.edit_form_value(response, field_name='login-title', field_type='text', value="title-custom")
+
+        form = response.forms['login-title-form']
+        nt.assert_equals(form['login-title'].value, "title-custom")
+
+
 class TestSocialNetworks(TestConfiguration):
 
     @patch('redis.StrictRedis', mock_strict_redis_client)
