@@ -1,0 +1,16 @@
+{% extends "config/config_base.html" %}
+{% block config %}
+
+    <h1>Título del Login</h1>
+
+    <form id="login-title-form" method="post" action="" data-module="basic-form">
+
+        <h2>¿Qué título querés mostrar en la pantalla del Login?</h2>
+        <input type="text" name="login-title" value="{{ h.get_theme_config('login-title') or '' }}">
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">GUARDAR</button>
+        </div>
+    </form>
+
+{% endblock -%}

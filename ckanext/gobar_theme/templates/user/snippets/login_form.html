@@ -16,15 +16,20 @@
     </p>
   {% endif %}
 
-  {{ form.checkbox('remember', label='Recordarme', id='field-remember', checked=true, value="63072000") }}
+  <div class="login-password-box">
+      <div class="login-remember">
+          {{ form.checkbox('remember', label='Recordarme', id='field-remember', checked=true, value="63072000") }}
+      </div>
+      <div class="password-reset">
+          <a href="#" id="password-reset-show-modal">Olvidé mi contraseña</a>
+      </div>
+  </div>
 
-  <div class="form-actions">
+  <div class="form-actions login-submit-box">
     {% block login_button %}
         <button type="submit">INGRESAR</button>
     {% endblock %}
   </div>
 
-  <p class="password-reset">
-      <a href="#" id="password-reset-show-modal">Olvidé mi contraseña</a>
-  </p>
+
 </form>

@@ -10,7 +10,7 @@
                     <i class="icon-reorder fa fa-bars" aria-hidden="true"></i>
                     <a href="{{ h.url('home') }}">
                         {% set image = h.get_theme_config('header.image') %}
-                        <img src="{{ image if image else '/img/logo_ministerio.svg' }}" class="logo-ministerio">
+                        <img src="{{ image if image else '/img/logo_ministerio_color.png' }}" class="logo-ministerio">
                     </a>
                     {% if c.userobj and c.userobj.sysadmin and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
                         <a class="edit-description-link"
