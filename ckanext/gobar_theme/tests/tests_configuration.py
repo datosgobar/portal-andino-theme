@@ -94,9 +94,6 @@ class TestLoginTitle(TestConfiguration):
     @patch('ckanext.gobar_theme.helpers.ThemeConfig', get_test_theme_config)
     def test_login_title_can_be_configured(self):
         env, response = self.get_page_response('/configurar/titulo_catalogo', admin_required=True)
-        form = response.forms['login-title-form']
-        # Chequeamos que el valor default sea utilizado
-        nt.assert_equals(form['login-title'].value, "title-default")
         response = \
             self.edit_form_value(response, field_name='login-title', field_type='text', value="title-custom")
 
