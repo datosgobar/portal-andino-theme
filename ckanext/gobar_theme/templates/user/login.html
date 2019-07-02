@@ -6,15 +6,22 @@
 
     <div id="login-container" class="container-fluid">
       <div class="restricted-max-width">
-        <div id="login" class="col-xs-12 col-md-10 col-md-offset-1">
-            <div id="login-vertical-wrapper">
-                <div id="forgot-password-positive-feedback" class="{{ 'hidden' if not h.get_request_param('email-feedback') }}">
-                    <span>
-                      <img src="/img/input-check.svg">
-                      ¡Perfecto! Te enviamos un e-mail para crear una nueva contraseña.
-                    </span>
-                </div>
+        <div id="login" class="col-xs-12 col-md-10 col-md-offset-1 login-block">
+            <div class="col-xs-4 col-xs-offset-4">
+                <img src="/img/andino.png" class="andino-logo">
+                <h2 class="login-custom-text">{{ h.get_theme_config('login-title') }}</h2>
+            </div>
+            <div class="col-xs-8 col-xs-offset-2">
+                <div id="login-vertical-wrapper" class="login-form">
+                    <h4 class="login-access-text"><b>Ingresá a tu cuenta</b></h4>
+                    <div id="forgot-password-positive-feedback" class="{{ 'hidden' if not h.get_request_param('email-feedback') }}">
+                        <span>
+                            <img src="/img/input-check.svg">
+                            ¡Perfecto! Te enviamos un e-mail para crear una nueva contraseña.
+                        </span>
+                    </div>
                 {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary, login_error=login_error %}
+                </div>
             </div>
         </div>
       </div>

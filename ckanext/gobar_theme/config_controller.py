@@ -348,6 +348,15 @@ class GobArConfigController(base.BaseController):
             self._set_config(config_dict)
         return h.json.dumps({'success': True}, for_json=True)
 
+    def edit_login_title(self):
+        self._authorize()
+        if request.method == 'POST':
+            params = parse_params(request.POST)
+            config_dict = self._read_config()
+            config_dict['login-title'] = params['login-title'].strip()
+            self._set_config(config_dict)
+        return base.render('config/config_19_login_title.html')
+
     def _generate_datastore_command(self, plugin_command):
         paster_path = self.get_paster_path()
         paster_config = '-y -c {}'.format(self.get_config_file_path())

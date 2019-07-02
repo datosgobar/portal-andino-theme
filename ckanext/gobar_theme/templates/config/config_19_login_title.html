@@ -1,0 +1,16 @@
+{% extends "config/config_base.html" %}
+{% block config %}
+
+    <h1>Título del catálogo</h1>
+
+    <form id="google-tag-manager" method="post" action="" data-module="basic-form">
+
+        <h2>¿Qué título querés mostrar para el catálogo?</h2>
+        <input type="text" name="login-title" value="{{ h.get_theme_config('login-title') or '' }}">
+
+        <div class="submit-container">
+            <button class="submit-button" type="submit" name="save">GUARDAR</button>
+        </div>
+    </form>
+
+{% endblock -%}

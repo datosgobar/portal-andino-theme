@@ -7491,7 +7491,8 @@ div#background-container {
         font-weight: 400;
         padding: 5px 20px 5px 0;
         font-size: 16px;
-        line-height: 1.2; }
+        line-height: 1.2;
+        color: #323232;}
       #login-container #login form input[type="text"], #login-container #login form input[type="password"] {
         width: 100%;
         font-size: 16px;
@@ -7556,8 +7557,7 @@ div#background-container {
       display: table-cell;
       vertical-align: middle; }
       #login-container #login #login-vertical-wrapper .password-reset {
-        text-align: center;
-        margin: 50px 0 0 0; }
+        float: right; }
     #login-container #login #forgot-password-positive-feedback {
       text-align: center;
       margin-bottom: 40px; }
@@ -7573,7 +7573,8 @@ div#background-container {
           margin-right: 10px; }
     #login-container #login form {
       width: 100%;
-      margin: 0 auto; }
+      margin: 0 auto;
+      border-radius: 10px;}
       @media (min-width: 768px) {
         #login-container #login form {
           width: 600px; } }
@@ -7606,14 +7607,14 @@ div#background-container {
         background: #0695d6;
         color: white;
         border: none;
-        border-radius: 4px;
-        font-size: 16px;
+        border-radius: 0;
+        font-size: 14px;
         margin-bottom: 5px;
-        font-weight: 300;
-        padding: 12px;
+        font-weight: 500;
+        padding: 6px 20px;
         display: inline-block; }
-        #login-container #login form button:hover {
-          background-color: #17b2f8; }
+      #login-container #login form button:hover {
+        background-color: #17b2f8; }
 
 #recover-password.modal {
   width: 600px;
@@ -10379,3 +10380,52 @@ form#datapusher > table.date-picker.datapusher {
   margin-bottom: 5px;
 }
 
+.login-block {
+  display: block;
+}
+
+.andino-logo {
+  width: 366px;
+  margin-top: 45px;
+}
+
+.login-form {
+  text-align: center;
+  display: inline !important;
+}
+
+.login-custom-text {
+  text-align: center;
+  margin-top: 18px;
+  margin-bottom: 10px;
+  color: #002F50;
+}
+
+.login-access-text {
+  margin-bottom: 20px;
+  color: #323232;
+}
+
+.login-password-box {
+  margin-top: 20px;
+}
+
+.login-remember {
+  width: 110px;
+  float: left;
+}
+
+.login-submit-box {
+  display: flex;
+  justify-content: center;
+  margin-left: 170px !important;
+  margin-top: 40px !important;
+}
+
+#field-login, #field-password {
+  border-radius: 8px;
+}
+
+#login-vertical-wrapper label::after {
+  content: "";
+}
