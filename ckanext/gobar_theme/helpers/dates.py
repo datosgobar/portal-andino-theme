@@ -1,10 +1,12 @@
 #!coding=utf-8
+from datetime import time
+from dateutil import parser, tz
+
 import moment
+
 import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 from ckan.common import _
-from datetime import time
-from dateutil import parser, tz
 
 
 def convert_iso_string_to_utc(date_string=''):
