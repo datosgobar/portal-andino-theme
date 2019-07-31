@@ -1,8 +1,12 @@
 #!coding=utf-8
-from datetime import time
 import moment
-from dateutil import parser, tz
+
 import ckan.lib.helpers as ckan_helpers
+import ckan.lib.formatters as formatters
+
+from dateutil import parser, tz
+from datetime import time
+
 from ckan.common import _
 
 
@@ -35,6 +39,7 @@ def render_ar_datetime(datetime_):
     datetime_ = ckan_helpers._datestamp_to_datetime(convert_iso_string_to_utc(datetime_))
     if not datetime_:
         return ''
-    return _('{day} de {month} de {year}').format(year=datetime_.year,
-                                                  month=datetime_.month,
-                                                  day=datetime_.day)
+    return _('{day} de {month} de {year}').format(
+        year=datetime_.year,
+        month=formatters._MONTH_FUNCTIONS[datetime_.month - 1]().lower(),
+        day=datetime_.day)
