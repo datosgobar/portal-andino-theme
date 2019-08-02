@@ -58,6 +58,10 @@
                 <input name="password" type="password" title="Nueva contraseña" data-default-value="">
             </div>
 
+            {% if 'security' in g.plugins %}
+                <p>La contraseña debe contener como mínimo 10 caracteres, y estar compuesta de al menos tres de los siguientes tipos de caracteres: mayúsculas, minúsculas, dígitos, puntuación y caracteres especiales.</p>
+            {% endif %}
+
             <h2>Repetir contraseña</h2>
             <div class="can-have-feedback-img">
                 <input name="password" type="password" title="Repetir contraseña">
