@@ -1,10 +1,12 @@
 #!coding=utf-8
 from datetime import time
-import moment
 from dateutil import parser, tz
+
+import moment
+
+import ckan.lib.formatters as formatters
 import ckan.lib.helpers as ckan_helpers
 from ckan.common import _
-
 
 
 def convert_iso_string_to_utc(date_string=''):
@@ -35,6 +37,7 @@ def render_ar_datetime(datetime_):
     datetime_ = ckan_helpers._datestamp_to_datetime(convert_iso_string_to_utc(datetime_))
     if not datetime_:
         return ''
-    return _('{day} de {month} de {year}').format(year=datetime_.year,
-                                                  month=datetime_.month,
-                                                  day=datetime_.day)
+    return _('{day} de {month} de {year}').format(
+        year=datetime_.year,
+        month=formatters._MONTH_FUNCTIONS[datetime_.month - 1]().lower(),
+        day=datetime_.day)
