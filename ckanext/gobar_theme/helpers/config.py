@@ -85,4 +85,4 @@ def get_security_things():
     from ckanext.security.cache.login import LoginThrottle
     user = User.by_name('admin')
     throttle = LoginThrottle(user, request.environ['REMOTE_ADDR'])
-    return {'user': user, 'cant_intentos': throttle.count}
+    return {'user': user, 'throttle': throttle.__dict__}
