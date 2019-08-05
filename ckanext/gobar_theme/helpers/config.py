@@ -77,3 +77,12 @@ def get_units():
     units_url = config.get('units_url').replace('file://', '')
     with io.open(units_url, encoding='utf-8') as content:
         return json.load(content)
+
+
+def get_security_things():
+    from ckan.model import User
+    from ckan.common import request
+    from ckanext.security.cache.login import LoginThrottle
+    user = User.by_name('admin')
+    throttle = LoginThrottle(user, request.environ['REMOTE_ADDR'])
+    return {'user': user, 'throttle': throttle}

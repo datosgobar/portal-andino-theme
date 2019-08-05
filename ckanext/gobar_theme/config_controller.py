@@ -72,7 +72,9 @@ class GobArConfigController(base.BaseController):
             datajson_actions.enqueue_update_datajson_cache_tasks()
             cache_actions.clear_web_cache()
 
-        return base.render('config/config_01_title.html')
+
+        from ckan.model import User
+        return base.render('config/config_01_title.html', extra_vars={'a': 'asd', 'user': User.by_name('default'), 'environ': request.environ})
 
     def edit_home(self):
         self._authorize()
