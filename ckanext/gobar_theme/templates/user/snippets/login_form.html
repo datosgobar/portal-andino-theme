@@ -10,6 +10,14 @@
 
   {{ form.input('password', label='Contraseña', id='field-password', type="password", value="", error=password_error) }}
 
+
+environ:  {{ environ }} | {{ login_error }}
+<br>
+prueba: {{ prueba }}
+<br>
+params: {{ params }}
+
+
   {% if login_error %}
     <p class="error">
       No encontramos ningún usuario con esa combinación de usuario y contraseña

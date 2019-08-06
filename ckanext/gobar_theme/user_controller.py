@@ -12,7 +12,7 @@ import ckan.lib.search as search
 import ckan.logic as logic
 import ckan.model as model
 import ckan.plugins as p
-from ckan.common import request, c, _, response
+from ckan.common import request, c, _, response, request
 from ckan.controllers.user import UserController
 
 import ckanext.gobar_theme.mailer as mailer
@@ -34,10 +34,10 @@ class GobArUserController(UserController):
             except HTTPNotFound:
                 return h.redirect_to(controller=controller, action='login')
         elif id == 'login':
-            return h.redirect_to(controller=controller, action='login', login_error=True)
+            return h.redirect_to(controller=controller, action='login', login_error=True, kwargs={'asd': request.environ})
         return h.redirect_to('home')
 
-    def login(self, error=None):
+    def login(self, error=None, *args, **kwargs):
         # Do any plugin login stuff
         for item in p.PluginImplementations(p.IAuthenticator):
             item.login()
@@ -50,7 +50,11 @@ class GobArUserController(UserController):
             c.login_handler = h.url_for(
                 self._get_repoze_handler('login_handler_path'),
                 came_from=came_from)
-            extra_vars = {'login_error': parse_params(request.GET).get('login_error')}
+            extra_vars = {'login_error': parse_params(request.GET).get('login_error'), 
+                          'environ': request.environ or 'asd', 
+                          'prueba': 'prueba',
+			  'params': request.params}
+	    extra_vars['login_error'] = c.user or request.params.get('came_from') or kwargs
             return base.render('user/login.html', extra_vars=extra_vars)
         else:
             return h.redirect_to('home')
