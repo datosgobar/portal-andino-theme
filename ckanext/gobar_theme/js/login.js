@@ -30,6 +30,7 @@ $(function () {
         var failCallback = function () {
             var feedback = '¡Oh! No encontramos este usuario. Probá con otro.'
         };
-        $.post('/olvide_mi_contraseña', {user: username}, callback).fail(failCallback);
+        $.post('/olvide_mi_contraseña', {user: username, token: $("#login-vertical-wrapper").find("form").children("input")[0].value}, callback).fail(failCallback);
     })
 });
+
