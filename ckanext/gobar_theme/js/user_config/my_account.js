@@ -55,7 +55,7 @@ $(function () {
                 } else {
                     var secondInput = $(inputs[2]);
                     clearFeedback(secondInput);
-                    showNegativeFeedback(firstInput, 'Ocurrió un error.');
+                    showNegativeFeedback(secondInput, 'La contraseña ingresada no es válida.');
                 }
             }
         };
