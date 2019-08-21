@@ -27,7 +27,7 @@ $(function () {
         var inputs = editSection.find('input');
         var endpoint = editSection.data('endpoint');
         var data = {
-            token: $("#token-form input").val()
+            token: $("#token-generator input").val()
         };
         var newData = $(inputs[1]).val();
         var attr = editSection.data('attr');
