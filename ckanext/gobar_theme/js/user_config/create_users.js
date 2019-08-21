@@ -24,7 +24,7 @@ $(function () {
         var button = $(e.currentTarget);
         button.prop('disabled', true);
         var failCallback = function () { button.prop('disabled', false); };
-        $.post('/configurar/borrar_usuario', {id: username}, function (response) {
+        $.post('/configurar/borrar_usuario', {id: username, token: $("#token-generator input").val()}, function (response) {
             if (response.success) {
                 window.location.reload()
             }
@@ -37,7 +37,8 @@ $(function () {
         var data = {
             username: $el.find('input[name="username"]').val(),
             role: $el.find('select.user-role').val(),
-            organizations: $el.find('select.organization-select').multipleSelect('getSelects')
+            organizations: $el.find('select.organization-select').multipleSelect('getSelects'),
+            token: $("#token-generator input").val()
         }
         var callback = function (response) {
             if (response.success) {
@@ -122,6 +123,7 @@ $(function () {
                 username: usernameInput.val().trim(),
                 fullname: fullnameInput.val().trim(),
                 email: emailInput.val().trim(),
+                token: $("#token-generator input").val()
             }
             if (createSection.hasClass('user')) {
                 var organizationSelect = createSection.find('select.organization-select');

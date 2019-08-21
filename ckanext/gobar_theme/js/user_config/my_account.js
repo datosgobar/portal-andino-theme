@@ -26,7 +26,9 @@ $(function () {
     var sendChanges = function (editSection) {
         var inputs = editSection.find('input');
         var endpoint = editSection.data('endpoint');
-        var data = {};
+        var data = {
+            token: $("#token-generator input").val()
+        };
         var newData = $(inputs[1]).val();
         var attr = editSection.data('attr');
         data[attr] = newData;

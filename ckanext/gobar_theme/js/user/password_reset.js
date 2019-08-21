@@ -57,7 +57,8 @@ $(function () {
         var password = $('#password1').val().trim();
         var data = {
             password: password,
-            key: $('#password-reset').data('key')
+            key: $('#password-reset').data('key'),
+            token: $("#token-generator input").val()
         }
         var email = $('#email1').val().trim();
         if (email.length > 0) {

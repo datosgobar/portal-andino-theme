@@ -272,7 +272,8 @@ class GobArUserController(UserController):
         username = params['username'].lower()
         if model.User.by_name(username) is not None:
             return {'success': False, 'error': 'user_already_exists'}
-        random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+        letter_space = string.ascii_uppercase + string.digits + string.ascii_lowercase
+        random_password = ''.join(random.choice(letter_space) for _ in range(10))
         data_dict = {
             'name': username,
             'fullname': params['fullname'],
