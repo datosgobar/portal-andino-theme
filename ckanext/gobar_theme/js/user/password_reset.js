@@ -1,6 +1,20 @@
 $(function () {
     $('#password-reset').modal('show');
 
+    var ckanextSecurityRules = function(password) {
+        return true;
+        if (password.length < 10) {
+            return false;
+        }
+
+        var hasLowercase = /[a-z]+/.test(password);
+        var hasUppercase = /[A-Z]+/.test(password);
+        var hasNumber = /[0-9]/.test(password);
+        var hasSymbol = /^[^a-zA-Z0-9]+/.test(password);
+        var amountTrue = hasLowercase + hasUppercase + hasNumber + hasSymbol;
+        return amountTrue >= 3;
+
+    };
     var validatePassword = function () {
         var input1 = $('#password1');
         var input2 = $('#password2');
@@ -17,6 +31,11 @@ $(function () {
         if (input1.val() != input2.val()) {
             showNegativeFeedback(input2, '¡Oh! Las contraseñas no coinciden. Probá otra vez.');
             return false
+        }
+
+        if (!ckanextSecurityRules(input1.val())) {
+            showNegativeFeedback(input2, "La contraseña ingresada no es segura. Debe tener al menos diez caracteres, y al menos 3 de los siguientes caracteres: una letra minúscula, una letra mayúscula, un número, o un símbolo");
+            return false;
         }
         return true
     };
@@ -71,6 +90,7 @@ $(function () {
             }
         };
         var failCallback = function () {
+            showNegativeFeedback("Error en la validación del servidor. Probá pidiendo un reinicio de contraseña nuevamente, y siguiendo el nuevo link del mail")
         };
         $.post(url, data, callback).fail(failCallback);
     };
