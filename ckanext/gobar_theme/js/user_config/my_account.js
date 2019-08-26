@@ -67,18 +67,18 @@ $(function () {
         var inputs = editSection.find('input');
         var firstInput = $(inputs[1]);
         var secondInput = $(inputs[2]);
-        var valuesAreEqual = firstInput.val() == secondInput.val();
+        var valuesAreEqual = firstInput.val() === secondInput.val();
 
         clearFeedback($(inputs[0]));
         clearFeedback(firstInput);
         clearFeedback(secondInput);
 
-        if (firstInput.val().length == 0) {
+        if (firstInput.val().length === 0) {
             showNegativeFeedback(firstInput, 'Completá este dato.');
             return false
         }
 
-        if (secondInput.val().length == 0) {
+        if (secondInput.val().length === 0) {
             showNegativeFeedback(secondInput, 'Completá este dato.');
             return false
         }
@@ -86,7 +86,7 @@ $(function () {
         var attr = editSection.data('attr');
 
         if (!valuesAreEqual) {
-            if (attr == 'password') {
+            if (attr === 'password') {
                 showNegativeFeedback(firstInput, '');
                 showNegativeFeedback(secondInput, '¡Oh! Las contraseñas no coinciden. Probá otra vez.');
             } else {
@@ -96,10 +96,10 @@ $(function () {
             return false
         }
 
-        if (attr == 'password' && secondInput.val().length < 4) {
-            showNegativeFeedback(secondInput, 'Usá por lo menos 4 caracteres.');
+        if (attr === 'password' && !securePassword(secondInput.val())) {
+            showNegativeFeedback(secondInput, "La contraseña ingresada no es segura. Debe tener al menos diez caracteres, y al menos 3 de los siguientes caracteres: una letra minúscula, una letra mayúscula, un número, o un símbolo");
             return false
-        } else if (attr == 'email') {
+        } else if (attr === 'email') {
             if (!email_re.test(secondInput.val())) {
                 showNegativeFeedback(secondInput, 'Usá este formato nombre@ejemplo.com.');
                 return false;
