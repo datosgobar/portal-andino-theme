@@ -1,5 +1,5 @@
 var securePassword = function (password) {
-    if ($("#token-generator input").val() === undefined) {
+    if (!ckanextSecurityActivated()) {
         return password.length < 4;
     }
 
