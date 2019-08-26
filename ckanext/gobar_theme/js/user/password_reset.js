@@ -20,11 +20,7 @@ $(function () {
         }
 
         if (!securePassword(input1.val())) {
-            if (ckanextSecurityActivated()) {
-                showNegativeFeedback(input2, "La contraseña ingresada no es segura. Debe tener al menos diez caracteres, y al menos 3 de los siguientes caracteres: una letra minúscula, una letra mayúscula, un número, o un símbolo");
-            } else {
-                showNegativeFeedback(input2, "La contraseña ingresada no es segura. Debe tener al menos 4 caracteres.")
-            }
+            insecurePasswordMessage();
             return false;
         }
         return true

@@ -19,3 +19,12 @@ var securePassword = function (password) {
 var ckanextSecurityActivated = function () {
     return $("#token-generator input").val() !== undefined
 };
+
+
+var insecurePasswordMessage = function () {
+    if (ckanextSecurityActivated()) {
+        showNegativeFeedback(secondInput, "La contraseña ingresada no es segura. Debe tener al menos diez caracteres, y al menos 3 de los siguientes caracteres: una letra minúscula, una letra mayúscula, un número, o un símbolo");
+    } else {
+        showNegativeFeedback(secondInput, "La contraseña ingresada no es segura. Debe tener al menos 4 caracteres.");
+    }
+};
