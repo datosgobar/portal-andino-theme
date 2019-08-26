@@ -19,8 +19,13 @@ $(function () {
             return false
         }
 
-        if (!securePassword(input1.val())) {
+        if (ckanextSecurityActivated() && !securePassword(input1.val())) {
             showNegativeFeedback(input2, "La contraseña ingresada no es segura. Debe tener al menos diez caracteres, y al menos 3 de los siguientes caracteres: una letra minúscula, una letra mayúscula, un número, o un símbolo");
+            return false;
+        }
+
+        if (input1.val().length < 4) {
+            showNegativeFeedback(input2, "La contraseña ingresada no es segura. Debe tener al menos 4 caracteres.")
             return false;
         }
         return true
@@ -76,7 +81,7 @@ $(function () {
             }
         };
         var failCallback = function () {
-            showNegativeFeedback("Error en la validación del servidor. Probá pidiendo un reinicio de contraseña nuevamente, y siguiendo el nuevo link del mail")
+            showNegativeFeedback("Error en la validación del servidor. Intente pedir un reinicio de contraseña nuevamente, y siguiendo el nuevo link del mail")
         };
         $.post(url, data, callback).fail(failCallback);
     };

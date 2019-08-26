@@ -96,8 +96,11 @@ $(function () {
             return false
         }
 
-        if (attr === 'password' && !securePassword(secondInput.val())) {
+        if (attr === 'password' && ckanextSecurityActivated() && !securePassword(secondInput.val())) {
             showNegativeFeedback(secondInput, "La contraseña ingresada no es segura. Debe tener al menos diez caracteres, y al menos 3 de los siguientes caracteres: una letra minúscula, una letra mayúscula, un número, o un símbolo");
+            return false
+        } else if (attr === 'password' && secondInput.val().length < 4) {
+            showNegativeFeedback(secondInput, "La contraseña ingresada no es segura. Debe tener al menos 4 caracteres.");
             return false
         } else if (attr === 'email') {
             if (!email_re.test(secondInput.val())) {
