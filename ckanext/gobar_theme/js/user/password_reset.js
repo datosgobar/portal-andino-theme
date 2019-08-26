@@ -19,8 +19,8 @@ $(function () {
             return false
         }
 
-        if (!securePassword(input1.val())) {
-            insecurePasswordMessage();
+        if (!securePassword(input2.val())) {
+            insecurePasswordMessage(input2);
             return false;
         }
         return true

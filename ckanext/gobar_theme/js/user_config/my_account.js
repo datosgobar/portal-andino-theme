@@ -97,7 +97,7 @@ $(function () {
         }
 
         if (attr === 'password' && !securePassword(secondInput.val())) {
-            insecurePasswordMessage();
+            insecurePasswordMessage(secondInput);
             return false
         } else if (attr === 'email') {
             if (!email_re.test(secondInput.val())) {
