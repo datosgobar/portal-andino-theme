@@ -18,6 +18,11 @@ $(function () {
             showNegativeFeedback(input2, '¡Oh! Las contraseñas no coinciden. Probá otra vez.');
             return false
         }
+
+        if (!securePassword(input2.val())) {
+            insecurePasswordMessage(input2);
+            return false;
+        }
         return true
     };
 
@@ -71,6 +76,7 @@ $(function () {
             }
         };
         var failCallback = function () {
+            showNegativeFeedback("Error en la validación del servidor. Intente pedir un reinicio de contraseña nuevamente, y siguiendo el nuevo link del mail")
         };
         $.post(url, data, callback).fail(failCallback);
     };

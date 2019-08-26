@@ -30,7 +30,14 @@ $(function () {
         var failCallback = function () {
             var feedback = '¡Oh! No encontramos este usuario. Probá con otro.'
         };
-        $.post('/olvide_mi_contraseña', {user: username, token: $("#login-vertical-wrapper").find("form").children("input")[0].value}, callback).fail(failCallback);
+        var data = {
+            user: username,
+        };
+        var csrf_input = $("#login-vertical-wrapper").find("form").children("input")[0];
+        if (csrf_input !== undefined) {
+            data['token'] = csrf_input.value;
+        }
+        $.post('/olvide_mi_contraseña', data, callback).fail(failCallback);
     })
 });
 
