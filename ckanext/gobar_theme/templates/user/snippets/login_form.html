@@ -12,8 +12,12 @@
 
   {% if login_error %}
     <p class="error">
-      No encontramos ningún usuario con esa combinación de usuario y contraseña
+    {% if h.is_plugin_present('security') %}
+      No encontramos ningún usuario con esa combinación de usuario y contraseña. A los {{ h.search_for_value_in_config_file('ckanext.security.login_max_count') }} intentos fallidos se bloqueará la cuenta.
     </p>
+    {% else %}
+      No encontramos ningún usuario con esa combinación de usuario y contraseña.
+    {% endif %}
   {% endif %}
 
   <div class="login-password-box">
