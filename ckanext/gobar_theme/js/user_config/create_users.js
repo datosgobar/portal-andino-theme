@@ -67,8 +67,8 @@ $(function () {
 
     $('input[name="username"]').on('change input keypress', function (e) {
         var $input = $(e.currentTarget);
-        var remainingCaracters = 10 - $input.val().length;
-        var text = $input.val().length == 0 ? 'Máximo 10 caracteres.' : 'Restan ' + remainingCaracters.toString() + ' caracter' + (remainingCaracters == 1 ? '' : 'es')
+        var remainingCaracters = 60 - $input.val().length;
+        var text = $input.val().length === 0 ? 'Máximo 60 caracteres.' : 'Restan ' + remainingCaracters.toString() + ' caracter' + (remainingCaracters === 1 ? '' : 'es');
         $input.parent().siblings('.username-restriction').text(text)
         clearFeedback($input)
     })

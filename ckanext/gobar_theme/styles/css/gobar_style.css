@@ -7688,8 +7688,8 @@ div#background-container {
 #template-config-container #template-config #user-config-my-account {
   margin-bottom: 50px; }
   #template-config-container #template-config #user-config-my-account input[name="username"] {
-    width: 200px;
-    max-width: 80%; }
+    width: 100%;
+    max-width: 100%; }
   #template-config-container #template-config #user-config-my-account input[name="email"],
   #template-config-container #template-config #user-config-my-account input[name="email-confirmation"],
   #template-config-container #template-config #user-config-my-account input[name="password"] {
@@ -7712,8 +7712,7 @@ div#background-container {
   #template-config-container #template-config #user-config-create-users .role-description {
     font-style: italic; }
   #template-config-container #template-config #user-config-create-users input[name="username"] {
-    width: 200px;
-    max-width: 80%;
+    width: 100%;
     margin-bottom: 10px; }
   #template-config-container #template-config #user-config-create-users .username-restriction {
     margin-bottom: 30px;
