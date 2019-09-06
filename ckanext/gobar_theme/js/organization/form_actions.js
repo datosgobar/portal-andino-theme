@@ -24,7 +24,7 @@ $(function () {
         var titleIsTooShort;
         var titleIsTooLong;
         var urlValid;
-        var isTooShortErrorTemplate = '<div class="missing-field">El título debe tener al menos 2 caracteres</div>';
+        var isTooShortErrorTemplate = '<div class="missing-field">El título debe tener, al menos 2, caracteres</div>';
         var isTooLongErrorTemplate = '<div class="missing-field">El título es muy largo</div>';
 
         var title = $('#field-name');
