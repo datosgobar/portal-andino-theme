@@ -3,10 +3,10 @@ $(function () {
 
     function urlValidator(errorTemplate) {
         var url = $('#field-url');
-        var urlPreview = $('.slug-preview-value')
+        var urlPreview = $('.slug-preview-value');
         var urlValid = true;
         if ($('.slug-preview').css('display') == 'none'){
-            if (!url.val().length > 0) {
+            if (url.val().length < 2) {
                 urlValid = false;
                 url.parent().after(errorTemplate)
             }
@@ -21,25 +21,25 @@ $(function () {
 
     function formIsValid() {
         $('.missing-field').remove();
-        var titleIsEmpty;
+        var titleIsTooShort;
         var titleIsValid;
-        var urlValid = true;
-        var isEmptyErrorTemplate = '<div class="missing-field">Completá este dato</div>';
+        var urlValid;
+        var isTooShortErrorTemplate = '<div class="missing-field">El título debe tener almenos 2 caracteres</div>';
         var isTooLongErrorTemplate = '<div class="missing-field">El título es muy largo</div>';
 
         var title = $('#field-name');
-        titleIsEmpty = 0 >= title.val().length;
+        titleIsTooShort = title.val().length < 2;
         titleIsValid = title.val().length <= 100;
 
-        if (titleIsEmpty){
-            title.after(isEmptyErrorTemplate);
+        if (titleIsTooShort){
+            title.after(isTooShortErrorTemplate);
         } else if (!titleIsValid) {
             title.after(isTooLongErrorTemplate);
         } else {
-            urlValid = urlValidator(isEmptyErrorTemplate);
+            urlValid = urlValidator(isTooShortErrorTemplate);
         }
 
-        var isValid = titleIsValid && !titleIsEmpty && urlValid;
+        var isValid = titleIsValid && !titleIsTooShort && urlValid;
         if (!isValid) {
             window.scrollTo(0, 0);
         }
