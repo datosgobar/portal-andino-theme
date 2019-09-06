@@ -7,7 +7,14 @@
     {% endblock %}
 
     {% set attrs = {'data-module': 'slug-preview-target'} %}
-    {{ form.input('title', label='Título', id='field-name', placeholder='Ej: Oficina Anticorrupción', value=data.title, error=errors.title, classes=['control-full'], attrs=attrs, is_required=true) }}
+    {% set max_length_title = 100 %}
+    {% set valid_title = h.valid_length(data.title, max_length_title) %}
+    {% if valid_title %}
+        {% set after_desc_title = ["Por favor, no superes los ", max_length_title, " caracteres."] %}
+    {% else %}
+        {% set after_desc_title = ["Por favor, para que el título de la organización sea más claro, <b>no superes los ", max_length_title, " caracteres.</b>"] %}
+    {% endif %}
+    {{ form.input('title', label='Título', id='field-name', placeholder='Ej: Oficina Anticorrupción', value=data.title, error=errors.title, classes=['control-full'], attrs=attrs, is_required=true, max_length=max_length_title) }}
 
     {# Perhaps these should be moved into the controller? #}
     {% set prefix = h.url_for(controller='organization', action='read', id='') %}
