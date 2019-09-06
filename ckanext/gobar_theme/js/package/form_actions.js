@@ -69,17 +69,6 @@ $(function () {
     function addDates() {
         var dateFrom = $('#date-from').datepicker('getDate');
         var dateTo = $('#date-to').datepicker('getDate');
-        var withHours = $('#date_with_time').is(':checked');
-        if (withHours && dateFrom) {
-            var hoursFrom = $('#date-from-hour option:selected').val();
-            var minutesFrom = $('#date-from-minute option:selected').val();
-            dateFrom.setHours(hoursFrom, minutesFrom);
-        }
-        if (withHours && dateTo) {
-            var hoursTo = $('#date-to-hour option:selected').val();
-            var minutesTo = $('#date-to-minute option:selected').val();
-            dateTo.setHours(hoursTo, minutesTo);
-        }
         var value = '';
         if (dateFrom) {
             value = dateFrom.toISOString();
@@ -208,29 +197,9 @@ $(function () {
     }
     if (dateFrom instanceof Date && isFinite(dateFrom)) {
         $('#date-from').datepicker('setDate', dateFrom);
-        var hoursFrom = dateFrom.getHours();
-        var minutesFrom = dateFrom.getMinutes();
-        if (hoursFrom != 0 || minutesFrom != 0) {
-            hoursFrom = hoursFrom < 10 ? '0' + hoursFrom : hoursFrom.toString();
-            minutesFrom = minutesFrom < 10 ? '0' + minutesFrom : minutesFrom.toString();
-            $('#date_with_time').prop('checked', true);
-            $('.hour-picker-to, .hour-picker-from').removeClass('hidden');
-            $('#date-from-hour').val(hoursFrom);
-            $('#date-from-minute').val(minutesFrom);
-        }
     }
     if (dateTo instanceof Date && isFinite(dateTo)) {
         $('#date-to').datepicker('setDate', dateTo);
-        var hoursTo = dateTo.getHours();
-        var minutesTo = dateTo.getMinutes();
-        if (hoursTo != 0 || minutesTo != 0) {
-            hoursTo = hoursTo < 10 ? '0' + hoursTo : hoursTo.toString();
-            minutesTo = minutesTo < 10 ? '0' + minutesTo : minutesTo.toString();
-            $('#date_with_time').prop('checked', true);
-            $('.hour-picker-to, .hour-picker-to').removeClass('hidden');
-            $('#date-to-hour').val(hoursTo);
-            $('#date-to-minute').val(minutesTo);
-        }
     }
 
     $(document).ajaxComplete(function(){
