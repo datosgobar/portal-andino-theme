@@ -10,6 +10,10 @@ from ckanext import constants
 from ckanext.gobar_theme.theme_config import ThemeConfig
 
 
+def get_from_config_file(field):
+    return config.get(field)
+
+
 def get_theme_config(path=None, default=None):
     theme_config = ThemeConfig(constants.CONFIG_PATH)
     return theme_config.get(path, default)

@@ -5,7 +5,7 @@
 
 {%- block page -%}
 
-    {% set background_config = h.get_default_background_configuration() %}
+    {% set background_config = h.get_from_config_file('andino.background_opacity') %}
     <style type="text/css">
         {{ 'div.background-overlay{background-color:rgba(0,0,0,' + background_config + ')!important;}' if background_config is not none }}
     </style>
