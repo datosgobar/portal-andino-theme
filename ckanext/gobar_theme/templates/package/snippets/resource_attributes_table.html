@@ -24,6 +24,7 @@
             </thead>
             <tbody id="metadata-body">
             {% for attribute_group in attributes %}
+                {% set api_uri = h.get_series_url_for_field(attribute_group) %}
                 <tr>
                     <td class="m-title">{{ attribute_group.get('title', '') }}&nbsp;</td>
                     <td class="m-type">
@@ -36,7 +37,7 @@
                     </td>
                     <td class="m-description">{{ attribute_group.get('description', '') }}&nbsp;</td>
                     <td class="m-units">{{ attribute_group.get('units', '') }}&nbsp;</td>
-                    <td class="m-id">{{ attribute_group.get('id', '') }}&nbsp;</td>
+                    <td class="m-id">{% if api_uri %}<a class="m-id" href="{{ api_uri }}" target="_blank">{% endif %}{{ attribute_group.get('id', '') }}{% if api_uri %}</a>{% endif %}&nbsp;</td>
                     <td class="m-specialType">
                         {% set special_type = attribute_group.get('specialType', '') %}
                         {% if special_type %}
