@@ -130,4 +130,23 @@ $(function () {
     $( window ).resize(function() {
         redrawAttributesTable();
     });
+
+    $("a.m-id").each(function() {
+        var element = $(this);
+        var href = element.attr('href');
+        $.ajax({
+            type: "HEAD",
+            async: true,
+            url: href,
+            timeout: 3000,
+            success: function(message,text,jqXHR) {
+                element.attr('href', href.substring(href.indexOf('/series/api')))
+            },
+            error: function (message,text,jqXHR) {
+                console.log("No se encontró la serie en la URL: " + href);
+                element.replaceWith(element.text());
+            }
+        });
+    });
+
 });
