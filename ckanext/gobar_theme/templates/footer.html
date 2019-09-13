@@ -70,7 +70,7 @@
                     {% set url = h.get_theme_config('footer.url') %}
                     {% set image = h.get_theme_config('footer.image') %}
                     <a href="{{ url if url else 'http://datos.gob.ar/' }}" target="_blank">
-                        <img src="{{ image if image else '/img/logo_ministerio_color.png' }}" class="logo-ministerio">
+                        <img src="{{ image if image else '/img/logo_ministerio_color.png' }}" alt="{{ url if url else 'http://datos.gob.ar/' }}" class="logo-ministerio">
                     </a>
                     {% if c.userobj and c.userobj.sysadmin and c.controller != 'ckanext.gobar_theme.config_controller:GobArConfigController' %}
                         <a class="edit-logo-link"
