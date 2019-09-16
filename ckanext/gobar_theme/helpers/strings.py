@@ -4,6 +4,7 @@ from urlparse import urlparse
 
 import ckan.lib.helpers as ckan_helpers
 from ckan.common import request
+from markdown import markdown
 from markupsafe import Markup
 
 
@@ -59,3 +60,7 @@ def capfirst(s):
 
 def jsondump(field=''):
     return Markup(json.dumps(field))
+
+
+def convert_plain_string_into_markdown(string):
+    return markdown(string)
