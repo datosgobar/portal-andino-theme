@@ -18,12 +18,7 @@
 
                 {%- set description = h.get_theme_config('about.description') -%}
                 {% if description %}
-                    {% set paragraphs = description.split('\n') %}
-                    {% for paragraph in paragraphs %}
-                        <p>
-                            {{- paragraph -}}
-                        </p>
-                    {% endfor %}
+                    {{ h.convert_plain_string_into_markdown(description)|safe }}
                 {% endif %}
             </div>
         </div>
