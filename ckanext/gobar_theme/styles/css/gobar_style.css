@@ -9863,7 +9863,8 @@ div.about-components > pre{
         box-shadow: 0 -2px 4px 0 rgba(150, 150, 150, 0.5); } }
     #template-config-container #template-config .main-config-container {
       padding-left: 20px;
-      padding-right: 20px; }
+      padding-right: 20px;
+      position: sticky; }
     #template-config-container #template-config form {
       margin: 0;
       padding: 0; }
