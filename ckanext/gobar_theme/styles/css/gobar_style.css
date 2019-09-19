@@ -9895,6 +9895,9 @@ div.about-components > pre{
       margin: 0 0 30px 0;
       font-weight: 400;
       font-size: 16px; }
+      #template-config-container #template-config p.default-user-error {
+        color:red;
+        margin: 10px 0; }
       #template-config-container #template-config p:after, #template-config-container #template-config label:after {
         content: none; }
     #template-config-container #template-config p.error {

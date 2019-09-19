@@ -238,6 +238,8 @@ class GobArUserController(UserController):
             params = parse_params(request.POST)
             try:
                 user = model.User.by_name(params['id'])
+                if user.name == 'default' and user.sysadmin:
+                    raise NotAuthorized  # El usuario admin "default" de CKAN no debe ser borrado
                 user.delete()
                 model.repo.commit_and_remove()
                 user_deleted = True
