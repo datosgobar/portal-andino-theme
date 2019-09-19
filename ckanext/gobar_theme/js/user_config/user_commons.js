@@ -30,8 +30,5 @@ $(document).ready( function() {
         if (!$(this).siblings('p.default-user-error').length) {
             $(this).after("<p class='default-user-error'>El usuario default no puede ser borrado.</p>");
         }
-        else {
-            alert("Nope");
-        }
     });
 });
