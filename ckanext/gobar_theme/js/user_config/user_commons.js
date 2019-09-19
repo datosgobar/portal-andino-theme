@@ -27,7 +27,7 @@ $(document).ready( function() {
     var email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     $('button.delete-user').on('click', function () {
-        if (!$(this).siblings('p.default-user-error').length) {
+        if (!$(this).siblings('p.default-user-error').length && $(this).parents('div.edit-user-modal').data('username') === 'default') {
             $(this).after("<p class='default-user-error'>El usuario default no puede ser borrado.</p>");
         }
     });
