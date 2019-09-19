@@ -72,12 +72,13 @@
             <h2 class="blue user-list-title">Administradores</h2>
             <div class="users">
                 {% for admin_user in admin_users %}
+                    {% set is_not_default_admin = admin_user.name != 'default' %}
                     <div class="user">
                         <div class="user-editable">
                             {% snippet "svg/user-logo.svg" %}
                             <p class="username">
                                 {{ admin_user.name }}
-                                {% snippet "svg/edit.svg" %}
+                                {% if is_not_default_admin %}{% snippet "svg/edit.svg" %}{% endif %}
                             </p>
                             <p class="fullname">
                                 {{ admin_user.fullname or '' }}
@@ -86,7 +87,9 @@
                                 {{ admin_user.email or '' }}
                             </p>
                         </div>
-                        {% snippet "user/snippets/edit_form.html", user=admin_user, organizations_tree=organizations_tree, organization_selector=organization_selector, organizations_and_users=organizations_and_users %}
+                        {% if is_not_default_admin %}
+                            {% snippet "user/snippets/edit_form.html", user=admin_user, organizations_tree=organizations_tree, organization_selector=organization_selector, organizations_and_users=organizations_and_users %}
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
