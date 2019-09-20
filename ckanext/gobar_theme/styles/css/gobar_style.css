@@ -10435,3 +10435,7 @@ form#datapusher > table.date-picker.datapusher {
 div.organization-select {
   position: sticky;
 }
+
+div.organization-select > div.ms-drop.bottom {
+  position: relative;
+}
