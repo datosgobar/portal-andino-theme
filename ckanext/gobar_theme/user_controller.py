@@ -300,7 +300,7 @@ class GobArUserController(UserController):
             email_sent = self.send_new_user_email(data_dict)
             if 'error' in email_sent:
                 print(email_sent['error'])
-        return {'success': user_created, 'password': random_password, 'email_sent': email_sent['success']}
+        return {'success': user_created, 'password': password, 'email_sent': email_sent['success']}
 
     @staticmethod
     def _set_user_organizations(username, user_organizations):
