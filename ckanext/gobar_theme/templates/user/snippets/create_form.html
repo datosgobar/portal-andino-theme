@@ -6,16 +6,16 @@
 
     <h2>Usuario</h2>
     <div class="can-have-feedback-img username-feedback">
-        <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="60">
+        <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="60" autocomplete="new-password">
     </div>
     <p class="username-restriction">Máximo 60 caracteres.</p>
 
     <h2>Contraseña</h2>
     <div class="can-have-feedback-img username-feedback">
-        <input name="password" type="password" title="Contraseña" data-attr="password">
+        <input name="password" type="password" title="Contraseña" data-attr="password" autocomplete="new-password">
     </div>
     {% if 'security' in g.plugins %}
-        <p>La contraseña debe contener como mínimo 10 caracteres, y estar compuesta de al menos tres de los siguientes tipos de caracteres: mayúsculas, minúsculas, dígitos, puntuación y caracteres especiales.</p>
+        <p class="username-restriction">La contraseña debe contener como mínimo 10 caracteres, y estar compuesta de al menos tres de los siguientes tipos de caracteres: mayúsculas, minúsculas, dígitos, puntuación y caracteres especiales.</p>
     {% endif %}
 
     <h2>Nombre y apellido</h2>
