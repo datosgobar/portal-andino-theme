@@ -3,68 +3,17 @@
 {% block config %}
     <div id="user-config-create-users">
         <h1>Crear usuarios</h1>
-        <h2 class="blue">Administrador</h2>
-        <p class="role-description with-bottom-margin">
-            Podrá crear usuarios, editar la configuración general de del portal; crear, actualizar
-            y borrar todos los conjuntos de datos; y gestionar temas y organizaciones.
-        </p>
 
-        <div class="create-section admin">
-            <h2>Usuario</h2>
-            <div class="can-have-feedback-img username-feedback">
-                <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="60">
-            </div>
-            <p class="username-restriction">Máximo 60 caracteres.</p>
-
-            <h2>Nombre y apellido</h2>
-            <div class="can-have-feedback-img fullname-feedback">
-                <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez">
-            </div>
-
-            <h2>E-mail</h2>
-            <div class="can-have-feedback-img">
-                <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
-            </div>
-            <button class="btn btn-blue save-new-user">
-                LISTO, CREAR
-            </button>
-        </div>
+        {% set user_type = "Administrador" %}
+        {% set description = "Podrá crear usuarios, editar la configuración general de del portal; crear, actualizar
+        y borrar todos los conjuntos de datos; y gestionar temas y organizaciones." %}
+        {% snippet "user/snippets/create_form.html", user_type=user_type, description=description %}
 
         <hr class="before-list">
 
-        <div class="create-section user">
-            <h2 class="blue">Colaborador</h2>
-            <p class="role-description with-bottom-margin">
-                Podrá crear, actualizar y borrar conjuntos de datos sólo de la organización que elijas.
-            </p>
-
-            <h2>Usuario</h2>
-            <div class="can-have-feedback-img username-feedback">
-                <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="60">
-            </div>
-            <p class="username-restriction">Máximo 60 caracteres.</p>
-
-            <h2>Nombre y apellido</h2>
-            <div class="can-have-feedback-img fullname-feedback">
-                <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez">
-            </div>
-
-            <h2>E-mail</h2>
-            <div class="can-have-feedback-img">
-                <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
-            </div>
-
-
-            <h2>Organización</h2>
-            <div class="can-have-feedback-img">
-                    {% import 'user/snippets/organization_selector.html' as organization_selector %}
-                    {% set organizations_tree = h.organization_tree() %}
-                    {{ organization_selector.organization_selector(organizations_tree) }}
-            </div>
-            <button class="btn btn-blue save-new-user">
-                LISTO, CREAR
-            </button>
-        </div>
+        {% set user_type = "Colaborador" %}
+        {% set description = "Podrá crear, actualizar y borrar conjuntos de datos sólo de la organización que elijas." %}
+        {% snippet "user/snippets/create_form.html", user_type=user_type, description=description %}
 
         <hr class="before-list">
 
