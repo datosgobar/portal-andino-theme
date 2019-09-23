@@ -1,4 +1,4 @@
-<div class="create-section">
+<div class="create-section {{ 'user' if user_type == 'Colaborador' else 'admin' }}">
     <h2 class="blue">{{ user_type }}</h2>
     <p class="role-description with-bottom-margin">
         {{ description }}
