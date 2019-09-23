@@ -91,7 +91,7 @@ $(function () {
             showNegativeFeedback(usernameInput, 'Completá este dato.')
             return false
         }
-        if (!securePassword(passwordInput.val())) {
+        if (!passwordInput.val() === '' && !securePassword(passwordInput.val())) {
             insecurePasswordMessage(passwordInput);
             return false;
         }
