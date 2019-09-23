@@ -3,19 +3,19 @@
 {% block config %}
     <div id="user-config-create-users">
         {% import 'user/snippets/organization_selector.html' as organization_selector %}
-    
+
         <h1>Crear usuarios</h1>
 
         {% set user_type = "Administrador" %}
         {% set description = "Podrá crear usuarios, editar la configuración general de del portal; crear, actualizar
         y borrar todos los conjuntos de datos; y gestionar temas y organizaciones." %}
-        {% snippet "user/snippets/create_form.html", user_type=user_type, description=description %}
+        {% snippet "user/snippets/create_form.html", user_type=user_type, description=description, organization_selector=organization_selector %}
 
         <hr class="before-list">
 
         {% set user_type = "Colaborador" %}
         {% set description = "Podrá crear, actualizar y borrar conjuntos de datos sólo de la organización que elijas." %}
-        {% snippet "user/snippets/create_form.html", user_type=user_type, description=description %}
+        {% snippet "user/snippets/create_form.html", user_type=user_type, description=description, organization_selector=organization_selector %}
 
         <hr class="before-list">
 
