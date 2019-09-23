@@ -2,6 +2,8 @@
 
 {% block config %}
     <div id="user-config-create-users">
+        {% import 'user/snippets/organization_selector.html' as organization_selector %}
+    
         <h1>Crear usuarios</h1>
 
         {% set user_type = "Administrador" %}

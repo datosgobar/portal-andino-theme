@@ -23,7 +23,6 @@
     {% if user_type == "Colaborador" %}
         <h2>Organización</h2>
         <div class="can-have-feedback-img">
-                {% import 'user/snippets/organization_selector.html' as organization_selector %}
                 {% set organizations_tree = h.organization_tree() %}
                 {{ organization_selector.organization_selector(organizations_tree) }}
         </div>
