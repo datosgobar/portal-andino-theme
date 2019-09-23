@@ -1,4 +1,3 @@
-$(document).ready( function() {
     var showPositiveFeedback = function (input, msg) {
         clearFeedback(input)
         if (msg && msg.length > 0) {
@@ -31,4 +30,3 @@ $(document).ready( function() {
             $(this).after("<p class='default-user-error'>El usuario default no puede ser borrado.</p>");
         }
     });
-});
