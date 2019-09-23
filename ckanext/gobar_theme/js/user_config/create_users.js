@@ -128,6 +128,7 @@ $(function () {
         var isValid = validateSection(createSection);
         var usernameInput = createSection.find('input[name="username"]');
         var passwordInput = createSection.find('input[name="password"]');
+        var repeatedPasswordInput = createSection.find('input[name="password2"]');
         var fullnameInput = createSection.find('input[name="fullname"]');
         var emailInput = createSection.find('input[name="email"]');
         var button = $(e.currentTarget);
@@ -151,17 +152,19 @@ $(function () {
             $.post(url, data, function (response) {
                 button.prop('disabled', false);
                 if (response.success) {
-                    showPositiveFeedback(usernameInput)
-                    showPositiveFeedback(fullnameInput)
+                    showPositiveFeedback(usernameInput);
+                    showPositiveFeedback(fullnameInput);
+                    showPositiveFeedback(passwordInput);
+                    showPositiveFeedback(repeatedPasswordInput);
                     if (createSection.hasClass('admin')) {
-                        showPositiveFeedback(emailInput, '¡Perfecto! Creaste un nuevo usuario.')
+                        showPositiveFeedback(emailInput, '¡Perfecto! Creaste un nuevo usuario.');
                     } else {
-                        showPositiveFeedback(emailInput)
-                        showPositiveFeedback(organizationSelect, '¡Perfecto! Creaste un nuevo usuario.')
+                        showPositiveFeedback(emailInput);
+                        showPositiveFeedback(organizationSelect, '¡Perfecto! Creaste un nuevo usuario.');
                     }
 
                 } else if (response.error == 'user_already_exists') {
-                    showNegativeFeedback(usernameInput, 'Este usuario ya existe.')
+                    showNegativeFeedback(usernameInput, 'Este usuario ya existe.');
                 }
             }).fail(failCallback)
         }
