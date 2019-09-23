@@ -121,12 +121,14 @@ $(function () {
         var createSection = $(e.currentTarget).parents('.create-section')
         var isValid = validateSection(createSection);
         var usernameInput = createSection.find('input[name="username"]');
+        var passwordInput = createSection.find('input[name="password"]');
         var fullnameInput = createSection.find('input[name="fullname"]');
         var emailInput = createSection.find('input[name="email"]');
         var button = $(e.currentTarget);
         if (isValid) {
             var data = {
                 username: usernameInput.val().trim(),
+                password: passwordInput.val().trim(),
                 fullname: fullnameInput.val().trim(),
                 email: emailInput.val().trim(),
                 token: $("#token-generator input").val()
