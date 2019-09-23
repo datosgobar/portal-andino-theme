@@ -7720,7 +7720,8 @@ div#background-container {
     font-style: italic; }
   #template-config-container #template-config #user-config-create-users input[name="email"],
   #template-config-container #template-config #user-config-create-users input[name="email-confirmation"],
-  #template-config-container #template-config #user-config-create-users input[name="password"] {
+  #template-config-container #template-config #user-config-create-users input[name="password"],
+  #template-config-container #template-config #user-config-create-users input[name="password2"] {
     width: 370px;
     max-width: 80%; }
   #template-config-container #template-config #user-config-create-users button.save-new-user {
