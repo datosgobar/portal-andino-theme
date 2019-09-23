@@ -7714,7 +7714,8 @@ div#background-container {
   #template-config-container #template-config #user-config-create-users input[name="username"] {
     width: 100%;
     margin-bottom: 10px; }
-  #template-config-container #template-config #user-config-create-users .username-restriction {
+  #template-config-container #template-config #user-config-create-users .username-restriction,
+  #template-config-container #template-config #user-config-create-users .password-restriction{
     margin-bottom: 30px;
     font-style: italic; }
   #template-config-container #template-config #user-config-create-users input[name="email"],

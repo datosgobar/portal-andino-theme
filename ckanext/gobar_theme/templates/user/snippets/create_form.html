@@ -14,8 +14,13 @@
     <div class="can-have-feedback-img username-feedback">
         <input name="password" type="password" title="Contraseña" data-attr="password" autocomplete="new-password">
     </div>
+
+    <h2>Repetir Contraseña</h2>
+    <div class="can-have-feedback-img username-feedback">
+        <input name="password2" type="password" title="Repetir Contraseña" data-attr="password" autocomplete="new-password">
+    </div>
     {% if 'security' in g.plugins %}
-        <p class="username-restriction">La contraseña debe contener como mínimo 10 caracteres, y estar compuesta de al menos tres de los siguientes tipos de caracteres: mayúsculas, minúsculas, dígitos, puntuación y caracteres especiales.</p>
+        <p class="password-restriction">La contraseña debe contener como mínimo 10 caracteres, y estar compuesta de al menos tres de los siguientes tipos de caracteres: mayúsculas, minúsculas, dígitos, puntuación y caracteres especiales.</p>
     {% endif %}
 
     <h2>Nombre y apellido</h2>

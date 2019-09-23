@@ -75,19 +75,29 @@ $(function () {
 
 
     var validateSection = function (createSection) {
-        var usernameInput = createSection.find('input[name="username"]')
-        var nameInput = createSection.find('input[name="fullname"]')
-        var emailInput = createSection.find('input[name="email"]')
-        var passwordInput = createSection.find('input[name="password"]')
+        var usernameInput = createSection.find('input[name="username"]');
+        var nameInput = createSection.find('input[name="fullname"]');
+        var emailInput = createSection.find('input[name="email"]');
+        var passwordInput = createSection.find('input[name="password"]');
+        var repeatedPasswordInput = createSection.find('input[name="password2"]');
 
-        clearFeedback(usernameInput)
-        clearFeedback(emailInput)
-        clearFeedback(nameInput)
-        clearFeedback(passwordInput)
+        clearFeedback(usernameInput);
+        clearFeedback(emailInput);
+        clearFeedback(nameInput);
+        clearFeedback(passwordInput);
+        clearFeedback(repeatedPasswordInput);
 
         if (usernameInput.val().length == 0) {
             showNegativeFeedback(usernameInput, 'Completá este dato.')
             return false
+        }
+        if (!securePassword(passwordInput.val())) {
+            insecurePasswordMessage(passwordInput);
+            return false;
+        }
+        if (passwordInput.val() !== repeatedPasswordInput.val()) {
+            showNegativeFeedback(repeatedPasswordInput, '¡Oh! Las contraseñas no coinciden. Probá otra vez.');
+            return false;
         }
         if (nameInput.val().length == 0) {
             showNegativeFeedback(nameInput, 'Completá este dato.')
@@ -109,10 +119,6 @@ $(function () {
                 showNegativeFeedback(divSelect, 'Completá este dato.')
                 return false
             }
-        }
-        if (!securePassword(passwordInput.val())) {
-            insecurePasswordMessage(passwordInput);
-            return false;
         }
         return true
     };
