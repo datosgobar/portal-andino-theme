@@ -78,10 +78,12 @@ $(function () {
         var usernameInput = createSection.find('input[name="username"]')
         var nameInput = createSection.find('input[name="fullname"]')
         var emailInput = createSection.find('input[name="email"]')
+        var passwordInput = createSection.find('input[name="password"]')
 
         clearFeedback(usernameInput)
         clearFeedback(emailInput)
         clearFeedback(nameInput)
+        clearFeedback(passwordInput)
 
         if (usernameInput.val().length == 0) {
             showNegativeFeedback(usernameInput, 'Completá este dato.')
@@ -107,6 +109,10 @@ $(function () {
                 showNegativeFeedback(divSelect, 'Completá este dato.')
                 return false
             }
+        }
+        if (!securePassword(passwordInput.val())) {
+            insecurePasswordMessage(passwordInput);
+            return false;
         }
         return true
     };
