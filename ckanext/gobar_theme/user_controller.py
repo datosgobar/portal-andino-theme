@@ -275,12 +275,12 @@ class GobArUserController(UserController):
         if model.User.by_name(username) is not None:
             return {'success': False, 'error': 'user_already_exists'}
         letter_space = string.ascii_uppercase + string.digits + string.ascii_lowercase
-        random_password = ''.join(random.choice(letter_space) for _ in range(10))
+        password = params['password'] or ''.join(random.choice(letter_space) for _ in range(10))
         data_dict = {
             'name': username,
             'fullname': params['fullname'],
             'email': params['email'],
-            'password': random_password,
+            'password': password,
             'sysadmin': 'admin' in params
         }
         site_user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
@@ -300,7 +300,7 @@ class GobArUserController(UserController):
             email_sent = self.send_new_user_email(data_dict)
             if 'error' in email_sent:
                 print(email_sent['error'])
-        return {'success': user_created, 'password': random_password, 'email_sent': email_sent['success']}
+        return {'success': user_created, 'password': password, 'email_sent': email_sent['success']}
 
     @staticmethod
     def _set_user_organizations(username, user_organizations):

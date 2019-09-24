@@ -75,17 +75,29 @@ $(function () {
 
 
     var validateSection = function (createSection) {
-        var usernameInput = createSection.find('input[name="username"]')
-        var nameInput = createSection.find('input[name="fullname"]')
-        var emailInput = createSection.find('input[name="email"]')
+        var usernameInput = createSection.find('input[name="username"]');
+        var nameInput = createSection.find('input[name="fullname"]');
+        var emailInput = createSection.find('input[name="email"]');
+        var passwordInput = createSection.find('input[name="password"]');
+        var repeatedPasswordInput = createSection.find('input[name="password2"]');
 
-        clearFeedback(usernameInput)
-        clearFeedback(emailInput)
-        clearFeedback(nameInput)
+        clearFeedback(usernameInput);
+        clearFeedback(emailInput);
+        clearFeedback(nameInput);
+        clearFeedback(passwordInput);
+        clearFeedback(repeatedPasswordInput);
 
         if (usernameInput.val().length == 0) {
             showNegativeFeedback(usernameInput, 'Completá este dato.')
             return false
+        }
+        if (passwordInput.val() !== '' && !securePassword(passwordInput.val())) {
+            insecurePasswordMessage(passwordInput);
+            return false;
+        }
+        if (passwordInput.val() !== repeatedPasswordInput.val()) {
+            showNegativeFeedback(repeatedPasswordInput, '¡Oh! Las contraseñas no coinciden. Probá otra vez.');
+            return false;
         }
         if (nameInput.val().length == 0) {
             showNegativeFeedback(nameInput, 'Completá este dato.')
@@ -115,12 +127,15 @@ $(function () {
         var createSection = $(e.currentTarget).parents('.create-section')
         var isValid = validateSection(createSection);
         var usernameInput = createSection.find('input[name="username"]');
+        var passwordInput = createSection.find('input[name="password"]');
+        var repeatedPasswordInput = createSection.find('input[name="password2"]');
         var fullnameInput = createSection.find('input[name="fullname"]');
         var emailInput = createSection.find('input[name="email"]');
         var button = $(e.currentTarget);
         if (isValid) {
             var data = {
                 username: usernameInput.val().trim(),
+                password: passwordInput.val().trim(),
                 fullname: fullnameInput.val().trim(),
                 email: emailInput.val().trim(),
                 token: $("#token-generator input").val()
@@ -137,17 +152,19 @@ $(function () {
             $.post(url, data, function (response) {
                 button.prop('disabled', false);
                 if (response.success) {
-                    showPositiveFeedback(usernameInput)
-                    showPositiveFeedback(fullnameInput)
+                    showPositiveFeedback(usernameInput);
+                    showPositiveFeedback(fullnameInput);
+                    showPositiveFeedback(passwordInput);
+                    showPositiveFeedback(repeatedPasswordInput);
                     if (createSection.hasClass('admin')) {
-                        showPositiveFeedback(emailInput, '¡Perfecto! Creaste un nuevo usuario.')
+                        showPositiveFeedback(emailInput, '¡Perfecto! Creaste un nuevo usuario.');
                     } else {
-                        showPositiveFeedback(emailInput)
-                        showPositiveFeedback(organizationSelect, '¡Perfecto! Creaste un nuevo usuario.')
+                        showPositiveFeedback(emailInput);
+                        showPositiveFeedback(organizationSelect, '¡Perfecto! Creaste un nuevo usuario.');
                     }
 
                 } else if (response.error == 'user_already_exists') {
-                    showNegativeFeedback(usernameInput, 'Este usuario ya existe.')
+                    showNegativeFeedback(usernameInput, 'Este usuario ya existe.');
                 }
             }).fail(failCallback)
         }

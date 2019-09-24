@@ -1,0 +1,47 @@
+<div class="create-section {{ 'user' if user_type == 'Colaborador' else 'admin' }}">
+    <h2 class="blue">{{ user_type }}</h2>
+    <p class="role-description with-bottom-margin">
+        {{ description }}
+    </p>
+
+    <h2>Usuario</h2>
+    <div class="can-have-feedback-img username-feedback">
+        <input name="username" type="text" title="Usuario" placeholder="Por ejemplo, jperez" maxlength="60" autocomplete="new-password">
+    </div>
+    <p class="username-restriction">Máximo 60 caracteres.</p>
+
+    <h2>Contraseña</h2>
+    <div class="can-have-feedback-img password-feedback">
+        <input name="password" type="password" title="Contraseña" data-attr="password" autocomplete="new-password">
+    </div>
+
+    <h2>Repetir Contraseña</h2>
+    <div class="can-have-feedback-img password-feedback">
+        <input name="password2" type="password" title="Repetir Contraseña" data-attr="password" autocomplete="new-password">
+    </div>
+    {% if 'security' in g.plugins %}
+        <p class="password-restriction">La contraseña debe contener como mínimo 10 caracteres, y estar compuesta de al menos tres de los siguientes tipos de caracteres: mayúsculas, minúsculas, dígitos, puntuación y caracteres especiales.</p>
+    {% endif %}
+
+    <h2>Nombre y apellido</h2>
+    <div class="can-have-feedback-img fullname-feedback">
+        <input name="fullname" type="text" title="Nombre y apellido" placeholder="Por ejemplo, Juan Rodríguez">
+    </div>
+
+    <h2>E-mail</h2>
+    <div class="can-have-feedback-img">
+        <input name="email" type="text" title="E-mail" placeholder="j.rodriguez@gmail.com">
+    </div>
+
+    {% if user_type == "Colaborador" %}
+        <h2>Organización</h2>
+        <div class="can-have-feedback-img">
+                {% set organizations_tree = h.organization_tree() %}
+                {{ organization_selector.organization_selector(organizations_tree) }}
+        </div>
+    {% endif %}
+
+    <button class="btn btn-blue save-new-user">
+        LISTO, CREAR
+    </button>
+</div>

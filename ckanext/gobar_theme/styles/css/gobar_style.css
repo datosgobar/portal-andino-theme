@@ -7386,13 +7386,13 @@ div#background-container {
     position: relative;
     top: -20px;
     color: #ef4d3d; }
-  #template-config-container #template-config .can-have-feedback-img.username-feedback .feedback-img,
   #recover-password.modal .can-have-feedback-img.username-feedback .feedback-img {
     left: 172px; }
   #template-config-container #template-config .can-have-feedback-img.username-feedback .validation-error,
   #recover-password.modal .can-have-feedback-img.username-feedback .validation-error {
     top: 0; }
   #template-config-container #template-config .can-have-feedback-img.fullname-feedback .feedback-img,
+  #template-config-container #template-config .can-have-feedback-img.username-feedback .feedback-img,
   #recover-password.modal .can-have-feedback-img.fullname-feedback .feedback-img {
     left: auto;
     right: 8px; }
@@ -7714,12 +7714,14 @@ div#background-container {
   #template-config-container #template-config #user-config-create-users input[name="username"] {
     width: 100%;
     margin-bottom: 10px; }
-  #template-config-container #template-config #user-config-create-users .username-restriction {
+  #template-config-container #template-config #user-config-create-users .username-restriction,
+  #template-config-container #template-config #user-config-create-users .password-restriction{
     margin-bottom: 30px;
     font-style: italic; }
   #template-config-container #template-config #user-config-create-users input[name="email"],
   #template-config-container #template-config #user-config-create-users input[name="email-confirmation"],
-  #template-config-container #template-config #user-config-create-users input[name="password"] {
+  #template-config-container #template-config #user-config-create-users input[name="password"],
+  #template-config-container #template-config #user-config-create-users input[name="password2"] {
     width: 370px;
     max-width: 80%; }
   #template-config-container #template-config #user-config-create-users button.save-new-user {
