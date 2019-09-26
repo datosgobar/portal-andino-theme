@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import json
 import random
 import string
@@ -17,6 +19,7 @@ from ckan.controllers.api import ApiController
 
 import ckanext.gobar_theme.mailer as mailer
 from ckan.lib.base import abort
+import ckan.lib.jsonp as jsonp
 
 parse_params = logic.parse_params
 check_access = logic.check_access
@@ -26,5 +29,7 @@ NotAuthorized = logic.NotAuthorized
 class GobArCkanUserController(ApiController):
     json_content_type = 'application/json;charset=utf-8'
 
+    @jsonp.jsonpify
     def user_autocomplete(self):
+        return ["No estás autorizado para ver esta página"]
         base.abort(403, _('Not authorized to see this page'))
