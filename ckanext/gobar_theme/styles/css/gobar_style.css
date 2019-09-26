@@ -7692,7 +7692,8 @@ div#background-container {
     max-width: 100%; }
   #template-config-container #template-config #user-config-my-account input[name="email"],
   #template-config-container #template-config #user-config-my-account input[name="email-confirmation"],
-  #template-config-container #template-config #user-config-my-account input[name="password"] {
+  #template-config-container #template-config #user-config-my-account input[name="password"],
+  #template-config-container #template-config #user-config-my-account input[name="apikey"]  {
     width: 370px;
     max-width: 80%; }
   #template-config-container #template-config #user-config-my-account .disabled-input svg {

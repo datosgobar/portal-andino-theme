@@ -11,6 +11,9 @@
         <h2>Nombre y apellido</h2>
         <input name="full-name" type="text" title="Nombre y apellido" value="{{ c.userobj.fullname or '' }}" disabled="disabled">
 
+        <h2>Apikey</h2>
+        <input name="apikey" type="text" title="Apikey" value="{{ c.userobj.apikey }}" disabled="disabled">
+
         {% set current_email = c.userobj.email or '' %}
 
         <div class="disabled-input" data-replace-id="email-edit">
