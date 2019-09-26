@@ -2,6 +2,8 @@
 from pylons import config
 from routes.mapper import SubMapper
 
+from ckan.controllers.api import ApiController
+
 
 class GobArRouter:
 
@@ -18,6 +20,8 @@ class GobArRouter:
         self.google_analytics_controller = 'ckanext.gobar_theme.google_analytics_controller:GobArGAController'
         self.spatial_controller = 'ckanext.gobar_theme.spatial_controller:GobArSpatialController'
         self.datajson_controller = 'ckanext.gobar_theme.datajson_controller:GobArDatajsonController'
+
+        self.ckan_api_controller = 'ckan.controllers.api:ApiController'
 
     def redirect(self, *routes):
         for url_from, url_to in routes:
@@ -42,6 +46,10 @@ class GobArRouter:
         self.connect_spatial()
         self.connect_datajson()
         self.connect_super_theme_taxonomy()
+
+    def connect_ckan_api(self):
+        with SubMapper(self.route_map, controller=self.ckan_api_controller) as m:
+            m.connect('user_list', '/api/action/user_list', action='user_autocomplete')
 
     def connect_home(self):
         self.home_routes.connect('/', action='index')

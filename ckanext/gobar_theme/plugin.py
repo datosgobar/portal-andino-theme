@@ -18,8 +18,14 @@ from ckanext.gobar_theme.lib import cache_actions
 from ckanext.gobar_theme.theme_config import ThemeConfig
 from ckanext.gobar_theme.uploader import GobArThemeResourceUploader
 
+from ckan.controllers.user import UserController
+from ckan.common import c
+import ckan.model as model
+import ckan.logic as logic
+import ckan.lib.base as base
 
-class Gobar_ThemePlugin(plugins.SingletonPlugin):
+
+class Gobar_ThemePlugin(plugins.SingletonPlugin, UserController):
     implements(plugins.IConfigurer)
     implements(IRoutes, inherit=True)
     implements(plugins.ITemplateHelpers)
@@ -27,6 +33,15 @@ class Gobar_ThemePlugin(plugins.SingletonPlugin):
     implements(plugins.IUploader)
     implements(interfaces.IDomainObjectModification)
     implements(interfaces.IGroupController)
+
+    def index(self):
+        import pdb; pdb.set_trace()
+        context = {'model': model, 'user': c.user, 'auth_user_obj': c.userobj}
+        try:
+            logic.check_access('sysadmin', context, {})
+        except logic.NotAuthorized:
+            base.abort(403, _('Not authorized to see this page'))
+        super(Gobar_ThemePlugin, self).index()
 
     def get_resource_uploader(self, data_dict):
         return GobArThemeResourceUploader(data_dict)
