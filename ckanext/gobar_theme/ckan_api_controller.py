@@ -16,6 +16,7 @@ from ckan.common import request, c, _, response
 from ckan.controllers.api import ApiController
 
 import ckanext.gobar_theme.mailer as mailer
+from ckan.lib.base import abort
 
 parse_params = logic.parse_params
 check_access = logic.check_access
@@ -26,4 +27,4 @@ class GobArCkanUserController(ApiController):
     json_content_type = 'application/json;charset=utf-8'
 
     def user_autocomplete(self):
-        raise ValueError
+        base.abort(403, _('Not authorized to see this page'))
