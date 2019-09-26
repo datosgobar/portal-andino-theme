@@ -117,6 +117,8 @@ class GobArApiController(GAApiController, ApiController):
         default_response = super(GobArApiController, self).action(logic_function, ver)
         if logic_function == 'datastore_search':
             default_response = self._remove_extra_id_field(default_response)
+        elif logic_function == 'user_list' and c.pylons.request.path == '/api/action/user_list' and not c.userobj:
+            return base.abort(403, u'No está autorizado para entrar a esta página')
         return default_response
 
     def status(self):
