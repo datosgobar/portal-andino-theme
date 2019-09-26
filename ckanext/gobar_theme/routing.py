@@ -28,6 +28,7 @@ class GobArRouter:
             self.route_map.redirect(url_from, url_to)
 
     def set_routes(self):
+        self.connect_ckan_api()
         self.connect_home()
         self.connect_static()
         self.connect_section()
