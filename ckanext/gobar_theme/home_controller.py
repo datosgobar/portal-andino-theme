@@ -1,14 +1,10 @@
 #!coding: utf-8
-import json
-from pylons import response
-
 import ckan.lib.base as base
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import c
-from ckan.controllers.api import ApiController
 from ckan.controllers.home import HomeController
-from ckanext.googleanalytics.controller import GAApiController
+from pylons import response
 
 import ckanext.gobar_theme.helpers as gobar_helpers
 

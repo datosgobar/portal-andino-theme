@@ -9,7 +9,7 @@ class GobArRouter:
     def __init__(self, route_map):
         self.route_map = route_map
 
-        self.home_controller = 'ckanext.gobar_theme.controller:GobArHomeController'
+        self.home_controller = 'ckanext.gobar_theme.home_controller:GobArHomeController'
         self.home_routes = SubMapper(self.route_map, controller=self.home_controller)
         self.api_controller = 'ckanext.gobar_theme.api_controller:GobArApiController'
         self.package_controller = 'ckanext.gobar_theme.package_controller:GobArPackageController'

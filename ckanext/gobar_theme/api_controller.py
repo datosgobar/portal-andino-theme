@@ -26,11 +26,11 @@ class GobArApiController(GAApiController, ApiController):
         return json.dumps(json_dict)
 
     def action(self, logic_function, ver=None):
+        if logic_function == 'user_list' and c.pylons.request.path == '/api/action/user_list' and not c.userobj:
+            return base.abort(403, u'No está autorizado para entrar a esta página')
         default_response = super(GobArApiController, self).action(logic_function, ver)
         if logic_function == 'datastore_search':
             default_response = self._remove_extra_id_field(default_response)
-        elif logic_function == 'user_list' and c.pylons.request.path == '/api/action/user_list' and not c.userobj:
-            return base.abort(403, u'No está autorizado para entrar a esta página')
         return default_response
 
     def status(self):
