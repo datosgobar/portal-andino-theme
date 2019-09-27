@@ -1,6 +1,6 @@
 var securePassword = function (password) {
     if (!ckanextSecurityActivated()) {
-        return password.length < 4;
+        return password.length >= 4;
     }
 
     if (password.length < 10) {

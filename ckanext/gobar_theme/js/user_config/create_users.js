@@ -87,8 +87,8 @@ $(function () {
         clearFeedback(passwordInput);
         clearFeedback(repeatedPasswordInput);
 
-        if (usernameInput.val().length == 0) {
-            showNegativeFeedback(usernameInput, 'Completá este dato.')
+        if (usernameInput.val().length < 2) {
+            showNegativeFeedback(usernameInput, 'Debe tener al menos 2 caracteres de longitud.');
             return false
         }
         if (passwordInput.val() !== '' && !securePassword(passwordInput.val())) {
