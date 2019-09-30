@@ -20,16 +20,18 @@
 {#    catalogId se configura en la sección "Metadatos del portal" #}
 
     <h2>Laps</h2>
+    <div class="reduced-margin-content">
     <h5>Diaria</h5>
-    <input type="text" name="diaria" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.diaria') or '' }}">
-    <h5>Mensual</h5>
-    <input type="text" name="mensual" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.mensual') or '' }}">
-    <h5>Trimestral</h5>
-    <input type="text" name="trimestral" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.trimestral') or '' }}">
-    <h5>Semestral</h5>
-    <input type="text" name="semestral" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.semestral') or '' }}">
-    <h5>Anual</h5>
-    <input type="text" name="anual" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.anual') or '' }}">
+        <input type="text" name="diaria" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.diaria') or '' }}">
+        <h5>Mensual</h5>
+        <input type="text" name="mensual" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.mensual') or '' }}">
+        <h5>Trimestral</h5>
+        <input type="text" name="trimestral" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.trimestral') or '' }}">
+        <h5>Semestral</h5>
+        <input type="text" name="semestral" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.semestral') or '' }}">
+        <h5>Anual</h5>
+        <input type="text" name="anual" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.anual') or '' }}">
+    </div>
 
     <h2>Locale</h2>
     {% set current_locale = h.get_theme_config('series_tiempo_ar_explorer.locale') or '' %}
@@ -40,7 +42,7 @@
         {% endfor %}
     </select>
 
-    <label class="with-vertical-margin checkbox-label">
+    <label class="checkbox-label">
         <input type="checkbox" name="format-chart-units" {{ 'checked="checked"' if h.get_theme_config('series_tiempo_ar_explorer.format-chart-units') else '' }}>
         ¿Querés formatear a porcentaje los valores entre -1 y 1?
     </label>
