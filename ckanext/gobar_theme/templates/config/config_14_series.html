@@ -21,26 +21,29 @@
 
     <h2>Laps</h2>
     <div class="reduced-margin-content">
-    <h5>Diaria</h5>
-    <input type="text" name="diaria" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.diaria') or '' }}">
-    <h5>Mensual</h5>
-    <input type="text" name="mensual" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.mensual') or '' }}">
-    <h5>Trimestral</h5>
-    <input type="text" name="trimestral" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.trimestral') or '' }}">
-    <h5>Semestral</h5>
-    <input type="text" name="semestral" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.semestral') or '' }}">
-    <h5>Anual</h5>
-    <input type="text" name="anual" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.anual') or '' }}">
+        <h5>Diaria</h5>
+        <input type="text" name="diaria" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.diaria') or '' }}">
+        <h5>Mensual</h5>
+        <input type="text" name="mensual" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.mensual') or '' }}">
+        <h5>Trimestral</h5>
+        <input type="text" name="trimestral" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.trimestral') or '' }}">
+        <h5>Semestral</h5>
+        <input type="text" name="semestral" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.semestral') or '' }}">
+        <h5>Anual</h5>
+        <input type="text" name="anual" class="reduced-margin" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.anual') or '' }}">
     </div>
 
     <h2>Locale</h2>
     {% set current_locale = h.get_theme_config('series_tiempo_ar_explorer.locale') or '' %}
     {% set locale_options = h.get_locale_options() %}
-    <select name="locale" data-module="autocomplete" title="Locale">
+    <select name="locale" class="locale" data-module="autocomplete" title="Locale">
         {% for locale in locale_options %}
             <option name="locale" value="{{ locale }}" {{ 'selected' if current_locale == locale or ("AR" == locale and not current_locale) }}>{{ locale }}</option>
         {% endfor %}
     </select>
+
+    <h2>Cantidad máxima de cifras decimales</h2>
+    <input type="text" name="max-decimals" value="{{ h.get_theme_config('series_tiempo_ar_explorer.max-decimals') or '' }}">
 
     <label class="checkbox-label">
         <input type="checkbox" name="format-chart-units" {{ 'checked="checked"' if h.get_theme_config('series_tiempo_ar_explorer.format-chart-units') else '' }}>
@@ -54,5 +57,6 @@
 
 {% resource 'gobar_js/errors.js' %}
 {% resource 'gobar_js/config/series_actions.js' %}
+{% resource 'gobar_js/forms/autovalidations/numbers.js' %}
 
 {% endblock -%}

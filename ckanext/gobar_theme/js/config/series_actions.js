@@ -1,10 +1,13 @@
 $(function() {
 
     $('form').on('submit', function (e) {
+        var validations = [validateLaps, validateMaxDecimals];
         cleanErrorLabels();
 
-        if (!validateLaps()) {
-            e.preventDefault();
+        for (var i = 0; i < validations.length; i++) {
+            if (!validations[i]()) {
+                e.preventDefault();
+            }
         }
     });
 
@@ -25,11 +28,21 @@ $(function() {
     }
 
     function validateLapField(field) {
-        if (field.val() === '' || field.val() > 0) {
+        if (field.val() === '' || valueIsPositiveNumber(field.val())) {
             return true;
         }
         var errorText = "Se debe ingresar un número entero positivo.";
         showErrorOnField(field, errorText);
+        return false;
+    }
+
+    function validateMaxDecimals() {
+        var maxDecimalsInput = $('input[name="max-decimals"]');
+        if (maxDecimalsInput.val() === '' || valueIsPositiveInteger(maxDecimalsInput.val())) {
+            return true;
+        }
+        var errorText = "Se debe ingresar un número entero a partir de 0 (cero).";
+        showErrorOnField(maxDecimalsInput, errorText);
         return false;
     }
 

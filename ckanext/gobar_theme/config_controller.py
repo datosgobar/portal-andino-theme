@@ -291,7 +291,8 @@ class GobArConfigController(base.BaseController):
                 'series-api-uri': params['series-api-uri'] or get_default_series_api_url(),
                 'laps': self.generate_laps_json(params),
                 'locale': params['locale'].strip(),
-                'format-chart-units': 'format-chart-units' in params
+                'format-chart-units': 'format-chart-units' in params,
+                'max-decimals': params['max-decimals'].strip()
             }
             self._set_config(config_dict)
         return base.render('config/config_14_series.html')
