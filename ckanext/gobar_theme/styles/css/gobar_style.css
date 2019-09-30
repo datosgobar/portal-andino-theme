@@ -9894,6 +9894,11 @@ div.about-components > pre{
       font-size: 16px;
       position: relative;
       top: -20px; }
+    #template-config-container #template-config label.input-error {
+      color: red;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
     #template-config-container #template-config p, #template-config-container #template-config label {
       margin: 0 0 30px 0;
       font-weight: 400;
@@ -9963,6 +9968,7 @@ div.about-components > pre{
       }
     #template-config-container #template-config .checkbox-label {
       font-size: 20px;
+      margin: 30px 0;
       color: #999999; }
     #template-config-container #template-config input[type="checkbox"] {
       margin: 0 5px 0 0;
@@ -10448,4 +10454,10 @@ div.organization-select > div.ms-drop.bottom {
 
 div.reduced-margin-content {
   margin-bottom: 25px;
+}
+
+label.input-error {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
