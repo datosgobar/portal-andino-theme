@@ -5,6 +5,11 @@ from pydatajson import time_series
 from ckanext.gobar_theme.helpers.config import get_from_config_file, get_theme_config
 
 
+def get_locale_options():
+    options = ['AR', 'US']
+    return options
+
+
 def get_series_url_for_field(field):
     if not field_id_can_be_searched(field):
         return ""

@@ -9889,6 +9889,8 @@ div.about-components > pre{
         color: #0695d6; }
     #template-config-container #template-config .with-bottom-margin {
       margin-bottom: 30px; }
+    #template-config-container #template-config .with-vertical-margin {
+      margin: 30px 0; }
     #template-config-container #template-config label.form-error-message {
       color: red;
       font-size: 16px;
