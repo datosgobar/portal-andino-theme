@@ -21,27 +21,27 @@
 
     <h2>Laps</h2>
     <h5>Diaria</h5>
-    <input type="text" name="series-api-uri" value="{{ h.get_theme_config('?????') or '' }}">
+    <input type="text" name="diaria" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.diaria') or '' }}">
     <h5>Mensual</h5>
-    <input type="text" name="series-api-uri" value="{{ h.get_theme_config('?????') or '' }}">
+    <input type="text" name="mensual" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.mensual') or '' }}">
     <h5>Trimestral</h5>
-    <input type="text" name="series-api-uri" value="{{ h.get_theme_config('?????') or '' }}">
+    <input type="text" name="trimestral" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.trimestral') or '' }}">
     <h5>Semestral</h5>
-    <input type="text" name="series-api-uri" value="{{ h.get_theme_config('?????') or '' }}">
+    <input type="text" name="semestral" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.semestral') or '' }}">
     <h5>Anual</h5>
-    <input type="text" name="series-api-uri" value="{{ h.get_theme_config('?????') or '' }}">
+    <input type="text" name="anual" value="{{ h.get_theme_config('series_tiempo_ar_explorer.laps.anual') or '' }}">
 
     <h2>Locale</h2>
-    {% set current_locale = h.get_theme_config('?????') or '' %}
+    {% set current_locale = h.get_theme_config('series_tiempo_ar_explorer.locale') or '' %}
     {% set locale_options = h.get_locale_options() %}
     <select name="locale" data-module="autocomplete" title="Locale">
         {% for locale in locale_options %}
-            <option name="locale" value="{{ locale }}" {{ 'selected' if current_locale or ("AR" == locale and not current_locale) }}>{{ locale }}</option>
+            <option name="locale" value="{{ locale }}" {{ 'selected' if current_locale == locale or ("AR" == locale and not current_locale) }}>{{ locale }}</option>
         {% endfor %}
     </select>
 
     <label class="with-vertical-margin checkbox-label">
-        <input type="checkbox" name="format-chart-units" {{ 'checked="checked"' if h.get_theme_config('?????') else '' }}>
+        <input type="checkbox" name="format-chart-units" {{ 'checked="checked"' if h.get_theme_config('series_tiempo_ar_explorer.format-chart-units') else '' }}>
         ¿Querés formatear a porcentaje los valores entre -1 y 1?
     </label>
 
