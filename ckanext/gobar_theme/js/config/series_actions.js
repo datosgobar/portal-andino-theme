@@ -33,19 +33,4 @@ $(function() {
         return false;
     }
 
-    function showErrorOnField(field, errorText) {
-        field.after(createErrorLabel(errorText));
-    }
-
-    function createErrorLabel(text) {  // TODO: llevar a archivo genérico
-        var newLabel = document.createElement('label');
-        newLabel.appendChild(document.createTextNode(text));
-        newLabel.className += "input-error";
-        return newLabel;
-    }
-
-    function cleanErrorLabels() {  // TODO: llevar a archivo genérico
-        $('label.input-error').remove();
-    }
-
 });
