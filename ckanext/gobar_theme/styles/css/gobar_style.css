@@ -7400,6 +7400,9 @@ div#background-container {
     margin-bottom: 40px;
     width: 100%;
     height: auto; }
+  #template-config-container #template-config div.locale {
+    margin-bottom: 30px;
+  }
 
 #password-reset.modal {
   width: 500px;
@@ -9894,6 +9897,11 @@ div.about-components > pre{
       font-size: 16px;
       position: relative;
       top: -20px; }
+    #template-config-container #template-config label.input-error {
+      color: red;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
     #template-config-container #template-config p, #template-config-container #template-config label {
       margin: 0 0 30px 0;
       font-weight: 400;
@@ -9958,8 +9966,12 @@ div.about-components > pre{
       #template-config-container #template-config input[type="text"]:-ms-input-placeholder,
       #template-config-container #template-config input[type="password"]:-ms-input-placeholder {
         font-style: italic; }
+      #template-config-container #template-config input[type="text"].reduced-margin {
+        margin: 0 0 5px 0;
+      }
     #template-config-container #template-config .checkbox-label {
       font-size: 20px;
+      margin: 30px 0;
       color: #999999; }
     #template-config-container #template-config input[type="checkbox"] {
       margin: 0 5px 0 0;
@@ -10441,4 +10453,14 @@ div.organization-select {
 
 div.organization-select > div.ms-drop.bottom {
   position: relative;
+}
+
+div.reduced-margin-content {
+  margin-bottom: 25px;
+}
+
+label.input-error {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
 }

@@ -288,7 +288,10 @@ class GobArConfigController(base.BaseController):
             config_dict['series_tiempo_ar_explorer'] = {
                 'featured': params['featured'].strip(),
                 'enable': 'enable' in params,
-                'series-api-uri': params['series-api-uri'] or get_default_series_api_url()
+                'series-api-uri': params['series-api-uri'] or get_default_series_api_url(),
+                'laps': self.generate_laps_json(params),
+                'locale': params['locale'].strip(),
+                'max-decimals': params['max-decimals'].strip()
             }
             self._set_config(config_dict)
         return base.render('config/config_14_series.html')
@@ -408,3 +411,12 @@ class GobArConfigController(base.BaseController):
 
     def get_paster_path(self):
         return "{}/bin/paster".format(os.getenv('CKAN_HOME').strip())
+
+    def generate_laps_json(self, params):
+        return {
+            'diaria': params['diaria'].strip(),
+            'mensual': params['mensual'].strip(),
+            'trimestral': params['trimestral'].strip(),
+            'semestral': params['semestral'].strip(),
+            'anual': params['anual'].strip()
+        }
