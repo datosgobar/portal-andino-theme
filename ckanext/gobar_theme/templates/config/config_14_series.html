@@ -45,11 +45,6 @@
     <h2>Cantidad máxima de cifras decimales</h2>
     <input type="text" name="max-decimals" value="{{ h.get_theme_config('series_tiempo_ar_explorer.max-decimals') or '' }}">
 
-    <label class="checkbox-label">
-        <input type="checkbox" name="format-chart-units" {{ 'checked="checked"' if h.get_theme_config('series_tiempo_ar_explorer.format-chart-units') else '' }}>
-        ¿Querés formatear a porcentaje los valores entre -1 y 1?
-    </label>
-
     <div class="submit-container">
         <button class="submit-button" type="submit" name="save">GUARDAR</button>
     </div>
