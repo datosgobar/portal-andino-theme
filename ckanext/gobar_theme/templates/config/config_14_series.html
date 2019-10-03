@@ -17,7 +17,8 @@
     <h2>URI de la API de Series</h2>
     <input type="text" name="series-api-uri" value="{{ h.get_theme_config('series_tiempo_ar_explorer.series-api-uri') or h.get_default_series_api_url() }}">
 
-{#    catalogId se configura en la sección "Metadatos del portal" #}
+    <h2>Identificador del catálogo</h2>
+    <p>Para este campo se utilizará el valor especificado en <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='edit_metadata_portal') }}">la configuración de metadatos del portal</a>.</p>
 
     <h2>Laps</h2>
     <div class="reduced-margin-content">
