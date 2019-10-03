@@ -294,15 +294,6 @@ class GobArConfigController(base.BaseController):
                 'format-chart-units': 'format-chart-units' in params,
                 'max-decimals': params['max-decimals'].strip()
             }
-            # Seteo la imagen de fondo del Explorer
-            if params['image-logic'] == 'new-image':
-                config_dict['series_tiempo_ar_explorer']['hero-image-url'] = self._save_img(params['background-image'])
-            elif params['image-logic'] == 'delete-image':
-                config_dict['series_tiempo_ar_explorer']['hero-image-url'] = None
-            else:
-                config_dict['series_tiempo_ar_explorer']['hero-image-url'] = \
-                    self.get_theme_config('series_tiempo_ar_explorer')['hero-image-url']
-
             self._set_config(config_dict)
         return base.render('config/config_14_series.html')
 

@@ -2,7 +2,7 @@
 {% block config %}
 <h1>Series</h1>
 
-<form method="post" action="" data-module="basic-form" accept-charset="utf-8" enctype="multipart/form-data">
+<form method="post" action="" data-module="basic-form" accept-charset="utf-8">
     <label class="with-bottom-margin checkbox-label">
         <input type="checkbox" name="enable" {{ 'checked="checked"' if h.get_theme_config('series_tiempo_ar_explorer.enable') else '' }}>
         ¿Querés que esta sección se vea en tu portal?
@@ -44,19 +44,6 @@
 
     <h2>Cantidad máxima de cifras decimales</h2>
     <input type="text" name="max-decimals" value="{{ h.get_theme_config('series_tiempo_ar_explorer.max-decimals') or '' }}">
-
-    <h2>Imagen de fondo</h2>
-    {% set image = h.get_theme_config('series_tiempo_ar_explorer.hero-image-url') %}
-    <div class="file-upload-container {{ 'with-image' if image else '' }}">
-        <i class="icon-remove-sign" aria-hidden="true"></i>
-        <input type="text" disabled placeholder="Subí tu archivo" id="filename" class="filename-input" value="{{ image if image else '' }}">
-        <input type="file" id="background-image" name="background-image">
-        <input type="hidden" name="image-logic" id="image-logic" value="">
-        <label for="background-image">
-            <span class="upload-file-button">ELEGIR</span>
-        </label>
-        <p>*Por favor, elegí formato .JPG, .SVG o .PNG.</p>
-    </div>
 
     <label class="checkbox-label">
         <input type="checkbox" name="format-chart-units" {{ 'checked="checked"' if h.get_theme_config('series_tiempo_ar_explorer.format-chart-units') else '' }}>
