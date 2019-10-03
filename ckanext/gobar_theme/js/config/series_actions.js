@@ -28,7 +28,7 @@ $(function() {
     }
 
     function validateLapField(field) {
-        if (field.val() === '' || valueIsPositiveNumber(field.val())) {
+        if (field.val() === '' || valueIsPositiveInteger(field.val())) {
             return true;
         }
         var errorText = "Se debe ingresar un número entero positivo.";

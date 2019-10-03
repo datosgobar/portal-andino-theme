@@ -3,5 +3,5 @@ function valueIsPositiveNumber(value) {
 }
 
 function valueIsPositiveInteger(value) {
-    return (valueIsPositiveNumber(value) || +value === 0);
+    return (valueIsPositiveNumber(value) && Number.isInteger(+value));
 }
