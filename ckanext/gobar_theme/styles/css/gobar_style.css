@@ -6325,7 +6325,7 @@ div.svg-tooltip {
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
   position: relative;
   white-space: nowrap;
-  z-index: 4; }
+  z-index: 10000; }
   @media (min-width: 768px) {
     #header {
       position: fixed;
