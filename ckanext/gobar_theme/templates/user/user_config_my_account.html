@@ -5,19 +5,21 @@
 
         <h1>Datos personales</h1>
 
-        <h2><b>Datos fijos</b></h2>
+        <h2 class="blue">Datos fijos</h2>
         <h2>Usuario</h2>
         <label><i>{{ c.userobj.name }}</i></label>
 
-        <h2>Nombre y apellido</h2>
-        <label><i>{{ c.userobj.fullname or '' }}</i></label>
+        {% if c.userobj.fullname %}
+            <h2>Nombre y apellido</h2>
+            <label><i>{{ c.userobj.fullname or '' }}</i></label>
+        {% endif %}
 
         <h2>Apikey</h2>
         <label><i>{{ c.userobj.apikey }}</i></label>
 
         {% set current_email = c.userobj.email or '' %}
 
-        <h2><b>Datos editables</b></h2>
+        <h2 class="blue">Datos editables</h2>
         <div class="disabled-input" data-replace-id="email-edit">
             <h2>E-mail</h2>
             <div class="can-have-feedback-img">
