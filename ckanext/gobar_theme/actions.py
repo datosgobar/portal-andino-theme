@@ -38,7 +38,8 @@ def activity_list_to_html(context, activity_stream, extra_vars):
     for activity in activity_stream:
         detail = None
         activity_type = activity['activity_type']
-        if activity_type not in activity_streams.activity_stream_string_functions and activity_type not in get_gobar_activity_streams():
+        if activity_type not in activity_streams.activity_stream_string_functions \
+                and activity_type not in get_gobar_activity_streams():
             raise NotImplementedError("No activity renderer for activity type '%s'" % activity_type)
 
         # Some activity types may have details.
@@ -170,7 +171,7 @@ def _get_plugin_version(plugin):
     return version
 
 
-def activity_create(context, activity_dict, **kw):
+def activity_create(context, activity_dict):
     logic.check_access('activity_create', context, activity_dict)
     model = context['model']
     activity_dict['revision_id'] = None
