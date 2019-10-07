@@ -3,14 +3,15 @@ import logging
 import re
 import sys
 
-import pkg_resources
-from webhelpers.html import literal
 import ckan
 import ckan.lib.activity_streams as activity_streams
 import ckan.lib.base as base
 import ckan.logic as logic
+import pkg_resources
+from webhelpers.html import literal
 
 import ckanext
+from ckanext.gobar_theme.helpers import get_gobar_activity_streams
 from ckanext.gobar_theme.utils.andino_version import get_portal_andino_version
 from . import helpers as h
 
@@ -36,9 +37,9 @@ def activity_list_to_html(context, activity_stream, extra_vars):
     for activity in activity_stream:
         detail = None
         activity_type = activity['activity_type']
-        if activity_type not in activity_streams.activity_stream_string_functions:
-            raise NotImplementedError("No activity renderer for activity "
-                                      "type '%s'" % activity_type)
+        if activity_type not in activity_streams.activity_stream_string_functions \
+                and activity_type not in get_gobar_activity_streams():
+            raise NotImplementedError("No activity renderer for activity type '%s'" % activity_type)
 
         # Some activity types may have details.
         result = get_activity_context(activity, activity_type, context, detail)
@@ -53,6 +54,7 @@ def activity_list_to_html(context, activity_stream, extra_vars):
                                extra_vars=extra_vars))
 
 
+# pylint:disable=too-many-branches
 def get_activity_context(activity, activity_type, context, detail):
     if activity_type in activity_streams.activity_stream_actions_with_detail:
         details = logic.get_action('activity_detail_list')(context=context,
@@ -74,8 +76,11 @@ def get_activity_context(activity, activity_type, context, detail):
         activity_icon = activity_streams.activity_stream_string_icons[activity_type]
     else:
         activity_icon = activity_streams.activity_stream_string_icons['undefined']
-    activity_msg = activity_streams.activity_stream_string_functions[activity_type](context,
-                                                                                    activity)
+
+    if activity_type in get_gobar_activity_streams():
+        activity_msg = get_gobar_activity_streams().get(activity_type)()
+    else:
+        activity_msg = activity_streams.activity_stream_string_functions[activity_type](context, activity)
     # Get the data needed to render the message.
     matches = re.findall(r'{([^}]*)}', activity_msg)
     data = {}
@@ -164,3 +169,17 @@ def _get_plugin_version(plugin):
     except Exception:
         version = None
     return version
+
+
+def activity_create(context, activity_dict):
+    logic.check_access('activity_create', context, activity_dict)
+    model = context['model']
+    activity_dict['revision_id'] = None
+    activity_obj = model.Activity(activity_dict['user_id'],
+                                  activity_dict['object_id'],
+                                  activity_dict['revision_id'],
+                                  activity_dict['activity_type'],
+                                  None)
+    activity_obj.save()
+    if not context.get('defer_commit'):
+        model.repo.commit()

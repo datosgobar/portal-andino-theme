@@ -2,8 +2,6 @@ import json
 import random
 import string
 
-from webob.exc import HTTPNotFound
-import ckan.lib.activity_streams as activity_streams
 import ckan.lib.base as base
 import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.lib.helpers as h
@@ -14,7 +12,9 @@ import ckan.model as model
 import ckan.plugins as p
 from ckan.common import request, c, _, response
 from ckan.controllers.user import UserController
+from webob.exc import HTTPNotFound
 
+import ckanext.gobar_theme.actions as gobar_actions
 import ckanext.gobar_theme.mailer as mailer
 
 parse_params = logic.parse_params
@@ -246,6 +246,22 @@ class GobArUserController(UserController):
             except NotAuthorized:
                 user_deleted = False
         response.headers['Content-Type'] = self.json_content_type
+
+        if user_deleted:
+            activity_dict = {
+                'user_id': c.userobj.id,
+                'object_id': user.id,
+                'activity_type': 'deleted_user',
+            }
+            activity_create_context = {
+                'model': model,
+                'user': user,
+                'defer_commit': True,
+                'ignore_auth': True,
+                'session': model.Session
+            }
+            gobar_actions.activity_create(activity_create_context, activity_dict)
+
         return h.json.dumps({'success': user_deleted}, for_json=True)
 
     @staticmethod
@@ -399,7 +415,7 @@ class GobArUserController(UserController):
             'offset': offset,
             'user_history': True
         }
-        return activity_streams.activity_list_to_html(context, activities, extra_vars), has_more
+        return gobar_actions.activity_list_to_html(context, activities, extra_vars), has_more
 
     def drafts(self):
         self._authorize()
