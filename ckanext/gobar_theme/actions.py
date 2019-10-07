@@ -55,6 +55,7 @@ def activity_list_to_html(context, activity_stream, extra_vars):
                                extra_vars=extra_vars))
 
 
+# pylint:disable=too-many-branches
 def get_activity_context(activity, activity_type, context, detail):
     if activity_type in activity_streams.activity_stream_actions_with_detail:
         details = logic.get_action('activity_detail_list')(context=context,
