@@ -11,3 +11,4 @@ from .config import *
 from .strings import *
 from .version import *
 from .series import *
+from .activities import *
