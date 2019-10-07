@@ -7,15 +7,15 @@
 
         <h2 class="blue">Datos fijos</h2>
         <h2>Usuario</h2>
-        <label><i>{{ c.userobj.name }}</i></label>
+        <p><i>{{ c.userobj.name }}</i></p>
 
         {% if c.userobj.fullname %}
             <h2>Nombre y apellido</h2>
-            <label><i>{{ c.userobj.fullname or '' }}</i></label>
+            <p><i>{{ c.userobj.fullname or '' }}</i></p>
         {% endif %}
 
         <h2>Apikey</h2>
-        <label><i>{{ c.userobj.apikey }}</i></label>
+        <p><i>{{ c.userobj.apikey }}</i></p>
 
         {% set current_email = c.userobj.email or '' %}
 
