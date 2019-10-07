@@ -17,7 +17,6 @@ from . import helpers as h
 
 _get_action = ckan.logic.get_action
 logger = logging.getLogger(__name__)
-_validate = ckan.lib.navl.dictization_functions.validate
 
 
 def package_activity_list_html(context, data_dict):
