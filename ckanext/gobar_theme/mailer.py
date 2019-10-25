@@ -1,5 +1,6 @@
 # coding=utf-8
 import smtplib
+from datetime import datetime
 from email import utils
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
@@ -137,6 +138,15 @@ def send_new_user_mail(admin_user, new_user):
     recipient_email = new_user.email
     msg = assemble_email(plain_body, html_body, subject, recipient_name, recipient_email)
     return send_mail(msg, recipient_email)
+
+
+def send_test_mail(admin_user):
+    current_time = datetime.now().strftime("%H:%M:%S")
+    plain_body = html_body = u'Ésta es una prueba de envío de mail. Hora de envío: {}.'.format(current_time)
+    subject = \
+        u'Prueba de envío de mail - {}'.format(gobar_helpers.get_theme_config('title.site-title', 'Portal Andino'))
+    msg = assemble_email(plain_body, html_body, subject, admin_user.display_name, admin_user.email)
+    return send_mail(msg, admin_user.email)
 
 
 def assemble_email(msg_plain_body, msg_html_body, msg_subject, recipient_name, recipient_email):

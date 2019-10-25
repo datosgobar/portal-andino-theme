@@ -115,4 +115,33 @@ $(function () {
             sendChanges(editSection)
         }
     });
+
+    $('#send-test-mail').on('click', function () {
+        var button = $(this);
+        var csrf_input = $("#login-vertical-wrapper").find("form").children("input")[0];
+        var data = {};
+        if (csrf_input !== undefined) {
+            data['token'] = csrf_input.value;
+        }
+        var callback = function () {showPositiveFeedback(button, 'Enviando mail...')};
+        $.post('/send_test_mail', data, callback)
+            .fail(
+                function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(error);
+                    showNegativeFeedback(button, 'Ocurrió un error enviando el mail.');
+                })
+            .success(
+                function(response) {
+                    if ('error' in response){
+                        console.log(response);
+                        showNegativeFeedback(button, 'Ocurrió un error enviando el mail: ' + response['error']);
+                    }
+                    else {
+                        console.log(response);
+                        showPositiveFeedback(button, 'Mail enviado exitosamente!');
+                    }
+                });
+    });
+
 });
