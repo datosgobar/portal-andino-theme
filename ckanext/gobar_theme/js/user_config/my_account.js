@@ -123,23 +123,29 @@ $(function () {
         if (csrf_input !== undefined) {
             data['token'] = csrf_input.value;
         }
-        var callback = function () {showPositiveFeedback(button, 'Enviando mail...')};
-        $.post('/send_test_mail', data, callback)
+        showPositiveFeedback(button, 'Enviando mail...');
+        $.post('/send_test_mail', data, function(){})
             .fail(
-                function(xhr, status, error) {
-                    console.log(xhr);
-                    console.log(error);
-                    showNegativeFeedback(button, 'Ocurrió un error enviando el mail.');
+                function(jqXHR) {
+                    console.log(jqXHR);
+                    showNegativeFeedback(button, 'Ocurrió un error creando o enviando el mail: ' + jqXHR.responseText);
                 })
             .success(
                 function(response) {
                     if ('error' in response){
-                        console.log(response);
-                        showNegativeFeedback(button, 'Ocurrió un error enviando el mail: ' + response['error']);
+                        showNegativeFeedback(button,
+                            'Ocurrió al menos un error enviando el mail:\n'
+                            + response['error'].split("|").map(x => "- ".concat(x)).join("\n")
+                            + '\n\nMostrando las últimas 20 líneas del log:\n\n' + response['log']);
                     }
                     else {
-                        console.log(response);
-                        showPositiveFeedback(button, 'Mail enviado exitosamente!');
+                        if (response['log'] === ''){
+                            showPositiveFeedback(button, 'No se encontraron problemas enviando el mail, ' +
+                                'pero no hay logs donde se pueda realizar un mayor análisis de errores.');
+                        }
+                        else {
+                            showPositiveFeedback(button, 'Mail enviado exitosamente!');
+                        }
                     }
                 });
     });

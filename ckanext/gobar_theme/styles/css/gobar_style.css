@@ -10467,14 +10467,16 @@ label.input-error {
 }
 
 div#test-mail > p.validation-success {
-    position: relative;
-    top: -20px;
-    color: #33B561;
+  color: #33B561;
+  position: relative;
+  top: -20px;
+  white-space: pre-line;
 }
 div#test-mail > p.validation-error {
-    position: relative;
-    top: -20px;
-    color: #ef4d3d;
+  color: #ef4d3d;
+  position: relative;
+  top: -20px;
+  white-space: pre-line;
 }
 div#test-mail > img.feedback-img {
   display: none;

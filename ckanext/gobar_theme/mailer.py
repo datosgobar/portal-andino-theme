@@ -1,4 +1,5 @@
 # coding=utf-8
+import re
 import smtplib
 from datetime import datetime
 from email import utils
@@ -6,14 +7,16 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from socket import error as socket_error
-from time import time
+from subprocess import check_output
+from time import time, sleep
 
-import paste.deploy.converters
-from pylons import config
 import ckan
 import ckan.lib.mailer as ckan_mailer
+import paste.deploy.converters
+from pylons import config
 
 import ckanext.gobar_theme.helpers as gobar_helpers
+
 MailerException = ckan_mailer.MailerException
 
 andino_address = config.get('smtp.mail_from')
@@ -146,7 +149,26 @@ def send_test_mail(admin_user):
     subject = \
         u'Prueba de envío de mail - {}'.format(gobar_helpers.get_theme_config('title.site-title', 'Portal Andino'))
     msg = assemble_email(plain_body, html_body, subject, admin_user.display_name, admin_user.email)
-    return send_mail(msg, admin_user.email)
+    try:
+        return_value = send_mail(msg, admin_user.email)
+        error_content = return_value.get('error')
+    except Exception as e:
+        error_content = e.message
+        return_value = {'error': error_content}
+    sleep(5)  # Le damos tiempo a postfix para enviar el mail y loguear
+
+    postfix_mail_log_path = '/var/log/shared/postfix/mail.log'
+    cmd = 'tail -n 20 {} || true'.format(postfix_mail_log_path)
+    log = check_output(cmd, shell=True).strip()  # TODO: esto es para cuando se usa postfix. Hacerlo también para SMTP
+    log = re.sub(r'\n', '\n\n', log)
+    spam_message = 'To protect our users from spam, mail sent from your IP address ' \
+                   'has 421-4.7.0 been temporarily rate limited.'
+    return_value['log'] = log
+    if spam_message in log:
+        return_value['error'] = \
+            u'{}Los mails fueron detectados como sospechosos, por lo que se aplicó un límite para la IP del servidor.'.\
+                format('{} | '.format(error_content) if error_content else '')
+    return return_value
 
 
 def assemble_email(msg_plain_body, msg_html_body, msg_subject, recipient_name, recipient_email):
