@@ -151,21 +151,16 @@ def send_test_mail(admin_user):
     msg = assemble_email(plain_body, html_body, subject, admin_user.display_name, admin_user.email)
     try:
         return_value = send_mail(msg, admin_user.email)
-        error_content = return_value.get('error')
     except Exception as e:
-        error_content = e.message
-        return_value = {'error': error_content}
+        return_value = {'error': e.message}
 
     if gobar_helpers.search_for_value_in_config_file('smtp.server') == 'postfix':
         sleep(5)  # Le damos tiempo a postfix para loguear
         return_value['log'] = get_postfix_log()
-        spam_message = 'To protect our users from spam, mail sent from your IP address ' \
-                       'has 421-4.7.0 been temporarily rate limited.'
-        if spam_message in return_value['log']:
+        issue = search_for_last_postfix_log_issue(return_value['log'], admin_user.email)
+        if issue:
             return_value['error'] = \
-                u'{}Se detectaron mails como sospechosos, por lo que se aplicó un límite ' \
-                u'en la tasa de envíos para la IP del servidor.'.\
-                    format('{} | '.format(error_content) if error_content else '')
+                '{0}{1}'.format('{} | '.format(return_value.get('error')) if return_value.get('error') else '', issue)
     return return_value
 
 
@@ -215,7 +210,14 @@ def send_mail(msg, recipient_email):
 
 def get_postfix_log():
     postfix_mail_log_path = '/var/log/shared/postfix/mail.log'
-    cmd = 'tail -n 20 {} || true'.format(postfix_mail_log_path)
+    cmd = 'tail -n 10 {} || true'.format(postfix_mail_log_path)
     log = check_output(cmd, shell=True).strip()
     log = re.sub(r'\n', '\n\n', log)
     return log
+
+
+def search_for_last_postfix_log_issue(log, email):
+    for line in reversed(log.split('\n\n')):
+        if email in line and ('status=deferred' in line or 'status=bounced' in line):
+            return line
+    return ''

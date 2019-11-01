@@ -19,7 +19,7 @@ $(function () {
                         showNegativeFeedback(button,
                             'Ocurrió al menos un problema enviando el mail:\n'
                             + response['error'].split("|").map(x => "- ".concat(x)).join("\n")
-                            + (response['log'] !== '' ? ('\n\nMostrando las últimas 20 líneas del log:\n\n' + response['log']) : ''));
+                            + (response['log'] !== undefined ? ('\n\nMostrando las últimas 10 líneas del log:\n\n' + response['log']) : ''));
                     }
                     else {
                         if (response['log'] === ''){
