@@ -66,7 +66,7 @@ def search_for_value_in_config_file(field):
     try:
         value = subprocess.check_output(
             'grep -E "^{}[[:space:]]*=[[:space:]]*" '
-            '/etc/ckan/default/debug.ini | tr -d [[:space:]]'.format(field), shell=True).strip()
+            '/etc/ckan/default/production.ini | tr -d [[:space:]]'.format(field), shell=True).strip()
         return value.replace(field, '')[1:]
     except Exception:
         return ''
