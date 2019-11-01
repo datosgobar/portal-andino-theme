@@ -5,12 +5,12 @@ import os
 import re
 import urlparse
 
-import ckan.lib.base as base
-import ckan.lib.helpers as h
-import ckan.logic as logic
-import ckan.model as model
 import moment
+from ckan import logic
+from ckan import model
 from ckan.common import request, c, response
+from ckan.lib import base
+from ckan.lib import helpers as h
 from pylons import config
 
 import ckanext.gobar_theme.mailer as mailer
