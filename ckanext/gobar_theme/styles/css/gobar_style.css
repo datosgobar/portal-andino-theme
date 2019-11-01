@@ -10468,13 +10468,13 @@ label.input-error {
 
 div#test-mail > p.validation-success {
   color: #33B561;
-  position: relative;
+  padding-top: 20px;
   top: -20px;
   white-space: pre-line;
 }
 div#test-mail > p.validation-error {
   color: #ef4d3d;
-  position: relative;
+  padding-top: 20px;
   top: -20px;
   white-space: pre-line;
 }

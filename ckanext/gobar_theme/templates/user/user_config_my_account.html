@@ -82,16 +82,10 @@
             </div>
         </div>
 
-        {% if c.userobj.sysadmin %}
-            <div id="test-mail">
-                <button id="send-test-mail" type="button" class="btn btn-blue" data-username="">Enviar mail de prueba</button>
-            </div>
-        {% endif %}
-
     </div>
 
+    {% resource 'gobar_js/commons.js' %}
     {% resource 'gobar_js/user/secure_password.js' %}
-    {% resource 'gobar_js/user_config/user_commons.js' %}
     {% resource 'gobar_js/user_config/my_account.js' %}
 
 {% endblock %}

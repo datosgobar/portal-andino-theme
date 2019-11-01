@@ -1,0 +1,19 @@
+{% extends "config/config_base.html" %}
+{% block config %}
+
+    <h1>Mail de prueba</h1>
+
+    <form id="test-mail" method="post" action="" data-module="basic-form">
+
+        <p>Se enviará un mail a tu dirección de correo electrónico para probar el estado del envío de mails.</p>
+
+        <div id="test-mail">
+            <button id="send-test-mail" type="button" class="btn btn-blue" data-username="">ENVIAR</button>
+        </div>
+
+    </form>
+
+    {% resource 'gobar_js/commons.js' %}
+    {% resource 'gobar_js/config/test_mail.js' %}
+
+{% endblock -%}

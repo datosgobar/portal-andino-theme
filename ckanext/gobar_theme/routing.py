@@ -149,7 +149,6 @@ class GobArRouter:
             m.connect('user_datasets', '/user/{id:.*}', action='read')
             m.connect('login', '/ingresar', action='login')
             m.connect('/olvide_mi_contraseña', action="password_forgot")
-            m.connect('/send_test_mail', action="send_test_mail")
             m.connect('/configurar/mi_cuenta', action="my_account")
             m.connect('/configurar/mi_cuenta/cambiar_email', action="my_account_edit_email")
             m.connect('/configurar/mi_cuenta/cambiar_contraseña', action="my_account_edit_password")
@@ -226,6 +225,7 @@ class GobArRouter:
             m.connect('/configurar/google_tag_manager', action='edit_google_tag_manager')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
             m.connect('/configurar/series', action='edit_series')
+            m.connect('/configurar/mail_de_prueba', action="send_test_mail")
 
         self.redirect(
             ('/configurar', '/configurar/titulo'),

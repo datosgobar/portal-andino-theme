@@ -5,14 +5,15 @@ import os
 import re
 import urlparse
 
-import moment
 import ckan.lib.base as base
 import ckan.lib.helpers as h
 import ckan.logic as logic
 import ckan.model as model
-from ckan.common import request, c
+import moment
+from ckan.common import request, c, response
 from pylons import config
 
+import ckanext.gobar_theme.mailer as mailer
 from ckanext.gobar_theme.lib import cache_actions
 from ckanext.gobar_theme.theme_config import ThemeConfig
 from .utils.ckan_utils import plugin_or_404, TS_EXPLORER_PLUGIN
@@ -25,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 class GobArConfigController(base.BaseController):
+    JSON_CONTENT_TYPE = 'application/json;charset=utf-8'
     IMG_DIR = '/usr/lib/ckan/default/src/ckanext-gobar-theme/ckanext/gobar_theme/public/user_images/'
     CONFIG_PATH = '/var/lib/ckan/theme_config/settings.json'
 
@@ -359,6 +361,15 @@ class GobArConfigController(base.BaseController):
             config_dict['login-title'] = params['login-title'].strip()
             self._set_config(config_dict)
         return base.render('config/config_19_login_title.html')
+
+    def send_test_mail(self):
+        self._authorize()
+        if request.method == 'POST':
+            response.headers['Content-Type'] = self.JSON_CONTENT_TYPE
+            result = mailer.send_test_mail(c.userobj)
+            json_response = result
+            return h.json.dumps(json_response, for_json=True)
+        return base.render('config/config_20_send_test_mail.html')
 
     def _generate_datastore_command(self, plugin_command):
         paster_path = self.get_paster_path()

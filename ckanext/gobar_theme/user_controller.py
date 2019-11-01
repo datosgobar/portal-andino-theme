@@ -1,4 +1,3 @@
-# coding=utf-8
 import json
 import random
 import string
@@ -138,20 +137,6 @@ class GobArUserController(UserController):
             }
             return h.json.dumps(json_response, for_json=True)
         return base.render('user/perform_reset.html', extra_vars={'user': user_obj})
-
-    def send_test_mail(self):
-        context = {'model': model, 'session': model.Session, 'user': c.user, 'auth_user_obj': c.userobj}
-        try:
-            check_access('sysadmin', context)
-        except NotAuthorized:
-            base.abort(401, u'No está autorizado para enviar mails.')
-
-        if request.method == 'POST':
-            response.headers['Content-Type'] = self.json_content_type
-            result = mailer.send_test_mail(c.userobj)
-            json_response = result
-            return h.json.dumps(json_response, for_json=True)
-        return h.redirect_to('/configurar/mi_cuenta')
 
     def my_account(self):
         self._authorize()
