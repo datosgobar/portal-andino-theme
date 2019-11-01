@@ -22,13 +22,7 @@ $(function () {
                             + (response['log'] !== undefined ? ('\n\nMostrando las últimas 10 líneas del log:\n\n' + response['log']) : ''));
                     }
                     else {
-                        if (response['log'] === ''){
-                            showPositiveFeedback(button, 'No se encontraron problemas enviando el mail, ' +
-                                'pero no hay logs donde se pueda realizar un mayor análisis de errores.');
-                        }
-                        else {
-                            showPositiveFeedback(button, 'Mail enviado exitosamente!');
-                        }
+                        showPositiveFeedback(button, 'No se encontraron problemas enviando el mail!');
                     }
                 });
     });
