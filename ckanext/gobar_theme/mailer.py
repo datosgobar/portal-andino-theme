@@ -156,16 +156,12 @@ def send_test_mail(admin_user):
         error_content = e.message
         return_value = {'error': error_content}
 
-    if 'postfix' == gobar_helpers.search_for_value_in_config_file('smtp.server'):
+    if gobar_helpers.search_for_value_in_config_file('smtp.server') == 'postfix':
         sleep(5)  # Le damos tiempo a postfix para loguear
-        postfix_mail_log_path = '/var/log/shared/postfix/mail.log'
-        cmd = 'tail -n 20 {} || true'.format(postfix_mail_log_path)
-        log = check_output(cmd, shell=True).strip()
-        log = re.sub(r'\n', '\n\n', log)
+        return_value['log'] = get_postfix_log()
         spam_message = 'To protect our users from spam, mail sent from your IP address ' \
                        'has 421-4.7.0 been temporarily rate limited.'
-        return_value['log'] = log
-        if spam_message in log:
+        if spam_message in return_value['log']:
             return_value['error'] = \
                 u'{}Se detectaron mails como sospechosos, por lo que se aplicó un límite ' \
                 u'en la tasa de envíos para la IP del servidor.'.\
@@ -215,3 +211,11 @@ def send_mail(msg, recipient_email):
     finally:
         smtp_connection.quit()
     return return_value
+
+
+def get_postfix_log():
+    postfix_mail_log_path = '/var/log/shared/postfix/mail.log'
+    cmd = 'tail -n 20 {} || true'.format(postfix_mail_log_path)
+    log = check_output(cmd, shell=True).strip()
+    log = re.sub(r'\n', '\n\n', log)
+    return log
