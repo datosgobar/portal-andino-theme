@@ -1,18 +1,22 @@
 # coding=utf-8
+import re
 import smtplib
+from datetime import datetime
 from email import utils
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from socket import error as socket_error
-from time import time
+from subprocess import check_output
+from time import time, sleep
 
-import paste.deploy.converters
-from pylons import config
 import ckan
 import ckan.lib.mailer as ckan_mailer
+import paste.deploy.converters
+from pylons import config
 
 import ckanext.gobar_theme.helpers as gobar_helpers
+
 MailerException = ckan_mailer.MailerException
 
 andino_address = config.get('smtp.mail_from')
@@ -139,6 +143,27 @@ def send_new_user_mail(admin_user, new_user):
     return send_mail(msg, recipient_email)
 
 
+def send_test_mail(admin_user):
+    current_time = datetime.now().strftime("%H:%M:%S")
+    plain_body = html_body = u'Ésta es una prueba de envío de mail. Hora de envío: {}.'.format(current_time)
+    subject = \
+        u'Prueba de envío de mail - {}'.format(gobar_helpers.get_theme_config('title.site-title', 'Portal Andino'))
+    msg = assemble_email(plain_body, html_body, subject, admin_user.display_name, admin_user.email)
+    try:
+        return_value = send_mail(msg, admin_user.email)
+    except Exception as e:
+        return_value = {'error': e.message}
+
+    if gobar_helpers.search_for_value_in_config_file('smtp.server') == 'postfix':
+        sleep(5)  # Le damos tiempo a postfix para loguear
+        return_value['log'] = get_postfix_log()
+        issue = search_for_last_postfix_log_issue(return_value['log'], admin_user.email)
+        if issue:
+            return_value['error'] = \
+                '{0}{1}'.format('{} | '.format(return_value.get('error')) if return_value.get('error') else '', issue)
+    return return_value
+
+
 def assemble_email(msg_plain_body, msg_html_body, msg_subject, recipient_name, recipient_email):
     text_msg = MIMEText(msg_plain_body, 'plain', 'UTF-8')
     html_msg = MIMEText(msg_html_body, 'html', 'UTF-8')
@@ -181,3 +206,18 @@ def send_mail(msg, recipient_email):
     finally:
         smtp_connection.quit()
     return return_value
+
+
+def get_postfix_log():
+    postfix_mail_log_path = '/var/log/shared/postfix/mail.log'
+    cmd = 'tail -n 10 {} || true'.format(postfix_mail_log_path)
+    log = check_output(cmd, shell=True).strip()
+    log = re.sub(r'\n', '\n\n', log)
+    return log
+
+
+def search_for_last_postfix_log_issue(log, email):
+    for line in reversed(log.split('\n\n')):
+        if email in line and ('status=deferred' in line or 'status=bounced' in line):
+            return line
+    return ''

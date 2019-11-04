@@ -225,6 +225,7 @@ class GobArRouter:
             m.connect('/configurar/google_tag_manager', action='edit_google_tag_manager')
             m.connect('/configurar/mensaje_de_bienvenida', action='edit_greetings')
             m.connect('/configurar/series', action='edit_series')
+            m.connect('/configurar/mail_de_prueba', action="send_test_mail")
 
         self.redirect(
             ('/configurar', '/configurar/titulo'),

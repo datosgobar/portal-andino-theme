@@ -10465,3 +10465,19 @@ label.input-error {
   font-size: 16px;
   margin-bottom: 10px;
 }
+
+div#test-mail > p.validation-success {
+  color: #33B561;
+  padding-top: 20px;
+  top: -20px;
+  white-space: pre-line;
+}
+div#test-mail > p.validation-error {
+  color: #ef4d3d;
+  padding-top: 20px;
+  top: -20px;
+  white-space: pre-line;
+}
+div#test-mail > img.feedback-img {
+  display: none;
+}

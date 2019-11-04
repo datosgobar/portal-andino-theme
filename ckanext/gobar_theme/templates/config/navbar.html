@@ -94,6 +94,10 @@
            class="section-link {{ 'active' if c.action == 'edit_google_tag_manager' else '' }}">
             Google Tag Manager
         </a>
+        <a href="{{ h.url_for(controller='ckanext.gobar_theme.config_controller:GobArConfigController', action='send_test_mail') }}"
+           class="section-link {{ 'active' if c.action == 'send_test_mail' else '' }}">
+            Mail de prueba
+        </a>
     </div>
 
     <div class="links-section guide-link">
