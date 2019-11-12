@@ -1,5 +1,9 @@
 $(function() {
 
+    $(document).ready(function(){
+        $('select.datapusher').prop('disabled', !$(this).find('input[type=checkbox]').prop('checked'));
+    });
+
     $('#cron-enabler').on('click', function (e) {
         let checkbox = $(this).find('input[type=checkbox]');
         let is_checked = checkbox.prop('checked');

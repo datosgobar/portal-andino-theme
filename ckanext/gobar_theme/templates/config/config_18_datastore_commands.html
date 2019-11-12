@@ -19,13 +19,13 @@
                 {% set established_hour = h.get_theme_config('datastore.schedule-hour', '') %}
                 {% set established_minute = h.get_theme_config('datastore.schedule-minute', '') %}
                 <div class="hour-picker-to">
-                    <select id="date-to-hour" class="datapusher" name="schedule-hour" {{ 'disabled' if not h.get_theme_config('datastore.enable_datastore_cron') else '' }}>
+                    <select id="date-to-hour" class="datapusher" name="schedule-hour" disabled="disabled">
                         {% for hour in hours %}
                             {% set hour = "%02d" | format(hour) %}
                             <option value="{{ hour }}" {{ 'selected=true' if hour == established_hour }}>{{ hour }}</option>
                         {% endfor %}
                     </select>
-                    <select id="date-to-minute" class="datapusher" name="schedule-minute" {{ 'disabled' if not h.get_theme_config('datastore.enable_datastore_cron') else '' }}>
+                    <select id="date-to-minute" class="datapusher" name="schedule-minute" disabled="disabled">
                         {% for minute in minutes %}
                             {% set minute = "%02d" | format(minute) %}
                             <option value="{{ minute }}" {{ 'selected=true' if minute == established_minute }}>{{ minute }}</option>
