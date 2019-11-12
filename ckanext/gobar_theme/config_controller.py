@@ -14,6 +14,7 @@ from ckan.lib import helpers as h
 from pylons import config
 
 import ckanext.gobar_theme.mailer as mailer
+from ckanext.gobar_theme.helpers import search_for_cron_jobs_and_remove
 from ckanext.gobar_theme.lib import cache_actions
 from ckanext.gobar_theme.theme_config import ThemeConfig
 from .utils.ckan_utils import plugin_or_404, TS_EXPLORER_PLUGIN
@@ -321,17 +322,25 @@ class GobArConfigController(base.BaseController):
             from ckanext.gobar_theme.helpers.cron import create_or_update_cron_job
             params = parse_params(request.POST)
             config_dict = self._read_config()
-            schedule_hour = params.get('schedule-hour').strip()
-            schedule_minute = params.get('schedule-minute').strip()
+            enable_datastore_cron = 'enable_datastore_cron' in params
+            schedule_hour = params.get('schedule-hour',
+                                       config_dict.get('datastore', {}).get('schedule-hour', '00')).strip()
+            schedule_minute = params.get('schedule-minute',
+                                         config_dict.get('datastore', {}).get('schedule-minute', '00')).strip()
             config_dict['datastore'] = {
+                'enable_datastore_cron': enable_datastore_cron,
                 'schedule-hour': schedule_hour,
                 'schedule-minute': schedule_minute
             }
             self._set_config(config_dict)
-            # Creamos el cron job, reemplazando el anterior si ya existía
-            command = self._generate_datastore_command(plugin_command)
             comment = 'datastore - submit_all'
-            create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
+            if enable_datastore_cron:
+                # Creamos el cron job, reemplazando el anterior si ya existía
+                command = self._generate_datastore_command(plugin_command)
+                create_or_update_cron_job(command, hour=schedule_hour, minute=schedule_minute, comment=comment)
+            else:
+                # Si existe un cron job, lo borramos
+                search_for_cron_jobs_and_remove(comment)
         return base.render('config/config_18_datastore_commands.html')
 
     def edit_google_tag_manager(self):

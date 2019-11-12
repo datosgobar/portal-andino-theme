@@ -3,9 +3,12 @@
 
     <h1>Comandos de Datastore</h1>
 
-    <h2>Subida de recursos automática al Datastore</h2>
-
     <form id="datapusher" method="post" action="" data-module="basic-form">
+
+        <label id="cron-enabler" class="with-bottom-margin checkbox-label">
+            <input type="checkbox" name="enable_datastore_cron" {{ 'checked="checked"' if h.get_theme_config('datastore.enable_datastore_cron') else ''}}>
+            ¿Querés habilitar la subida de recursos automática al Datastore?
+        </label>
 
         <h2>Horario de ejecución</h2>
         <table class="date-picker datapusher"
@@ -16,13 +19,13 @@
                 {% set established_hour = h.get_theme_config('datastore.schedule-hour', '') %}
                 {% set established_minute = h.get_theme_config('datastore.schedule-minute', '') %}
                 <div class="hour-picker-to">
-                    <select id="date-to-hour" class="datapusher" name="schedule-hour">
+                    <select id="date-to-hour" class="datapusher" name="schedule-hour" {{ 'disabled' if not h.get_theme_config('datastore.enable_datastore_cron') else '' }}>
                         {% for hour in hours %}
                             {% set hour = "%02d" | format(hour) %}
                             <option value="{{ hour }}" {{ 'selected=true' if hour == established_hour }}>{{ hour }}</option>
                         {% endfor %}
                     </select>
-                    <select id="date-to-minute" class="datapusher" name="schedule-minute">
+                    <select id="date-to-minute" class="datapusher" name="schedule-minute" {{ 'disabled' if not h.get_theme_config('datastore.enable_datastore_cron') else '' }}>
                         {% for minute in minutes %}
                             {% set minute = "%02d" | format(minute) %}
                             <option value="{{ minute }}" {{ 'selected=true' if minute == established_minute }}>{{ minute }}</option>
@@ -39,5 +42,7 @@
         </div>
 
     </form>
+
+    {% resource 'gobar_js/config/datastore_actions.js' %}
 
 {% endblock -%}
