@@ -4,12 +4,9 @@ $(function() {
         $('select.datapusher').prop('disabled', !$(this).find('input[type=checkbox]').prop('checked'));
     });
 
-    $('#cron-enabler').on('click', function (e) {
-        let checkbox = $(this).find('input[type=checkbox]');
-        let is_checked = checkbox.prop('checked');
-
-        $('select.datapusher').prop('disabled', is_checked);
-        checkbox.prop('checked', !checkbox.prop('checked'));
+    $('input[name="enable_datastore_cron"]').on('change', function (e) {
+        let is_checked = $(this).prop('checked');
+        $('select.datapusher').prop('disabled', !is_checked);
         e.stopPropagation();
         e.preventDefault();
     });
