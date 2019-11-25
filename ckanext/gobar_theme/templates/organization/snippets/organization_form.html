@@ -55,30 +55,34 @@
 
 </form>
 
-<div id="delete-modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h1>¿Querés borrar esta organización?</h1>
-                <p>
-                    Si lo hacés, <strong>borrarás también las organizaciones que dependan de ella y todos los conjuntos
-                    de datos vinculados</strong>. Además, <strong>los usuarios asociados a estas organización dejarán
-                    de tener permisos</strong> para crear, actualizar y borrar datos.
-                </p>
-                <div class="modal-actions">
-                    <form id="organization-confirm-delete-form"
-                          action="{% url_for controller='organization', action='delete', id=data.name %}"
-                          method="post">
-                        <button class="btn btn-blue" type="submit" name="delete">BORRAR ORGANIZACIÓN</button>
-                        <button id="dismiss-greetings" type="button" class="btn btn-blue" data-dismiss="modal">
-                            NO BORRAR
-                        </button>
-                    </form>
+{% if data %}
+    <div id="delete-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {% set organization = h.get_complete_organization_from_tree(data.name, true) %}
+                    <h1>¿Querés borrar esta organización?</h1>
+                    <p>
+                        Si lo hacés, <strong>borrarás también las organizaciones que dependan de ella</strong>.
+                        Además, <strong>los usuarios asociados a estas organización dejarán
+                        de tener permisos</strong> para crear, actualizar y borrar datos.
+                        <br>
+                        El borrado sólo se puede realizar si la organización y aquellas organizaciones que dependen
+                        de ella no poseen datasets.
+                    </p>
+                    <div class="modal-actions">
+                        <form id="organization-confirm-delete-form" action="{% url_for controller='organization', action='delete', id=data.name %}" method="post">
+                            <button class="btn btn-blue" type="submit" name="delete" {{ 'disabled' if organization['total_package_count'] > 0 }}>BORRAR ORGANIZACIÓN</button>
+                            <button id="dismiss-greetings" type="button" class="btn btn-blue" data-dismiss="modal">
+                                NO BORRAR
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{% endif %}
 
 {% resource 'gobar_js/organization/form_actions.js' %}
 {% resource 'gobar_js/forms/confirm_delete.js' %}
