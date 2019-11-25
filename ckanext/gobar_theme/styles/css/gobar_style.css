@@ -10481,3 +10481,7 @@ div#test-mail > p.validation-error {
 div#test-mail > img.feedback-img {
   display: none;
 }
+
+form#organization-confirm-delete-form > button:disabled {
+  background-color: grey;
+}

@@ -23,7 +23,7 @@ def _count_total(organization):
     return organization['package_count'] + children_count
 
 
-def organizations_basic_info():
+def organizations_basic_info(separate_children_from_parents=False):
     def convert_organization_to_dict(organization, depth):
         current_organization = {}
         organization_id = organization.pop('id')
@@ -72,6 +72,8 @@ def organizations_basic_info():
         current_organization = convert_organization_to_dict(organization, 0)
         organizations_data.append(current_organization)
 
+    if separate_children_from_parents:
+        return organizations_info_with_children_as_separate(organizations_data)
     return organizations_data
 
 
@@ -87,21 +89,12 @@ def organization_tree():
     return organizations
 
 
-def get_suborganizations_names(org_name=None):
-    '''
-    Consigue el 'name' de todas las suborganizaciones de una organización
-    :param org_name: 'name' de la organización cuyas suborganizaciones necesitamos
-    :return: una lista vacía o que contiene los 'name' de las suborganizaciones correspondientes
-    '''
-    if org_name is None:
-        return []
-    organizations = organization_tree()
-    for organization in organizations:
-        if organization.get('name') == org_name:
-            if 'children' in organization:
-                return [x['name'] for x in organization['children']]
-            break
-    return []
+def get_complete_organization_from_tree(name, search_suborganizations=False):
+    orgs = organizations_basic_info(separate_children_from_parents=search_suborganizations)
+    for organization in orgs:
+        if organization.get('name') == name:
+            return organization
+    return None
 
 
 def organizations_with_packages():
@@ -120,10 +113,13 @@ def get_pkg_extra(pkg, keyname):
     return None
 
 
-def all_descendants(organization_list):
-    descendants = []
-    for organization in organization_list:
-        descendants.append(organization['name'])
-        if 'children' in organization and organization['children']:
-            descendants += all_descendants(organization['children'])
-    return descendants
+def organizations_info_with_children_as_separate(organizations):
+    all_organizations = []
+    for organization in organizations:
+        children = organization.get('children', [])
+        if children:
+            for child in children:
+                child['parent_name'] = organization['name']
+            all_organizations.extend(organizations_info_with_children_as_separate(children))
+        all_organizations.append(organization)
+    return all_organizations

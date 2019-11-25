@@ -11,7 +11,7 @@ import pkg_resources
 from webhelpers.html import literal
 
 import ckanext
-from ckanext.gobar_theme.helpers import get_gobar_activity_streams
+from ckanext.gobar_theme.helpers import get_gobar_activity_streams, get_complete_organization_from_tree
 from ckanext.gobar_theme.utils.andino_version import get_portal_andino_version
 from . import helpers as h
 
@@ -144,9 +144,17 @@ def dataset_delete_and_purge(context, data_dict):
 
 
 def organization_delete_and_purge(context, data_dict):
-    for suborganization in h.get_suborganizations_names(data_dict.get('id', None)):  # En realidad es el name, no el id
-        logic.action.delete._group_or_org_delete(context, {'id': suborganization}, is_org=True)
-        logic.action.delete.group_purge(context, {'id': suborganization})
+    organization = get_complete_organization_from_tree(data_dict.get('id'), search_suborganizations=True)
+    dataset_count_from_organization_and_children = organization.get('total_package_count')
+    if dataset_count_from_organization_and_children > 0:
+        raise ValueError('Se contaron {} datasets que pertenecen a esta organización y las que '
+                         'dependen de ella. Por favor, borralos.'.format(dataset_count_from_organization_and_children))
+    return _delete_and_purge_organization_and_children(context, data_dict, organization)
+
+
+def _delete_and_purge_organization_and_children(context, data_dict, organization):
+    for suborganization in organization.get('children'):
+        _delete_and_purge_organization_and_children(context, {'id': suborganization.get('name')}, suborganization)
     logic.action.delete._group_or_org_delete(context, data_dict, is_org=True)
     return logic.action.delete.group_purge(context, data_dict)
 
